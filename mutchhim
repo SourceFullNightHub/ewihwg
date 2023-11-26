@@ -1172,6 +1172,7 @@ spawn(
                                     plyselecthunthelpold = v.Humanoid.Health
                                     repeat
                                         task.wait()
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                         NameTarget = v.Name
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
                                         if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
@@ -1191,7 +1192,10 @@ spawn(
                                                     spawn(
                                                         function()
                                                             autoskill()
-                                                            Click()
+                                                            DF = true
+                                                            Sword = true
+                                                            Melee = true
+                                                            Gun = true
                                                             Aimbot = true
                                                         end
                                                     )
