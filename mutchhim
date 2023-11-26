@@ -1176,12 +1176,12 @@ spawn(
                                         NameTarget = v.Name
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
                                         if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-                                            TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
                                         elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
                                             if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-                                                TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
                                         elseif tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
-                                            TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 40, 2))
+                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 40, 2))
                                         end
                                         end
                                         spawn(
@@ -1189,7 +1189,7 @@ spawn(
                                                 if
                                                     (v.HumanoidRootPart.Position -
                                                         game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                                        15
+                                                        50
                                                  then
                                                     spawn(
                                                         function()
