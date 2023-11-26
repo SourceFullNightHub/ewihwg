@@ -964,10 +964,10 @@ spawn(function()
     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
     workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position,v.HumanoidRootPart.Position + workspace.CurrentCamera.CFrame.Position)
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,9,2))
+        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,13,2))
     elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,9,2))
+        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,13,2))
     elseif  tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
     end
