@@ -1,312 +1,6 @@
-_G.AutoFarmBounty = true
 
-function DMouse(Frame, Object)
-    dragToggle = nil
-    dragSpeed = .25
-    dragInput = nil
-    dragStart = nil
-    dragPos = nil
-    function updateInput(input)
-        Delta = input.Position - dragStart
-        Position =
-            UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-        game:GetService("TweenService"):Create(Object, TweenInfo.new(dragSpeed), {Position = Position}):Play()
-    end
-    Frame.InputBegan:Connect(
-        function(input)
-            if
-                (input.UserInputType == Enum.UserInputType.MouseButton1 or
-                    input.UserInputType == Enum.UserInputType.Touch)
-            then
-                dragToggle = true
-                dragStart = input.Position
-                startPos = Object.Position
-                input.Changed:Connect(
-                    function()
-                        if (input.UserInputState == Enum.UserInputState.End) then
-                            dragToggle = false
-                        end
-                    end)
-            end
-        end)
-    Frame.InputChanged:Connect(
-        function(input)
-            if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch)
-            then
-                dragInput = input
-            end
-        end)
-    game:GetService("UserInputService").InputChanged:Connect(
-    function(input)
-        if (input == dragInput and dragToggle) then
-            updateInput(input)
-        end
-    end)
-end
 
-local BountyA = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
-local NightHubAB = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local MainCorner = Instance.new("UICorner")
-local NightLogo = Instance.new("Frame")
-local NightLogoStroke = Instance.new("UIStroke")
-local NightLogoCorner = Instance.new("UICorner")
-local NightLogoImage = Instance.new("ImageLabel")
-local ClientTime = Instance.new("Frame")
-local ClientTimeStroke = Instance.new("UIStroke")
-local ClientTimeCorner = Instance.new("UICorner")
-local ClientTimeLabel_1 = Instance.new("TextLabel")
-local ClientTimeLabel_2 = Instance.new("TextLabel")
-local SkipPlayer = Instance.new("Frame")
-local SkipPlayerStroke = Instance.new("UIStroke")
-local SkipPlayerCorner = Instance.new("UICorner")
-local SkipPlayerButton = Instance.new("TextButton")
-local TargetNameEarnedTimeElapsed = Instance.new("Frame")
-local EarnedTimeElapsedStroke = Instance.new("UIStroke")
-local EarnedTimeElapsedCorner = Instance.new("UICorner")
-local EarnedLabel = Instance.new("TextLabel")
-local TimeElapsedLabel = Instance.new("TextLabel")
-local TotalBountyLabel = Instance.new("TextLabel")
-local MainSection = Instance.new("Frame")
-local MainSectionCorner = Instance.new("UICorner")
-local MainSectionStroke = Instance.new("UIStroke")
-local MainSectionLabel_1 = Instance.new("TextLabel")
-local MainSectionLabel_2 = Instance.new("TextLabel")
-local MainStroke = Instance.new("UIStroke")
 
-NightHubAB.Name = "NightHubAB"
-NightHubAB.Parent = game.CoreGui
-NightHubAB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-Main.Name = "Main"
-Main.Parent = NightHubAB
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 300, 0, 230)
-
-MainCorner.Name = "MainCorner"
-MainCorner.Parent = Main
-
-NightLogo.Name = "NightLogo"
-NightLogo.Parent = Main
-NightLogo.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-NightLogo.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogo.BorderSizePixel = 0
-NightLogo.Position = UDim2.new(0.0500000007, 0, 0.0394444428, 0)
-NightLogo.Size = UDim2.new(0, 85, 0, 85)
-
-NightLogoStroke.Color = Color3.fromRGB(255, 255, 255)
-NightLogoStroke.Name = "NightLogoStroke"
-NightLogoStroke.Parent = NightLogo
-
-NightLogoCorner.Name = "NightLogoCorner"
-NightLogoCorner.Parent = NightLogo
-
-NightLogoImage.Name = "NightLogoImage"
-NightLogoImage.Parent = NightLogo
-NightLogoImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NightLogoImage.BackgroundTransparency = 1.000
-NightLogoImage.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogoImage.LayoutOrder = 2
-NightLogoImage.Size = UDim2.new(0, 84, 0, 85)
-NightLogoImage.Image = "rbxassetid://15467813210"
-NightLogoImage.ImageColor3 = Color3.fromRGB(1000, 1000, 1000)
-
-ClientTime.Name = "ClientTime"
-ClientTime.Parent = Main
-ClientTime.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ClientTime.BorderColor3 = Color3.fromRGB(27, 42, 53)
-ClientTime.BorderSizePixel = 0
-ClientTime.Position = UDim2.new(0.0500000007, 0, 0.495289803, 0)
-ClientTime.Size = UDim2.new(0, 85, 0, 51)
-
-ClientTimeStroke.Color = Color3.fromRGB(255, 255, 255)
-ClientTimeStroke.Name = "ClientTimeStroke"
-ClientTimeStroke.Parent = ClientTime
-
-ClientTimeCorner.Name = "ClientTimeCorner"
-ClientTimeCorner.Parent = ClientTime
-
-ClientTimeLabel_1.Name = "ClientTimeLabel_1"
-ClientTimeLabel_1.Parent = ClientTime
-ClientTimeLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.BackgroundTransparency = 1.000
-ClientTimeLabel_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_1.BorderSizePixel = 0
-ClientTimeLabel_1.Position = UDim2.new(-0.0117647061, 0, -0.0143791651, 0)
-ClientTimeLabel_1.Size = UDim2.new(0, 85, 0, 27)
-ClientTimeLabel_1.Font = Enum.Font.ArialBold
-ClientTimeLabel_1.Text = "Client Time:"
-ClientTimeLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.TextSize = 13.000
-
-ClientTimeLabel_2.Name = "ClientTimeLabel_2"
-ClientTimeLabel_2.Parent = ClientTime
-ClientTimeLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.BackgroundTransparency = 1.000
-ClientTimeLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_2.BorderSizePixel = 0
-ClientTimeLabel_2.Position = UDim2.new(0.0117647061, 0, 0.444444448, 0)
-ClientTimeLabel_2.Size = UDim2.new(0, 84, 0, 25)
-ClientTimeLabel_2.Font = Enum.Font.ArialBold
-ClientTimeLabel_2.Text = "0M / 0S"
-ClientTimeLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.TextSize = 13.000
-
-SkipPlayer.Name = "SkipPlayer"
-SkipPlayer.Parent = Main
-SkipPlayer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-SkipPlayer.BorderColor3 = Color3.fromRGB(27, 42, 53)
-SkipPlayer.BorderSizePixel = 0
-SkipPlayer.Position = UDim2.new(0.356666654, 0, 0.508333325, 0)
-SkipPlayer.Size = UDim2.new(0, 178, 0, 45)
-
-SkipPlayerStroke.Color = Color3.fromRGB(255, 255, 255)
-SkipPlayerStroke.Name = "SkipPlayerStroke"
-SkipPlayerStroke.Parent = SkipPlayer
-
-SkipPlayerCorner.Name = "SkipPlayerCorner"
-SkipPlayerCorner.Parent = SkipPlayer
-
-SkipPlayerButton.Name = "SkipPlayerButton"
-SkipPlayerButton.Parent = SkipPlayer
-SkipPlayerButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.BackgroundTransparency = 1.000
-SkipPlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SkipPlayerButton.BorderSizePixel = 0
-SkipPlayerButton.Position = UDim2.new(0, 0, -0.0666666701, 0)
-SkipPlayerButton.Size = UDim2.new(0, 178, 0, 51)
-SkipPlayerButton.Font = Enum.Font.ArialBold
-SkipPlayerButton.Text = "Skip Players"
-SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.TextSize = 18.000
-SkipPlayerButton.MouseButton1Down:Connect(function()
-    NextplySelect = true
-    wait(0.1)
-    NextplySelect = false
-end)
-
-TargetNameEarnedTimeElapsed.Name = "TargetName/Earned/TimeElapsed"
-TargetNameEarnedTimeElapsed.Parent = Main
-TargetNameEarnedTimeElapsed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TargetNameEarnedTimeElapsed.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TargetNameEarnedTimeElapsed.BorderSizePixel = 0
-TargetNameEarnedTimeElapsed.Position = UDim2.new(0.0533333346, 0, 0.753260851, 0)
-TargetNameEarnedTimeElapsed.Size = UDim2.new(0, 270, 0, 50)
-
-EarnedTimeElapsedStroke.Color = Color3.fromRGB(255, 255, 255)
-EarnedTimeElapsedStroke.Name = "Earned/TimeElapsedStroke"
-EarnedTimeElapsedStroke.Parent = TargetNameEarnedTimeElapsed
-
-EarnedTimeElapsedCorner.Name = "Earned/TimeElapsedCorner"
-EarnedTimeElapsedCorner.Parent = TargetNameEarnedTimeElapsed
-
-EarnedLabel.Name = "EarnedLabel"
-EarnedLabel.Parent = TargetNameEarnedTimeElapsed
-EarnedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-EarnedLabel.BackgroundTransparency = 1.000
-EarnedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-EarnedLabel.Position = UDim2.new(0.0459771045, 0, 0.319999993, 0)
-EarnedLabel.Size = UDim2.new(0, 79, 0, 17)
-EarnedLabel.Font = Enum.Font.ArialBold
-EarnedLabel.Text = "Earned :  16000000"
-EarnedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-EarnedLabel.TextSize = 15.000
-EarnedLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-TimeElapsedLabel.Name = "TimeElapsedLabel"
-TimeElapsedLabel.Parent = TargetNameEarnedTimeElapsed
-TimeElapsedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TimeElapsedLabel.BackgroundTransparency = 1.000
-TimeElapsedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TimeElapsedLabel.Position = UDim2.new(0.0422734022, 0, 0.555555582, 0)
-TimeElapsedLabel.Size = UDim2.new(0, 246, 0, 25)
-TimeElapsedLabel.Font = Enum.Font.ArialBold
-TimeElapsedLabel.Text = "Time Elapsed: 0D 0H 0M 0S"
-TimeElapsedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TimeElapsedLabel.TextSize = 15.000
-TimeElapsedLabel.TextXAlignment = Enum.TextXAlignment.Left
-function UpdateTime()
-    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
-    local Hour = math.floor(GameTime/(60^2))%24
-    local Minute = math.floor(GameTime/(60^1))%60
-    local Second = math.floor(GameTime/(60^0))%60
-    TimeElapsedLabel.Text = "Time Elapsed : Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
-    end
-    spawn(function()
-    while task.wait() do
-    pcall(function()
-    UpdateTime()
-    end)
-    end
-    end)
-
-TotalBountyLabel.Name = "TotalBountyLabel"
-TotalBountyLabel.Parent = TargetNameEarnedTimeElapsed
-TotalBountyLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TotalBountyLabel.BackgroundTransparency = 1.000
-TotalBountyLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TotalBountyLabel.Position = UDim2.new(0.0422734022, 0, 0, 0)
-TotalBountyLabel.Size = UDim2.new(0, 258, 0, 18)
-TotalBountyLabel.Font = Enum.Font.ArialBold
-TotalBountyLabel.Text = "Target Name:"
-TotalBountyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TotalBountyLabel.TextSize = 15.000
-TotalBountyLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSection.Name = "MainSection"
-MainSection.Parent = Main
-MainSection.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSection.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSection.BorderSizePixel = 0
-MainSection.Position = UDim2.new(0.376666665, 0, 0.0399999991, 0)
-MainSection.Size = UDim2.new(0, 172, 0, 87)
-
-MainSectionCorner.Name = "MainSectionCorner"
-MainSectionCorner.Parent = MainSection
-
-MainSectionStroke.Color = Color3.fromRGB(255, 255, 255)
-MainSectionStroke.Name = "MainSectionStroke"
-MainSectionStroke.Parent = MainSection
-
-MainSectionLabel_1.Name = "MainSectionLabel_1"
-MainSectionLabel_1.Parent = MainSection
-MainSectionLabel_1.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_1.BackgroundTransparency = 1.000
-MainSectionLabel_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_1.BorderSizePixel = 0
-MainSectionLabel_1.Position = UDim2.new(0.0813953504, 0, 0, 0)
-MainSectionLabel_1.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_1.Font = Enum.Font.Unknown
-MainSectionLabel_1.Text = "Night Hub"
-MainSectionLabel_1.TextColor3 = Color3.fromRGB(210, 210, 210)
-MainSectionLabel_1.TextSize = 25.000
-MainSectionLabel_1.TextWrapped = true
-MainSectionLabel_1.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSectionLabel_2.Name = "MainSectionLabel_2"
-MainSectionLabel_2.Parent = MainSection
-MainSectionLabel_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_2.BackgroundTransparency = 1.000
-MainSectionLabel_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_2.BorderSizePixel = 0
-MainSectionLabel_2.Position = UDim2.new(0.0813953504, 0, 0.338205963, 0)
-MainSectionLabel_2.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_2.Font = Enum.Font.Unknown
-MainSectionLabel_2.Text = "Auto Bounty"
-MainSectionLabel_2.TextColor3 = Color3.fromRGB(64, 64, 64)
-MainSectionLabel_2.TextSize = 25.000
-MainSectionLabel_2.TextWrapped = true
-MainSectionLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-
-MainStroke.Color = Color3.fromRGB(210, 210, 210)
-MainStroke.Name = "MainStroke"
-MainStroke.Parent = Main
-
-DMouse(Main,Main)
 
 function GetDistance(target)
     return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
@@ -821,6 +515,80 @@ function autoskill()
     end
 end
 
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime + 0.5)
+    local Hour = math.floor(GameTime / (60 ^ 2)) % 24
+    local Minute = math.floor(GameTime / (60 ^ 1)) % 60
+    local Second = math.floor(GameTime / (60 ^ 0)) % 60
+    Time:Set("Time Elapsed: " .. Hour .. "H " .. Minute .. "M " .. Second .. "S")
+end
+
+spawn(
+    function()
+        while task.wait() do
+            pcall(
+                function()
+                    UpdateTime()
+                end
+            )
+        end
+    end
+)
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Night Hub Bounty Hunter", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub Hunt"})
+
+local G = Window:MakeTab({
+	Name = "General",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local SC = Window:MakeTab({
+	Name = "Setting-Configs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = G:AddSection({
+	Name = "Hunt Console"
+})
+
+G:AddToggle({
+	Name = "Start Hunt",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoFarmBounty = Value
+	end    
+})
+
+G:AddButton({
+	Name = "Next Players",
+	Callback = function()
+      	NextplySelect = true
+        wait(0.5)
+        NextplySelect = false
+  	end    
+})
+
+local Section = G:AddSection({
+	Name = "Hunt Status"
+})
+
+local Bounty = G:AddLabel("Your Bounty : ")
+local Earned = G:AddLabel("Earned : ")
+local Time = G:AddLabel("Time : ")
+local Target = G:AddLabel("Target Name : ")
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            Bounty:Set("Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value)
+        end)
+    end
+end)
+
+
 spawn(function()
     pcall(function()
     if _G.AutoFarmBounty then
@@ -867,7 +635,7 @@ spawn(function()
             if v.Name == "NotificationTemplate" then
                 if string.find(v.Text,"attack") or string.find(v.Text,"players") or string.find(v.Text,"Players") or string.find(v.Text,"Safe Zone!") then
                         NextplySelect = true
-                        wait(0.0000000000000000000000000000000001)
+                        wait(0.5)
                         NextplySelect = false
                         end
                     end
@@ -890,6 +658,7 @@ spawn(function()
     plyselecthunthelpold = v.Humanoid.Health
     repeat task.wait()
     NameTarget = v.Name
+    Target:Set("Target Name : " .. v.Name .. "")
     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,13,2))
@@ -949,7 +718,7 @@ spawn(
             function()
                 while wait(0.1) do
                     local BountyB = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
-                    EarnedLabel.Text = "Earned: " .. BountyB - BountyA
+                    Earned:Set("Earned: " .. BountyB - BountyA)
                 end
             end
         )
@@ -1030,4 +799,4 @@ spawn(function()
         end)
     end)
 
-print()
+    OrionLib:Init()
