@@ -1,3 +1,5 @@
+_G.AutoFarmBounty = true
+
 function DMouse(Frame, Object)
     dragToggle = nil
     dragSpeed = .25
@@ -495,8 +497,6 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     wait(1)
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
-
-_G.AutoFarmBounty = true
 
 spawn(function()
     pcall(function()
