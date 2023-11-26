@@ -535,51 +535,6 @@ spawn(
     end
 )
 
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Night Hub Bounty Hunter", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub Hunt"})
-
-local G = Window:MakeTab({
-	Name = "General",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local SC = Window:MakeTab({
-	Name = "Setting-Configs",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
-
-local Section = G:AddSection({
-	Name = "Hunt Console"
-})
-
-G:AddToggle({
-	Name = "Start Hunt",
-	Default = false,
-	Callback = function(Value)
-		_G.AutoFarmBounty = Value
-	end    
-})
-
-G:AddButton({
-	Name = "Next Players",
-	Callback = function()
-      	NextplySelect = true
-        wait(0.5)
-        NextplySelect = false
-  	end    
-})
-
-local Section = G:AddSection({
-	Name = "Hunt Status"
-})
-
-local Bounty = G:AddLabel("Your Bounty : 0")
-local Earned = G:AddLabel("Earned : 0")
-local Time = G:AddLabel("Time : 0H 0M 0S")
-local Target = G:AddLabel("Target Name : Cuccut")
-
 spawn(function()
     while wait() do
         pcall(function()
@@ -799,4 +754,50 @@ spawn(function()
         end)
     end)
 
-    OrionLib:Init()
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Night Hub Bounty Hunter", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub Hunt"})
+
+local G = Window:MakeTab({
+	Name = "General",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local SC = Window:MakeTab({
+	Name = "Setting-Configs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = G:AddSection({
+	Name = "Hunt Console"
+})
+
+G:AddToggle({
+	Name = "Start Hunt",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoFarmBounty = Value
+	end    
+})
+
+G:AddButton({
+	Name = "Next Players",
+	Callback = function()
+      	NextplySelect = true
+        wait(0.5)
+        NextplySelect = false
+  	end    
+})
+
+local Section = G:AddSection({
+	Name = "Hunt Status"
+})
+
+local Bounty = G:AddLabel("Your Bounty : 0")
+local Earned = G:AddLabel("Earned : 0")
+local Time = G:AddLabel("Time : 0H 0M 0S")
+local Target = G:AddLabel("Target Name : Cuccut")
+    
+OrionLib:Init()
