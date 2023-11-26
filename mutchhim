@@ -325,94 +325,23 @@ function TelePPlayer(P)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
 
-function topos(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance < 25 then
-        Speed = 6000
-    elseif Distance < 50 then
-        Speed = 3000
-    elseif Distance < 150 then
-        Speed = 800
-    elseif Distance < 250 then
-        Speed = 350
+function topos(P1)
+    Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 250 then
+        Speed = 600
     elseif Distance < 500 then
-        Speed = 300
-    elseif Distance < 750 then
-        Speed = 300
+        Speed = 400
+    elseif Distance < 1000 then
+        Speed = 350
     elseif Distance >= 1000 then
-        Speed = 300
+        Speed = 200
     end
     game:GetService("TweenService"):Create(
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-        {CFrame = Pos}
+        {CFrame = P1}
     ):Play()
 end
-
-function TPB(CFgo)
-local tween_s = game:service"TweenService"
-local info = TweenInfo.new((game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
-tween = tween_s:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, info, {CFrame = CFgo})
-tween:Play()
-
-local tweenfunc = {}
-
-function tweenfunc:Stop()
-    tween:Cancel()
-end
-
-return tweenfunc
-end
-
-function TPP(CFgo)
-if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait() until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
-local tween_s = game:service"TweenService"
-local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFgo.Position).Magnitude/325, Enum.EasingStyle.Linear)
-tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFgo})
-tween:Play()
-
-local tweenfunc = {}
-
-function tweenfunc:Stop()
-    tween:Cancel()
-end
-
-return tweenfunc
-end
-
-Type = 1
-spawn(function()
-while wait(.1) do
-    if Type == 1 then
-        Pos = CFrame.new(0,PosY,0)
-    elseif Type == 2 then
-        Pos = CFrame.new(0,PosY,-30)
-    elseif Type == 3 then
-        Pos = CFrame.new(30,PosY,0)
-    elseif Type == 4 then
-        Pos = CFrame.new(0,PosY,30)	
-    elseif Type == 5 then
-        Pos = CFrame.new(-30,PosY,0)
-    elseif Type == 6 then
-        Pos = CFrame.new(0,35,0)
-    end
-    end
-end)
-
-spawn(function()
-while wait(.1) do
-    Type = 1
-    wait(0.5)
-    Type = 2
-    wait(0.5)
-    Type = 3
-    wait(0.5)
-    Type = 4
-    wait(0.5)
-    Type = 5
-    wait(0.5)
-end
-end)
 
 spawn(function()
 game:GetService("RunService").Heartbeat:Connect(function()
