@@ -853,30 +853,6 @@ function SendKey(c9, ca)
     end
 end
 
-function Y()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
-end
-
-function Z()
-game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
-game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
-end
-
-function X()
-game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
-game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
-end
-
-function C()
-game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
-game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
-end
-
-function V()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
-    end
 
 function autoskill()
     EnableBuso()
@@ -891,76 +867,24 @@ function autoskill()
         EquipWeaponName(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
         local condimebeo = checkskillDF()
         if condimebeo then
-            Z()
-            Z()
-            Z()
-            Z()
-            Z()
-            X()
-            X()
-            X()
-            X()
-            X()
-            C()
-            C()
-            C()
-            C()
-            C()
-            V()
-            V()
-            V()
-            V()
-            V()
-            V()
+            SendKey(condimebeo)
         end
     elseif checkskillMelee() and Melee then
         EquipWeaponName(NameMelee())
         local condimebeo = checkskillMelee()
         if condimebeo then
-            Z()
-            Z()
-            Z()
-            Z()
-            Z()
-            X()
-            X()
-            X()
-            X()
-            X()
-            C()
-            C()
-            C()
-            C()
-            C()
+            SendKey(condimebeo)
         end
     elseif checkskillSword() and Sword then
         EquipWeaponName(NameSword())
         local condimebeo = checkskillSword()
         if condimebeo then
-            Z()
-            Z()
-            Z()
-            Z()
-            Z()
-            X()
-            X()
-            X()
-            X()
-            X()
+            SendKey(condimebeo)
         end
     elseif checkskillGun() and Gun then
         EquipWeaponName(NameGun())
         if condimebeo then
-            Z()
-            Z()
-            Z()
-            Z()
-            Z()
-            X()
-            X()
-            X()
-            X()
-            X()
+            SendKey(condimebeo)
         end
     else
         EquipAllWeapon()
