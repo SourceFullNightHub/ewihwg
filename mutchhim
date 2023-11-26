@@ -537,6 +537,22 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        if _G.AutoFarmBounty then
+        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+            if v.Name == "NotificationTemplate" then
+                if string.find(v.Text,"attack") or string.find(v.Text,"players") or string.find(v.Text,"Players") or string.find(v.Text,"Safe Zone!") then
+                        NextplySelect = true
+                        wait(0.0000000000000000000000000000000001)
+                        NextplySelect = false
+                        end
+                    end
+                end
+            end
+        end
+    end)
+
     CastlePostoMansion = CFrame.new(-5084.8447265625, 316.48101806641, -3145.3752441406)
     MansiontoCastlePos = CFrame.new(-12464.596679688, 376.30590820312, -7567.2626953125)
     Castletophydra = CFrame.new(-5095.33984375, 316.48101806641, -3168.3134765625)
@@ -613,7 +629,67 @@ spawn(function()
     end)
     end)
 
-
+    local Select_Size_Fov = 1200
+    local Show_Fov = false
+    local Circle = Drawing.new("Circle")
+    Circle.Color =  Color3.fromRGB(255, 255, 255)
+    Circle.Thickness = 1
+    Circle.Radius = 250
+    Circle.NumSides = 460
+    Circle.Filled = false
+    Circle.Transparency = 1
+    game:GetService("RunService").Stepped:Connect(function()
+        Circle.Radius = Select_Size_Fov
+        Circle.Thickness = 1
+        Circle.NumSides = 460
+        Circle.Position = game:GetService('UserInputService'):GetMouseLocation()
+        if Show_Fov then
+            Circle.Visible = true
+        else
+            Circle.Visible = false
+        end
+    end)
+    local lp = game:GetService('Players').LocalPlayer
+    local mouse = lp:GetMouse()
+    spawn(function()
+        while wait() do
+            if _G.Aimbot_Skill_Fov then
+                pcall(function()
+                    local MaxDist, Closest = math.huge
+                    for i,v in pairs(game:GetService("Players"):GetChildren()) do 
+                        local Head = v.Character:FindFirstChild("HumanoidRootPart")
+                        local Pos, Vis = game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera, Head.Position)
+                        local MousePos, TheirPos = Vector2.new(mouse.X, mouse.Y), Vector2.new(Pos.X, Pos.Y)
+                        local Dist = (TheirPos - MousePos).Magnitude
+                        if Dist < MaxDist and Dist <= Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
+                            MaxDist = Dist
+                            _G.Aim_Players = v
+                        end
+                    end
+                end)
+            end
+        end
+    end)
+    spawn(function()
+        local gg = getrawmetatable(game)
+        local old = gg.__namecall
+        setreadonly(gg,false)
+        gg.__namecall = newcclosure(function(...)
+            local method = getnamecallmethod()
+            local args = {...}
+            if tostring(method) == "FireServer" then
+                if tostring(args[1]) == "RemoteEvent" then
+                    if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                        if _G.Aimbot_Skill_Fov then
+                            args[2] = _G.Aim_Players.Character.HumanoidRootPart.Position
+                            return old(unpack(args))
+                        end
+                    end
+                end
+            end
+            return old(...)
+        end)
+    end)
 
 
 
