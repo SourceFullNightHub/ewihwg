@@ -1,0 +1,449 @@
+-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+
+function Hop()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+    function Teleport() 
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+    Teleport()
+end       
+
+-- Instances:
+
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_Frame"] = Instance.new("Frame");
+	["_Frame1"] = Instance.new("Frame");
+	["_UICorner"] = Instance.new("UICorner");
+	["_ImageLabel"] = Instance.new("ImageLabel");
+	["_Frame2"] = Instance.new("Frame");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_Time"] = Instance.new("TextLabel");
+	["_Bounty"] = Instance.new("TextLabel");
+	["_Target"] = Instance.new("TextLabel");
+	["_Frame3"] = Instance.new("Frame");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_Next"] = Instance.new("TextButton");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_Hop"] = Instance.new("TextButton");
+	["_UICorner4"] = Instance.new("UICorner");
+	["_UICorner5"] = Instance.new("UICorner");
+	["_Frame4"] = Instance.new("Frame");
+	["_UICorner6"] = Instance.new("UICorner");
+	["_TextLabel"] = Instance.new("TextLabel");
+	["_UICorner7"] = Instance.new("UICorner");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderSizePixel = 0
+Converted["_Frame"].Position = UDim2.new(0.225598529, 0, 0.309236944, 0)
+Converted["_Frame"].Size = UDim2.new(0, 401, 0, 189)
+Converted["_Frame"].Parent = Converted["_ScreenGui"]
+
+Converted["_Frame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderSizePixel = 0
+Converted["_Frame1"].Position = UDim2.new(0.00726773823, 0, 0.0147982808, 0)
+Converted["_Frame1"].Size = UDim2.new(0, 395, 0, 183)
+Converted["_Frame1"].Parent = Converted["_Frame"]
+
+Converted["_UICorner"].Parent = Converted["_Frame1"]
+
+Converted["_ImageLabel"].Image = "rbxassetid://15150981742"
+Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel"].BorderSizePixel = 0
+Converted["_ImageLabel"].Position = UDim2.new(0.0430379733, 0, 0.158469945, 0)
+Converted["_ImageLabel"].Size = UDim2.new(0, 100, 0, 100)
+Converted["_ImageLabel"].Parent = Converted["_Frame1"]
+
+Converted["_Frame2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame2"].BorderSizePixel = 0
+Converted["_Frame2"].Position = UDim2.new(0.445569634, 0, 0.0655737668, 0)
+Converted["_Frame2"].Size = UDim2.new(0, 213, 0, 117)
+Converted["_Frame2"].Parent = Converted["_Frame1"]
+
+Converted["_UICorner1"].Parent = Converted["_Frame2"]
+
+Converted["_Time"].Font = Enum.Font.SourceSansBold
+Converted["_Time"].Text = "Time :"
+Converted["_Time"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Time"].TextSize = 14
+Converted["_Time"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Time"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Time"].BorderSizePixel = 0
+Converted["_Time"].Position = UDim2.new(0.0281690136, 0, 0.145299152, 0)
+Converted["_Time"].Size = UDim2.new(0, 200, 0, 33)
+Converted["_Time"].Name = "Time"
+Converted["_Time"].Parent = Converted["_Frame2"]
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+    local Hour = math.floor(GameTime/(60^2))%24
+    local Minute = math.floor(GameTime/(60^1))%60
+    local Second = math.floor(GameTime/(60^0))%60
+    Converted["_Time"].Text = "Hours : "..Hour.." Minute : "..Minute.." Second : "..Second
+    end
+    spawn(function()
+    while task.wait() do
+    pcall(function()
+    UpdateTime()
+    end)
+    end
+    end)
+
+Converted["_Bounty"].Font = Enum.Font.SourceSansBold
+Converted["_Bounty"].Text = "Earned Bounty :"
+Converted["_Bounty"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Bounty"].TextSize = 14
+Converted["_Bounty"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Bounty"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Bounty"].BorderSizePixel = 0
+Converted["_Bounty"].Position = UDim2.new(0.0281690136, 0, 0.427350432, 0)
+Converted["_Bounty"].Size = UDim2.new(0, 200, 0, 33)
+Converted["_Bounty"].Name = "Bounty"
+Converted["_Bounty"].Parent = Converted["_Frame2"]
+
+Converted["_Target"].Font = Enum.Font.SourceSansBold
+Converted["_Target"].Text = "Target Name :"
+Converted["_Target"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Target"].TextSize = 14
+Converted["_Target"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Target"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Target"].BorderSizePixel = 0
+Converted["_Target"].Position = UDim2.new(0.0281690136, 0, 0.717948735, 0)
+Converted["_Target"].Size = UDim2.new(0, 200, 0, 33)
+Converted["_Target"].Name = "Target"
+Converted["_Target"].Parent = Converted["_Frame2"]
+
+Converted["_Frame3"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame3"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame3"].BorderSizePixel = 0
+Converted["_Frame3"].Position = UDim2.new(0, 0, 0.704918027, 0)
+Converted["_Frame3"].Size = UDim2.new(0, 395, 0, 54)
+Converted["_Frame3"].Parent = Converted["_Frame1"]
+
+Converted["_UICorner2"].Parent = Converted["_Frame3"]
+
+Converted["_Next"].Font = Enum.Font.SourceSansBold
+Converted["_Next"].Text = "Next Players"
+Converted["_Next"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Next"].TextSize = 14
+Converted["_Next"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Next"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Next"].BorderSizePixel = 0
+Converted["_Next"].Position = UDim2.new(0.0430379733, 0, 0.166666672, 0)
+Converted["_Next"].Size = UDim2.new(0, 135, 0, 36)
+Converted["_Next"].Name = "Next"
+Converted["_Next"].Parent = Converted["_Frame3"]
+Converted["_Next"].MouseButton1Down:Connect(function()
+    NextplySelect = true
+    wait(0.5)
+    NextplySelect = false
+end)
+
+Converted["_UICorner3"].Parent = Converted["_Next"]
+
+Converted["_Hop"].Font = Enum.Font.SourceSansBold
+Converted["_Hop"].Text = "Hop Server"
+Converted["_Hop"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Hop"].TextSize = 14
+Converted["_Hop"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Hop"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Hop"].BorderSizePixel = 0
+Converted["_Hop"].Position = UDim2.new(0.544303775, 0, 0.166666672, 0)
+Converted["_Hop"].Size = UDim2.new(0, 135, 0, 36)
+Converted["_Hop"].Name = "Hop"
+Converted["_Hop"].Parent = Converted["_Frame3"]
+Converted["_Hop"].MouseButton1Down:Connect(function()
+    Hop()
+end)
+
+Converted["_UICorner4"].Parent = Converted["_Hop"]
+
+Converted["_UICorner5"].Parent = Converted["_Frame"]
+
+Converted["_Frame4"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame4"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame4"].BorderSizePixel = 0
+Converted["_Frame4"].Position = UDim2.new(0.0589318611, 0, 0.0562249012, 0)
+Converted["_Frame4"].Size = UDim2.new(0, 347, 0, 34)
+Converted["_Frame4"].Parent = Converted["_ScreenGui"]
+
+Converted["_UICorner6"].Parent = Converted["_Frame4"]
+
+Converted["_TextLabel"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel"].Text = "Your Bounty : | Night Hub"
+Converted["_TextLabel"].TextColor3 = Color3.fromRGB(0, 85.0000025331974, 255)
+Converted["_TextLabel"].TextSize = 14
+Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderSizePixel = 0
+Converted["_TextLabel"].Size = UDim2.new(0, 347, 0, 34)
+Converted["_TextLabel"].Parent = Converted["_Frame4"]
+spawn(function()
+    while wait() do
+        pcall(function()
+            Converted["_TextLabel"].Text = "Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value.." | ".."Night Hub"
+        end)
+    end
+end)
+
+Converted["_UICorner7"].Parent = Converted["_TextLabel"]
+
+_G.AutoFarmBounty = true
+
+spawn(function()
+pcall(function()
+if _G.AutoFarmBounty then
+while wait() do
+if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+end
+end
+end
+end)
+end)
+
+function GetDistance(target)
+    return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
+end
+
+function BTP(P)
+repeat wait(1)
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+    task.wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500
+end
+
+function TelePPlayer(P)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+end
+
+function TP(Pos)
+Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+if Distance < 25 then
+    Speed = 10000
+elseif Distance < 50 then
+    Speed = 2000
+elseif Distance < 150 then
+    Speed = 800
+elseif Distance < 250 then
+    Speed = 600
+elseif Distance < 500 then
+    Speed = 400
+elseif Distance < 750 then
+    Speed = 250
+elseif Distance >= 1000 then
+    Speed = 200
+end
+game:GetService("TweenService"):Create(
+    game.Players.LocalPlayer.Character.HumanoidRootPart,
+    TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+    {CFrame = Pos}
+):Play()
+end
+
+function TP1(Pos)
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 25 then
+        Speed = 5000
+    elseif Distance < 50 then
+        Speed = 2000
+    elseif Distance < 150 then
+        Speed = 800
+    elseif Distance < 250 then
+        Speed = 600
+    elseif Distance < 500 then
+        Speed = 300
+    elseif Distance < 750 then
+        Speed = 250
+    elseif Distance >= 1000 then
+        Speed = 200
+    end
+    game:GetService("TweenService"):Create(
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = Pos}
+    ):Play()
+end
+
+function topos(Pos)
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 25 then
+        Speed = 5000
+    elseif Distance < 50 then
+        Speed = 2000
+    elseif Distance < 150 then
+        Speed = 800
+    elseif Distance < 250 then
+        Speed = 600
+    elseif Distance < 500 then
+        Speed = 300
+    elseif Distance < 750 then
+        Speed = 250
+    elseif Distance >= 1000 then
+        Speed = 200
+    end
+    game:GetService("TweenService"):Create(
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = Pos}
+    ):Play()
+end
+
+function TPB(CFgo)
+local tween_s = game:service"TweenService"
+local info = TweenInfo.new((game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - CFgo.Position).Magnitude/300, Enum.EasingStyle.Linear)
+tween = tween_s:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, info, {CFrame = CFgo})
+tween:Play()
+
+local tweenfunc = {}
+
+function tweenfunc:Stop()
+    tween:Cancel()
+end
+
+return tweenfunc
+end
+
+function TPP(CFgo)
+if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait() until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
+local tween_s = game:service"TweenService"
+local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFgo.Position).Magnitude/325, Enum.EasingStyle.Linear)
+tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFgo})
+tween:Play()
+
+local tweenfunc = {}
+
+function tweenfunc:Stop()
+    tween:Cancel()
+end
+
+return tweenfunc
+end
+
+function StopTween(target)
+    if not target then
+        _G.StopTween = true
+        wait()
+        topos(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        end
+        _G.StopTween = false
+        _G.Clip = false
+    end
+end
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do  
+                if v:IsA("Tool") then
+                    if v:FindFirstChild("RemoteFunctionShoot") then 
+                        SelectWeaponGun = v.Name
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+_G.Bountyshithunt = true
+
+spawn(function ()
+    while wait() do
+        if _G.Bountyshithunt then
+            for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                if v.Name ~= game.Players.LocalPlayer.Name then
+                    if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
+                        Healthmuctieu = v.Humanoid.Health
+                        repeat task.wait()
+                            NameTarget = v.Name
+                            if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
+                                topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
+                            elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
+                            if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
+                                topos(v.HumanoidRootPart.CFrame * CFrame.new(0,0,2))
+                                spawn(function()
+                                    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 15 then
+                                        Hop()
+                                        end
+                                    end
+                                end)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end)
