@@ -1176,11 +1176,13 @@ spawn(
                                         NameTarget = v.Name
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
                                         if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                            TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
                                         elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
                                             if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
-                                            end
+                                                TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                        elseif tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
+                                            TP1(v.HumanoidRootPart.CFrame * CFrame.new(2, 40, 2))
+                                        end
                                         end
                                         spawn(
                                             function()
@@ -1306,10 +1308,8 @@ spawn(
     end
 )
 
-spawn(
-    function()
-        pcall(
-            function()
+spawn(function()
+        pcall(function()
                 while wait(.1) do
                     if _G.AutoFarmBounty then
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
@@ -1317,10 +1317,8 @@ spawn(
                         end
                     end
                 end
-            end
-        )
-    end
-)
+            end)
+        end)
 
 spawn(
     function()
