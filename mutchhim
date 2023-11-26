@@ -977,6 +977,7 @@ spawn(function()
         Melee = true
         Sword = true
         DF = true
+        _G.Aimbot_Skill_Fov = true
         end)
     end
     end)
