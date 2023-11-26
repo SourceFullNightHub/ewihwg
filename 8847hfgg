@@ -1,18 +1,4 @@
-_G.ConfigUse = true
-if _G.ConfigUse then
-    if getgenv().config["Melee"] then
-        Melee = true
-    end
-    if getgenv().config["Sword"] then
-        Sword = true
-    end
-    if getgenv().config["Gun"] then
-        Gun = true
-    end
-    if getgenv().config["Devil Fruit"] then
-        DF = true
-    end
-end
+
 function DMouse(Frame, Object)
     dragToggle = nil
     dragSpeed = .25
