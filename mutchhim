@@ -44,6 +44,7 @@ function DMouse(Frame, Object)
     end)
 end
 
+local BountyA = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
 local NightHubAB = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local MainCorner = Instance.new("UICorner")
@@ -960,6 +961,8 @@ spawn(function()
     plyselecthunthelpold = v.Humanoid.Health
     repeat task.wait()
     NameTarget = v.Name
+    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+    workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position,v.HumanoidRootPart.Position + workspace.CurrentCamera.CFrame.Position)
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,9,2))
     elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
@@ -1011,6 +1014,19 @@ end
 end
 end)
 end)
+
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(0.1) do
+                    local BountyB = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
+                    EarnedLabel.Text = "Earned: " .. BountyB - BountyA
+                end
+            end
+        )
+    end
+)
 
 spawn(function()
     pcall(function()
