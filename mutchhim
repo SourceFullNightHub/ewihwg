@@ -1,131 +1,3 @@
-------- config 
-_G.AutoFarmBounty = true
-repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players:GetPlayers()
-getgenv().c = {
-    ["Team"]                      = "Pirates"
-  , ["Buso"]                      = 1
-  , ["Ken"]                       = 1 
-  , ["AlwaysDash"]                = 1
-  , ["V3"]                        = 1 
-  , ["V4"]                        = 1 
-  , ["MainItem"]                  = "Blox Fruit"
-  , ["MainClick"]                 = "Melee"
-  , ["MainItemSkillToggle"]       = {"Click", "Z", "X", "C", "V"}
-  , ["MainClickSkillToggle"]      = {"Click", "Z", "C"}
-  , ["Hop"]                       = 1
-  , ["SpamChat"]                  = {"aaaa"}
-  , ["Invisble"]                  = 0 
-  , ["Webhooks"]                  = 0 
-  , ["SafeMode"]                  = 1 
-  , ["SafeHealth"]                = 5000
-  , ["SafeUntil"]                 = 6000
-  , ["BypassTP"]                  = 1 
-  , ["BypassDist"]                = 5000
-  , ["YTween"]                    = 1 
-  , ["TweenSpeed"]                = 350
-}
-
--- Vars
-getgenv().deb           = {}
-local players           = game.Players
-local scannedPlayers    = {}
-local rs                = game.RunService
-local hb                = rs.Heartbeat
-local db                = {}
-local lp                = players.LocalPlayer
-local allp              = lp.Parent:GetPlayers()
-local p                 = CFrame.new(0,0,0)
------ functions
-
-
-
-function fetch()
-   dist = 20000
-   getgenv().targ =nil 
-   oldp = nil
-   for i, v in pairs(players:GetPlayers()) do 
-    print('v', v.Name)
-    v.Character.Head:Destroy()
-    if v then 
-     print(1)
-     if v.Name then 
-      print(2)
-      if v.Character:FindFirstChild('HumanoidRootPart') then 
-       print(3)
-       if v ~= lp then 
-        print(4)
-        if v ~= oldp then 
-         print(5)
-         if lp:DistanceFromCharacter(v.Character.HumanoidRootPart.CFrame.Position) < dist then 
-          
-     print('true')
-     getgenv().targ = v 
-     dist = lp:DistanceFromCharacter(getc(v).Position)
-     oldp = getgenv().targ
-     print(dist)
-         end
-        end 
-       end
-  end 
-     end 
-    end 
- end 
-     
-    
-end
-
-spawn(function()
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if _G.AutoFarmBounty or _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFactory or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.AutoKai or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest or _G.Namfon or _G.AutoSwordMastery or _G.AutoSeaBest or _G.AutoKillTial or _G.Auto_Saber or _G.Position_Spawn or _G.Farmfast or _G.AutoRace or _G.RaidPirate then
-            if not game:GetService("Workspace"):FindFirstChild("LOL") then
-                local LOL = Instance.new("Part")
-                LOL.Name = "LOL"
-                LOL.Parent = game.Workspace
-                LOL.Anchored = true
-                LOL.Transparency = 1
-                LOL.Size = Vector3.new(30,-0.5,30)
-            elseif game:GetService("Workspace"):FindFirstChild("LOL") then
-                game.Workspace["LOL"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -3.6, 0)
-            end
-        else
-            if game:GetService("Workspace"):FindFirstChild("LOL") then
-                game:GetService("Workspace"):FindFirstChild("LOL"):Destroy()
-            end
-        end
-    end)
-    end)
-    
-    spawn(function()
-        pcall(function()
-            while wait() do
-                if _G.AutoFarmBounty == true then
-                    if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                        local Noclip = Instance.new("BodyVelocity")
-                        Noclip.Name = "BodyClip"
-                        Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                        Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(0,0,0)
-                    end
-                end
-            end
-        end)
-    end)
-    
-    spawn(function()
-        pcall(function()
-            game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoFarmBounty == true then
-                    for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = false    
-                        end
-                    end
-                end
-            end)
-        end)
-    end)
-
-
 function GetDistance(target)
     return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
 end
@@ -279,252 +151,137 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     wait(1)
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
- function db:new(id)
-  id = id or #getgenv().deb + 1
-  getgenv().deb[id] = true
- end 
- function db:get(id)
-  return getgenv().deb[id]
- end 
- function db:start(id)
-  if not pcall(function()
-   if getgenv().deb[id] ~= nil then
-    getgenv().deb[id] = true
-   end 
-  end) then
-  return false 
-  else 
-   return true
-  end
- end 
- function db:stop(id)
-  return pcall(function ()
-   getgenv().deb[id] = false
-  end)
- end 
- function db:delete(id)
-  getgenv().de[id] = nil 
- end 
-function getc(p)
- 
- return pcall(function() return p.Character:WaitForChild('Head').CFrame end) 
- end
-function down(use) -- Send key to client
 
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,use,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+_G.AutoBounty = true
 
-    wait(.1)
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,use,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
-end 
-function geth(t)
- return tonumber(t.Character.Humanoid.Health)
-end 
-function equip(tooltip)
-   local player = game.Players.LocalPlayer
-   local character = player.Character or player.CharacterAdded:Wait()
-
-   for _, item in pairs(player.Backpack:GetChildren()) do
-      if item:IsA("Tool") and item.ToolTip == tooltip then
-         local humanoid = character:FindFirstChildOfClass("Humanoid")
-         if humanoid and not humanoid:IsDescendantOf(item) then
-            humanoid:UnequipTools()
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(item)
-            return true
-         end
-      end
-   end
-   
-   return false
-end 
-function rands()
- local shit = math.random(1,4)
- if shit == 1 then return 'Z' end
- if shit == 2 then return 'X' end
- if shit == 3 then return 'C' end
- if shit == 4 then return 'V' end 
-end 
-function buso() 
-    if(not(game.Players.LocalPlayer.Character:FindFirstChild('HasBuso')))then
-local rel = game.ReplicatedStorage
-
-        rel.Remotes.CommF_:InvokeServer('Buso')
+spawn(function()
+    pcall(function()
+    if _G.AutoBounty then
+    while wait() do
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
     end
-end 
-function Hop()
-    local PlaceID = game.PlaceId
-    local AllIDs = {}
-    local foundAnything = ""
-    local actualHour = os.date("!*t").hour
-    local Deleted = false
-    function TPReturner()
-        local Site
-        if foundAnything == "" then
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"
-                )
-            )
-        else
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" ..
-                        PlaceID .. "/servers/Public?sortOrder=Asc&limit=100&cursor=" .. foundAnything
-                )
-            )
-        end
-        local ID = ""
-        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-            foundAnything = Site.nextPageCursor
-        end
-        local num = 0
-        for i, v in pairs(Site.data) do
-            local Possible = true
-            ID = tostring(v.id)
-            if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                for _, Existing in pairs(AllIDs) do
-                    if num ~= 0 then
-                        if ID == tostring(Existing) then
-                            Possible = false
-                        end
-                    else
-                        if tonumber(actualHour) ~= tonumber(Existing) then
-                            local delFile =
-                                pcall(
-                                function()
-                                    AllIDs = {}
-                                    table.insert(AllIDs, actualHour)
-                                end
-                            )
-                        end
-                    end
-                    num = num + 1
-                end
-                if Possible == true then
-                    table.insert(AllIDs, ID)
-                    wait()
-                    pcall(
-                        function()
-                            wait()
-                            game:GetService("TeleportService"):TeleportToPlaceInstance(
-                                PlaceID,
-                                ID,
-                                game.Players.LocalPlayer
-                            )
-                        end
-                    )
-                    wait(4)
+    end
+    end
+    end)
+    end)
+
+
+spawn(function()
+    while wait() do
+    pcall(function()
+    if _G.AutoBounty then
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+    end
+    end)
+    end
+    end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoBounty then
+            for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                if v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent then
+                    NextplySelect = true
+                    wait(0.1)
+                    NextplySelect = false
                 end
             end
         end
     end
-    function Teleport()
-        while wait() do
-            pcall(
-                function()
-                    TPReturner()
-                    if foundAnything ~= "" then
-                        TPReturner()
-                    end
-                end
-            )
-        end
+end)
+
+    CastlePostoMansion = CFrame.new(-5084.8447265625, 316.48101806641, -3145.3752441406)
+    MansiontoCastlePos = CFrame.new(-12464.596679688, 376.30590820312, -7567.2626953125)
+    Castletophydra = CFrame.new(-5095.33984375, 316.48101806641, -3168.3134765625)
+    HydratoCastle = CFrame.new(5741.869140625, 611.94750976562, -282.61154174805)
+    spawn(function()
+    while wait() do
+    pcall(function()
+    if _G.AutoBounty then
+    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+    if v.Name ~= game.Players.LocalPlayer.Name then
+    if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
+    plyselecthunthelpold = v.Humanoid.Health
+    repeat task.wait()
+    NameTarget = v.Name
+    if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
+        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,6,2))
+    elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
+    if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
+        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,6,2))
+    elseif  tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
+        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
     end
-    Teleport()
+    end
+    spawn(function()
+    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+        spawn(function()
+        Melee1 = true
+        DF1 = true
+        Gun1 = true
+        SW1 = true
+        end)
+    end
+    end)
+    v.HumanoidRootPart.CanCollide = false
+    TargetSelectHunt = v.Humanoid
+    until _G.AutoBounty == false or v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent or NextplySelect == true
+    NextplySelect = false
+    StartCheckTarget = false
+    end
+    end
+    end
+    end
+    end)
+    end
+    end)
+
+spawn(function()
+pcall(function()
+while wait() do
+if _G.AutoBounty then
+if TargetSelectHunt ~= nil then
+if StartCheckTarget then
+wait(6.5)
+if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+NextplySelect = true
+TargetSelectHunt = nil
 end
-------------------main
-if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-
-        repeat wait()
-
-            if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-                if getgenv().c['Team'] == nil or getgenv().c['Team'] == "Pirates" then
-                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                        v.Function()
-                    end
-                elseif getgenv().c['Team'] == "Marines" then
-                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                        v.Function()
-                    end
-                else
-                    for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
-                        v.Function()
-                    end
-                end
-            end
-        until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
-    end
-nextp = true 
-print('ur mom is loaded')
- spawn(function ()
- hb: Connect (function()
-    task.wait(1)
-    
-    if nextp and not debou then 
-     print('tfetch')
-     debou = true
-     if getgenv().targ then
-      table.insert(scannedPlayers, getgenv().targ) 
-      print ('save target to list')
-     end 
-    
-     fetch()
-     if getgenv().targ == nil or getgenv().targ == false then Hop() end
-     debou, nextp = false, false
-     end
- end)
+end
+end
+end
+end
+end)
 end)
 
-hb: Connect (function ()
- print('a')
- if nextp then
-  if getgenv().targ and lp:DistanceFromCharacter(getc(getgenv().targ).Position) < 50 then 
-   print('reached')
-   if geth(getgenv().targ) > 4000 then
-    print('health > 4k')
-    fastspam = true
-   game.VirtualUser:CaptureController()
-   game.VirtualUser:ClickButton1()
-   p = CFrame.new(0,0,0)
-   elseif not safe then 
-    
-   p = CFrame.new(0,20,0)
-   fastspam = false
-   end
-   if geth(lp) < getgenv().c.SafeHealth then 
-    print('hide')
-    repeat wait() safe = true t = CFrame.new(0,500,0)
-    until geth(lp) > getgenv().c.SafeUntil
-    safe = false
+spawn(function()
+    pcall(function()
+    while wait(.1) do
+    if _G.AutoBounty then
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
     end
-   if getgenv().c.Buso then buso() print('buso') end 
-   if getgenv().c.AlwaysDash then down("Q") end 
-   if getgenv().c.Ken then down('0x65') end 
-   if getgenv().c["V3"] then down('T') end
-   if getgenv().c["V4"] then down('Y') end 
-   if game:GetService("Players").LocalPlayer.PlayerGui.Main.SafeZone.Visible == true then print('next: safe') nextp = true end
-   pcall(function() if string.find(string.lower(game:GetService("Players").LocalPlayer.PlayerGui.Notifications.NotificationTemplate.Text), "player") then nextp = true game:GetService("Players").LocalPlayer.PlayerGui.Notifications.NotificationTemplate.Text = "detected" end end)
-   if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp") end
-   equip("Melee")
-   if fastspam then num = 3 else num = 6 end 
-   if math.random(1, num) == 2 then
-    keydown(rands())
-   end
-   else 
-    print("waiting for tween")
-  end
-  else 
-   print("waiting for target")
- end
-end)
-  
-hb:Connect(function()
- spawn(function ()
-  print(debou)
-  if debou then 
-   print(getgenv().targ.Name)
-   topos(getgenv().targ.Character.HumanoidRootPart.CFrame + p.Position)
-  end 
- end)
- end)
+    end
+    end
+    end)
+    end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
