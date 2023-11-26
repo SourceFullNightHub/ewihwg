@@ -1112,47 +1112,6 @@ end
 
 _G.AutoFarmBounty = true
 
-spawn(
-    function()
-        while wait() do
-            if _G.AutoFarmBounty then
-                for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                    if
-                        not v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or
-                            not v:FindFirstChild("Humanoid") or
-                            not v.Parent
-                     then
-                        NextplySelect = true
-                        wait(.2)
-                    end
-                end
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.AutoFarmBounty then
-                for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-                    if v.Name == "NotificationTemplate" then
-                        if
-                            string.find(v.Text, "attack") or string.find(v.Text, "players") or
-                                string.find(v.Text, "Players") or
-                                string.find(v.Text, "Safe Zone!")
-                         then
-                            NextplySelect = true
-                            wait(0.0000000000000000000000000000000001)
-                            NextplySelect = false
-                        end
-                    end
-                end
-            end
-        end
-    end
-)
-
 local Catsle = CFrame.new(-5071.82324, 314.858734, -3150.69922)
 local Mainsion = CFrame.new(-12471.169921875, 374.94024658203, -7551.677734375)
 
@@ -1243,6 +1202,47 @@ spawn(
                 end
             end
         )
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.AutoFarmBounty then
+                for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                    if
+                        not v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or
+                            not v:FindFirstChild("Humanoid") or
+                            not v.Parent
+                     then
+                        NextplySelect = true
+                        wait(.2)
+                    end
+                end
+            end
+        end
+    end
+)
+
+spawn(
+    function()
+        while wait() do
+            if _G.AutoFarmBounty then
+                for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                    if v.Name == "NotificationTemplate" then
+                        if
+                            string.find(v.Text, "attack") or string.find(v.Text, "players") or
+                                string.find(v.Text, "Players") or
+                                string.find(v.Text, "Safe Zone!")
+                         then
+                            NextplySelect = true
+                            wait(0.0000000000000000000000000000000001)
+                            NextplySelect = false
+                        end
+                    end
+                end
+            end
+        end
     end
 )
 
