@@ -1042,13 +1042,17 @@ spawn(function()
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,9,2))
     elseif  tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
-        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
+        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
     end
     end
     spawn(function()
     if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
         spawn(function()
         autoskill()
+        Gun = true
+        Melee = true
+        Sword = true
+        DF = true
         end)
     end
     end)
