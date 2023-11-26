@@ -966,7 +966,7 @@ spawn(function()
     if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,9,2))
     elseif  tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
-        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
+        topos(v.HumanoidRootPart.CFrame * CFrame.new(0,40,2))
     end
     end
     spawn(function()
