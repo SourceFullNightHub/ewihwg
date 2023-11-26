@@ -575,10 +575,10 @@ local Section = G:AddSection({
 	Name = "Hunt Status"
 })
 
-local Bounty = G:AddLabel("Your Bounty : ")
-local Earned = G:AddLabel("Earned : ")
-local Time = G:AddLabel("Time : ")
-local Target = G:AddLabel("Target Name : ")
+local Bounty = G:AddLabel("Your Bounty : 0")
+local Earned = G:AddLabel("Earned : 0")
+local Time = G:AddLabel("Time : 0H 0M 0S")
+local Target = G:AddLabel("Target Name : Cuccut")
 
 spawn(function()
     while wait() do
