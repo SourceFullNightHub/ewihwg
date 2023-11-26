@@ -962,7 +962,6 @@ spawn(function()
     repeat task.wait()
     NameTarget = v.Name
     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-    workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position,v.HumanoidRootPart.Position + workspace.CurrentCamera.CFrame.Position)
     if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
         topos(v.HumanoidRootPart.CFrame * CFrame.new(0,13,2))
     elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
