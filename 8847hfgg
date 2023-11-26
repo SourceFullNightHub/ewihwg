@@ -1136,9 +1136,13 @@ spawn(
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
                                         if tostring(game.Players.LocalPlayer.Humanoid.Health) >= 3000 then
                                             topos(v.HumanoidRootPart.CFrame * CFrame.new(3, 9, 3))
+                                            if game.Players.LocalPlayer.Humanoid.Health >= 3000 then
                                         elseif tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
-                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(3, 40, 3))
+                                            if game.Players.LocalPlayer.Humanoid.Health <= 3000 then
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
                                             end
+                                            end
+                                        end
                                         spawn(
                                             function()
                                                 if
