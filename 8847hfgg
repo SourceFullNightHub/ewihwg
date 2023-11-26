@@ -1134,13 +1134,11 @@ spawn(
                                         v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                         NameTarget = v.Name
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
-                                        if tostring(game.Players.LocalPlayer.Humanoid.Health) >= 3000 then
-                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(3, 9, 3))
-                                            if game.Players.LocalPlayer.Humanoid.Health >= 3000 then
-                                        elseif tostring(game.Players.LocalPlayer.Humanoid.Health) <= 3000 then
-                                            if game.Players.LocalPlayer.Humanoid.Health <= 3000 then
+                                        if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
+                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                        elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
+                                            if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
                                                 topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
-                                            end
                                             end
                                         end
                                         spawn(
