@@ -498,6 +498,475 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+function NameMelee()
+    for r, v in next, game:GetService("Players").LocalPlayer.Backpack:GetChildren() do
+        if v:IsA("Tool") and v.ToolTip == "Melee" then
+            return v.Name
+        end
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.Character:GetChildren() do
+        if v:IsA("Tool") and v.ToolTip == "Melee" then
+            return v.Name
+        end
+    end
+end
+function NameSword()
+    for r, v in next, game:GetService("Players").LocalPlayer.Backpack:GetChildren() do
+        if v:IsA("Tool") and v.ToolTip == "Sword" then
+            return v.Name
+        end
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.Character:GetChildren() do
+        if v:IsA("Tool") and v.ToolTip == "Sword" then
+            return v.Name
+        end
+    end
+end
+function CheckPriceAndBuyMelee(bt)
+    if SaveMasteryMelee()[bt] > 0 then
+        return BuyMelee(bt)
+    end
+    v = bt
+    if
+        pricemelee[v] and pricemelee[v].Beli and pricemelee[v].Beli <= LocalPlayerBeliValue and pricemelee[v].Fragment and
+            pricemelee[v].Fragment <= LocalPlayerFragmentValue
+     then
+        BuyMelee(v)
+    end
+end
+function GetAndCheckMeleeMastery(bu, bs)
+    mm = bu
+    usingmelee = browhat[NameMelee()]
+    momo = browhat[mm]
+    if type(momo) == "string" then
+        momo = game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo, true) == 1
+    else
+        momo = momo()
+    end
+    if momo then
+        if
+            not game.Players.LocalPlayer.Character:FindFirstChild(mm) and
+                not game.Players.LocalPlayer.Backpack:FindFirstChild(mm)
+         then
+            momo = browhat[mm]
+            if type(momo) == "string" then
+                game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo, true)
+                momo = game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo)
+            else
+                momo = momo()
+            end
+        end
+        if game.Players.LocalPlayer.Character:FindFirstChild(mm) or game.Players.LocalPlayer.Backpack:FindFirstChild(mm) then
+            kwekrwe = {game.Players.LocalPlayer.Character, game.Players.LocalPlayer.Backpack}
+            for r, v in pairs(kwekrwe) do
+                if v:FindFirstChild(mm) then
+                    return v[mm].Level.Value
+                end
+            end
+        end
+    end
+    return 0
+end
+tablemm = {"Black Leg", "Electro", "Fishman Karate", "Dragon Claw"}
+function DetectMeleeSPHM()
+    vanmeo = SaveMasteryMelee()
+    for r, v in pairs(tablemm) do
+        if vanmeo[v] < 300 then
+            return v
+        end
+    end
+end
+function CheckPhouyeDoor()
+    if game.Workspace.Map.IceCastle.Hall.LibraryDoor:FindFirstChild("PhoeyuDoor") then
+        return game.Workspace.Map.IceCastle.Hall.LibraryDoor.PhoeyuDoor.CanCollide
+    end
+end
+WaterKey = false
+function CheckWaterKey()
+    if WaterKey then
+        return WaterKey
+    end
+    local bv = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate", true)
+    if bv == 3 or bv == 1 then
+        WaterKey = true
+        return true
+    end
+    local bw = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+    if bw == 1 or bw == 0 or bw == 2 then
+        WaterKey = true
+        return true
+    end
+end
+function CheckBackPack(bx)
+    BackpackandCharacter = {game.Players.LocalPlayer.Backpack, game.Players.LocalPlayer.Character}
+    for al, by in pairs(BackpackandCharacter) do
+        for r, v in pairs(by:GetChildren()) do
+            if v.Name == bx then
+                return v
+            end
+        end
+    end
+end
+
+function GetWeaponMastery(f)
+    local u3 = game.Players.LocalPlayer.Backpack
+    for r, v in pairs(u3:GetChildren()) do
+        if v.Name == f and v:FindFirstChild("Level") then
+            return v.Level.Value
+        end
+    end
+    local u3 = game.Players.LocalPlayer.Character
+    for r, v in pairs(u3:GetChildren()) do
+        if v.Name == f and v:FindFirstChild("Level") then
+            return v.Level.Value
+        end
+    end
+    return nil
+end
+function u6(bX, bY)
+    if bY == nil then
+        bY = 0
+    end
+    game:service("VirtualInputManager"):SendKeyEvent(true, bX, false, game)
+    wait(bY)
+    game:service("VirtualInputManager"):SendKeyEvent(false, bX, false, game)
+end
+
+function EnableBuso()
+    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+        NoClip = true
+        local args = {[1] = "Buso"}
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        NoClip = false
+    end
+    NoClip = false
+end
+function GetWeapon(bh)
+    s = ""
+    for r, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == bh then
+            s = v.Name
+        end
+    end
+    for r, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == bh then
+            s = v.Name
+        end
+    end
+    return s
+end
+function EquipWeapon(ToolSe)
+    if gggggg then
+        return
+    end
+    if lonmemayto == "" or lonmemayto == nil then
+        lonmemayto = "Melee"
+    end
+    ToolSe = GetWeapon(lonmemayto)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        NoClip = true
+        local bi = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.4)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bi)
+        NoClip = false
+    end
+end
+
+function u8(m)
+    ToolSe = GetWeapon(m)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        local bi = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.4)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bi)
+    end
+end
+function EquipWeaponName(m)
+    if not m then
+        return
+    end
+    NoClip = true
+    ToolSe = m
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        local bi = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.4)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bi)
+    end
+end
+function IsWpSKillLoaded(bW)
+    if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Skills:FindFirstChild(bW) then
+        return true
+    end
+end
+function EquipAllWeapon()
+    u3 = {"Melee", "Blox Fruit", "Sword", "Gun"}
+    u3_2 = {}
+    for r, v in pairs(u3) do
+        u3_3 = GetWeapon(v)
+        table.insert(u3_2, u3_3)
+    end
+    for r, v in pairs(u3_2) do
+        if not IsWpSKillLoaded(v) then
+            print(v)
+            EquipWeaponName(v)
+        end
+    end
+end
+function GetWeaponMastery(f)
+    local u3 = game.Players.LocalPlayer.Backpack
+    for r, v in pairs(u3:GetChildren()) do
+        if v.Name == f and v:FindFirstChild("Level") then
+            return v.Level.Value
+        end
+    end
+    local u3 = game.Players.LocalPlayer.Character
+    for r, v in pairs(u3:GetChildren()) do
+        if v.Name == f and v:FindFirstChild("Level") then
+            return v.Level.Value
+        end
+    end
+    return nil
+end
+function u6(bX, bY)
+    if bY == nil then
+        bY = 0
+    end
+    game:service("VirtualInputManager"):SendKeyEvent(true, bX, false, game)
+    wait(bY)
+    game:service("VirtualInputManager"):SendKeyEvent(false, bX, false, game)
+end
+
+function equipweapon(aq)
+    local c6 = tostring(aq)
+    local c7 = game.Players.LocalPlayer.Backpack:FindFirstChild(c6)
+    local c8 =
+        game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") or
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+    if c7 then
+        c8:EquipTool(c7)
+    end
+end
+function checkskillMelee()
+    if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills:FindFirstChild(NameMelee()) then
+        equipweapon(NameMelee())
+        return false
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills[NameMelee()]:GetChildren() do
+        if v:IsA("Frame") then
+            if
+                v.Name ~= "Template" and v.Title.TextColor3 == Color3.new(1, 1, 1) and
+                    v.Cooldown.Size == UDim2.new(0, 0, 1, -1) or
+                    v.Cooldown.Size == UDim2.new(1, 0, 1, -1)
+             then
+                return v.Name
+            end
+        end
+    end
+end
+function checkskillDF()
+    if
+        not game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills:FindFirstChild(
+            game:GetService("Players").LocalPlayer.Data.DevilFruit.Value
+        )
+     then
+        equipweapon(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
+        return false
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills[
+        game:GetService("Players").LocalPlayer.Data.DevilFruit.Value
+    ]:GetChildren() do
+        if v:IsA("Frame") then
+            if
+                v.Name ~= "Template" and v.Title.TextColor3 == Color3.new(1, 1, 1) and
+                    v.Cooldown.Size == UDim2.new(0, 0, 1, -1) or
+                    v.Cooldown.Size == UDim2.new(1, 0, 1, -1)
+             then
+                return v.Name
+            end
+        end
+    end
+end
+function checkskillSword()
+    if not NameSword() then
+        return
+    end
+    if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills:FindFirstChild(NameSword()) then
+        equipweapon(NameSword())
+        return false
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills[NameSword()]:GetChildren() do
+        if v:IsA("Frame") then
+            if
+                v.Name ~= "Template" and v.Title.TextColor3 == Color3.new(1, 1, 1) and
+                    v.Cooldown.Size == UDim2.new(0, 0, 1, -1) or
+                    v.Cooldown.Size == UDim2.new(1, 0, 1, -1)
+             then
+                return v.Name
+            end
+        end
+    end
+end
+function NameGun()
+    dick = game.Players.LocalPlayer.Backpack or game.Players.LocalPlayer.Character
+    for r, v in pairs(dick:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == "Gun" then
+            return v.Name
+        end
+    end
+end
+function checkskillGun()
+    if not NameGun() then
+        return nil
+    end
+    if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills:FindFirstChild(NameGun()) then
+        equipweapon(NameGun())
+        return false
+    end
+    for r, v in next, game:GetService("Players").LocalPlayer.PlayerGui.Main.Skills[NameGun()]:GetChildren() do
+        if v:IsA("Frame") then
+            if
+                v.Name ~= "Template" and v.Title.TextColor3 == Color3.new(1, 1, 1) and
+                    v.Cooldown.Size == UDim2.new(0, 0, 1, -1) or
+                    v.Cooldown.Size == UDim2.new(1, 0, 1, -1)
+             then
+                return v.Name
+            end
+        end
+    end
+end
+function SendKey(c9, ca)
+    if c9 then
+        if not ca then
+            game:service("VirtualInputManager"):SendKeyEvent(true, c9, false, game)
+            task.wait()
+            game:service("VirtualInputManager"):SendKeyEvent(false, c9, false, game)
+        elseif ca then
+            game:service("VirtualInputManager"):SendKeyEvent(true, c9, false, game)
+            task.wait(ca)
+            game:service("VirtualInputManager"):SendKeyEvent(false, c9, false, game)
+        end
+    end
+end
+
+function Y()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+end
+
+function Z()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+end
+
+function X()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+end
+
+function C()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+end
+
+function V()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+    end
+
+function autoskill()
+    EnableBuso()
+    sword = checkskillSword()
+    meele = checkskillMelee()
+    df = checkskillDF()
+    gun = checkskillGun()
+    if
+        df and DF and not string.find(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value, "Portal") and
+            df ~= "F"
+     then
+        EquipWeaponName(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
+        local condimebeo = checkskillDF()
+        if condimebeo then
+            Z()
+            Z()
+            Z()
+            Z()
+            Z()
+            X()
+            X()
+            X()
+            X()
+            X()
+            C()
+            C()
+            C()
+            C()
+            C()
+            V()
+            V()
+            V()
+            V()
+            V()
+            V()
+        end
+    elseif checkskillMelee() and Melee then
+        EquipWeaponName(NameMelee())
+        local condimebeo = checkskillMelee()
+        if condimebeo then
+            Z()
+            Z()
+            Z()
+            Z()
+            Z()
+            X()
+            X()
+            X()
+            X()
+            X()
+            C()
+            C()
+            C()
+            C()
+            C()
+        end
+    elseif checkskillSword() and Sword then
+        EquipWeaponName(NameSword())
+        local condimebeo = checkskillSword()
+        if condimebeo then
+            Z()
+            Z()
+            Z()
+            Z()
+            Z()
+            X()
+            X()
+            X()
+            X()
+            X()
+        end
+    elseif checkskillGun() and Gun then
+        EquipWeaponName(NameGun())
+        if condimebeo then
+            Z()
+            Z()
+            Z()
+            Z()
+            Z()
+            X()
+            X()
+            X()
+            X()
+            X()
+        end
+    else
+        EquipAllWeapon()
+    end
+end
+
 spawn(function()
     pcall(function()
     if _G.AutoFarmBounty then
@@ -579,10 +1048,7 @@ spawn(function()
     spawn(function()
     if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
         spawn(function()
-        Melee1 = true
-        DF1 = true
-        Gun1 = true
-        SW1 = true
+        autoskill()
         end)
     end
     end)
