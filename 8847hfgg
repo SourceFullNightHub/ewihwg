@@ -1,5 +1,3 @@
-
-
 _G.configenabled = true
 if _G.configenabled then
     if getgenv().config["Start Hunt"] then
@@ -83,8 +81,7 @@ game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
 game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
 end
 
-    spawn(function()
-        while wait() do
+    if skilluse then    
         if SkillZMelee and SkillZMelee2 then
             Z()
         end
@@ -119,7 +116,6 @@ end
             V()
         end
     end
-end)
 
 function DMouse(Frame, Object)
     dragToggle = nil
@@ -1273,6 +1269,7 @@ spawn(
                                                     spawn(
                                                         function()
                                                             autoskill()
+                                                            useskill = true
                                                             SkillZMelee2 = true
                                                             SkillXMelee2 = true
                                                             SkillCMelee2 = true
