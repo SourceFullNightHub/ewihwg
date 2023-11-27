@@ -56,6 +56,16 @@ if _G.configenabled then
     end
 end
 
+function EquipWeapon(ToolSe)
+    if not _G.NotAutoEquip then
+        if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+            Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+            wait(.1)
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+        end
+    end
+end
+
 function Y()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
     game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
@@ -82,37 +92,37 @@ game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
 end
 
     if skilluse then    
-        if SkillZMelee and SkillZMelee2 then
+        if SkillZMelee and SkillZMelee2 and EquipWeapon("Melee") then
             Z()
         end
-        if SkillXMelee and SkillXMelee2 then
+        if SkillXMelee and SkillXMelee2 and EquipWeapon("Melee") then
             X()
         end
-        if SkillCMelee and SkillCMelee2 then
+        if SkillCMelee and SkillCMelee2 and EquipWeapon("Melee") then
             C()
         end
-        if SkillZSword and SkillZSword2 then
+        if SkillZSword and SkillZSword2 and EquipWeapon("Sword") then
             Z()
         end
-        if SkillXSword and SkillXSword2 then
+        if SkillXSword and SkillXSword2 and EquipWeapon("Sword") then
             X()
         end
-        if SkillZGun and SkillZGun2 then
+        if SkillZGun and SkillZGun2 and EquipWeapon("Gun") then
             Z()
         end
-        if SkillXGun and SkillXGun2 then
+        if SkillXGun and SkillXGun2 and EquipWeapon("Gun") then
             X()
         end
-        if SkillZDF and SkillZDF2 then
+        if SkillZDF and SkillZDF2 and EquipWeapon("Devil Fruit") then
             Z()
         end
-        if SkillXDF and SkillXDF2 then
+        if SkillXDF and SkillXDF2 and EquipWeapon("Devil Fruit") then
             X()
         end
-        if SkillCDF and SkillCDF2 then
+        if SkillCDF and SkillCDF2 and EquipWeapon("Devil Fruit") then
             C()
         end
-        if SkillVDF and SkillVDF2 then
+        if SkillVDF and SkillVDF2 and EquipWeapon("Devil Fruit")then
             V()
         end
     end
@@ -567,8 +577,6 @@ function topos(Pos)
     ):Play()
 end
 
-
-
 function TPB(CFgo)
     local tween_s = game:service "TweenService"
     local info =
@@ -922,6 +930,37 @@ function DetectMeleeSPHM()
         end
     end
 end
+function CheckPhouyeDoor()
+    if game.Workspace.Map.IceCastle.Hall.LibraryDoor:FindFirstChild("PhoeyuDoor") then
+        return game.Workspace.Map.IceCastle.Hall.LibraryDoor.PhoeyuDoor.CanCollide
+    end
+end
+WaterKey = false
+function CheckWaterKey()
+    if WaterKey then
+        return WaterKey
+    end
+    local bv = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate", true)
+    if bv == 3 or bv == 1 then
+        WaterKey = true
+        return true
+    end
+    local bw = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+    if bw == 1 or bw == 0 or bw == 2 then
+        WaterKey = true
+        return true
+    end
+end
+function CheckBackPack(bx)
+    BackpackandCharacter = {game.Players.LocalPlayer.Backpack, game.Players.LocalPlayer.Character}
+    for al, by in pairs(BackpackandCharacter) do
+        for r, v in pairs(by:GetChildren()) do
+            if v.Name == bx then
+                return v
+            end
+        end
+    end
+end
 
 function GetWeaponMastery(f)
     local u3 = game.Players.LocalPlayer.Backpack
@@ -1163,6 +1202,7 @@ function SendKey(c9, ca)
 end
 
 function autoskill()
+    EnableBuso()
     sword = checkskillSword()
     meele = checkskillMelee()
     df = checkskillDF()
@@ -1239,6 +1279,18 @@ spawn(
                                                     spawn(
                                                         function()
                                                             autoskill()
+                                                            useskill = true
+                                                            SkillZMelee2 = true
+                                                            SkillXMelee2 = true
+                                                            SkillCMelee2 = true
+                                                            SkillZSword2 = true
+                                                            SkillXSword2 = true
+                                                            SkillZGun2 = true
+                                                            SkillXGun2 = true
+                                                            SkillZDF2 = true
+                                                            SkillXDF2 = true
+                                                            SkillCDF2 = true
+                                                            SkillVDF2 = true
                                                             _G.Aimbot_Skill_Fov = true
                                                         end
                                                     )
