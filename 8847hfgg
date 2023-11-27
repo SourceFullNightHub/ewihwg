@@ -1,3 +1,5 @@
+
+
 _G.configenabled = true
 if _G.configenabled then
     if getgenv().config["Start Hunt"] then
@@ -95,13 +97,13 @@ end
         if SkillZSword and SkillZSword2 then
             Z()
         end
-        if SkillXSword and SkillXSword then
+        if SkillXSword and SkillXSword2 then
             X()
         end
         if SkillZGun and SkillZGun2 then
             Z()
         end
-        if SkillXGun and SkillXGun then
+        if SkillXGun and SkillXGun2 then
             X()
         end
         if SkillZDF and SkillZDF2 then
@@ -113,7 +115,7 @@ end
         if SkillCDF and SkillCDF2 then
             C()
         end
-        if SkillCDF and SkillCDF2 then
+        if SkillVDF and SkillVDF2 then
             V()
         end
     end
