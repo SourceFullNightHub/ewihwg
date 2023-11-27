@@ -4,7 +4,7 @@ if _G.configenabled then
         _G.AutoFarmBounty = true
     end
     if getgenv().config["Race V4"] then
-        _G.V4
+        _G.V4 = true
     end
     if getgenv().config["Race V3"] then
         _G.RaceV3 = true
