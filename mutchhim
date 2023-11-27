@@ -1,3 +1,131 @@
+_G.configenabled = true
+if _G.configenabled then
+    if getgenv().config["Start Hunt"] then
+        _G.AutoFarmBounty = true
+    end
+    if getgenv().config["Race V4"] then
+        _G.V4 = true
+    end
+    if getgenv().config["Race V3"] then
+        _G.RaceV3 = true
+    end
+    if getgenv().config["Settings"]["Melee"]["Enabled"] then
+        Melee = true
+    end
+    if getgenv().config["Settings"]["Melee"]["Skill Z"] then
+        SkillZMelee = true
+    end
+    if getgenv().config["Settings"]["Melee"]["Skill X"] then
+        SkillXMelee = true
+    end
+    if getgenv().config["Settings"]["Melee"]["Skill C"] then
+        SkillCMelee = true
+    end
+    if getgenv().config["Settings"]["Sword"]["Enabled"] then
+        Sword = true
+    end
+    if getgenv().config["Settings"]["Sword"]["Skill Z"] then
+        SkillZSword = true
+    end
+    if getgenv().config["Settings"]["Melee"]["Skill X"] then
+        SkillXSword = true
+    end
+    if getgenv().config["Settings"]["Gun"]["Enabled"] then
+        Gun = true
+    end
+    if getgenv().config["Settings"]["Gun"]["Skill Z"] then
+        SkillZGun = true
+    end
+    if getgenv().config["Settings"]["Gun"]["Skill X"] then
+        SkillXGun = true
+    end
+    if getgenv().config["Settings"]["Devil Fruit"]["Enabled"] then
+        DF = true
+    end
+    if getgenv().config["Settings"]["Devil Fruit"]["Skill Z"] then
+        SkillZDF = true
+    end
+    if getgenv().config["Settings"]["Devil Fruit"]["Skill X"] then
+        SkillXDF = true
+    end
+    if getgenv().config["Settings"]["Devil Fruit"]["Skill C"] then
+        SkillCDF = true
+    end
+    if getgenv().config["Settings"]["Devil Fruit"]["Skill V"] then
+        SkillVDF = true
+    end
+end
+
+function EquipWeapon(ToolSe)
+    if not _G.NotAutoEquip then
+        if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+            Tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+            wait(.1)
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tool)
+        end
+    end
+end
+
+function Y()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+end
+
+function Z()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+end
+
+function X()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+end
+
+function C()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+end
+
+function V()
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+end
+
+    if skilluse then    
+        if SkillZMelee and SkillZMelee2 and EquipWeapon("Melee") then
+            Z()
+        end
+        if SkillXMelee and SkillXMelee2 and EquipWeapon("Melee") then
+            X()
+        end
+        if SkillCMelee and SkillCMelee2 and EquipWeapon("Melee") then
+            C()
+        end
+        if SkillZSword and SkillZSword2 and EquipWeapon("Sword") then
+            Z()
+        end
+        if SkillXSword and SkillXSword2 and EquipWeapon("Sword") then
+            X()
+        end
+        if SkillZGun and SkillZGun2 and EquipWeapon("Gun") then
+            Z()
+        end
+        if SkillXGun and SkillXGun2 and EquipWeapon("Gun") then
+            X()
+        end
+        if SkillZDF and SkillZDF2 and EquipWeapon("Devil Fruit") then
+            Z()
+        end
+        if SkillXDF and SkillXDF2 and EquipWeapon("Devil Fruit") then
+            X()
+        end
+        if SkillCDF and SkillCDF2 and EquipWeapon("Devil Fruit") then
+            C()
+        end
+        if SkillVDF and SkillVDF2 and EquipWeapon("Devil Fruit")then
+            V()
+        end
+    end
 
 function DMouse(Frame, Object)
     dragToggle = nil
@@ -1086,24 +1214,31 @@ function autoskill()
         EquipWeaponName(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
         local condimebeo = checkskillDF()
         if condimebeo then
-            SendKey(condimebeo)
+            SkillZMelee2 = true
+            SkillXMelee2 = true
+            SkillCMelee2 = true
         end
     elseif checkskillMelee() and Melee then
         EquipWeaponName(NameMelee())
         local condimebeo = checkskillMelee()
         if condimebeo then
-            SendKey(condimebeo)
+            SkillZSword2 = true
+            SkillXSword2 = true
         end
     elseif checkskillSword() and Sword then
         EquipWeaponName(NameSword())
         local condimebeo = checkskillSword()
         if condimebeo then
-            SendKey(condimebeo)
+            SkillZGun2 = true
+            SkillXGun2 = true
         end
     elseif checkskillGun() and Gun then
         EquipWeaponName(NameGun())
         if condimebeo then
-            SendKey(condimebeo)
+            SkillZDF2 = true
+            SkillXDF2 = true
+            SkillCDF2 = true
+            SkillVDF2 = true
         end
     else
         EquipAllWeapon()
@@ -1135,10 +1270,10 @@ spawn(
                                         NameTarget = v.Name
                                         TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
                                         if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(5, 12, 5))
                                         elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
                                             if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(2, 9, 2))
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5, 12, 5))
                                             end
                                         end
                                         spawn(
@@ -1151,10 +1286,7 @@ spawn(
                                                     spawn(
                                                         function()
                                                             autoskill()
-                                                            DF = true
-                                                            Sword = true
-                                                            Melee = true
-                                                            Gun = true
+                                                            useskill = true
                                                             _G.Aimbot_Skill_Fov = true
                                                         end
                                                     )
