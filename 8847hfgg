@@ -1,12 +1,10 @@
-
-
 _G.configenabled = true
 if _G.configenabled then
     if getgenv().config["Start Hunt"] then
         _G.AutoFarmBounty = true
     end
     if getgenv().config["Race V4"] then
-        Y()
+        _G.V4
     end
     if getgenv().config["Race V3"] then
         _G.RaceV3 = true
