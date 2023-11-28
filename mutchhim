@@ -1,3 +1,28 @@
+-----Chào hỏi đê----------------------------
+
+spawn(function() 
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    repeat
+        task.wait()
+    until game.Players
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+    wait(1.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>!Thanks For Use!<Color=/>"):Display()
+    wait(4.0)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Auto Bounty Hunt there is version BETA<Color=/>"):Display()
+    wait(7.14)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Please use Fluxus Client<Color=/>"):Display()
+    wait(10.24)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Join Discord to get new noitification update<Color=/>"):Display()
+    wait(15.29)
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Channel : LMNGAMING <Color=/>"):Display()
+    wait(.36)
+end)
+
 ----config------------------------
 
 _G.configenabled = true
@@ -195,6 +220,8 @@ Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(0, 300, 0, 230)
+Main.Draggable = true
+
 
 MainCorner.Name = "MainCorner"
 MainCorner.Parent = Main
