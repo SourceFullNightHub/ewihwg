@@ -203,7 +203,7 @@ S:AddDropdown({
 	Default = "Melee",
 	Options = {"Melee"},
 	Callback = function(Value)
-		print(Value)
+		_G.SelectWeapon = Value
 	end    
 })
 
@@ -253,7 +253,7 @@ task.spawn(function()
         Name = "Fast Attack",
         Default = false,
         Callback = function(Value)
-            _G.FastAttack
+            _G.FastAttack = Value
         end    
     })
     
