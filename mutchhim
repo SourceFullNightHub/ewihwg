@@ -878,8 +878,8 @@ spawn(function()
         for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
             if v.Name ~= game.Players.LocalPlayer.Name then
                 if v.Humanoid.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
-                    plyselecthunthelpold = v.Humanoid.Health
-                    TargetSelectHunt = v.Humanoid
+                    deoskid = v.Humanoid.Health
+                    Muctieu = v.Humanoid
                     repeat task.wait()
                         Converted["_TextLabel1"].Text = "Target Name : "..v.Name..""
                         Converted["_TextLabel2"].Text = "Target Bounty : " ..v.leaderstats["Bounty/Honor"].Value..""
@@ -890,6 +890,7 @@ spawn(function()
                         Useskill = true
                     until _G.AutoBountyNightHub == false or v.Humanoid.Health <= 0 or not v.Parent
                         Useskill = false
+                        Timmuctieu = false
                     end
                 end
             end
@@ -913,12 +914,12 @@ spawn(function()
     pcall(function()
         while wait() do
             if _G.AutoBountyNightHub then
-                if TargetSelectHunt ~= nil then
-                    if StartCheckTarget then 
+                if Muctieu ~= nil then
+                    if Timmuctieu then 
                         wait(.1)
-                            if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+                            if Muctieu.Health == Muctieu.MaxHealth or Muctieu.Health >= deoskid then
                                 NextPlayers = true
-                                TargetSelectHunt = nil
+                                Muctieu = nil
                             end
                         end
                     end
