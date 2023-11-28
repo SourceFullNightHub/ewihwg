@@ -910,7 +910,6 @@ spawn(function()
                         Useskill = true
                     until _G.AutoBountyNightHub == false or v.Humanoid.Health <= 0 or not v.Parent
                         Useskill = false
-                        Timmuctieu = false
                     end
                 end
             end
@@ -938,15 +937,17 @@ spawn(function()
 
     spawn(function()
         while wait() do
-        if _G.AutoBountyNightHub then
-            if Distance < 15 then
-                if Useskill then
+            pcall(function()
+                if _G.AutoBountyNightHub then
+                if Distance < 50 then
+                if UseSkill then
                     autoskill()
-                    end
                 end
+                end
+                end
+            end)
             end
-        end
-    end)
+        end)
 
     spawn(function()
             pcall(function()
