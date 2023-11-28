@@ -916,7 +916,7 @@ end)
 spawn(function()
     while wait() do
     if _G.AutoBountyNightHub then
-        if Distance <= 50 then
+        if Distance < 50 then
             if Useskill then
                 autoskill()
                 end
