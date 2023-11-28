@@ -177,7 +177,7 @@ function EquipWeapon(ToolSe)
 end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Night Hub ;D", HidePremium = false,IntroText = "Night Hub" SaveConfig = true, ConfigFolder = "Night Hub"})
+local Window = OrionLib:MakeWindow({Name = "Night Hub ;D", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub"})
 
 OrionLib:MakeNotification({
 	Name = "LMN GAMING",
