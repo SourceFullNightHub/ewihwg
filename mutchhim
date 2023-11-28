@@ -298,9 +298,9 @@ SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 SkipPlayerButton.TextSize = 18.000
 SkipPlayerButton.MouseButton1Click:Connect(
     function()
-        NextplySelect = true
+        NextPlayers = true
         wait(0.5)
-        NextplySelect = false
+        NextPlayers = false
     end
 )
 
@@ -895,59 +895,75 @@ end)
 
 spawn(function()
     while wait() do
-        pcall(function()
-            if _G.AutoFarmBounty then
-                for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name then
-                        if v:WaitForChild("Humanoid").Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 10000 then
-                            maumuctieu = v.Humanoid.Health
-                            repeat task.wait()
-                            NameTarget = v.Name
-                            Converted["_Target Name"].Text = "Target Name : "..v.Name..""
-                            if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5,12,5))
-                            elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
-                                if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-                                    topos(v.HumanoidRootPart.CFrame * CFrame.new(5,12,5))
-                                end
-                            end
-spawn(function()
-    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 15 then
-        spawn(function()
-        autoskill()
-        end)
+    if _G.AutoBountyNightHub then
+        for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+            plyselecthunthelpold = v.Humanoid.Health
+            TargetSelectHunt = v.Humanoid
+            if v.Name ~= game.Players.LocalPlayer.Name then
+                if v.Humanoid.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
+                    repeat task.wait()
+                        TargetNameLabel.Text = "Target Name : "..v.Name..""
+                        NameTarget = v.Name
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                        v.HumanoidRootPart.CanCollide = false
+                        topos(v.HumanoidRootPart.CFrame * CFrame.new(5,12,5))
+                        Useskill = true
+                    until _G.AutoBountyNightHub == false or v.Humanoid.Health <= 0 or not v.Parent
+                        Useskill = false
+                        NextPlayers = true
+                        wait(0.5)
+                        NextPlayers = false
+                        StartCheckTarget = false
+                    end
+                end
+            end
+        end
     end
-end)
-v.HumanoidRootPart.CanCollide = false
-Muctieu = v.Humanoid
-until _G.AutoFarmBounty == false or v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not v.Parent or NextPlayers == true
-NextPlayers = false
-Timmuctieu = false
-end
-end
-end
-end
-end)
-end
 end)
 
 spawn(function()
     pcall(function()
+    while wait() do
+    if _G.AutoBountyNightHub then
+    if TargetSelectHunt ~= nil then
+    if StartCheckTarget then
+    wait(.1)
+    if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+    NextPlayers = true
+    TargetSelectHunt = nil
+    end
+    end
+    end
+    end
+    end
+    end)
+    end)
+    
+    spawn(function()
+        pcall(function()
+        if _G.AutoFarmBounty then
         while wait() do
-            if _G.AutoBountyNightHub then
-                if Muctieu ~= nil then
-                    if Timmuctieu then 
-                        wait(.1)
-                            if Muctieu.Health == Muctieu.MaxHealth or Muctieu.Health >= maumuctieu then
-                                NextPlayers = true
-                                Muctieu = nil
-                            end
-                        end
-                    end
+        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+        end
+        end
+        end
+        end)
+        end)
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoBountyNightHub then
+                if Distance < 50 then
+                if UseSkill then
+                    autoskill()
                 end
+                end
+                end
+            end)
             end
         end)
-    end)
 
     spawn(function()
             pcall(function()
