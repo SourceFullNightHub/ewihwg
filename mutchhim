@@ -147,6 +147,9 @@ end
         end
     end
 
+----Earned-----------
+local BountyA = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
+
 -----Gui--By--Me------------------------------------
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 
@@ -281,6 +284,7 @@ Converted["_Stt2"].Position = UDim2.new(0.650092065, 0, 0, 0)
 Converted["_Stt2"].Size = UDim2.new(0, 180, 0, 498)
 Converted["_Stt2"].Name = "Stt2"
 Converted["_Stt2"].Parent = Converted["_ScreenGui"]
+Converted["_Stt2"].Draggable = true
 
 Converted["_Next"].Font = Enum.Font.SourceSansBold
 Converted["_Next"].Text = "Next Players"
@@ -882,7 +886,6 @@ spawn(function()
                     Muctieu = v.Humanoid
                     repeat task.wait()
                         Converted["_TextLabel1"].Text = "Target Name : "..v.Name..""
-                        Converted["_TextLabel2"].Text = "Target Bounty : " ..v.leaderstats["Bounty/Honor"].Value..""
                         NameTarget = v.Name
                         v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CanCollide = false
@@ -928,6 +931,15 @@ spawn(function()
         end)
     end)
 
+
+    spawn(function()
+            pcall(function()
+                    while wait(0.1) do
+                        local BountyB = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
+                        Converted["_TextLabel"].Text = "Earned: " .. BountyB - BountyA
+                    end
+                end)
+            end)
 
 
 
