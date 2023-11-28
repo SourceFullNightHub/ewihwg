@@ -351,7 +351,7 @@ spawn(function()
             end)
         end
     end
-end
+end)
 
 ----giờ đến kill-----
 
@@ -360,7 +360,6 @@ S:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.DjtShark = Value
-        
 	end    
 })
 
