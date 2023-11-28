@@ -897,8 +897,8 @@ spawn(function()
     while wait() do
     if _G.AutoBountyNightHub then
         for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-            plyselecthunthelpold = v.Humanoid.Health
-            TargetSelectHunt = v.Humanoid
+            tietcanhmuctieu = v.Humanoid.Health
+            Muctieu = v.Humanoid
             if v.Name ~= game.Players.LocalPlayer.Name then
                 if v.Humanoid.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
                     repeat task.wait()
@@ -913,7 +913,7 @@ spawn(function()
                         NextPlayers = true
                         wait(0.5)
                         NextPlayers = false
-                        StartCheckTarget = false
+                        timmuctieu = false
                     end
                 end
             end
@@ -925,12 +925,12 @@ spawn(function()
     pcall(function()
     while wait() do
     if _G.AutoBountyNightHub then
-    if TargetSelectHunt ~= nil then
-    if StartCheckTarget then
+    if Muctieu ~= nil then
+    if timmuctieu then
     wait(.1)
-    if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+    if TargetSelectHunt.Health == Muctieu.MaxHealth or Muctieu.Health >= tietcanhmuctieu then
     NextPlayers = true
-    TargetSelectHunt = nil
+    Muctieu = nil
     end
     end
     end
