@@ -1,13 +1,15 @@
+----config------------------------
+
 _G.configenabled = true
 if _G.configenabled then
     if getgenv().config["Start Hunt"] then
-        _G.AutoFarmBounty = true
+        _G.AutoBountyNightHub = true
     end
     if getgenv().config["Race V4"] then
         _G.V4 = true
     end
     if getgenv().config["Race V3"] then
-        _G.RaceV3 = true
+        _G.V3 = true
     end
     if getgenv().config["Settings"]["Melee"]["Enabled"] then
         Melee = true
@@ -56,6 +58,24 @@ if _G.configenabled then
     end
 end
 
+spawn(function()
+    while wait() do
+    if _G.V4 then
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+    if _G.V3 then
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"T",false,game)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"T",false,game)
+        end
+    end
+end)
+
 function EquipWeapon(ToolSe)
     if not _G.NotAutoEquip then
         if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
@@ -92,448 +112,299 @@ game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
 end
 
     if skilluse then    
-        if SkillZMelee and SkillZMelee2 and EquipWeapon("Melee") then
+        if SkillZMelee and SkillZMelee2 then
             Z()
         end
-        if SkillXMelee and SkillXMelee2 and EquipWeapon("Melee") then
+        if SkillXMelee and SkillXMelee2 then
             X()
         end
-        if SkillCMelee and SkillCMelee2 and EquipWeapon("Melee") then
+        if SkillCMelee and SkillCMelee2 then
             C()
         end
-        if SkillZSword and SkillZSword2 and EquipWeapon("Sword") then
+        if SkillZSword and SkillZSword2 then
             Z()
         end
-        if SkillXSword and SkillXSword2 and EquipWeapon("Sword") then
+        if SkillXSword and SkillXSword2 then
             X()
         end
-        if SkillZGun and SkillZGun2 and EquipWeapon("Gun") then
+        if SkillZGun and SkillZGun2 then
             Z()
         end
-        if SkillXGun and SkillXGun2 and EquipWeapon("Gun") then
+        if SkillXGun and SkillXGun2 then
             X()
         end
-        if SkillZDF and SkillZDF2 and EquipWeapon("Devil Fruit") then
+        if SkillZDF and SkillZDF2 then
             Z()
         end
-        if SkillXDF and SkillXDF2 and EquipWeapon("Devil Fruit") then
+        if SkillXDF and SkillXDF2 then
             X()
         end
-        if SkillCDF and SkillCDF2 and EquipWeapon("Devil Fruit") then
+        if SkillCDF and SkillCDF2 then
             C()
         end
-        if SkillVDF and SkillVDF2 and EquipWeapon("Devil Fruit")then
+        if SkillVDF and SkillVDF2 then
             V()
         end
     end
 
-function DMouse(Frame, Object)
-    dragToggle = nil
-    dragSpeed = .25
-    dragInput = nil
-    dragStart = nil
-    dragPos = nil
-    function updateInput(input)
-        Delta = input.Position - dragStart
-        Position =
-            UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-        game:GetService("TweenService"):Create(Object, TweenInfo.new(dragSpeed), {Position = Position}):Play()
+-----Gui--By--Me------------------------------------
+-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+
+-- Instances:
+
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_Frame"] = Instance.new("Frame");
+	["_UICorner"] = Instance.new("UICorner");
+	["_UIStroke"] = Instance.new("UIStroke");
+	["_Stt"] = Instance.new("TextLabel");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_UIStroke1"] = Instance.new("UIStroke");
+	["_shadowHolder"] = Instance.new("Frame");
+	["_umbraShadow"] = Instance.new("ImageLabel");
+	["_penumbraShadow"] = Instance.new("ImageLabel");
+	["_ambientShadow"] = Instance.new("ImageLabel");
+	["_Stt2"] = Instance.new("Frame");
+	["_Next"] = Instance.new("TextButton");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_UIStroke2"] = Instance.new("UIStroke");
+	["_ImageLabel"] = Instance.new("ImageLabel");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_UIStroke3"] = Instance.new("UIStroke");
+	["_UIStroke4"] = Instance.new("UIStroke");
+	["_Frame1"] = Instance.new("Frame");
+	["_TextLabel"] = Instance.new("TextLabel");
+	["_TextLabel1"] = Instance.new("TextLabel");
+	["_TextLabel2"] = Instance.new("TextLabel");
+	["_shadowHolder1"] = Instance.new("Frame");
+	["_umbraShadow1"] = Instance.new("ImageLabel");
+	["_penumbraShadow1"] = Instance.new("ImageLabel");
+	["_ambientShadow1"] = Instance.new("ImageLabel");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame"].BorderSizePixel = 0
+Converted["_Frame"].Position = UDim2.new(0.0414364636, 0, 0.0321285129, 0)
+Converted["_Frame"].Size = UDim2.new(0, 448, 0, 35)
+Converted["_Frame"].Parent = Converted["_ScreenGui"]
+
+Converted["_UICorner"].Parent = Converted["_Frame"]
+
+Converted["_UIStroke"].Color = Color3.fromRGB(255, 255, 255)
+Converted["_UIStroke"].Parent = Converted["_Frame"]
+
+Converted["_Stt"].Font = Enum.Font.SourceSansBold
+Converted["_Stt"].Text = "Night Hub | Time : OH 0M 0S  | FPS : 60 | Your Bounty : 3000000"
+Converted["_Stt"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Stt"].TextSize = 14
+Converted["_Stt"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stt"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stt"].BorderSizePixel = 0
+Converted["_Stt"].Position = UDim2.new(0.00669642864, 0, 0.0857142881, 0)
+Converted["_Stt"].Size = UDim2.new(0, 441, 0, 28)
+Converted["_Stt"].Name = "Stt"
+Converted["_Stt"].Parent = Converted["_Frame"]
+function skidconc()
+    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+    local Hour = math.floor(GameTime/(60^2))%24
+    local Minute = math.floor(GameTime/(60^1))%60
+    local Second = math.floor(GameTime/(60^0))%60
+    Converted["_Time :"].Text = "H : "..Hour.." M : "..Minute.." S : "..Second.. " | ".."FPS : đeo biet ".." | ".."Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
     end
-    Frame.InputBegan:Connect(
-        function(input)
-            if
-                (input.UserInputType == Enum.UserInputType.MouseButton1 or
-                    input.UserInputType == Enum.UserInputType.Touch)
-             then
-                dragToggle = true
-                dragStart = input.Position
-                startPos = Object.Position
-                input.Changed:Connect(
-                    function()
-                        if (input.UserInputState == Enum.UserInputState.End) then
-                            dragToggle = false
-                        end
-                    end
-                )
-            end
-        end
-    )
-    Frame.InputChanged:Connect(
-        function(input)
-            if
-                (input.UserInputType == Enum.UserInputType.MouseMovement or
-                    input.UserInputType == Enum.UserInputType.Touch)
-             then
-                dragInput = input
-            end
-        end
-    )
-    game:GetService("UserInputService").InputChanged:Connect(
-        function(input)
-            if (input == dragInput and dragToggle) then
-                updateInput(input)
-            end
-        end
-    )
-end
-local osfunc = {}
-local uihide = false
-local abc = false
-local currentpage = ""
-local keybind = keybind or Enum.KeyCode.RightControl
-local yoo = string.gsub(tostring(keybind), "Enum.KeyCode.", "")
-function Hop()
-    local PlaceID = game.PlaceId
-    local AllIDs = {}
-    local foundAnything = ""
-    local actualHour = os.date("!*t").hour
-    local Deleted = false
-    function TPReturner()
-        local Site
-        if foundAnything == "" then
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"
-                )
-            )
-        else
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" ..
-                        PlaceID .. "/servers/Public?sortOrder=Asc&limit=100&cursor=" .. foundAnything
-                )
-            )
-        end
-        local ID = ""
-        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-            foundAnything = Site.nextPageCursor
-        end
-        local num = 0
-        for i, v in pairs(Site.data) do
-            local Possible = true
-            ID = tostring(v.id)
-            if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                for _, Existing in pairs(AllIDs) do
-                    if num ~= 0 then
-                        if ID == tostring(Existing) then
-                            Possible = false
-                        end
-                    else
-                        if tonumber(actualHour) ~= tonumber(Existing) then
-                            local delFile =
-                                pcall(
-                                function()
-                                    AllIDs = {}
-                                    table.insert(AllIDs, actualHour)
-                                end
-                            )
-                        end
-                    end
-                    num = num + 1
-                end
-                if Possible == true then
-                    table.insert(AllIDs, ID)
-                    wait()
-                    pcall(
-                        function()
-                            wait()
-                            game:GetService("TeleportService"):TeleportToPlaceInstance(
-                                PlaceID,
-                                ID,
-                                game.Players.LocalPlayer
-                            )
-                        end
-                    )
-                    wait(4)
-                end
-            end
-        end
+    spawn(function()
+    while task.wait() do
+    pcall(function()
+    skidconc()
+    end)
     end
-    function Teleport()
-        while wait() do
-            pcall(
-                function()
-                    TPReturner()
-                    if foundAnything ~= "" then
-                        TPReturner()
-                    end
-                end
-            )
-        end
-    end
-    Teleport()
-end
-local BountyA = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
-local NightHubAB = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local MainCorner = Instance.new("UICorner")
-local NightLogo = Instance.new("Frame")
-local NightLogoStroke = Instance.new("UIStroke")
-local NightLogoCorner = Instance.new("UICorner")
-local NightLogoImage = Instance.new("ImageLabel")
-local ClientTime = Instance.new("Frame")
-local ClientTimeStroke = Instance.new("UIStroke")
-local ClientTimeCorner = Instance.new("UICorner")
-local ClientTimeLabel_1 = Instance.new("TextLabel")
-local ClientTimeLabel_2 = Instance.new("TextLabel")
-local SkipPlayer = Instance.new("Frame")
-local SkipPlayerStroke = Instance.new("UIStroke")
-local SkipPlayerCorner = Instance.new("UICorner")
-local SkipPlayerButton = Instance.new("TextButton")
-local TargetNameEarnedTimeElapsed = Instance.new("Frame")
-local EarnedTimeElapsedStroke = Instance.new("UIStroke")
-local EarnedTimeElapsedCorner = Instance.new("UICorner")
-local EarnedLabel = Instance.new("TextLabel")
-local TimeElapsedLabel = Instance.new("TextLabel")
-local TargetNameLabel = Instance.new("TextLabel")
-local MainSection = Instance.new("Frame")
-local MainSectionCorner = Instance.new("UICorner")
-local MainSectionStroke = Instance.new("UIStroke")
-local MainSectionLabel_1 = Instance.new("TextLabel")
-local MainSectionLabel_2 = Instance.new("TextLabel")
-local MainStroke = Instance.new("UIStroke")
+    end)
 
-NightHubAB.Name = "NightHubAB"
-NightHubAB.Parent = game.CoreGui
-NightHubAB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_UICorner1"].Parent = Converted["_Stt"]
 
-Main.Name = "Main"
-Main.Parent = NightHubAB
-Main.AnchorPoint = Vector2.new(0.5, 0.5)
-Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.5, 0)
-Main.Size = UDim2.new(0, 300, 0, 230)
+Converted["_UIStroke1"].Parent = Converted["_UICorner1"]
 
-MainCorner.Name = "MainCorner"
-MainCorner.Parent = Main
+Converted["_shadowHolder"].BackgroundTransparency = 1
+Converted["_shadowHolder"].Size = UDim2.new(1, 0, 1, 0)
+Converted["_shadowHolder"].ZIndex = 0
+Converted["_shadowHolder"].Name = "shadowHolder"
+Converted["_shadowHolder"].Parent = Converted["_Frame"]
 
-NightLogo.Name = "NightLogo"
-NightLogo.Parent = Main
-NightLogo.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-NightLogo.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogo.BorderSizePixel = 0
-NightLogo.Position = UDim2.new(0.0500000007, 0, 0.0394444428, 0)
-NightLogo.Size = UDim2.new(0, 85, 0, 85)
+Converted["_umbraShadow"].Image = "rbxassetid://1316045217"
+Converted["_umbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_umbraShadow"].ImageTransparency = 0.8600000143051147
+Converted["_umbraShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_umbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_umbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_umbraShadow"].BackgroundTransparency = 1
+Converted["_umbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_umbraShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_umbraShadow"].ZIndex = 0
+Converted["_umbraShadow"].Name = "umbraShadow"
+Converted["_umbraShadow"].Parent = Converted["_shadowHolder"]
 
-NightLogoStroke.Color = Color3.fromRGB(255, 255, 255)
-NightLogoStroke.Name = "NightLogoStroke"
-NightLogoStroke.Parent = NightLogo
+Converted["_penumbraShadow"].Image = "rbxassetid://1316045217"
+Converted["_penumbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_penumbraShadow"].ImageTransparency = 0.8799999952316284
+Converted["_penumbraShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_penumbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_penumbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_penumbraShadow"].BackgroundTransparency = 1
+Converted["_penumbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_penumbraShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_penumbraShadow"].ZIndex = 0
+Converted["_penumbraShadow"].Name = "penumbraShadow"
+Converted["_penumbraShadow"].Parent = Converted["_shadowHolder"]
 
-NightLogoCorner.Name = "NightLogoCorner"
-NightLogoCorner.Parent = NightLogo
+Converted["_ambientShadow"].Image = "rbxassetid://1316045217"
+Converted["_ambientShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ambientShadow"].ImageTransparency = 0.8799999952316284
+Converted["_ambientShadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_ambientShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_ambientShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_ambientShadow"].BackgroundTransparency = 1
+Converted["_ambientShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_ambientShadow"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_ambientShadow"].ZIndex = 0
+Converted["_ambientShadow"].Name = "ambientShadow"
+Converted["_ambientShadow"].Parent = Converted["_shadowHolder"]
 
-NightLogoImage.Name = "NightLogoImage"
-NightLogoImage.Parent = NightLogo
-NightLogoImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NightLogoImage.BackgroundTransparency = 1.000
-NightLogoImage.BorderColor3 = Color3.fromRGB(27, 42, 53)
-NightLogoImage.LayoutOrder = 2
-NightLogoImage.Size = UDim2.new(0, 84, 0, 85)
-NightLogoImage.Image = "rbxassetid://15467813210"
-NightLogoImage.ImageColor3 = Color3.fromRGB(1000, 1000, 1000)
+Converted["_Stt2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stt2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Stt2"].BorderSizePixel = 0
+Converted["_Stt2"].Position = UDim2.new(0.650092065, 0, 0, 0)
+Converted["_Stt2"].Size = UDim2.new(0, 180, 0, 498)
+Converted["_Stt2"].Name = "Stt2"
+Converted["_Stt2"].Parent = Converted["_ScreenGui"]
 
-ClientTime.Name = "ClientTime"
-ClientTime.Parent = Main
-ClientTime.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ClientTime.BorderColor3 = Color3.fromRGB(27, 42, 53)
-ClientTime.BorderSizePixel = 0
-ClientTime.Position = UDim2.new(0.0500000007, 0, 0.495289803, 0)
-ClientTime.Size = UDim2.new(0, 85, 0, 51)
+Converted["_Next"].Font = Enum.Font.SourceSansBold
+Converted["_Next"].Text = "Next Players"
+Converted["_Next"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Next"].TextSize = 14
+Converted["_Next"].BackgroundColor3 = Color3.fromRGB(29.000002071261406, 29.000002071261406, 29.000002071261406)
+Converted["_Next"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Next"].BorderSizePixel = 0
+Converted["_Next"].Position = UDim2.new(0.0511664487, 0, 0.417670697, 0)
+Converted["_Next"].Size = UDim2.new(0, 160, 0, 38)
+Converted["_Next"].Name = "Next"
+Converted["_Next"].Parent = Converted["_Stt2"]
+Converted["_Next"].MouseButton1Down:Connect(function()
+    NextPlayers = true
+    wait(0.5)
+    NextPlayers = false
+end)
 
-ClientTimeStroke.Color = Color3.fromRGB(255, 255, 255)
-ClientTimeStroke.Name = "ClientTimeStroke"
-ClientTimeStroke.Parent = ClientTime
+Converted["_UICorner2"].Parent = Converted["_Next"]
 
-ClientTimeCorner.Name = "ClientTimeCorner"
-ClientTimeCorner.Parent = ClientTime
+Converted["_UIStroke2"].Color = Color3.fromRGB(255, 255, 255)
+Converted["_UIStroke2"].Thickness = 0.20000000298023224
+Converted["_UIStroke2"].Parent = Converted["_Next"]
 
-ClientTimeLabel_1.Name = "ClientTimeLabel_1"
-ClientTimeLabel_1.Parent = ClientTime
-ClientTimeLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.BackgroundTransparency = 1.000
-ClientTimeLabel_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_1.BorderSizePixel = 0
-ClientTimeLabel_1.Position = UDim2.new(-0.0117647061, 0, -0.0143791651, 0)
-ClientTimeLabel_1.Size = UDim2.new(0, 85, 0, 27)
-ClientTimeLabel_1.Font = Enum.Font.ArialBold
-ClientTimeLabel_1.Text = "Client Time:"
-ClientTimeLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_1.TextSize = 13.000
+Converted["_ImageLabel"].Image = "rbxassetid://15150981742"
+Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ImageLabel"].BorderSizePixel = 0
+Converted["_ImageLabel"].Position = UDim2.new(0.177777782, 0, 0.102409638, 0)
+Converted["_ImageLabel"].Size = UDim2.new(0, 113, 0, 113)
+Converted["_ImageLabel"].Parent = Converted["_Stt2"]
 
-ClientTimeLabel_2.Name = "ClientTimeLabel_2"
-ClientTimeLabel_2.Parent = ClientTime
-ClientTimeLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.BackgroundTransparency = 1.000
-ClientTimeLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ClientTimeLabel_2.BorderSizePixel = 0
-ClientTimeLabel_2.Position = UDim2.new(0.0117647061, 0, 0.444444448, 0)
-ClientTimeLabel_2.Size = UDim2.new(0, 84, 0, 25)
-ClientTimeLabel_2.Font = Enum.Font.ArialBold
-ClientTimeLabel_2.Text = "0M / 0S"
-ClientTimeLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClientTimeLabel_2.TextSize = 13.000
+Converted["_UICorner3"].Parent = Converted["_ImageLabel"]
 
-SkipPlayer.Name = "SkipPlayer"
-SkipPlayer.Parent = Main
-SkipPlayer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-SkipPlayer.BorderColor3 = Color3.fromRGB(27, 42, 53)
-SkipPlayer.BorderSizePixel = 0
-SkipPlayer.Position = UDim2.new(0.356666654, 0, 0.508333325, 0)
-SkipPlayer.Size = UDim2.new(0, 178, 0, 45)
+Converted["_UIStroke3"].Parent = Converted["_ImageLabel"]
 
-SkipPlayerStroke.Color = Color3.fromRGB(255, 255, 255)
-SkipPlayerStroke.Name = "SkipPlayerStroke"
-SkipPlayerStroke.Parent = SkipPlayer
+Converted["_UIStroke4"].Color = Color3.fromRGB(255, 255, 255)
+Converted["_UIStroke4"].Parent = Converted["_Stt2"]
 
-SkipPlayerCorner.Name = "SkipPlayerCorner"
-SkipPlayerCorner.Parent = SkipPlayer
+Converted["_Frame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Frame1"].BorderSizePixel = 0
+Converted["_Frame1"].Position = UDim2.new(0, 0, 0.518072307, 0)
+Converted["_Frame1"].Size = UDim2.new(0, 180, 0, 239)
+Converted["_Frame1"].Parent = Converted["_Stt2"]
 
-SkipPlayerButton.Name = "SkipPlayerButton"
-SkipPlayerButton.Parent = SkipPlayer
-SkipPlayerButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.BackgroundTransparency = 1.000
-SkipPlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SkipPlayerButton.BorderSizePixel = 0
-SkipPlayerButton.Position = UDim2.new(0, 0, -0.0666666701, 0)
-SkipPlayerButton.Size = UDim2.new(0, 178, 0, 51)
-SkipPlayerButton.Font = Enum.Font.ArialBold
-SkipPlayerButton.Text = "Skip Player"
-SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-SkipPlayerButton.TextSize = 18.000
-SkipPlayerButton.MouseButton1Click:Connect(
-    function()
-        NextplySelect = true
-        wait(.2)
-        NextplySelect = false
-    end
-)
+Converted["_TextLabel"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel"].Text = "Earned : "
+Converted["_TextLabel"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel"].TextSize = 14
+Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel"].BorderSizePixel = 0
+Converted["_TextLabel"].Position = UDim2.new(0.055555556, 0, 0.0502092056, 0)
+Converted["_TextLabel"].Size = UDim2.new(0, 159, 0, 33)
+Converted["_TextLabel"].Parent = Converted["_Frame1"]
 
-TargetNameEarnedTimeElapsed.Name = "TargetName/Earned/TimeElapsed"
-TargetNameEarnedTimeElapsed.Parent = Main
-TargetNameEarnedTimeElapsed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TargetNameEarnedTimeElapsed.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TargetNameEarnedTimeElapsed.BorderSizePixel = 0
-TargetNameEarnedTimeElapsed.Position = UDim2.new(0.0533333346, 0, 0.753260851, 0)
-TargetNameEarnedTimeElapsed.Size = UDim2.new(0, 270, 0, 50)
+Converted["_TextLabel1"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel1"].Text = "Target Name : "
+Converted["_TextLabel1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].TextSize = 14
+Converted["_TextLabel1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel1"].BorderSizePixel = 0
+Converted["_TextLabel1"].Position = UDim2.new(0.055555556, 0, 0.238493726, 0)
+Converted["_TextLabel1"].Size = UDim2.new(0, 159, 0, 33)
+Converted["_TextLabel1"].Parent = Converted["_Frame1"]
 
-EarnedTimeElapsedStroke.Color = Color3.fromRGB(255, 255, 255)
-EarnedTimeElapsedStroke.Name = "Earned/TimeElapsedStroke"
-EarnedTimeElapsedStroke.Parent = TargetNameEarnedTimeElapsed
+Converted["_TextLabel2"].Font = Enum.Font.SourceSansBold
+Converted["_TextLabel2"].Text = "Target Bounty : "
+Converted["_TextLabel2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel2"].TextSize = 14
+Converted["_TextLabel2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TextLabel2"].BorderSizePixel = 0
+Converted["_TextLabel2"].Position = UDim2.new(0.055555556, 0, 0.430962354, 0)
+Converted["_TextLabel2"].Size = UDim2.new(0, 159, 0, 33)
+Converted["_TextLabel2"].Parent = Converted["_Frame1"]
 
-EarnedTimeElapsedCorner.Name = "Earned/TimeElapsedCorner"
-EarnedTimeElapsedCorner.Parent = TargetNameEarnedTimeElapsed
+Converted["_shadowHolder1"].BackgroundTransparency = 1
+Converted["_shadowHolder1"].Size = UDim2.new(1, 0, 1, 0)
+Converted["_shadowHolder1"].ZIndex = 0
+Converted["_shadowHolder1"].Name = "shadowHolder"
+Converted["_shadowHolder1"].Parent = Converted["_Stt2"]
 
-EarnedLabel.Name = "EarnedLabel"
-EarnedLabel.Parent = TargetNameEarnedTimeElapsed
-EarnedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-EarnedLabel.BackgroundTransparency = 1.000
-EarnedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-EarnedLabel.Position = UDim2.new(0.0459771045, 0, 0.319999993, 0)
-EarnedLabel.Size = UDim2.new(0, 79, 0, 17)
-EarnedLabel.Font = Enum.Font.ArialBold
-EarnedLabel.Text = "Earned:  16000000"
-EarnedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-EarnedLabel.TextSize = 15.000
-EarnedLabel.TextXAlignment = Enum.TextXAlignment.Left
+Converted["_umbraShadow1"].Image = "rbxassetid://1316045217"
+Converted["_umbraShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_umbraShadow1"].ImageTransparency = 0.8600000143051147
+Converted["_umbraShadow1"].ScaleType = Enum.ScaleType.Slice
+Converted["_umbraShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_umbraShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_umbraShadow1"].BackgroundTransparency = 1
+Converted["_umbraShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_umbraShadow1"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_umbraShadow1"].ZIndex = 0
+Converted["_umbraShadow1"].Name = "umbraShadow"
+Converted["_umbraShadow1"].Parent = Converted["_shadowHolder1"]
 
-TimeElapsedLabel.Name = "TimeElapsedLabel"
-TimeElapsedLabel.Parent = TargetNameEarnedTimeElapsed
-TimeElapsedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TimeElapsedLabel.BackgroundTransparency = 1.000
-TimeElapsedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TimeElapsedLabel.Position = UDim2.new(0.0422734022, 0, 0.555555582, 0)
-TimeElapsedLabel.Size = UDim2.new(0, 246, 0, 25)
-TimeElapsedLabel.Font = Enum.Font.ArialBold
-TimeElapsedLabel.Text = "Time Elapsed: 0H 0M 0S"
-TimeElapsedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TimeElapsedLabel.TextSize = 15.000
-TimeElapsedLabel.TextXAlignment = Enum.TextXAlignment.Left
-function UpdateTime()
-    local GameTime = math.floor(workspace.DistributedGameTime + 0.5)
-    local Hour = math.floor(GameTime / (60 ^ 2)) % 24
-    local Minute = math.floor(GameTime / (60 ^ 1)) % 60
-    local Second = math.floor(GameTime / (60 ^ 0)) % 60
-    TimeElapsedLabel.Text = "Time Elapsed: " .. Hour .. "H " .. Minute .. "M " .. Second .. "S"
-end
+Converted["_penumbraShadow1"].Image = "rbxassetid://1316045217"
+Converted["_penumbraShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_penumbraShadow1"].ImageTransparency = 0.8799999952316284
+Converted["_penumbraShadow1"].ScaleType = Enum.ScaleType.Slice
+Converted["_penumbraShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_penumbraShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_penumbraShadow1"].BackgroundTransparency = 1
+Converted["_penumbraShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_penumbraShadow1"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_penumbraShadow1"].ZIndex = 0
+Converted["_penumbraShadow1"].Name = "penumbraShadow"
+Converted["_penumbraShadow1"].Parent = Converted["_shadowHolder1"]
 
-spawn(
-    function()
-        while task.wait() do
-            pcall(
-                function()
-                    UpdateTime()
-                end
-            )
-        end
-    end
-)
-TargetNameLabel.Name = "TargetNameLabel"
-TargetNameLabel.Parent = TargetNameEarnedTimeElapsed
-TargetNameLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-TargetNameLabel.BackgroundTransparency = 1.000
-TargetNameLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
-TargetNameLabel.Position = UDim2.new(0.0422734022, 0, 0, 0)
-TargetNameLabel.Size = UDim2.new(0, 258, 0, 18)
-TargetNameLabel.Font = Enum.Font.ArialBold
-TargetNameLabel.Text = "Target Name:"
-TargetNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TargetNameLabel.TextSize = 15.000
-TargetNameLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSection.Name = "MainSection"
-MainSection.Parent = Main
-MainSection.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSection.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSection.BorderSizePixel = 0
-MainSection.Position = UDim2.new(0.376666665, 0, 0.0399999991, 0)
-MainSection.Size = UDim2.new(0, 172, 0, 87)
-
-MainSectionCorner.Name = "MainSectionCorner"
-MainSectionCorner.Parent = MainSection
-
-MainSectionStroke.Color = Color3.fromRGB(255, 255, 255)
-MainSectionStroke.Name = "MainSectionStroke"
-MainSectionStroke.Parent = MainSection
-
-MainSectionLabel_1.Name = "MainSectionLabel_1"
-MainSectionLabel_1.Parent = MainSection
-MainSectionLabel_1.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_1.BackgroundTransparency = 1.000
-MainSectionLabel_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_1.BorderSizePixel = 0
-MainSectionLabel_1.Position = UDim2.new(0.0813953504, 0, 0, 0)
-MainSectionLabel_1.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_1.Font = Enum.Font.Unknown
-MainSectionLabel_1.Text = "Night Hub"
-MainSectionLabel_1.TextColor3 = Color3.fromRGB(210, 210, 210)
-MainSectionLabel_1.TextSize = 25.000
-MainSectionLabel_1.TextWrapped = true
-MainSectionLabel_1.TextXAlignment = Enum.TextXAlignment.Left
-
-MainSectionLabel_2.Name = "MainSectionLabel_2"
-MainSectionLabel_2.Parent = MainSection
-MainSectionLabel_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainSectionLabel_2.BackgroundTransparency = 1.000
-MainSectionLabel_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
-MainSectionLabel_2.BorderSizePixel = 0
-MainSectionLabel_2.Position = UDim2.new(0.0813953504, 0, 0.338205963, 0)
-MainSectionLabel_2.Size = UDim2.new(0, 158, 0, 50)
-MainSectionLabel_2.Font = Enum.Font.Unknown
-MainSectionLabel_2.Text = "Auto Bounty"
-MainSectionLabel_2.TextColor3 = Color3.fromRGB(64, 64, 64)
-MainSectionLabel_2.TextSize = 25.000
-MainSectionLabel_2.TextWrapped = true
-MainSectionLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-
-MainStroke.Color = Color3.fromRGB(210, 210, 210)
-MainStroke.Name = "MainStroke"
-MainStroke.Parent = Main
-
-DMouse(Main, Main)
+Converted["_ambientShadow1"].Image = "rbxassetid://1316045217"
+Converted["_ambientShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ambientShadow1"].ImageTransparency = 0.8799999952316284
+Converted["_ambientShadow1"].ScaleType = Enum.ScaleType.Slice
+Converted["_ambientShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
+Converted["_ambientShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_ambientShadow1"].BackgroundTransparency = 1
+Converted["_ambientShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
+Converted["_ambientShadow1"].Size = UDim2.new(1, 10, 1, 10)
+Converted["_ambientShadow1"].ZIndex = 0
+Converted["_ambientShadow1"].Name = "ambientShadow"
+Converted["_ambientShadow1"].Parent = Converted["_shadowHolder1"]
+--//[-------Tween Services----------------------]\\--
 
 function GetDistance(target)
     return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
@@ -637,116 +508,7 @@ spawn(
     function()
         game:GetService("RunService").Heartbeat:Connect(
             function()
-                if
-                    _G.AutoFarmBounty or _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or
-                        _G.AutoFarmChest or
-                        _G.AutoFactory or
-                        _G.AutoFarmBossHallow or
-                        _G.AutoFarmSwanGlasses or
-                        _G.AutoLongSword or
-                        _G.AutoBlackSpikeycoat or
-                        _G.AutoElectricClaw or
-                        _G.AutoFarmGunMastery or
-                        _G.AutoHolyTorch or
-                        _G.AutoLawRaid or
-                        _G.AutoFarmBoss or
-                        _G.AutoTwinHooks or
-                        _G.AutoOpenSwanDoor or
-                        _G.AutoDragon_Trident or
-                        _G.AutoSaber or
-                        _G.NOCLIP or
-                        _G.AutoFarmFruitMastery or
-                        _G.AutoFarmGunMastery or
-                        _G.TeleportIsland or
-                        _G.Auto_EvoRace or
-                        _G.AutoFarmAllMsBypassType or
-                        _G.AutoObservationv2 or
-                        _G.AutoMusketeerHat or
-                        _G.AutoEctoplasm or
-                        _G.AutoRengoku or
-                        _G.Auto_Rainbow_Haki or
-                        _G.AutoObservation or
-                        _G.AutoDarkDagger or
-                        _G.Safe_Mode or
-                        _G.MasteryFruit or
-                        _G.AutoBudySword or
-                        _G.AutoOderSword or
-                        _G.AutoBounty or
-                        _G.AutoAllBoss or
-                        _G.Auto_Bounty or
-                        _G.AutoSharkman or
-                        _G.Auto_Mastery_Fruit or
-                        _G.Auto_Mastery_Gun or
-                        _G.Auto_Dungeon or
-                        _G.Auto_Cavender or
-                        _G.Auto_Pole or
-                        _G.Auto_Kill_Ply or
-                        _G.Auto_Factory or
-                        _G.AutoSecondSea or
-                        _G.TeleportPly or
-                        _G.AutoBartilo or
-                        _G.Auto_DarkBoss or
-                        _G.GrabChest or
-                        _G.AutoFarmBounty or
-                        _G.Holy_Torch or
-                        _G.AutoFarm or
-                        _G.Clip or
-                        _G.AutoElitehunter or
-                        _G.AutoThirdSea or
-                        _G.Auto_Bone or
-                        _G.Autoheart or
-                        _G.Autodoughking or
-                        _G.AutoFarmMaterial or
-                        _G.AutoNevaSoulGuitar or
-                        _G.Auto_Dragon_Trident or
-                        _G.Autotushita or
-                        _G.d or
-                        _G.Autowaden or
-                        _G.Autogay or
-                        _G.Autopole or
-                        _G.Autosaw or
-                        _G.AutoObservationHakiV2 or
-                        _G.AutoFarmNearest or
-                        AutoFarmChest or
-                        _G.AutoCarvender or
-                        _G.AutoTwinHook or
-                        AutoMobAura or
-                        _G.Tweenfruit or
-                        _G.AutoKai or
-                        _G.TeleportNPC or
-                        _G.Leather or
-                        _G.Auto_Wing or
-                        _G.Umm or
-                        _G.Makori_gay or
-                        Radioactive or
-                        Fish or
-                        Gunpowder or
-                        Dragon_Scale or
-                        Cocoafarm or
-                        Scrap or
-                        MiniHee or
-                        _G.AutoFarmSeabaest or
-                        Auto_Cursed_Dual_Katana or
-                        _G.AutoFarmMob or
-                        _G.AutoMysticIsland or
-                        _G.AutoFarmDungeon or
-                        _G.AutoRaidPirate or
-                        _G.AutoQuestRace or
-                        _G.TweenMGear or
-                        getgenv().AutoFarm or
-                        _G.AutoPlayerHunter or
-                        _G.AutoFactory or
-                        Grab_Chest or
-                        _G.Namfon or
-                        _G.AutoSwordMastery or
-                        _G.AutoSeaBest or
-                        _G.AutoKillTial or
-                        _G.Auto_Saber or
-                        _G.Position_Spawn or
-                        _G.Farmfast or
-                        _G.AutoRace or
-                        _G.RaidPirate
-                 then
+                if _G.AutoBountyNightHub == true then
                     if not game:GetService("Workspace"):FindFirstChild("LOL") then
                         local LOL = Instance.new("Part")
                         LOL.Name = "LOL"
@@ -773,7 +535,7 @@ spawn(
         pcall(
             function()
                 while wait() do
-                    if _G.AutoFarmBounty == true then
+                    if _G.AutoBountyNightHub == true then
                         if
                             not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild(
                                 "BodyClip"
@@ -798,7 +560,7 @@ spawn(
             function()
                 game:GetService("RunService").Stepped:Connect(
                     function()
-                        if _G.AutoFarmBounty == true then
+                        if _G.AutoBountyNightHub == true then
                             for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                                 if v:IsA("BasePart") then
                                     v.CanCollide = false
@@ -812,45 +574,7 @@ spawn(
     end
 )
 
-function StopTween(target)
-    if not target then
-        _G.StopTween = true
-        wait()
-        topos(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-        wait()
-        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-        end
-        _G.StopTween = false
-        _G.Clip = false
-    end
-end
-
-spawn(
-    function()
-        pcall(
-            function()
-                while wait() do
-                    for i, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                        if v:IsA("Tool") then
-                            if v:FindFirstChild("RemoteFunctionShoot") then
-                                SelectWeaponGun = v.Name
-                            end
-                        end
-                    end
-                end
-            end
-        )
-    end
-)
-
-game:GetService("Players").LocalPlayer.Idled:connect(
-    function()
-        game:GetService("VirtualUser"):Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-        wait(1)
-        game:GetService("VirtualUser"):Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-    end
-)
+---------//[EquipWeapon]\\---------------------------
 
 function NameMelee()
     for r, v in next, game:GetService("Players").LocalPlayer.Backpack:GetChildren() do
@@ -876,92 +600,6 @@ function NameSword()
         end
     end
 end
-function CheckPriceAndBuyMelee(bt)
-    if SaveMasteryMelee()[bt] > 0 then
-        return BuyMelee(bt)
-    end
-    v = bt
-    if
-        pricemelee[v] and pricemelee[v].Beli and pricemelee[v].Beli <= LocalPlayerBeliValue and pricemelee[v].Fragment and
-            pricemelee[v].Fragment <= LocalPlayerFragmentValue
-     then
-        BuyMelee(v)
-    end
-end
-function GetAndCheckMeleeMastery(bu, bs)
-    mm = bu
-    usingmelee = browhat[NameMelee()]
-    momo = browhat[mm]
-    if type(momo) == "string" then
-        momo = game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo, true) == 1
-    else
-        momo = momo()
-    end
-    if momo then
-        if
-            not game.Players.LocalPlayer.Character:FindFirstChild(mm) and
-                not game.Players.LocalPlayer.Backpack:FindFirstChild(mm)
-         then
-            momo = browhat[mm]
-            if type(momo) == "string" then
-                game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo, true)
-                momo = game.ReplicatedStorage.Remotes.CommF_:InvokeServer(momo)
-            else
-                momo = momo()
-            end
-        end
-        if game.Players.LocalPlayer.Character:FindFirstChild(mm) or game.Players.LocalPlayer.Backpack:FindFirstChild(mm) then
-            kwekrwe = {game.Players.LocalPlayer.Character, game.Players.LocalPlayer.Backpack}
-            for r, v in pairs(kwekrwe) do
-                if v:FindFirstChild(mm) then
-                    return v[mm].Level.Value
-                end
-            end
-        end
-    end
-    return 0
-end
-tablemm = {"Black Leg", "Electro", "Fishman Karate", "Dragon Claw"}
-function DetectMeleeSPHM()
-    vanmeo = SaveMasteryMelee()
-    for r, v in pairs(tablemm) do
-        if vanmeo[v] < 300 then
-            return v
-        end
-    end
-end
-function CheckPhouyeDoor()
-    if game.Workspace.Map.IceCastle.Hall.LibraryDoor:FindFirstChild("PhoeyuDoor") then
-        return game.Workspace.Map.IceCastle.Hall.LibraryDoor.PhoeyuDoor.CanCollide
-    end
-end
-WaterKey = false
-function CheckWaterKey()
-    if WaterKey then
-        return WaterKey
-    end
-    local bv = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate", true)
-    if bv == 3 or bv == 1 then
-        WaterKey = true
-        return true
-    end
-    local bw = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuySharkmanKarate")
-    if bw == 1 or bw == 0 or bw == 2 then
-        WaterKey = true
-        return true
-    end
-end
-function CheckBackPack(bx)
-    BackpackandCharacter = {game.Players.LocalPlayer.Backpack, game.Players.LocalPlayer.Character}
-    for al, by in pairs(BackpackandCharacter) do
-        for r, v in pairs(by:GetChildren()) do
-            if v.Name == bx then
-                return v
-            end
-        end
-    end
-end
-
 function GetWeaponMastery(f)
     local u3 = game.Players.LocalPlayer.Backpack
     for r, v in pairs(u3:GetChildren()) do
@@ -984,16 +622,6 @@ function u6(bX, bY)
     game:service("VirtualInputManager"):SendKeyEvent(true, bX, false, game)
     wait(bY)
     game:service("VirtualInputManager"):SendKeyEvent(false, bX, false, game)
-end
-
-function EnableBuso()
-    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-        NoClip = true
-        local args = {[1] = "Buso"}
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        NoClip = false
-    end
-    NoClip = false
 end
 function GetWeapon(bh)
     s = ""
@@ -1187,19 +815,6 @@ function checkskillGun()
         end
     end
 end
-function SendKey(c9, ca)
-    if c9 then
-        if not ca then
-            game:service("VirtualInputManager"):SendKeyEvent(true, c9, false, game)
-            task.wait()
-            game:service("VirtualInputManager"):SendKeyEvent(false, c9, false, game)
-        elseif ca then
-            game:service("VirtualInputManager"):SendKeyEvent(true, c9, false, game)
-            task.wait(ca)
-            game:service("VirtualInputManager"):SendKeyEvent(false, c9, false, game)
-        end
-    end
-end
 
 function autoskill()
     EnableBuso()
@@ -1245,353 +860,101 @@ function autoskill()
     end
 end
 
-_G.AutoFarmBounty = true
+--//[--------Source--tự--viết-100%--------]\\---------
 
-local Catsle = CFrame.new(-5071.82324, 314.858734, -3150.69922)
-local Mainsion = CFrame.new(-12471.169921875, 374.94024658203, -7551.677734375)
-
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if _G.AutoFarmBounty then
-                        for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                            if v.Name ~= game.Players.LocalPlayer.Name then
-                                if
-                                    v:WaitForChild("Humanoid").Health > 0 and
-                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
-                                            v.HumanoidRootPart.Position).Magnitude <= 10000
-                                 then
-                                    plyselecthunthelpold = v.Humanoid.Health
-                                    repeat
-                                        task.wait()
-                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                        NameTarget = v.Name
-                                        TargetNameLabel.Text = "Target Name : " .. v.Name .. ""
-                                        if tostring(game.Players.LocalPlayer.Team) == "Pirates" then
-                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(5, 12, 5))
-                                        elseif tostring(game.Players.LocalPlayer.Team) == "Marines" then
-                                            if game.Players[NameTarget].Team ~= game.Players.LocalPlayer.Team then
-                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5, 12, 5))
-                                            end
-                                        end
-                                        spawn(
-                                            function()
-                                                if
-                                                    (v.HumanoidRootPart.Position -
-                                                        game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                                        15
-                                                 then
-                                                    spawn(
-                                                        function()
-                                                            autoskill()
-                                                            useskill = true
-                                                            _G.Aimbot_Skill_Fov = true
-                                                        end
-                                                    )
-                                                end
-                                            end
-                                        )
-                                        v.HumanoidRootPart.CanCollide = false
-                                        TargetSelectHunt = v.Humanoid
-                                    until _G.AutoFarmBounty == false or v.Humanoid.Health == 0 or
-                                        not v:FindFirstChild("HumanoidRootPart") or
-                                        not v:FindFirstChild("Humanoid") or
-                                        not v.Parent or
-                                        NextplySelect == true
-                                    NextplySelect = false
-                                    StartCheckTarget = false
-                                end
-                            end
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
-spawn(
-    function()
-        pcall(
-            function()
-                while wait() do
-                    if _G.AutoFarmBounty then
-                        if TargetSelectHunt ~= nil then
-                            if StartCheckTarget then
-                                wait(.1)
-                                if
-                                    TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or
-                                        TargetSelectHunt.Health >= plyselecthunthelpold
-                                 then
-                                    NextplySelect = true
-                                    TargetSelectHunt = nil
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        )
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.AutoFarmBounty then
-                for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                    if
-                        not v.Humanoid.Health == 0 or not v:FindFirstChild("HumanoidRootPart") or
-                            not v:FindFirstChild("Humanoid") or
-                            not v.Parent
-                     then
-                        NextplySelect = true
-                        wait(.2)
-                    end
-                end
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            if _G.AutoFarmBounty then
-                for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-                    if v.Name == "NotificationTemplate" then
-                        if
-                            string.find(v.Text, "attack") or string.find(v.Text, "players") or
-                                string.find(v.Text, "Players") or
-                                string.find(v.Text, "Safe Zone!")
-                         then
-                            NextplySelect = true
-                            wait(0.0000000000000000000000000000000001)
-                            NextplySelect = false
-                        end
-                    end
-                end
-            end
-        end
-    end
-)
-
-spawn(
-    function()
-        pcall(
-            function()
-                if _G.AutoFarmBounty then
-                    while wait() do
-                        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-                        end
-                    end
-                end
-            end
-        )
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if _G.AutoFarmBounty then
-                        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                        end
-                    end
-                end
-            )
-        end
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if Ken then
-                        repeat
-                            task.wait()
-                            if
-                                not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild(
-                                    "ImageLabel"
-                                )
-                             then
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):SetKeyDown("0x65")
-                                wait(2)
-                                game:GetService("VirtualUser"):SetKeyUp("0x65")
-                            end
-                        until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or
-                            not ken
-                    end
-                end
-            )
-        end
-    end
-)
-
-spawn(
-    function()
-        pcall(
-            function()
-                while wait(.1) do
-                    if _G.AutoFarmBounty then
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                            game:GetService("ReplicatedStorage").Remotes.CommF:InvokeServer("EnablePvp")
-                        end
-                    end
-                end
-            end
-        )
-    end
-)
-
-spawn(
-    function()
-        pcall(
-            function()
-                game:GetService("RunService").RenderStepped:Connect(
-                    function()
-                        if
-                            Aimbot and TargetPlayerAim ~= nil and
-                                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and
-                                game.Players.LocalPlayer.Character[
-                                    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-                                ]:FindFirstChild("MousePos")
-                         then
-                            local args = {
-                                [1] = game:GetService("Players"):FindFirstChild(TargetPlayerAim).Character.HumanoidRootPart.Position
-                            }
-                            game:GetService("Players").LocalPlayer.Character[
-                                game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
-                            ].RemoteEvent:FireServer(unpack(args))
-                        end
-                    end
-                )
-            end
-        )
-    end
-)
-spawn(
-    function()
-        pcall(
-            function()
-                while wait(0.1) do
-                    local BountyB = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
-                    EarnedLabel.Text = "Earned: " .. BountyB - BountyA
-                end
-            end
-        )
-    end
-)
-
-spawn(
-    function()
-        while wait() do
-            pcall(
-                function()
-                    if Ken then
-                        repeat
-                            task.wait()
-                            if
-                                not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild(
-                                    "ImageLabel"
-                                )
-                             then
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):SetKeyDown("0x65")
-                                wait(2)
-                                game:GetService("VirtualUser"):SetKeyUp("0x65")
-                            end
-                        until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or
-                            not ken
-                    end
-                end
-            )
-        end
-    end
-)
-
-spawn(
-    function()
-        pcall(
-            function()
-                while wait(.1) do
-                    if _G.AutoFarmBounty then
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                            game:GetService("ReplicatedStorage").Remotes.CommF:InvokeServer("EnablePvp")
-                        end
-                    end
-                end
-            end
-        )
-    end
-)
-
-local Select_Size_Fov = 1200
-local Show_Fov = false
-local Circle = Drawing.new("Circle")
-Circle.Color =  Color3.fromRGB(255, 255, 255)
-Circle.Thickness = 1
-Circle.Radius = 250
-Circle.NumSides = 460
-Circle.Filled = false
-Circle.Transparency = 1
-game:GetService("RunService").Stepped:Connect(function()
-    Circle.Radius = Select_Size_Fov
-    Circle.Thickness = 1
-    Circle.NumSides = 460
-    Circle.Position = game:GetService('UserInputService'):GetMouseLocation()
-    if Show_Fov then
-        Circle.Visible = true
-    else
-        Circle.Visible = false
-    end
-end)
-local lp = game:GetService('Players').LocalPlayer
-local mouse = lp:GetMouse()
 spawn(function()
     while wait() do
-        if _G.Aimbot_Skill_Fov then
-            pcall(function()
-                local MaxDist, Closest = math.huge
-                for i,v in pairs(game:GetService("Players"):GetChildren()) do 
-                    local Head = v.Character:FindFirstChild("HumanoidRootPart")
-                    local Pos, Vis = game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera, Head.Position)
-                    local MousePos, TheirPos = Vector2.new(mouse.X, mouse.Y), Vector2.new(Pos.X, Pos.Y)
-                    local Dist = (TheirPos - MousePos).Magnitude
-                    if Dist < MaxDist and Dist <= Select_Size_Fov and v.Name ~= game.Players.LocalPlayer.Name then
-                        MaxDist = Dist
-                    end
-                end
-            end)
+    if _G.AutoBountyNightHub then
+        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+            end
         end
     end
 end)
+local Myhealth = game.Players.LocalPlayer.Character.Humanoid.Health
 spawn(function()
-    local gg = getrawmetatable(game)
-    local old = gg.__namecall
-    setreadonly(gg,false)
-    gg.__namecall = newcclosure(function(...)
-        local method = getnamecallmethod()
-        local args = {...}
-        if tostring(method) == "FireServer" then
-            if tostring(args[1]) == "RemoteEvent" then
-                if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-                    if _G.Aimbot_Skill_Fov then
-                        args[2] = v.Character.HumanoidRootPart.Position
-                        return old(unpack(args))
+    while wait() do
+    if _G.AutoBountyNightHub then
+        for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+            if v.Name ~= game.Players.LocalPlayer.Name then
+                if v.Humanoid.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
+                    plyselecthunthelpold = v.Humanoid.Health
+                    TargetSelectHunt = v.Humanoid
+                    repeat task.wait()
+                        Converted["_TextLabel1"].Text = "Target Name : "..v.Name..""
+                        Converted["_TextLabel2"].Text = "Target Bounty : " ..v.leaderstats["Bounty/Honor"].Value..""
+                        NameTarget = v.Name
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                        v.HumanoidRootPart.CanCollide = false
+                        topos(v.HumanoidRootPart.CFrame * CFrame.new(5,12,5))
+                        Useskill = true
+                    until _G.AutoBountyNightHub == false or v.Humanoid.Health <= 0 or not v.Parent
+                        Useskill = false
                     end
                 end
             end
         end
-        return old(...)
-    end)
+    end
 end)
+
+spawn(function()
+    while wait() do
+    if _G.AutoBountyNightHub then
+        if Distance <= 50 then
+            if Useskill then
+                autoskill()
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.AutoBountyNightHub then
+                if TargetSelectHunt ~= nil then
+                    if StartCheckTarget then 
+                        wait(.1)
+                            if TargetSelectHunt.Health == TargetSelectHunt.MaxHealth or TargetSelectHunt.Health >= plyselecthunthelpold then
+                                NextPlayers = true
+                                TargetSelectHunt = nil
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
