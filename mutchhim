@@ -897,14 +897,13 @@ spawn(function()
     while wait() do
     if _G.AutoBountyNightHub then
         for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-            tietcanhmuctieu = v.Humanoid.Health
-            Muctieu = v.Humanoid
-            Distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
             if v.Name ~= game.Players.LocalPlayer.Name then
                 if v.Humanoid.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 7000 then
                     repeat task.wait()
                         TargetNameLabel.Text = "Target Name : "..v.Name..""
                         NameTarget = v.Name
+                        tietcanhmuctieu = v.Humanoid.Health
+                        Muctieu = v.Humanoid
                         v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CanCollide = false
                         topos(v.HumanoidRootPart.CFrame * CFrame.new(5,12,5))
