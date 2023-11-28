@@ -1,28 +1,5 @@
 -----Chào hỏi đê----------------------------
 
-spawn(function() 
-    repeat
-        task.wait()
-    until game:IsLoaded()
-    repeat
-        task.wait()
-    until game.Players
-    repeat
-        task.wait()
-    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
-    wait(1.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>!Thanks For Use!<Color=/>"):Display()
-    wait(4.0)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Auto Bounty Hunt there is version BETA<Color=/>"):Display()
-    wait(7.14)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Please use Fluxus Client<Color=/>"):Display()
-    wait(10.24)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Join Discord to get new noitification update<Color=/>"):Display()
-    wait(15.29)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Channel : LMNGAMING <Color=/>"):Display()
-    wait(.36)
-end)
-
 ----config------------------------
 
 _G.configenabled = true
@@ -981,7 +958,28 @@ spawn(function()
             end)
 
 
-
+            spawn(function() 
+                repeat
+                    task.wait()
+                until game:IsLoaded()
+                repeat
+                    task.wait()
+                until game.Players
+                repeat
+                    task.wait()
+                until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+                wait(1.5)
+                require(game.ReplicatedStorage.Notification).new("<Color=Red>!Thanks For Use!<Color=/>"):Display()
+                wait(3.0)
+                require(game.ReplicatedStorage.Notification).new("<Color=Red>Auto Bounty Hunt there is version BETA<Color=/>"):Display()
+                wait(4.14)
+                require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Please use Fluxus Client<Color=/>"):Display()
+                wait(7.24)
+                require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Join Discord to get new noitification update<Color=/>"):Display()
+                wait(8.29)
+                require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Channel : LMNGAMING <Color=/>"):Display()
+                wait(.36)
+            end)
 
 
 
