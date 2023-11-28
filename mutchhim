@@ -154,260 +154,272 @@ local BountyA = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor
 -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
 
 -- Instances:
+local NightHubAB = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local MainCorner = Instance.new("UICorner")
+local NightLogo = Instance.new("Frame")
+local NightLogoStroke = Instance.new("UIStroke")
+local NightLogoCorner = Instance.new("UICorner")
+local NightLogoImage = Instance.new("ImageLabel")
+local ClientTime = Instance.new("Frame")
+local ClientTimeStroke = Instance.new("UIStroke")
+local ClientTimeCorner = Instance.new("UICorner")
+local ClientTimeLabel_1 = Instance.new("TextLabel")
+local ClientTimeLabel_2 = Instance.new("TextLabel")
+local SkipPlayer = Instance.new("Frame")
+local SkipPlayerStroke = Instance.new("UIStroke")
+local SkipPlayerCorner = Instance.new("UICorner")
+local SkipPlayerButton = Instance.new("TextButton")
+local TargetNameEarnedTimeElapsed = Instance.new("Frame")
+local EarnedTimeElapsedStroke = Instance.new("UIStroke")
+local EarnedTimeElapsedCorner = Instance.new("UICorner")
+local EarnedLabel = Instance.new("TextLabel")
+local TimeElapsedLabel = Instance.new("TextLabel")
+local TargetNameLabel = Instance.new("TextLabel")
+local MainSection = Instance.new("Frame")
+local MainSectionCorner = Instance.new("UICorner")
+local MainSectionStroke = Instance.new("UIStroke")
+local MainSectionLabel_1 = Instance.new("TextLabel")
+local MainSectionLabel_2 = Instance.new("TextLabel")
+local MainStroke = Instance.new("UIStroke")
 
-local Converted = {
-	["_ScreenGui"] = Instance.new("ScreenGui");
-	["_Frame"] = Instance.new("Frame");
-	["_UICorner"] = Instance.new("UICorner");
-	["_UIStroke"] = Instance.new("UIStroke");
-	["_Stt"] = Instance.new("TextLabel");
-	["_UICorner1"] = Instance.new("UICorner");
-	["_UIStroke1"] = Instance.new("UIStroke");
-	["_shadowHolder"] = Instance.new("Frame");
-	["_umbraShadow"] = Instance.new("ImageLabel");
-	["_penumbraShadow"] = Instance.new("ImageLabel");
-	["_ambientShadow"] = Instance.new("ImageLabel");
-	["_Stt2"] = Instance.new("Frame");
-	["_Next"] = Instance.new("TextButton");
-	["_UICorner2"] = Instance.new("UICorner");
-	["_UIStroke2"] = Instance.new("UIStroke");
-	["_ImageLabel"] = Instance.new("ImageLabel");
-	["_UICorner3"] = Instance.new("UICorner");
-	["_UIStroke3"] = Instance.new("UIStroke");
-	["_UIStroke4"] = Instance.new("UIStroke");
-	["_Frame1"] = Instance.new("Frame");
-	["_TextLabel"] = Instance.new("TextLabel");
-	["_TextLabel1"] = Instance.new("TextLabel");
-	["_TextLabel2"] = Instance.new("TextLabel");
-	["_shadowHolder1"] = Instance.new("Frame");
-	["_umbraShadow1"] = Instance.new("ImageLabel");
-	["_penumbraShadow1"] = Instance.new("ImageLabel");
-	["_ambientShadow1"] = Instance.new("ImageLabel");
-}
+NightHubAB.Name = "NightHubAB"
+NightHubAB.Parent = game.CoreGui
+NightHubAB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Properties:
+Main.Name = "Main"
+Main.Parent = NightHubAB
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+Main.Size = UDim2.new(0, 300, 0, 230)
 
-Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+MainCorner.Name = "MainCorner"
+MainCorner.Parent = Main
 
-Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame"].BorderSizePixel = 0
-Converted["_Frame"].Position = UDim2.new(0.0414364636, 0, 0.0321285129, 0)
-Converted["_Frame"].Size = UDim2.new(0, 448, 0, 35)
-Converted["_Frame"].Parent = Converted["_ScreenGui"]
+NightLogo.Name = "NightLogo"
+NightLogo.Parent = Main
+NightLogo.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+NightLogo.BorderColor3 = Color3.fromRGB(27, 42, 53)
+NightLogo.BorderSizePixel = 0
+NightLogo.Position = UDim2.new(0.0500000007, 0, 0.0394444428, 0)
+NightLogo.Size = UDim2.new(0, 85, 0, 85)
 
-Converted["_UICorner"].Parent = Converted["_Frame"]
+NightLogoStroke.Color = Color3.fromRGB(255, 255, 255)
+NightLogoStroke.Name = "NightLogoStroke"
+NightLogoStroke.Parent = NightLogo
 
-Converted["_UIStroke"].Color = Color3.fromRGB(255, 255, 255)
-Converted["_UIStroke"].Parent = Converted["_Frame"]
+NightLogoCorner.Name = "NightLogoCorner"
+NightLogoCorner.Parent = NightLogo
 
-Converted["_Stt"].Font = Enum.Font.SourceSansBold
-Converted["_Stt"].Text = "Night Hub | Time : OH 0M 0S  | FPS : 60 | Your Bounty : 3000000"
-Converted["_Stt"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Stt"].TextSize = 14
-Converted["_Stt"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Stt"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Stt"].BorderSizePixel = 0
-Converted["_Stt"].Position = UDim2.new(0.00669642864, 0, 0.0857142881, 0)
-Converted["_Stt"].Size = UDim2.new(0, 441, 0, 28)
-Converted["_Stt"].Name = "Stt"
-Converted["_Stt"].Parent = Converted["_Frame"]
-function skidconc()
-    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
-    local Hour = math.floor(GameTime/(60^2))%24
-    local Minute = math.floor(GameTime/(60^1))%60
-    local Second = math.floor(GameTime/(60^0))%60
-    Converted["_Time :"].Text = "H : "..Hour.." M : "..Minute.." S : "..Second.. " | ".."FPS : đeo biet ".." | ".."Your Bounty :".." "..game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value
+NightLogoImage.Name = "NightLogoImage"
+NightLogoImage.Parent = NightLogo
+NightLogoImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NightLogoImage.BackgroundTransparency = 1.000
+NightLogoImage.BorderColor3 = Color3.fromRGB(27, 42, 53)
+NightLogoImage.LayoutOrder = 2
+NightLogoImage.Size = UDim2.new(0, 84, 0, 85)
+NightLogoImage.Image = "rbxassetid://15467813210"
+NightLogoImage.ImageColor3 = Color3.fromRGB(1000, 1000, 1000)
+
+ClientTime.Name = "ClientTime"
+ClientTime.Parent = Main
+ClientTime.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+ClientTime.BorderColor3 = Color3.fromRGB(27, 42, 53)
+ClientTime.BorderSizePixel = 0
+ClientTime.Position = UDim2.new(0.0500000007, 0, 0.495289803, 0)
+ClientTime.Size = UDim2.new(0, 85, 0, 51)
+
+ClientTimeStroke.Color = Color3.fromRGB(255, 255, 255)
+ClientTimeStroke.Name = "ClientTimeStroke"
+ClientTimeStroke.Parent = ClientTime
+
+ClientTimeCorner.Name = "ClientTimeCorner"
+ClientTimeCorner.Parent = ClientTime
+
+ClientTimeLabel_1.Name = "ClientTimeLabel_1"
+ClientTimeLabel_1.Parent = ClientTime
+ClientTimeLabel_1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ClientTimeLabel_1.BackgroundTransparency = 1.000
+ClientTimeLabel_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ClientTimeLabel_1.BorderSizePixel = 0
+ClientTimeLabel_1.Position = UDim2.new(-0.0117647061, 0, -0.0143791651, 0)
+ClientTimeLabel_1.Size = UDim2.new(0, 85, 0, 27)
+ClientTimeLabel_1.Font = Enum.Font.ArialBold
+ClientTimeLabel_1.Text = "Client Time:"
+ClientTimeLabel_1.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClientTimeLabel_1.TextSize = 13.000
+
+ClientTimeLabel_2.Name = "ClientTimeLabel_2"
+ClientTimeLabel_2.Parent = ClientTime
+ClientTimeLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ClientTimeLabel_2.BackgroundTransparency = 1.000
+ClientTimeLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ClientTimeLabel_2.BorderSizePixel = 0
+ClientTimeLabel_2.Position = UDim2.new(0.0117647061, 0, 0.444444448, 0)
+ClientTimeLabel_2.Size = UDim2.new(0, 84, 0, 25)
+ClientTimeLabel_2.Font = Enum.Font.ArialBold
+ClientTimeLabel_2.Text = "0M / 0S"
+ClientTimeLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClientTimeLabel_2.TextSize = 13.000
+
+SkipPlayer.Name = "SkipPlayer"
+SkipPlayer.Parent = Main
+SkipPlayer.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+SkipPlayer.BorderColor3 = Color3.fromRGB(27, 42, 53)
+SkipPlayer.BorderSizePixel = 0
+SkipPlayer.Position = UDim2.new(0.356666654, 0, 0.508333325, 0)
+SkipPlayer.Size = UDim2.new(0, 178, 0, 45)
+
+SkipPlayerStroke.Color = Color3.fromRGB(255, 255, 255)
+SkipPlayerStroke.Name = "SkipPlayerStroke"
+SkipPlayerStroke.Parent = SkipPlayer
+
+SkipPlayerCorner.Name = "SkipPlayerCorner"
+SkipPlayerCorner.Parent = SkipPlayer
+
+SkipPlayerButton.Name = "SkipPlayerButton"
+SkipPlayerButton.Parent = SkipPlayer
+SkipPlayerButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SkipPlayerButton.BackgroundTransparency = 1.000
+SkipPlayerButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SkipPlayerButton.BorderSizePixel = 0
+SkipPlayerButton.Position = UDim2.new(0, 0, -0.0666666701, 0)
+SkipPlayerButton.Size = UDim2.new(0, 178, 0, 51)
+SkipPlayerButton.Font = Enum.Font.ArialBold
+SkipPlayerButton.Text = "Skip Players"
+SkipPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SkipPlayerButton.TextSize = 18.000
+SkipPlayerButton.MouseButton1Click:Connect(
+    function()
+        NextplySelect = true
+        wait(0.5)
+        NextplySelect = false
     end
-    spawn(function()
-    while task.wait() do
-    pcall(function()
-    skidconc()
-    end)
+)
+
+TargetNameEarnedTimeElapsed.Name = "TargetName/Earned/TimeElapsed"
+TargetNameEarnedTimeElapsed.Parent = Main
+TargetNameEarnedTimeElapsed.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+TargetNameEarnedTimeElapsed.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TargetNameEarnedTimeElapsed.BorderSizePixel = 0
+TargetNameEarnedTimeElapsed.Position = UDim2.new(0.0533333346, 0, 0.753260851, 0)
+TargetNameEarnedTimeElapsed.Size = UDim2.new(0, 270, 0, 50)
+
+EarnedTimeElapsedStroke.Color = Color3.fromRGB(255, 255, 255)
+EarnedTimeElapsedStroke.Name = "Earned/TimeElapsedStroke"
+EarnedTimeElapsedStroke.Parent = TargetNameEarnedTimeElapsed
+
+EarnedTimeElapsedCorner.Name = "Earned/TimeElapsedCorner"
+EarnedTimeElapsedCorner.Parent = TargetNameEarnedTimeElapsed
+
+EarnedLabel.Name = "EarnedLabel"
+EarnedLabel.Parent = TargetNameEarnedTimeElapsed
+EarnedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+EarnedLabel.BackgroundTransparency = 1.000
+EarnedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+EarnedLabel.Position = UDim2.new(0.0459771045, 0, 0.319999993, 0)
+EarnedLabel.Size = UDim2.new(0, 79, 0, 17)
+EarnedLabel.Font = Enum.Font.ArialBold
+EarnedLabel.Text = "Earned : 0"
+EarnedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+EarnedLabel.TextSize = 15.000
+EarnedLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+TimeElapsedLabel.Name = "TimeElapsedLabel"
+TimeElapsedLabel.Parent = TargetNameEarnedTimeElapsed
+TimeElapsedLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+TimeElapsedLabel.BackgroundTransparency = 1.000
+TimeElapsedLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TimeElapsedLabel.Position = UDim2.new(0.0422734022, 0, 0.555555582, 0)
+TimeElapsedLabel.Size = UDim2.new(0, 246, 0, 25)
+TimeElapsedLabel.Font = Enum.Font.ArialBold
+TimeElapsedLabel.Text = "Time Elapsed: 0H 0M 0S"
+TimeElapsedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TimeElapsedLabel.TextSize = 15.000
+TimeElapsedLabel.TextXAlignment = Enum.TextXAlignment.Left
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime + 0.5)
+    local Hour = math.floor(GameTime / (60 ^ 2)) % 24
+    local Minute = math.floor(GameTime / (60 ^ 1)) % 60
+    local Second = math.floor(GameTime / (60 ^ 0)) % 60
+    TimeElapsedLabel.Text = "Time Elapsed: " .. Hour .. "H " .. Minute .. "M " .. Second .. "S"
+end
+
+spawn(
+    function()
+        while task.wait() do
+            pcall(
+                function()
+                    UpdateTime()
+                end
+            )
+        end
     end
-    end)
+)
+TargetNameLabel.Name = "TargetNameLabel"
+TargetNameLabel.Parent = TargetNameEarnedTimeElapsed
+TargetNameLabel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+TargetNameLabel.BackgroundTransparency = 1.000
+TargetNameLabel.BorderColor3 = Color3.fromRGB(27, 42, 53)
+TargetNameLabel.Position = UDim2.new(0.0422734022, 0, 0, 0)
+TargetNameLabel.Size = UDim2.new(0, 258, 0, 18)
+TargetNameLabel.Font = Enum.Font.ArialBold
+TargetNameLabel.Text = "Target Name : "
+TargetNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TargetNameLabel.TextSize = 15.000
+TargetNameLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-Converted["_UICorner1"].Parent = Converted["_Stt"]
+MainSection.Name = "MainSection"
+MainSection.Parent = Main
+MainSection.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainSection.BorderColor3 = Color3.fromRGB(27, 42, 53)
+MainSection.BorderSizePixel = 0
+MainSection.Position = UDim2.new(0.376666665, 0, 0.0399999991, 0)
+MainSection.Size = UDim2.new(0, 172, 0, 87)
 
-Converted["_UIStroke1"].Parent = Converted["_UICorner1"]
+MainSectionCorner.Name = "MainSectionCorner"
+MainSectionCorner.Parent = MainSection
 
-Converted["_shadowHolder"].BackgroundTransparency = 1
-Converted["_shadowHolder"].Size = UDim2.new(1, 0, 1, 0)
-Converted["_shadowHolder"].ZIndex = 0
-Converted["_shadowHolder"].Name = "shadowHolder"
-Converted["_shadowHolder"].Parent = Converted["_Frame"]
+MainSectionStroke.Color = Color3.fromRGB(255, 255, 255)
+MainSectionStroke.Name = "MainSectionStroke"
+MainSectionStroke.Parent = MainSection
 
-Converted["_umbraShadow"].Image = "rbxassetid://1316045217"
-Converted["_umbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_umbraShadow"].ImageTransparency = 0.8600000143051147
-Converted["_umbraShadow"].ScaleType = Enum.ScaleType.Slice
-Converted["_umbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_umbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_umbraShadow"].BackgroundTransparency = 1
-Converted["_umbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_umbraShadow"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_umbraShadow"].ZIndex = 0
-Converted["_umbraShadow"].Name = "umbraShadow"
-Converted["_umbraShadow"].Parent = Converted["_shadowHolder"]
+MainSectionLabel_1.Name = "MainSectionLabel_1"
+MainSectionLabel_1.Parent = MainSection
+MainSectionLabel_1.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainSectionLabel_1.BackgroundTransparency = 1.000
+MainSectionLabel_1.BorderColor3 = Color3.fromRGB(27, 42, 53)
+MainSectionLabel_1.BorderSizePixel = 0
+MainSectionLabel_1.Position = UDim2.new(0.0813953504, 0, 0, 0)
+MainSectionLabel_1.Size = UDim2.new(0, 158, 0, 50)
+MainSectionLabel_1.Font = Enum.Font.Unknown
+MainSectionLabel_1.Text = "Night Hub"
+MainSectionLabel_1.TextColor3 = Color3.fromRGB(210, 210, 210)
+MainSectionLabel_1.TextSize = 25.000
+MainSectionLabel_1.TextWrapped = true
+MainSectionLabel_1.TextXAlignment = Enum.TextXAlignment.Left
 
-Converted["_penumbraShadow"].Image = "rbxassetid://1316045217"
-Converted["_penumbraShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_penumbraShadow"].ImageTransparency = 0.8799999952316284
-Converted["_penumbraShadow"].ScaleType = Enum.ScaleType.Slice
-Converted["_penumbraShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_penumbraShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_penumbraShadow"].BackgroundTransparency = 1
-Converted["_penumbraShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_penumbraShadow"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_penumbraShadow"].ZIndex = 0
-Converted["_penumbraShadow"].Name = "penumbraShadow"
-Converted["_penumbraShadow"].Parent = Converted["_shadowHolder"]
+MainSectionLabel_2.Name = "MainSectionLabel_2"
+MainSectionLabel_2.Parent = MainSection
+MainSectionLabel_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainSectionLabel_2.BackgroundTransparency = 1.000
+MainSectionLabel_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+MainSectionLabel_2.BorderSizePixel = 0
+MainSectionLabel_2.Position = UDim2.new(0.0813953504, 0, 0.338205963, 0)
+MainSectionLabel_2.Size = UDim2.new(0, 158, 0, 50)
+MainSectionLabel_2.Font = Enum.Font.Unknown
+MainSectionLabel_2.Text = "Auto Bounty"
+MainSectionLabel_2.TextColor3 = Color3.fromRGB(64, 64, 64)
+MainSectionLabel_2.TextSize = 20.000
+MainSectionLabel_2.TextWrapped = true
+MainSectionLabel_2.TextXAlignment = Enum.TextXAlignment.Left
 
-Converted["_ambientShadow"].Image = "rbxassetid://1316045217"
-Converted["_ambientShadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ambientShadow"].ImageTransparency = 0.8799999952316284
-Converted["_ambientShadow"].ScaleType = Enum.ScaleType.Slice
-Converted["_ambientShadow"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_ambientShadow"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_ambientShadow"].BackgroundTransparency = 1
-Converted["_ambientShadow"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_ambientShadow"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_ambientShadow"].ZIndex = 0
-Converted["_ambientShadow"].Name = "ambientShadow"
-Converted["_ambientShadow"].Parent = Converted["_shadowHolder"]
-
-Converted["_Stt2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Stt2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Stt2"].BorderSizePixel = 0
-Converted["_Stt2"].Position = UDim2.new(0.650092065, 0, 0, 0)
-Converted["_Stt2"].Size = UDim2.new(0, 180, 0, 498)
-Converted["_Stt2"].Name = "Stt2"
-Converted["_Stt2"].Parent = Converted["_ScreenGui"]
-Converted["_Stt2"].Draggable = true
-
-Converted["_Next"].Font = Enum.Font.SourceSansBold
-Converted["_Next"].Text = "Next Players"
-Converted["_Next"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_Next"].TextSize = 14
-Converted["_Next"].BackgroundColor3 = Color3.fromRGB(29.000002071261406, 29.000002071261406, 29.000002071261406)
-Converted["_Next"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Next"].BorderSizePixel = 0
-Converted["_Next"].Position = UDim2.new(0.0511664487, 0, 0.417670697, 0)
-Converted["_Next"].Size = UDim2.new(0, 160, 0, 38)
-Converted["_Next"].Name = "Next"
-Converted["_Next"].Parent = Converted["_Stt2"]
-Converted["_Next"].MouseButton1Down:Connect(function()
-    NextPlayers = true
-    wait(0.5)
-    NextPlayers = false
-end)
-
-Converted["_UICorner2"].Parent = Converted["_Next"]
-
-Converted["_UIStroke2"].Color = Color3.fromRGB(255, 255, 255)
-Converted["_UIStroke2"].Thickness = 0.20000000298023224
-Converted["_UIStroke2"].Parent = Converted["_Next"]
-
-Converted["_ImageLabel"].Image = "rbxassetid://15150981742"
-Converted["_ImageLabel"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_ImageLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ImageLabel"].BorderSizePixel = 0
-Converted["_ImageLabel"].Position = UDim2.new(0.177777782, 0, 0.102409638, 0)
-Converted["_ImageLabel"].Size = UDim2.new(0, 113, 0, 113)
-Converted["_ImageLabel"].Parent = Converted["_Stt2"]
-
-Converted["_UICorner3"].Parent = Converted["_ImageLabel"]
-
-Converted["_UIStroke3"].Parent = Converted["_ImageLabel"]
-
-Converted["_UIStroke4"].Color = Color3.fromRGB(255, 255, 255)
-Converted["_UIStroke4"].Parent = Converted["_Stt2"]
-
-Converted["_Frame1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame1"].BorderSizePixel = 0
-Converted["_Frame1"].Position = UDim2.new(0, 0, 0.518072307, 0)
-Converted["_Frame1"].Size = UDim2.new(0, 180, 0, 239)
-Converted["_Frame1"].Parent = Converted["_Stt2"]
-
-Converted["_TextLabel"].Font = Enum.Font.SourceSansBold
-Converted["_TextLabel"].Text = "Earned : "
-Converted["_TextLabel"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel"].TextSize = 14
-Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel"].BorderSizePixel = 0
-Converted["_TextLabel"].Position = UDim2.new(0.055555556, 0, 0.0502092056, 0)
-Converted["_TextLabel"].Size = UDim2.new(0, 159, 0, 33)
-Converted["_TextLabel"].Parent = Converted["_Frame1"]
-
-Converted["_TextLabel1"].Font = Enum.Font.SourceSansBold
-Converted["_TextLabel1"].Text = "Target Name : "
-Converted["_TextLabel1"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel1"].TextSize = 14
-Converted["_TextLabel1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel1"].BorderSizePixel = 0
-Converted["_TextLabel1"].Position = UDim2.new(0.055555556, 0, 0.238493726, 0)
-Converted["_TextLabel1"].Size = UDim2.new(0, 159, 0, 33)
-Converted["_TextLabel1"].Parent = Converted["_Frame1"]
-
-Converted["_TextLabel2"].Font = Enum.Font.SourceSansBold
-Converted["_TextLabel2"].Text = "Target Bounty : "
-Converted["_TextLabel2"].TextColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_TextLabel2"].TextSize = 14
-Converted["_TextLabel2"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel2"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_TextLabel2"].BorderSizePixel = 0
-Converted["_TextLabel2"].Position = UDim2.new(0.055555556, 0, 0.430962354, 0)
-Converted["_TextLabel2"].Size = UDim2.new(0, 159, 0, 33)
-Converted["_TextLabel2"].Parent = Converted["_Frame1"]
-
-Converted["_shadowHolder1"].BackgroundTransparency = 1
-Converted["_shadowHolder1"].Size = UDim2.new(1, 0, 1, 0)
-Converted["_shadowHolder1"].ZIndex = 0
-Converted["_shadowHolder1"].Name = "shadowHolder"
-Converted["_shadowHolder1"].Parent = Converted["_Stt2"]
-
-Converted["_umbraShadow1"].Image = "rbxassetid://1316045217"
-Converted["_umbraShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_umbraShadow1"].ImageTransparency = 0.8600000143051147
-Converted["_umbraShadow1"].ScaleType = Enum.ScaleType.Slice
-Converted["_umbraShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_umbraShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_umbraShadow1"].BackgroundTransparency = 1
-Converted["_umbraShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_umbraShadow1"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_umbraShadow1"].ZIndex = 0
-Converted["_umbraShadow1"].Name = "umbraShadow"
-Converted["_umbraShadow1"].Parent = Converted["_shadowHolder1"]
-
-Converted["_penumbraShadow1"].Image = "rbxassetid://1316045217"
-Converted["_penumbraShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_penumbraShadow1"].ImageTransparency = 0.8799999952316284
-Converted["_penumbraShadow1"].ScaleType = Enum.ScaleType.Slice
-Converted["_penumbraShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_penumbraShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_penumbraShadow1"].BackgroundTransparency = 1
-Converted["_penumbraShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_penumbraShadow1"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_penumbraShadow1"].ZIndex = 0
-Converted["_penumbraShadow1"].Name = "penumbraShadow"
-Converted["_penumbraShadow1"].Parent = Converted["_shadowHolder1"]
-
-Converted["_ambientShadow1"].Image = "rbxassetid://1316045217"
-Converted["_ambientShadow1"].ImageColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_ambientShadow1"].ImageTransparency = 0.8799999952316284
-Converted["_ambientShadow1"].ScaleType = Enum.ScaleType.Slice
-Converted["_ambientShadow1"].SliceCenter = Rect.new(10, 10, 118, 118)
-Converted["_ambientShadow1"].AnchorPoint = Vector2.new(0.5, 0.5)
-Converted["_ambientShadow1"].BackgroundTransparency = 1
-Converted["_ambientShadow1"].Position = UDim2.new(0.5, 0, 0.5, 6)
-Converted["_ambientShadow1"].Size = UDim2.new(1, 10, 1, 10)
-Converted["_ambientShadow1"].ZIndex = 0
-Converted["_ambientShadow1"].Name = "ambientShadow"
-Converted["_ambientShadow1"].Parent = Converted["_shadowHolder1"]
+MainStroke.Color = Color3.fromRGB(210, 210, 210)
+MainStroke.Name = "MainStroke"
+MainStroke.Parent = Main
 --//[-------Tween Services----------------------]\\--
 
 function GetDistance(target)
@@ -885,7 +897,7 @@ spawn(function()
                     deoskid = v.Humanoid.Health
                     Muctieu = v.Humanoid
                     repeat task.wait()
-                        Converted["_TextLabel1"].Text = "Target Name : "..v.Name..""
+                        TargetNameLabel.Text = "Target Name : "..v.Name..""
                         NameTarget = v.Name
                         v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CanCollide = false
