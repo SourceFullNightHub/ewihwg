@@ -4,14 +4,16 @@ local Caservers = game.Players:GetPlayers()
 
 spawn(function()
     while wait() do
-        if getgenv().config["Skip Level 1 - 300"] == true then
-            if YourLevel == 1 or YourLevel <= 50 then
-                DjtShanda = true
-            elseif YourLevel == 50 or YourLevel <= 300 then
-                KillPlayers = true
-                DjtShanda = false
+        pcall(function()
+            if getgenv().config["Skip Level 1 - 300"] == true then
+                if YourLevel == 1 or YourLevel <= 50 then
+                    DjtShanda = true
+                elseif YourLevel == 50 or YourLevel <= 300 then
+                    KillPlayers = true
+                    DjtShanda = false
+                end
             end
-        end
+        end)
     end
 end)
 
@@ -1240,30 +1242,6 @@ spawn(function()
 end)
 
 spawn(function()
-    game:GetService("RunService").Heartbeat:connect(function()
-        pcall(function()
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
-                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
-                end
-            end
-        end)
-    end)
-end)
-
-   spawn(function()
-    pcall(function()
-        while wait(.1) do
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
-                end
-            end
-        end
-    end)
-end)
-
-spawn(function()
     while wait() do
         pcall(function()
             if DjtShanda then
@@ -1298,34 +1276,62 @@ spawn(function()
 end)
 
 spawn(function()
+    game:GetService("RunService").Heartbeat:connect(function()
+        pcall(function()
+            if KillPlayers then
+                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
+                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                end
+            end
+        end)
+    end)
+end)
+
+   spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if KillPlayers then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                end
+            end
+        end
+    end)
+end)
+
+
+spawn(function()
     while wait() do
         pcall(function()
             if KillPlayers then
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    wait(.5)
+                    wait(.1)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                    for i,v in pairs(Caservers) do
-                        if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                            print(v.Name)
-                        end
-                    end
                 else
                     for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
-                            repeat wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0							
-                                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                                Useskill = true
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
-                            Useskill = false
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            if v.humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
+                                repeat wait()
+                                    AutoHaki()
+                                    EquipTool(SelectWP)
+                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0							
+                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                    Useskill = true
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                                Useskill = false
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            end
+                        end
+                    end
+                else
+                    for i,v in pairs(PlayersAll) do
+                        if v.Data.Level.Value >= 20 and v.Data.Level.Value <= YourLevel * 5 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                            print(v)
                         end
                     end
                 end
