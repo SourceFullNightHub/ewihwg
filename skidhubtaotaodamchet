@@ -108,7 +108,7 @@ function UpdateTime()
     local Hour = math.floor(GameTime / (60 ^ 2)) % 24
     local Minute = math.floor(GameTime / (60 ^ 1)) % 60
     local Second = math.floor(GameTime / (60 ^ 0)) % 60
-    Time.Text = Hour .. "H " .. Minute .. "M " .. Second .. "S"
+    TextLabel_4.Text = Hour .. "H " .. Minute .. "M " .. Second .. "S"
 end
 spawn(function()
     while task.wait() do
@@ -1275,18 +1275,6 @@ spawn(function()
     end
 end)
 
-spawn(function()
-    game:GetService("RunService").Heartbeat:connect(function()
-        pcall(function()
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
-                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
-                end
-            end
-        end)
-    end)
-end)
-
    spawn(function()
     pcall(function()
         while wait(.1) do
@@ -1299,7 +1287,6 @@ end)
     end)
 end)
 
-
 spawn(function()
     while wait() do
         pcall(function()
@@ -1310,7 +1297,7 @@ spawn(function()
                 else
                     for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
-                            if v.humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
                                 repeat wait()
                                     AutoHaki()
                                     EquipTool(SelectWP)
@@ -1319,6 +1306,7 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0							
                                     v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                                     Useskill = true
+                                    TextLabel_5.Text = "Target Kill : ".. v.Name .. ""
                                     game:GetService'VirtualUser':CaptureController()
                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
