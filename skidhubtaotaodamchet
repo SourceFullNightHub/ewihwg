@@ -892,7 +892,7 @@ end
 spawn(function()
     while task.wait() do
         pcall(function()
-            if NoClip == true then
+            if getgenv().config["Skip Level 1 - 300"] or NoClip == true then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -910,7 +910,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if NoClip == true then
+            if getgenv().config["Skip Level 1 - 300"] or NoClip == true then
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
