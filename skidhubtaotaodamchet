@@ -1047,7 +1047,7 @@ spawn(function()
                                     Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,10,2))
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                until not _G.Farmfast or not v.Parent or v.Humanoid.Health <= 0
+                                until getgenv().config["Skip Level 1 - 300"] == false or not v.Parent or v.Humanoid.Health <= 0 or YourLevel >= 50
                                 StardMag = false
                                 Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
                             end
