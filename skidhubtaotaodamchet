@@ -951,11 +951,18 @@ end)
 
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
-        if _G.FastAttack == true then
-            game.Players.LocalPlayer.Character.Stun.Value = 0
-            game.Players.LocalPlayer.Character.Busy.Value = false        
-        end
+        game.Players.LocalPlayer.Character.Stun.Value = 0
+        game.Players.LocalPlayer.Character.Busy.Value = false        
     end)
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            game:GetService'VirtualUser':CaptureController()
+            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+        end)
+    end
 end)
 
 spawn(function()
@@ -1136,6 +1143,30 @@ spawn(function()
 end)
 
 spawn(function()
+    game:GetService("RunService").Heartbeat:connect(function()
+        pcall(function()
+            if getgenv().config["Skip Level 1 - 300"] == true then
+                if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
+                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                end
+            end
+        end)
+    end)
+end)
+
+   spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if getgenv().config["Skip Level 1 - 300"] == true then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
     while wait() do
         pcall(function()
             if getgenv().config["Skip Level 1 - 300"] == true then
@@ -1166,10 +1197,63 @@ spawn(function()
                         Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
                     end
                 end
+            elseif YourLevel >= 50 or YourLevel <= 300 then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    wait(.5)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                else
+                    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
+                            repeat wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0							
+                                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until getgenv().config["Skip Level 1 - 300"] == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                            Useskill = false
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                        end
+                    end
+                end
+            else
+                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                end
             end
         end)
     end
 end)
+
+spawn(function()
+    while wait() do
+		pcall(function()
+			if Useskill then
+                if Distance <= 10 then
+				    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+                end
+			end
+		end)
+    end
+end)
+
 
 spawn(function()
     while wait() do
