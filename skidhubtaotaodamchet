@@ -1323,7 +1323,7 @@ spawn(function()
                     end
                 end
             else
-                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("player") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                 end
             end
