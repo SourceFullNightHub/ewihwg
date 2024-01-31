@@ -1143,9 +1143,22 @@ spawn(function()
 end)
 
 spawn(function()
+    while wait() do
+        if getgenv().config["Skip Level 1 - 300"] then
+            if YourLevel == 1 or YourLevel <= 50 then
+                DjtShanda = true
+            elseif YourLevel == 50 or YourLevel <= 300 then
+                KillPlayers = true
+                DjtShanda = false
+            end
+        end
+    end
+end)
+
+spawn(function()
     game:GetService("RunService").Heartbeat:connect(function()
         pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == true then
+            if KillPlayers then
                 if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") then
                     game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                 end
@@ -1157,7 +1170,7 @@ end)
    spawn(function()
     pcall(function()
         while wait(.1) do
-            if getgenv().config["Skip Level 1 - 300"] == true then
+            if KillPlayers then
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
                 end
@@ -1169,7 +1182,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == true then
+            if DjtShanda then
                 if YourLevel == 1 or YourLevel <= 50 then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1186,7 +1199,7 @@ spawn(function()
                                     Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                until getgenv().config["Skip Level 1 - 300"] == false or not v.Parent or v.Humanoid.Health <= 0 or YourLevel >= 50
+                                until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0 or YourLevel >= 50
                                 StardMag = false
                                 Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
                             end
@@ -1197,31 +1210,42 @@ spawn(function()
                         Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
                     end
                 end
-            elseif YourLevel >= 50 or YourLevel <= 300 then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    wait(.5)
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                else
-                    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
-                            repeat wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0							
-                                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until getgenv().config["Skip Level 1 - 300"] == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
-                            Useskill = false
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if KillPlayers then
+                if YourLevel >= 50 or YourLevel <= 300 then
+                    DjtShanda = false
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                        wait(.5)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    else
+                        for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                            if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
+                                repeat wait()
+                                    AutoHaki()
+                                    EquipTool(SelectWP)
+                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0							
+                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                                Useskill = false
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            end
                         end
                     end
-                end
-            else
-                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                else
+                    if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    end
                 end
             end
         end)
