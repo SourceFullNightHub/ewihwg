@@ -1138,7 +1138,7 @@ spawn(function()
                 end
             else
                 for i,v in pairs(Caservers) do
-                    if v.Data.Level.Value <= 20 or v.Data.Level.Value >= YourLevel * 5 then
+                    if v.Data.Level.Value <= 20 or v.Data.Level.Value >= 150 then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                         print(v.Data.Level.Value)
                     end
