@@ -1143,7 +1143,6 @@ spawn(function()
                         print(v)
                     end
                 end
-            else
                 if game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter") == "I don't have anything for you right now. Come back later." then
                     KillPlayers = false
                     Hop()
