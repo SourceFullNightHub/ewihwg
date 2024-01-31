@@ -1,6 +1,19 @@
 local YourLevel = game.Players.LocalPlayer.Data.Level.Value
 local playersmain = game.Players.LocalPlayer
 
+spawn(function()
+    while wait() do
+        if getgenv().config["Skip Level 1 - 300"] == true then
+            if YourLevel == 1 or YourLevel <= 50 then
+                DjtShanda = true
+            elseif YourLevel == 50 or YourLevel <= 300 then
+                KillPlayers = true
+                DjtShanda = false
+            end
+        end
+    end
+end)
+
 -- Ui  :
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1222,19 +1235,6 @@ spawn(function()
                 end
             end
         end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if getgenv().config["Skip Level 1 - 300"] then
-            if YourLevel == 1 or YourLevel <= 50 then
-                DjtShanda = true
-            elseif YourLevel == 50 or YourLevel <= 300 then
-                KillPlayers = true
-                DjtShanda = false
-            end
-        end
     end
 end)
 
