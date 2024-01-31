@@ -1304,6 +1304,12 @@ spawn(function()
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     wait(.5)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    for i,v in pairs(Caservers) do
+                        if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                            print(v.Name)
+                        end
+                    end
                 else
                     for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
@@ -1321,13 +1327,6 @@ spawn(function()
                             Useskill = false
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                         end
-                    end
-                end
-            else
-                for i,v in pairs(Caservers) do
-                    if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                        print(v.Name)
                     end
                 end
             end
