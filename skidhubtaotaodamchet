@@ -1069,7 +1069,7 @@ spawn(function()
                                     StardMag = true
                                     FastMon = v.HumanoidRootPart.CFrame
                                     v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                 until getgenv().config["Skip Level 1 - 300"] == false or not v.Parent or v.Humanoid.Health <= 0 or YourLevel >= 50
