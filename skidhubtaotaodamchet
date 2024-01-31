@@ -1126,7 +1126,6 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0							
                                     v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                                     Useskill = true
-                                    TextLabel_5.Text = "Target Kill : ".. v.Name .. ""
                                     game:GetService'VirtualUser':CaptureController()
                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
