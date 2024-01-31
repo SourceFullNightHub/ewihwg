@@ -1,5 +1,6 @@
 local YourLevel = game.Players.LocalPlayer.Data.Level.Value
 local playersmain = game.Players.LocalPlayer
+local Caservers = game.Players:GetPlayers()
 
 spawn(function()
     while wait() do
@@ -1323,8 +1324,10 @@ spawn(function()
                     end
                 end
             else
-                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                for i,v in pairs(Caservers) do
+                    if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("left") or CheckNotify("players") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    end
                 end
             end
         end)
