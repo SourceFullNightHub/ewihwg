@@ -1366,6 +1366,17 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().config["Lock Level"]["Enabled"] == true then
+                if YourLevel == getgenv().config["Lock Level"]["Level"] or YourLevel >= getgenv().config["Lock Level"]["Level"] then
+                    game:GetService("Players").LocalPlayer:Kick("[Kaitun] Kicked By Level Lock")
+                end
+            end
+        end)
+    end
+end)
 
 spawn(function()
     while wait() do
