@@ -2,21 +2,6 @@ local YourLevel = game.Players.LocalPlayer.Data.Level.Value
 local playersmain = game.Players.LocalPlayer
 local Caservers = game.Players:GetPlayers()
 
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == true then
-                if YourLevel == 1 or YourLevel <= 50 then
-                    DjtShanda = true
-                elseif YourLevel == 50 or YourLevel <= 300 then
-                    KillPlayers = true
-                    DjtShanda = false
-                end
-            end
-        end)
-    end
-end)
-
 -- Ui  :
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -949,6 +934,21 @@ end)
 
 
 -- function :
+
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if getgenv().config["Skip Level 1 - 300"] == true then
+                if YourLevel == 1 or YourLevel <= 50 then
+                    DjtShanda = true
+                elseif YourLevel == 50 or YourLevel <= 300 then
+                    KillPlayers = true
+                    DjtShanda = false
+                end
+            end
+        end)
+    end
+end)
 
 RedeemCode("NEWTROLL")
         RedeemCode("SECRET_ADMIN")
