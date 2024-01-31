@@ -950,6 +950,223 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().config["Skip Level 1 - 300"] == false then
+                QuestCheck()
+                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(questTitle, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
+                            BP(CFrameMon)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
+                            Teleport(CFrameQuest)
+                        end
+                    else
+                        Teleport(CFrameQuest)
+                    end
+                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
+                    end
+                elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mon then
+                            repeat
+                                task.wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                PosMon = v.HumanoidRootPart.CFrame
+                                BringMob = true
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until getgenv().config["Skip Level 1 - 300"] == true or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                        end
+                    end
+                    Teleport(CFrameMon)
+                    BringMob = false
+                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                        Teleport(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if DjtShanda then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Shanda" then
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            repeat task.wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                StardMag = true
+                                FastMon = v.HumanoidRootPart.CFrame
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                            until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
+                            StardMag = false
+                            Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                        end
+                    end
+                end
+            else
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                end
+            end
+        end)
+    end
+end)
+
+   spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if KillPlayers then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if KillPlayers then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    wait(.1)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                else
+                    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
+                                repeat wait()
+                                    AutoHaki()
+                                    EquipTool(SelectWP)
+                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0							
+                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                    Useskill = true
+                                    TextLabel_5.Text = "Target Kill : ".. v.Name .. ""
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                                Useskill = false
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            end
+                        end
+                    end
+                end
+            else
+                for i,v in pairs(Caservers) do
+                    if v.Data.Level.Value >= 20 and v.Data.Level.Value <= YourLevel * 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                        print(v)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+		pcall(function()
+			if Useskill then
+                if Distance <= 10 then
+				    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+				    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+                end
+			end
+		end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().config["Lock Level"]["Enabled"] == true then
+                if YourLevel == getgenv().config["Lock Level"]["Level"] or YourLevel >= getgenv().config["Lock Level"]["Level"] then
+                    game:GetService("Players").LocalPlayer:Kick("[Kaitun] Kicked By Level Lock")
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            QuestCheck()
+            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                    v.HumanoidRootPart.CFrame = PosMon
+                    v.Humanoid:ChangeState(14)
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                elseif not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                    v.HumanoidRootPart.CFrame = PosMon
+                    v.Humanoid:ChangeState(14)
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                elseif getgenv().config["Skip Level 1 - 300"] == true and StardMag then
+                    if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = FastMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 RedeemCode("NEWTROLL")
         RedeemCode("SECRET_ADMIN")
         RedeemCode("KITT_RESET")
@@ -1190,221 +1407,3 @@ assert(getrawmetatable)
         end
         return old(self, ...)
     end)
-
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == false then
-                QuestCheck()
-                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(questTitle, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                    if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                            BP(CFrameMon)
-                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
-                            Teleport(CFrameQuest)
-                        end
-                    else
-                        Teleport(CFrameQuest)
-                    end
-                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
-                    end
-                elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mon then
-                            repeat
-                                task.wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.CanCollide = false
-                                PosMon = v.HumanoidRootPart.CFrame
-                                BringMob = true
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until getgenv().config["Skip Level 1 - 300"] == true or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                        end
-                    end
-                    Teleport(CFrameMon)
-                    BringMob = false
-                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                        Teleport(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if DjtShanda then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
-                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if v.Name == "Shanda" then
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                            repeat task.wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                StardMag = true
-                                FastMon = v.HumanoidRootPart.CFrame
-                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                            until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
-                            StardMag = false
-                            Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
-                        end
-                    end
-                end
-            else
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
-                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-                end
-            end
-        end)
-    end
-end)
-
-   spawn(function()
-    pcall(function()
-        while wait(.1) do
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
-                end
-            end
-        end
-    end)
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    wait(.1)
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                else
-                    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
-                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
-                                repeat wait()
-                                    AutoHaki()
-                                    EquipTool(SelectWP)
-                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Humanoid.WalkSpeed = 0							
-                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                                    Useskill = true
-                                    TextLabel_5.Text = "Target Kill : ".. v.Name .. ""
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
-                                Useskill = false
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                            end
-                        end
-                    end
-                end
-            else
-                for i,v in pairs(Caservers) do
-                    if v.Data.Level.Value >= 20 and v.Data.Level.Value <= YourLevel * 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                        print(v)
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-		pcall(function()
-			if Useskill then
-                if Distance <= 10 then
-				    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
-				    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
-                    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
-				    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
-                    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
-				    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
-                    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
-				    wait(0.1)
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
-                end
-			end
-		end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().config["Lock Level"]["Enabled"] == true then
-                if YourLevel == getgenv().config["Lock Level"]["Level"] or YourLevel >= getgenv().config["Lock Level"]["Level"] then
-                    game:GetService("Players").LocalPlayer:Kick("[Kaitun] Kicked By Level Lock")
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            QuestCheck()
-            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = PosMon
-                    v.Humanoid:ChangeState(14)
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Head.CanCollide = false
-                    if v.Humanoid:FindFirstChild("Animator") then
-                        v.Humanoid.Animator:Destroy()
-                    end
-                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = PosMon
-                    v.Humanoid:ChangeState(14)
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Head.CanCollide = false
-                    if v.Humanoid:FindFirstChild("Animator") then
-                        v.Humanoid.Animator:Destroy()
-                    end
-                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif getgenv().config["Skip Level 1 - 300"] == true and StardMag then
-                    if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                        v.HumanoidRootPart.CFrame = FastMon
-                        v.Humanoid:ChangeState(14)
-                        v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
-                        if v.Humanoid:FindFirstChild("Animator") then
-                            v.Humanoid.Animator:Destroy()
-                        end
-                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    end
-                end
-            end
-        end)
-    end
-end)
