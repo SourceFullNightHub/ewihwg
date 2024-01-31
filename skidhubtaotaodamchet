@@ -1139,8 +1139,8 @@ spawn(function()
             else
                 for i,v in pairs(Caservers) do
                     if v.Data.Level.Value <= 20 or v.Data.Level.Value >= 150 then
+                        wait(0.5)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                        print(v.Data.Level.Value)
                     end
                 end
                 if game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter") == "I don't have anything for you right now. Come back later." then
