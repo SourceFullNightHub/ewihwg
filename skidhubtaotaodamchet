@@ -957,6 +957,56 @@ RedeemCode("NEWTROLL")
         RedeemCode("TantaiGaming")
         RedeemCode("STRAWHATMAINE")
 
+_G.Stats = "Melee"
+spawn(
+    function()
+        while wait() do
+            if game.Players.localPlayer.Data.Points.Value >= 1 then
+                if _G.Stats == "Melee" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Melee",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.Stats == "Defense" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Defense",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.Stats == "Sword" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Sword",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.Stats == "Gun" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Gun",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.Stats == "Blox Fruit" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Blox Fruit",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+            end
+        end
+    end
+)
+
 local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
 CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
 y = debug.getupvalues(CombatFrameworkR)[2]
