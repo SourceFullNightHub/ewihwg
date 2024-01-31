@@ -1193,31 +1193,30 @@ spawn(function()
     while wait() do
         pcall(function()
             if DjtShanda then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == "Shanda" then
-                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
-                                    AutoHaki()
-                                    EquipTool(SelectWP)
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Humanoid.WalkSpeed = 0
-                                    StardMag = true
-                                    FastMon = v.HumanoidRootPart.CFrame
-                                    v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
-                                    game:GetService("VirtualUser"):CaptureController()
-                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
-                                StardMag = false
-                                Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
-                            end
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Shanda" then
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            repeat task.wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                StardMag = true
+                                FastMon = v.HumanoidRootPart.CFrame
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                            until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
+                            StardMag = false
+                            Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
                         end
                     end
-                else
-                    if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
-                        Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-                    end
+                end
+            else
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
                 end
             end
         end)
@@ -1228,36 +1227,31 @@ spawn(function()
     while wait() do
         pcall(function()
             if KillPlayers then
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                        wait(.5)
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                    else
-                        for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                            if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
-                                repeat wait()
-                                    AutoHaki()
-                                    EquipTool(SelectWP)
-                                    Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Humanoid.WalkSpeed = 0							
-                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                                    Useskill = true
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
-                                Useskill = false
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                            end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    wait(.5)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                else
+                    for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,v.Name) then
+                            repeat wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(0,5,2))
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0							
+                                v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                Useskill = true
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until KillPlayers == false or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                            Useskill = false
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                         end
                     end
-                else
-                    if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                    end
-                else
-                    if CheckNotify("Players") or CheckNotify("Died") or CheckNotify("player") then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                    end
+                end
+            else
+                if v.Data.level.Value <= 20 or v.Data.Level.Value >= 150 or CheckNotify("Players") or CheckNotify("Died") or CheckNotify("player") or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                 end
             end
         end)
