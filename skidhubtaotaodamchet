@@ -17,6 +17,19 @@ if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
     end
 end
 
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if getgenv().config["Skip Level 1 - 300"] == true then
+                if YourLevel == 50 and YourLevel <= 300 then
+                    DjtShanda = false
+                    KillPlayers = true
+                end
+            end
+        end)
+    end
+end)
+
 -- Ui  :
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1011,6 +1024,7 @@ end)
 
 -- function :
 
+DjtShanda = true
 spawn(function()
     while wait() do
         pcall(function()
@@ -1043,32 +1057,6 @@ spawn(function()
             end
         end)
     end
-end)
-
-DjtShanda = true
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == true then
-                if YourLevel == 50 and YourLevel <= 300 then
-                    DjtShanda = false
-                    KillPlayers = true
-                end
-            end
-        end)
-    end
-end)
-
-   spawn(function()
-    pcall(function()
-        while wait(.1) do
-            if KillPlayers then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
-                end
-            end
-        end
-    end)
 end)
 
 spawn(function()
@@ -1115,6 +1103,19 @@ spawn(function()
         end)
     end
 end)
+
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if KillPlayers then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                end
+            end
+        end
+    end)
+end)
+
 
 spawn(function()
     while wait() do
