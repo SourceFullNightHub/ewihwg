@@ -923,6 +923,20 @@ function QuestCheck()
 
 ----- function ;3
 
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.Skiplevel1den50 then
+                if YourLevel >= 50 and YourLevel <= 300 then
+                    _G.DisanPlayers = true
+                    _G.Skiplevel1den50 = false
+                end
+            end
+        end
+    end)
+end)
+
 _G.Skiplevel1den50 = true
 spawn(function()
     while wait() do
@@ -962,19 +976,6 @@ spawn(function()
             end
         end)
     end
-end)
-
-spawn(function()
-    pcall(function()
-        while wait() do
-            if _G.Skiplevel1den50 then
-                if YourLevel >= 50 and YourLevel <= 300 then
-                    _G.DisanPlayers = true
-                    _G.Skiplevel1den50 = false
-                end
-            end
-        end
-    end)
 end)
 
 spawn(function()
