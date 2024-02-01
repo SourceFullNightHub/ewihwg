@@ -7,21 +7,6 @@ if getgenv().config["Start Kaitun Settings"]["Enabled Kaitun"] == true then
     _G.LevelFarm = true
 end
 
--- Join Teams :
-
-if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    for i, v in pairs(
-        getconnections(
-            game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated
-        )
-    ) do
-        for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-            b:Fire()
-        end
-        v.Function()
-    end
-end
-
 -- Ui  :
 
 local ScreenGui = Instance.new("ScreenGui")
@@ -1013,6 +998,21 @@ spawn(function()
         end)
     end)
 end)
+
+-- Join Teams :
+
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    for i, v in pairs(
+        getconnections(
+            game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated
+        )
+    ) do
+        for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+            b:Fire()
+        end
+        v.Function()
+    end
+end
 
 -- function :
 
