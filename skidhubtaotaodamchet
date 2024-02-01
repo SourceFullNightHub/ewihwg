@@ -1,6 +1,11 @@
-local YourLevel = game.Players.LocalPlayer.Data.Level.Value
+local YourLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
 local playersmain = game.Players.LocalPlayer
 local Caservers = game.Players:GetPlayers()
+
+if getgenv().config["Start Kaitun Settings"]["Enabled Kaitun"] == true then
+    DjtShanda = true
+    KillPlayers = true
+end
 
 -- Join Teams :
 
@@ -16,19 +21,6 @@ if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
         v.Function()
     end
 end
-
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == true then
-                if YourLevel == 50 and YourLevel <= 300 then
-                    DjtShanda = false
-                    KillPlayers = true
-                end
-            end
-        end)
-    end
-end)
 
 -- Ui  :
 
@@ -1053,6 +1045,19 @@ spawn(function()
             else
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
                     Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if DjtShanda then
+                if YourLevel == 50 or YourLevel <= 300 then
+                    KillPlayers = true
+                    DjtShanda = false
                 end
             end
         end)
