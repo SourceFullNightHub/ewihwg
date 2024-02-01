@@ -1067,7 +1067,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if KillPlayers and YourLevel >= 50 or YourLevel <= 300 then
+            if KillPlayers and YourLevel >= 50 and YourLevel <= 300 then
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     wait(.1)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
