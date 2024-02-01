@@ -258,6 +258,16 @@ function RedeemCode(Code)
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
 end
 
+function CheckNotify(abc)
+    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+        if v.Name == "NotificationTemplate" then
+            if string.find(v.Text, abc) then
+                return true
+            end
+        end
+    end
+end
+
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -991,10 +1001,10 @@ spawn(function()
                                 task.wait()
                                 AutoHaki()
                                 EquipTool(SelectWP)
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 5, 2))
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 5, 2))
                                 game:GetService'VirtualUser':CaptureController()
                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
@@ -1002,7 +1012,7 @@ spawn(function()
                     end
                 end
                 for i, v in pairs(game:GetService("Players"):GetPlayers()) do
-                    if v.Data.Level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                    if v.Data.Level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") or CheckNotify("Player") then
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                     end
