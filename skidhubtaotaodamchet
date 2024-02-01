@@ -955,7 +955,7 @@ spawn(function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier" then
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Data.Level.Value == 20 and v.Data.Level.Value <= 150 then
                             repeat task.wait()
                                 AutoHaki()
                                 EquipTool(SelectWP)
