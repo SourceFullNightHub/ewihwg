@@ -1033,8 +1033,7 @@ spawn(function()
                                 FastMon = v.HumanoidRootPart.CFrame
                                 v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
                                 Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                Click()
                             until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
                             StardMag = false
                             Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
@@ -1099,8 +1098,7 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 PosMon = v.HumanoidRootPart.CFrame
                                 BringMob = true
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                Click()
                             until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                         end
                     end
