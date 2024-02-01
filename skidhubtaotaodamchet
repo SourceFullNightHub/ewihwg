@@ -1080,6 +1080,7 @@ spawn(function()
     end
 end)
 
+DjtShanda = true
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -1089,8 +1090,6 @@ spawn(function()
                         DjtShanda = false
                         KillPlayers = true
                     end
-                else
-                    DjtShanda = true
                 end
             end
         end)
