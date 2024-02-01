@@ -1054,7 +1054,10 @@ spawn(function()
     pcall(function()
         while wait() do
             if DjtShanda then
-                if game.Players.LocalPlayer.Data.Level.Value >= 150 then
+                if game.Players.LocalPlayer.Data.Level.Value <= 150 then
+                    _G.LevelFarm = false
+                    DjtShanda = true
+                elseif game.Players.LocalPlayer.Data.Level.Value >= 150 then
                     _G.LevelFarm = true
                     DjtShanda = false
                 end
