@@ -130,7 +130,7 @@ TextLabel_5.BorderSizePixel = 0
 TextLabel_5.Position = UDim2.new(0.714851499, 0, 0.346153855, 0)
 TextLabel_5.Size = UDim2.new(0, 137, 0, 31)
 TextLabel_5.Font = Enum.Font.SourceSansBold
-TextLabel_5.Text = "Target Kill : Noob"
+TextLabel_5.Text = "Target Kill : [Comming Soon]"
 TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel_5.TextSize = 16.000
 
@@ -1273,16 +1273,6 @@ spawn(function()
         game.Players.LocalPlayer.Character.Stun.Value = 0
         game.Players.LocalPlayer.Character.Busy.Value = false        
     end)
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            wait(.1)
-            game:GetService'VirtualUser':CaptureController()
-            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-        end)
-    end
 end)
 
 spawn(function()
