@@ -1026,7 +1026,8 @@ spawn(function()
                                 FastMon = v.HumanoidRootPart.CFrame
                                 v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
                                 Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
-                                Click()
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
                             StardMag = false
                             Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
@@ -1088,7 +1089,8 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 PosMon = v.HumanoidRootPart.CFrame
                                 BringMob = true
-                                Click()
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                         end
                     end
@@ -1391,22 +1393,22 @@ assert(getrawmetatable)
     end)
 
 
-    function AntiKick()
-        for _, descendant in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-            if descendant:IsA("LocalScript") then
-                local blacklistNames = {"General", "Shiftlock", "FallDamage", "4444", "CamBob", "JumpCD", "Looking", "Run"}
-                if table.find(blacklistNames, descendant.Name) then
-                    descendant:Destroy()
-                end
-            end
-        end
-        for _, descendant in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-            if descendant:IsA("LocalScript") then
-                local blacklistNames = {"RobloxMotor6DBugFix", "Clans", "Codes", "CustomForceField", "MenuBloodSp", "PlayerList"}
-                if table.find(blacklistNames, descendant.Name) then
-                    descendant:Destroy()
-                end
+function AntiKick()
+    for _, descendant in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if descendant:IsA("LocalScript") then
+            local blacklistNames = {"General", "Shiftlock", "FallDamage", "4444", "CamBob", "JumpCD", "Looking", "Run"}
+            if table.find(blacklistNames, descendant.Name) then
+                descendant:Destroy()
             end
         end
     end
-    AntiKick()
+    for _, descendant in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if descendant:IsA("LocalScript") then
+            local blacklistNames = {"RobloxMotor6DBugFix", "Clans", "Codes", "CustomForceField", "MenuBloodSp", "PlayerList"}
+            if table.find(blacklistNames, descendant.Name) then
+                descendant:Destroy()
+            end
+        end
+    end
+end
+AntiKick()
