@@ -845,7 +845,7 @@ function Tween(Pos)
     pcall(function()
         local tween = game:GetService("TweenService"):Create(
             game.Players.LocalPlayer.Character.HumanoidRootPart,
-            TweenInfo.new(Distance/getgenv().config["Tween Speed"], Enum.EasingStyle.Linear),
+            TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),
             {CFrame = Pos}
         )
         tween:Play()
@@ -859,7 +859,7 @@ end
 
 function Teleport(P)
     local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    local Speed = Distance >= 1 and getgenv().config["Tween Speed"] or 1
+    local Speed = Distance >= 1 and 300 or 1
     pcall(function()
         local teleport = game:GetService("TweenService"):Create(
             game.Players.LocalPlayer.Character.HumanoidRootPart,
