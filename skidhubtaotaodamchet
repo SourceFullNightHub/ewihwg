@@ -136,26 +136,6 @@ TextLabel_5.TextSize = 16.000
 
 -- Check Quest :
 
-function AntiKick()
-    for _, descendant in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if descendant:IsA("LocalScript") then
-            local blacklistNames = {"General", "Shiftlock", "FallDamage", "4444", "CamBob", "JumpCD", "Looking", "Run"}
-            if table.find(blacklistNames, descendant.Name) then
-                descendant:Destroy()
-            end
-        end
-    end
-    for _, descendant in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if descendant:IsA("LocalScript") then
-            local blacklistNames = {"RobloxMotor6DBugFix", "Clans", "Codes", "CustomForceField", "MenuBloodSp", "PlayerList"}
-            if table.find(blacklistNames, descendant.Name) then
-                descendant:Destroy()
-            end
-        end
-    end
-end
-AntiKick()
-
 function QuestCheck()
     MyLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if Sea1 then
@@ -1161,7 +1141,7 @@ spawn(function()
                     end
                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                 elseif DjtShanda and StardMag then
-                    if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                    if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
                         v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                         v.HumanoidRootPart.CFrame = FastMon
                         v.Humanoid:ChangeState(14)
@@ -1409,3 +1389,24 @@ assert(getrawmetatable)
         end
         return old(self, ...)
     end)
+
+
+    function AntiKick()
+        for _, descendant in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+            if descendant:IsA("LocalScript") then
+                local blacklistNames = {"General", "Shiftlock", "FallDamage", "4444", "CamBob", "JumpCD", "Looking", "Run"}
+                if table.find(blacklistNames, descendant.Name) then
+                    descendant:Destroy()
+                end
+            end
+        end
+        for _, descendant in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+            if descendant:IsA("LocalScript") then
+                local blacklistNames = {"RobloxMotor6DBugFix", "Clans", "Codes", "CustomForceField", "MenuBloodSp", "PlayerList"}
+                if table.find(blacklistNames, descendant.Name) then
+                    descendant:Destroy()
+                end
+            end
+        end
+    end
+    AntiKick()
