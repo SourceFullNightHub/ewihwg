@@ -1050,11 +1050,9 @@ spawn(function()
     while task.wait() do
         pcall(function()
             if getgenv().config["Skip Level 1 - 300"] == true then
-                if DjtShanda then
-                    if YourLevel == 50 and YourLevel <= 300 then
-                        DjtShanda = false
-                        KillPlayers = true
-                    end
+                if YourLevel == 50 and YourLevel <= 300 then
+                    DjtShanda = false
+                    KillPlayers = true
                 end
             end
         end)
