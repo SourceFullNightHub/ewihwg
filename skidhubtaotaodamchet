@@ -1072,6 +1072,13 @@ end)
 
 spawn(function()
     while wait() do
+        game:GetService'VirtualUser':CaptureController()
+        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+    end
+end)
+
+spawn(function()
+    while wait() do
         pcall(function()
             if getgenv().config["FastAttack"] == "Fast" then
                 getgenv().config["FastAttack"] = 0.5
