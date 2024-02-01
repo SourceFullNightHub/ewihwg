@@ -935,12 +935,14 @@ spawn(function()
                             repeat task.wait()
                                 AutoHaki()
                                 EquipTool(SelectWP)
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                 StardMag = true
                                 FastMon = v.HumanoidRootPart.CFrame
                                 v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
                                 game:GetService'VirtualUser':CaptureController()
                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
@@ -1125,10 +1127,10 @@ spawn(function()
     while wait() do
         pcall(function()
             QuestCheck()
-            if _G.Skiplevel1den50 and StardMag then
-                if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
+            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if _G.LevelFarm and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                     v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = FastMon
+                    v.HumanoidRootPart.CFrame = PosMon
                     v.Humanoid:ChangeState(14)
                     v.HumanoidRootPart.CanCollide = false
                     v.Head.CanCollide = false
@@ -1136,6 +1138,28 @@ spawn(function()
                         v.Humanoid.Animator:Destroy()
                     end
                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                elseif _G.LevelFarm and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                    v.HumanoidRootPart.CFrame = PosMon
+                    v.Humanoid:ChangeState(14)
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                elseif _G.Skiplevel1den50 and StardMag then
+                    if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = FastMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
                 end
             end
         end)
