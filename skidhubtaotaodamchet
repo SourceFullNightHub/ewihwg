@@ -941,9 +941,8 @@ spawn(function()
                 _G.DisanPlayers = false
                 _G.Skiplevel1den50 = true
             elseif game.Players.LocalPlayer.Data.Level.Value >= 50 then
-                    _G.DisanPlayers = true
-                    _G.Skiplevel1den50 = false
-                end
+                _G.DisanPlayers = true
+                _G.Skiplevel1den50 = false
             end
         end
     end)
