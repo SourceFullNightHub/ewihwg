@@ -1121,6 +1121,27 @@ task.spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            QuestCheck()
+            if _G.Skiplevel1den50 and StardMag then
+                if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
+                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                    v.HumanoidRootPart.CFrame = FastMon
+                    v.Humanoid:ChangeState(14)
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                end
+            end
+        end)
+    end
+end)
+
 _G.FastAttack = true
 local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
 CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
@@ -1255,27 +1276,6 @@ end)
 
 local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
 CamShake:Stop()
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            QuestCheck()
-            if _G.Skiplevel1den50 and StardMag then
-                if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = FastMon
-                    v.Humanoid:ChangeState(14)
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Head.CanCollide = false
-                    if v.Humanoid:FindFirstChild("Animator") then
-                        v.Humanoid.Animator:Destroy()
-                    end
-                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                end
-            end
-        end)
-    end
-end)
 
 assert(getrawmetatable)
     grm = getrawmetatable(game)
