@@ -1279,13 +1279,13 @@ spawn(function()
     while wait() do
         pcall(function()
             if getgenv().config["FastAttack"] == "Fast" then
-                getgenv().config["FastAttack"] = 0.175
+                getgenv().config["FastAttack"] = 0.5
             elseif getgenv().config["FastAttack"] == "Super Fast" then
                 getgenv().config["FastAttack"] = 0.1
             elseif getgenv().config["FastAttack"] == "Slow" then
-                getgenv().config["FastAttack"] = 0.189
+                getgenv().config["FastAttack"] = 0.9
             elseif getgenv().config["FastAttack"] == "Normal" then
-                getgenv().config["FastAttack"] = 0.185
+                getgenv().config["FastAttack"] = 0.7
             end
         end)
     end
