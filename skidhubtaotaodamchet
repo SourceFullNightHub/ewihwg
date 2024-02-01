@@ -4,7 +4,7 @@ local Caservers = game.Players:GetPlayers()
 
 if getgenv().config["Start Kaitun Settings"]["Enabled Kaitun"] == true then
     DjtShanda = true
-    KillPlayers = true
+    _G.LevelFarm = true
 end
 
 -- Join Teams :
@@ -1065,7 +1065,7 @@ end)
 
 spawn(function()
     while task.wait() do
-        if _G.LevelFarm then
+        if _G.LevelFarm and YourLevel >= 150 then
             pcall(function()
                 QuestCheck()
                 local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
