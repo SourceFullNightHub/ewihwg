@@ -1,23 +1,29 @@
-local YourLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
-local playersmain = game.Players.LocalPlayer
-local Caservers = game.Players:GetPlayers()
+if game.PlaceId == 2753915549 then
+    Sea1 = true
+elseif game.PlaceId == 4442272183 then
+    Sea2 = true
+elseif game.PlaceId == 7449423635 then
+    Sea3 = true
+else
+    game:GetService("Players").LocalPlayer:Kick("Support Only Blox Fruits")
+end
 
--- Ui  :
+-- local
+
+local YourLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+
+-- Ui
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local UIStroke = Instance.new("UIStroke")
 local UICorner = Instance.new("UICorner")
 local ImageLabel = Instance.new("ImageLabel")
-local Frame_2 = Instance.new("Frame")
 local UICorner_2 = Instance.new("UICorner")
+local UIStroke_2 = Instance.new("UIStroke")
 local TextLabel = Instance.new("TextLabel")
-local UICorner_3 = Instance.new("UICorner")
 local TextLabel_2 = Instance.new("TextLabel")
 local TextLabel_3 = Instance.new("TextLabel")
-local UICorner_4 = Instance.new("UICorner")
-local TextLabel_4 = Instance.new("TextLabel")
-local TextLabel_5 = Instance.new("TextLabel")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -25,8 +31,8 @@ Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.26617375, 0, 0.0890688226, 0)
-Frame.Size = UDim2.new(0, 505, 0, 104)
+Frame.Position = UDim2.new(0.236598894, 0, 0.141700402, 0)
+Frame.Size = UDim2.new(0, 441, 0, 65)
 
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
 UIStroke.Parent = Frame
@@ -37,79 +43,45 @@ ImageLabel.Parent = Frame
 ImageLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.447524756, 0, 0, 0)
-ImageLabel.Size = UDim2.new(0, 52, 0, 50)
-ImageLabel.Image = "rbxassetid://16035137478"
+ImageLabel.Position = UDim2.new(0.442688257, 0, -0.329959452, 0)
+ImageLabel.Size = UDim2.new(0, 50, 0, 50)
+ImageLabel.Image = "rbxassetid://16194700566"
 
-Frame_2.Parent = Frame
-Frame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_2.BorderSizePixel = 0
-Frame_2.Position = UDim2.new(0, 0, 0.50505048, 0)
-Frame_2.Size = UDim2.new(0, 505, 0, 50)
+UICorner_2.Parent = ImageLabel
 
-UICorner_2.Parent = Frame_2
+UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
+UIStroke_2.Parent = ImageLabel
 
-TextLabel.Parent = Frame_2
+TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderSizePixel = 0
-TextLabel.Size = UDim2.new(0, 505, 0, 50)
+TextLabel.Position = UDim2.new(0.0158730168, 0, 0.784615397, 0)
+TextLabel.Size = UDim2.new(0, 74, 0, 7)
 TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.Text = "NIGHT HUB KAITUN"
+TextLabel.Text = "By LMNGAMING."
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextSize = 20.000
+TextLabel.TextSize = 12.000
+TextLabel.TextWrapped = true
 
-UICorner_3.Parent = TextLabel
-
-TextLabel_2.Parent = Frame_2
+TextLabel_2.Parent = Frame
 TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0.0356435627, 0, -0.620000005, 0)
-TextLabel_2.Size = UDim2.new(0, 137, 0, 31)
+TextLabel_2.Position = UDim2.new(0.700680256, 0, 0.15384616, 0)
+TextLabel_2.Size = UDim2.new(0, 105, 0, 18)
 TextLabel_2.Font = Enum.Font.SourceSansBold
-TextLabel_2.Text = "Your Level : 1"
+TextLabel_2.Text = "Time : 0H 0M 0S"
 TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.TextSize = 16.000
-spawn(function()
-    while wait() do
-        pcall(function()
-            TextLabel_2.Text = "Your Level : ".." "..game:GetService("Players").LocalPlayer.Data.Level.Value
-        end)
-    end
-end)
-
-TextLabel_3.Parent = Frame
-TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_3.BorderSizePixel = 0
-TextLabel_3.Position = UDim2.new(0.0356435627, 0, 0.826923072, 0)
-TextLabel_3.Size = UDim2.new(0, 58, 0, 10)
-TextLabel_3.Font = Enum.Font.SourceSansBold
-TextLabel_3.Text = "By LMNGAMING"
-TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.TextSize = 14.000
-
-UICorner_4.Parent = TextLabel_3
-
-TextLabel_4.Parent = Frame
-TextLabel_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_4.BorderSizePixel = 0
-TextLabel_4.Position = UDim2.new(0.714851499, 0, 0.0480769239, 0)
-TextLabel_4.Size = UDim2.new(0, 137, 0, 31)
-TextLabel_4.Font = Enum.Font.SourceSansBold
-TextLabel_4.Text = "Time : 0H 0M 0S"
-TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_4.TextSize = 16.000
+TextLabel_2.TextSize = 14.000
 function UpdateTime()
     local GameTime = math.floor(workspace.DistributedGameTime + 0.5)
     local Hour = math.floor(GameTime / (60 ^ 2)) % 24
     local Minute = math.floor(GameTime / (60 ^ 1)) % 60
     local Second = math.floor(GameTime / (60 ^ 0)) % 60
-    TextLabel_4.Text = Hour .. "H " .. Minute .. "M " .. Second .. "S"
+    TextLabel_2.Text = Hour .. "H " .. Minute .. "M " .. Second .. "S"
 end
+
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -118,18 +90,217 @@ spawn(function()
     end
 end)
 
-TextLabel_5.Parent = Frame
-TextLabel_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_5.BorderSizePixel = 0
-TextLabel_5.Position = UDim2.new(0.714851499, 0, 0.346153855, 0)
-TextLabel_5.Size = UDim2.new(0, 137, 0, 31)
-TextLabel_5.Font = Enum.Font.SourceSansBold
-TextLabel_5.Text = "Target Kill : [Comming Soon]"
-TextLabel_5.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_5.TextSize = 16.000
+TextLabel_3.Parent = Frame
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.700680256, 0, 0.43927142, 0)
+TextLabel_3.Size = UDim2.new(0, 105, 0, 22)
+TextLabel_3.Font = Enum.Font.SourceSansBold
+TextLabel_3.Text = "Your Level : 0"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextSize = 14.000
+spawn(function()
+    while wait() do
+        pcall(function()
+            TextLabel_3.Text = "Your Level : ".. game:GetService("Players").LocalPlayer.Data.Level.Value .. ""
+        end)
+    end
+end)
 
--- Check Quest :
+function Teleport(P)
+    local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    local Speed = Distance >= 1 and 300 or 1
+    pcall(function()
+        local teleport = game:GetService("TweenService"):Create(
+            game.Players.LocalPlayer.Character.HumanoidRootPart,
+            TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),
+            {CFrame = P}
+        )
+        teleport:Play()
+        if _G.StopTween then
+            teleport:Cancel()
+            NoClip = false
+        end
+        NoClip = true
+        wait(Distance/Speed)
+        NoClip = false
+    end)
+end
+
+function BP(P)
+	pcall(function()
+        repeat task.wait()
+		    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+		    task.wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+            task.wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+            task.wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+        until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+    end)
+end
+
+function EquipTool(Toolse)
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
+    if tool then
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
+
+function UnEquipTool(Toolse)
+    if game.Players.LocalPlayer.Character:FindFirstChild(Toolse) then
+        wait(.5)
+        game.Players.LocalPlayer.Character:FindFirstChild(Toolse).Parent = game.Players.LocalPlayer.Backpack
+    end
+end
+
+function AutoHaki()
+    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+end
+function Hop()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+    function Teleport() 
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+    Teleport()
+end
+
+getgenv().NoDieEffect = true
+if getgenv().NoDieEffect then
+    local effectContainer = game:GetService("ReplicatedStorage").Effect.Container
+    if effectContainer:FindFirstChild("Death") then
+        effectContainer.Death:Destroy()
+    end
+    if effectContainer:FindFirstChild("Respawn") then
+        effectContainer.Respawn:Destroy()
+    end
+end
+
+spawn(function()
+    while wait() do
+        local rs = game:GetService("ReplicatedStorage")
+        local guiAssets = rs.Assets.GUI
+        local soundStorage = rs.Util.Sound.Storage.Other
+        guiAssets.DamageCounter.Enabled = false
+        soundStorage:FindFirstChild("LevelUp_Proxy"):Destroy()
+        soundStorage:FindFirstChild("LevelUp"):Destroy()
+        effectContainer.Respawn:Destroy()  
+        effectContainer.LevelUp:Destroy()
+    end
+end)
+
+local slashHit = game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit')
+if slashHit then
+    slashHit:Destroy()
+end
+
+function RedeemCode(Code)
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
+end
+
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if NoClip == true then
+                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                end
+            else
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if NoClip == true then
+                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+    end)
+end)
+
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    wait(1)
+    game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+-- CheckQuest :
 
 function QuestCheck()
     MyLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
@@ -750,220 +921,106 @@ function QuestCheck()
     end
     end
 
-    function Hop()
-        local PlaceID = game.PlaceId
-        local AllIDs = {}
-        local foundAnything = ""
-        local actualHour = os.date("!*t").hour
-        local Deleted = false
-        function TPReturner()
-            local Site;
-            if foundAnything == "" then
-                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-            else
-                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-            end
-            local ID = ""
-            if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-                foundAnything = Site.nextPageCursor
-            end
-            local num = 0;
-            for i,v in pairs(Site.data) do
-                local Possible = true
-                ID = tostring(v.id)
-                if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                    for _,Existing in pairs(AllIDs) do
-                        if num ~= 0 then
-                            if ID == tostring(Existing) then
-                                Possible = false
-                            end
-                        else
-                            if tonumber(actualHour) ~= tonumber(Existing) then
-                                local delFile = pcall(function()
-                                    AllIDs = {}
-                                    table.insert(AllIDs, actualHour)
-                                end)
-                            end
+----- function ;3
+
+_G.Skiplevel1den50 = true
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Skiplevel1den50 then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier" then
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            repeat task.wait()
+                                AutoHaki()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                StardMag = true
+                                FastMon = v.HumanoidRootPart.CFrame
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
+                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
+                            StardMag = false
+                            Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
                         end
-                        num = num + 1
                     end
-                    if Possible == true then
-                        table.insert(AllIDs, ID)
-                        wait()
-                        pcall(function()
-                            wait()
-                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-                        end)
-                        wait(4)
-                    end
+                end
+            else
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.Skiplevel1den50 then
+                if YourLevel >= 50 and YourLevel <= 300 then
+                    _G.DisanPlayers = true
+                    _G.Skiplevel1den50 = false
                 end
             end
         end
-        function Teleport() 
-            while wait() do
-                pcall(function()
-                    TPReturner()
-                    if foundAnything ~= "" then
-                        TPReturner()
-                    end
-                end)
-            end
-        end
-        Teleport()
-    end
-
-function Tween(Pos)
-    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.KillShark and not _G.KillPiranha and not _G.KillTerrorShark and not _G.KillFishCrew then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-    end
-    pcall(function()
-        local tween = game:GetService("TweenService"):Create(
-            game.Players.LocalPlayer.Character.HumanoidRootPart,
-            TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),
-            {CFrame = Pos}
-        )
-        tween:Play()
-        if Distance <= 250 or _G.StopTween then
-            tween:Cancel()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-            NoClip = false
-        end
     end)
-end
-
-function Teleport(P)
-    local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    local Speed = Distance >= 1 and 300 or 1
-    pcall(function()
-        local teleport = game:GetService("TweenService"):Create(
-            game.Players.LocalPlayer.Character.HumanoidRootPart,
-            TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-            {CFrame = P}
-        )
-        teleport:Play()
-        if _G.StopTween then
-            teleport:Cancel()
-            NoClip = false
-        end
-        NoClip = true
-        wait(Distance/Speed)
-        NoClip = false
-    end)
-end
-
-function BP(P)
-	pcall(function()
-        repeat task.wait()
-		    game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-		    task.wait()
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-            task.wait()
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-            task.wait()
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-        until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
-    end)
-end
-
-function EquipTool(Toolse)
-    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
-    if tool then
-        wait(0.5)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
-    end
-end
-
-function UnEquipTool(Toolse)
-    if game.Players.LocalPlayer.Character:FindFirstChild(Toolse) then
-        wait(.5)
-        game.Players.LocalPlayer.Character:FindFirstChild(Toolse).Parent = game.Players.LocalPlayer.Backpack
-    end
-end
-
-function AutoHaki()
-    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-    end
-end
-
-function RedeemCode(Code)
-    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
-end
-
-getgenv().NoDieEffect = true
-if getgenv().NoDieEffect then
-    local effectContainer = game:GetService("ReplicatedStorage").Effect.Container
-    if effectContainer:FindFirstChild("Death") then
-        effectContainer.Death:Destroy()
-    end
-    if effectContainer:FindFirstChild("Respawn") then
-        effectContainer.Respawn:Destroy()
-    end
-end
+end)
 
 spawn(function()
     while wait() do
-        local rs = game:GetService("ReplicatedStorage")
-        local guiAssets = rs.Assets.GUI
-        local soundStorage = rs.Util.Sound.Storage.Other
-        guiAssets.DamageCounter.Enabled = false
-        soundStorage:FindFirstChild("LevelUp_Proxy"):Destroy()
-        soundStorage:FindFirstChild("LevelUp"):Destroy()
-        effectContainer.Respawn:Destroy()  
-        effectContainer.LevelUp:Destroy()
-    end
-end)
-
-local slashHit = game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit')
-if slashHit then
-    slashHit:Destroy()
-end
-
-function CheckNotify(abc)
-    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-        if v.Name == "NotificationTemplate" then
-            if string.find(v.Text, abc) then
-                return true
-            end
-        end
-    end
-end
-
-spawn(function()
-    while task.wait() do
         pcall(function()
-            if KillPlayers or DjtShanda or NoClip == true then
-                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0,0,0)
-                end
+            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
             else
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if KillPlayers or DjtShanda or NoClip == true then
-                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                    if v:IsA("BasePart") then
-                        v.CanCollide = false
+                for _, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
+                        repeat
+                            task.wait()
+                            AutoHaki()
+                            EquipTool(SelectWP)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Humanoid.WalkSpeed = 0
+                            v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                            Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 5, 2))
+                            game:GetService'VirtualUser':CaptureController()
+                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                        until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                     end
                 end
             end
+            for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+                if v.Data.Level.Value <= 20 or v.Data.Level.Value >= 150 or not v:FindFirstChild("Data") or not v:FindFirstChild("HumanoidRootPart") then
+                    wait(.1)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                end
+            end
+            if game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter") == "I don't have anything for you right now. Come back later." then
+                Hop()
+            end
         end)
-    end)
+    end
 end)
 
--- function :
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().config["Lock Level"]["Enabled"] == true then
+                if YourLevel == getgenv().config["Lock Level"]["Level"] or YourLevel >= getgenv().config["Lock Level"]["Level"] then
+                    game:GetService("Players").LocalPlayer:Kick("[Kaitun] Kicked By Level Lock")
+                end
+            end
+        end)
+    end
+end)
 
 RedeemCode("NEWTROLL")
         RedeemCode("SECRET_ADMIN")
@@ -1055,175 +1112,6 @@ task.spawn(function()
                 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Sword" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
                         SelectWP = v.Name
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-DjtShanda = true
-spawn(function()
-    pcall(function()
-        while wait() do
-            if DjtShanda then
-                if game.Players.LocalPlayer.Data.Level.Value <= 150 then
-                    _G.LevelFarm = false
-                    DjtShanda = true
-                end
-            end
-        end
-    end)
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if DjtShanda then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
-                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier" then
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                            repeat task.wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                StardMag = true
-                                FastMon = v.HumanoidRootPart.CFrame
-                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)                             
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(5,20,2))
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until DjtShanda == false or not v.Parent or v.Humanoid.Health <= 0
-                            StardMag = false
-                            Teleport(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
-                        end
-                    end
-                end
-            else
-                if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
-                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad") then
-                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier") then
-                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    pcall(function()
-        while wait() do
-            if DjtShanda then
-                if game.Players.LocalPlayer.Data.Level.Value >= 150 then
-                    _G.LevelFarm = true
-                    DjtShanda = false
-                end
-            end
-        end
-    end)
-end)
-
-spawn(function()
-    while task.wait() do
-        if _G.LevelFarm and YourLevel >= 150 then
-            pcall(function()
-                QuestCheck()
-                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(questTitle, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                    if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                            BP(CFrameMon)
-                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
-                            Teleport(CFrameQuest)
-                        end
-                    else
-                        Teleport(CFrameQuest)
-                    end
-                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
-                    end
-                elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mon then
-                            repeat
-                                task.wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.CanCollide = false
-                                PosMon = v.HumanoidRootPart.CFrame
-                                BringMob = true
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                        end
-                    end
-                    Teleport(CFrameMon)
-                    BringMob = false
-                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                        Teleport(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().config["Lock Level"]["Enabled"] == true then
-                if YourLevel == getgenv().config["Lock Level"]["Level"] or YourLevel >= getgenv().config["Lock Level"]["Level"] then
-                    game:GetService("Players").LocalPlayer:Kick("[Kaitun] Kicked By Level Lock")
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            QuestCheck()
-            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if _G.LevelFarm and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = PosMon
-                    v.Humanoid:ChangeState(14)
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Head.CanCollide = false
-                    if v.Humanoid:FindFirstChild("Animator") then
-                        v.Humanoid.Animator:Destroy()
-                    end
-                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif _G.LevelFarm and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
-                    v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                    v.HumanoidRootPart.CFrame = PosMon
-                    v.Humanoid:ChangeState(14)
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Head.CanCollide = false
-                    if v.Humanoid:FindFirstChild("Animator") then
-                        v.Humanoid.Animator:Destroy()
-                    end
-                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif DjtShanda and StardMag then
-                    if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                        v.HumanoidRootPart.CFrame = FastMon
-                        v.Humanoid:ChangeState(14)
-                        v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
-                        if v.Humanoid:FindFirstChild("Animator") then
-                            v.Humanoid.Animator:Destroy()
-                        end
-                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     end
                 end
             end
