@@ -1015,55 +1015,6 @@ end
 spawn(function()
     while wait() do
         pcall(function()
-            if getgenv().config["Skip Level 1 - 300"] == false then
-                QuestCheck()
-                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(questTitle, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                    if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                            BP(CFrameMon)
-                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
-                            Teleport(CFrameQuest)
-                        end
-                    else
-                        Teleport(CFrameQuest)
-                    end
-                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
-                    end
-                elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Name == Mon then
-                            repeat
-                                task.wait()
-                                AutoHaki()
-                                EquipTool(SelectWP)
-                                Teleport(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.CanCollide = false
-                                PosMon = v.HumanoidRootPart.CFrame
-                                BringMob = true
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                            until getgenv().config["Skip Level 1 - 300"] == true or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                        end
-                    end
-                    Teleport(CFrameMon)
-                    BringMob = false
-                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                        Teleport(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
             if DjtShanda then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -1101,7 +1052,7 @@ spawn(function()
         pcall(function()
             if getgenv().config["Skip Level 1 - 300"] == true then
                 if DjtShanda then
-                    if YourLevel == 50 or YourLevel <= 300 then
+                    if YourLevel == 50 and YourLevel <= 300 then
                         DjtShanda = false
                         KillPlayers = true
                     end
