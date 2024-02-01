@@ -1192,7 +1192,7 @@ spawn(function()
             if DjtShanda then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if v.Name == "Shanda" then
+                    if v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier" then
                         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                             repeat task.wait()
                                 AutoHaki()
@@ -1214,6 +1214,10 @@ spawn(function()
             else
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
                     Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Squad").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier") then
+                    Teleport(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier").HumanoidRootPart.CFrame * CFrame.new(5,10,2))
                 end
             end
         end)
@@ -1320,7 +1324,7 @@ spawn(function()
                     end
                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                 elseif DjtShanda and StardMag then
-                    if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
+                    if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
                         v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                         v.HumanoidRootPart.CFrame = FastMon
                         v.Humanoid:ChangeState(14)
