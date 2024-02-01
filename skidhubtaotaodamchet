@@ -1003,7 +1003,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                 else
                     for _, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) and v.Data.Level.Value == 20 and v.Data.Level.Value <= 150 then
+                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
                             repeat
                                 task.wait()
                                 AutoHaki()
