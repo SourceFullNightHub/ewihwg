@@ -1129,7 +1129,7 @@ spawn(function()
         pcall(function()
             QuestCheck()
             for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                if _G.LevelFarm and BringMob and v.Name == Mon and (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or Mon == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                     v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                     v.HumanoidRootPart.CFrame = PosMon
                     v.Humanoid:ChangeState(14)
@@ -1139,7 +1139,7 @@ spawn(function()
                         v.Humanoid.Animator:Destroy()
                     end
                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif not getgenv().config["Skip Level 1 - 300"] and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                elseif _G.LevelFarm and BringMob and v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                     v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                     v.HumanoidRootPart.CFrame = PosMon
                     v.Humanoid:ChangeState(14)
@@ -1149,7 +1149,7 @@ spawn(function()
                         v.Humanoid.Animator:Destroy()
                     end
                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                elseif getgenv().config["Skip Level 1 - 300"] == true and StardMag then
+                elseif DjtShanda and StardMag then
                     if v.Name == "Shanda" and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
                         v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                         v.HumanoidRootPart.CFrame = FastMon
