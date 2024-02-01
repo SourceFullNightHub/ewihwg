@@ -937,8 +937,10 @@ function QuestCheck()
 spawn(function()
     pcall(function()
         while wait() do
-            if _G.Skiplevel1den50 then
-                if game.Players.LocalPlayer.Data.Level.Value >= 50 then
+            if game.Players.LocalPlayer.Data.Level.Value <= 50 then
+                _G.DisanPlayers = false
+                _G.Skiplevel1den50 = true
+            elseif game.Players.LocalPlayer.Data.Level.Value >= 50 then
                     _G.DisanPlayers = true
                     _G.Skiplevel1den50 = false
                 end
@@ -947,7 +949,6 @@ spawn(function()
     end)
 end)
 
-_G.Skiplevel1den50 = true
 spawn(function()
     while wait() do
         pcall(function()
