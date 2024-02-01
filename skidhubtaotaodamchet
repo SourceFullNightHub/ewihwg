@@ -1054,7 +1054,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if DjtShanda then
-                if YourLevel == 50 or YourLevel <= 300 then
+                if YourLevel == 50 and YourLevel <= 300 then
                     KillPlayers = true
                     DjtShanda = false
                 end
