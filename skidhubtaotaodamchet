@@ -984,12 +984,13 @@ spawn(function()
         end)
     end
 end)
+
 spawn(function()
     pcall(function()
         while wait() do
             if game.Players.LocalPlayer.Data.Level.Value >= 50 then
-                _G.DisanPlayers = true
                 _G.Skiplevel1den50 = false
+                _G.DisanPlayers = true
             end
         end
     end)
