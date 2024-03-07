@@ -1005,7 +1005,7 @@ function Tween(Pos)
     pcall(function()
         local teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos})
         teleport:Play()
-        if _G.StopTween then
+        if _G.StopTween == true then
             teleport:Cancel()
             NoCLip = false
         end
@@ -1037,10 +1037,10 @@ function EquipTool(Toolse)
     end
 end
 
-function UnEquipTool(Toolse)
-    if game.Players.LocalPlayer.Character:FindFirstChild(Toolse) then
+function botayraditmemay(Lon)
+    if game.Players.LocalPlayer.Character:FindFirstChild(Lon) then
         wait(.5)
-        game.Players.LocalPlayer.Character:FindFirstChild(Toolse).Parent = game.Players.LocalPlayer.Backpack
+        game.Players.LocalPlayer.Character:FindFirstChild(Lon).Parent = game.Players.LocalPlayer.Backpack
     end
 end
 
@@ -2980,7 +2980,7 @@ spawn(function()
         while wait() do 
             if _G.AutoSuperhuman then
                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 150000 then
-                    UnEquipTool("Combat")
+                    botayraditmemay("Combat")
                     wait(.1)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
                 end   
@@ -3001,44 +3001,44 @@ spawn(function()
                         SelectWP = "Dragon Claw"
                     end
                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
-                        UnEquipTool("Black Leg")
+                        botayraditmemay("Black Leg")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
                     end
                     if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 300000 then
-                        UnEquipTool("Black Leg")
+                        botayraditmemay("Black Leg")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
                     end
                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
-                        UnEquipTool("Electro")
+                        botayraditmemay("Electro")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
                     end
                     if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 750000 then
-                        UnEquipTool("Electro")
+                        botayraditmemay("Electro")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
                     end
                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
-                        UnEquipTool("Fishman Karate")
+                        botayraditmemay("Fishman Karate")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
                     end
                     if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 and game:GetService("Players")["Localplayer"].Data.Fragments.Value >= 1500 then
-                        UnEquipTool("Fishman Karate")
+                        botayraditmemay("Fishman Karate")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2") 
                     end
                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
-                        UnEquipTool("Dragon Claw")
+                        botayraditmemay("Dragon Claw")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
                     end
                     if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 300 and game:GetService("Players")["LocalPlayer"].Data.Beli.Value >= 3000000 then
-                        UnEquipTool("Dragon Claw")
+                        botayraditmemay("Dragon Claw")
                         wait(.1)
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
                     end 
@@ -3063,7 +3063,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
+            if taodangosea3 and game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
                 Kitsune:Set("Kitsune Island : ✅ Spawn")
             else
                 Kitsune:Set("Kitsune Island : ❌ Not Spawn")
@@ -3075,7 +3075,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
+            if taodangosea3 and game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
                 Frozen:Set("Frozen Dimension : ✅ Spawn")
             else
                 Frozen:Set("Frozen Dimension : ❌ Not Spawn")
@@ -3087,7 +3087,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            if taodangosea3 and game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
                 Elite:Set("Elite : ✅ Spawn")	
             else
                 Elite:Set("Elite : ❌ Not Spawn")	
@@ -3372,19 +3372,19 @@ spawn(function()
                     if v.Name == "NotificationTemplate" then
                         if string.find(v.Text, "#1") then
                             Notify("Ez Island 1", 5)
-                            wait(2)
+                            wait(5)
                         elseif string.find(v.Text, "#2") then
                             Notify("Ez Island 2", 5)
-                            wait(2)
+                            wait(5)
                         elseif string.find(v.Text, "#3") then
                             Notify("Ez Island 3", 5)
-                            wait(2)
+                            wait(5)
                         elseif string.find(v.Text, "#4") then
                             Notify("Ez Island 4", 5)
-                            wait(2)
+                            wait(5)
                         elseif string.find(v.Text, "#5") then
                             Notify("Ez Island 5", 5)
-                            wait(2)
+                            wait(5)
                         end
                     end
                 end
