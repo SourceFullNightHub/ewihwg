@@ -1029,6 +1029,10 @@ function Djtmestop(CAC)
     end
 end
 
+function Instance(LopManto)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = LopManto
+end
+
 function EquipTool(Toolse)
     local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
     if tool then
@@ -2214,6 +2218,15 @@ RD:AddToggle({
 	end    
 })
 
+RD:AddToggle({
+	Name = "Instance To Fruit",
+	Default = false,
+	Callback = function(Value)
+		_G.InstanceToFruit = Value
+        Djtmestop(_G.InstanceToFruit)
+	end    
+})
+
 local Section = RD:AddSection({
 	Name = "Raid"
 })
@@ -2246,7 +2259,7 @@ RD:AddToggle({
 })
 
 RD:AddToggle({
-	Name = "Auto Start Raid",
+	Name = "Auto Start Raid(Fluxus Only)",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoStartRaid = Value
@@ -2276,11 +2289,11 @@ local Section = SV:AddSection({
 	Name = "Status"
 })
 
-local Moon = SV:AddLabel("Moon : deo co moon")
-local Mirage = SV:AddLabel("Mirage : ❌")
-local Kitsune = SV:AddLabel("Kitsune Island : ❌")
-local Elite = SV:AddLabel("Elite : ❌")
-local Frozen = SV:AddLabel("Frozen Dimension : ❌")
+local Moon = SV:AddLabel("Moon : Deo Co Moon")
+local Mirage = SV:AddLabel("Mirage : 🔴")
+local Kitsune = SV:AddLabel("Kitsune Island : 🔴")
+local Elite = SV:AddLabel("Elite : 🔴")
+local Frozen = SV:AddLabel("Frozen Dimension : 🔴")
 
 local Section = SV:AddSection({
 	Name = "Servers"
@@ -2412,7 +2425,7 @@ RC:AddToggle({
 	Name = "Auto Kill Players After Trials",
 	Default = false,
 	Save = true,
-	Flag = "Save",
+	Flag = "Auto Kill Players After Trials",
 	Callback = function(Value)
 		_G.AutoKillPlyAfterTrial = Value
         Djtmestop(_G.AutoKillPlyAfterTrial)
@@ -2923,7 +2936,7 @@ spawn(function()
                     wait(2)
                     game:GetService("VirtualUser"):SetKeyUp("0x65")
                 end
-            until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillV4
+            until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.AutoKillPlyAfterTrial
         end
     end
 end)
@@ -3052,9 +3065,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-                Mirage:Set("Mirrage : ✅ Spawn")
+                Mirage:Set("Mirrage : 🟢 Spawn")
             else
-                Mirage:Set("Mirrage : ❌ Not Spawn")
+                Mirage:Set("Mirrage : 🔴 Not Spawn")
             end
         end)
     end
@@ -3064,9 +3077,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if taodangosea3 and game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
-                Kitsune:Set("Kitsune Island : ✅ Spawn")
+                Kitsune:Set("Kitsune Island : 🟢 Spawn")
             else
-                Kitsune:Set("Kitsune Island : ❌ Not Spawn")
+                Kitsune:Set("Kitsune Island : 🔴 Not Spawn")
             end
         end)
     end
@@ -3076,9 +3089,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if taodangosea3 and game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                Frozen:Set("Frozen Dimension : ✅ Spawn")
+                Frozen:Set("Frozen Dimension : 🟢 Spawn")
             else
-                Frozen:Set("Frozen Dimension : ❌ Not Spawn")
+                Frozen:Set("Frozen Dimension : 🔴 Not Spawn")
             end
         end)
     end
@@ -3088,9 +3101,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if taodangosea3 and game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-                Elite:Set("Elite : ✅ Spawn")	
+                Elite:Set("Elite : 🟢 Spawn")	
             else
-                Elite:Set("Elite : ❌ Not Spawn")	
+                Elite:Set("Elite : 🔴 Not Spawn")	
             end
         end)
     end
@@ -3198,6 +3211,20 @@ spawn(function()
                 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
                     if v.Name:find("Fruit") then
                         Tween(v.Handle.CFrame)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.InstanceToFruit then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v.Name:find("Fruit") then
+                        Instance(v.Handle.CFrame)
                     end
                 end
             end)
