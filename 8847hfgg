@@ -1623,6 +1623,8 @@ function Notify(Hiri, Mi)
     })
 end
 
+Notify("Welcome To Night Hub, Script Will Back!!!")
+
 local I = Window:MakeTab({Name = "Info", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://15541504459", PremiumOnly = false })
@@ -2422,7 +2424,7 @@ RC:AddToggle({
 })
 
 RC:AddToggle({
-	Name = "Auto Kill Players After Trials",
+	Name = "Auto Kill Players After Trials ",
 	Default = false,
 	Save = true,
 	Flag = "Auto Kill Players After Trials",
