@@ -45,7 +45,7 @@ end
 -- cac :
 
 function Checknhiemvu()
-    YourLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
+    YourLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
     if taodangosea1 then
         if YourLevel == 1 or YourLevel <= 9 then
             Mob = "Bandit"
@@ -1554,6 +1554,30 @@ spawn(function()
     end)
 end)
 
+-- Open & Close Ui :
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+ImageButton.Size = UDim2.new(0, 60, 0, 60)
+ImageButton.Image = "rbxassetid://16237266234"
+ImageButton.MouseButton1Click:Connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+end)
+
+UICorner.Parent = ImageButton
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Parent = ImageButton
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 print("Night Hub Check Game...")
@@ -1564,7 +1588,7 @@ print("Run Scripting....")
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({
-    Name = "Night Hub", 
+    Name = "Blox Fruit(Night Hub)", 
     HidePremium = false,
     IntroText = "Night Library", 
     SaveConfig = true, 
@@ -1579,8 +1603,6 @@ function Notify(Hiri, Mi)
         Time = Mi
     })
 end
-
-Notify("Welcome To Night Hub, Script Will Back!!!")
 
 local I = Window:MakeTab({Name = "Info", Icon = "rbxassetid://15541504459", PremiumOnly = false })
 local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://15541504459", PremiumOnly = false })
@@ -3979,32 +4001,6 @@ spawn(function()
         end
     end
 end)
-
--- Open & Close Ui :
-
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")
-local UICorner = Instance.new("UICorner")
-local UIStroke = Instance.new("UIStroke")
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
-ImageButton.Size = UDim2.new(0, 60, 0, 60)
-ImageButton.Image = "rbxassetid://16237266234"
-ImageButton.MouseButton1Click:Connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
-end)
-
-UICorner.Parent = ImageButton
-
-UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Parent = ImageButton
-
 
 assert(getrawmetatable)
     grm = getrawmetatable(game)
