@@ -1554,31 +1554,13 @@ spawn(function()
     end)
 end)
 
--- Notify Blox Fruit :
-
-spawn(function() 
-    repeat
-        task.wait()
-    until game:IsLoaded()
-    repeat
-        task.wait()
-    until game.Players
-    repeat
-        task.wait()
-    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
-    wait(.3)
-    require(game.ReplicatedStorage.Notification).new("<Color=Green>Welcome To Night Hub<Color=/>"):Display()
-    wait(.2)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Owner : ! NightX<Color=/>"):Display()
-    wait(.3)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Channel : LMNGAMING<Color=/>"):Display()
-    wait(.4)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Discord : https://discord.gg/R4xC3t2Xm8<Color=/>"):Display()
-    wait(.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Green>! DestroyX and T... and House Of Blance is the Best <Color=/>"):Display()
-end)
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+print("Night Hub Check Game...")
+wait(3)
+print("Check Game Complete")
+wait(2)
+print("Run Scripting....")
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({
