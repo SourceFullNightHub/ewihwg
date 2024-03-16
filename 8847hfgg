@@ -1521,7 +1521,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if _G.AutoBartilo or _G.AutoGreybeard or _G.AutoSaw or _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or NoCLip == true then
+            if NoCLip == true then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -1539,7 +1539,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.AutoBartilo or _G.AutoGreybeard or _G.AutoSaw or _G.AutoFishCrew or _G.AutoShark or _G.AutoTerror or _G.AutoPiranha or _G.TrialV4 or _G.AutoCyborgRace or _G.AutoRaceV2 or _G.AutoRaceV3 or _G.KillNear or _G.TeleportToFruit or _G.AutoDarkbeard or _G.AutoChest or _G.AutoGhoulRace or _G.AutoSaber or _G.AutoPole or _G.AutoElite or _G.AutoFactory or _G.AutoPirates or _G.AutoBone or _G.AutoKatakuri or _G.AutoSi2 or _G.LevelFarm or NoCLip == true then
+            if NoCLip == true then
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -1597,6 +1597,36 @@ spawn(function()
     require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Discord : https://discord.gg/R4xC3t2Xm8<Color=/>"):Display()
     wait(.5)
     require(game.ReplicatedStorage.Notification).new("<Color=Green>! DestroyX and T... and House Of Blance is the Best <Color=/>"):Display()
+end)
+
+-- Effect Remove :
+
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+getgenv().NoDieEffect = true
+if getgenv().NoDieEffect then
+    local effectContainer = game:GetService("ReplicatedStorage").Effect.Container
+    if effectContainer:FindFirstChild("Death") then
+        effectContainer.Death:Destroy()
+    end
+    if effectContainer:FindFirstChild("Respawn") then
+        effectContainer.Respawn:Destroy()
+    end
+end
+
+spawn(function()
+    while wait() do
+        local rs = game:GetService("ReplicatedStorage")
+        local guiAssets = rs.Assets.GUI
+        local soundStorage = rs.Util.Sound.Storage.Other
+        guiAssets.DamageCounter.Enabled = false
+        soundStorage:FindFirstChild("LevelUp_Proxy"):Destroy()
+        soundStorage:FindFirstChild("LevelUp"):Destroy()
+        effectContainer.Respawn:Destroy()  
+        effectContainer.LevelUp:Destroy()
+    end
 end)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1877,6 +1907,10 @@ ST:AddDropdown({
 	end    
 })
 
+local Section = ST:AddSection({
+	Name = "Others"
+})
+
 ST:AddToggle({
 	Name = "Anti Afk",
 	Default = true,
@@ -1897,7 +1931,27 @@ ST:AddToggle({
 	Name = "Bypass Teleport",
 	Default = true,
 	Callback = function(Value)
-		BypassTP = Value
+		BypassTP = ValueS
+	end    
+})
+
+local Section = ST:AddSection({
+	Name = "Game Play"
+})
+
+ST:AddToggle({
+	Name = "Remove Notification",
+	Default = true,
+	Callback = function(Value)
+		_G.RemoveNotification = Value
+	end    
+})
+
+ST:AddToggle({
+	Name = "Remove Your Girl Friend",
+	Default = true,
+	Callback = function(Value)
+		Notify("Remove Your Girl Friend Succes")
 	end    
 })
 
@@ -2511,6 +2565,7 @@ spawn(function()
                                                 v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                                 BringMob = true
                                                 _G.LevelFarm = true
+                                                ClickNormal()
                                             until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                             
                                         end
@@ -2538,6 +2593,7 @@ spawn(function()
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
+                                        ClickNormal()
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
@@ -2565,6 +2621,7 @@ spawn(function()
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                     BringKatakuriMob = true
                                                     PosMobCake = v.HumanoidRootPart.CFrame
+                                                    ClickNormal()
                                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
                                                 
                                             end
@@ -2624,7 +2681,7 @@ spawn(function()
                                         repeat wait()
                                             EnableBuso()
                                             EquipTool(SelectWP)
-                                            
+                                            ClickNormal()
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
@@ -2770,7 +2827,7 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                 PosMaretialsMob = v.HumanoidRootPart.CFrame
                                 BringQuai = true
-
+                                ClickNormal()
                             until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoMaretials
                         end
                     end
@@ -2903,7 +2960,7 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                                 game:GetService("VirtualUser"):CaptureController()
                                 game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                
+                                ClickNormal()
                             until _G.AutoKillPlyAfterTrial == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
                             
                         end
@@ -2943,7 +3000,7 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.Size = Vector3.new(80,80,80)     
-                                                        
+                                ClickNormal()          
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 Attack()
                             until v.Humanoid.Health <= 0 or not _G.AutoPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
@@ -3371,15 +3428,15 @@ spawn(function()
             if _G.AutoNextIsland then
                 for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
                     if v.Name == "NotificationTemplate" then
-                        if string.find(v.Text,"Island #1") then
+                        if string.find(v.Text,"#1") then
                             Notify("Ez Island 1", 5)
-                        elseif string.find(v.Text,"Island #2") then
+                        elseif string.find(v.Text,"#2") then
                             Notify("Ez Island 2", 5)
-                        elseif string.find(v.Text,"Island #3") then
+                        elseif string.find(v.Text,"#3") then
                             Notify("Ez Island 3", 5)
-                        elseif string.find(v.Text,"Island #4") then
+                        elseif string.find(v.Text,"#4") then
                             Notify("Ez Island 4", 5)
-                        elseif string.find(v.Text,"Island #5") then
+                        elseif string.find(v.Text,"#5") then
                             Notify("Ez Island 5", 5)
                         end
                     end
@@ -3806,6 +3863,20 @@ spawn(function()
                 end
             end)
         end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.RemoveNotification == true then
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                    if v.Name == "NotificationTemplate" then
+                        v:Destroy()
+                    end
+                end
+            end
+        end)
     end
 end)
 
