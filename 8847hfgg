@@ -1907,7 +1907,7 @@ ST:AddToggle({
 	Name = "Bypass Teleport",
 	Default = true,
 	Callback = function(Value)
-		BypassTP = ValueS
+		BypassTP = Value
 	end    
 })
 
@@ -1920,14 +1920,6 @@ ST:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.RemoveNotification = Value
-	end    
-})
-
-ST:AddToggle({
-	Name = "Remove Your Girl Friend",
-	Default = false,
-	Callback = function(Value)
-		Notify("Remove Your Girl Friend Succes")
 	end    
 })
 
@@ -2023,7 +2015,7 @@ IQ:AddToggle({
 })
 
 IQ:AddToggle({
-	Name = "Auto Dough King",
+	Name = "Auto Dough King(Not Work Don't Use)",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoDoughtKing = Value
@@ -2276,7 +2268,7 @@ RD:AddToggle({
 })
 
 RD:AddToggle({
-	Name = "Auto Start Raid",
+	Name = "Auto Start Raid(Only Fluxus)",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoStartRaid = Value
@@ -3225,6 +3217,42 @@ spawn(function()
     end
 end)
 
+local AdminPos = CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781)
+spawn(function()
+    while wait() do
+        if _G.AutoAdmin and taodangosea3 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") or game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == ("rip_indra True Form" or v.Name == "rip_indra") and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                ClickNormal()
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.huge)
+                            until _G.AutoAdmin == false or v.Humanoid.Health <= 0
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (AdminPos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            Taixiu(AdminPos)
+                        elseif (AdminPos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(AdminPos)
+                        end
+                    else
+                        Tween(AdminPos)
+                    end
+                end
+            end)
+        end
+    end
+end)
+                
 spawn(function()
     while wait() do
         if _G.TeleportToFruit then
@@ -3406,14 +3434,19 @@ spawn(function()
                     if v.Name == "NotificationTemplate" then
                         if string.find(v.Text,"#1") then
                             Notify("Ez Island 1", 5)
+                            wait(5)
                         elseif string.find(v.Text,"#2") then
                             Notify("Ez Island 2", 5)
+                            wait(5)
                         elseif string.find(v.Text,"#3") then
                             Notify("Ez Island 3", 5)
+                            wait(5)
                         elseif string.find(v.Text,"#4") then
                             Notify("Ez Island 4", 5)
+                            wait(5)
                         elseif string.find(v.Text,"#5") then
                             Notify("Ez Island 5", 5)
+                            wait(5)
                         end
                     end
                 end
