@@ -1575,30 +1575,6 @@ UICorner.Parent = ImageButton
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
 UIStroke.Parent = ImageButton
 
--- Notify Blox Fruit :
-
-spawn(function() 
-    repeat
-        task.wait()
-    until game:IsLoaded()
-    repeat
-        task.wait()
-    until game.Players
-    repeat
-        task.wait()
-    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
-    wait(.3)
-    require(game.ReplicatedStorage.Notification).new("<Color=Green>Welcome To Night Hub<Color=/>"):Display()
-    wait(.2)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Owner : ! NightX<Color=/>"):Display()
-    wait(.3)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Channel : LMNGAMING<Color=/>"):Display()
-    wait(.4)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Discord : https://discord.gg/R4xC3t2Xm8<Color=/>"):Display()
-    wait(.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Green>! DestroyX and T... and House Of Blance is the Best <Color=/>"):Display()
-end)
-
 -- Effect Remove :
 
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
@@ -1941,7 +1917,7 @@ local Section = ST:AddSection({
 
 ST:AddToggle({
 	Name = "Remove Notification",
-	Default = true,
+	Default = false,
 	Callback = function(Value)
 		_G.RemoveNotification = Value
 	end    
@@ -1949,7 +1925,7 @@ ST:AddToggle({
 
 ST:AddToggle({
 	Name = "Remove Your Girl Friend",
-	Default = true,
+	Default = false,
 	Callback = function(Value)
 		Notify("Remove Your Girl Friend Succes")
 	end    
