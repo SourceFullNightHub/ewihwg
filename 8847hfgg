@@ -1013,20 +1013,20 @@ end
 function Tween(Pos)
     local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     local Speed = Distance >= 1 and 325 or 1
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true and not _G.AutoTerror and not _G.AutoShark and not _G.AutoFish and not _G.AutoPiranha then
+    if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.AutoShark and not _G.AutoTerrorShark and not _G.AutoPirana and not _G.AutoFishCrew and not _G.TeleportShip then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
-        local teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos})
-        teleport:Play()
-        if _G.StopTween then
-            teleport:Cancel()
-            NoCLip = false
-        end
-        NoCLip = true
-        wait(Distance/Speed)
-        NoCLip = false
+        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
     end)
+    if Distance <= 300 or _G.StopTween then
+        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Cancel()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        NoCLip = false
+    end
+    NoCLip = true
+    wait(Distance/Speed)
+    NoCLip = false
 end
 
 function Djtmestop(CAC)
