@@ -1443,7 +1443,7 @@ function TweenDaobian()
         end
         for _, v in pairs(AllNPCS) do
             if v.Name == "Advanced Fruit Dealer" then
-                Teleport(v.HumanoidRootPart.CFrame)
+                Tween(v.HumanoidRootPart.CFrame)
             end
         end
     end
@@ -1452,7 +1452,7 @@ end
 function TweenFrozen()
     pcall(function()
         if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-            Teleport(game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') * CFrame.new(2, 20, 2))
+            Tween(game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') * CFrame.new(2, 20, 2))
         end
     end)
 end
@@ -2326,10 +2326,10 @@ local Section = SV:AddSection({
 })
 
 local Moon = SV:AddLabel("Moon : deo co moon")
-local Mirage = SV:AddLabel("Mirage : ❌")
-local Kitsune = SV:AddLabel("Kitsune Island : ❌")
-local Elite = SV:AddLabel("Elite : ❌")
-local Frozen = SV:AddLabel("Frozen Dimension : ❌")
+local Mirage = SV:AddLabel("Mirage : 🔴")
+local Kitsune = SV:AddLabel("Kitsune Island : 🔴")
+local Elite = SV:AddLabel("Elite : 🔴")
+local Frozen = SV:AddLabel("Frozen Dimension : 🔴")
 
 local Section = SV:AddSection({
 	Name = "Servers"
@@ -2970,9 +2970,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-                Mirage:Set("Mirrage : ✅ Spawn")
+                Mirage:Set("Mirrage : 🟢 Spawn")
             else
-                Mirage:Set("Mirrage : ❌ Not Spawn")
+                Mirage:Set("Mirrage : 🔴 Not Spawn")
             end
         end)
     end
@@ -2982,9 +2982,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
-                Kitsune:Set("Kitsune Island : ✅ Spawn")
+                Kitsune:Set("Kitsune Island : 🟢 Spawn")
             else
-                Kitsune:Set("Kitsune Island : ❌ Not Spawn")
+                Kitsune:Set("Kitsune Island : 🔴 Not Spawn")
             end
         end)
     end
@@ -2994,9 +2994,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                Frozen:Set("Frozen Dimension : ✅ Spawn")
+                Frozen:Set("Frozen Dimension : 🟢 Spawn")
             else
-                Frozen:Set("Frozen Dimension : ❌ Not Spawn")
+                Frozen:Set("Frozen Dimension : 🔴 Not Spawn")
             end
         end)
     end
@@ -3006,9 +3006,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
-                Elite:Set("Elite : ✅ Spawn")	
+                Elite:Set("Elite : 🟢 Spawn")	
             else
-                Elite:Set("Elite : ❌ Not Spawn")	
+                Elite:Set("Elite : 🔴 Not Spawn")	
             end
         end)
     end
