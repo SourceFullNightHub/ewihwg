@@ -2928,9 +2928,7 @@ spawn(function()
     while task.wait() do
         if _G.AutoElite and taodangosea3 then
             pcall(function()
-                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Diablo") and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Deandre") and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Urban") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
-                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
                         if game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -2959,6 +2957,10 @@ spawn(function()
                                 Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                             end
                         end                    
+                    end
+                else
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") and not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
                     end
                 end
             end)
