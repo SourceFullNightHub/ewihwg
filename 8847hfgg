@@ -2562,7 +2562,6 @@ spawn(function()
                                                 _G.LevelFarm = true
                                                 ClickNormal()
                                             until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                            
                                         end
                                     end
                                 end
@@ -2589,7 +2588,7 @@ spawn(function()
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
                                         ClickNormal()
-                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
+                                    until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
                         end
@@ -2617,8 +2616,7 @@ spawn(function()
                                                     BringKatakuriMob = true
                                                     PosMobCake = v.HumanoidRootPart.CFrame
                                                     ClickNormal()
-                                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
-                                                
+                                                until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
                                             end
                                         end
                                     end
