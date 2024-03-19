@@ -1016,11 +1016,8 @@ function Tween(Pos)
     if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.AutoShark and not _G.AutoTerrorShark and not _G.AutoPirana and not _G.AutoFishCrew and not _G.TeleportShip then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
-    pcall(function()
-        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
-    end)
+    game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
     if Distance <= 300 or _G.StopTween then
-        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Cancel()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         NoCLip = false
     end
