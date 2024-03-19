@@ -2793,7 +2793,7 @@ spawn(function()
                 }
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 end
-            if _G.Stats == "Blox Fruit" then
+            if _G.Stats == "Devil Fruit" then
                 local args = {
                     [1] = "AddPoint",
                     [2] = "Blox Fruit",
