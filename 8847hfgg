@@ -2559,7 +2559,6 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                                 BringMob = true
-                                                _G.LevelFarm = true
                                                 ClickNormal()
                                             until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                         end
@@ -2588,7 +2587,7 @@ spawn(function()
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
                                         ClickNormal()
-                                    until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
+                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
                         end
@@ -3821,7 +3820,6 @@ spawn(function()
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 v.HumanoidRootPart.CanCollide = false
-                                
                                 sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
                             until v.Humanoid.Health <= 0 or _G.AutoHallowSycthe == false
                             
@@ -3867,19 +3865,6 @@ spawn(function()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     end
-                    if _G.StartFarm and SkipLevel then
-                        if (v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                            v.HumanoidRootPart.CFrame = BringSky
-                            v.Humanoid:ChangeState(14)
-                            v.HumanoidRootPart.CanCollide = false
-                            v.Head.CanCollide = false
-                            if v.Humanoid:FindFirstChild("Animator") then
-                                v.Humanoid.Animator:Destroy()
-                            end
-                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                        end
-                    end
                     if _G.StartFarm and BringKatakuriMob then
                         if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
                             v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
@@ -3894,23 +3879,9 @@ spawn(function()
                         end
                     end
                     if _G.StartFarm and StartCheckBone then
-                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 300 then
                             v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
                             v.HumanoidRootPart.CFrame = PosMobBone
-                            v.Humanoid:ChangeState(14)
-                            v.HumanoidRootPart.CanCollide = false
-                            v.Head.CanCollide = false
-                            if v.Humanoid:FindFirstChild("Animator") then
-                                v.Humanoid.Animator:Destroy()
-                            end
-                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                        end
-                    end
-                    if _G.AutoMaretials and BringQuai then
-                        CheckMaterial()
-                        if (v.Name == Mob) and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                            v.HumanoidRootPart.CFrame = PosMaretialsMob
                             v.Humanoid:ChangeState(14)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
