@@ -1609,19 +1609,19 @@ end)
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({
-    Name = "Night Hub", 
+    Name = "Blox Fruit(Night Hub)", 
     HidePremium = false,
     IntroText = "Night Library", 
     SaveConfig = true, 
     ConfigFolder = "Night Hub"
 })
 
-function Notify(Hiri, Mi)
+function Notify(Deo, Skid)
     OrionLib:MakeNotification({
         Name = "[Night Hub]",
-        Content = Hiri,
+        Content = Deo,
         Image = "rbxassetid://15541504459",
-        Time = Mi
+        Time = Skid
     })
 end
 
@@ -1755,6 +1755,7 @@ G:AddButton({
         RedeemCode("Sub2Daigrock")
         RedeemCode("Axiore")
         RedeemCode("TantaiGaming")
+        Notify("Redeem All Codes Complete")
   	end    
 })
 
@@ -2063,7 +2064,7 @@ IQ:AddDropdown({
 })
 
 IQ:AddToggle({
-	Name = "Auto Maretials",
+	Name = "Auto Maretials(Not Work Wait Fix)",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoMaretials = Value
