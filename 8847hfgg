@@ -9,6 +9,20 @@ else
     game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
 end
 
+-- Notify :
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Loading...",
+	Icon = "rbxassetid://15541504459"
+})
+wait(3)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Loading Complete",
+	Icon = "rbxassetid://15541504459"
+})
+
 -- Join Teams :
 
 if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
@@ -2684,136 +2698,6 @@ spawn(function()
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             elseif v.Name == "Posessed Mummy" then
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                            end
-                        end
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if _G.StartFarm then
-            pcall(function()
-                if _G.SelectFarm == "Level" and SkipLv and _G.StartFarm then
-                    if game.Players.LocalPlayer.Data.Level.Value >= 1 and game.Players.LocalPlayer.Data.Level.Value <= 149 then
-                        if game:GetService("Workspace").Enemies:FindFirstChild("Shanda") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Squad") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Soldier") then
-                            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "Shanda" or v.Name == "Royal Squad" or v.Name == "Royal Soldier" then
-                                    if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.StartFarm then
-                                        repeat wait()
-                                            EnableBuso()
-                                            EquipTool(SelectWP)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            
-                                            v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.HumanoidRootPart.CanCollide = false
-                                            BringSky = v.HumanoidRootPart.CFrame
-                                            SkipLevel = true
-                                            
-                                
-                                        until not _G.StartFarm or not v.Parent or v.Humanoid.Health <= 0
-                                        
-                                        Tween(PosDaoSky3)
-                                    end
-                                end
-                            end
-                        else
-                            if BypassTP then
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosDaoSky3.Position).Magnitude > 2000 then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
-                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosDaoSky3.Position).Magnitude < 2000 then
-                                    Tween(PosDaoSky3)
-                                end
-                            else
-                                Tween(PosDaoSky3)
-                            end
-                        end
-                    end
-                elseif _G.SelectFarm == "Level" and SkipLv and _G.StartFarm then
-                    if game.Players.LocalPlayer.Data.Level.Value >= 150 then
-                        Checknhiemvu()
-                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                            if BypassTP then
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
-                                    Taixiu(CFrameQuest)
-                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
-                                    Tween(CFrameQuest)
-                                end
-                            else
-                                Tween(CFrameQuest)
-                            end
-                            if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
-                            end
-                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                            Checknhiemvu()
-                            if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                        if v.Name == Mob then
-                                            if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
-                                                repeat task.wait()
-                                                    EquipTool(SelectWP)
-                                                    EnableBuso()                                            
-                                                    PosMon = v.HumanoidRootPart.CFrame
-                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.Head.CanCollide = false
-                                                    v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                                    BringMob = true
-                                                until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                            end
-                                        end
-                                    end
-                                end
-                            else
-                                Tween(CFrameMob)
-                                BringMob = false
-                                if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
-                                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
-                                end
-                            end
-                        end
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if _G.AutoMaretials then
-            pcall(function()
-                CheckMaterials()
-                if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Name == Mob then
-                            repeat task.wait()
-                                EquipTool(SelectWP)
-                                EnableBuso()                                            
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                PosMaretialsMob = v.HumanoidRootPart.CFrame
-                                BringQuai = true
-                                ClickNormal()
-                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoMaretials
-                        end
-                    end
-                    CheckMaterials()
-                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if string.find(v.Name, Mob) then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
-                                Tween(v.CFrame * CFrame.new(2, 20, 2))
                             end
                         end
                     end
