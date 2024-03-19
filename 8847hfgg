@@ -1434,7 +1434,7 @@ function ClickNormal()
 end
 
 function TweenDaobian()
-    repeat wait()
+    repeat task.wait()
     until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
     if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
         local AllNPCS = getnilinstances()
@@ -2579,7 +2579,7 @@ spawn(function()
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v.Name == "Cake Prince" or v.Name == "Dough King" then
                                 if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.AutoKatakuri) then
-                                    repeat wait()
+                                    repeat task.wait()
                                         EnableBuso()
                                         EquipTool(SelectWP)
                                         v.HumanoidRootPart.CanCollide = false
@@ -2605,7 +2605,7 @@ spawn(function()
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
                                             if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.AutoKatakuri) then
-                                                repeat wait()
+                                                repeat task.wait()
                                                     EnableBuso()
                                                     EquipTool(SelectWP)
                                                     v.HumanoidRootPart.CanCollide = false
@@ -2671,7 +2671,7 @@ spawn(function()
                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
                                     if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.StartFarm) then
-                                        repeat wait()
+                                        repeat task.wait()
                                             EnableBuso()
                                             EquipTool(SelectWP)
                                             ClickNormal()
@@ -3216,7 +3216,7 @@ spawn(function()
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
                                     if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                        repeat wait()
+                                        repeat task.wait()
                                             EnableBuso()
                                             EquipTool(SelectWP)
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
@@ -3255,7 +3255,7 @@ spawn(function()
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if _G.AutoCastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                                repeat wait()
+                                repeat task.wait()
                                     EnableBuso()
                                     EquipTool(SelectWP)
                                     v.HumanoidRootPart.CanCollide = false
