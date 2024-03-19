@@ -3326,7 +3326,7 @@ spawn(function()
     while wait() do
         if _G.AutoCastleRaid and taodangosea3 then
             pcall(function()
-                if (PosRaidCastle.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                if (CastlePos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if _G.AutoCastleRaid and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
