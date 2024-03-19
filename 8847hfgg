@@ -904,50 +904,6 @@ function CheckBoss()
     end
 end
 
-function CheckMaterials()
-    if _G.SelectMaterials == "Angel Swings" then
-        Mob = {"Shanda", "God's Guard", "Royal Squad", "Royal Soldier"}
-    elseif _G.SelectMaterials == "Leather" then
-        Mob = {"Pirate", "Brute"}
-    elseif _G.SelectMaterials == "Magma Ore" then
-        if taodangosea1 then
-            Mob = {"Military Soldier", "Military Spy"}
-        end
-        if taodangosea2 then
-            Mob = {"Magma Admiral", "Magma Ninja", "Lava Pirate"}
-        end
-    elseif _G.SelectMaterials == "Scrap Metal" then
-        Mob = {"Pirate", "Brute"}
-    elseif _G.SelectMaterials == "Yeti Fur" then
-        Mob = "Yeti"
-    elseif _G.SelectMaterials == "Ectoplasm" then
-        Mob = {"Ship Deckhand", "Ship Engineer ", "Ship Steward", "Ship Officer", "Cursed Captain"}
-    elseif _G.SelectMaterials == "Fish Tail" then
-        if taodangosea1 then
-            Mob = {"Fishman Commando", "Fishman Warrior"}
-        end
-        if taodangosea3 then
-            Mob = {"Fishman Raider", "Fishman Captain"}
-        end
-    elseif _G.SelectMaterials == "Gunpowder" then
-        Mob = "Pistol Billionaire"
-    elseif _G.SelectMaterials == "Mini Tusk" then
-        Mob = "Mythological Pirate"
-    elseif _G.SelectMaterials == "Mystic Droplet" then
-        Mob = {"Sea Soldier", "Water Fighter"}
-    elseif _G.SelectMaterials == "Radioactive Material" then
-        Mob = "Factory Staff"
-    elseif _G.SelectMaterials == "Vampire Fang" then
-        Mob = "Vampire"
-    elseif _G.SelectMaterials == "Conjured Cocoa" then
-        Mob = {"Cocoa Warrior", "Chocolate Bar Battler"}
-    elseif _G.SelectMaterials == "Demonic Wisp" then
-        Mob = "Demonic Souls"
-    elseif _G.SelectMaterials == "Dragon Scale" then
-        Mob = {"Dragon Crew Warrior", "Dragon Crew Archer"}
-    end
-end
-
 function Hop()
     local PlaceID = game.PlaceId
     local AllIDs = {}
@@ -2061,26 +2017,6 @@ IQ:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.AutoBuyLegendarySword = Value
-	end    
-})
-
-IQ:AddParagraph("Maretials","Select Maretials to Farm")
-
-IQ:AddDropdown({
-	Name = "Select Maretials",
-	Default = "",
-	Options = Maretialslist,
-	Callback = function(Value)
-		_G.SelectMaterials = Value
-	end    
-})
-
-IQ:AddToggle({
-	Name = "Auto Maretials(Not Work Wait Fix)",
-	Default = false,
-	Callback = function(Value)
-		_G.AutoMaretials = Value
-        Djtmestop(_G.AutoMaretials)
 	end    
 })
 
