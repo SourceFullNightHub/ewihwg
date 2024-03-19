@@ -2009,7 +2009,7 @@ local ToggleGhoulRace = IQ:AddToggle({
 })
 
 IQ:AddToggle({
-	Name = "Auto Third Sea",
+	Name = "Auto Third Sea(Not Work Wait Fix)",
 	Default = false,
 	Callback = function(Value)
 		_G.AutoThirdSea = Value
