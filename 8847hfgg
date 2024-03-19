@@ -1680,16 +1680,21 @@ local Section = G:AddSection({
 	Name = "Cancel Tween"
 })
 
+G:AddParagraph("Cancel Tween","If Your Character Can't Move and Fly Your Can Click Button Here To Stop Fly")
+
 G:AddButton({
 	Name = "Cancel Tween",
 	Callback = function()
       	Djtmestop(dextralrac)
+        NoCLip = false
   	end    
 })
 
 local Section = G:AddSection({
 	Name = "Settings Farm"
 })
+
+G:AddParagraph("Settings Farm","Boots Farmming")
 
 G:AddToggle({
 	Name = "Turn On V4",
@@ -1757,6 +1762,8 @@ local Section = G:AddSection({
 	Name = "Farm"
 })
 
+G:AddParagraph("Select Farm","Choose Mode Farm Your Need And Click The Box(Start Farm) To Farm")
+
 G:AddDropdown({
 	Name = "Select Farm",
 	Default = "Level",
@@ -1780,6 +1787,8 @@ G:AddToggle({
 local Section = G:AddSection({
 	Name = "Boss and Mob"
 })
+
+G:AddParagraph("Select Boss","Select Boss Your Need and Click The Box(Auto Farm Boss). If Your Need GetQuest Boss, Your Can Click A Box(Auto GetQuest Boss)")
 
 G:AddDropdown({
 	Name = "Select Boss",
@@ -1814,6 +1823,8 @@ G:AddToggle({
 local Section = G:AddSection({
 	Name = "Others"
 })
+
+G:AddParagraph("Others Toggle","Đéo biết nói gì...")
 
 G:AddToggle({
 	Name = "Auto Elite",
@@ -3217,7 +3228,7 @@ spawn(function()
     end
 end)
 
-local AdminPos = CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781)
+local AdminPos = CFrame.new(-5379.76904, 335.637238, -2558.82837)
 spawn(function()
     while wait() do
         if _G.AutoAdmin and taodangosea3 then
