@@ -1973,6 +1973,14 @@ IQ:AddToggle({
 	end    
 })
 
+IQ:AddToggle({
+	Name = "Auto Observation Level Hop",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoObservationLevelHop = Value
+	end    
+})
+
 -- LocalPlayer Tab :
 
 local Section = LC:AddSection({
@@ -3416,6 +3424,14 @@ spawn(function()
                                 repeat task.wait()
                                     Tween(game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.CFrame)
                                 until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            else
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.CFrame* CFrame.new(2, 50, 2))
+                                    wait(1)
+                                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true then
+                                        game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
+                                    end
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         else
                             if taodangosea1 then
@@ -3434,6 +3450,14 @@ spawn(function()
                                 repeat task.wait()
                                     Tween(game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame)
                                 until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            else
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
+                                    wait(1)
+                                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true then
+                                        game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
+                                    end
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         else
                             if BypassTP then
@@ -3451,6 +3475,14 @@ spawn(function()
                             if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
                                 repeat task.wait()
                                     Tween(game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame)
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            else
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
+                                    wait(1)
+                                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true then
+                                        game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
+                                    end
                                 until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         else
