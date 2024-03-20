@@ -1038,7 +1038,6 @@ function teleporttosea()
 end
 
 local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
-
 function TweenIsland()
     if _G.SelectIsland == "WindMill" then
         Tween(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
@@ -1383,8 +1382,8 @@ function ClickNormal()
         local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
         CameraShaker:Stop()
         CombatFramework.activeController.attacking = false
-        CombatFramework.activeController.timeToNextAttack = -20
-        CombatFramework.activeController.hitboxMagnitude = 90
+        CombatFramework.activeController.timeToNextAttack = 0
+        CombatFramework.activeController.hitboxMagnitude = 60
         game:GetService'VirtualUser':CaptureController()
         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
     end
@@ -1488,38 +1487,6 @@ spawn(function()
             game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
         end
     end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if NoCLip == true then
-                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0,0,0)
-                end
-            else
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if NoCLip == true then
-                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                    if v:IsA("BasePart") then
-                        v.CanCollide = false
-                    end
-                end
-            end
-        end)
-    end)
 end)
 
 -- Open & Close Ui :
@@ -1690,6 +1657,7 @@ G:AddDropdown({
 G:AddButton({
 	Name = "Redeem All Codes",
 	Callback = function()
+        Notify("Redeem Codes....")
         RedeemCode("Sub2UncleKizaru")
         RedeemCode("NEWTROLL")
         RedeemCode("SUB2NOOBMASTER123")
@@ -1717,7 +1685,7 @@ G:AddButton({
         RedeemCode("Sub2Daigrock")
         RedeemCode("Axiore")
         RedeemCode("TantaiGaming")
-        Notify("Redeem All Codes Complete")
+        Notify("Redeem All Codes Complete!!")
   	end    
 })
 
@@ -1993,6 +1961,15 @@ IQ:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.AutoBuyLegendarySword = Value
+	end    
+})
+
+IQ:AddToggle({
+	Name = "Auto Observation Level",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoObservationLevel = Value
+        Djtmestop(_G.AutoObservationLevel)
 	end    
 })
 
@@ -2378,6 +2355,38 @@ RC:AddToggle({
 })
 
 -- function :
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if NoCLip == true then
+                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                end
+            else
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if NoCLip == true then
+                for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+    end)
+end)
 
 task.spawn(function()
     while wait() do
@@ -3391,6 +3400,94 @@ spawn(function()
 end
 end)
 
+local Sea1Observation = CFrame.new(-5395.79395, 27.2208748, 8528.62695)
+local Sea2Observation = CFrame.new(-5478.39209, 15.9775667, -5246.9126)
+local Sea3Observation = CFrame.new(5533.29785, 88.1079102, 4852.3916)
+spawn(function()
+    while wait() do
+        if _G.AutoObservationLevel then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
+                    Notify("Your Are Max Point, You Can Upgrate to V2", 5)
+                else
+                    if taodangosea1 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier") then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.CFrame)
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            end
+                        else
+                            if taodangosea1 then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea1Observation.Position).Magnitude > 2000 then
+                                    Taixiu(Sea1Observation)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea1Observation.Position).Magnitude < 2000 then
+                                    Tween(Sea1Observation)
+                                end
+                            else
+                                Tween(Sea1Observation)
+                            end
+                        end
+                    elseif taodangosea2 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate") then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame)
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            end
+                        else
+                            if BypassTP then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea2Observation.Position).Magnitude > 2000 then
+                                    Taixiu(Sea2Observation)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea2Observation.Position).Magnitude < 2000 then
+                                    Tween(Sea2Observation)
+                                end
+                            else
+                                Tween(Sea2Observation)
+                            end
+                        end
+                    elseif taodangosea3 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander") then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                                repeat task.wait()
+                                    Tween(game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame)
+                                until not _G.AutoObservationLevel or v.Humanoid.Health <= 0 or not v.Parent
+                            end
+                        else
+                            if BypassTP then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea3Observation.Position).Magnitude > 2000 then
+                                    Taixiu(Sea3Observation)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea3Observation.Position).Magnitude < 2000 then
+                                    Tween(Sea3Observation)
+                                end
+                            else
+                                Tween(Sea3Observation)
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoObservationLevel then
+                repeat task.wait()
+                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                        game:GetService('VirtualUser'):CaptureController()
+                        game:GetService('VirtualUser'):SetKeyDown('0x65')
+                        wait(2)
+                        game:GetService('VirtualUser'):SetKeyUp('0x65')
+                    end
+                until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.AutoObservationLevel
+            end
+        end)
+    end
+end)
+
 spawn(function()
     while task.wait() do
         if _G.AutoBoss and not _G.GetQuestBoss then
@@ -3409,7 +3506,6 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBoss
-                            
                             end
                         end
                     end
