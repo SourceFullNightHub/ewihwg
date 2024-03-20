@@ -967,26 +967,22 @@ function Hop()
 end
 
 function Tween(Pos)
-    local initialPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-    local initialVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
-    local Distance = (Pos.Position - initialPosition).Magnitude
+    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     local Speed = Distance >= 1 and 325 or 1
-    local shouldSit = game.Players.LocalPlayer.Character.Humanoid.Sit
-    local shouldStopTween = _G.StopTween
-    if shouldSit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
+    if game.Players.LocalPlayer.Character.Humanoid.Sit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
-    if Distance <= 300 or shouldStopTween then
+    if Distance <= 300 or _G.StopTween then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         NoCLip = false
     end
     NoCLip = true
     wait(Distance / Speed)
+    NoCLip = false
     local tweenInfo = TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear)
     local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = Pos})
     tween:Play()
 end
-
 
 function Djtmestop(CAC)
     if not CAC then
@@ -2379,7 +2375,7 @@ spawn(function()
                     Noclip.Name = "BodyClip"
                     Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                     Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0 ,0 ,0 )
+                    Noclip.Velocity = Vector3.new(Pos)
                 end
             else
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
