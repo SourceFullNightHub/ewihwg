@@ -3429,7 +3429,7 @@ end)
 
 local Sea1Observation = CFrame.new(-5395.79395, 27.2208748, 8528.62695)
 local Sea2Observation = CFrame.new(-5478.39209, 15.9775667, -5246.9126)
-local Sea3Observation = CFrame.new(5533.29785, 88.1079102, 4852.3916)
+local Sea3Observation = CFrame.new(4530.3540039063, 656.75695800781, -131.60952758789)
 spawn(function()
     while wait() do
         if _G.AutoObservationLevel then
