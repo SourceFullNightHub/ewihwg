@@ -3408,6 +3408,23 @@ spawn(function()
 end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoObservationLevel then
+                repeat task.wait()
+                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                        game:GetService('VirtualUser'):CaptureController()
+                        game:GetService('VirtualUser'):SetKeyDown('0x65')
+                        wait(2)
+                        game:GetService('VirtualUser'):SetKeyUp('0x65')
+                    end
+                until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.AutoObservationLevel
+            end
+        end)
+    end
+end)
+
 local Sea1Observation = CFrame.new(-5395.79395, 27.2208748, 8528.62695)
 local Sea2Observation = CFrame.new(-5478.39209, 15.9775667, -5246.9126)
 local Sea3Observation = CFrame.new(5533.29785, 88.1079102, 4852.3916)
@@ -3485,23 +3502,6 @@ spawn(function()
                 end
             end)
         end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AutoObservationLevel then
-                repeat task.wait()
-                    if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
-                        game:GetService('VirtualUser'):CaptureController()
-                        game:GetService('VirtualUser'):SetKeyDown('0x65')
-                        wait(2)
-                        game:GetService('VirtualUser'):SetKeyUp('0x65')
-                    end
-                until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.AutoObservationLevel
-            end
-        end)
     end
 end)
 
