@@ -2978,12 +2978,6 @@ spawn(function()
                     if BypassTP then
                         if (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
                         elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
                             Tween(PosGhoulRace)
                             wait(0.5)
@@ -3039,13 +3033,6 @@ spawn(function()
                         if BypassTP then
                             if (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
                             elseif (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
                                 Tween(PosCursedBoss)
                             end
@@ -3086,7 +3073,7 @@ spawn(function()
                 else
                     if BypassTP then
                         if (AdminPos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
-                            Taixiu(AdminPos)
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5005.29834, 314.858734, -3025.00659))
                         elseif (AdminPos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
                             Tween(AdminPos)
                         end
@@ -3182,7 +3169,7 @@ spawn(function()
                 else
                     if BypassTP then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CastlePos.Position).Magnitude > 2000 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5071.82324,314.858734,-3150.69922))
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5005.29834, 314.858734, -3025.00659))
                         elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CastlePos.Position).Magnitude < 2000 then
                             Tween(CastlePos)
                         end
@@ -3406,7 +3393,7 @@ end)
 
 spawn(function()
     while task.wait() do
-        if _G.AutoBoss then
+        if _G.AutoBoss and not _G.GetQuestBoss then
             pcall(function()
                 CheckBoss()
                 if game:GetService("Workspace").Enemies:FindFirstChild(Boss) then
@@ -3437,6 +3424,7 @@ spawn(function()
     end
 end)
 
+local PosGlass = CFrame.new(-2125.64282, 70.3262863, -12400.6777)
 spawn(function()
     while task.wait() do
         if _G.AutoDoughKing then
@@ -3454,12 +3442,19 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoDoughKing
-                            
                             end
                         end
                     end
                 else
-                    Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosGlass.Position).Magnitude > 2000 then
+                            Taixiu(PosGlass)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosGlass.Position).Magnitude < 2000 then
+                            Tween(PosGlass)
+                        end
+                    else
+                        Tween(PosGlass)
+                    end
                     if game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                     end
@@ -3514,41 +3509,6 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
                             Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
                         end
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-local PosGreybeard = CFrame.new(-4881.23095703125, 22.65204429626465, 4273.75244140625)
-spawn(function()
-    while wait() do
-        if _G.AutoGreybeard and taodangosea1 then
-            pcall(function()
-                if game:GetService("Workspace").Enemies:FindFirstChild("Greybeard") then
-                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == "Greybeard" and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoGreybeard then
-                            repeat task.wait()
-                                EnableBuso()
-                                EquipTool(SelectWP)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.CanCollide = false
-                                ClickNormal()
-                            until v.Humanoid.Health <= 0 or not _G.AutoGreybeard or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                        end
-                    end
-                else
-                    if BypassTP then
-                        if (PosGreybeard.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
-                            Taixiu(PosGreybeard)
-                        elseif (PosGreybeard.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                            Tween(PosGreybeard)
-                        end
-                    else
-                        Tween(PosGreybeard)
                     end
                 end
             end)
@@ -3622,7 +3582,6 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 until v.Humanoid.Health <= 0  or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or not _G.AutoRipIndra
                                 
@@ -3660,7 +3619,6 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoDarkbeard == false
                                 
@@ -3694,7 +3652,6 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.CanCollide = false
                             until v.Humanoid.Health <= 0 or not _G.AutoSaw or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
-                            
                         end
                     end
                 else
