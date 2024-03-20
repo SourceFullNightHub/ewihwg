@@ -967,20 +967,26 @@ function Hop()
 end
 
 function Tween(Pos)
-    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    local initialPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    local initialVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    local Distance = (Pos.Position - initialPosition).Magnitude
     local Speed = Distance >= 1 and 325 or 1
-    if game.Players.LocalPlayer.Character.Humanoid.Sit and not _G.AutoShark and not _G.AutoTerrorShark and not _G.AutoPirana and not _G.AutoFishCrew and not _G.TeleportShip then
+    local shouldSit = game.Players.LocalPlayer.Character.Humanoid.Sit
+    local shouldStopTween = _G.StopTween
+    if shouldSit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
-    if Distance <= 300 or _G.StopTween then
+    if Distance <= 300 or shouldStopTween then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         NoCLip = false
     end
     NoCLip = true
-    wait(Distance/Speed)
-    NoCLip = false
-    game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
+    wait(Distance / Speed)
+    local tweenInfo = TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear)
+    local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = Pos})
+    tween:Play()
 end
+
 
 function Djtmestop(CAC)
     if not CAC then
@@ -2373,7 +2379,7 @@ spawn(function()
                     Noclip.Name = "BodyClip"
                     Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                     Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0 ,55555 ,0 )
+                    Noclip.Velocity = Vector3.new(0 ,0 ,0 )
                 end
             else
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
