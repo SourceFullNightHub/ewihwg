@@ -3424,7 +3424,7 @@ spawn(function()
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.CFrame)
                             else
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.CFrame* CFrame.new(2, 50, 2))
-                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea1Observation.Position).Magnitude < 200 then
+                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game:GetService("Workspace").Enemies:FindFirstChild("Military Soldier").HumanoidRootPart.Position).Magnitude <= 150 then
                                     game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
                                 end
                             end
@@ -3445,7 +3445,7 @@ spawn(function()
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame)
                             else
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
-                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea2Observation.Position).Magnitude < 200 then
+                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game:GetService("Workspace").Enemies:FindFirstChild("Lava Pirate").HumanoidRootPart.Position).Magnitude <= 150 then
                                     game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
                                 end
                             end
@@ -3466,7 +3466,7 @@ spawn(function()
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame)
                             else
                                 Tween(game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.CFrame * CFrame.new(2, 50, 2))
-                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Sea3Observation.Position).Magnitude < 200 then
+                                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") and _G.AutoObservationLevelHop == true and (game:GetService("Workspace").Enemies:FindFirstChild("Giant Islander").HumanoidRootPart.Position).Magnitude <= 150 then
                                     game:GetService("TeleportService"):Teleport(game.PlaceId,game:GetService("Players").LocalPlayer)
                                 end
                             end
