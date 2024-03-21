@@ -15,14 +15,6 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 })
 
 if taodangosea1 then
-    Maretialslist = {"Angel Swings", "Leather", "Magma Ore", "Scrap Metal", "Yeti Fur", "Fish Tail"}
-elseif taodangosea2 then
-    Maretialslist = {"Magma Ore", "Ectoplasm", "Mistic Droplet", "Radioactive Material", "Vampire Fang"}
-elseif taodangosea3 then
-    Maretialslist = {"Fish Tail", "Gunpowder", "Mini Tusk", "Conjured Cocoa", "Dragon Scale"}
-end
-
-if taodangosea1 then
     BossList = {"The Gorilla King","Bobby","Yeti","Mob Leader","Vice Admiral","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Saber Expert"}
 elseif taodangosea2 then
     BossList = {"Diamond","Jeremy","Fajita","Don Swan","Smoke Admiral","Cursed Captain","Darkbeard","Order","Awakened Ice Admiral","Tide Keeper"}
@@ -1136,6 +1128,9 @@ function Tween(Pos)
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
         {CFrame = Pos}
     ):Play()
+    NoCLip = true
+    wait(Distance / Speed)
+    NoCLip = false
 end
     
 function Djtmestop(CAC)
