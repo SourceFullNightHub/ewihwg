@@ -3632,7 +3632,7 @@ spawn(function()
 end)
 
 local RaceCheck = game:GetService("Players").LocalPlayer.Data.Race.Value
-local CFrameCyborg = CFrame.new(-20021.8691,10090.4893,-16.37994,)
+local CFrameCyborg = CFrame.new(-20021.8691,10090.4893,-16.37994)
 spawn(function()
     while wait() do
         if _G.AutoTrials then
@@ -3656,11 +3656,11 @@ spawn(function()
                             Tween(v.CFrame * CFrame.new(0 ,0 ,0))
                         end
                     end
-                elseif RaceCheck = "Cyborg" then
+                elseif RaceCheck == "Cyborg" then
                     if (CFrameCyborg.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500 then
                         Tween(CFrameCyborg)
                     end
-                elseif RaceCheck = "Mink" then
+                elseif RaceCheck == "Mink" then
                     for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                         if v.Name == "StartPoint" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
                             Tween(v.CFrame * CFrame.new(0, 3, 0))
