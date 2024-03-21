@@ -2357,7 +2357,7 @@ RC:AddToggle({
 	Name = "Auto Kill Players After Trials",
 	Default = false,
 	Save = true,
-	Flag = "Save",
+	Flag = "Auto Kill Players After Trials",
 	Callback = function(Value)
 		_G.AutoKillPlyAfterTrial = Value
         Djtmestop(_G.AutoKillPlyAfterTrial)
@@ -3623,6 +3623,60 @@ spawn(function()
                         Tween(CFrameBoss)
                         if game:GetService("ReplicatedStorage"):FindFirstChild(Boss) then
                             Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Boss).HumanoidRootPart.CFrame * CFrame.new(2 ,20 ,2))
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local RaceCheck = game:GetService("Players").LocalPlayer.Data.Race.Value
+local CFrameCyborg = CFrame.new(-20021.8691,10090.4893,-16.37994,)
+spawn(function()
+    while wait() do
+        if _G.AutoTrials then
+            pcall(function()
+                if RaceCheck == "Human" then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoTrials then
+                                repeat task.wait()
+                                    v.Humanoid.Health = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    ClickNormal()
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoTrials
+                            end
+                        end
+                    end
+                elseif RaceCheck == "Skypiea" then
+                    for i,v in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
+                        if v.Name ==  "snowisland_Cylinder.081" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500then
+                            Tween(v.CFrame * CFrame.new(0 ,0 ,0))
+                        end
+                    end
+                elseif RaceCheck = "Cyborg" then
+                    if (CFrameCyborg.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500 then
+                        Tween(CFrameCyborg)
+                    end
+                elseif RaceCheck = "Mink" then
+                    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                        if v.Name == "StartPoint" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            Tween(v.CFrame * CFrame.new(0, 3, 0))
+                        end
+                    end
+                elseif RaceCheck == "Ghoul " then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoTrials then
+                                repeat task.wait()
+                                    v.Humanoid.Health = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    ClickNormal()
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoTrials
+                            end
                         end
                     end
                 end
