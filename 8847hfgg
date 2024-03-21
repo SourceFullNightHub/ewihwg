@@ -944,38 +944,6 @@ function Hop()
     Teleport()
 end
 
-function Tween(Pos)
-    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    local Speed = Distance >= 1 and 325 or 1
-    if game.Players.LocalPlayer.Character.Humanoid.Sit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-    end
-    if Distance <= 300 or _G.StopTween then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-        NoCLip = false
-    end
-    NoCLip = true
-    wait(Distance / Speed)
-    NoCLip = false
-    local tweenInfo = TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear)
-    local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = Pos})
-    tween:Play()
-end
-
-function Djtmestop(CAC)
-    if not CAC then
-        _G.StopTween = true
-        wait()
-        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-        wait()
-        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-        end
-        _G.StopTween = false
-        NoCLip = false
-    end
-end
-
 function EquipTool(Toolse)
     local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
     if tool then
@@ -1197,6 +1165,38 @@ spawn(function()
         effectContainer.LevelUp:Destroy()
     end
 end)
+
+function Tween(Pos)
+    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    local Speed = Distance >= 1 and 325 or 1
+    if game.Players.LocalPlayer.Character.Humanoid.Sit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end
+    if Distance <= 300 or _G.StopTween then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        NoCLip = false
+    end
+    NoCLip = true
+    wait(Distance / Speed)
+    NoCLip = false
+    local tweenInfo = TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear)
+    local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = Pos})
+    tween:Play()
+end
+
+function Djtmestop(CAC)
+    if not CAC then
+        _G.StopTween = true
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        end
+        _G.StopTween = false
+        NoCLip = false
+    end
+end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({
