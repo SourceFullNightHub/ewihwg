@@ -941,14 +941,12 @@ end
 function EquipTool(Toolse)
     local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
     if tool then
-        wait(0.5)
         game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
     end
 end
 
 function UnEquipTool(Toolse)
     if game.Players.LocalPlayer.Character:FindFirstChild(Toolse) then
-        wait(.5)
         game.Players.LocalPlayer.Character:FindFirstChild(Toolse).Parent = game.Players.LocalPlayer.Backpack
     end
 end
@@ -1125,23 +1123,21 @@ spawn(function()
 end)
 
 function Tween(Pos)
-    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    local Speed = Distance >= 1 and 325 or 1
-    if game.Players.LocalPlayer.Character.Humanoid.Sit and not (_G.AutoShark or _G.AutoTerrorShark or _G.AutoPirana or _G.AutoFishCrew or _G.TeleportShip) then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance > 1 then
+        Speed = 325
     end
-    if Distance <= 300 or _G.StopTween then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    if Distance <= 300 then
+        plr.Character.HumanoidRootPart.CFrame = Pos
         NoCLip = false
     end
-    NoCLip = true
-    wait(Distance / Speed)
-    NoCLip = false
-    local tweenInfo = TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear)
-    local tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, tweenInfo, {CFrame = Pos})
-    tween:Play()
+    game:GetService("TweenService"):Create(
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = Pos}
+    ):Play()
 end
-
+    
 function Djtmestop(CAC)
     if not CAC then
         _G.StopTween = true
@@ -2152,6 +2148,9 @@ spawn(function()
                     Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                     Noclip.MaxForce = Vector3.new(100000,100000,100000)
                     Noclip.Velocity = Vector3.new(Pos)
+                    if plr.Character.Humanoid.Sit == true then
+                        plr.Character.Humanoid.Sit = false
+                    end
                 end
             else
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
@@ -2167,6 +2166,9 @@ spawn(function()
                 for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
+                        if plr.Character.Humanoid.Sit == true then
+                            plr.Character.Humanoid.Sit = false
+                        end
                     end
                 end
             end
