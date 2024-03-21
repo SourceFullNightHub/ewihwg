@@ -2404,6 +2404,9 @@ RC:AddToggle({
 	Callback = function(Value)
 		_G.AutoKillPlyAfterTrial = Value
         Djtmestop(_G.AutoKillPlyAfterTrial)
+        if _G.AutoKillPlyAfterTrial == false then
+            dungskilldithangngu = false
+        end
 	end    
 })
 
@@ -2841,7 +2844,7 @@ end)
 
 spawn(function()
     while wait() do
-        if _G.AutoKillPlyAfterTrial then
+        if dungskilldithangngu then
             pcall(function()
                 if getgenv().SkillZ then
                     game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
