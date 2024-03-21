@@ -975,16 +975,6 @@ function Taixiu(Pos)
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
-function teleporttosea()
-    if _G.SelectSea == "1" then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
-    elseif _G.SelectSea == "2" then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
-    elseif _G.SelectSea == "3" then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
-    end
-end
-
 local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
 
 function RedeemCode(Code)
@@ -1022,30 +1012,6 @@ function ClickNormal()
         game:GetService'VirtualUser':CaptureController()
         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
     end
-end
-
-function TweenDaobian()
-    repeat wait()
-    until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
-    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-        local AllNPCS = getnilinstances()
-        for _, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
-            table.insert(AllNPCS, v)
-        end
-        for _, v in pairs(AllNPCS) do
-            if v.Name == "Advanced Fruit Dealer" then
-                Tween(v.HumanoidRootPart.CFrame)
-            end
-        end
-    end
-end
-
-function TweenFrozen()
-    pcall(function()
-        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-            Tween(game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') * CFrame.new(2, 20, 2))
-        end
-    end)
 end
 
 function TweenTemplete()
@@ -1688,7 +1654,13 @@ LC:AddDropdown({
 LC:AddButton({
 	Name = "Teleport To Sea",
 	Callback = function()
-        teleporttosea()
+        if _G.SelectSea == "1" then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
+        elseif _G.SelectSea == "2" then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+        elseif _G.SelectSea == "3" then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+        end
   	end    
 })
 
