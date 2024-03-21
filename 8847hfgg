@@ -2553,11 +2553,11 @@ spawn(function()
                             repeat task.wait()
                                 EnableBuso()
                                 EquipTool(SelectWP)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                                 ClickNormal()
                                 PosNearestMob = v.HumanoidRootPart.CFrame
                                 BringNearest = true
