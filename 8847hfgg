@@ -1700,7 +1700,7 @@ G:AddParagraph("Select Farm","Choose Mode Farm Your Need And Click The Box(Start
 G:AddDropdown({
 	Name = "Select Farm",
 	Default = "Level",
-	Options = {"Level", "Katakuri", "Bone"},
+	Options = {"Level", "Katakuri", "Bone", "Farm Nearest"},
 	Callback = function(Value)
 		_G.SelectFarm = Value
 	end    
@@ -1864,6 +1864,49 @@ ST:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.RemoveNotification = Value
+	end    
+})
+
+local Section = ST:AddSection({
+	Name = "Settings Skill And Weapons Trials"
+})
+
+ST:AddDropdown({
+	Name = "Select Weapons Kill Players After Trials",
+	Default = "Melee",
+	Options = {"Melee", "Sword"},
+	Callback = function(Value)
+		_G.SelectWPTrials = Value
+	end    
+})
+
+ST:AddToggle({
+	Name = "Skill Z",
+	Default = false,
+	Save = true,
+	Flag = "Skill Z",
+	Callback = function(Value)
+		getgenv().SkillZ = Value
+	end    
+})
+
+ST:AddToggle({
+	Name = "Skill X",
+	Default = false,
+	Save = true,
+	Flag = "Skill X",
+	Callback = function(Value)
+		getgenv().SkillX = Value
+	end    
+})
+
+ST:AddToggle({
+	Name = "Skill C",
+	Default = false,
+	Save = true,
+	Flag = "Skill C",
+	Callback = function(Value)
+		getgenv().SkillC = Value
 	end    
 })
 
@@ -2501,6 +2544,23 @@ spawn(function()
                             end
                         end
                     end
+                elseif _G.SelectFarm == "Farm Nearest" and _G.StartFarm then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.StartFarm then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(SelectWP)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                                ClickNormal()
+                                PosNearestMob = v.HumanoidRootPart.CFrame
+                                BringNearest = true
+                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.StartFarm
+                        end
+                    end
                 elseif _G.SelectFarm == "Katakuri" and _G.StartFarm then
                     if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -2732,6 +2792,7 @@ spawn(function()
     end
 end)
 
+local PosKillPlayers = CFrame.new(28727.4941, 14887.877, -87.3792191)
 spawn(function()
     while wait() do
         if _G.AutoKillPlyAfterTrial then
@@ -2739,19 +2800,22 @@ spawn(function()
                 for i, v in pairs(game.Workspace.Characters:GetChildren()) do
                     if v.Name ~= game.Players.LocalPlayer.Name then
                         if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 200 then
-                            repeat task.wait()
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
-                                EnableBuso()
-                                EquipTool(SelectWP)
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Head.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-                                game:GetService("VirtualUser"):CaptureController()
-                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                ClickNormal()
-                            until _G.AutoKillPlyAfterTrial == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
-                            
+                            if (PosKillPlayers.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                                repeat task.wait()
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                    EnableBuso()
+                                    EquipTool(_G.SelectWPTrials)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    dungskilldithangngu = true
+                                    ClickNormal()
+                                until _G.AutoKillPlyAfterTrial == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                                dungskilldithangngu = false
+                            end
                         end
                     end
                 end
@@ -2771,6 +2835,30 @@ spawn(function()
                     game:GetService("VirtualUser"):SetKeyUp("0x65")
                 end
             until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillV4
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoKillPlyAfterTrial then
+            pcall(function()
+                if getgenv().SkillZ then
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                    if getgenv().SkillX then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+                        wait(0.1)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                        if getgenv().SkillC then
+                            game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+                            wait(0.1)
+                            game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                        end
+                    end
+                end
+            end)
         end
     end
 end)
@@ -3652,7 +3740,7 @@ spawn(function()
                     end
                 elseif RaceCheck == "Skypiea" then
                     for i,v in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
-                        if v.Name ==  "snowisland_Cylinder.081" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500then
+                        if v.Name ==  "snowisland_Cylinder.081" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500 then
                             Tween(v.CFrame * CFrame.new(0 ,0 ,0))
                         end
                     end
@@ -3666,7 +3754,7 @@ spawn(function()
                             Tween(v.CFrame * CFrame.new(0, 3, 0))
                         end
                     end
-                elseif RaceCheck == "Ghoul " then
+                elseif RaceCheck == "Ghoul" then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
                             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoTrials then
@@ -3961,6 +4049,19 @@ spawn(function()
                             sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                         end
                     end
+                    if _G.StartFarm and BringNearest then
+                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.StartFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                            v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                            v.HumanoidRootPart.CFrame = PosNearestMob
+                            v.Humanoid:ChangeState(14)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            if v.Humanoid:FindFirstChild("Animator") then
+                                v.Humanoid.Animator:Destroy()
+                            end
+                            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                        end
+                    end  
                 end
             end)
         end
