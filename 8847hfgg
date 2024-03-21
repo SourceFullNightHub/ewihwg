@@ -13,12 +13,6 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 	Text = "Loading...",
 	Icon = "rbxassetid://15541504459"
 })
-wait(3)
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Night Hub",
-	Text = "Loading Complete",
-	Icon = "rbxassetid://15541504459"
-})
 
 if taodangosea1 then
     Maretialslist = {"Angel Swings", "Leather", "Magma Ore", "Scrap Metal", "Yeti Fur", "Fish Tail"}
@@ -974,8 +968,6 @@ function Taixiu(Pos)
         wait(3)
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
-
-local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
 
 function RedeemCode(Code)
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Code)
@@ -2047,6 +2039,7 @@ RC:AddButton({
   	end    
 })
 
+local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
 RC:AddButton({
 	Name = "Teleport To Doors Trials",
 	Callback = function()
@@ -3729,3 +3722,9 @@ assert(getrawmetatable)
         end
         return old(self, ...)
     end)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Loading Complete",
+	Icon = "rbxassetid://15541504459"
+})
