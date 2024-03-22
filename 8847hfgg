@@ -638,7 +638,6 @@ function Tween(Pos)
     Speed = Distance >= 1 and 325 or 1
     if Distance <= 300 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-        NoCLip = false
     end
     game:GetService("TweenService"):Create(
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -797,7 +796,7 @@ local ST = windowz:CreatePage("Settings")
 
 local Dungtoll = G:CreateSection("Select Weapons")
 
-Dungtoll:CreateDropdown("Select Weapon ", {List = {"Melee", "Sword"}, Default = "Melee"}, function(value) _G.UsingTool = Value end)
+Dungtoll:CreateDropdown("Select Weapon ", {List = {"Melee", "Sword"}, Default = "Melee"}, function(value) _G.UsingTool = value end)
 
 task.spawn(function()
     while wait() do
@@ -884,6 +883,29 @@ local FastAttackSection = ST:CreateSection("FastAttack")
 
 FastAttackSection:CreateToggle("FastAttack", {Toggled = true , Description = "..."}, function(Value) _G.FastAttackOld = Value end)
 
+FastAttackSection:CreateDropdown("FastAttack Delay ", {List ={"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.175"}, function(Value) _G.FastAttackDelay = Value end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttackOld == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
+
+spawn(function()
+    while wait(0.1) do
+        if _G.FastAttackOld then
+            pcall(function()
+                repeat task.wait(_G.FastAttackDelay)
+                    Attack()
+                until not _G.FastAttackOld
+            end)
+        end
+    end
+end)
+
 FastAttackSection:CreateToggle("Bring Mob", {Toggled = true , Description = "..."}, function(Value) _G.BringMob = Value end)
 
 FastAttackSection:CreateToggle("Bypass Teleport", {Toggled = true , Description = "..."}, function(Value) BypassTP = Value end)
@@ -920,6 +942,8 @@ spawn(function()
         end
     end
 end)
+
+
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "Night Hub",
