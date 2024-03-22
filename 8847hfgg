@@ -1010,10 +1010,11 @@ spawn(function()
         pcall(function()
             if _G.AutoChestTween then
                 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if string.find(v.Name, "Chest") and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 7000 then
+                    if string.find(v.Name, "Chest") then
                         repeat task.wait()
                             Tween(v.CFrame)
                         until not _G.AutoChestTween
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
                     end
                 end
             end
@@ -1028,10 +1029,11 @@ spawn(function()
         pcall(function()
             if _G.AutoChestBypass then
                 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if string.find(v.Name, "Chest") and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 7000 then
+                    if string.find(v.Name, "Chest") then
                         repeat task.wait()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         until not _G.AutoChestBypass
+                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
                     end
                 end
             end
