@@ -1,7 +1,9 @@
 # Night Hub Library Ui New
 
 # Library :
-```local uilibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()```
+```
+local uilibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
+```
 
 # Create Windows :
 ```local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)```
