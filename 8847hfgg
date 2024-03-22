@@ -899,7 +899,7 @@ spawn(function()
     end
 end)
 
-Section1:CreateToggle("Enable Race V4", {Toggled = false , Description = "Auto Awkening Race V4 If Have"}, function(Value) _G.TurnV4 = Value end)
+PlayersFarmSection:CreateToggle("Enable Race V4", {Toggled = false , Description = "Auto Awkening Race V4 If Have"}, function(Value) _G.TurnV4 = Value end)
 
 spawn(function()
     while wait() do
