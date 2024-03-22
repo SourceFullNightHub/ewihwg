@@ -229,6 +229,11 @@ function CFAHub:CreateWindow(title, gameName, intro)
         Container.Visible = isVisible
     end)
 
+    UICorner.Parent = ImageButton
+
+    UIStroke.Color = Color3.fromRGB(255, 255, 255)
+    UIStroke.Parent = ImageButton
+
     -- NOTIFICATION
 
     local UIListLayout = Instance.new("UIListLayout")
