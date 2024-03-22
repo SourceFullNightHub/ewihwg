@@ -128,26 +128,6 @@ function CFAHub:DraggingEnabled(frame, parent)
     end)
 end
 
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")
-local UICorner = Instance.new("UICorner")
-local UIStroke = Instance.new("UIStroke")
-local isVisible = false
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
-ImageButton.Size = UDim2.new(0, 30, 0, 30)
-ImageButton.Image = "rbxassetid://16237266234"
-ImageButton.MouseButton1Click:Connect(function()
-    isVisible = not isVisible
-    Container.Visible = isVisible
-end)
-
 local GuiName = "Night Hub"
 
 function CFAHub:CreateWindow(title, gameName, intro)
@@ -228,6 +208,26 @@ function CFAHub:CreateWindow(title, gameName, intro)
     local TabGridLayout = Instance.new("UIGridLayout")
 
     local ShadowBlue = Instance.new("ImageLabel")
+
+    local ScreenGui = Instance.new("ScreenGui")
+    local ImageButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    local isVisible = false
+    
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    
+    ImageButton.Parent = ScreenGui
+    ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+    ImageButton.Size = UDim2.new(0, 30, 0, 30)
+    ImageButton.Image = "rbxassetid://16237266234"
+    ImageButton.MouseButton1Click:Connect(function()
+        isVisible = not isVisible
+        Container.Visible = isVisible
+    end)
 
     -- NOTIFICATION
 
