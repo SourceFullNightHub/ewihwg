@@ -852,7 +852,7 @@ end
 
 PlayersFarmSection:CreateButton("Redeem All Codes", function () RedeemAllCode() end)
 
-PlayersFarmSection:CreateDropdown("Select Stats ", {List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"},, Default = ""}, function(Value) getgenv().Stats = Value end)
+PlayersFarmSection:CreateDropdown("Select Stats ", {List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Default = ""}, function(Value) getgenv().Stats = Value end)
 
 spawn(function()
     while wait() do
