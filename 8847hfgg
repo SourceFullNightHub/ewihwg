@@ -934,7 +934,7 @@ function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     Speed = Distance >= 1 and 325 or 1
     if Distance <= 300 then
-        plr.Character.HumanoidRootPart.CFrame = Pos
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         NoCLip = false
     end
     game:GetService("TweenService"):Create(
