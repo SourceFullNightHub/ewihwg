@@ -777,6 +777,8 @@ local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 
 local G = windowz:CreatePage("General")
 
+local ST = windowz:CreatePage("Settings")
+
 local Dungtoll = G:CreateSection("Select Weapons")
 
 Dungtoll:CreateDropdown("Select Weapon ", {List = {"Melee", "Sword"}, Default = "Melee"}, function(value) _G.UsingTool = Value end)
@@ -812,7 +814,7 @@ spawn(function()
                                 if v.Name == Mob then
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
                                         repeat wait()
-                                            EquipTool(SelectWP)
+                                            EquipTool(_G.UsingTool)
                                             EnableBuso()                                            
                                             PosMon = v.HumanoidRootPart.CFrame
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
@@ -822,7 +824,7 @@ spawn(function()
                                             v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                             BringMob = true
                                             ClickNormal()
-                                        until not _G.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                     end
                                 end
                             end
@@ -839,5 +841,44 @@ spawn(function()
                 end
             end
         end)
+    end
+end)
+
+local FastAttackSection = G:CreateSection("FastAttack")
+
+FastAttackSection:CreateToggle("FastAttack", {Toggled = true , Description = "..."}, function(Value) _G.FastAttackOld = Value end)
+
+FastAttackSection:CreateToggle("Bring Mob", {Toggled = true , Description = "..."}, function(Value) _G.BringMob = Value end)
+
+spawn(function()
+    while wait() do
+        if _G.BringMob then
+            pcall(function()
+                Checknhiemvu()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if _G.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    elseif _G.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
+            end)
+        end
     end
 end)
