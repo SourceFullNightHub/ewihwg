@@ -799,6 +799,26 @@ local Dungtoll = G:CreateSection("Select Weapons")
 
 Dungtoll:CreateDropdown("Select Weapon ", {List = {"Melee", "Sword"}, Default = "Melee"}, function(value) _G.UsingTool = Value end)
 
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.UsingTool == "Melee" then
+                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                        _G.UsingTool = v.Name
+                    end
+                end
+            elseif _G.UsingTool == "Sword" then
+                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                        _G.UsingTool = v.Name
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 local FarmSection = G:CreateSection("Farmming")
 
 FarmSection:CreateToggle("Auto Farm", {Toggled = false , Description = "Click The Box To Enabled Auto Farm"}, function(Value) _G.AutoLevel = Value end)
