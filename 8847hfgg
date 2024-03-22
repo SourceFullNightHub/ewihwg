@@ -3,7 +3,7 @@ local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 
 local G = windowz:CreatePage("General")
 
-local Section1 = G:CreateSection("Test Ui")
+local Section1 = G:CreateSection("Section")
 
 Section1:CreateToggle("Toggle", {Toggled = false , Description = "Is This Toggle"}, function(Value) _G.AutoFarm = Value end)
 
