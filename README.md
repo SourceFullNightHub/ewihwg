@@ -32,7 +32,7 @@ Section1:CreateToggle("Toggle Example", {Toggled = false , Description = "Iu Tvk
 
 # Create DropDown :
 ```lua
-Section1:CreateDropdown("Dropdown ", {List = {"Value1", "Value2", "Value3", "Value4"}, Default = "None"}, function(value) print(value) end)
+Section1:CreateDropdown("Dropdown ", {List = {"Value1", "Value2", "Value3", "Value4"}, Default = ""}, function(Value) print(value) end)
 ```
 
 # Create TextBox :
