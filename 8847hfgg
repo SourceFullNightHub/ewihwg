@@ -858,35 +858,35 @@ spawn(function()
     while wait() do
         pcall(function()
             if game.Players.localPlayer.Data.Points.Value >= 1 then
-                if _G.Stats == "Melee" then
+                if getgenv().Stats == "Melee" then
                     local args = {
                     [1] = "AddPoint",
                     [2] = "Melee",
                     [3] = 1
                 }
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                elseif _G.Stats == "Defense" then
+                elseif getgenv().Stats == "Defense" then
                 local args = {
                     [1] = "AddPoint",
                     [2] = "Defense",
                         [3] = 1
                     }
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                    elseif _G.Stats == "Sword" then
+                    elseif getgenv().Stats == "Sword" then
                     local args = {
                         [1] = "AddPoint",
                         [2] = "Sword",
                         [3] = 1
                     }
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                    elseif _G.Stats == "Gun" then
+                    elseif getgenv().Stats == "Gun" then
                     local args = {
                         [1] = "AddPoint",
                         [2] = "Gun",
                         [3] = 1
                     }
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                    elseif _G.Stats == "Devil Fruit" then
+                    elseif getgenv().Stats == "Devil Fruit" then
                     local args = {
                         [1] = "AddPoint",
                         [2] = "Blox Fruit",
