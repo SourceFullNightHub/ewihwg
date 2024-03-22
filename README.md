@@ -2,49 +2,40 @@
 
 # Library :
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
+local uilibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
 ```
 
 # Create Window :
 ```lua
-local Main = Library.CreateMain({Title = 'Night Hub', Desc = 'Decription'})
+local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 ```
 
 # Create Tab :
 ```lua
-local Page1 = Main.CreatePage({Page_Name = 'Page 1', Page_Title = 'Main Tab'})
+local Page1 = windowz:CreatePage("Page I")
 ```
 
 # Create Section :
 ```lua
-local Section = Page1.CreateSection('Item')
+local Section1 = Page1:CreateSection("Section Name")
 ```
 
 # Create Buttons :
 ```lua
-Section.CreateButton({Title = 'Button'}, function()
-    print("hello there")
-end)
+Section1:CreateButton("Button Example", function () print("Button Cliked!") end)
 ```
 
 # Create Toggle :
 ```lua
-Section.CreateToggle({Title = 'Toggle', Default = true}, function(Value)
-    print(Value)
-end)
+Section1:CreateToggle("Toggle Example", {Toggled = false , Description = "Iu Tvk nhìu UwU"}, function(Value) print(Value) end)
 ```
 
 # Create DropDown :
 ```lua
-local List1 = {"1","2"}
-Section.CreateDropdown({Title = 'Dropdown', List = List1, Search = true, Selected = true}, function(Value)
-  print(Value)
-end) 
+Section1:CreateDropdown("Dropdown ", {List = {"Value1", "Value2", "Value3", "Value4"}, Default = "None"}, function(value) print(Value) end)
 ```
 
 # Create TextBox :
 ```lua
-Section.CreateBox({Title = 'Box / Text Box', Placeholder = 'Type here', Number_Only = true}, function(Value)
-    print(Value)
-end)
+Section1:CreateTextbox("TextBox", false, function(vv) print(vv) end)
 ```
