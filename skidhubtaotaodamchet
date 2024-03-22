@@ -97,7 +97,7 @@ end
 function CFAHub:DraggingEnabled(frame, parent)
     parent = parent or frame
 
-    local dragging = false
+    local dragging = true
     local dragInput, mousePos, framePos
 
     frame.InputBegan:Connect(function(input)
@@ -128,10 +128,30 @@ function CFAHub:DraggingEnabled(frame, parent)
     end)
 end
 
-local GuiName = "CFAHubPremium2022"
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local isVisible = false
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+ImageButton.Size = UDim2.new(0, 30, 0, 30)
+ImageButton.Image = "rbxassetid://16237266234"
+ImageButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    Container.Visible = isVisible
+end)
+
+local GuiName = "Night Hub"
 
 function CFAHub:CreateWindow(title, gameName, intro)
-    title = title or "<font color=\"#1CB2F5\">CFA Hub Premium</font>"
+    title = title or "<font color=\"#1CB2F5\">Night Hubm</font>"
     gameName = gameName or "N/A"
 
     for _, v in pairs(CoreGui:GetChildren()) do
@@ -151,7 +171,7 @@ function CFAHub:CreateWindow(title, gameName, intro)
         ScrollBar = Color3.fromRGB(149, 149, 149),
         NotiBackground = Color3.fromRGB(0, 0, 0),
         Glow = Color3.fromRGB(79, 195, 247),
-        Logo = "rbxassetid://7409401226"
+        Logo = "rbxassetid://15541504459"
     }
 
     table.insert(CFAHub, title)
