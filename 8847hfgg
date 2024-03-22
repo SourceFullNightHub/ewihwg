@@ -818,6 +818,101 @@ task.spawn(function()
     end
 end)
 
+local PlayersFarmSection = G:CreateSection("Players Farm")
+
+function RedeemAllCode()
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2UncleKizaru")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("NEWTROLL")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUB2NOOBMASTER123")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("StrawHatMaine")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2OfficialNoobie")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2NoobMaster123")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUB2GAMERROBOT_EXP1")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUB2GAMERROBOT_RESET1")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("THEGREATACE")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("BIGNEWS")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("FUDD10")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("fudd10_v2")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Bluxxy")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Starcodeheo")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("JCWK")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUB2CAPTAINMAUI")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Magicbus")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2Fer999")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("kittgaming")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("GAMERROBOT")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUBGAMERROBOT")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("ADMINGIVEAWAY")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("KITT_RESET")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SECRET_ADMIN")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2Daigrock")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Axiore")
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("TantaiGaming")
+end
+
+PlayersFarmSection:CreateButton("Redeem All Codes", function () RedeemAllCode() end)
+
+PlayersFarmSection:CreateDropdown("Select Stats ", {List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"},, Default = ""}, function(Value) getgenv().Stats = Value end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game.Players.localPlayer.Data.Points.Value >= 1 then
+                if _G.Stats == "Melee" then
+                    local args = {
+                    [1] = "AddPoint",
+                    [2] = "Melee",
+                    [3] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                elseif _G.Stats == "Defense" then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Defense",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    elseif _G.Stats == "Sword" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Sword",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    elseif _G.Stats == "Gun" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Gun",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    elseif _G.Stats == "Devil Fruit" then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Blox Fruit",
+                        [3] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+            end
+        end)
+    end
+end)
+
+Section1:CreateToggle("Enable Race V4", {Toggled = false , Description = "Auto Awkening Race V4 If Have"}, function(Value) _G.TurnV4 = Value end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TurnV4 then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+                wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+            end
+        end)
+    end
+end)
+
 local FarmSection = G:CreateSection("Farmming")
 
 FarmSection:CreateToggle("Auto Farm", {Toggled = false , Description = "Click The Box To Enabled Auto Farm"}, function(Value) _G.AutoLevel = Value end)
