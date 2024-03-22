@@ -855,7 +855,7 @@ spawn(function()
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                             BringMob = true
                                             PosMon = v.HumanoidRootPart.CFrame
                                             ClickNormal()
@@ -894,7 +894,7 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             v.Humanoid.WalkSpeed = 0
                             v.Head.CanCollide = false
-                            v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                            v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                             ClickNormal()
                             PosNearestMob = v.HumanoidRootPart.CFrame
                             BringNearest = true
@@ -976,7 +976,7 @@ spawn(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if _G.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
                         v.HumanoidRootPart.CanCollide = false
@@ -986,7 +986,7 @@ spawn(function()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     elseif _G.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
                         v.HumanoidRootPart.CanCollide = false
@@ -999,7 +999,7 @@ spawn(function()
                 end
                 if _G.AutoFarmNearest and BringNearest then
                     if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoFarmNearest and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CFrame = PosNearestMob
                         v.Humanoid:ChangeState(14)
                         v.HumanoidRootPart.CanCollide = false
