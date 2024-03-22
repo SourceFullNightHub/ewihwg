@@ -41,6 +41,6 @@ Section1:CreateTextbox("TextBox", false, function(vv) print(vv) end)
 ```
 
 # Create KeyBind :
-```
+```lua
 Section1:CreateKeybind("Keybind", "T", function() print("Pressed T") end)
 ```
