@@ -906,6 +906,8 @@ spawn(function()
     end
 end)
 
+FarmSection:CreateToggle("Auto Skip Level(1 - 150)", {Toggled = false , Description = "Skip Level 1 to 150 with sky Farm"}, function(Value) _G.AutoSkipLevel = Value end)
+
 local FastAttackSection = ST:CreateSection("FastAttack")
 
 FastAttackSection:CreateToggle("FastAttack", {Toggled = true , Description = "..."}, function(Value) _G.FastAttackOld = Value end)
