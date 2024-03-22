@@ -1,3 +1,19 @@
+if game.PlaceId == 2753915549 then
+    taodangosea1 = true
+elseif game.PlaceId == 4442272183 then
+    taodangosea2 = true
+elseif game.PlaceId == 7449423635 then
+    taodangosea3 = true
+else
+    game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
+end
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Loading...",
+	Icon = "rbxassetid://15541504459"
+})
+
 function Checknhiemvu()
     YourLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if taodangosea1 then
@@ -816,13 +832,13 @@ spawn(function()
                                         repeat wait()
                                             EquipTool(_G.UsingTool)
                                             EnableBuso()                                            
-                                            PosMon = v.HumanoidRootPart.CFrame
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(70,70,70)
                                             BringMob = true
+                                            PosMon = v.HumanoidRootPart.CFrame
                                             ClickNormal()
                                         until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                     end
@@ -844,11 +860,13 @@ spawn(function()
     end
 end)
 
-local FastAttackSection = G:CreateSection("FastAttack")
+local FastAttackSection = ST:CreateSection("FastAttack")
 
 FastAttackSection:CreateToggle("FastAttack", {Toggled = true , Description = "..."}, function(Value) _G.FastAttackOld = Value end)
 
 FastAttackSection:CreateToggle("Bring Mob", {Toggled = true , Description = "..."}, function(Value) _G.BringMob = Value end)
+
+FastAttackSection:CreateToggle("Bypass Teleport", {Toggled = true , Description = "..."}, function(Value) BypassTP = Value end)
 
 spawn(function()
     while wait() do
@@ -882,3 +900,9 @@ spawn(function()
         end
     end
 end)
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Complete Your Can Use",
+	Icon = "rbxassetid://15541504459"
+})
