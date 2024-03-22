@@ -12,7 +12,7 @@ local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 
 # Create Tab :
 ```
-windowz:CreatePage("General")
+local Page1 = windowz:CreatePage("Page I")
 ```
 
 # Create Section :
