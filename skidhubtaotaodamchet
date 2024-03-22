@@ -1,5 +1,5 @@
 
-local NightHup = {}
+local CFAHub = {}
 
 warn("Preparing UI...")
 
@@ -94,7 +94,7 @@ function Animate:CreateGradient(object)
     UIGradient.Parent = object
 end
 
-function NightHup:DraggingEnabled(frame, parent)
+function CFAHub:DraggingEnabled(frame, parent)
     parent = parent or frame
 
     local dragging = false
@@ -128,10 +128,10 @@ function NightHup:DraggingEnabled(frame, parent)
     end)
 end
 
-local GuiName = "NightHupPremium2022"
+local GuiName = "CFAHubPremium2022"
 
-function NightHup:CreateWindow(title, intro)
-    title = title or "<font color=\"#1CB2F5\">Night Hub</font>"
+function CFAHub:CreateWindow(title, gameName, intro)
+    title = title or "<font color=\"#1CB2F5\">CFA Hub Premium</font>"
     gameName = gameName or "N/A"
 
     for _, v in pairs(CoreGui:GetChildren()) do
@@ -151,21 +151,21 @@ function NightHup:CreateWindow(title, intro)
         ScrollBar = Color3.fromRGB(149, 149, 149),
         NotiBackground = Color3.fromRGB(0, 0, 0),
         Glow = Color3.fromRGB(79, 195, 247),
-        Logo = "rbxassetid://15541504459"
+        Logo = "rbxassetid://7409401226"
     }
 
-    table.insert(NightHup, title)
+    table.insert(CFAHub, title)
 
-    function NightHup:SetTheme(theme, color3)
+    function CFAHub:SetTheme(theme, color3)
         themes[theme] = color3
     end
 
-    local NightHupGui = Instance.new("ScreenGui")
+    local CFAHubGui = Instance.new("ScreenGui")
 
     if intro == true then
         local Logo = Instance.new("ImageLabel")
         
-        Logo.Parent = NightHupGui
+        Logo.Parent = CFAHubGui
         Logo.AnchorPoint = Vector2.new(0.5, 0.5)
         Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Logo.BackgroundTransparency = 1.000
@@ -221,7 +221,7 @@ function NightHup:CreateWindow(title, intro)
     UIListLayout.Padding = UDim.new(0, 8)
     
     CurrentAlert.Name = "NotiContainer"
-    CurrentAlert.Parent = NightHupGui
+    CurrentAlert.Parent = CFAHubGui
     CurrentAlert.AnchorPoint = Vector2.new(1, 1)
     CurrentAlert.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     CurrentAlert.BackgroundTransparency = 1.000
@@ -229,7 +229,7 @@ function NightHup:CreateWindow(title, intro)
     CurrentAlert.Size = UDim2.new(1, -10, 1, -10)
     CurrentAlert.ZIndex = 9
 
-    function NightHup:AddNoti(header, message, duration, buttonEnable, callback)
+    function CFAHub:AddNoti(header, message, duration, buttonEnable, callback)
         header = header or "Announcement"
         message = message or "Nil"
         duration = duration or 120
@@ -444,7 +444,7 @@ function NightHup:CreateWindow(title, intro)
         end)
     end -- final
 
-    function NightHup:ToggleUI()
+    function CFAHub:ToggleUI()
         if Container.Visible == true then
             Utility:TweenObject(UIScale, {Scale = 0.95}, 0.25)
             wait(0.25)
@@ -455,14 +455,14 @@ function NightHup:CreateWindow(title, intro)
         end
     end
 
-    NightHup:DraggingEnabled(Header, Container)
+    CFAHub:DraggingEnabled(Header, Container)
 
-    NightHupGui.Name = GuiName
-    NightHupGui.Parent = CoreGui
-    NightHupGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    CFAHubGui.Name = GuiName
+    CFAHubGui.Parent = CoreGui
+    CFAHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     Container.Name = "Container"
-    Container.Parent = NightHupGui
+    Container.Parent = CFAHubGui
     Container.AnchorPoint = Vector2.new(0.5, 0.5)
     Container.BackgroundColor3 = themes.Container
     Objects[Container] = "Container"
@@ -2270,4 +2270,4 @@ function NightHup:CreateWindow(title, intro)
     return Tabs
 end
 
-return NightHup
+return CFAHub
