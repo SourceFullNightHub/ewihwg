@@ -1,5 +1,5 @@
 local uilibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
-local windowz = uilibrary:CreateWindow("Night Hub", true)
+local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 
 local G = windowz:CreatePage("General")
 
