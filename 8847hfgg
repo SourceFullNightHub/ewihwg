@@ -6231,9 +6231,13 @@ end)
 
 local ServerSection = MSC.CreateSection('Servers')
 
-ServerSection:CreateButton("Hop Servers", function () Hop() end)
+ServerSection.CreateButton({Title = 'Hop Servers'}, function()
+    Hop()
+end)
 
-ServerSection:CreateButton("Rejoin Servers", function () game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer) end)
+ServerSection.CreateButton({Title = 'Rejoin'}, function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
 
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
