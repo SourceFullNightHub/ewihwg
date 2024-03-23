@@ -1,0 +1,44 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
+local Main = Library.CreateMain({Title = 'Night Hub', Desc = ''})
+
+local Page1 = Main.CreatePage({Page_Name = 'Page1', Page_Title = ''})
+local Page1 = Main.CreatePage({Page_Name = 'Page2', Page_Title = ''})
+
+local Section1 = Page1.CreateSection('Section')
+local Section2 = Page2.CreateSection('Section')
+
+Section1.CreateButton({Title = 'Buttons'}, function()
+  print("Hi")  
+end)
+Section2.CreateButton({Title = 'Buttons'}, function()
+  print("Hi")  
+end)
+
+Section1.CreateDropdown({Title = 'DropDown', List = {"1", "2", "3", "4"}, Search = true, Selected = true}, function(Value)
+  print(Value)
+end)
+Section2.CreateDropdown({Title = 'DropDown', List = {"1", "2", "3", "4"}, Search = true, Selected = true}, function(Value)
+  print(Value)
+end)
+
+Section1.CreateToggle({Title = 'Toggle', Default = Settings.DoublePassive}, function(Value)
+    print(Value)
+end)
+Section2.CreateToggle({Title = 'Toggle', Default = Settings.DoublePassive}, function(Value)
+    print(Value)
+end)
+
+Section1.CreateSlider({Title = "Slider", Min = 1, Max = 100, Default = 1, Precise = false}, function(Value)
+    print(Value)
+end)
+Section2.CreateSlider({Title = "Slider", Min = 1, Max = 100, Default = 1, Precise = false}, function(Value)
+    print(Value)
+end)
+
+Section1.CreateBind({Title = 'Key Bind', Key = Enum.KeyCode.RightControl}, function()
+    print("Key Bind")
+end)
+Section2.CreateBind({Title = 'Key Bind', Key = Enum.KeyCode.RightControl}, function()
+	    print("Key Bind")
+end)
+
