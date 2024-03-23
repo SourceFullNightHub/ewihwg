@@ -981,6 +981,10 @@ spawn(function()
     end
 end)
 
+local STOPTWEENSCTION = G:CreateSection("StopTween")
+
+STOPTWEENSCTION:CreateButton("StopTween", function () Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame) NoClip = false end)
+
 local FarmSection = G:CreateSection("Farmming")
 
 FarmSection:CreateToggle("Auto Farm", {Toggled = false , Description = "Click The Box To Enabled Auto Farm"}, function(Value) _G.AutoLevel = Value end)
