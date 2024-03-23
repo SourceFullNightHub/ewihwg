@@ -8,7 +8,7 @@ function GetUi()
         end
     end
 end
-getgenv().Tvk = false
+getgenv().Tvk = true
 getgenv().Chon = true
 
 local oldcolor = {
@@ -8616,3 +8616,4 @@ Section2.CreateBind({Title = 'Key Bind', Key = Enum.KeyCode.RightControl}, funct
 	    print("Key Bind")
 end)
 
+print("tao lạy mày đấy cái ui")
