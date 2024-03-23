@@ -854,19 +854,21 @@ local plr = game.Players.LocalPlayer
     end)
 
 local uilibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
-local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
+local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
-local G = windowz:CreatePage("General")
+local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
 
-local ST = windowz:CreatePage("Settings")
+local ST = Main.CreatePage({Page_Name = 'Settings', Page_Title = ''})
 
-local IQ = windowz:CreatePage("Item & Quest")
+local IQ = Main.CreatePage({Page_Name = 'Item & Quest', Page_Title = ''})
 
-local MSC = windowz:CreatePage("Misc")
+local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
-local Dungtoll = G:CreateSection("Select Weapons")
+local Dungtoll = G.CreateSection('Select Weapons')
 
-Dungtoll:CreateDropdown("Select Weapon ", {List = {"Melee", "Sword"}, Default = "Melee"}, function(value) _G.UsingTool = value end)
+Dungtoll.CreateDropdown({Title = 'Select Weapons', List = {"Melee", "Sword"}, Search = false, Selected = true}, function(Value)
+    _G.UsingTool = Value
+end)
 
 task.spawn(function()
     while wait() do
@@ -888,7 +890,7 @@ task.spawn(function()
     end
 end)
 
-local PlayersFarmSection = G:CreateSection("Players Farm")
+local FarmSettingSection = G.CreateSection('Farm Settings')
 
 function RedeemAllCode()
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2UncleKizaru")
@@ -920,9 +922,13 @@ function RedeemAllCode()
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("TantaiGaming")
 end
 
-PlayersFarmSection:CreateButton("Redeem All Codes", function () RedeemAllCode() end)
+FarmSettingSection.CreateButton({Title = 'Redeem All Codes'}, function()
+    RedeemAllCode()
+end)
 
-PlayersFarmSection:CreateDropdown("Select Stats ", {List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Default = ""}, function(Value) getgenv().Stats = Value end)
+FarmSettingSection.CreateDropdown({Title = 'Select Stas To Add', List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Search = false, Selected = true}, function(Value)
+    getgenv().Stats = Value
+end)
 
 spawn(function()
     while wait() do
@@ -969,7 +975,9 @@ spawn(function()
     end
 end)
 
-PlayersFarmSection:CreateToggle("Enable Race V4", {Toggled = false , Description = "Auto Awkening Race V4 If Have"}, function(Value) _G.TurnV4 = Value end)
+FarmSettingSection.CreateToggle({Title = 'Auto Wakening Race V4', Desc = 'Auto Wakening Race V4 If Train Race Full', Default = false}, function(Value)
+    _G.TurnV4 = Value
+end)
 
 spawn(function()
     while wait() do
@@ -983,13 +991,19 @@ spawn(function()
     end
 end)
 
-local STOPTWEENSCTION = G:CreateSection("StopTween")
+local STOPTWEENSCTION = G.CreateSection('StopTween')
 
-STOPTWEENSCTION:CreateButton("StopTween", function () Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame) NoClip = false end)
+STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
+    _G.Emdungdiiiii = true
+    wait(0.5)
+    _G.Emdungdiiiii = false
+end)
 
-local FarmSection = G:CreateSection("Farmming")
+local FarmSection = G.CreateSection('FARM TOGGLE')
 
-FarmSection:CreateToggle("Auto Farm", {Toggled = false , Description = "Click The Box To Enabled Auto Farm"}, function(Value) _G.AutoLevel = Value end)
+FarmSection.CreateToggle({Title = 'Auto Farm', Desc = 'Auto Teleport To NPC GetQuest and going to Mob need farm to kill', Default = false}, function(Value)
+    _G.AutoLevel = Value
+end)
 
 spawn(function()
     while wait() do
@@ -1048,7 +1062,9 @@ spawn(function()
     end
 end)
 
-FarmSection:CreateToggle("Auto Katakuri", {Toggled = false , Description = "Auto Katakuri has the function of attacking 500 Mobs to summon Katakuri and fly up to attack. If there is a Dough King, it will also fight. "}, function(Value) _G.AutoKatakuri = Value end)
+FarmSection.CreateToggle({Title = 'Auto Katakuri', Desc = 'Auto Killing 500 Mobs To Spawn Cake Price else if Have Cake Price or Dough King In Servers then Teleport To Boss and kill', Default = false}, function(Value)
+    _G.AutoKatakuri = Value
+end)
 
 spawn(function()
     while wait() do
@@ -1159,7 +1175,9 @@ spawn(function()
     end
 end)
 
-FarmSection:CreateToggle("Auto Bone", {Toggled = false , Description = "Auto Bone has the function of Teleporting to the dark castle island and fighting monsters to collect bones."}, function(Value) _G.AutoBone = Value end)
+FarmSection.CreateToggle({Title = 'Auto Bone', Desc = ' Go to castle haunted kill mob to get bone', Default = false}, function(Value)
+    _G.AutoBone = Value
+end)
 
 local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
 spawn(function()
@@ -1204,7 +1222,9 @@ spawn(function()
     end
 end)
 
-FarmSection:CreateToggle("Auto Farm Nearest", {Toggled = false , Description = "Find Nearest Mob And Farm"}, function(Value) _G.AutoFarmNearest = Value end)
+FarmSection.CreateToggle({Title = 'Auto Farm Nearest', Desc = ' get nearest mob to farm', Default = false}, function(Value)
+    _G.AutoFarmNearest = Value
+end)
 
 spawn(function()
     while wait() do
@@ -1231,9 +1251,15 @@ spawn(function()
     end
 end)
 
-local ChestSection = G:CreateSection("Chest")
+FarmSection.CreateToggle({Title = 'Auto Skip Level(1 - 150)', Desc = 'If Your Level = 1 then, go to sky island farm Mob ', Default = false}, function(Value)
+    _G.SkipLevel = Value
+end)
 
-ChestSection:CreateToggle("Auto Chest<Tween>", {Toggled = false , Description = "Auto Chest Tween Never Ban!!"}, function(Value) _G.AutoChestTween = Value end)
+local ChestSection = G.CreateSection('Chest')
+
+ChestSection.CreateToggle({Title = 'Auto Chest<Tween>', Desc = 'Get Nearest Chest and Teleport To Get Beli', Default = false}, function(Value)
+    print(Value)
+end)
 
 spawn(function()
     while wait() do
@@ -1251,7 +1277,7 @@ spawn(function()
                                         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Q",false,game)
                                     end
                                 end
-                            until not _G.AutoChestBypass or not v.Parent
+                            until not _G.AutoChestTween or not v.Parent
                             Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                         end
                     end
@@ -1261,7 +1287,9 @@ spawn(function()
     end
 end)
 
-ChestSection:CreateToggle("Auto Chest<Bypass>", {Toggled = false , Description = "Auto Chest Bypass Can Ban And Kick Your"}, function(Value) _G.AutoChestBypass = Value end)
+ChestSection.CreateToggle({Title = 'Auto Chest<Instance>', Desc = 'Find Nearest Chest And Instance Teleport To Get Beli', Default = false}, function(Value)
+    _G.AutoChestBypass = Value
+end)
 
 spawn(function()
     while wait() do
@@ -1289,13 +1317,15 @@ spawn(function()
     end
 end)
 
-FarmSection:CreateToggle("Auto Skip Level(1 - 150)", {Toggled = false , Description = "Skip Level 1 to 150 with sky Farm"}, function(Value) _G.AutoSkipLevel = Value end)
+local FastAttackSection = ST.CreateSection('FastAttack')
 
-local FastAttackSection = ST:CreateSection("FastAttack")
+FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No Delay And Large Hit.', Default = true}, function(Value)
+    _G.FastAttackOld = Value
+end)
 
-FastAttackSection:CreateToggle("FastAttack", {Toggled = true , Description = "..."}, function(Value) _G.FastAttackOld = Value end)
-
-FastAttackSection:CreateDropdown("FastAttack Delay ", {List ={"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.175"}, function(Value) _G.FastAttackDelay = Value end)
+FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Search = true, Selected = true}, function(Value)
+    _G.FastAttackDelay = Value
+end)
 
 spawn(function()
     while wait(.1) do
@@ -1348,9 +1378,17 @@ spawn(function()
     end
 end)
 
-FastAttackSection:CreateToggle("Bring Mob", {Toggled = true , Description = "..."}, function(Value) _G.BringMob = Value end)
+local BringMobSection = ST.CreateSection('Bring Mobs')
 
-FastAttackSection:CreateToggle("Bypass Teleport", {Toggled = true , Description = "..."}, function(Value) BypassTP = Value end)
+BringMobSection.CreateToggle({Title = 'Bring Mobs', Desc = 'Gather the surrounding monsters in one place when you enable a function related to Farming', Default = true}, function(Value)
+    _G.BringMob = Value
+end)
+
+local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
+
+BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
+    BypassTP = Value
+end)
 
 spawn(function()
     while wait() do
@@ -1424,7 +1462,7 @@ spawn(function()
     end
 end)
 
-local ServerSection = MSC:CreateSection("Servers")
+local ServerSection = ST.CreateSection('Servers')
 
 ServerSection:CreateButton("Hop Servers", function () Hop() end)
 
