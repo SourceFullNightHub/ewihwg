@@ -1,4 +1,11 @@
 -- Lib Night Hub
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Night Hub",
+	Text = "Loading Ui....",
+	Icon = "rbxassetid://15541504459"
+})
+
 function GetUi() 
     if getgenv().Tvk then
     if game.CoreGui:FindFirstChild("Night Hub GUI") then
@@ -4714,7 +4721,7 @@ end
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "Night Hub",
-	Text = "Loading...",
+	Text = "Loading Ui Complete waiting load function",
 	Icon = "rbxassetid://15541504459"
 })
 
@@ -5730,7 +5737,7 @@ spawn(function()
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                     Checknhiemvu()
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                    if game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 if v.Name == Mob then
