@@ -762,7 +762,7 @@ local plr = game.Players.LocalPlayer
                         Noclip.Name = "BodyClip"
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(55, 55, 55)
+                        Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                         if plr.Character.Humanoid.Sit == true then
                             plr.Character.Humanoid.Sit = false
                         end
