@@ -227,12 +227,9 @@ function CFAHub:CreateWindow(title, gameName, intro)
     ImageButton.Size = UDim2.new(0, 30, 0, 30)
     ImageButton.Image = "rbxassetid://16237266234"
     ImageButton.MouseButton1Click:Connect(function()
-        script.Parent.Button.MouseButton1Click:Connect(function()
-            isExpanded = not isExpanded
-            local goalSize = isExpanded and UDim2.new(0, 440, 0, 34) or UDim2.new(0, 0, 0, 0)
-            Container:TweenSize(goalSize, "Out", "Quad", tweenTime, true)
-        end)
-        
+        isExpanded = not isExpanded
+        local goalSize = isExpanded and UDim2.new(0, 440, 0, 34) or UDim2.new(0, 0, 0, 0)
+        Container:TweenSize(goalSize, "Out", "Quad", tweenTime, true)
     end)
 
     UICorner.Parent = ImageButton
