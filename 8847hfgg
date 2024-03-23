@@ -6042,6 +6042,10 @@ end)
 
 local SeaBypassSection = IQ.CreateSection('Auto Sea')
 
+SeaBypassSection.CreateToggle({Title = 'Auto Seconds Sea', Desc = 'Auto Quest Go To Sea 2.', Default = false}, function(Value)
+    _G.AutoSea2 = Value
+end)
+
 spawn(function()
     while wait() do
         pcall(function()
