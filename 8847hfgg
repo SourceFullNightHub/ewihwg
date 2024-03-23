@@ -644,6 +644,8 @@ function Tween(Pos)
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
         {CFrame = Pos}
     ):Play()
+    local Noclip = Instance.new("BodyVelocity")
+    Noclip.Velocity = Vector3.new(Pos)
     NoCLip = true
     wait(Distance / Speed)
     NoCLip = false
