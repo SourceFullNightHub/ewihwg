@@ -6103,7 +6103,7 @@ end)
 
 FruitList = {
     "Rocket-Rocket",
-    "Spin-Spin"
+    "Spin-Spin",
     "Spike-Spike",
     "Chop-Chop",
     "Spring-Spring",
@@ -6134,7 +6134,7 @@ FruitList = {
     "Control-Control",
     "Spirit-Spirit",
     "Dragon-Dragon",
-    "Leopard-Leopard"
+    "Leopard-Leopard",
     "Kitsune-Kitsune"
 }
 
