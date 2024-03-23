@@ -1012,11 +1012,11 @@ spawn(function()
                                 repeat wait()
                                     EnableBuso()
                                     EquipTool(_G.UsingTool)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, -20, 2))
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoKatakuri or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                             end
@@ -1038,11 +1038,11 @@ spawn(function()
                                             repeat wait()
                                                 EnableBuso()
                                                 EquipTool(_G.UsingTool)
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
                                                 ClickNormal()
@@ -1114,12 +1114,12 @@ spawn(function()
                                     repeat wait()
                                         EnableBuso()
                                         EquipTool(_G.UsingTool)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         ClickNormal()
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         StartCheckBone = true
                                         Dungimanhdabijbat = v.HumanoidRootPart.CFrame
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBone
@@ -1185,10 +1185,10 @@ spawn(function()
                     if v.Name:find("Chest") then
                         if game:GetService("Workspace"):FindFirstChild(v.Name) then
                             repeat wait()
-                                if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                                if game:GetService("Workspace"):FindFirstChild(v.Name) and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
                                     Tween(v.CFrame)
                                 end
-                            until not _G.AutoChestTween
+                            until not _G.AutoChestBypass or not v.Parent
                             Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                         end
                     end
@@ -1211,7 +1211,7 @@ spawn(function()
                                 if game:GetService("Workspace"):FindFirstChild(v.Name) then
                                     InstanceTween(v.CFrame)
                                 end
-                            until not _G.AutoChestBypass
+                            until not _G.AutoChestBypass or not v.Parent
                             Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                         end
                     end
