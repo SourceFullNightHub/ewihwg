@@ -4699,7 +4699,6 @@ function t.CreateMain(H)
     return dj
 end
 return t end
-local rnd = tostring(math.random(1,100000))
 local Library = GetUi()
 
 -----------------
