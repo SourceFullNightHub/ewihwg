@@ -5576,7 +5576,7 @@ local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
 local Dungtoll = G.CreateSection('Select Weapons')
 
-local ListCraft = {"Melee", "Sword"}
+local WP = {"Melee", "Sword"}
 Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Search = false, Selected = false}, function(Value)
     _G.UsingTool = Value
 end)
@@ -6172,7 +6172,7 @@ BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your l
     BypassTP = Value
 end)
 
-local ServerSection = ST.CreateSection('Servers')
+local ServerSection = MSC.CreateSection('Servers')
 
 ServerSection:CreateButton("Hop Servers", function () Hop() end)
 
