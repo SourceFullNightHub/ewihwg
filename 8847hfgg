@@ -5637,7 +5637,7 @@ FarmSettingSection.CreateButton({Title = 'Redeem All Codes'}, function()
     RedeemAllCode()
 end)
 
-FarmSettingSection.CreateDropdown({Title = 'Select Stas To Add', List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Search = false, Selected = true}, function(Value)
+FarmSettingSection.CreateDropdown({Title = 'Select Stas To Add', List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Search = false, Selected = false}, function(Value)
     getgenv().Stats = Value
 end)
 
@@ -6033,7 +6033,7 @@ FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No D
     _G.FastAttackOld = Value
 end)
 
-FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Search = true, Selected = true}, function(Value)
+FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Search = true, Selected = false}, function(Value)
     _G.FastAttackDelay = Value
 end)
 
