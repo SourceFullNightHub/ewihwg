@@ -1249,7 +1249,7 @@ spawn(function()
                             repeat wait()
                                 if game:GetService("Workspace"):FindFirstChild(v.Name) and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
                                     Tween(v.CFrame)
-                                    (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                                         game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
                                         wait(0.1)
                                         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Q",false,game)
@@ -1277,7 +1277,7 @@ spawn(function()
                             repeat wait()
                                 if game:GetService("Workspace"):FindFirstChild(v.Name) then
                                     InstanceTween(v.CFrame)
-                                    (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                                         game:GetService("VirtualInputManager"):SendKeyEvent(true,"Q",false,game)
                                         wait(0.1)
                                         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Q",false,game)
