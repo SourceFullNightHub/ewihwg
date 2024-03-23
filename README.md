@@ -37,7 +37,7 @@ end)
 
 # Create Toggle :
 ```lua
-Section1.CreateToggle({Title = 'Toggle', Default = false}, function(Value)
+Section1.CreateToggle({Title = 'Toggle', Desc = '', Default = false}, function(Value)
     print(Value)
 end)
 ```
