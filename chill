@@ -1,9 +1,9 @@
--- Lib Sea Hub
+-- Lib Night Hub
 function GetUi() 
     if getgenv().Tvk then
-    if game.CoreGui:FindFirstChild("Sea Hub GUI") then
+    if game.CoreGui:FindFirstChild("Night Hub GUI") then
         for a, v in ipairs(game.CoreGui:GetChildren()) do
-            if v.Name == "Sea Hub GUI" then
+            if v.Name == "Night Hub GUI" then
                 v:Destroy()
             end
         end
@@ -124,20 +124,20 @@ local j = game:GetService("HttpService")
 local k = "!CustomUI.json"
 function SaveCustomUISettings()
     local j = game:GetService("HttpService")
-    if not isfolder("Sea Hub") then
-        makefolder("Sea Hub")
+    if not isfolder("Night Hub") then
+        makefolder("Night Hub")
     end
-    writefile("Sea Hub/" .. k, j:JSONEncode(CorrectTable(e)))
+    writefile("Night Hub/" .. k, j:JSONEncode(CorrectTable(e)))
 end
 function ReadCustomUISetting()
     local l, m =
         pcall(
         function()
             local j = game:GetService("HttpService")
-            if not isfolder("Sea Hub") then
-                makefolder("Sea Hub")
+            if not isfolder("Night Hub") then
+                makefolder("Night Hub")
             end
-            local n = j:JSONDecode(readfile("Sea Hub/" .. k))
+            local n = j:JSONDecode(readfile("Night Hub/" .. k))
             for d, v in pairs(n) do
                 local function o()
                     if v.Color == nil then
@@ -276,7 +276,7 @@ u.GetIMG = function(C)
 end
 u.Gui = Instance.new("ScreenGui")
 u.Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-u.Gui.Name = "Sea Hub GUI"
+u.Gui.Name = "Night Hub GUI"
 getgenv().ReadyForGuiLoaded = false
 spawn(
     function()
@@ -289,7 +289,7 @@ spawn(
 )
 u.NotiGui = Instance.new("ScreenGui")
 u.NotiGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-u.NotiGui.Name = "Sea Hub Notification"
+u.NotiGui.Name = "Night Hub Notification"
 local F = Instance.new("Frame")
 local G = Instance.new("UIListLayout")
 F.Name = "NotiContainer"
@@ -503,15 +503,15 @@ getgenv().GUI = u.Gui
 -- end
 -- SetUpTranslate()
 -- getgenv().TranslateCache = {}
--- if not isfolder("Sea Hub") then
---     makefolder("Sea Hub")
+-- if not isfolder("Night Hub") then
+--     makefolder("Night Hub")
 -- end
 -- local s,Translated = pcall(function() 
---     return game.HttpService:JSONDecode(readfile("Sea Hub/!UIText.json"))
+--     return game.HttpService:JSONDecode(readfile("Night Hub/!UIText.json"))
 -- end)
 -- function SaveFile() 
 --     pcall(function() 
---         writefile("Sea Hub/!UIText.json",game.HttpService:JSONEncode(getgenv().TranslateCache))
+--         writefile("Night Hub/!UIText.json",game.HttpService:JSONEncode(getgenv().TranslateCache))
 --     end)
 -- end
 -- function isnumber() end
@@ -526,8 +526,8 @@ getgenv().GUI = u.Gui
 --                     if des.Text=="" or #des.Text<=4 or tonumber(des.Text)~=nil then
 --                         return
 --                     end
---                     if string.match(des.Text,"Sea Hub") then 
---                         local tvk = des.Text:gsub("Sea Hub","Trung Tâm Biển")
+--                     if string.match(des.Text,"Night Hub") then 
+--                         local tvk = des.Text:gsub("Night Hub","Trung Tâm Biển")
 --                         des.Text = tvk
 --                         return
 --                     end
@@ -643,7 +643,7 @@ function t.CreateNoti(H)
     local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
     local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
     local g = V .. "," .. W .. "," .. X
-    Q.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().TitleNameNoti
+    Q.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().TitleNameNoti
     table.insert(
         c["Title Text Color"],
         function()
@@ -651,7 +651,7 @@ function t.CreateNoti(H)
             local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
             local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
             local g = V .. "," .. W .. "," .. X
-            Q.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().TitleNameNoti
+            Q.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().TitleNameNoti
         end
     )
     Q.Name = "TextLabelNoti"
@@ -769,7 +769,7 @@ function t.CreateNoti(H)
     )
 end
 function t.CreateMain(H)
-    local Z = tostring(H.Title) or "Sea Hub"
+    local Z = tostring(H.Title) or "Night Hub"
     getgenv().MainDesc = H.Desc or ""
     local _ = false
     cac = false
@@ -872,7 +872,7 @@ function t.CreateMain(H)
         local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
         local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
         local g = V .. "," .. W .. "," .. X
-        ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+        ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
         table.insert(
             c["Title Text Color"],
             function()
@@ -881,7 +881,7 @@ function t.CreateMain(H)
                 local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
                 local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
                 local g = V .. "," .. W .. "," .. X
-                ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+                ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
             end
         )
         local as
@@ -942,7 +942,7 @@ function t.CreateMain(H)
     local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
     local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
     local g = V .. "," .. W .. "," .. X
-    ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+    ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
     table.insert(
         c["Title Text Color"],
         function()
@@ -951,7 +951,7 @@ function t.CreateMain(H)
             local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
             local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
             local g = V .. "," .. W .. "," .. X
-            ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+            ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
         end
     )
     local ar
@@ -1081,7 +1081,7 @@ function t.CreateMain(H)
     local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
     local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
     local g = V .. "," .. W .. "," .. X
-    ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+    ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
     table.insert(
         c["Title Text Color"],
         function()
@@ -1089,7 +1089,7 @@ function t.CreateMain(H)
             local W = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[2])
             local X = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[3])
             local g = V .. "," .. W .. "," .. X
-            ad.Text = '<font color="rgb(' .. g .. ')">Sea Hub</font> ' .. getgenv().MainDesc
+            ad.Text = '<font color="rgb(' .. g .. ')">Night Hub</font> ' .. getgenv().MainDesc
         end
     )
     ak.Name = "SettionMain"
@@ -4702,10 +4702,10 @@ return t end
 local Library = GetUi()
 
 -----------------
-local Main = Library.CreateMain({Title = 'Night Hub', Desc = ''})
+local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = 'By LMNGAMING'})
 
 local Page1 = Main.CreatePage({Page_Name = 'Page1', Page_Title = ''})
-local Page1 = Main.CreatePage({Page_Name = 'Page2', Page_Title = ''})
+local Page2 = Main.CreatePage({Page_Name = 'Page2', Page_Title = ''})
 
 local Section1 = Page1.CreateSection('Section')
 local Section2 = Page2.CreateSection('Section')
