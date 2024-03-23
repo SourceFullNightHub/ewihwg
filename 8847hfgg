@@ -644,8 +644,6 @@ function Tween(Pos)
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
         {CFrame = Pos}
     ):Play()
-    local Noclip = Instance.new("BodyVelocity")
-    Noclip.Velocity = Vector3.new(Pos)
     NoCLip = true
     wait(Distance / Speed)
     NoCLip = false
@@ -760,7 +758,7 @@ local plr = game.Players.LocalPlayer
                         Noclip.Name = "BodyClip"
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(Pos)
+                        Noclip.Velocity = Vector3.new(979.79895019531, 16.516613006592, 1429.0466308594)
                         if plr.Character.Humanoid.Sit == true then
                             plr.Character.Humanoid.Sit = false
                         end
