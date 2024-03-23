@@ -1161,6 +1161,7 @@ end)
 
 FarmSection:CreateToggle("Auto Bone", {Toggled = false , Description = "Auto Bone has the function of Teleporting to the dark castle island and fighting monsters to collect bones."}, function(Value) _G.AutoBone = Value end)
 
+local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
 spawn(function()
     while wait() do
         pcall(function()
