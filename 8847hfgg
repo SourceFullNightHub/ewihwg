@@ -5529,7 +5529,7 @@ local plr = game.Players.LocalPlayer
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoLevel or NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -5550,7 +5550,7 @@ local plr = game.Players.LocalPlayer
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoLevel or NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false
@@ -5576,7 +5576,8 @@ local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
 local Dungtoll = G.CreateSection('Select Weapons')
 
-Dungtoll.CreateDropdown({Title = 'Select Weapons', List = {"Melee", "Sword"}, Search = false, Selected = true}, function(Value)
+local ListCraft = {"Melee", "Sword"}
+Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Search = false, Selected = false}, function(Value)
     _G.UsingTool = Value
 end)
 
@@ -5837,9 +5838,9 @@ spawn(function()
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                                ClickNormal()
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
-                                                ClickNormal()
                                             until not _G.AutoKatakuri or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
                                         end
                                     end
@@ -5916,7 +5917,6 @@ spawn(function()
                         end
                     end
                 else
-                    StartCheckBone = false
                     if BypassTP then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude > 2000 then
                             Taixiu(PosBone)
@@ -6094,12 +6094,6 @@ BringMobSection.CreateToggle({Title = 'Bring Mobs', Desc = 'Gather the surroundi
     _G.BringMob = Value
 end)
 
-local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
-
-BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
-    BypassTP = Value
-end)
-
 spawn(function()
     while wait() do
         if _G.BringMob then
@@ -6143,7 +6137,7 @@ spawn(function()
                 end
                 if _G.AutoKatakuri and BringKatakuriMob then
                     if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CFrame = PosMobCake
                         v.Humanoid:ChangeState(14)
                         v.HumanoidRootPart.CanCollide = false
@@ -6156,7 +6150,7 @@ spawn(function()
                 end
                 if _G.AutoBone and StartCheckBone then
                     if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
                         v.HumanoidRootPart.CFrame = Dungimanhdabijbat
                         v.Humanoid:ChangeState(14)
                         v.HumanoidRootPart.CanCollide = false
@@ -6170,6 +6164,12 @@ spawn(function()
             end)
         end
     end
+end)
+
+local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
+
+BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
+    BypassTP = Value
 end)
 
 local ServerSection = ST.CreateSection('Servers')
