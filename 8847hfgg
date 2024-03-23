@@ -686,6 +686,10 @@ function ClickNormal()
     end
 end
 
+function InstanceTween(P)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+end
+
 local plr = game.Players.LocalPlayer
 	local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
 	local CbFw2 = CbFw[2]
@@ -758,7 +762,7 @@ local plr = game.Players.LocalPlayer
                         Noclip.Name = "BodyClip"
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(979.79895019531, 16.516613006592, 1429.0466308594)
+                        Noclip.Velocity = Vector3.new(-2850.20068, 7.39224768, 5354.99268)
                         if plr.Character.Humanoid.Sit == true then
                             plr.Character.Humanoid.Sit = false
                         end
@@ -793,6 +797,8 @@ local windowz = uilibrary:CreateWindow("Night Hub", "Blox Fruit", true)
 local G = windowz:CreatePage("General")
 
 local ST = windowz:CreatePage("Settings")
+
+local MSC = windowz:CreatePage("Misc")
 
 local Dungtoll = G:CreateSection("Select Weapons")
 
@@ -1009,12 +1015,16 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.AutoChestTween then
-                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if string.find(v.Name, "Chest") then
-                        repeat task.wait()
-                            Tween(v.CFrame)
-                        until not _G.AutoChestTween
-                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+                    if v.Name:find("Chest") then
+                        if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                            repeat wait()
+                                if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                                    Tween(v.CFrame)
+                                end
+                            until not _G.AutoChestTween
+                            Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        end
                     end
                 end
             end
@@ -1028,12 +1038,16 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.AutoChestBypass then
-                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if string.find(v.Name, "Chest") then
-                        repeat task.wait()
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-                        until not _G.AutoChestBypass
-                        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                for i,v in pairs(game:GetService("Workspace"):GetChildren()) do 
+                    if v.Name:find("Chest") then
+                        if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                            repeat wait()
+                                if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                                    InstanceTween(v.CFrame)
+                                end
+                            until not _G.AutoChestBypass
+                            Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        end
                     end
                 end
             end
@@ -1149,6 +1163,10 @@ spawn(function()
         end
     end
 end)
+
+local TweenSection = MSC:CreateSection("Tween")
+
+TweenSection:CreateButton("Tween Test", function () Tween(CFrame.new(-2850.20068, 7.39224768, 5354.99268)) end)
 
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
