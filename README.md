@@ -31,7 +31,7 @@ local Section1 = Page1.CreateSection('Section')
 # Create Buttons :
 ```lua
 Section1.CreateButton({Title = 'Buttons'}, function()
-  print("Hi")  
+    print("Hi")  
 end)
 ```
 
