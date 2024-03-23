@@ -5601,6 +5601,7 @@ task.spawn(function()
     end
 end)
 
+local CheckLevel = game.Players.LocalPlayer.Data.Level.Value
 local FarmSettingSection = G.CreateSection('Farm Settings')
 
 function RedeemAllCode()
@@ -5709,6 +5710,18 @@ STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
     wait(0.5)
     _G.Emdungdiiiii = false
 end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Emdungdiiiii == true then
+                Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                NoCLip = false
+            end
+        end)
+    end
+end)
+
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
 
@@ -6026,6 +6039,46 @@ spawn(function()
         end)
     end
 end)
+
+local SeaBypassSection = IQ.CreateSection('Auto Sea')
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoSea2 and CheckLevel >= 700 then
+                if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
+                    Tween(CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563))
+                    if (CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                    end
+                    wait(0.5)
+                    EquipTool("Key")
+                    wait(0.5)
+                    Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
+                elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Ice Admiral" then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoSea2 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    ClickNormal()
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoSea2
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 
 local FastAttackSection = ST.CreateSection('FastAttack')
 
