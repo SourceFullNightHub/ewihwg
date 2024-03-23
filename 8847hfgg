@@ -860,6 +860,8 @@ local G = windowz:CreatePage("General")
 
 local ST = windowz:CreatePage("Settings")
 
+local IQ = windowz:CreatePage("Item & Quest")
+
 local MSC = windowz:CreatePage("Misc")
 
 local Dungtoll = G:CreateSection("Select Weapons")
@@ -1400,7 +1402,33 @@ spawn(function()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     end
-                end  
+                end
+                if _G.AutoKatakuri and BringKatakuriMob then
+                    if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = PosMobCake
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
+                if _G.AutoBone and StartCheckBone then
+                    if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = Dungimanhdabijbat
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
             end)
         end
     end
