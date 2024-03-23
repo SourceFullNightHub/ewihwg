@@ -5463,6 +5463,14 @@ function InstanceTween(P)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
 
+function Raidroom()
+    if taodangosea2 then
+        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
+    elseif taodangosea3 then
+        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+    end
+end
+
 local plr = game.Players.LocalPlayer
 	local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
 	local CbFw2 = CbFw[2]
@@ -5567,11 +5575,11 @@ local plr = game.Players.LocalPlayer
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
 local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
-
 local ST = Main.CreatePage({Page_Name = 'Settings', Page_Title = ''})
-
 local IQ = Main.CreatePage({Page_Name = 'Item & Quest', Page_Title = ''})
-
+local DR = Main.CreatePage({Page_Name = 'Devil Fruit and Raids', Page_Title = ''})
+local RC = Main.CreatePage({Page_Name = 'Race V4', Page_Title = ''})
+local SE = Main.CreatePage({Page_Name = 'Sea Event', Page_Title = ''})
 local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
 local Dungtoll = G.CreateSection('Select Weapons')
@@ -5758,11 +5766,11 @@ spawn(function()
                                         repeat wait()
                                             EquipTool(_G.UsingTool)
                                             EnableBuso()                                            
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             BringMob = true
                                             PosMon = v.HumanoidRootPart.CFrame
                                             ClickNormal()
@@ -5818,13 +5826,13 @@ spawn(function()
                         if v.Name == "Cake Prince" or v.Name == "Dough King" then
                             if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.AutoKatakuri) then
                                 repeat wait()
-                                    EnableBuso()
                                     EquipTool(_G.UsingTool)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, -20, 2))
+                                    EnableBuso()                                            
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
-                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoKatakuri or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                             end
@@ -5844,13 +5852,13 @@ spawn(function()
                                     if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
                                         if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.AutoKatakuri) then
                                             repeat wait()
-                                                EnableBuso()
                                                 EquipTool(_G.UsingTool)
-                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                EnableBuso()                                            
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
-                                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                                v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                 ClickNormal()
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
@@ -5914,14 +5922,14 @@ spawn(function()
                             if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
                                 if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.AutoBone) then
                                     repeat wait()
-                                        EnableBuso()
                                         EquipTool(_G.UsingTool)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        ClickNormal()
+                                        EnableBuso()                                            
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                        v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        ClickNormal()
                                         StartCheckBone = true
                                         Dungimanhdabijbat = v.HumanoidRootPart.CFrame
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBone
@@ -5956,13 +5964,13 @@ spawn(function()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoFarmNearest then
                         repeat wait()
-                            EnableBuso()
                             EquipTool(_G.UsingTool)
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                            EnableBuso()                                            
                             v.HumanoidRootPart.CanCollide = false
                             v.Humanoid.WalkSpeed = 0
                             v.Head.CanCollide = false
-                            v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             ClickNormal()
                             PosNearestMob = v.HumanoidRootPart.CFrame
                             BringNearest = true
@@ -6064,13 +6072,13 @@ spawn(function()
                         if v.Name == "Ice Admiral" then
                             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoSea2 then
                                 repeat task.wait()
-                                    EnableBuso()
                                     EquipTool(_G.UsingTool)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                                    EnableBuso()                                            
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
-                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoSea2
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
@@ -6083,6 +6091,162 @@ spawn(function()
     end
 end)
 
+local DevilFruitSection = DR.CreateSection('Devil Fruit')
+
+DevilFruitSection.CreateButton({Title = 'Random Fruit'}, function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy") 
+end)
+
+DevilFruitSection.CreateToggle({Title = 'Auto Random Fruit', Desc = 'Auto Random Fruit.', Default = false}, function(Value)
+    _G.AutoRandom = Value
+end)
+
+FruitList = {
+    "Rocket-Rocket",
+    "Spin-Spin"
+    "Spike-Spike",
+    "Chop-Chop",
+    "Spring-Spring",
+    "Bird: Falcon",
+    "Smoke-Smoke",
+    "Flame-Flame",
+    "Ice-Ice",
+    "Sand-Sand",
+    "Dark-Dark",
+    "Revive-Revive",
+    "Diamond-Diamond",
+    "Light-Light",
+    "Love-Love",
+    "Rubber-Rubber",
+    "Barrier-Barrier",
+    "Magma-Magma",
+    "Portal-Portal",
+    "Quake-Quake",
+    "Human-Human: Buddha",
+    "Spider-Spider",
+    "Bird-Bird: Phoenix",
+    "Rumble-Rumble",
+    "Pain-Pain",
+    "Gravity-Gravity",
+    "Dough-Dough",
+    "Venom-Venom",
+    "Shadow-Shadow",
+    "Control-Control",
+    "Spirit-Spirit",
+    "Dragon-Dragon",
+    "Leopard-Leopard"
+    "Kitsune-Kitsune"
+}
+
+local Laytraiacquydithangngu = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits");
+FruitSnipeList = {}
+SellSellConcac = {}
+for i,v in next,Laytraiacquydithangngu do
+	table.insert(FruitSnipeList,v.Name)
+	if v.OnSale then 
+		table.insert(SellSellConcac,v.Name)
+	end
+end
+	
+DevilFruitSection.CreateDropdown({Title = 'Select Fruit Snipe', List = FruitSnipeList, Search = true, Selected = false}, function(Value)
+    _G.SelectSnipe = Value
+end)
+
+DevilFruitSection.CreateToggle({Title = 'Auto Buy Snipe Fruit', Desc = 'Auto Buy Fruit In Shop If Sell.', Default = false}, function(Value)
+    _G.AutoSnipeFruit = Value
+end)
+
+local RaidSection = DR.CreateSection('Raid')
+
+_G.SelectChip = selectchip or ""
+    ChipList = {}
+    raidraidcaiconcac = require(game.ReplicatedStorage.Raids)
+    for i,v in pairs(raidraidcaiconcac.raids) do
+        table.insert(ChipList,v)
+    end
+    for i,v in pairs(raidraidcaiconcac.advancedRaids) do
+        table.insert(ChipList,v)
+end
+
+RaidSection.CreateDropdown({Title = 'Select Chips', List = ChipList, Search = true, Selected = false}, function(Value)
+    _G.SelectChip = Value
+end)
+
+RaidSection.CreateButton({Title = 'Buy Chip'}, function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", _G.SelectChip)
+end)
+
+RaidSection.CreateButton({Title = 'Teleport To Raid Room'}, function()
+    Raidroom()
+end)
+
+RaidSection.CreateToggle({Title = 'KillAura', Desc = 'Kill Mob Very Fast In Raid.', Default = false}, function(Value)
+    _G.KillAura = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.KilLAura then
+            pcall(function()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000 then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then
+                            repeat wait()
+                                v.Humanoid.Health = 0
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+RaidSection.CreateToggle({Title = 'Next Island', Desc = 'Auto Teleport To New Island In Raid.', Default = false}, function(Value)
+    _G.NextIsland = Value
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.AutoNextIsland then
+                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+                    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5").CFrame * CFrame.new(2, 20 ,2))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4").CFrame *CFrame.new(2, 20 ,2))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3").CFrame *CFrame.new(2, 20 ,2))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2").CFrame *CFrame.new(2, 20 ,2))
+                    elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                        Tween(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").CFrame *CFrame.new(2, 20 ,2))
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+RaidSection.CreateToggle({Title = 'Auto Wakening', Desc = 'Auto Wakening If Raid Done.', Default = false}, function(Value)
+    _G.Wakening = Value
+end)
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.Wakening then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Check")
+                wait(0.95)
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+            end
+        end
+    end)
+end)
 
 local FastAttackSection = ST.CreateSection('FastAttack')
 
