@@ -5564,7 +5564,6 @@ local plr = game.Players.LocalPlayer
         end)
     end)
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
 local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
