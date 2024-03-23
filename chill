@@ -4701,7 +4701,7 @@ return t end
 local Library = GetUi()
 
 -----------------
-local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = 'By LMNGAMING'})
+local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
 local Page1 = Main.CreatePage({Page_Name = 'Page1', Page_Title = ''})
 local Page2 = Main.CreatePage({Page_Name = 'Page2', Page_Title = ''})
