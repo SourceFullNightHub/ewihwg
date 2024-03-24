@@ -6833,6 +6833,7 @@ spawn(function()
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
                     Attack()
+                    ClickNormal()
                     getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
                 until not _G.FastAttackOld
             end)
