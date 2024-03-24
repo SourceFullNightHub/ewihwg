@@ -5533,6 +5533,12 @@ function Raidroom()
     end
 end
 
+function CheckBalo(Name)
+    if game.Players.LocalPlayer.BackPack:FindFirstChild(Name) then
+        return
+    end
+end
+
 local plr = game.Players.LocalPlayer
 	local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
 	local CbFw2 = CbFw[2]
@@ -5640,6 +5646,7 @@ local SE = Main.CreatePage({Page_Name = 'Sea Event', Page_Title = ''})
 local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
 local Dungtoll = G.CreateSection('Select Weapons')
+local Mainchinh = game.Players.LocalPlayer
 
 local WP = {"Melee", "Sword"}
 Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Search = false, Selected = false}, function(Value)
@@ -6148,6 +6155,56 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
                         end
                     end
+                end
+            end
+        end)
+    end
+end)
+
+local Meleesection = IQ.CreateSection('Melee Style')
+
+Meleesection.CreateToggle({Title = 'Auto Superhuman', Desc = 'If Your Using Combat Melee, function will buy Black leg and farm to 300 mastery and buy electro farm to 300 mastery and repeat with fishman karate and dragon claw', Default = false}, function(Value)
+    _G.AutoSuperhuman = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoSuperhuman then
+                if CheckBalo("Combat") and Mainchinh.Data.Beli.Value >= 150000 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+                    _G.UsingTool = "Black Leg"
+                end
+                if CheckBalo("Black Leg") or CheckBalo("Electro") or CheckBalo("Fishman Karate") or CheckBalo("Dragon Claw") then
+                    if CheckBalo("Black Leg") and game.Players.LocalPlayer.Backpack:FindFirstChild("Black Leg").Level.Value <= 299 then
+                        _G.UsingTool = "Black Leg"
+                    end
+                    if CheckBalo("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value <= 299 then
+                        _G.UsingTool = "Electro"
+                    end
+                    if CheckBalo("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value <= 299 then
+                        _G.UsingTool = "Fishman Karate"
+                    end
+                    if CheckBalo("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value <= 299 then
+                        _G.UsingTool = "Dragon Claw"
+                    end
+                elseif CheckBalo("Black Leg") and game.Players.LocalPlayer.BackPack:FindFirstChild("Black Leg").Level.Value >= 300 and Mainchinh.Data.Beli.Value >= 500000 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+                    wait(0.5)
+                    _G.UsingTool = "Electro"
+                elseif CheckBalo("Electro") and game.Players.LocalPlayer.BackPack:FindFirstChild("Electro").Level.Value >= 300 and Mainchinh.Data.Beli.Value >= 750000 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+                    wait(0.5)
+                    _G.UsingTool = "Fishman Karate"
+                elseif CheckBalo("Fishman Karate") and game.Players.LocalPlayer.BackPack:FindFirstChild("Fishman Karate").Level.Value >= 300 and Mainchinh.Data.Fragments.Value >= 1500 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
+                    wait(0.5)
+                    _G.UsingTool = "Dragon Claw"
+                elseif CheckBalo("Dragon Claw") and game.Players.LocalPlayer.BackPack:FindFirstChild("Dragon Claw").Level.Value >= 300 and Mainchinh.Data.Beli.Value >= 3000000 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+                    wait(0.5)
+                    _G.UsingTool = "Superhuman"
                 end
             end
         end)
