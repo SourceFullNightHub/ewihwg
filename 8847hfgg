@@ -5446,6 +5446,44 @@ function Tween(Pos)
     NoCLip = false
 end
 
+Onichan = 1
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Onichan == 1 then
+                Dodge = CFrame.new(0,20,0)
+            elseif Onichan == 2 then
+                Dodge = CFrame.new(0,20,-30)
+            elseif Onichan == 3 then
+                Dodge = CFrame.new(30,20,0)
+            elseif Onichan == 4 then
+                PDodgeos = CFrame.new(0,20,30)	
+            elseif Onichan == 5 then
+                Dodge = CFrame.new(-30,20,0)
+            elseif Onichan == 6 then
+                Dodge = CFrame.new(0,20,30)
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            Type = 1
+            wait(0.5)
+            Type = 2
+            wait(0.5)
+            Type = 3
+            wait(0.5)
+            Type = 4
+            wait(0.5)
+            Type = 5
+            wait(0.5)
+        end)
+    end
+end)
+
 function EquipTool(Toolse)
     local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
     if tool then
@@ -5794,7 +5832,7 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * Dodge)
                                             BringMob = true
                                             PosMon = v.HumanoidRootPart.CFrame
                                             ClickNormal()
@@ -5857,7 +5895,7 @@ spawn(function()
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    Tween(v.HumanoidRootPart.CFrame * Dodge)
                                     ClickNormal()
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoKatakuri or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                             end
@@ -5883,7 +5921,7 @@ spawn(function()
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                Tween(v.HumanoidRootPart.CFrame * Dodge)
                                                 ClickNormal()
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
@@ -5953,7 +5991,7 @@ spawn(function()
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.HumanoidRootPart.CFrame * Dodge)
                                         ClickNormal()
                                         StartCheckBone = true
                                         Dungimanhdabijbat = v.HumanoidRootPart.CFrame
@@ -5995,7 +6033,7 @@ spawn(function()
                             v.Humanoid.WalkSpeed = 0
                             v.Head.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * Dodge)
                             ClickNormal()
                             PosNearestMob = v.HumanoidRootPart.CFrame
                             BringNearest = true
@@ -6104,7 +6142,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * Dodge)
                                 ClickNormal()
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoSea2
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
