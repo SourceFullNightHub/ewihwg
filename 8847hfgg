@@ -5784,6 +5784,8 @@ local STOPTWEENSCTION = G.CreateSection('StopTween')
 
 STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
     _G.Emdungdiiiii = true
+    wait(0.5)
+    _G.Emdungdiiiii = false
 end)
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
