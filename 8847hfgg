@@ -6659,7 +6659,7 @@ end)
 
 spawn(function()
     while wait() do
-        if _G.KilLAura then
+        if _G.KillAura then
             pcall(function()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000 then
