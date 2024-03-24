@@ -6778,7 +6778,7 @@ spawn(function()
     end)
 end)
 
-local LCSection = ST.CreateSection('LocalPlayer')
+local LCSection = PV.CreateSection('LocalPlayer')
 
 if taodangosea1 then
     IslandList = {"WindMill","Marine","Middle Town","Jungle","Pirate Village","Desert","Snow Island","MarineFord","Colosseum","Sky Island 1","Sky Island 2","Sky Island 3","Prison","Magma Village","Under Water Island","Fountain City","Shank Room","Mob Island"}
@@ -6792,7 +6792,7 @@ LCSection.CreateDropdown({Title = 'Select Island', List = IslandList, Default = 
     _G.didianhbao = Value
 end)
 
-FastAttackSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island Your Selected.', Default = false}, function(Value)
+LCSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island Your Selected.', Default = false}, function(Value)
     _G.LetsGoooo = Value
     if _G.LetsGoooo == true then
         if _G.didianhbao == "WindMill" then
@@ -6915,7 +6915,7 @@ FastAttackSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport T
     end
 end)
 
-local FastAttackSection = ST.CreateSection('FastAttack')
+local FastAttackSection = PV.CreateSection('FastAttack')
 
 FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No Delay And Large Hit.', Default = true}, function(Value)
     _G.FastAttackOld = Value
