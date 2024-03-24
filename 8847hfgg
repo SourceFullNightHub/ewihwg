@@ -6856,12 +6856,11 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-12549.7236, 337.511505, -7470.36328))
                     wait(0.5)
                     Tween(CFrame.new(-16101.1885,12.8422165,380.942291))
-                    end
-                else
-                    _G.Emdungdiiiii = true
-                    wait(0.5)
-                    _G.Emdungdiiiii = false
                 end
+            else
+                _G.Emdungdiiiii = true
+                wait(0.5)
+                _G.Emdungdiiiii = false
             end
         end)
     end
