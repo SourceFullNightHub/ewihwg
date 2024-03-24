@@ -56,6 +56,11 @@ Section1.CreateSlider({Title = "Slider", Min = 1, Max = 100, Default = 1, Precis
 end)
 ```
 
+# Create Label :
+```
+local Label = Section1.CreateLabel({Title = "Label"})
+```
+
 # Create Key Bind :
 ```lua
 Section2.CreateBind({Title = 'Key Bind', Key = Enum.KeyCode.RightControl}, function()
