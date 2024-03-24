@@ -6623,7 +6623,7 @@ spawn(function()
         while wait() do
             if _G.AutoSnipeFruit then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit",_G.SelectFruit)
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit",_G.SelectSnipe)
             end 
         end
     end)
