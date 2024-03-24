@@ -6972,8 +6972,7 @@ spawn(function()
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
                     Attack()
-                    ClickNormal()
-                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
+                    Damchetnodithangngu = true
                 until not _G.FastAttackOld
             end)
         end
@@ -7077,6 +7076,32 @@ end)
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
 end
+
+local Camerabattu = require(game.ReplicatedStorage.Util.CameraShaker)
+taisaoanhlaigianemhahirimii = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+lon = debug.getupvalues(taisaoanhlaigianemhahirimii)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if Damchetnodithangngu then
+            if typeof(lon) == "table" then
+                pcall(function()
+                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
+                    Camerabattu:Stop()
+                    lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    lon.activeController.timeToNextAttack = 0
+                    lon.activeController.hitboxMagnitude = 60
+                    lon.activeController.active = false
+                    lon.activeController.timeToNextBlock = 0
+                    lon.activeController.focusStart = 1655503339.0980349
+                    lon.activeController.increment = 1
+                    lon.activeController.blocking = false
+                    lon.activeController.attacking = false
+                    lon.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
 
 getgenv().NoDieEffect = true
 if getgenv().NoDieEffect then
