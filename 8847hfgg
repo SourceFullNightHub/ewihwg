@@ -5603,7 +5603,8 @@ local plr = game.Players.LocalPlayer
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(b7 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", b2, 2, "")
                                 getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
-                                ClickNormal()
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             end
                         end)
                     end
