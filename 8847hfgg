@@ -5621,6 +5621,9 @@ local plr = game.Players.LocalPlayer
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false
+                            if plr.Character.Humanoid.Sit == true then
+                                plr.Character.Humanoid.Sit = false
+                            end
                         end
                     end
                 end
@@ -5629,15 +5632,15 @@ local plr = game.Players.LocalPlayer
     end)
 
     spawn(function()
-        while wait() do
-            pcall(function()
+        pcall(function()
+            game:GetService("RunService").Stepped:Connect(function()
                 if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
-                    if game.Players.LocalPlayer.Character.Humanoid.Sit then
-                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
+                        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
                     end
                 end
             end)
-        end
+        end)
     end)
 
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
