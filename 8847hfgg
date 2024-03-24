@@ -6731,7 +6731,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if getgenv().Baylacnaoae then
+            if getgenv().Baylacnaoae == true then
                 if _G.Chondianhbao == "WindMill" then
                     Tween(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
                 elseif _G.Chondianhbao == "Marine" then
