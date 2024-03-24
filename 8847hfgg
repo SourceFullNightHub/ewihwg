@@ -5606,6 +5606,9 @@ local plr = game.Players.LocalPlayer
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
                         Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        if plr.Character.Humanoid.Sit == true then
+                            plr.Character.Humanoid.Sit = false
+                        end
                     end
                 else
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
@@ -5625,18 +5628,6 @@ local plr = game.Players.LocalPlayer
                                 plr.Character.Humanoid.Sit = false
                             end
                         end
-                    end
-                end
-            end)
-        end)
-    end)
-
-    spawn(function()
-        pcall(function()
-            game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
-                    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
-                        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
                     end
                 end
             end)
@@ -5790,6 +5781,23 @@ STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
     wait(0.5)
     _G.Emdungdiiiii = false
 end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Emdungdiiiii == true then
+                wait()
+                Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                wait()
+                if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+                end
+                NoCLip = false
+            end
+        end)
+    end
+end)
+
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
 
@@ -6740,7 +6748,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if getgenv().Baylacnaoae == true then
+            if getgenv().Baylacnaoae then
                 if _G.Chondianhbao == "WindMill" then
                     Tween(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
                 elseif _G.Chondianhbao == "Marine" then
@@ -7032,17 +7040,6 @@ if getgenv().NoDieEffect then
         effectContainer.Respawn:Destroy()
     end
 end
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Emdungdiiiii == true then
-                Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                NoCLip = false
-            end
-        end)
-    end
-end)
 
 assert(getrawmetatable)
     grm = getrawmetatable(game)
