@@ -874,6 +874,30 @@ function t.CreateMain(H)
             aa.ImageColor3 = getgenv().UIColor["Border Color"]
         end
     )
+    local ScreenGui = Instance.new("ScreenGui")
+    local ImageButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    local _G.CloseandOpenUi = true
+
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    ImageButton.Parent = ScreenGui
+    ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+    ImageButton.Size = UDim2.new(0, 40, 0, 40)
+    ImageButton.Image = "rbxassetid://16237266234"
+    ImageButton.MouseButton1Click:Connect(function()
+        _G.CloseandOpenUi = not _G.CloseandOpenUi
+        a9.Visible = _G.CloseandOpenUi
+    end)
+
+    UICorner.Parent = ImageButton
+
+    UIStroke.Color = Color3.fromRGB(255, 255, 255)
+    UIStroke.Parent = ImageButton
     function u.ReloadMain(v)
         aa.ImageColor3 = getgenv().UIColor["Title Text Color"]
         local V = tostring(u.Getcolor(getgenv().UIColor["Title Text Color"])[1])
@@ -4709,37 +4733,6 @@ end
 return t end
 local Library = GetUi()
 
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")
-local UICorner = Instance.new("UICorner")
-local UIStroke = Instance.new("UIStroke")
-local CloseandOpen = true
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
-ImageButton.Size = UDim2.new(0, 60, 0, 60)
-ImageButton.Image = "rbxassetid://16237266234"
-ImageButton.MouseButton1Click:Connect(function()
-    _G.CloseandOpenUi = not _G.CloseandOpenUi
-    if game.CoreGui:FindFirstChild("Night Hub GUI") then
-        for i, v in ipairs(game.CoreGui:GetChildren()) do
-            if v.Name == "Night Hub GUI"then
-                v.Enable = _G.CloseandOpenUi
-            end
-        end
-    end
-end)
-
-UICorner.Parent = ImageButton
-
-UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Parent = ImageButton
-
 if game.PlaceId == 2753915549 then
     taodangosea1 = true
 elseif game.PlaceId == 4442272183 then
@@ -5811,6 +5804,7 @@ spawn(function()
                             end
                         end
                     else
+                        Tween(CFrameMob)
                         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
                             if string.find(v.Name, NameMob) then
                                 if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
