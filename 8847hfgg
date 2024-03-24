@@ -6802,13 +6802,25 @@ RaidSection.CreateToggle({Title = 'Auto Wakening', Desc = 'Auto Wakening If Raid
     _G.Wakening = Value
 end)
 
+local PosWakeningRoomsea2 = CFrame.new(243.465836, 1.36005056, 1810.29993)
+local PosWakeningRoomsea3 = CFrame.new(-11571.440429688, 49.172668457031, -7574.7368164062)
 spawn(function()
     pcall(function()
         while wait() do
             if _G.Wakening then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Check")
-                wait(0.95)
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+                if taodangosea2 then
+                    if (PosWakeningRoomsea2.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Check")
+                        wait(0.95)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+                    end
+                elseif taodangosea3 then
+                    if (PosWakeningRoomsea3.Position - Mainchinh.Character.HumanoidRootPart.Position).Magnitude <= 500 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Check")
+                        wait(0.95)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Awakener","Awaken")
+                    end
+                end
             end
         end
     end)
