@@ -5516,6 +5516,7 @@ function ClickNormal()
         CombatFramework.activeController.attacking = false
         CombatFramework.activeController.timeToNextAttack = 0
         CombatFramework.activeController.hitboxMagnitude = 60
+        getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
         game:GetService'VirtualUser':CaptureController()
         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
     end
@@ -5593,6 +5594,7 @@ local plr = game.Players.LocalPlayer
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                                getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
                                 ClickNormal()
                             end
                         end)
@@ -6915,7 +6917,7 @@ LCSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island
     end
 end)
 
-local FastAttackSection = PV.CreateSection('FastAttack')
+local FastAttackSection = ST.CreateSection('FastAttack')
 
 FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No Delay And Large Hit.', Default = true}, function(Value)
     _G.FastAttackOld = Value
