@@ -5433,11 +5433,11 @@ end
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     Speed = Distance >= 1 and 325 or 1
-    if Distance <= 300 then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    end
     if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end
+    if Distance <= 300 then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
     game:GetService("TweenService"):Create(
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
@@ -5778,8 +5778,6 @@ local STOPTWEENSCTION = G.CreateSection('StopTween')
 
 STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
     _G.Emdungdiiiii = true
-    wait(0.5)
-    _G.Emdungdiiiii = false
 end)
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
