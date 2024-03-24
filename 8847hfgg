@@ -5436,6 +5436,9 @@ function Tween(Pos)
     if Distance <= 300 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
+    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end
     game:GetService("TweenService"):Create(
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
@@ -5606,9 +5609,6 @@ local plr = game.Players.LocalPlayer
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(100000,100000,100000)
                         Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-                        if plr.Character.Humanoid.Sit == true then
-                            plr.Character.Humanoid.Sit = false
-                        end
                     end
                 else
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
@@ -5781,18 +5781,6 @@ STOPTWEENSCTION.CreateButton({Title = 'Cancel Tween'}, function()
     wait(0.5)
     _G.Emdungdiiiii = false
 end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Emdungdiiiii == true then
-                Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                NoCLip = false
-            end
-        end)
-    end
-end)
-
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
 
@@ -7035,6 +7023,17 @@ if getgenv().NoDieEffect then
         effectContainer.Respawn:Destroy()
     end
 end
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Emdungdiiiii == true then
+                Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                NoCLip = false
+            end
+        end)
+    end
+end)
 
 assert(getrawmetatable)
     grm = getrawmetatable(game)
