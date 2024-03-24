@@ -5470,15 +5470,15 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            Type = 1
+            Onichan = 1
             wait(0.5)
-            Type = 2
+            Onichan = 2
             wait(0.5)
-            Type = 3
+            Onichan = 3
             wait(0.5)
-            Type = 4
+            Onichan = 4
             wait(0.5)
-            Type = 5
+            Onichan = 5
             wait(0.5)
         end)
     end
