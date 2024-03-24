@@ -5432,7 +5432,7 @@ end
 
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    Speed = Distance >= 1 and 325 or 1
+    Speed = Distance > 1 and 325 or 1
     if Distance <= 300 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
