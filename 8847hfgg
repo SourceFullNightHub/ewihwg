@@ -6785,7 +6785,7 @@ if taodangosea1 then
 elseif taodangosea2 then
     IslandList = {"The Cafe","Frist Spot","Dark Area","Flamingo Mansion","Flamingo Room","Green Zone","Factory","Colossuim","Zombie Island","Two Snow Mountain","Punk Hazard","Cursed Ship","Ice Castle","Forgotten Island","Ussop Island","Mini Sky Island"}
 elseif taodangosea3 then
-    {"Mansion","Port Town","Great Tree","Castle On The Sea","MiniSky", "Hydra Island","Floating Turtle","Haunted Castle","Ice Cream Island","Peanut Island","Cake Island","Cocoa Island","Tiki Outpost New","Candy Island New⛄"}
+    IslandList = {"Mansion","Port Town","Great Tree","Castle On The Sea","MiniSky", "Hydra Island","Floating Turtle","Haunted Castle","Ice Cream Island","Peanut Island","Cake Island","Cocoa Island","Tiki Outpost New","Candy Island New⛄"}
 end
 
 LCSection.CreateDropdown({Title = 'Select Island', List = IslandList, Default = "", Search = true, Selected = false}, function(Value)
