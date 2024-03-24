@@ -5596,7 +5596,9 @@ local plr = game.Players.LocalPlayer
                         debug.setupvalue(AC.attack, 7, u10)
                         pcall(function()
                             if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                                AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                                for k, v in pairs(AC.animator.anims.basic) do
+                                    v:Play()
+                                end
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
@@ -6085,8 +6087,10 @@ spawn(function()
                                         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Q",false,game)
                                     end
                                 end
-                            until not _G.AutoChestTween or not v.Parent
-                            Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                            until _G.AutoChestTween == false or not v.Parent
+                            _G.Emdungdiiiii = true
+                            wait(0.5)
+                            _G.Emdungdiiiii = false
                         end
                     end
                 end
@@ -6115,8 +6119,11 @@ spawn(function()
                                         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Q",false,game)
                                     end
                                 end
-                            until not _G.AutoChestBypass or not v.Parent
-                            Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                            until _G.AutoChestBypass == false or not v.Parent
+                            Instance(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                            _G.Emdungdiiiii = true
+                            wait(0.5)
+                            _G.Emdungdiiiii = false
                         end
                     end
                 end
@@ -7135,7 +7142,7 @@ spawn(function()
                     Camerabattu:Stop()
                     lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
                     lon.activeController.timeToNextAttack = 0
-                    lon.activeController.hitboxMagnitude = 60
+                    lon.activeController.hitboxMagnitude = 120
                     lon.activeController.active = false
                     lon.activeController.timeToNextBlock = 0
                     lon.activeController.focusStart = 1655503339.0980349
