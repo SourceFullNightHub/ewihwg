@@ -65,11 +65,11 @@ local b = {
     ["Text Color"] = Color3.fromRGB(255, 255, 255),
     ["Placeholder Text Color"] = Color3.fromRGB(255, 255, 255),
     ["Title Text Color"] = Color3.fromRGB(0, 0, 0),
-    ["Background Main Color"] = Color3.fromRGB(40, 40, 40),
-    ["Background 1 Color"] = Color3.fromRGB(33, 33, 33),
+    ["Background Main Color"] = Color3.fromRGB(60, 60, 60),
+    ["Background 1 Color"] = Color3.fromRGB(25, 25, 25),
     ["Background 1 Transparency"] = 0,
-    ["Background 2 Color"] = Color3.fromRGB(33, 33, 33),
-    ["Background 3 Color"] = Color3.fromRGB(33, 33, 33),
+    ["Background 2 Color"] = Color3.fromRGB(25, 25, 25),
+    ["Background 3 Color"] = Color3.fromRGB(25, 25, 25),
     ["Background Image"] = "",
     ["Page Selected Color"] = Color3.fromRGB(142, 172, 255),
     ["Section Text Color"] = Color3.fromRGB(255, 255, 255),
@@ -4708,6 +4708,37 @@ function t.CreateMain(H)
 end
 return t end
 local Library = GetUi()
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+local UIStroke = Instance.new("UIStroke")
+local CloseandOpen = true
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+ImageButton.Size = UDim2.new(0, 60, 0, 60)
+ImageButton.Image = "rbxassetid://16237266234"
+ImageButton.MouseButton1Click:Connect(function()
+    _G.CloseandOpenUi = not _G.CloseandOpenUi
+    if game.CoreGui:FindFirstChild("Night Hub GUI") then
+        for i, v in ipairs(game.CoreGui:GetChildren()) do
+            if v.Name == "Night Hub GUI"then
+                v.Enable = _G.CloseandOpenUi
+            end
+        end
+    end
+end)
+
+UICorner.Parent = ImageButton
+
+UIStroke.Color = Color3.fromRGB(255, 255, 255)
+UIStroke.Parent = ImageButton
 
 if game.PlaceId == 2753915549 then
     taodangosea1 = true
