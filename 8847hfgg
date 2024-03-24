@@ -878,7 +878,7 @@ function t.CreateMain(H)
     local ImageButton = Instance.new("ImageButton")
     local UICorner = Instance.new("UICorner")
     local UIStroke = Instance.new("UIStroke")
-    local _G.CloseandOpenUi = true
+    _G.CloseandOpenUi = true
 
     ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
