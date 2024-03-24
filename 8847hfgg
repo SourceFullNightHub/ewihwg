@@ -5546,6 +5546,14 @@ function CheckBalo(Name)
     end
 end
 
+function Notify(Noi, di)
+    Library.CreateNoti({
+        Title = "[Night Hub],
+        Desc = Noi,
+        ShowTime = di,
+    })
+end
+
 local plr = game.Players.LocalPlayer
 	local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
 	local CbFw2 = CbFw[2]
@@ -6866,6 +6874,35 @@ spawn(function()
             end
         end
     end)
+end)
+
+spawn(function()    
+    while wait() do
+        pcall(function()
+            if _G.NextIsland then
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                    if v.Name == "NotificationTemplate" then
+                        if string.find(v.Text,"#1") then
+                            Notify("Ez Island 1", 5)
+                            wait(5)
+                        elseif string.find(v.Text,"#2") then
+                            Notify("Ez Island 2", 5)
+                            wait(5)
+                        elseif string.find(v.Text,"#3") then
+                            Notify("Ez Island 3", 5)
+                            wait(5)
+                        elseif string.find(v.Text,"#4") then
+                            Notify("Ez Island 4", 5)
+                            wait(5)
+                        elseif string.find(v.Text,"#5") then
+                            Notify("Ez Island 5", 5)
+                            wait(5)
+                        end
+                    end
+                end
+            end
+        end)
+    end
 end)
 
 RaidSection.CreateToggle({Title = 'Auto Wakening', Desc = 'Auto Wakening If Raid Done.', Default = false}, function(Value)
