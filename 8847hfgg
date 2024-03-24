@@ -5590,6 +5590,7 @@ local plr = game.Players.LocalPlayer
                         pcall(function()
                             if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
                                 AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                                getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
