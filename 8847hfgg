@@ -6402,12 +6402,12 @@ spawn(
                         end
                         if
                             game:GetService("Players").LocalPlayer.Character:FindFirstChild("Pain Fruit") or
-                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Paw Fruit")
+                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Pain Fruit")
                          then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "StoreFruit",
                                 "Pain-Pain",
-                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Paw Fruit")
+                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Pain Fruit")
                             )
                         end
                         if
@@ -6462,11 +6462,11 @@ spawn(
                         end
                         if
                             game:GetService("Players").LocalPlayer.Character:FindFirstChild("Spirit Fruit") or
-                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Soul Fruit")
+                                game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spirit Fruit")
                          then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
                                 "StoreFruit",
-                                "Soul-Soul",
+                                "Spirit-Spirit",
                                 game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spirit Fruit")
                             )
                         end
@@ -6585,7 +6585,7 @@ spawn(function()
         while wait() do
             if _G.AutoSnipeFruit then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit","_G.SelectFruit",false)
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit",_G.SelectFruit)
             end 
         end
     end)
