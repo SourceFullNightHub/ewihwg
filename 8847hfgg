@@ -5551,9 +5551,9 @@ local plr = game.Players.LocalPlayer
         return ret
     end
     
-    function Attack()
-        if not _G.AutoClick then
-            if not _G.AutoNextIsland or _G.KilLAura then
+    function AttackNoCD()
+        if not AutoFarmMasDevilFruit or AutoFarmMasGun then
+            if not Auto_Raid then
                 local AC = CbFw2.activeController
                 for i = 1, 1 do 
                     local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
@@ -5589,22 +5589,10 @@ local plr = game.Players.LocalPlayer
                         debug.setupvalue(AC.attack, 7, u10)
                         pcall(function()
                             if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                                for k, v in pairs(AC.animator.anims.basic) do
-                                    v:Play()
-                                end
+                                AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(b7 / 1099511627776 * 16777215), u10)
-                                getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
-                                CbFw2.activeController.timeToNextAttack = 1
-                                CbFw2.activeController.attacking = false
-                                CbFw2.activeController.blocking = false
-                                CbFw2.activeController.timeToNextBlock = 0
-                                CbFw2.activeController.increment = 3
-                                CbFw2.activeController.hitboxMagnitude = 120
-                                CbFw2.activeController.focusStart = 0
-                                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, b2, 2, "")
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
                             end
                         end)
                     end
@@ -7191,8 +7179,6 @@ function AttackHit()
                 CBFRLIB2.activeController.focusStart = 0
                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", hit, i, 2, "")
-                game:GetService'VirtualUser':CaptureController()
-                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
             end)
         end
     end
@@ -7203,8 +7189,10 @@ spawn(function()
         if _G.FastAttackOld then
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
-                    Attack()
-                    AttackHit()
+                    AttackNoCD()
+                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
+                    game:GetService'VirtualUser':CaptureController()
+                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                 until not _G.FastAttackOld
             end)
         end
