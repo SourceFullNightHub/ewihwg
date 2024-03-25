@@ -5432,7 +5432,7 @@ end
 
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    Speed = Distance > 1 and 325 or 1
+    Speed = Distance > 1 and getgenv().TweenSpeed or 1
     if Distance <= 300 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
@@ -5609,8 +5609,15 @@ local plr = game.Players.LocalPlayer
                                 end
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(b7 / 1099511627776 * 16777215), u10)
-                                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", b2, 2, "")
                                 getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
+                                CbFw2.activeController.timeToNextAttack = 1
+                                CbFw2.activeController.attacking = false
+                                CbFw2.activeController.blocking = false
+                                CbFw2.activeController.timeToNextBlock = 0
+                                CbFw2.activeController.increment = 3
+                                CbFw2.activeController.hitboxMagnitude = 120
+                                CbFw2.activeController.focusStart = 0
+                                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, b2, 2, "")
                                 game:GetService'VirtualUser':CaptureController()
                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             end
@@ -7070,6 +7077,12 @@ LCSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island
     end
 end)
 
+local TweenSpeedSection = ST.CreateSection('Tween Speed')
+
+TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 180, Max = 350, Default = 180, Precise = false}, function(Value)
+    getgenv().TweenSpeed = Value
+end)
+
 local FastAttackSection = ST.CreateSection('FastAttack')
 
 FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No Delay And Large Hit.', Default = true}, function(Value)
@@ -7079,6 +7092,8 @@ end)
 FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.15", Search = true, Selected = false}, function(Value)
     _G.FastAttackDelay = Value
 end)
+
+
 
 spawn(function()
     while wait(.1) do
