@@ -7231,7 +7231,6 @@ spawn(function()
                 repeat task.wait(_G.FastAttackDelay)
                     AttackNoCD()
                     getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
-                    _G.AutoClick = true
                 until not _G.FastAttackOld
             end)
         end
