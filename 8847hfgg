@@ -5605,7 +5605,8 @@ local plr = game.Players.LocalPlayer
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
-                                _G.AutoClick = true
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             end
                         end)
                     end
@@ -5799,7 +5800,6 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.Emdungdiiiii == true then
-                wait()
                 Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                 wait()
                 if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
@@ -6135,7 +6135,7 @@ spawn(function()
                             if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoFactory then
                                 repeat wait()
                                     EnableBuso()
-                                    EquipTool(SelectWP)
+                                    EquipTool(_G.UsingTool)
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
@@ -6178,7 +6178,7 @@ spawn(function()
                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
                                 repeat wait()
                                     EnableBuso()
-                                    EquipTool(SelectWP)
+                                    EquipTool(_G.UsingTool)
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
