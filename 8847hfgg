@@ -7149,6 +7149,36 @@ spawn(function()
     end)
 end)
 
+PVPSection.CreateToggle({Title = 'Kill Players Nearest', Desc = 'Kill Nearest Players', Default = false}, function(Value)
+    _G.KillNearest = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.KillNearest then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 200 then
+                            repeat wait()
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                EnableBuso()
+                                EquipTool(_G.UsingTool)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                _G.AutoClick = true
+                            until _G.KillNearest == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                            _G.AutoClick = false
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
 TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 154, Max = 350, Default = 180, Precise = false}, function(Value)
