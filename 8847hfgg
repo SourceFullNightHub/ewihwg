@@ -7061,7 +7061,7 @@ end)
 
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
-TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 180, Max = 350, Default = 180, Precise = false}, function(Value)
+TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 154, Max = 350, Default = 180, Precise = false}, function(Value)
     getgenv().TweenSpeed = Value
 end)
 
