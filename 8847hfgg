@@ -5513,21 +5513,6 @@ function Taixiu(Pos)
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
-function ClickNormal()
-    if _G.FastAttackOld then
-        local requireCombatFramework = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
-        local CombatFramework = debug.getupvalues(requireCombatFramework)[2]
-        local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
-        CameraShaker:Stop()
-        CombatFramework.activeController.attacking = false
-        CombatFramework.activeController.timeToNextAttack = 0
-        CombatFramework.activeController.hitboxMagnitude = 60
-        getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
-        game:GetService'VirtualUser':CaptureController()
-        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-    end
-end
-
 function InstanceTween(P)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
@@ -5867,7 +5852,8 @@ spawn(function()
                                             Tween(v.HumanoidRootPart.CFrame * Dodge)
                                             BringMob = true
                                             PosMon = v.HumanoidRootPart.CFrame
-                                            ClickNormal()
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                     end
                                 end
@@ -5928,7 +5914,8 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                     Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                    ClickNormal()
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoKatakuri or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                             end
                         end
@@ -5954,7 +5941,8 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                                 Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                                ClickNormal()
+                                                game:GetService'VirtualUser':CaptureController()
+                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
                                             until not _G.AutoKatakuri or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
@@ -6024,7 +6012,8 @@ spawn(function()
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                         Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                        ClickNormal()
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         StartCheckBone = true
                                         Dungimanhdabijbat = v.HumanoidRootPart.CFrame
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBone
@@ -6066,7 +6055,8 @@ spawn(function()
                             v.Head.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                             Tween(v.HumanoidRootPart.CFrame * Dodge)
-                            ClickNormal()
+                            game:GetService'VirtualUser':CaptureController()
+                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             PosNearestMob = v.HumanoidRootPart.CFrame
                             BringNearest = true
                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoFarmNearest
@@ -6108,7 +6098,8 @@ spawn(function()
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                            ClickNormal()
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until not _G.AutoElite or v.Humanoid.Health <= 0 or not v.Parent
                                     end
                                 end
@@ -6149,7 +6140,8 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(CFrame.new(448.46756, 199.356781, -441.389252))
-                                    ClickNormal()
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until _G.AutoFactory == false or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         end
@@ -6191,7 +6183,8 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    ClickNormal()
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoCastleRaid
                             end
                         end
@@ -6242,7 +6235,8 @@ spawn(function()
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                 Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                ClickNormal()
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoSea2
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
                         end
@@ -7089,11 +7083,35 @@ FastAttackSection.CreateToggle({Title = 'Fast Attack', Desc = 'Speed Attack No D
     _G.FastAttackOld = Value
 end)
 
+local Camerabattu = require(game.ReplicatedStorage.Util.CameraShaker)
+taisaoanhlaigianemhahirimii = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+lon = debug.getupvalues(taisaoanhlaigianemhahirimii)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.FastAttackOld then
+            if typeof(lon) == "table" then
+                pcall(function()
+                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
+                    Camerabattu:Stop()
+                    lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    lon.activeController.timeToNextAttack = 0
+                    lon.activeController.hitboxMagnitude = 120
+                    lon.activeController.active = false
+                    lon.activeController.timeToNextBlock = 0
+                    lon.activeController.focusStart = 1655503339.0980349
+                    lon.activeController.increment = 1
+                    lon.activeController.blocking = false
+                    lon.activeController.attacking = false
+                    lon.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+
 FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.15", Search = true, Selected = false}, function(Value)
     _G.FastAttackDelay = Value
 end)
-
-
 
 spawn(function()
     while wait(.1) do
@@ -7134,13 +7152,59 @@ spawn(function()
     end)
 end)
 
+function GetBladeHit()
+    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CBFRLIB2 = CombatFrameworkLib[2]
+    local p13 = CBFRLIB2.activeController
+    local weapon = p13.blades[1]
+    if not weapon then 
+        return weapon
+    end
+    while weapon.Parent ~= game.Players.LocalPlayer.Character do
+        weapon = weapon.Parent 
+    end
+    return weapon
+end
+function AttackHit()
+    local CBFRLIB = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CBFRLIB2 = CombatFrameworkLib[2]
+    local plr = game.Players.LocalPlayer
+    for i = 1, 1 do
+        local hit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        hit = cac
+        if #hit > 0 then
+            pcall(function()
+                CBFRLIB2.activeController.timeToNextAttack = 0
+                CBFRLIB2.activeController.attacking = false
+                CBFRLIB2.activeController.blocking = false
+                CBFRLIB2.activeController.timeToNextBlock = 0
+                CBFRLIB2.activeController.increment = 3
+                CBFRLIB2.activeController.hitboxMagnitude = 60
+                CBFRLIB2.activeController.focusStart = 0
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", hit, i, 2, "")
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+            end)
+        end
+    end
+end
+
 spawn(function()
     while wait(0.1) do
         if _G.FastAttackOld then
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
                     Attack()
-                    Damchetnodithangngu = true
+                    AttackHit()
                 until not _G.FastAttackOld
             end)
         end
@@ -7244,32 +7308,6 @@ end)
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
 end
-
-local Camerabattu = require(game.ReplicatedStorage.Util.CameraShaker)
-taisaoanhlaigianemhahirimii = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
-lon = debug.getupvalues(taisaoanhlaigianemhahirimii)[2]
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if Damchetnodithangngu then
-            if typeof(lon) == "table" then
-                pcall(function()
-                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
-                    Camerabattu:Stop()
-                    lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
-                    lon.activeController.timeToNextAttack = 0
-                    lon.activeController.hitboxMagnitude = 120
-                    lon.activeController.active = false
-                    lon.activeController.timeToNextBlock = 0
-                    lon.activeController.focusStart = 1655503339.0980349
-                    lon.activeController.increment = 1
-                    lon.activeController.blocking = false
-                    lon.activeController.attacking = false
-                    lon.activeController.humanoid.AutoRotate = true
-                end)
-            end
-        end
-    end)
-end)
 
 getgenv().NoDieEffect = true
 if getgenv().NoDieEffect then
