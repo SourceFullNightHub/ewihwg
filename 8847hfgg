@@ -7074,6 +7074,81 @@ LCSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island
     end
 end)
 
+local PVPSection = PV.CreateSection('PVP')
+
+cobaonhieuthangtaocanhet = {}
+    
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(cobaonhieuthangtaocanhet,v.Name)
+end
+
+PVPSection.CreateDropdown({Title = 'Players List', List = cobaonhieuthangtaocanhet, Search = true, Selected = false}, function(Value)
+    getgenv().thangnaya = Value
+end)
+
+PVPSection.CreateToggle({Title = 'Kill Player(Select)', Desc = 'Select Players Your Need Kill And Turn On Toggle Here To Kill.', Default = false}, function(Value)
+    getgenv().maytoisoroicon = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().maytoisoroicon then
+                if game:GetService("Workspace").Characters:FindFirstChild(getgenv().thangnaya) then
+                    for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                        if v.Name == getgenv().thangnaya and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                            repeat wait()
+                                EquipTool(_G.UsingTool)
+                                EnableBuso()                                            
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                Tween(v.HumanoidRootPart.CFrame * Dodge)
+                                _G.AutoClick = true
+                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+PVPSection.CreateToggle({Title = 'Aimbot Skill', Desc = 'Aimbot Skill If Your Use To Players Select', Default = false}, function(Value)
+    _G.AimSkill = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            local MaxDistance = math.huge
+            for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+                if v.Name ~= game:GetService("Players").LocalPlayer.Name and v.Name == getgenv().thangnaya then
+                    local Distance = v:DistanceFromCharacter(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position)
+                    if Distance < MaxDistance then
+                        MaxDistance = Distance
+                        PlayerSelectAimbot = v.Name
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        while task.wait() do
+            if _G.AimSkill and PlayerSelectAimbot ~= nil and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and game.Players.LocalPlayer.Character[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name]:FindFirstChild("MousePos") then
+                local args = {
+                    [1] = game:GetService("Players"):FindFirstChild(PlayerSelectAimbot).Character.HumanoidRootPart.Position
+                }
+                game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name).RemoteEvent:FireServer(unpack(args))
+            end
+        end
+    end)
+end)
+
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
 TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 154, Max = 350, Default = 180, Precise = false}, function(Value)
