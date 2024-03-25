@@ -7094,8 +7094,8 @@ spawn(function()
     while wait() do
         pcall(function()
             if getgenv().didenthangkia then
-                if game:GetService("Workspace").Characters:FindFirstChild(getgenv().thangnaya) then
-                    for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                if game:GetService("Players"):FindFirstChild(getgenv().thangnaya) then
+                    for i, v in pairs(game:GetService("Players"):GetChildren()) do
                         if v.Name == getgenv().thangnaya and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 0, 5))
@@ -7116,8 +7116,8 @@ spawn(function()
     while wait() do
         pcall(function()
             if getgenv().maytoisoroicon then
-                if game:GetService("Workspace").Characters:FindFirstChild(getgenv().thangnaya) then
-                    for i, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                if game:GetService("Players"):FindFirstChild(getgenv().thangnaya) then
+                    for i, v in pairs(game:GetService("Players"):GetChildren()) do
                         if v.Name == getgenv().thangnaya and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
                                 EquipTool(_G.UsingTool)
