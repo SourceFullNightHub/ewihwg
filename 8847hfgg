@@ -7088,23 +7088,10 @@ end)
 
 PVPSection.CreateToggle({Title = 'Teleport To Player(Select)', Desc = 'Select Players Your Need Teleport And Turn On Toggle Here To Teleport.', Default = false}, function(Value)
     getgenv().didenthangkia = Value
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().didenthangkia then
-                if game:GetService("Players"):FindFirstChild(getgenv().thangnaya) then
-                    for i, v in pairs(game:GetService("Players"):GetChildren()) do
-                        if v.Name == getgenv().thangnaya and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                            repeat wait()
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 0, 5))
-                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
-                        end
-                    end
-                end
-            end
-        end)
+    if getgenv().didenthangkia then
+        repeat 
+            Tween(game:GetService("Players")[getgenv().thangnaya].Character.HumanoidRootPart.CFrame) 
+        until getgenv().didenthangkia == false
     end
 end)
 
