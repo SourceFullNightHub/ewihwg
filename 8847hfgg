@@ -5647,6 +5647,16 @@ local plr = game.Players.LocalPlayer
         end)
     end)
 
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not _G.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone then
+                    _G.AutoClick = false
+                end
+            end)
+        end
+    end)
+
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
 local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
@@ -5853,8 +5863,7 @@ spawn(function()
                                             Tween(v.HumanoidRootPart.CFrame * Dodge)
                                             BringMob = true
                                             PosMon = v.HumanoidRootPart.CFrame
-                                            game:GetService'VirtualUser':CaptureController()
-                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            _G.AutoClick = true
                                         until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                     end
                                 end
@@ -5915,8 +5924,7 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                     Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    _G.AutoClick = true
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoKatakuri or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                             end
                         end
@@ -5942,8 +5950,7 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                                 Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                                game:GetService'VirtualUser':CaptureController()
-                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                _G.AutoClick = true
                                                 BringKatakuriMob = true
                                                 PosMobCake = v.HumanoidRootPart.CFrame
                                             until not _G.AutoKatakuri or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
@@ -6013,8 +6020,7 @@ spawn(function()
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                         Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        _G.AutoClick = true
                                         StartCheckBone = true
                                         Dungimanhdabijbat = v.HumanoidRootPart.CFrame
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoBone
@@ -6056,8 +6062,7 @@ spawn(function()
                             v.Head.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                             Tween(v.HumanoidRootPart.CFrame * Dodge)
-                            game:GetService'VirtualUser':CaptureController()
-                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            _G.AutoClick = true
                             PosNearestMob = v.HumanoidRootPart.CFrame
                             BringNearest = true
                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoFarmNearest
@@ -6099,8 +6104,7 @@ spawn(function()
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                            game:GetService'VirtualUser':CaptureController()
-                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            _G.AutoClick = true
                                         until not _G.AutoElite or v.Humanoid.Health <= 0 or not v.Parent
                                     end
                                 end
@@ -6141,8 +6145,7 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(CFrame.new(448.46756, 199.356781, -441.389252))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    _G.AutoClick = true
                                 until _G.AutoFactory == false or v.Humanoid.Health <= 0 or not v.Parent
                             end
                         end
@@ -6184,8 +6187,7 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    _G.AutoClick = true
                                 until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoCastleRaid
                             end
                         end
