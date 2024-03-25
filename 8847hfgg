@@ -5548,7 +5548,7 @@ end
 
 function Notify(Noi, di)
     Library.CreateNoti({
-        Title = "[Night Hub],
+        Title = "[Night Hub]",
         Desc = Noi,
         ShowTime = di,
     })
