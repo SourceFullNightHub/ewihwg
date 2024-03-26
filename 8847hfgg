@@ -5613,6 +5613,24 @@ local plr = game.Players.LocalPlayer
             end
         end
     end
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
+                    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
+                        local Noclip = Instance.new("BodyVelocity")
+                        Noclip.Name = "BodyClip"
+                        Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                        Noclip.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                        Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end
+                else
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+                end
+            end)
+        end
+    end)
     
     spawn(function()
         pcall(function()
@@ -7408,12 +7426,11 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait(0.1) do
+    while wait() do
         if _G.FastAttackOld then
             pcall(function()
                 repeat task.wait(_G.FastAttackDelay)
                     AttackNoCD()
-                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
                 until not _G.FastAttackOld
             end)
         end
