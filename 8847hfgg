@@ -5517,14 +5517,6 @@ function InstanceTween(P)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
 
-function Raidroom()
-    if taodangosea2 then
-        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
-    elseif taodangosea3 then
-        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
-    end
-end
-
 function CheckBalo(Name)
     if game.Players.LocalPlayer.BackPack:FindFirstChild(Name) then
         return
@@ -6894,7 +6886,11 @@ RaidSection.CreateButton({Title = 'Buy Chip'}, function()
 end)
 
 RaidSection.CreateButton({Title = 'Teleport To Raid Room'}, function()
-    Raidroom()
+    if taodangosea2 then
+        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
+    elseif taodangosea3 then
+        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+    end
 end)
 
 RaidSection.CreateToggle({Title = 'KillAura', Desc = 'Kill Mob Very Fast In Raid.', Default = false}, function(Value)
@@ -6957,19 +6953,19 @@ spawn(function()
                     if v.Name == "NotificationTemplate" then
                         if string.find(v.Text,"#1") then
                             Notify("Ez Island 1", 5)
-                            wait(5)
+                            wait(6)
                         elseif string.find(v.Text,"#2") then
                             Notify("Ez Island 2", 5)
-                            wait(5)
+                            wait(6)
                         elseif string.find(v.Text,"#3") then
                             Notify("Ez Island 3", 5)
-                            wait(5)
+                            wait(6)
                         elseif string.find(v.Text,"#4") then
                             Notify("Ez Island 4", 5)
-                            wait(5)
+                            wait(6)
                         elseif string.find(v.Text,"#5") then
                             Notify("Ez Island 5", 5)
-                            wait(5)
+                            wait(6)
                         end
                     end
                 end
