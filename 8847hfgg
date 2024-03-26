@@ -5517,6 +5517,14 @@ function InstanceTween(P)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
 end
 
+function Raidroom()
+    if taodangosea2 then
+        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
+    elseif taodangosea3 then
+        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+    end
+end
+
 function CheckBalo(Name)
     if game.Players.LocalPlayer.BackPack:FindFirstChild(Name) then
         return
@@ -5609,13 +5617,13 @@ local plr = game.Players.LocalPlayer
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-                        Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        Noclip.Velocity = Vector3.new(0, 0, 0)
                     end
                 else
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
@@ -5627,7 +5635,7 @@ local plr = game.Players.LocalPlayer
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false
@@ -6886,11 +6894,7 @@ RaidSection.CreateButton({Title = 'Buy Chip'}, function()
 end)
 
 RaidSection.CreateButton({Title = 'Teleport To Raid Room'}, function()
-    if taodangosea2 then
-        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
-    elseif taodangosea3 then
-        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
-    end
+    Raidroom()
 end)
 
 RaidSection.CreateToggle({Title = 'KillAura', Desc = 'Kill Mob Very Fast In Raid.', Default = false}, function(Value)
@@ -6953,19 +6957,19 @@ spawn(function()
                     if v.Name == "NotificationTemplate" then
                         if string.find(v.Text,"#1") then
                             Notify("Ez Island 1", 5)
-                            wait(6)
+                            wait(5)
                         elseif string.find(v.Text,"#2") then
                             Notify("Ez Island 2", 5)
-                            wait(6)
+                            wait(5)
                         elseif string.find(v.Text,"#3") then
                             Notify("Ez Island 3", 5)
-                            wait(6)
+                            wait(5)
                         elseif string.find(v.Text,"#4") then
                             Notify("Ez Island 4", 5)
-                            wait(6)
+                            wait(5)
                         elseif string.find(v.Text,"#5") then
                             Notify("Ez Island 5", 5)
-                            wait(6)
+                            wait(5)
                         end
                     end
                 end
@@ -7233,18 +7237,18 @@ spawn(function()
             pcall(function()
                 for i, v in pairs(game.Workspace.Characters:GetChildren()) do
                     if v.Name ~= game.Players.LocalPlayer.Name then
-                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 200 then
-                            repeat wait()
-                                EnableBuso()
-                                EquipTool(_G.UsingTool)
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Head.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
-                                _G.AutoClick = true
-                            until _G.KillNearest == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
-                            _G.AutoClick = false
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent then 
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 200 then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                    _G.AutoClick = true
+                                until _G.KillNearest == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                                _G.AutoClick = false
+                            end
                         end
                     end
                 end
