@@ -5846,32 +5846,28 @@ spawn(function()
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    if game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
-                                    repeat wait()
-                                        EquipTool(_G.UsingTool)
-                                        EnableBuso()                                            
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                        Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                        BringMob = true
-                                        PosMon = v.HumanoidRootPart.CFrame
-                                        _G.AutoClick = true
-                                    until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                end
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                            if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                                repeat wait()
+                                    EquipTool(_G.UsingTool)
+                                    EnableBuso()                                            
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                    Tween(v.HumanoidRootPart.CFrame * Dodge)
+                                    BringMob = true
+                                    PosMon = v.HumanoidRootPart.CFrame
+                                    _G.AutoClick = true
+                                until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                             end
                         end
                     else
                         Tween(CFrameMob)
                         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                            if string.find(v.Name, NameMob) then
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude and not  game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
-                                    Tween(v.CFrame * CFrame.new(2, 20, 2))
-                                end
+                            if string.find(v.Name, NameMob) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude and not game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
+                                Tween(v.CFrame * CFrame.new(2, 20, 2))
                             end
                         end
                     end
