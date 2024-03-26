@@ -5620,26 +5620,17 @@ local plr = game.Players.LocalPlayer
                         Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
                         Noclip.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
                         Noclip.Velocity = Vector3.new(0, 0, 0)
+                        for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                            if v:IsA("BasePart") then
+                                v.CanCollide = false
+                            end
+                        end
                     end
                 else
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
                 end
             end)
         end
-    end)
-    
-    spawn(function()
-        pcall(function()
-            game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
-                    for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = false
-                        end
-                    end
-                end
-            end)
-        end)
     end)
 
     spawn(function()
@@ -5694,7 +5685,7 @@ end)
 local CheckLevel = game.Players.LocalPlayer.Data.Level.Value
 local FarmSettingSection = G.CreateSection('Farm Settings')
 
-function RedeemAllCode()
+FarmSettingSection.CreateButton({Title = 'Redeem All Codes'}, function()
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2UncleKizaru")
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("NEWTROLL")
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("SUB2NOOBMASTER123")
@@ -5722,10 +5713,6 @@ function RedeemAllCode()
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Sub2Daigrock")
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("Axiore")
     game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer("TantaiGaming")
-end
-
-FarmSettingSection.CreateButton({Title = 'Redeem All Codes'}, function()
-    RedeemAllCode()
 end)
 
 FarmSettingSection.CreateDropdown({Title = 'Select Stas To Add', List = {"Melee", "Defense", "Sword", "Gun", "Devil Fruit"}, Search = false, Selected = false}, function(Value)
@@ -5733,7 +5720,7 @@ FarmSettingSection.CreateDropdown({Title = 'Select Stas To Add', List = {"Melee"
 end)
 
 spawn(function()
-    while wait() do
+    while wait(.1) do
         pcall(function()
             if game.Players.localPlayer.Data.Points.Value >= 1 then
                 if getgenv().Stats == "Melee" then
@@ -5878,20 +5865,18 @@ FarmSection.CreateToggle({Title = 'Auto Katakuri', Desc = 'Auto Killing 500 Mobs
 end)
 
 spawn(function()
-    while wait() do
-        if _G.AutoKatakuri == true and taodangosea3 then
-            pcall(function()
-                local spawnerData = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")
-                local dataLength = string.len(spawnerData)
-                if dataLength == 88 then
-                    CountMob = tonumber(string.sub(spawnerData, 39, 41)) - 500
-                elseif dataLength == 87 then
-                    CountMob = tonumber(string.sub(spawnerData, 40, 41)) - 500
-                elseif dataLength == 86 then
-                    CountMob = tonumber(string.sub(spawnerData, 41, 41)) - 500
+    while wait(.1) do
+        pcall(function()
+            if _G.AutoKatakuri and taodangosea3 then
+                if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner") == 88 then
+                    CountMob = tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 39, 41)) - 500
+                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner") == 87 then
+                    CountMob = tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 40, 41)) - 500
+                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner") == 86 then
+                    CountMob = tonumber(string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"), 41, 41)) - 500
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
