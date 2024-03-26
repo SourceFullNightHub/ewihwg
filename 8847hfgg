@@ -7293,7 +7293,6 @@ spawn(function()
         if _G.FastAttackOld then
             if typeof(lon) == "table" then
                 pcall(function()
-                    getupvalue(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework), 2).activeController.data = require(game:GetService("ReplicatedStorage").ClientWeapons).divineart
                     Camerabattu:Stop()
                     lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
                     lon.activeController.timeToNextAttack = 0
