@@ -5613,24 +5613,6 @@ local plr = game.Players.LocalPlayer
             end
         end
     end
-
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or NoCLip == true then
-                    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
-                        local Noclip = Instance.new("BodyVelocity")
-                        Noclip.Name = "BodyClip"
-                        Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                        Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                        Noclip.Velocity = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-                    end
-                else
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-                end
-            end)
-        end
-    end)
     
     spawn(function()
         pcall(function()
@@ -5846,25 +5828,22 @@ spawn(function()
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    Checknhiemvu()
                     if game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == Mob then
-                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
-                                        repeat wait()
-                                            EquipTool(_G.UsingTool)
-                                            EnableBuso()                                            
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.Head.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                            Tween(v.HumanoidRootPart.CFrame * Dodge)
-                                            BringMob = true
-                                            PosMon = v.HumanoidRootPart.CFrame
-                                            _G.AutoClick = true
-                                        until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    end
+                            if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                                    repeat wait()
+                                        EquipTool(_G.UsingTool)
+                                        EnableBuso()                                            
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                        Tween(v.HumanoidRootPart.CFrame * Dodge)
+                                        BringMob = true
+                                        PosMon = v.HumanoidRootPart.CFrame
+                                        _G.AutoClick = true
+                                    until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                 end
                             end
                         end
@@ -6326,6 +6305,95 @@ spawn(function()
             end
         end
     end)
+end)
+
+local QuestSection = IQ.CreateSection('Quest')
+
+QuestSection.CreateToggle({Title = 'Auto Ghoul Race', Desc = 'If Your Not Have Ghoul Race, function when check boss cursed captan in Cursed Ship to kill, if have torch will teleport to npc and get ghoul race(not kuttay)', Default = false}, function(Value)
+    _G.AutoGhoulRace = Value
+end)
+
+local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
+local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
+spawn(function()
+    while wait() do
+        if _G.AutoGhoulRace and taodangosea2 then
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if BypassTP then
+                        if (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosGhoulRace)
+                            wait(0.5)
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "BuyCheck",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                            local a = {
+                                [1] = "Ectoplasm",
+                                [2] = "Change",
+                                [3] = 4
+                            }
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        end
+                    else
+                        Tween(PosGhoulRace)
+                        wait(0.5)
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "BuyCheck",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                        local a = {
+                            [1] = "Ectoplasm",
+                            [2] = "Change",
+                            [3] = 4
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+                    end
+                elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Captain") then
+                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Cursed Captain" then
+                                if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoGhoulRace then
+                                    repeat wait()
+                                        EnableBuso()
+                                        EquipTool(SelectWP)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        ClickNormal()
+                                    until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.AutoGhoulRace == false
+                                    
+                                end
+                            end
+                        end
+                    else
+                        if BypassTP then
+                            if (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                            elseif (PosCursedBoss.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                                Tween(PosCursedBoss)
+                            end
+                        else
+                            Tween(PosCursedBoss)
+                        end
+                    end
+                else
+                    if game.Players.LocalPlayer.Data.Race.Value == "Ghoul" then
+                        Notify("Your Race Are Ghoul!!!", 5)
+                        wait(6)
+                    end
+                end
+            end)
+        end
+    end
 end)
 
 local DevilFruitSection = DR.CreateSection('Devil Fruit')
