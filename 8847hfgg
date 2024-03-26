@@ -5436,13 +5436,9 @@ function Tween(Pos)
     if Distance <= 300 then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
-    game:GetService("TweenService"):Create(
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
-        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-        {CFrame = Pos}
-    ):Play()
+    game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
     NoCLip = true
-    wait(Distance / Speed)
+    wait(Distance/Speed)
     NoCLip = false
 end
 
