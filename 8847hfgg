@@ -6348,6 +6348,7 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                             local args = {[1] = "Ectoplasm", [2] = "Change", [3] = 4}
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end
                     else
                         Tween(PosGhoulRace)
                         wait(0.5)
