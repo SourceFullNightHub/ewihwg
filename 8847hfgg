@@ -6377,6 +6377,46 @@ spawn(function()
     end)
 end)
 
+QuestSection.CreateToggle({Title = 'Auto Third Sea', Desc = 'Auto Third Sea là Auto Third Sea còn gì nữa.', Default = false}, function(Value)
+    _G.AutoThirdSea = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoThirdSea and taodangosea2 then
+                if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
+                    Tween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
+                    wait(.1)
+                    if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - Mainchinh.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+                    end
+                    wait(.1)
+                    if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                if v.Name == "rip_indra" then
+                                    repeat wait()
+                                        EnableBuso()
+                                        EquipTool(_G.UsingTool)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.CanCollide = false
+                                        _G.AutoClick = true
+                                    until v.Humanoid.Health <= 0 or not _G.AutoThirdSea or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                                    _G.AutoClick = false
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 local ItemandFarmSection = IQ.CreateSection('Item & Farm')
 
 ItemandFarmSection.CreateToggle({Title = 'Auto Swan', Desc = 'Teleport To Swan and wait boss spawn. If Boss Spawn and your are give NPC Fruit > 1000000 beli then Teleport To Swan And KILL', Default = false}, function(Value)
