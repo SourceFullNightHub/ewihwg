@@ -5430,11 +5430,10 @@ function Hop()
     Teleport()
 end       
 
-function Tween(Pos)
+function topos(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    Speed = Distance > 1 and getgenv().TweenSpeed or 1
-    if Distance <= 300 then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    if Distance > 1 then
+        Speed = getgenv().TweenSpeed
     end
     game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
     NoCLip = true
@@ -5639,6 +5638,19 @@ local plr = game.Players.LocalPlayer
         end
     end)
 
+    local Mainchinh = game.Players.LocalPlayer
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                    if Mainchinh.Character.Humanoid.Sit == true then
+                        Mainchinh.Character.Humanoid.Sit = false
+                    end
+                end
+            end)
+        end
+    end)
     spawn(function()
         while wait() do
             pcall(function()
@@ -5661,7 +5673,6 @@ local SE = Main.CreatePage({Page_Name = 'Sea Event', Page_Title = ''})
 local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
 local Dungtoll = G.CreateSection('Select Weapons')
-local Mainchinh = game.Players.LocalPlayer
 
 local WP = {"Melee", "Sword"}
 Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Search = false, Selected = false}, function(Value)
