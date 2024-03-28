@@ -12,7 +12,7 @@ local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 # Create Notify :
 ```lua
 Library.CreateNoti({
-   Title = "Night Hub,
+   Title = "Night Hub",
    Desc = "Notify",
    ShowTime = 5,
 }) 
