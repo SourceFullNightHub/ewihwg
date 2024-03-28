@@ -5535,6 +5535,12 @@ function Notify(Noi, di)
     })
 end
 
+function SendKey(Key)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,Key,false,game)
+    wait(0.1)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
+end
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -5772,9 +5778,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.TurnV4 then
-                game:GetService("VirtualInputManager"):SendKeyEvent(true,"Y",false,game)
-                wait(0.1)
-                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Y",false,game)
+                SendKey("Y")
             end
         end)
     end
