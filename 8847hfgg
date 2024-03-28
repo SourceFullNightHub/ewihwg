@@ -5636,12 +5636,12 @@ local plr = game.Players.LocalPlayer
     spawn(function()
         while wait() do
             pcall(function()
-                if not _G.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone and not _G.KillNearest and not _G.AutoFarmNearest and not _G.AutoSea2 then
+                if _G.AutoSwan and not _G.Bartilonhucac and not _G.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone and not _G.KillNearest and not _G.AutoFarmNearest and not _G.AutoSea2 then
                     _G.AutoClick = false
                 end
             end)
         end
-    end)
+    end) 
 
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
@@ -6303,6 +6303,171 @@ spawn(function()
 end)
 
 local QuestSection = IQ.CreateSection('Quest')
+
+QuestSection.CreateToggle({Title = 'Auto Bartilo Quest', Desc = 'Auto Bartilo Quest If Your Level 850.', Default = false}, function(Value)
+    _G.Bartilonhucac = Value
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.Bartilonhucac then
+                if game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 0 then
+                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Swan Pirates") and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then 
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    repeat task.wait()
+                                        EquipTool(_G.UsingTool)
+                                        EnableBuso()
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))													
+                                        PosMobBartilo =  v.HumanoidRootPart.CFrame
+                                        BringBartilo = true
+                                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                                        _G.AutoClick = true
+                                    until not v.Parent or v.Humanoid.Health <= 0 or _G.Bartilonhucac == false or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    BringBartilo = false
+                                end
+                            end
+                        else
+                            repeat 
+                                Tween(CFrame.new(932.624451, 156.106079, 1180.27466)) 
+                                wait() 
+                            until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(932.624451, 156.106079, 1180.27466)).Magnitude <= 10
+                        end
+                    else
+                        repeat 
+                            Tween(CFrame.new(-456.28952, 73.0200958, 299.895966)) 
+                            wait() 
+                        until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-456.28952, 73.0200958, 299.895966)).Magnitude <= 10
+                        wait(1.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","BartiloQuest",1)
+                    end 
+                elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 1 then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Jeremy") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Jeremy" then
+                                repeat task.wait()
+                                    EquipTool(_G.UsingTool)
+                                    EnableBuso()
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                    PosJeremy = v.HumanoidRootPart.CFrame
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))			
+                                    sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                    _G.AutoClick = true
+                                until not v.Parent or v.Humanoid.Health <= 0 or _G.Bartilonhucac == false
+                            end
+                        end
+                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Jeremy") then
+                        repeat 
+                            Tween(CFrame.new(-456.28952, 73.0200958, 299.895966)) 
+                            wait() 
+                        until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-456.28952, 73.0200958, 299.895966)).Magnitude <= 10
+                        wait(1.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo")
+                        wait(1)
+                        repeat 
+                            Tween(CFrame.new(2099.88159, 448.931, 648.997375)) 
+                            wait() 
+                        until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(2099.88159, 448.931, 648.997375)).Magnitude <= 10
+                        wait(2)
+                    else
+                        repeat 
+                            Tween(CFrame.new(2099.88159, 448.931, 648.997375)) 
+                            wait() 
+                        until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(2099.88159, 448.931, 648.997375)).Magnitude <= 10
+                    end
+                elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 2 then
+                    repeat 
+                        Tween(CFrame.new(-1850.49329, 13.1789551, 1750.89685)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1850.49329, 13.1789551, 1750.89685)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1858.87305, 19.3777466, 1712.01807)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1858.87305, 19.3777466, 1712.01807)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1803.94324, 16.5789185, 1750.89685)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1803.94324, 16.5789185, 1750.89685)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1858.55835, 16.8604317, 1724.79541)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1858.55835, 16.8604317, 1724.79541)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1869.54224, 15.987854, 1681.00659)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1869.54224, 15.987854, 1681.00659)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1800.0979, 16.4978027, 1684.52368)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1800.0979, 16.4978027, 1684.52368)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1819.26343, 14.795166, 1717.90625)) 
+                        wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1819.26343, 14.795166, 1717.90625)).Magnitude <= 10
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(-1813.51843, 14.8604736, 1724.79541)) 
+                    wait() 
+                    until not _G.Bartilonhucac or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1813.51843, 14.8604736, 1724.79541)).Magnitude <= 10
+                end
+            end 
+        end
+    end)
+end)
+
+local ItemandFarmSection = IQ.CreateSection('Item & Farm')
+
+ItemandFarmSection.CreateToggle({Title = 'Auto Swan', Desc = 'Teleport To Swan and wait boss spawn. If Boss Spawn and your are give NPC Fruit > 1000000 beli then Teleport To Swan And KILL', Default = false}, function(Value)
+    _G.AutoSwan = Value
+end)
+
+local PosSwanRoom = CFrame.new(2284.91211, 15.1520348, 905.48291)
+spawn(function()
+    while wait() do
+        if _G.AutoSwan then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Don Swan") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            if v.Name == "Don Swan" then
+                                repeat wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not _G.AutoSwan or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                                _G.AutoClick = false
+                            end
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosSwanRoom.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(2284.91211, 15.1520348, 905.48291))
+                        elseif (PosSwanRoom.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosSwanRoom)
+                        end
+                    else
+                        Tween(PosSwanRoom)
+                    end
+                end
+            end)
+        end
+    end
+end)
 
 QuestSection.CreateToggle({Title = 'Auto Ghoul Race', Desc = 'If Your Not Have Ghoul Race, function when check boss cursed captan in Cursed Ship to kill, if have torch will teleport to npc and get ghoul race(not kuttay)', Default = false}, function(Value)
     _G.AutoGhoulRace = Value
@@ -7045,7 +7210,7 @@ LCSection.CreateToggle({Title = 'Teleport To Island', Desc = 'Teleport To Island
         elseif _G.didianhbao == "Flamingo Mansion" then
             Tween(CFrame.new(-483.73370361328, 332.0383605957, 595.32708740234))
         elseif _G.didianhbao == "Flamingo Room" then
-            Tween(CFrame.new(2284.4140625, 15.152037620544, 875.72534179688))
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(2284.91211, 15.1520348, 905.48291))
         elseif _G.didianhbao == "Green Zone" then
             Tween(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
         elseif _G.didianhbao == "Factory" then
