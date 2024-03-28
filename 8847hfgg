@@ -4743,10 +4743,10 @@ else
     game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
 end
 
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Night Hub",
-	Text = "Loading Ui Complete waiting load function",
-	Icon = "rbxassetid://15541504459"
+Library.CreateNoti({
+    Title = "Night Hub,
+    Desc = "Loaded Gui Completed!",
+    ShowTime = 5,
 })
 
 function Checknhiemvu()
@@ -7695,6 +7695,24 @@ if getgenv().NoDieEffect then
     end
 end
 
+function BypassAntiCheats()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
+end
+BypassAntiCheats()
+
 assert(getrawmetatable)
     grm = getrawmetatable(game)
     setreadonly(grm, false)
@@ -7727,8 +7745,4 @@ assert(getrawmetatable)
         return old(self, ...)
     end)
 
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Night Hub",
-	Text = "Complete Your Can Use",
-	Icon = "rbxassetid://15541504459"
-})
+Notify("Loaded Script Completed", 5)
