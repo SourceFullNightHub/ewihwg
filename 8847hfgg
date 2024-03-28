@@ -5430,7 +5430,7 @@ function Hop()
     Teleport()
 end       
 
-function topos(Pos)
+function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance > 1 then
         Speed = getgenv().TweenSpeed
