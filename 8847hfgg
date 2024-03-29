@@ -79,7 +79,8 @@ local b = {
     ["Toggle Desc Color"] = Color3.fromRGB(255, 255, 255),
     ["Button Text Color"] = Color3.fromRGB(128, 187, 219),
     ["Button Color"] = Color3.fromRGB(255, 255, 255),
-    ["Label Color"] = Color3.fromRGB(255, 255, 255),
+    ["Label Color"] = Color3.fromRGB(25, 25, 25),
+    ["Label Text Color"] = Color3.fromRGB(255, 255, 255),
     ["Dropdown Icon Color"] = Color3.fromRGB(255, 255, 255),
     ["Dropdown Selected Color"] = Color3.fromRGB(255, 255, 255),
     ["Textbox Highlight Color"] = Color3.fromRGB(255, 255, 255),
@@ -3624,11 +3625,11 @@ function t.CreateMain(H)
                 e1.TextXAlignment = Enum.TextXAlignment.Left
                 e1.AutomaticSize = Enum.AutomaticSize.Y
                 e1.TextWrapped = true
-                e1.TextColor3 = getgenv().UIColor["Text Color"]
+                e1.TextColor3 = getgenv().UIColor["Label Text Color"]
                 table.insert(
-                    c["Text Color"],
+                    c["Label Text Color"],
                     function()
-                        e1.TextColor3 = getgenv().UIColor["Text Color"]
+                        e1.TextColor3 = getgenv().UIColor["Label Text Color"]
                     end
                 )
                 local e2 = {}
@@ -5811,6 +5812,24 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+            else
+                KatakuriCount:SetValue("Cake Prince Spawned")
+            end
+        end)
+    end
+end)
+
+local KatakuriCount = FarmSection.CreateLabel({Title = "Killed : "})
+
 FarmSection.CreateToggle({Title = 'Auto Katakuri', Desc = 'Auto Killing 500 Mobs To Spawn Cake Price else if Have Cake Price or Dough King In Servers then Teleport To Boss and kill', Default = false}, function(Value)
     _G.AutoKatakuri = Value
 end)
@@ -5830,24 +5849,6 @@ spawn(function()
         end)
     end
 end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
-                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
-            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
-                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
-            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
-                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
-            else
-                KatakuriCount:SetValue("Cake Prince Spawned")
-            end
-        end)
-    end
-end)
-
-local KatakuriCount = FarmSection.CreateLabel({Title = "Killed : "})
 
 local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 spawn(function()
