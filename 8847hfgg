@@ -7172,15 +7172,15 @@ end)
 
 local StatusServers = STT.CreateSection('Status')
 
-local LevelPlayers = STT.CreateLabel({Title = "Your Level : Infinity"})
+local LevelPlayers = StatusServers.CreateLabel({Title = "Your Level : Infinity"})
 
-local Moon = STT.CreateLabel({Title = "Wait Update"})
+local Moon = StatusServers.CreateLabel({Title = "Wait Update"})
 
-local Mirage = STT.CreateLabel({Title = "Mirage Island : 🔴"})
+local Mirage = StatusServers.CreateLabel({Title = "Mirage Island : 🔴"})
 
-local Kitsune = STT.CreateLabel({Title = "Kitsune Island : 🔴"})
+local Kitsune = StatusServers.CreateLabel({Title = "Kitsune Island : 🔴"})
 
-local FruitSpawn = STT.CreateLabel({Title = "Fruit Spawn : 🔴"})
+local FruitSpawn = StatusServers.CreateLabel({Title = "Fruit Spawn : 🔴"})
 
 spawn(function()
     while wait() do
