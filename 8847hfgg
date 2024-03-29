@@ -6383,8 +6383,8 @@ end)
 
 spawn(function()
     while wait() do
-        pcall(function()
-            if _G.AutoThirdSea and taodangosea2 then
+        if _G.AutoThirdSea and taodangosea2 then
+            pcall(function()
                 if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
                     Tween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
                     wait(.1)
@@ -6412,8 +6412,8 @@ spawn(function()
                         end
                     end
                 end
-            end
-        end)
+            end)
+        end
     end
 end)
 
