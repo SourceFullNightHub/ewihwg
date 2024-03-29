@@ -5431,21 +5431,6 @@ function Hop()
     Teleport()
 end       
 
-function Tween(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance > 1 then
-        Speed = getgenv().TweenSpeed
-    end
-    game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
-    NoCLip = true
-    wait(Distance/Speed)
-    NoCLip = false
-    if _G.Emdungdiiiii == true then
-        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Cancel()
-        NoCLip = false
-    end
-end
-
 Onichan = 1
 spawn(function()
     while wait() do
@@ -5507,22 +5492,14 @@ function Taixiu(Pos)
     repeat wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-        wait(2)
+        wait(1.5)
         game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Pos
-        wait(3)
+        wait(2)
     until (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
 function InstanceTween(P)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-end
-
-function Raidroom()
-    if taodangosea2 then
-        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
-    elseif taodangosea3 then
-        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
-    end
 end
 
 function CheckBalo(Name)
@@ -5601,6 +5578,29 @@ end)
             end)
         end
     end) 
+    
+function Tween(Pos)
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance > 1 then
+        Speed = getgenv().TweenSpeed
+    end
+    game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Play()
+    NoCLip = true
+    wait(Distance/Speed)
+    NoCLip = false
+    if _G.Emdungdiiiii == true then
+        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Cancel()
+        NoCLip = false
+    end
+end
+
+function Raidroom()
+    if taodangosea2 then
+        Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
+    elseif taodangosea3 then
+        Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+    end
+end
 
 local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
 
