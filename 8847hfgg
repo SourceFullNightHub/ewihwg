@@ -5942,6 +5942,16 @@ spawn(function()
     end
 end)
 
+local BoneCount = FarmSection.CreateLabel({Title = "Your Bone : "})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            BoneCount.SetText("Your Bone : " ..game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check").. " ")
+        end)
+    end
+end)
+
 FarmSection.CreateToggle({Title = 'Auto Bone', Desc = ' Go to castle haunted kill mob to get bone', Default = false}, function(Value)
     _G.AutoBone = Value
 end)
