@@ -7223,9 +7223,9 @@ spawn(function()
         pcall(function()
             for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
                 if string.find(v.Name, "Fruit") then
-                    FruitSpawn.SetText("Fruit Spawned 🟢")
+                    FruitSpawn.SetText("Fruit Spawned : 🟢")
                 else
-                    FruitSpawn.SetText("Fruit Not Spawned 🔴")
+                    FruitSpawn.SetText("Fruit Not Spawned : 🔴")
                 end
             end
         end)
