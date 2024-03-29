@@ -5831,6 +5831,24 @@ spawn(function()
     end
 end)
 
+spawn(function()
+    while wait() do
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                KatakuriCount:SetValue("Killed : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+            else
+                KatakuriCount:SetValue("Cake Prince Spawned")
+            end
+        end)
+    end
+end)
+
+local KatakuriCount = FarmSection.CreateLabel({Title = "Killed : "})
+
 local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 spawn(function()
     while wait() do
@@ -6383,7 +6401,7 @@ end)
 
 spawn(function()
     while wait() do
-        if _G.AutoThirdSea and taodangosea2 then
+        if _G.AutoThirdSea and taodangosea2 and Mainchinh.Data.Level.Value >= 1500 then
             pcall(function()
                 if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
                     Tween(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
