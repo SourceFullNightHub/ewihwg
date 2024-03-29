@@ -5440,6 +5440,10 @@ function Tween(Pos)
     NoCLip = true
     wait(Distance/Speed)
     NoCLip = false
+    if _G.Emdungdiiiii == true then
+        game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),{CFrame = Pos}):Cancel()
+        NoCLip = false
+    end
 end
 
 Onichan = 1
