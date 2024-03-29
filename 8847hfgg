@@ -5604,8 +5604,9 @@ local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
 local ST = Main.CreatePage({Page_Name = 'Settings', Page_Title = ''})
 local IQ = Main.CreatePage({Page_Name = 'Item & Quest', Page_Title = ''})
 local DR = Main.CreatePage({Page_Name = 'Devil Fruit and Raids', Page_Title = ''})
+local STT = Main.CreatePage({Page_Name = 'Status and Servers', Page_Title = ''})
 local PV = Main.CreatePage({Page_Name = 'Players & PVP', Page_Title = ''})
-local RC = Main.CreatePage({Page_Name = 'Race V4', Page_Title = ''})
+local RC = Main.CreatePage({Page_Name = 'Upgrated Race', Page_Title = ''})
 local SE = Main.CreatePage({Page_Name = 'Sea Event', Page_Title = ''})
 local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 
@@ -7159,6 +7160,78 @@ spawn(function()
     end)
 end)
 
+local StatusServers = STT.CreateSection('Status')
+
+local LevelPlayers = Section1.CreateLabel({Title = "Your Level : Infinity"})
+
+local Moon = Section1.CreateLabel({Title = "Wait Update"})
+
+local Mirage = Section1.CreateLabel({Title = "Mirage Island : 🔴"})
+
+local Kitsune = Section1.CreateLabel({Title = "Kitsune Island : 🔴"})
+
+local FruitSpawn = Section1.CreateLabel({Title = "Fruit Spawn : 🔴"})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            LevelPlayers.SetText("Your Level : ".. game.Players.LocalPlayer.Data.Level.Value.. " ")
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+                Mirage.SetText("Mirage Island : 🟢")
+            else
+                Mirage.SetText("Mirage Island : 🔴")
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
+                Kitsune.SetText("Kitsune Island : 🟢 Spawn")
+            else
+                Kitsune.SetText("Kitsune Island : 🔴 Not Spawn")
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if string.find(v.Name, "Fruit") then
+                    FruitSpawn.SetText("Fruit Spawned 🟢")
+                else
+                    FruitSpawn.SetText("Fruit Not Spawned 🔴")
+                end
+            end
+        end)
+    end
+end)
+
+local ServerSection = STT.CreateSection('Servers')
+
+ServerSection.CreateBox({Title = 'Put Job Id Here!', Placeholder = '', Number_Only = false}, function(Value)
+    getgenv().Jobid = Value
+end)
+
+ServerSection.CreateButton({Title = 'Join JobId'}, function()
+    game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId,getgenv().Jobid, game.Players.LocalPlayer)
+end)
+
+ServerSection.CreateButton({Title = 'Hop Servers'}, function()
+    Hop()
+end)
+
 local LCSection = PV.CreateSection('LocalPlayer')
 
 if taodangosea1 then
@@ -7730,20 +7803,6 @@ local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
 
 BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
     BypassTP = Value
-end)
-
-local ServerSection = MSC.CreateSection('Servers')
-
-ServerSection.CreateBox({Title = 'Put Job Id Here!', Placeholder = '', Number_Only = false}, function(Value)
-    getgenv().Jobid = Value
-end)
-
-ServerSection.CreateButton({Title = 'Join JobId'}, function()
-    game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId,getgenv().Jobid, game.Players.LocalPlayer)
-end)
-
-ServerSection.CreateButton({Title = 'Hop Servers'}, function()
-    Hop()
 end)
 
 ServerSection.CreateButton({Title = 'Rejoin'}, function()
