@@ -7210,9 +7210,9 @@ spawn(function()
     while wait() do
         pcall(function()
             if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
-                Kitsune.SetText("Kitsune Island : 🟢 Spawn")
+                Kitsune.SetText("Kitsune Island : 🟢")
             else
-                Kitsune.SetText("Kitsune Island : 🔴 Not Spawn")
+                Kitsune.SetText("Kitsune Island : 🔴")
             end
         end)
     end
