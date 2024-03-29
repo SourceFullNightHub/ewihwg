@@ -3633,8 +3633,8 @@ function t.CreateMain(H)
                     end
                 )
                 local e2 = {}
-                function e2.SetText(e3)
-                    e1.Text = e3
+                function e2.SetText(duma)
+                    e1.Text = duma
                 end
                 function e2.SetColor(g)
                     e1.TextColor3 = g
