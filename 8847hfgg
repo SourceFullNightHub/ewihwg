@@ -7564,6 +7564,7 @@ TweenRace.CreateButton({Title = 'Teleport To Lever Pull'}, function()
     Teleport(CFrame.new(28576.4688,14939.2832,76.5164413))
 end)
 
+local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
 TweenRace.CreateButton({Title = 'Teleport To Doors Trial'}, function()
     if taodangosea3 then
         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude > 1000 then
