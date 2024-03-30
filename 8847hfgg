@@ -5536,7 +5536,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -6451,7 +6451,7 @@ end)
 local PosSwanRoom = CFrame.new(2284.91211, 15.1520348, 905.48291)
 spawn(function()
     while wait() do
-        if _G.AutoSwan then
+        if _G.AutoSwan and taodangosea2 then
             pcall(function()
                 if game:GetService("Workspace").Enemies:FindFirstChild("Don Swan") then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -6479,6 +6479,129 @@ spawn(function()
                         end
                     else
                         Tween(PosSwanRoom)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+ItemandFarmSection.CreateToggle({Title = 'Auto Admin', Desc = 'Nói chung là đánh boss rip indra', Default = false}, function(Value)
+    _G.AutoAdmin = Value
+end)
+
+local PosAdmin = CFrame.new(-5344.822265625, 423.98541259766, -2725.0930175781)
+spawn(function()
+    while wait() do
+        if _G.AutoAdmin and taodangosea3 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") or game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "rip_indra" or v.Name == "rip_indra True Form" then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    _G.AutoClick = true
+                                until _G.AutoAdmin == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                            end
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (PosAdmin.Position - Mainchinh.Character.HumanoidRootPart.Position).Magnitude >= 2500 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-5005.29834, 314.858734, -3025.00659))
+                        elseif (PosAdmin.Position - Mainchinh.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
+                            Tween(PosAdmin)
+                        end
+                    else
+                        Tween(PosAdmin)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+QuestSection.CreateToggle({Title = 'Auto DarkBeard', Desc = 'Đánh Râu đen. Thế không cần giải thích j hết ok?', Default = false}, function(Value)
+    _G.AutoChimden = Value
+end)
+
+local PosChimden = CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531)
+spawn(function()
+    while wait() do
+        if _G.AutoChimden and taodangosea2 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard")  then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Darkbeard" then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                repeat task.wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    _G.AutoClick = true
+                                until _G.AutoChimden == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                            end
+                        end
+                    end
+                else
+                    Tween(PosChimden)
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+QuestSection.CreateToggle({Title = 'Auto Auto Dough King', Desc = 'Đjt Dough King. Hết', Default = false}, function(Value)
+    _G.AutoDoughKing = Value
+end)
+
+local PosGlass = CFrame.new(-2125.64282, 70.3262863, -12400.6777)
+spawn(function()
+    while task.wait() do
+        if _G.AutoDoughKing then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Dough King" then
+                            if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.AutoDoughKing then
+                                repeat wait()
+                                    EnableBuso()
+                                    EquipTool(SelectWP)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.AutoDoughKing
+                            end
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosGlass.Position).Magnitude > 2000 then
+                            Taixiu(PosGlass)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosGlass.Position).Magnitude < 2000 then
+                            Tween(PosGlass)
+                        end
+                    else
+                        Tween(PosGlass)
+                    end
+                    if game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
                     end
                 end
             end)
