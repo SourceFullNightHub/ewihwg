@@ -5544,7 +5544,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -7557,7 +7557,7 @@ TweenRace.CreateButton({Title = 'Teleport To Top On Great Tree'}, function()
 end)
 
 TweenRace.CreateButton({Title = 'Teleport To Temple'}, function()
-    TweenTemple()
+    TweenTemplete()
 end)
 
 TweenRace.CreateButton({Title = 'Teleport To Lever Pull'}, function()
@@ -7611,6 +7611,66 @@ TweenRace.CreateButton({Title = 'Teleport To Anclient One'}, function()
         elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude < 1000 then
             wait(1)
             Teleport(CFrame.new(28973.0879, 14889.9756, -120.298691))
+        end
+    end
+end)
+
+local ToggleTrial = RC.CreateSection('Trials')
+
+ToggleTrial.CreateToggle({Title = 'Auto Trials', Desc = 'Thì là Auto Trial.', Default = false}, function(Value)
+    _G.AutoTrial = Value
+end)
+
+local RaceCheck = game:GetService("Players").LocalPlayer.Data.Race.Value
+local CFrameCyborg = CFrame.new(-20021.8691,10090.4893,-16.37994)
+spawn(function()
+    while wait() do
+        if _G.AutoTrials then
+            pcall(function()
+                if RaceCheck == "Human" then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoTrials then
+                                repeat wait()
+                                    v.Humanoid.Health = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoTrials
+                            end
+                        end
+                    end
+                elseif RaceCheck == "Skypiea" then
+                    for i,v in pairs(game:GetService("Workspace").Map.SkyTrial.Model:GetDescendants()) do
+                        if v.Name ==  "snowisland_Cylinder.081" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500 then
+                            Tween(v.CFrame * CFrame.new(0 ,0 ,0))
+                        end
+                    end
+                elseif RaceCheck == "Cyborg" then
+                    if (CFrameCyborg.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1500 then
+                        Tween(CFrameCyborg)
+                    end
+                elseif RaceCheck == "Mink" then
+                    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                        if v.Name == "StartPoint" and (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            Tween(v.CFrame * CFrame.new(0, 3, 0))
+                        end
+                    end
+                elseif RaceCheck == "Ghoul" then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoTrials then
+                                repeat wait()
+                                    v.Humanoid.Health = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    _G.AutoClick = true
+                                until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoTrials
+                            end
+                        end
+                    end
+                end
+            end)
         end
     end
 end)
