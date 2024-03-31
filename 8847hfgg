@@ -7480,6 +7480,20 @@ end)
 
 local LCSection = PV.CreateSection('LocalPlayer')
 
+LCSection.CreateDropdown({Title = 'Select Travel', List = {"1", "2", "3"}, Default = "1", Search = false, Selected = false}, function(Value)
+    _G.SelectTravel = Value
+end)
+
+LCSection.CreateButton({Title = 'Teleport To Travel'}, function()
+    if _G.SelectTravel == "1" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
+    elseif _G.SelectTravel == "2" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+    elseif _G.SelectTravel == "3" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+    end
+end)
+
 if taodangosea1 then
     IslandList = {"WindMill","Marine","Middle Town","Jungle","Pirate Village","Desert","Snow Island","MarineFord","Colosseum","Sky Island 1","Sky Island 2","Sky Island 3","Prison","Magma Village","Under Water Island","Fountain City","Shank Room","Mob Island"}
 elseif taodangosea2 then
