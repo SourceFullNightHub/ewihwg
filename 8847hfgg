@@ -5686,6 +5686,7 @@ function KillMob(ditmethangnaotaokeuaechoihet)
                 repeat task.wait()
                     EnableBuso()
                     EquipTool(_G.UsingTool)
+                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                     v.Humanoid.WalkSpeed = 0
                     v.HumanoidRootPart.CanCollide = false
