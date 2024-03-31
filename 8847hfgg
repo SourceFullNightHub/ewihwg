@@ -5676,6 +5676,10 @@ function KillMob(ditmethangnaotaokeuaechoihet)
                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
             end
         end
+    else
+        if game:GetService("ReplicatedStorage"):FindFirstChild(ditmethangnaotaokeuaechoihet) then
+            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(ditmethangnaotaokeuaechoihet).HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+        end
     end
 end -- ổn k?
 
