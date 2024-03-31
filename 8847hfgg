@@ -5544,7 +5544,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if _G.KillKidTrials or _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -5611,6 +5611,14 @@ function Raidroom()
         Tween(CFrame.new(-6437.87793, 250.645355, -4498.92773, 0.502376854, -1.01223634e-08, -0.864648759, 2.34106086e-08, 1, 1.89508653e-09, 0.864648759, -2.11940012e-08, 0.502376854))
     elseif taodangosea3 then
         Tween(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
+    end
+end
+
+function Checkdao()
+    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        return true
+    else
+        return false
     end
 end
 
@@ -6550,6 +6558,84 @@ spawn(function()
 end)
 
 local ItemandFarmSection = IQ.CreateSection('Item & Farm')
+
+ItemandFarmSection.CreateToggle({Title = 'Auto Pole', Desc = 'Cướp Pole. Thế thôi', Default = false}, function(Value)
+    _G.Autoditthansam = Value
+end)
+
+local thanvoichalasamnhucac = CFrame.new(-7748.0185546875, 5606.80615234375, -2305.898681640625)
+spawn(function()
+    while wait() do
+        if _G.Autoditthansam and taodangosea1 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Thunder God" and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent then
+                            repeat wait()
+                                EnableBuso()
+                                EquipTool(_G.UsingTool)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)       
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                _G.AutoClick = true
+                            until v.Humanoid.Health <= 0 or not _G.Autoditthansam or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (thanvoichalasamnhucac.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
+                        elseif (thanvoichalasamnhucac.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(thanvoichalasamnhucac)
+                        end
+                    else
+                        Tween(thanvoichalasamnhucac)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+ItemandFarmSection.CreateToggle({Title = 'Auto Glass Cyborg', Desc = 'Cướp Kính thằng Franky Okê. Thế thôi', Default = false}, function(Value)
+    _G.Ditmemayduacaikinhday = Value
+end)
+
+local ditmemaythaocaikinhra = CFrame.new(6094.0249023438, 73.770050048828, 3825.7348632813)
+spawn(function()
+    while wait() do
+        if _G.Ditmemayduacaikinhday and taodangosea1 then
+            pcall(function()
+                if game:GetService("Workspace").Enemies:FindFirstChild("Cyborg") then
+                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Cyborg" and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent then
+                            repeat wait()
+                                EnableBuso()
+                                EquipTool(_G.UsingTool)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)       
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                _G.AutoClick = true
+                            until v.Humanoid.Health <= 0 or not _G.Ditmemayduacaikinhday or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        end
+                    end
+                else
+                    if BypassTP then
+                        if (ditmemaythaocaikinhra.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            Taixiu(ditmemaythaocaikinhra)
+                        elseif (ditmemaythaocaikinhra.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(ditmemaythaocaikinhra)
+                        end
+                    else
+                        Tween(ditmemaythaocaikinhra)
+                    end
+                end
+            end)
+        end
+    end
+end)
 
 ItemandFarmSection.CreateToggle({Title = 'Auto Swan', Desc = 'Teleport To Swan and wait boss spawn. If Boss Spawn and your are give NPC Fruit > 1000000 beli then Teleport To Swan And KILL', Default = false}, function(Value)
     _G.AutoSwan = Value
@@ -7668,6 +7754,79 @@ spawn(function()
                                     _G.AutoClick = true
                                 until v.Humanoid.Health <= 0 or not v.Parent or not _G.AutoTrials
                             end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+ToggleTrial.CreateToggle({Title = 'Auto Kill Kid After Trials', Desc = 'Beta thôi, cần AttackNoCD mới ngol', Default = false}, function(Value)
+    _G.KillKidTrials = Value
+end)
+
+local PosPvp = CFrame.new(28727.4941, 14887.877, -87.3792191)
+spawn(function()
+    while wait() do
+        if _G.KillKidTrials then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 200 then
+                            if (PosPvp.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                                repeat wait()
+                                    EnableBuso()
+                                    EquipTool(_G.UsingTool)
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 5, 3))
+                                    game:GetService("VirtualUser"):CaptureController()
+                                    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                                    dungskilldithangngu = true
+                                    _G.AutoClick = true
+                                until _G.KillKidTrials == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid")
+                                dungskilldithangngu = false
+                                _G.AutoClick = true
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.KillKidTrials and getgenv().BatHakilen then
+            repeat wait()
+                if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+                    SendKey("E")
+                end
+            until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") or not _G.KillKidTrials
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if dungskilldithangngu then
+            pcall(function()
+                if getgenv().SkillZ then
+                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+                    wait(0.1)
+                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                    if getgenv().SkillX then
+                        game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+                        wait(0.1)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                        if getgenv().SkillC then
+                            game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+                            wait(0.1)
+                            game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
                         end
                     end
                 end
