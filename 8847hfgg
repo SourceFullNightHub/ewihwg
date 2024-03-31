@@ -5593,11 +5593,25 @@ function WaitHRP(q0)
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end
 
+local lp = game.Players.LocalPlayer
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end
+
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if not Pos then return end 
     lp.Character:WaitForChild("HumanoidRootPart", 9)
     lp.Character:WaitForChild("Head", 9)
+    if not lp.Character.HumanoidRootPart:FindFirstChild("Hold") then
+        local Hold = Instance.new("BodyVelocity", lp.Character.HumanoidRootPart)
+        Hold.Name = "Hold"
+        Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        Hold.Velocity = Vector3.new(0, 0, 0)
+    else
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold"):Destroy()
+    end
     if not lp.Character:FindFirstChild("PartTele") then
         local PartTele = Instance.new("Part", lp.Character) -- Create part
         PartTele.Size = Vector3.new(10,1,10)
@@ -5611,36 +5625,8 @@ function Tween(Pos)
             WaitHRP(lp).CFrame = PartTele.CFrame
         end)
     end
-Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),{CFrame = Pos})
-Tween:Play() 
-end
-
-function Teleport(didauthanglon)
-    xavailon = (didauthanglon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if xavailon > 1 then
-        tocdocao = 350
-    end
-    if not Pos then return end 
-    lp.Character:WaitForChild("HumanoidRootPart", 9)
-    lp.Character:WaitForChild("Head", 9)
-    if not lp.Character:FindFirstChild("PartTele") then
-        local PartTele = Instance.new("Part", lp.Character) -- Create part
-        PartTele.Size = Vector3.new(10,1,10)
-        PartTele.Name = "PartTele"
-        PartTele.Anchored = true
-        PartTele.Transparency = 1
-        PartTele.CanCollide = false
-        PartTele.CFrame = WaitHRP(lp).CFrame 
-        PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-            task.wait(0.01)
-            WaitHRP(lp).CFrame = PartTele.CFrame
-        end)
-    end
-    Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(xavailon / tocdocao, Enum.EasingStyle.Linear),{CFrame = didauthanglon})
+    Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),{CFrame = Pos})
     Tween:Play()
-    NoCLip = true
-    wait(Distance/tocdocao)
-    NoCLip = false
 end
 
 function Raidroom()
