@@ -5925,10 +5925,7 @@ spawn(function()
                         end
                     end
                 else
-                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince").HumanoidRootPart.CFrame * CFrame.new(20,- 20 ,20))
-                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(20,- 20 ,20))
+                    Tween(CFrame.new(CFrame.new(-2125.64282, 70.3262863, -12400.6777)))
                     else
                         if CountMob == 0 then
                         end
@@ -5992,7 +5989,7 @@ spawn(function()
     end
 end)
 
-local BoneCount = FarmSection.CreateLabel({Title = "Your Bone : "})
+local BoneCount = FarmSection.CreateLabel({Title = "Your Bone : Only Sea 3"})
 
 spawn(function()
     while wait() do
