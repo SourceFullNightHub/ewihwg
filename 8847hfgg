@@ -5871,7 +5871,7 @@ end)
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
 
-FarmSection.CreateToggle({Title = 'Auto Farm', Desc = 'Auto Teleport To NPC GetQuest and going to Mob need farm to kill', Default = false}, function(Value)
+FarmSection.CreateToggle({Title = 'Auto Farm', Desc = 'Auto Teleport To NPC GetQuest and going to Mob need farm to kill', Default = Settings.AutoLevel}, function(Value)
     Settings.AutoLevel = Value
 end)
 
