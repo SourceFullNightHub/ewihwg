@@ -5464,7 +5464,7 @@ function Tween(Pos)
             WaitHRP(game.Players.LocalPlayer).CFrame = PartTele.CFrame
         end)
     end
-    didididididi = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),{CFrame = Pos})
+    didididididi = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / getgenv().TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
     didididididi:Play()
 end
 
