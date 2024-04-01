@@ -7862,7 +7862,7 @@ end)
 
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
-TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"180", "200", "250", "300", "325", "350"}, Search = true, Selected = false}, function(Value)
+TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"180", "200", "250", "300", "325", "350"}, Default = "180", Search = true, Selected = false}, function(Value)
     getgenv().TweenSpeed = Value
 end)
 
@@ -7881,7 +7881,6 @@ spawn(function()
             if typeof(lon) == "table" then
                 pcall(function()
                     Camerabattu:Stop()
-                    lon.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
                     lon.activeController.timeToNextAttack = 0
                     lon.activeController.hitboxMagnitude = 120
                     lon.activeController.active = false
