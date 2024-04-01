@@ -7860,6 +7860,85 @@ spawn(function()
     end
 end)
 
+local BoatSection = SE.CreateSection('Boats')
+
+BoatSection.CreateButton({Title = 'Teleport To NPC Buy Boats(Tiki)'}, function()
+    Tween(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906))
+    wait(0.5)
+    local args = {
+        [1] = "BuyBoat",
+        [2] = "PirateBrigade"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+BoatSection.CreateSlider({Title = "Speed Boats", Min = 250, Max = 350, Default = 275, Precise = false}, function(Value)
+    getgenv().SpeedBoats = Value
+end)
+
+BoatSection.CreateToggle({Title = 'Enable Speed Boats', Desc = 'Thuyền nhanh. Hết', Default = false}, function(Value)
+    getgenv().DjtBoats = Value
+end)
+
+spawn(function()
+    while wait() do
+        if getgenv().DjtBoats then
+            for i, v in pairs(workspace.Boats:GetChildren()) do
+                if v:FindFirstChild("Owner") then
+                    if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                        table.foreach(v:GetDescendants(), function(a, child)
+                            if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
+                            child.CanCollide = false
+                            end
+                        end)
+                        v:FindFirstChild("Humanoid"):GetPropertyChangedSignal("Value"):Connect(function(g)
+                            if g == 0 then
+                            print("Vailon")
+                        end
+                    end)
+                    repeat wait()
+                        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 3, 0))
+                        until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit == true
+                        v:FindFirstChild("VehicleSeat").MaxSpeed = getgenv().SpeedBoats
+                    end
+                end
+            end
+        end
+    end
+end)
+
+BoatSection.CreateToggle({Title = 'Sail Boats To Zone 6', Desc = 'Di chuyển thuyền đến biển 6. Hết', Default = false}, function(Value)
+    _G.TweenBoat = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.TweenBoat then
+            for i, v in pairs(workspace.Boats:GetChildren()) do
+                if v:FindFirstChild("Owner") then
+                    if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                        table.foreach(v:GetDescendants(), function(a, child)
+                            if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
+                            child.CanCollide = false
+                            end
+                        end)
+                        v:FindFirstChild("Humanoid"):GetPropertyChangedSignal("Value"):Connect(function(g)
+                            if g == 0 then
+                            print("Vailon")
+                        end
+                    end)
+                    repeat wait()
+                        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 3, 0))
+                        until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit == true
+                        local TweenBoat = game:GetService("TweenService"):Create(v:FindFirstChild("VehicleSeat"), TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),{CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)})
+                        TweenBoat:Play()
+                    end
+                end
+            end
+        end
+    end
+end)
+
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
 TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"180", "200", "250", "300", "325", "350"}, Default = "180", Search = true, Selected = false}, function(Value)
