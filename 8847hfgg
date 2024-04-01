@@ -583,40 +583,6 @@ getgenv().GUI = u.Gui
 --     u.Gui.Parent = game:GetService("CoreGui")
 --     u.NotiGui.Parent = game:GetService("CoreGui")
 -- end
-
-local SaveFileName = game.Players.LocalPlayer.Name .."BloxFruit.json"
-
-function SaveSettings()
-    local HttpService = game:GetService("HttpService")
-    if not isfolder("Night Hub") then
-        makefolder("Night Hub")
-    end
-    writefile("Night Hub/" .. SaveFileName, HttpService:JSONEncode(Settings))
-end
-
-function ReadSetting() 
-    local s,e = pcall(function() 
-        local HttpService = game:GetService("HttpService")
-        if not isfolder("Night Hub") then
-            makefolder("Night Hub")
-        end
-        return HttpService:JSONDecode(readfile("Night Hub/" .. SaveFileName))
-    end)
-    if s then return e 
-    else
-        SaveSettings()
-        return ReadSetting()
-    end
-end
-Settings = ReadSetting()
-
-function AutoSave()
-    while not _G.NotSave and Settings.AutoSave and wait() do 
-        SaveSettings()
-        wait(5)
-    end
-end
-
 u.Gui.Parent = game:GetService("CoreGui")
 u.NotiGui.Parent = game:GetService("CoreGui")
 
@@ -4920,7 +4886,7 @@ function Checknhiemvu()
             NameMob = "Fishman Warrior"
             CFrameQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
             CFrameMob = CFrame.new(60878.30078125, 18.482830047607422, 1543.7574462890625)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
             end
             elseif YourLevel == 400 or YourLevel <= 449 then
@@ -4930,7 +4896,7 @@ function Checknhiemvu()
             NameMob = "Fishman Commando"
             CFrameQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
             CFrameMob = CFrame.new(61922.6328125, 18.482830047607422, 1493.934326171875)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
             end
             elseif YourLevel == 450 or YourLevel <= 474 then
@@ -4940,7 +4906,7 @@ function Checknhiemvu()
             NameMob = "God's Guard"
             CFrameQuest = CFrame.new(-4721.88867, 843.874695, -1949.96643, 0.996191859, -0, -0.0871884301, 0, 1, -0, 0.0871884301, 0, 0.996191859)
             CFrameMob = CFrame.new(-4710.04296875, 845.2769775390625, -1927.3079833984375)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-4607.82275, 872.54248, -1667.55688))
             end
             elseif YourLevel == 475 or YourLevel <= 524 then
@@ -4950,7 +4916,7 @@ function Checknhiemvu()
             NameMob = "Shanda"
             CFrameQuest = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
             CFrameMob = CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
             end
             elseif YourLevel == 525 or YourLevel <= 549 then
@@ -5088,7 +5054,7 @@ function Checknhiemvu()
             NameMob = "Ship Deckhand"
             CFrameQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
             CFrameMob = CFrame.new(1212.0111083984375, 150.79205322265625, 33059.24609375)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1275 or YourLevel <= 1299 then
@@ -5098,7 +5064,7 @@ function Checknhiemvu()
             NameMob = "Ship Engineer"
             CFrameQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
             CFrameMob = CFrame.new(919.4786376953125, 43.54401397705078, 32779.96875)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1300 or YourLevel <= 1324 then
@@ -5108,7 +5074,7 @@ function Checknhiemvu()
             NameMob = "Ship Steward"
             CFrameQuest = CFrame.new(968.80957, 125.092171, 33244.125)
             CFrameMob = CFrame.new(919.4385375976562, 129.55599975585938, 33436.03515625)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1325 or YourLevel <= 1349 then
@@ -5118,7 +5084,7 @@ function Checknhiemvu()
             NameMob = "Ship Officer"
             CFrameQuest = CFrame.new(968.80957, 125.092171, 33244.125)
             CFrameMob = CFrame.new(1036.0179443359375, 181.4390411376953, 33315.7265625)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1350 or YourLevel <= 1374 then
@@ -5128,7 +5094,7 @@ function Checknhiemvu()
             NameMob = "Arctic Warrior"
             CFrameQuest = CFrame.new(5667.6582, 26.7997818, -6486.08984, -0.933587909, 0, -0.358349502, 0, 1, 0, 0.358349502, 0, -0.933587909)
             CFrameMob = CFrame.new(5966.24609375, 62.97002029418945, -6179.3828125)
-            if Settings.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-6508.5581054688, 5000.034996032715, -132.83953857422))
             end
             elseif YourLevel == 1375 or YourLevel <= 1424 then
@@ -5615,7 +5581,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.KillKidTrials or _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or Settings.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if _G.KillKidTrials or _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -5640,7 +5606,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if Settings.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
                     if Mainchinh.Character.Humanoid.Sit == true then
                         Mainchinh.Character.Humanoid.Sit = false
                     end
@@ -5651,7 +5617,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.AutoSwan and not _G.Bartilonhucac and not Settings.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone and not _G.KillNearest and not _G.AutoFarmNearest and not _G.AutoSea2 then
+                if _G.AutoSwan and not _G.Bartilonhucac and not _G.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone and not _G.KillNearest and not _G.AutoFarmNearest and not _G.AutoSea2 then
                     _G.AutoClick = false
                 end
             end)
@@ -5871,14 +5837,14 @@ end)
 
 local FarmSection = G.CreateSection('FARM TOGGLE')
 
-FarmSection.CreateToggle({Title = 'Auto Farm', Desc = 'Auto Teleport To NPC GetQuest and going to Mob need farm to kill', Default = Settings.AutoLevel}, function(Value)
-    Settings.AutoLevel = Value
+FarmSection.CreateToggle({Title = 'Auto Farm', Desc = 'Auto Teleport To NPC GetQuest and going to Mob need farm to kill', Default = false}, function(Value)
+    _G.AutoLevel = Value
 end)
 
 spawn(function()
     while wait() do
         pcall(function()
-            if Settings.AutoLevel then
+            if _G.AutoLevel then
                 Checknhiemvu()
                 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -5908,7 +5874,7 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * Dodge)
                                     BringMob = true
                                     PosMon = v.HumanoidRootPart.CFrame
-                                until not Settings.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                             end
                         end
                     else
@@ -8134,7 +8100,7 @@ spawn(function()
             pcall(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if Settings.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
+                    if _G.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                         vv.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
@@ -8144,7 +8110,7 @@ spawn(function()
                             v.Humanoid.Animator:Destroy()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    elseif Settings.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
+                    elseif _G.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
@@ -8215,23 +8181,6 @@ local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
 
 BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
     BypassTP = Value
-end)
-
-local SaveSection = ST.CreateSection('Save')
-
-SaveSection.CreateToggle({Title = 'Auto Save', Desc = 'Save Settings.', Default = true}, function(Value)
-    Settings.AutoSave = Value
-    if Value then
-        spawn(function()
-            AutoSave()
-        end)
-    elseif not _G.NotSave then
-        SaveSettings()
-    end
-end)
-
-SaveSection.CreateToggle({Title = 'No Save', Desc = 'Not Save Settings.', Default = false}, function(Value)
-    _G.NotSave = Value
 end)
 
 ServerSection.CreateButton({Title = 'Rejoin'}, function()
