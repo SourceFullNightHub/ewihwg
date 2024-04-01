@@ -44,7 +44,7 @@ end)
 
 # Create DropDown :
 ```lua
-Section1.CreateDropdown({Title = 'DropDown', List = {"1", "2", "3", "4"}, Search = true, Selected = true}, function(Value)
+Section1.CreateDropdown({Title = 'DropDown', List = {"1", "2", "3", "4"}, Default = "0.15", Search = true, Selected = true}, function(Value)
     print(Value)
 end)
 ```
