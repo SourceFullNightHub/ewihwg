@@ -610,6 +610,7 @@ function ReadSetting()
 end
 Settings = ReadSetting()
 Settings.AutoSave = true
+_G.NotSave = false
 
 function AutoSave()
     while not _G.NotSave and Settings.AutoSave and wait() do 
