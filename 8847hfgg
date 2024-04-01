@@ -584,7 +584,7 @@ getgenv().GUI = u.Gui
 --     u.NotiGui.Parent = game:GetService("CoreGui")
 -- end
 
-local SaveFileName = game.Players.LocalPlayer.Name.."BloxFruit.json"
+local SaveFileName = game.Players.LocalPlayer.Name .."BloxFruit.json"
 
 function SaveSettings()
     local HttpService = game:GetService("HttpService")
@@ -609,8 +609,6 @@ function ReadSetting()
     end
 end
 Settings = ReadSetting()
-Settings.AutoSave = true
-_G.NotSave = false
 
 function AutoSave()
     while not _G.NotSave and Settings.AutoSave and wait() do 
@@ -8217,6 +8215,23 @@ local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
 
 BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
     BypassTP = Value
+end)
+
+local SaveSection = ST.CreateSection('Save')
+
+SaveSection.CreateToggle({Title = 'Auto Save', Desc = 'Save Settings.', Default = true}, function(Value)
+    Settings.AutoSave = Value
+    if Value then
+        spawn(function()
+            AutoSave()
+        end)
+    elseif not _G.NotSave then
+        SaveSettings()
+    end
+end)
+
+SaveSection.CreateToggle({Title = 'No Save', Desc = 'Not Save Settings.', Default = false}, function(Value)
+    _G.NotSave = Value
 end)
 
 ServerSection.CreateButton({Title = 'Rejoin'}, function()
