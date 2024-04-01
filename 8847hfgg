@@ -5464,7 +5464,7 @@ function Tween(Pos)
             WaitHRP(game.Players.LocalPlayer).CFrame = PartTele.CFrame
         end)
     end
-    didididididi = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),{CFrame = Pos})
+    didididididi = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / getgenv().TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
     didididididi:Play()
 end
 
@@ -5634,6 +5634,14 @@ end
 
 function Checkdao()
     if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        return true
+    else
+        return false
+    end
+end
+
+function CheckEnemies(thangnao)
+    if game.Workspace.Enemies:FindFirstChild(thangnao) then
         return true
     else
         return false
@@ -8053,7 +8061,7 @@ local plr = game.Players.LocalPlayer
                         debug.setupvalue(AC.attack, 7, u10)
                         pcall(function()
                             if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                                for k, v in pairs(ac.animator.anims.basic) do
+                                for k, v in pairs(AC.animator.anims.basic) do
                                     v:Play()
                                 end
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
