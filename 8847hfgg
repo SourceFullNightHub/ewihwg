@@ -7862,7 +7862,7 @@ end)
 
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
-TweenSpeedSection.CreateSlider({Title = "Tween Speed", Min = 154, Max = 350, Default = 180, Precise = false}, function(Value)
+TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"180", "200", "250", "300", "325", "350"}, Search = true, Selected = false}, function(Value)
     getgenv().TweenSpeed = Value
 end)
 
@@ -7897,7 +7897,7 @@ spawn(function()
     end)
 end)
 
-FastAttackSection.CreateDropdown({Title = 'FastAttack Delay', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.15", Search = true, Selected = false}, function(Value)
+FastAttackSection.CreateDropdown({Title = 'Fast Attack Cooldown', List = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}, Default = "0.15", Search = true, Selected = false}, function(Value)
     _G.FastAttackDelay = Value
 end)
 
@@ -8024,8 +8024,8 @@ local plr = game.Players.LocalPlayer
     end
     
     function AttackNoCD()
-        if not AutoFarmMasDevilFruit or AutoFarmMasGun then
-            if not Auto_Raid then
+        if not _G.AutoMasFruit or _G.AutoMasGun then
+            if not _G.NextIsland then
                 local AC = CbFw2.activeController
                 for i = 1, 1 do 
                     local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
@@ -8101,7 +8101,7 @@ spawn(function()
             pcall(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if _G.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                    if _G.AutoLevel and BringMob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                         vv.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
@@ -8111,7 +8111,7 @@ spawn(function()
                             v.Humanoid.Animator:Destroy()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    elseif _G.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                    elseif _G.AutoLevel and BringMob and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                         v.HumanoidRootPart.CFrame = PosMon
                         v.Humanoid:ChangeState(14)
@@ -8134,7 +8134,7 @@ spawn(function()
             pcall(function()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if _G.AutoFarmNearest and BringNearest then
-                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoFarmNearest and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.AutoFarmNearest and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                             v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                             v.HumanoidRootPart.CFrame = PosNearestMob
                             v.Humanoid:ChangeState(14)
@@ -8147,7 +8147,7 @@ spawn(function()
                         end
                     end
                     if _G.AutoKatakuri and BringKatakuriMob then
-                        if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                             v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                             v.HumanoidRootPart.CFrame = PosMobCake
                             v.Humanoid:ChangeState(14)
@@ -8160,7 +8160,7 @@ spawn(function()
                         end
                     end
                     if _G.AutoBone and StartCheckBone then
-                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then
+                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 250 then
                             v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
                             v.HumanoidRootPart.CFrame = Dungimanhdabijbat
                             v.Humanoid:ChangeState(14)
