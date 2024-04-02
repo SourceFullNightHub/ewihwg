@@ -7931,7 +7931,8 @@ spawn(function()
                     end)
                     v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
                     wait(1.0)
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    Notify("Xong rồi thằng óc", 5)
+                    wait(5)
                     end
                 end
             end
