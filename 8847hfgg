@@ -6329,6 +6329,14 @@ end)
 
 local BossSection = G.CreateSection('Boss')
 
+if taodangosea1 then
+    BossList = {"The Gorilla King","Bobby","Yeti","Mob Leader","Vice Admiral","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Saber Expert"}
+elseif taodangosea2 then
+    BossList = {"Diamond","Jeremy","Fajita","Don Swan","Smoke Admiral","Cursed Captain","Darkbeard","Order","Awakened Ice Admiral","Tide Keeper"}
+elseif taodangosea3 then
+    BossList = {"Stone","Island Empress","Kilo Admiral","Captain Elephant","Beautiful Pirate","rip_indra True Form","Longma","Soul Reaper","Cake Queen"}
+end
+
 BossSection.CreateDropdown({Title = 'Boss List', List = BossList, Default = "", Search = true, Selected = false}, function(Value)
     getgenv().SelectBoss = Value
 end)
