@@ -1333,12 +1333,6 @@ else
     game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
 end
 
-Library.CreateNoti({
-    Title = "Xyner Hub",
-    Desc = "Loaded Gui Completed!",
-    ShowTime = 5,
-})
-
 function Checknhiemvu()
     YourLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if taodangosea1 then
