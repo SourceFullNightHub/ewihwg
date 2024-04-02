@@ -2239,4 +2239,14 @@ function CheckEnemies(thangnao)
     end
 end
 
-local Win = Library:CreateWindow('W-Azure - Blox Fruit')
+local Windows = Library:CreateWindow('Xyler Hub - Blox Fruit')
+
+local G  = Win:CreateTab('General')
+local IQ  = Win:CreateTab('Item & Quests')
+local ST  = Win:CreateTab('Settings')
+local PV  = Win:CreateTab('Players & PVP')
+local ST  = Win:CreateTab('Status And Servers')
+local DR  = Win:CreateTab('Devil Fruit and Raid')
+local UR  = Win:CreateTab('Upgrated Race')
+local SE  = Win:CreateTab('Sea Event')
+local MC  = Win:CreateTab('Misc')
