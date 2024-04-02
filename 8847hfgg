@@ -5474,7 +5474,7 @@ Onichan = 1
 spawn(function()
     while wait() do
         if Onichan == 1 then
-            Dodge = CFrame.new(0,20,0)f
+            Dodge = CFrame.new(0,20,0)
         elseif Onichan == 2 then
             Dodge = CFrame.new(0,20,-30)
         elseif Onichan == 3 then
@@ -7974,8 +7974,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
@@ -8008,8 +8008,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
@@ -8042,8 +8042,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
@@ -8076,8 +8076,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
@@ -8112,8 +8112,8 @@ spawn(function()
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
