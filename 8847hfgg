@@ -7915,7 +7915,7 @@ end)
 
 spawn(function()
     while wait() do
-        if _G.TweenBoat and getgenv().StartSeaEvent and taodangosea3 then
+        if _G.TweenBoat and taodangosea3 then
             for i, v in pairs(workspace.Boats:GetChildren()) do
                 if v:FindFirstChild("Owner") then
                     if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
