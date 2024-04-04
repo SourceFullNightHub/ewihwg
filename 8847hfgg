@@ -8274,13 +8274,13 @@ end)
 
 spawn(function()
     while wait() do
-        if MainChinh.Character.Humanoid.Sit == false then
+        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Sit == false then
             Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
         end
     end
 end)
 
-BoatSection.CreateDropdown({Title = 'Select Zone', List = {"1", "2", "3", "4", "5", "6"}, Default = "0.15", Search = false, Selected = false}, function(Value)
+BoatSection.CreateDropdown({Title = 'Select Zone', List = {"1", "2", "3", "4", "5", "6"}, Default = "", Search = false, Selected = false}, function(Value)
     _G.SelectZone = Value
 end)
 
