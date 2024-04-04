@@ -2,7 +2,7 @@
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "Neon Hub",
-	Text = "Loading Ui....",
+	Text = "Loading",
 	Icon = "rbxassetid://15541504459"
 })
 
@@ -4733,6 +4733,15 @@ function t.CreateMain(H)
 end
 return t end
 local Library = GetUi()
+wait(1)
+print("Anh nghĩa đz")
+wait(1)
+print("đừng skid nữa")
+wait(1)
+print("Cả anh dump được Source nữa")
+wait(1)
+print("tha em đi")
+wait(3)
 
 if game.PlaceId == 2753915549 then
     taodangosea1 = true
@@ -4743,12 +4752,6 @@ elseif game.PlaceId == 7449423635 then
 else
     game.Players.LocalPlayer:Kick("Bro, My Script Support Only Blox Fruits and Please Wait Me Update New Game")
 end
-
-Library.CreateNoti({
-    Title = "Neon Hub",
-    Desc = "Loaded Gui Completed!",
-    ShowTime = 5,
-})
 
 function Checknhiemvu()
     YourLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
