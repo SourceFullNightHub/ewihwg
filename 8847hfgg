@@ -8274,8 +8274,11 @@ end)
 
 spawn(function()
     while wait() do
-        if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Sit == false then
-            Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+        if _G.chanvaidai == true then
+            if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Sit == false then
+                repeat wait()
+                Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+            until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.chanvaidai == false
         end
     end
 end)
