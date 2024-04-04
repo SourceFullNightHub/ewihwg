@@ -8276,11 +8276,11 @@ spawn(function()
     end
 end)
 
-SeaEventSection.CreateDropdown({Title = 'Select Zone', List = {"1", "2", "3", "4", "5", "6"}, Default = "0.15", Search = false, Selected = false}, function(Value)
+BoatSection.CreateDropdown({Title = 'Select Zone', List = {"1", "2", "3", "4", "5", "6"}, Default = "0.15", Search = false, Selected = false}, function(Value)
     _G.SelectZone = Value
 end)
 
-SeaEventSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Sea Event(Only Sea 3)', Default = false}, function(Value)
+BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Sea Event(Only Sea 3)', Default = false}, function(Value)
     getgenv().StartSeaEvent = Value
 end)
 
