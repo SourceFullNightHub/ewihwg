@@ -6259,6 +6259,25 @@ spawn(function()
     end
 end)
 
+FarmSection.CreateToggle({Title = 'Auto Random Bone', Desc = ' Trade Bone', Default = false}, function(Value)
+    _G.TradeBone = Value
+end)
+
+spawn(function()
+	while wait() do
+	    if _G.TradeBone then
+            local args = {
+                [1] = "Bones",
+                [2] = "Buy",
+                [3] = 1,
+                [4] = 1
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+	        end
+	    end
+	end)
+end
+
 FarmSection.CreateToggle({Title = 'Auto Bone', Desc = ' Go to castle haunted kill mob to get bone', Default = false}, function(Value)
     _G.AutoBone = Value
 end)
