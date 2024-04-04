@@ -5698,8 +5698,8 @@ function Tween(Pos)
 end
 
 function TweenShip(ZoneCFrame)
-    local Distance = (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position)
-    Letgoboat = game:GetService("TweenService"):Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, TweenInfo.new(Distance.CFrame.Position.Magnitude/300, Enum.EasingStyle.Linear), {CFrame = ZoneCFrame})
+    local Distance = (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position).Magnitude
+    Letgoboat = game:GetService("TweenService"):Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, TweenInfo.new(Distance/300, Enum.EasingStyle.Linear), {CFrame = ZoneCFrame})
     Letgoboat:Play()
 end
 
