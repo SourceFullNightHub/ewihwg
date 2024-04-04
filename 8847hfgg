@@ -7834,6 +7834,10 @@ end)
 
 local ServerSection = STT.CreateSection('Servers')
 
+ServerSection.CreateButton({Title = 'Rejoin'}, function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
 ServerSection.CreateBox({Title = 'Put Job Id Here!', Placeholder = '', Number_Only = false}, function(Value)
     getgenv().Jobid = Value
 end)
@@ -8655,10 +8659,6 @@ local BypassTeleportSection = ST.CreateSection('Bypass Teleport')
 
 BypassTeleportSection.CreateToggle({Title = 'Bypass Teleport', Desc = 'If your location is too far from where it needs to go, it will use the death method and fly to that location quickly (if you have Gods Chaile or Darkbeard Key in your inventory, dont turn it on).', Default = true}, function(Value)
     BypassTP = Value
-end)
-
-ServerSection.CreateButton({Title = 'Rejoin'}, function()
-    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
