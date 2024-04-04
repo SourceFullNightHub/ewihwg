@@ -8340,7 +8340,7 @@ end)
 
 local TweenSpeedSection = ST.CreateSection('Tween Speed')
 
-TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"180", "200", "250", "300", "325", "350"}, Default = "180", Search = true, Selected = false}, function(Value)
+TweenSpeedSection.CreateDropdown({Title = 'Tween Speed', List = {"170", "180", "200", "250", "300", "325", "350"}, Default = "170", Search = true, Selected = false}, function(Value)
     getgenv().TweenSpeed = Value
 end)
 
