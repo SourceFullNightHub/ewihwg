@@ -8302,6 +8302,8 @@ BoatSection.CreateDropdown({Title = 'Select Zone', List = {"1", "2", "3", "4", "
     _G.SelectZone = Value
 end)
 
+-- game:GetService("Workspace").Map.KitsuneIsland.ShrineActive.NeonShrinePart
+
 BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Sea Event(Only Sea 3)', Default = false}, function(Value)
     getgenv().StartSeaEvent = Value
 end)
@@ -8368,7 +8370,7 @@ spawn(function()
     while wait() do
         if _G.AutoShark and getgenv().StartSeaEvent then
             pcall(function()
-                if CheckEnemies("Shark") then
+                if CheckEnemies("Shark") and game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Shark" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
@@ -8400,7 +8402,7 @@ spawn(function()
     while wait() do
         if _G.AutoTerrorshark and getgenv().StartSeaEvent then
             pcall(function()
-                if CheckEnemies("Terrorshark") then
+                if CheckEnemies("Terrorshark") and game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Terrorshark" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
@@ -8432,7 +8434,7 @@ spawn(function()
     while wait() do
         if _G.AutoPiranha and getgenv().StartSeaEvent then
             pcall(function()
-                if CheckEnemies("Piranha") then
+                if CheckEnemies("Piranha") and game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Piranha" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
@@ -8464,7 +8466,7 @@ spawn(function()
     while wait() do
         if _G.AutoFishCrew and getgenv().StartSeaEvent then
             pcall(function()
-                if CheckEnemies("Fish Crew Member") then
+                if CheckEnemies("Fish Crew Member") game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v.Name == "Fish Crew Member" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
