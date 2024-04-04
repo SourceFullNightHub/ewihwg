@@ -5698,15 +5698,9 @@ function Tween(Pos)
 end
 
 function TweenShip(ZoneCFrame)
-    local TWSRV = game:service"TweenService"
-    local In4 = TweenInfo.new((game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position).Magnitude/300, Enum.EasingStyle.Linear)
-    Letgoboat = TWSRV:Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, In4, {CFrame = ZoneCFrame})
+    local Distance = (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position)
+    Letgoboat = game:GetService("TweenService"):Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, TweenInfo.new(Distance.CFrame.Position.Magnitude/300, Enum.EasingStyle.Linear), {CFrame = ZoneCFrame})
     Letgoboat:Play()
-    local tweenfunc = {}
-    function tweenfunc:Stop()
-        tween:Cancel()
-    end
-    return tweenfunc
 end
 
 Onichan = 1
@@ -6119,7 +6113,6 @@ spawn(function()
                             end
                         end
                     else
-                        Tween(CFrameMob)
                         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
                             if string.find(v.Name, NameMob) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude and not game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
                                 Tween(v.CFrame * CFrame.new(2, 20, 2))
