@@ -6271,12 +6271,11 @@ spawn(function()
                 [2] = "Buy",
                 [3] = 1,
                 [4] = 1
-                }
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-	        end
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	    end
-	end)
-end
+	end
+end)
 
 FarmSection.CreateToggle({Title = 'Auto Bone', Desc = ' Go to castle haunted kill mob to get bone', Default = false}, function(Value)
     _G.AutoBone = Value
