@@ -5697,11 +5697,11 @@ function Tween(Pos)
     end
 end
 
-function TweenShip(CFBoat)
+function TweenShip(ZoneCFrame)
     local TWSRV = game:service"TweenService"
-    local info = TweenInfo.new((game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - CFBoat.Position).Magnitude/300, Enum.EasingStyle.Linear)
-    TweenBoat = TWSRV:Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, info, {CFrame = CFBoat})
-    TweenBoat:Play()
+    local In4 = TweenInfo.new((game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position).Magnitude/300, Enum.EasingStyle.Linear)
+    Letgoboat = TWSRV:Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, In4, {CFrame = ZoneCFrame})
+    Letgoboat:Play()
     local tweenfunc = {}
     function tweenfunc:Stop()
         tween:Cancel()
@@ -8292,6 +8292,7 @@ BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Se
     getgenv().StartSeaEvent = Value
 end)
 
+local TikiNPCBuyBoat = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
 spawn(function()
     while wait() do
         if getgenv().StartSeaEvent then
@@ -8300,7 +8301,7 @@ spawn(function()
                     if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                         Tween(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906))
                         wait(0.5)
-                        if (CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906).Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude <= 10 then   
+                        if (MainChinh.Character.HumanoidRootPart.Position - TikiNPCBuyBoat.Position).Magnitude <= 10 then   
                             local args = {
                                 [1] = "BuyBoat",
                                 [2] = "PirateGrandBrigade"
