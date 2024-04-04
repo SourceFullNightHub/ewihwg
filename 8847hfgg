@@ -8292,16 +8292,15 @@ BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Se
     getgenv().StartSeaEvent = Value
 end)
 
-local TikiNPCBuyBoat = CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906)
 spawn(function()
     while wait() do
-        if getgenv().StartSeaEvent then
-            pcall(function()
+        pcall(function()
+            if getgenv().StartSeaEvent then
                 if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                     if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                        Tween(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906))
-                        wait(0.5)
-                        if (MainChinh.Character.HumanoidRootPart.Position - TikiNPCBuyBoat.Position).Magnitude <= 10 then   
+                        chomua = Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                        if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                            if chomua then chomua:Stop() end
                             local args = {
                                 [1] = "BuyBoat",
                                 [2] = "PirateGrandBrigade"
@@ -8310,24 +8309,26 @@ spawn(function()
                         end
                     elseif game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
                         if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                            Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                            Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0 ,3, 0))
                         else
-                            if game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                                repeat wait()
-                                    if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                        TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
-                                    elseif (CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                        TweenShip(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
-                                    elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                        TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
-                                    end 
-                                until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or getgenv().StartSeaEvent == false
+                            for i,v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                                if v.Name == "PirateGrandBrigade" then
+                                    repeat wait()
+                                        if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                            TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                        elseif (CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                            TweenShip(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
+                                        elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                            TweenShip(CFrame.new(-33163.1875, 10.964323997497559, -324.4842224121094))
+                                        end 
+                                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or getgenv().StartSeaEvent == false
+                                end
                             end
                         end
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
