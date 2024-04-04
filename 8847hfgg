@@ -7834,12 +7834,12 @@ end)
 
 local ServerSection = STT.CreateSection('Servers')
 
-ServerSection.CreateButton({Title = 'Rejoin'}, function()
-    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-end)
-
 ServerSection.CreateBox({Title = 'Put Job Id Here!', Placeholder = '', Number_Only = false}, function(Value)
     getgenv().Jobid = Value
+end)
+
+ServerSection.CreateButton({Title = 'Rejoin'}, function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
 end)
 
 ServerSection.CreateButton({Title = 'Join JobId'}, function()
