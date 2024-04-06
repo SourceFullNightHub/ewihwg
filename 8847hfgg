@@ -6495,7 +6495,7 @@ spawn(function()
                                 if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
                                     if BypassTP then
                                         if (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
-                                            Taixiu(v.HumanoidRootPart.CFrame)
+                                            Taixiu(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         elseif (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         end
