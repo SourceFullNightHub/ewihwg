@@ -8370,6 +8370,10 @@ spawn(function()
     end)
 end)
 
+BoatSection.CreateToggle({Title = 'Reset If Your Boats Destroy<Not function>', Desc = 'Function Support Only Sea(3)', Default = false}, function(Value)
+    _G.Reset = Value
+end)
+
 BoatSection.CreateToggle({Title = 'Kill Shark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
     _G.AutoShark = Value
 end)
