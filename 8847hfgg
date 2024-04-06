@@ -8351,7 +8351,9 @@ spawn(function()
                     end)
                     v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
                     wait(1.0)
-                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    repeat task.wait()
+                        Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.AutoZone6 == false
                 end
             end
         end
@@ -8368,10 +8370,6 @@ spawn(function()
             end
         end
     end)
-end)
-
-BoatSection.CreateToggle({Title = 'Reset If Your Boats Destroy<Not function>', Desc = 'Function Support Only Sea(3)', Default = false}, function(Value)
-    _G.Reset = Value
 end)
 
 BoatSection.CreateToggle({Title = 'Kill Shark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
@@ -8392,8 +8390,8 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                MainChinh.Character.Humanoid.Sit = false
                             until _G.AutoShark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8425,8 +8423,8 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                MainChinh.Character.Humanoid.Sit = false
                             until _G.AutoTerrorshark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8458,8 +8456,8 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                MainChinh.Character.Humanoid.Sit = false
                             until _G.AutoPiranha == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8491,8 +8489,8 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                MainChinh.Character.Humanoid.Sit = false
                             until _G.AutoFishCrew == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
