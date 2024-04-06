@@ -6506,10 +6506,10 @@ spawn(function()
                                         if (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
                                             Taxiu(v.HumanoidRootPart.CFrame)
                                         elseif (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude < 2500 then
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         end
                                     else
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     end
                                 end
                             end
@@ -7799,7 +7799,9 @@ local StatusServers = STT.CreateSection('Status')
 
 local LevelPlayers = StatusServers.CreateLabel({Title = "Your Level : Infinity"})
 
-local Moon = StatusServers.CreateLabel({Title = "Wait Update"})
+local Moon = StatusServers.CreateLabel({Title = "Moon : Wait Update"})
+
+local Elite = StatusServers.CreateLabel({Title = "Elite : 🔴"})
 
 local Mirage = StatusServers.CreateLabel({Title = "Mirage Island : 🔴"})
 
@@ -7834,6 +7836,20 @@ spawn(function()
                 Kitsune.SetText("Kitsune Island : 🟢")
             else
                 Kitsune.SetText("Kitsune Island : 🔴")
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+                if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+                    Elite.SetText("Elite : 🟢")
+                else
+                    Elite.SetText("Elite : 🔴")
+                end
             end
         end)
     end
