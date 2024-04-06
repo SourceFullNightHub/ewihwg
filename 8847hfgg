@@ -8388,6 +8388,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until _G.AutoShark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
@@ -8420,6 +8421,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until _G.AutoTerrorshark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
@@ -8452,6 +8454,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until _G.AutoPiranha == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
@@ -8484,6 +8487,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                MainChinh.Character.Humanoid.Sit = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until _G.AutoFishCrew == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
