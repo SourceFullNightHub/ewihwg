@@ -4733,15 +4733,6 @@ function t.CreateMain(H)
 end
 return t end
 local Library = GetUi()
-wait(1)
-print("Anh nghĩa đz")
-wait(1)
-print("đừng skid nữa")
-wait(1)
-print("Cả anh dump được Source nữa")
-wait(1)
-print("tha em đi")
-wait(3)
 
 if game.PlaceId == 2753915549 then
     taodangosea1 = true
