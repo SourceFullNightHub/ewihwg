@@ -5811,7 +5811,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if _G.KillKidTrials or _G.AutoTrials or _G.AutoDoughKing or _G.AutoChimden or _G.AutoAdmin or _G.AutoAdmin or _G.AutoElite or _G.AutoFactory or _G.AutoCastleRaid or _G.AutoSwan or _G.Bartilonhucac or _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
+                if NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -5832,27 +5832,6 @@ end)
     end)
 
     local Mainchinh = game.Players.LocalPlayer
-
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.KillNearest or _G.AutoFarmNearest or NoCLip == true then
-                    if Mainchinh.Character.Humanoid.Sit == true then
-                        Mainchinh.Character.Humanoid.Sit = false
-                    end
-                end
-            end)
-        end
-    end)
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if _G.AutoSwan and not _G.Bartilonhucac and not _G.AutoLevel and not _G.AutoKatakuri and not _G.AutoBone and not _G.KillNearest and not _G.AutoFarmNearest and not _G.AutoSea2 then
-                    _G.AutoClick = false
-                end
-            end)
-        end
-    end) 
 
 function Raidroom()
     if taodangosea2 then
