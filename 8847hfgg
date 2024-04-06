@@ -5893,7 +5893,7 @@ local MSC = Main.CreatePage({Page_Name = 'Misc', Page_Title = ''})
 local Dungtoll = G.CreateSection('Select Weapons')
 
 local WP = {"Melee", "Sword"}
-Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Search = false, Selected = false}, function(Value)
+Dungtoll.CreateDropdown({Title = 'Select Weapons', List = WP, Default = "Melee", Search = false, Selected = false}, function(Value)
     _G.UsingTool = Value
 end)
 
@@ -6939,6 +6939,24 @@ spawn(function()
                     end
                 end
             end)
+        end
+    end
+end)
+
+local ItemBuySection = IQ.CreateSection('Buy Item')
+
+ItemBuySection.CreateToggle({Title = 'Auto Buy Sword Legend', Desc = 'Mua kiếm của Zoro. Thế thôi', Default = false}, function(Value)
+    _G.AutoSwordLegend = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoSwordLegend then
+            local args = {
+                [1] = "LegendarySwordDealer",
+                [2] = "2"
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         end
     end
 end)
