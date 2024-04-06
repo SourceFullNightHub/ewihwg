@@ -8341,6 +8341,7 @@ spawn(function()
     while wait() do
         if _G.chanvaidai == true then
             if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Sit == false then
+                wait(0.5)
                 repeat wait()
                     Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
                 until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.chanvaidai == false
@@ -8359,6 +8360,7 @@ BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Se
     getgenv().StartSeaEvent = Value
     _G.Automuathuyen = Value
     _G.AutoZone6 = Value
+    _G.chanvaidai = Value
 end)
 
 spawn(function()
@@ -8401,10 +8403,6 @@ spawn(function()
                         end
                     end)
                     v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
-                    wait(1.0)
-                    repeat task.wait()
-                        Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
-                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.AutoZone6 == false
                 end
             end
         end
