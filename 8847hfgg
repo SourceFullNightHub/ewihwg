@@ -8370,7 +8370,7 @@ spawn(function()
     end)
 end)
 
-BoatSection.CreateToggle({Title = 'Auto Shark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
+BoatSection.CreateToggle({Title = 'Kill Shark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
     _G.AutoShark = Value
 end)
 
@@ -8403,7 +8403,7 @@ spawn(function()
     end
 end)
 
-BoatSection.CreateToggle({Title = 'Auto TerrorShark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
+BoatSection.CreateToggle({Title = 'Kill TerrorShark', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
     _G.AutoTerrorshark = Value
 end)
 
@@ -8436,7 +8436,7 @@ spawn(function()
     end
 end)
 
-BoatSection.CreateToggle({Title = 'Auto Piranha', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
+BoatSection.CreateToggle({Title = 'Kill Piranha', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
     _G.AutoPiranha = Value
 end)
 
@@ -8469,7 +8469,7 @@ spawn(function()
     end
 end)
 
-BoatSection.CreateToggle({Title = 'Auto Fish Crew Member', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
+BoatSection.CreateToggle({Title = 'Kill Fish Crew Member', Desc = 'Function Only Sea(3).', Default = true}, function(Value)
     _G.AutoFishCrew = Value
 end)
 
