@@ -5776,6 +5776,7 @@ end
 function Taixiu(Pos)
     repeat wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        game.Players.LocalPlayer.Character.Head:Destroy()
         game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
         wait(2)
         game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Pos
