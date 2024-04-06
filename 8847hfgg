@@ -6500,13 +6500,19 @@ spawn(function()
                                 end
                             end
                         else
-                            if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") then
-                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Diablo").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
-                            elseif game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") then
-                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Deandre").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
-                            elseif game:GetService("ReplicatedStorage"):FindFirstChild("Urban") then
-                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Urban").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
-                            end                    
+                            for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+                                if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+                                    if BypassTP then
+                                        if (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
+                                            Taxiu(v.HumanoidRootPart.CFrame)
+                                        elseif (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude < 2500 then
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2)
+                                        end
+                                    else
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2)
+                                    end
+                                end
+                            end
                         end
                     end
                 end
