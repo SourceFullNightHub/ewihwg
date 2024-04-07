@@ -48,7 +48,7 @@ function requestEntrance(place)
     wait(0.5)
 end
 
-local nearestTeleporter = CheckNearestTeleporter(plr.Character)
+local nearestTeleporter = CheckNearestTeleporter(plr.Character.HumanoidRootPart.Position)
 if nearestTeleporter then
     requestEntrance(nearestTeleporter)
 end
