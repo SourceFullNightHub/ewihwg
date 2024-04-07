@@ -48,7 +48,10 @@ function requestEntrance(place)
     wait(0.5)
 end
 
-local nearestTeleporter = CheckNearestTeleporter(plr.Character.HumanoidRootPart.Position)
-if nearestTeleporter then
-    requestEntrance(nearestTeleporter)
+function taobuondai(Pos)
+    local nearestTeleporter = CheckNearestTeleporter(Pos)
+    if nearestTeleporter then
+        requestEntrance(nearestTeleporter)
+    end
 end
+taobuondai(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
