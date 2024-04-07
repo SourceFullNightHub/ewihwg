@@ -5657,6 +5657,75 @@ function WaitHRP(q0)
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end
 
+function GetNearestPortal(Portal)
+    NearestPotal = Portal.Position
+    one1 = math.huge
+    two2 = math.huge
+    if game.PlaceId == 2753915549 then
+        taodangosea1 = true
+    elseif game.PlaceId == 4442272183 then
+        taodangosea2 = true
+    elseif game.PlaceId == 7449423635 then
+        taodangosea3 = true
+    end
+    if taodangosea3 then
+        Location = {
+            ["Caslte On The Sea"] = Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
+            ["Hydra"] = Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953),
+            ["Mansion"] = Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
+            ["Great Tree"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
+            ["DoorBossNPCPirate"] = Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
+            ["DoorBossNPCPirate2"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
+        }
+    elseif taodangosea2 then
+        Location = {
+            ["Mansion"] = Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312),
+            ["Flamingo"] = Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
+            ["CursedShip"] = Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
+            ["CursedShip2"] = Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422)
+        }
+    elseif taodangosea1 then
+        Location = {
+            ["Sky3"] = Vector3.new(-7894.6201171875, 5545.49169921875, -380.2467346191406),
+            ["Sky2"] = Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625),
+            ["thanhphoduoibien"] = Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
+            ["thanhphoduoibien2"] = Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875)
+        }
+    end
+    Location2 = {}
+    for r, v in pairs(Location) do
+        Location2[r] = (v - NearestPotal).Magnitude
+    end
+    for r, v in pairs(Location2) do
+        if v < one1 then
+            one1 = v
+            two2 = v
+        end
+    end
+    for r, v in pairs(Location2) do
+        if v < one1 then
+            one1 = v
+            two2 = v
+        end
+    end
+    for r, v in pairs(Location2) do
+        if v <= one1 then
+            thereokay = Location[r]
+        end
+    end
+    Three3 = (NearestPotal - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if two2 <= Three3 then
+        return thereokay
+    end
+end
+function requestEntrance(nhanh)
+    args = {"requestEntrance", nhanh}
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y + 50, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+    game.Players.LocalPlayer.Character:FindFirstChild("PartTele"):Destroy()
+    task.wait(0.5)
+end
+
 function Tween(Pos)
     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -5665,14 +5734,6 @@ function Tween(Pos)
         end
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-        if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold") then
-            local Hold = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
-            Hold.Name = "Hold"
-            Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            Hold.Velocity = Vector3.new(0, 0, 0)
-        else
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold"):Destroy()
-        end
         if not game.Players.LocalPlayer.Character:FindFirstChild("PartTele") then
             local PartTele = Instance.new("Part", game.Players.LocalPlayer.Character) -- Create part
             PartTele.Size = Vector3.new(10,1,10)
@@ -5687,14 +5748,39 @@ function Tween(Pos)
             end)
         end
         didididididi = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / getgenv().TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
+        if GetNearestPortal(Pos) then
+            pcall(function()
+                didididididi:Cancel()
+            end)
+            requestEntrance(GetNearestPortal())
+        end
         didididididi:Play()
     end
 end
 
-function TweenShip(ZoneCFrame)
-    local Distance = (game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - ZoneCFrame.Position).Magnitude
-    Letgoboat = game:GetService("TweenService"):Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, TweenInfo.new(Distance/300, Enum.EasingStyle.Linear), {CFrame = ZoneCFrame})
-    Letgoboat:Play()
+function TweenShip(CFrameZone)
+    local TweenService = game:service"TweenService"
+    local In4 = TweenInfo.new((game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame.Position - CFrameZone.Position).Magnitude/300, Enum.EasingStyle.Linear)
+    In4 = TweenService:Create(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat, In4, {CFrame = CFrameZone})
+    In4:Play()
+    local tweenfunc = {}
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+    return tweenfunc
+end
+    
+function TweentoShip(CFrameShip)
+    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait() until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
+    local TweenService2 = game:service"TweenService"
+    local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFrameShip.Position).Magnitude/325, Enum.EasingStyle.Linear)
+    tween = TweenService2:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFrameShip})
+    tween:Play()
+    local tweenfunc = {}
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+    return tweenfunc
 end
 
 Onichan = 1
@@ -5811,7 +5897,7 @@ end)
     spawn(function()
         while wait() do
             pcall(function()
-                if NoCLip == true then
+                if _G.AutoLevel or _G.AutoKatakuri or _G.AutoBone or _G.AutoShark or _G.AutoPiranha or _G.AutoShark or _G.AutoTerrorshark or _G.AutoFishCrew or _G.KillKidTrials or _G.AutoTrial or _G.AutoFindKitsune or _G.TeleKitsune or _G.CollectAzure or NoCLip == true then
                     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyGyro") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -5857,7 +5943,7 @@ function CheckEnemies(thangnao)
     end
 end
 
-local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
+local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- discord.gg/R4xC3t2Xm8'})
 
 local G = Main.CreatePage({Page_Name = 'General', Page_Title = ''})
 local ST = Main.CreatePage({Page_Name = 'Settings', Page_Title = ''})
@@ -5897,7 +5983,7 @@ task.spawn(function()
 end)
 
 function KillMob(ditmethangnaotaokeuaechoihet)
-    if game.Workspace.Enemies:FindFirstChild(ditmethangnaotaokeuaechoihet) then
+    if CheckEnemies(ditmethangnaotaokeuaechoihet) then
         for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
             if v.Name == ditmethangnaotaokeuaechoihet and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat task.wait()
@@ -6324,6 +6410,64 @@ spawn(function()
     end
 end)
 
+local ChestSections = G.CreateSection('Chest')
+
+ChestSections.CreateToggle({Title = 'Auto Chest<Tween>', Desc = 'Auto Chest Mode Tween', Default = false}, function(Value)
+    _G.AutoChest1 = Value
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoChest1 then
+                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if string.find(v.Name, "Chest") then
+                        if (v.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
+                            repeat wait()
+                                if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                                    Tween(v.CFrame)
+                                end
+                            until not _G.AutoChest1 or not v.Parent
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+ChestSections.CreateToggle({Title = 'Auto Chest<Instance>', Desc = 'Auto Chest Mode Instance', Default = false}, function(Value)
+    _G.AutoChest2 = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoChest2 then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoChest2 then
+                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if string.find(v.Name, "Chest") then
+                        if (v.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
+                            repeat wait()
+                                if game:GetService("Workspace"):FindFirstChild(v.Name) then
+                                    InstanceTween(v.CFrame)
+                                end
+                            until not _G.AutoChest2 or not v.Parent
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 local BossSection = G.CreateSection('Boss')
 
 if taodangosea1 then
@@ -6472,15 +6616,7 @@ spawn(function()
                         else
                             for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
                                 if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
-                                    if BypassTP then
-                                        if (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
-                                            Taixiu(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        elseif (v.HumanoidRootPart.Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude < 2500 then
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        end
-                                    else
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    end
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 end
                             end
                         end
@@ -8288,14 +8424,6 @@ local BoatSection = SE.CreateSection('Boats')
 
 BoatSection.CreateButton({Title = 'Teleport To NPC Buy Boats(Tiki)'}, function()
     Tween(CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906))
-    wait(0.5)
-    if (CFrame.new(-16921.853515625, 9.0863618850708, 433.9601135253906).Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude <= 10 then   
-        local args = {
-            [1] = "BuyBoat",
-            [2] = "PirateGrandBrigade"
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end
 end)
 
 BoatSection.CreateSlider({Title = "Speed Boats", Min = 250, Max = 350, Default = 275, Precise = false}, function(Value)
@@ -8322,29 +8450,9 @@ spawn(function()
                             print("Vailon")
                         end
                     end)
-                    repeat wait()
-                        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 3, 0))
-                        until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit == true
                         v:FindFirstChild("VehicleSeat").MaxSpeed = getgenv().SpeedBoats
                     end
                 end
-            end
-        end
-    end
-end)
-
-BoatSection.CreateToggle({Title = 'Teleport To Your Boat', Desc = 'Di chuyển tới thuyền. Hết', Default = false}, function(Value)
-    _G.chanvaidai = Value
-end)
-
-spawn(function()
-    while wait() do
-        if _G.chanvaidai == true then
-            if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Sit == false then
-                wait(0.5)
-                repeat wait()
-                    Tween(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame * CFrame.new(0, 3, 0))
-                until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.chanvaidai == false
             end
         end
     end
@@ -8358,27 +8466,49 @@ end)
 
 BoatSection.CreateToggle({Title = 'Start Sea Event', Desc = 'Enabled Function Sea Event(Only Sea 3)', Default = false}, function(Value)
     getgenv().StartSeaEvent = Value
-    _G.Automuathuyen = Value
     _G.AutoZone6 = Value
-    _G.chanvaidai = Value
+    _G.Automuathuyen = Value
+    _G.Lenthuyendiem = Value
+end)
+
+BoatSection.CreateToggle({Title = 'Set Your Health = 0 if Your Boats Destroy', Desc = 'Enabled Function Sea Event(Only Sea 3)', Default = false}, function(Value)
+    _G.ResetIfBoat = Value
 end)
 
 spawn(function()
     while wait() do
         if _G.Automuathuyen == true and getgenv().StartSeaEvent then
             pcall(function()
-                if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") or not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") and not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
                     if not game:GetService("Workspace").Boats:FindFirstChild("PirateGrandBrigade") then
-                        ChoMuaThuyen = Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                        if _G.ResetIfBoat == true then
+                            if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
+                                Taixiu(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                            elseif (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - MainChinh.Character.HumanoidRootPart.Position).Magnitude > 2500 then
+                                ChoMuaThuyen = Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                                if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                                    if ChoMuaThuyen then 
+                                        ChoMuaThuyen:Stop() 
+                                    end
+                                    local args = {
+                                        [1] = "BuyBoat",
+                                        [2] = "PirateGrandBrigade"
+                                    }
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                end
+                            end
+                        else
+                            ChoMuaThuyen = Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
                             if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
                                 if ChoMuaThuyen then 
-                                    buyb:Stop() 
+                                    ChoMuaThuyen:Stop() 
                                 end
                                 local args = {
                                     [1] = "BuyBoat",
                                     [2] = "PirateGrandBrigade"
                                 }
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
                         end
                     end
                 end
@@ -8389,20 +8519,28 @@ end)
 
 spawn(function()
     while wait() do
+        pcall(function()
+            if _G.Lenthuyendiem == true and getgenv().StartSeaEvent then
+                if not game:GetService("Workspace").Enemies:FindFirstChild("Shark") and not game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") and not game:GetService("Workspace").Enemies:FindFirstChild("Piranha") and not game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") then
+                    repeat wait(0.1)
+                        for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                            if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                                Tween(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 1, 0))
+                            end
+                        end
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member")
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
         if _G.AutoZone6 and getgenv().StartSeaEvent then
             for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
                 if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
-                    table.foreach(v:GetDescendants(), function(a, child)
-                        if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
-                            child.CanCollide = false
-                        end
-                    end)
-                    v:FindFirstChild("Humanoid"):GetPropertyChangedSignal("Value"):Connect(function(g)
-                        if g == 0 then
-                        print("Vailon")
-                        end
-                    end)
-                    v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
+                    v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 13.7790766, 16911.3477)
                 end
             end
         end
@@ -8437,10 +8575,9 @@ spawn(function()
                                 EquipTool(_G.UsingTool)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                MainChinh.Character.Humanoid.Sit = false
+                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             until _G.AutoShark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8470,10 +8607,9 @@ spawn(function()
                                 EquipTool(_G.UsingTool)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                MainChinh.Character.Humanoid.Sit = false
+                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             until _G.AutoTerrorshark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8503,10 +8639,9 @@ spawn(function()
                                 EquipTool(_G.UsingTool)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                MainChinh.Character.Humanoid.Sit = false
+                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             until _G.AutoPiranha == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8536,10 +8671,9 @@ spawn(function()
                                 EquipTool(_G.UsingTool)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Humanoid.WalkSpeed = 0
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                MainChinh.Character.Humanoid.Sit = false
+                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             until _G.AutoFishCrew == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -8549,6 +8683,104 @@ spawn(function()
                     end
                 end
             end)
+        end
+    end
+end)
+
+local KitsuneSection = SE.CreateSection('Kitsune Event')
+
+KitsuneSection.CreateToggle({Title = 'Auto Find Kitsune Island', Desc = 'Auto Find Kitsune Island.', Default = false}, function(Value)
+    _G.AutoFindKitsune = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoFindKitsune then
+            if not game:GetService("Workspace").Boats:FindFirstChild("PirateBrigade") then
+            buyb = Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                    if buyb then 
+                        buyb:Stop() 
+                    end
+                    local args = {
+                        [1] = "BuyBoat",
+                        [2] = "PirateBrigade"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoFindKitsune then
+            for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+                if v:FindFirstChild("Owner") and v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                    v:FindFirstChild("VehicleSeat").CFrame = CFrame.new(-44842.3945, 10.7790766, 16911.3477)
+                    wait(.1)
+                    Tween(game:GetService("Workspace").Boats.PirateBrigade.VehicleSeat.CFrame * CFrame.new(0, 1, 0))
+                end
+            end
+        end
+    end
+end)
+
+KitsuneSection.CreateToggle({Title = 'Teleport To Kitsune Island', Desc = 'Teleport To Kitsune Island On Zone 6 If Spawn.', Default = false}, function(Value)
+    _G.TeleKitsune = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.TeleKitsune then
+            if game:GetService("Workspace").Map:FindFirstChild("KitsuneIsland") then
+                MainChinh.Character.Humanoid.Sit = false
+                Tween(game:GetService("Workspace").Map.KitsuneIsland.ShrineActive.NeonShrinePart.CFrame)
+            end
+        end
+    end
+end)
+
+KitsuneSection.CreateToggle({Title = 'Auto Collect Azure Member', Desc = 'Collect Azure Member.', Default = false}, function(Value)
+    _G.CollectAzure = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.CollectAzure then
+            pcall(function()
+                for i ,v in next, game:GetService("Workspace").EmberTemplate:GetDescendants() do
+                    if v.Name == "Part" then
+                        MainChinh.Character.HumanoidRootPart.CFrame = v.CFrame
+                    else
+                        Tween(game:GetService("Workspace").Map.KitsuneIsland.ShrineActive.NeonShrinePart.CFrame)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local PlayersMiscSection = MSC.CreateSection('Players')
+
+PlayersMiscSection.CreateButton({Title = 'No Frog'}, function()
+    game:GetService("Lighting").LightingLayers:Destroy()
+    game:GetService("Lighting").Sky:Destroy()
+end)
+
+PlayersMiscSection.CreateSlider({Title = "Players Walkspeed", Min = 50, Max = 150, Default = 50, Precise = false}, function(Value)
+    _G.Walkspeed = Value
+end)
+
+PlayersMiscSection.CreateToggle({Title = 'Enable Walkspeed', Desc = 'Enable Walkspeed.', Default = false}, function(Value)
+    _G.WalkspeedEnable = Value
+end)
+
+spawn(function()
+    while wait() do
+        if _G.WalkspeedEnable == true then
+            MainChinh.Character.Humanoid.WalkSpeed = _G.WalkSpeed
         end
     end
 end)
