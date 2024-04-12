@@ -1974,6 +1974,8 @@ spawn(function()
                                     v.Head.CanCollide = false
                                 end
                                 BringNo = true
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until _G.AutomasteryFruit == false or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or v.Humanoid.Health <= 0
                             BringNo = false
                             dungskillfarm = false
@@ -5079,7 +5081,9 @@ local plr = game.Players.LocalPlayer
                         debug.setupvalue(AC.attack, 7, u10)
                         pcall(function()
                             if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                                AC.animator.anims.basic[1]:Play(0.000001,0.000001,0.000001)
+                                for k, v in pairs(AC.animator.anims.basic) do
+                                    v:Play()
+                                end 
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                                 game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
