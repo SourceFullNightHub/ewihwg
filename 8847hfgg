@@ -5108,6 +5108,7 @@ spawn(function()
                                             child.CanCollide = false
                                         end
                                     end)
+                                    TPP(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 1, 0))
                                 end
                             end
                         end
