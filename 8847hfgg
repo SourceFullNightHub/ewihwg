@@ -723,7 +723,7 @@ function Tween(Pos)
                 WaitHRP(game.Players.LocalPlayer).CFrame = PartTele.CFrame
             end)
         end
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / getgenv().TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / _G.Settings.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
         if Distance <= 350 then
             tween:Cancel()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
@@ -790,7 +790,7 @@ UIStroke.Color = Color3.fromRGB(255, 255, 255)
 UIStroke.Parent = ImageButton
 ------------------------------------------------// Library \\------------------------------------------------------------------------------
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/chill')))()
-local Window = OrionLib:MakeWindow({Name = "Night Hub[Comming Soon]", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
+local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
 local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://17065785686", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17065796587", PremiumOnly = false})
