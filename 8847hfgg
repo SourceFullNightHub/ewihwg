@@ -1229,7 +1229,7 @@ spawn(function()
     while wait() do
         if _G.Settings.KillMobAura then
             for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                if (v.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 1000 and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 1000 and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                     repeat wait()
                         EnableBuso()
                         EquipTool(ToolFarm)
