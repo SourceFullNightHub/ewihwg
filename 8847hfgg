@@ -754,6 +754,7 @@ function Bypass(Ps)
     until (Ps.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 function Click()
+    wait(0.3)
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 end
@@ -789,6 +790,40 @@ end)
 UICorner.Parent = ImageButton
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
 UIStroke.Parent = ImageButton
+-- // No Clip \\ ----
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                end
+            else
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+        end)
+    end
+end)
+
+
+--No CLip Auto Farm
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+                for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+    end)
+end)
 ------------------------------------------------// Library \\------------------------------------------------------------------------------
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/chill')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
@@ -1580,4 +1615,39 @@ spawn(function()
         end
     end
 end)
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+getgenv().NoDieEffect = true
+if getgenv().NoDieEffect then
+    pcall(function()
+        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+            game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        end
+        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        end
+    end)
+end
+
+function BypassAntiCheats()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
+end
+BypassAntiCheats()
 ---------------------------------------------------------------------------------------------------------------------------------------
