@@ -754,7 +754,7 @@ function Bypass(Ps)
     until (Ps.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 function Click()
-    wait(0.3)
+    wait(0.01)
     game:GetService'VirtualUser':CaptureController()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 end
