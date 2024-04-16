@@ -1107,10 +1107,10 @@ spawn(function()
                                             v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
-                                            BringMobCastleHauted = true
-                                            CFrameHauntedMob = v.HumanoidRootPart.CFrame
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             Click()
+                                            BringMobCastleHauted = true
+                                            CFrameHauntedMob = v.HumanoidRootPart.CFrame
                                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
                                     end
                                 end
@@ -1165,10 +1165,10 @@ spawn(function()
                                                     v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
-                                                    BringCakeIslandMob = true
-                                                    PosMobCake = v.HumanoidRootPart.CFrame
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                     Click()
+                                                    BringCakeIslandMob = true
+                                                    PosMobCake = v.HumanoidRootPart.CFrame
                                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
                                             end
                                         end
@@ -1547,8 +1547,8 @@ spawn(function()
             pcall(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if _G.Settings.StartFarm and BringCakeIslandMob then
-                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.Settings.StartFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
+                    if _G.Settings.StartFarm and BringMobCastleHauted then
+                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.CFrame = PosMobCake
                             v.Humanoid:ChangeState(12)
@@ -1560,7 +1560,7 @@ spawn(function()
                             sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                         end
                     end
-                    if _G.Settings.StartFarm and BringMobCastleHauted then
+                    if _G.Settings.StartFarm and BringCakeIslandMob then
                         if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.CFrame = CFrameHauntedMob
