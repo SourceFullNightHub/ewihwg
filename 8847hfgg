@@ -726,7 +726,8 @@ function Tween(Pos)
         tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / _G.Settings.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
         if Distance <= 350 then
             tween:Cancel()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+            game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
+            WaitHRP(game.Players.LocalPlayer).CFrame = Pos
         end
 		tween:Play()
     end
