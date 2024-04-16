@@ -737,10 +737,9 @@ function EnableBuso()
     end
 end
 function EquipTool(NameTool)
-    local ToolFind = Your.BackPack:FindFirstChild(NameTool)
-    if ToolFind then
-        wait(0.1)
-        Your.Character.Humanoid:EquipTool(ToolFind)
+    local tool = Your.Backpack:FindFirstChild(NameTool)
+    if tool then
+        Your.Character.Humanoid:EquipTool(tool)
     end
 end
 function Bypass(Ps)
@@ -805,7 +804,7 @@ local Section = G:AddSection({
 G:AddDropdown({
 	Name = "Select Tool",
 	Default = _G.Settings.SelectTool,
-	Options = {"Melee", "Melee"},
+	Options = {"Melee", "Sword"},
 	Callback = function(Value)
 		_G.Settings.SelectTool = Value
         SaveSettings()
