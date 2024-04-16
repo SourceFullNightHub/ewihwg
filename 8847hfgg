@@ -1487,11 +1487,12 @@ function AttackCoolDown()
         end
     end
 end
+
 spawn(function()
-    while wait(0.01) do
+    while wait() do
         if _G.Settings.FastAttack then
-            repeat task.wait(_G.Settings.FastCoolDown)
-                AttackCoolDown()
+            repeat task.wait(_G.Settings.CoolDownAttack)
+                AttackNoCD()
             until not _G.Settings.FastAttack
         end
     end
