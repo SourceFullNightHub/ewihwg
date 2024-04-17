@@ -16,6 +16,8 @@ _G.Settings = {
     AutoFactory = false,
     FastAttack = true,
     BringMob = true,
+    WhiteScreen = false,
+    AutoRejoin = false
 }
 
 function LoadSettings()
@@ -1618,6 +1620,63 @@ spawn(function()
         end
     end
 end)
+
+ST:AddToggle({
+	Name = "Anti AFK",
+	Default = true,
+	Save = false,
+	Flag = "Anti AFK",
+	Callback = function(Value)
+        repeat wait() until game:IsLoaded() 
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+            game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+            game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+            wait(1)
+            game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        end)
+	end    
+})
+
+ST:AddToggle({
+	Name = "White Screen",
+	Default = _G.Settings.WhiteScreen,
+	Save = true,
+	Flag = "White Screen",
+	Callback = function(Value)
+		_G.Settings.WhiteScreen = Value
+        if _G.WhiteScreen == true then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        elseif _G.Settings.WhiteScreen == false then
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+	end    
+})
+
+ST:AddToggle({
+	Name = "Auto Rejoin",
+	Default = _G.Settings.AutoRejoin,
+	Save = true,
+	Flag = "Auto Rejoin",
+	Callback = function(Value)
+        _G.Settings.AutoRejoin = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoRejoin then
+            getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+                if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+                    game:GetService("TeleportService"):Teleport(game.PlaceId)
+                end
+            end)
+        end
+    end
+end)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
 end
