@@ -1527,7 +1527,7 @@ spawn(function()
     while wait() do
         if _G.Settings.FastAttack then
             repeat task.wait(_G.Settings.FastCoolDown)
-                AttackNoCD()
+                AttackCoolDown()
             until not _G.Settings.FastAttack
         end
     end
