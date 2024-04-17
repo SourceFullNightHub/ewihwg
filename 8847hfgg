@@ -1465,7 +1465,7 @@ spawn(function()
     end)
 end)
 
-G:AddDropdown({
+ST:AddDropdown({
 	Name = "FastAttack Cooldown",
 	Default = _G.Settings.FastCoolDown,
 	Options = {"0", "0.0015", "0.00175", "0.01", "0.15", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
