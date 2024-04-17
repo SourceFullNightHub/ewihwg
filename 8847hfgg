@@ -1310,7 +1310,7 @@ G:AddToggle({
 
 spawn(function()
     while wait() do
-        if _G.AutoElite and Sea3 then
+        if _G.Settings.AutoElite and Sea3 then
             if Your.PlayerGui.Main.Quest.Visible == false then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
             elseif Your.PlayerGui.Main.Quest.Visible == true then
