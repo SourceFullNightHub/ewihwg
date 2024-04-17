@@ -957,56 +957,6 @@ local Section = G:AddSection({
 	Name = "Settings"
 })
 
-G:AddDropdown({
-	Name = "FastAttack Cooldown",
-	Default = _G.Settings.FastCoolDown,
-	Options = {"0", "0.0015", "0.00175", "0.01", "0.15", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
-	Callback = function(Value)
-		_G.Settings.FastCoolDown = Value
-        SaveSettings()
-	end    
-})
-
-spawn(function()
-    while wait(0.01) do
-        if _G.Settings.FastCoolDown then
-            if _G.Settings.FastCoolDown == "0" then
-                _G.Settings.FastCoolDown = 0
-            elseif _G.Settings.FastCoolDown == "0.0015" then
-                _G.Settings.FastCoolDown = 0.0015
-            elseif _G.Settings.FastCoolDown == "0.00175" then
-                _G.Settings.FastCoolDown = 0.00175
-            elseif _G.Settings.FastCoolDown == "0.01" then
-                _G.Settings.FastCoolDown = 0.01
-            elseif _G.Settings.FastCoolDown == "0.0175" then
-                _G.Settings.FastCoolDown = 0.0175
-            elseif _G.Settings.FastCoolDown == "0.05" then
-                _G.Settings.FastCoolDown = 0.05
-            elseif _G.Settings.FastCoolDown == "0.075" then
-                _G.Settings.FastCoolDown = 0.075
-            elseif _G.Settings.FastCoolDown == "0.1" then
-                _G.Settings.FastCoolDown = 0.1
-            elseif _G.Settings.FastCoolDown == "0.15" then
-                _G.Settings.FastCoolDown = 0.15
-            elseif _G.Settings.FastCoolDown == "0.15" then
-                _G.Settings.FastCoolDown = 0.15
-            elseif _G.Settings.FastCoolDown == "0.16" then
-                _G.Settings.FastCoolDown = 0.16
-            elseif _G.Settings.FastCoolDown == "0.165" then
-                _G.Settings.FastCoolDown = 0.165
-            elseif _G.Settings.FastCoolDown == "0.17" then
-                _G.Settings.FastCoolDown = 0.17
-            elseif _G.Settings.FastCoolDown == "0.175" then
-                _G.Settings.FastCoolDown = 0.175
-            elseif _G.Settings.FastCoolDown == "0.18" then
-                _G.Settings.FastCoolDown = 0.18
-            elseif _G.Settings.FastCoolDown == "0.185" then
-                _G.Settings.FastCoolDown = 0.185
-            end
-        end
-    end
-end)
-
 G:AddSlider({
 	Name = "Bring Mob Range",
 	Min = 180,
@@ -1506,26 +1456,84 @@ spawn(function()
         end
     end)
 end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if _G.Settings.FastAttack == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
+end)
 
-local CbFw = getupvalues(require(Your.PlayerScripts.CombatFramework))
-local CbFw2 = CbFw[2]
+G:AddDropdown({
+	Name = "FastAttack Cooldown",
+	Default = _G.Settings.FastCoolDown,
+	Options = {"0", "0.0015", "0.00175", "0.01", "0.15", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
+	Callback = function(Value)
+		_G.Settings.FastCoolDown = Value
+        SaveSettings()
+	end    
+})
 
-function GetCurrentBlade() 
-    local p13 = CbFw2.activeController
-    local ret = p13.blades[1]
-    if not ret then return end
-    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
-    return ret
+spawn(function()
+    while wait(0.01) do
+        if _G.Settings.FastCoolDown then
+            if _G.Settings.FastCoolDown == "0" then
+                _G.Settings.FastCoolDown = 0
+            elseif _G.Settings.FastCoolDown == "0.0015" then
+                _G.Settings.FastCoolDown = 0.0015
+            elseif _G.Settings.FastCoolDown == "0.00175" then
+                _G.Settings.FastCoolDown = 0.00175
+            elseif _G.Settings.FastCoolDown == "0.01" then
+                _G.Settings.FastCoolDown = 0.01
+            elseif _G.Settings.FastCoolDown == "0.0175" then
+                _G.Settings.FastCoolDown = 0.0175
+            elseif _G.Settings.FastCoolDown == "0.05" then
+                _G.Settings.FastCoolDown = 0.05
+            elseif _G.Settings.FastCoolDown == "0.075" then
+                _G.Settings.FastCoolDown = 0.075
+            elseif _G.Settings.FastCoolDown == "0.1" then
+                _G.Settings.FastCoolDown = 0.1
+            elseif _G.Settings.FastCoolDown == "0.15" then
+                _G.Settings.FastCoolDown = 0.15
+            elseif _G.Settings.FastCoolDown == "0.15" then
+                _G.Settings.FastCoolDown = 0.15
+            elseif _G.Settings.FastCoolDown == "0.16" then
+                _G.Settings.FastCoolDown = 0.16
+            elseif _G.Settings.FastCoolDown == "0.165" then
+                _G.Settings.FastCoolDown = 0.165
+            elseif _G.Settings.FastCoolDown == "0.17" then
+                _G.Settings.FastCoolDown = 0.17
+            elseif _G.Settings.FastCoolDown == "0.175" then
+                _G.Settings.FastCoolDown = 0.175
+            elseif _G.Settings.FastCoolDown == "0.18" then
+                _G.Settings.FastCoolDown = 0.18
+            elseif _G.Settings.FastCoolDown == "0.185" then
+                _G.Settings.FastCoolDown = 0.185
+            end
+        end
+    end
+end)
+
+function GetBladeHit()
+    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local p13 = CmrFwLib.activeController
+    local weapon = p13.blades[1]
+    if not weapon then 
+        return weapon
+    end
+    while weapon.Parent ~= game.Players.LocalPlayer.Character do
+        weapon = weapon.Parent 
+    end
+    return weapon
 end
-
-function AttackCoolDown()
-    local AC = getupvalues(require(Your.PlayerScripts.CombatFramework))[2].activeController
-    for i = 1, 1 do 
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-            Your.Character,
-            {Your.Character.HumanoidRootPart},
-            60
-        )
+function AttackHit()
+    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local plr = game.Players.LocalPlayer
+    for i = 1, 1 do
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
         local cac = {}
         local hash = {}
         for k, v in pairs(bladehit) do
@@ -1536,44 +1544,28 @@ function AttackCoolDown()
         end
         bladehit = cac
         if #bladehit > 0 then
-            local u8 = debug.getupvalue(AC.attack, 5)
-            local u9 = debug.getupvalue(AC.attack, 6)
-            local u7 = debug.getupvalue(AC.attack, 4)
-            local u10 = debug.getupvalue(AC.attack, 7)
-            local u12 = (u8 * 798405 + u7 * 727595) % u9
-            local u13 = u7 * 798405
-            (function()
-                u12 = (u12 * u9 + u13) % 1099511627776
-                u8 = math.floor(u12 / u9)
-                u7 = u12 - u8 * u9
-            end)()
-            u10 = u10 + 1
-            debug.setupvalue(AC.attack, 5, u8)
-            debug.setupvalue(AC.attack, 6, u9)
-            debug.setupvalue(AC.attack, 4, u7)
-            debug.setupvalue(AC.attack, 7, u10)
             pcall(function()
-                if Your.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                    for k, v in pairs(AC.animator.anims.basic) do
-                        v:Play()
-                    end 
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                    game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
-                    game:GetService'VirtualUser':CaptureController()
-                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                end
+                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.attacking = false
+                CmrFwLib.activeController.blocking = false
+                CmrFwLib.activeController.timeToNextBlock = 0
+                CmrFwLib.activeController.increment = 3
+                CmrFwLib.activeController.hitboxMagnitude = 60
+                CmrFwLib.activeController.focusStart = 0
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
             end)
         end
     end
 end
-
 spawn(function()
-    while wait(0.001) do
+    while wait(0.01) do
         if _G.Settings.FastAttack then
-            repeat task.wait(_G.Settings.FastCoolDown)
-                AttackCoolDown()
-            until not _G.Settings.FastAttack
+            pcall(function()
+                repeat task.wait(_G.Settings.FastCoolDown)
+                    AttackHit()
+                until not _G.Settings.FastAttack
+            end)
         end
     end
 end)
