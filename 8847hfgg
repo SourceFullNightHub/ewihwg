@@ -1120,7 +1120,7 @@ spawn(function()
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     BringLevel = true
                                     MobLevel = v.HumanoidRootPart.CFrame
-                                until not _G.AutoLevel or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                             end
                         end
                     else
@@ -1552,22 +1552,26 @@ spawn(function()
             pcall(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if _G.Settings.StartFarm and BringLevel and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 175 then
-                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                    if _G.Settings.StartFarm and BringLevel and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                         v.HumanoidRootPart.CFrame = MobLevel
-                        v.Humanoid:ChangeState(14)
+                        v.Humanoid:ChangeState(11)
                         v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
+                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                        v.HumanoidRootPart.Transparency = 1
+                        v.Humanoid.WalkSpeed = 0
+                        v.Humanoid.JumpPower = 0
                         if v.Humanoid:FindFirstChild("Animator") then
                             v.Humanoid.Animator:Destroy()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    elseif _G.Settings.StartFarm and BringLevel and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 175 then
-                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                    elseif _G.Settings.StartFarm and BringLevel and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (PosMon.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                         v.HumanoidRootPart.CFrame = MobLevel
-                        v.Humanoid:ChangeState(14)
+                        v.Humanoid:ChangeState(11)
                         v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
+                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                        v.HumanoidRootPart.Transparency = 1
+                        v.Humanoid.WalkSpeed = 0
+                        v.Humanoid.JumpPower = 0
                         if v.Humanoid:FindFirstChild("Animator") then
                             v.Humanoid.Animator:Destroy()
                         end
