@@ -830,8 +830,37 @@ end)
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/chill')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
-local G = Window:MakeTab({Name = "General", Icon = "rbxassetid://17065785686", PremiumOnly = false})
-local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17065796587", PremiumOnly = false})
+local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", PremiumOnly = false})
+local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17176292358", PremiumOnly = false})
+local I = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17176293352", PremiumOnly = false})
+local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17176289388", PremiumOnly = false})
+local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17176299916", PremiumOnly = false})
+
+--// About Tab \\ ----
+
+local Section = AB:AddSection({
+	Name = "About"
+})
+
+AB:AddLabel("Owner Name : Lương Minh Nghĩa")
+AB:AddLabel("BirthDay : 12/8/2011")
+AB:AddLabel("Brothers : ! Destroyx")
+AB:AddLabel("My Best Friend : Afxcaxi Roblox, Luni, Daven, House Of Balance")
+AB:AddLabel("I'm From VietNamese")
+AB:AddLabel("Youtube Url : https://www.youtube.com/@NIGHTHUBCREATE")
+AB:AddButton({
+	Name = "Copy Link Youtube Channel",
+	Callback = function()
+        setclipboard("https://www.youtube.com/@NIGHTHUBCREATE")
+  	end
+})
+AB:AddLabel("Discord Invite : discord.gg/R4xC3t2Xm8")
+AB:AddButton({
+	Name = "Copy Link Invite Discord",
+	Callback = function()
+      	setclipboard("https://discord.gg/R4xC3t2Xm8")
+  	end    
+})
 
 -----// General Tab \\ --------
 
