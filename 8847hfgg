@@ -802,7 +802,7 @@ function AttackHit()
         bladehit = cac
         if #bladehit > 0 then
             pcall(function()
-                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.timeToNextAttack = 0
                 CmrFwLib.activeController.attacking = false
                 CmrFwLib.activeController.blocking = false
                 CmrFwLib.activeController.timeToNextBlock = 0
@@ -1138,7 +1138,7 @@ spawn(function()
                                     v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     BringLevel = true
                                     MobLevel = v.HumanoidRootPart.CFrame
                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1162,12 +1162,12 @@ spawn(function()
                                             EnableBuso()
                                             EquipTool(ToolFarm)
                                             v.Humanoid.WalkSpeed = 0
-                                            v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             BringMobCastleHauted = true
                                             CFrameHauntedMob = v.HumanoidRootPart.CFrame
                                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
@@ -1195,12 +1195,12 @@ spawn(function()
                                         EnableBuso()
                                         EquipTool(ToolFarm)
                                         v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Head.CanCollide = false
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
@@ -1222,12 +1222,12 @@ spawn(function()
                                                     EnableBuso()
                                                     EquipTool(ToolFarm)
                                                     v.Humanoid.WalkSpeed = 0
-                                                    v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                                     game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     BringCakeIslandMob = true
                                                     PosMobCake = v.HumanoidRootPart.CFrame
                                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
@@ -1295,12 +1295,12 @@ spawn(function()
                         EnableBuso()
                         EquipTool(ToolFarm)
                         v.Humanoid.WalkSpeed = 0
-                        v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                         v.HumanoidRootPart.CanCollide = false
                         v.Head.CanCollide = false
                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                         game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672)) -- AFK ĐI TẮM
+                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672)) -- AFK ĐI TẮM
                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
                 end
             end
@@ -1349,12 +1349,12 @@ spawn(function()
                                     EnableBuso()
                                     EquipTool(ToolFarm)
                                     v.Humanoid.WalkSpeed = 0
-                                    v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Head.CanCollide = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.AutoElite == false
                             end
                         end
@@ -1398,12 +1398,12 @@ spawn(function()
                                 EnableBuso()
                                 EquipTool(ToolFarm)
                                 v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                 game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.AutoCastleRaid
                         end
                     end
@@ -1449,18 +1449,26 @@ spawn(function()
                                 EnableBuso()
                                 EquipTool(ToolFarm)
                                 v.Humanoid.WalkSpeed = 0
-                                v.HumanoidRootPart.Size = Vector3.new(40, 40, 40)
+                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
                                 Tween(CFrame.new(448.46756, 199.356781, -441.389252)) -- AFK ĐI TẮM!!!
                                 game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until _G.Settings.AutoFactory == false or v.Humanoid.Health <= 0 or not v.Parent
                         end
                     end
                 end
             else
-                Tween(CFrame.new(448.46756, 199.356781, -441.389252))    
+                if _G.Settings.BypassTele then
+                    if (CFrame.new(448.46756, 199.356781, -441.389252).Position - Your.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                        Bypass(CFrame.new(448.46756, 199.356781, -441.389252))
+                    elseif (CFrame.new(448.46756, 199.356781, -441.389252).Position - Your.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                        Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+                    end
+                else
+                    Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+                end
             end        
         end
     end
@@ -1490,9 +1498,8 @@ spawn(function()
             if typeof(y) == "table" then
                 pcall(function()
                     CameraShaker:Stop()
-                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
                     y.activeController.timeToNextAttack = 0
-                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.hitboxMagnitude = 120
                     y.activeController.active = false
                     y.activeController.timeToNextBlock = 0
                     y.activeController.focusStart = 1655503339.0980349
@@ -1689,7 +1696,7 @@ ST:AddToggle({
 	Flag = "White Screen",
 	Callback = function(Value)
 		_G.Settings.WhiteScreen = Value
-        if _G.WhiteScreen == true then
+        if _G.Settings.WhiteScreen == true then
             game:GetService("RunService"):Set3dRenderingEnabled(false)
         elseif _G.Settings.WhiteScreen == false then
             game:GetService("RunService"):Set3dRenderingEnabled(true)
