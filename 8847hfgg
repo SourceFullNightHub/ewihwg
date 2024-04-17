@@ -1559,7 +1559,7 @@ function AttackHit()
     end
 end
 spawn(function()
-    while wait(0.01) do
+    while wait(.1) do
         if _G.Settings.FastAttack then
             pcall(function()
                 repeat task.wait(_G.Settings.FastCoolDown)
