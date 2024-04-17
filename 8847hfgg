@@ -772,7 +772,6 @@ function SendKey(Key)
     wait(0.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
 end
-local plr = game.Players.LocalPlayer
 local CbFw = getupvalues(require(Your.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
 
@@ -790,8 +789,8 @@ function AttackNoCD()
             local AC = getupvalues(require(Your.PlayerScripts.CombatFramework))[2].activeController
             for i = 1, 1 do 
                 local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-                    plr.Character,
-                    {plr.Character.HumanoidRootPart},
+                    Your.Character,
+                    {Your.Character.HumanoidRootPart},
                     60
                 )
                 local cac = {}
@@ -821,7 +820,7 @@ function AttackNoCD()
                     debug.setupvalue(AC.attack, 4, u7)
                     debug.setupvalue(AC.attack, 7, u10)
                     pcall(function()
-                        if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                        if Your.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
                             for k, v in pairs(AC.animator.anims.basic) do
                                 v:Play()
                             end 
@@ -1159,8 +1158,6 @@ spawn(function()
                                     v.Head.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     BringLevel = true
                                     MobLevel = v.HumanoidRootPart.CFrame
                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1188,8 +1185,6 @@ spawn(function()
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            game:GetService'VirtualUser':CaptureController()
-                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             BringMobCastleHauted = true
                                             CFrameHauntedMob = v.HumanoidRootPart.CFrame
                                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
@@ -1221,8 +1216,6 @@ spawn(function()
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Head.CanCollide = false
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
@@ -1248,8 +1241,6 @@ spawn(function()
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
                                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                                    game:GetService'VirtualUser':CaptureController()
-                                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     BringCakeIslandMob = true
                                                     PosMobCake = v.HumanoidRootPart.CFrame
                                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
@@ -1321,8 +1312,6 @@ spawn(function()
                         v.HumanoidRootPart.CanCollide = false
                         v.Head.CanCollide = false
                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                        game:GetService'VirtualUser':CaptureController()
-                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672)) -- AFK ĐI TẮM
                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
                 end
             end
@@ -1375,8 +1364,6 @@ spawn(function()
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Head.CanCollide = false
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.AutoElite == false
                             end
                         end
@@ -1424,8 +1411,6 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.AutoCastleRaid
                         end
                     end
@@ -1475,8 +1460,6 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
                                 Tween(CFrame.new(448.46756, 199.356781, -441.389252)) -- AFK ĐI TẮM!!!
-                                game:GetService'VirtualUser':CaptureController()
-                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                             until _G.Settings.AutoFactory == false or v.Humanoid.Health <= 0 or not v.Parent
                         end
                     end
@@ -1598,7 +1581,7 @@ spawn(function()
         if _G.Settings.FastAttack then
             pcall(function()
                 repeat task.wait(_G.Settings.FastCoolDown)
-                    AttackHit()
+                    AttackNoCD()
                 until not _G.Settings.FastAttack
             end)
         end
