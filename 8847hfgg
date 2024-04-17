@@ -1508,6 +1508,23 @@ function AttackCoolDown()
         end
         bladehit = cac
         if #bladehit > 0 then
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
+        if #bladehit > 0 then
             pcall(function()
                 CmrFwLib.activeController.timeToNextAttack = 1
                 CmrFwLib.activeController.attacking = false
@@ -1519,15 +1536,18 @@ function AttackCoolDown()
                 for k, v in pairs(AC.animator.anims.basic) do
                     v:Play()
                 end 
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(Hit()))
                 game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
             end)
         end
     end
 end
 
 spawn(function()
-    while wait() do
+    while wait(0.001) do
         if _G.Settings.FastAttack then
             repeat task.wait(_G.Settings.FastCoolDown)
                 AttackCoolDown()
