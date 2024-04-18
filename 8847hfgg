@@ -12,6 +12,7 @@ _G.Settings = {
     BypassTele = false,
     KillMobAura = false,
     AutoElite = false,
+    TakenSaber = false,
     AutoCastleRaid = false,
     AutoFactory = false,
     FastAttack = true,
