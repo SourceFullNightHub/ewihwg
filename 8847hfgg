@@ -1728,6 +1728,7 @@ spawn(function()
                             EquipTool("Torch")
                         end
                         if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - game:GetService("Workspace").Map.Desert.Burn.Fire.Position).Magnitude < 3 then
+                            wait(0.5)
                             firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 0) 
                             firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 1)
                         else
