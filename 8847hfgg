@@ -791,8 +791,22 @@ function Tween(Pos)
 		tween:Play()
     end
 end
+function TweenOld(CFm)
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (CFm.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+        if not CFm then return end 
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / _G.Settings.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = CFm})
+        if Distance <= 350 then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFm
+        end
+		tween:Play()
+    end
+end
 function ToTarget(ab, ab, b1)
-    Tween(b1)
+    TweenOld(b1)
 end
 function EnableBuso()
     if not Your.Character:FindFirstChild("HasBuso") then
@@ -1650,7 +1664,7 @@ spawn(function()
                     if ButtonsInJungle() then
                         local Kickhoat = ButtonsInJungle()
                         pcall(function()
-                            Tween(Kickhoat.Button.CFrame)
+                            TweenOld(Kickhoat.Button.CFrame)
                         end)
                     end
                 else
@@ -1662,13 +1676,13 @@ spawn(function()
                                     firetouchinterest(game:GetService("Workspace").Map.Desert.Cup,Your.Character.HumanoidRootPart, 0)
                                     firetouchinterest(game:GetService("Workspace").Map.Desert.Cup, Your.Character.HumanoidRootPart, 1)
                                 else
-                                    Tween(game:GetService("Workspace").Map.Desert.Cup.CFrame)
+                                    TweenOld(game:GetService("Workspace").Map.Desert.Cup.CFrame)
                                 end
                             elseif Your.Backpack:FindFirstChild("Cup") and Your.Character:FindFirstChild("Cup") then
                                 print("lay duoc cup roi bay di thang ngu")
                                 EquipTool("Cup")
                                 if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Backpack.Cup.Handle:FindFirstChild("TouchInterest") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Character.Cup.Handle:FindFirstChild("TouchInterest") then
-                                    Tween(CFrame.new(1395.77307, 37.4733238, -1324.34631, -0.999978602, -6.53588605e-09, 0.00654155109, -6.57083277e-09, 1, -5.32077493e-09, -0.00654155109, -5.3636442e-09, -0.999978602))
+                                    TweenOld(CFrame.new(1395.77307, 37.4733238, -1324.34631, -0.999978602, -6.53588605e-09, 0.00654155109, -6.57083277e-09, 1, -5.32077493e-09, -0.00654155109, -5.3636442e-09, -0.999978602))
                                 elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup") and not game:GetService("Players").LocalPlayer.Backpack.Cup.Handle:FindFirstChild("TouchInterest") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cup") and not game:GetService("Players").LocalPlayer.Character.Cup.Handle:FindFirstChild("TouchInterest") then
                                     if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(1457.8768310547, 88.377502441406, -1390.6892089844)).Magnitude > 8 then
                                         ToTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, CFrame.new(1457.8768310547, 88.377502441406, -1390.6892089844).Position, CFrame.new(1457.8768310547, 88.377502441406, -1390.6892089844))
@@ -1689,7 +1703,7 @@ spawn(function()
                                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                         until not v or not v.Parent or v.Humanoid.Health <= 0
                                     end
                                 end
@@ -1698,7 +1712,7 @@ spawn(function()
                         elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 1 then
                             if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Relic") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Relic") then
                                 if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - CFrame.new(-1404.07996, 29.8520069, 5.26677656, 0.888123989, -4.0340602e-09, 0.459603906, 7.5884703e-09, 1, -5.8864642e-09, -0.459603906, 8.71560069e-09, 0.888123989)).Magnitude > 8 then
-                                    Tween(CFrame.new(-1404.07996, 29.8520069, 5.26677656, 0.888123989, -4.0340602e-09, 0.459603906, 7.5884703e-09, 1, -5.8864642e-09, -0.459603906, 8.71560069e-09, 0.888123989))
+                                    TweenOld(CFrame.new(-1404.07996, 29.8520069, 5.26677656, 0.888123989, -4.0340602e-09, 0.459603906, 7.5884703e-09, 1, -5.8864642e-09, -0.459603906, 8.71560069e-09, 0.888123989))
                                 else
                                     game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon")
                                 end
@@ -1709,7 +1723,7 @@ spawn(function()
                         end
                     else
                         if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Torch") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") then
-                            Tween(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
+                            TweenOld(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
                         else
                             EquipTool("Torch")
                         end
@@ -1717,7 +1731,7 @@ spawn(function()
                             firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 0) 
                             firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 1)
                         else
-                            Tween(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
+                            TweenOld(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
                         end
                     end
                 end
@@ -1732,12 +1746,12 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until not v or not v.Parent or v.Humanoid.Health <= 0
                         end
                     end
                 else
-                    Tween(CFrame.new(5278.04932, 2.15167475, 944.101929))
+                    TweenOld(CFrame.new(5278.04932, 2.15167475, 944.101929))
                 end
             end
         end
