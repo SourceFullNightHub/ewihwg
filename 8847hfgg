@@ -1754,7 +1754,26 @@ spawn(function()
                     end
                 else
                     TweenOld(CFrame.new(-1424.92334, 30.19524, -4.31849194))
+                    if game.ReplicatedStorage:FindFirstChild("Saber Expert") then
+                        Tween(game.ReplicatedStorage:FindFirstChild("Saber Expert").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    else
+                        if _G.Settings.SaberHop then
+                            wait(3)
+                            Hop()
+                        end
+                    end
                 end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Settings.TakenSaber and _G.Settings.SaberHop then
+            if not game.ReplicatedStorage:FindFirstChild("Saber Expert") then
+                wait(3)
+                Hop()
             end
         end
     end
@@ -1951,12 +1970,32 @@ spawn(function()
     end
 end)
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Section = ST:AddSection({Name = "Game booters"})
 
+ST:AddToggle({
+	Name = "Remove Notification",
+	Default = _G.Settings.AutoRejoin,
+	Save = true,
+	Flag = "Remove Notification",
+	Callback = function(Value)
+        _G.Settings.RemoveNotify = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.RemoveNotify == true then
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+        elseif _G.Settings.RemoveNotify == false then
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+        end
+    end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
 end
-
 getgenv().NoDieEffect = true
 if getgenv().NoDieEffect then
     pcall(function()
@@ -1970,7 +2009,6 @@ if getgenv().NoDieEffect then
         end
     end)
 end
-
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
         if v:IsA("LocalScript") then
