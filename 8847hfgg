@@ -2136,9 +2136,7 @@ RC:AddButton({
   	end    
 })
 
-local Section = RC:AddSection({
-	Name = "Teleport Upgrated Race"
-})
+RC:AddParagraph("Upgrated Race","Upgrated Race is the best function of Script Night Hub because it can defeat many players at trials")
 
 local ConNPCTemplete = CFrame.new(28612.7148, 14896.4893, 103.860237)
 function TweenTopOnGreatTree()
