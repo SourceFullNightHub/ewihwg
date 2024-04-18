@@ -1254,7 +1254,7 @@ local Section = G:AddSection({
 	Name = "FARMMING"
 })
 
-G:AddDropdown({
+local ToggleFarm = G:AddDropdown({
 	Name = "Select Mode Farm",
 	Default = _G.Settings.SelectModeFarm,
 	Options = {"Level", "Bone", "Cake Prince"},
@@ -1666,6 +1666,9 @@ local ToggleSaber = IQ:AddToggle({
 spawn(function()
     while wait() do
         if _G.Settings.TakenSaber and Your.Data.Level.Value >= 200 and not CheckInventory("Saber") then
+            if _G.Settings.StartFarm == true then
+                ToggleFarm:Set(false)
+            end
             if not CheckSaberDoors() then
                 if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
                     if ButtonsInJungle() then
