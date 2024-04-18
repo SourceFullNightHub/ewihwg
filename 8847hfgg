@@ -1677,7 +1677,7 @@ spawn(function()
                                 else
                                     TweenOld(game:GetService("Workspace").Map.Desert.Cup.CFrame)
                                 end
-                            elseif Your.Backpack:FindFirstChild("Cup") and Your.Character:FindFirstChild("Cup") then
+                            elseif Your.Backpack:FindFirstChild("Cup") or Your.Character:FindFirstChild("Cup") then
                                 print("lay duoc cup roi bay di thang ngu")
                                 EquipTool("Cup")
                                 if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Backpack.Cup.Handle:FindFirstChild("TouchInterest") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Character.Cup.Handle:FindFirstChild("TouchInterest") then
