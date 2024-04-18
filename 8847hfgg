@@ -9,6 +9,12 @@ _G.Settings = {
     SaberHop = false,
     TweenSpeed = 200,
     AutoTurnRaceV3 = false,
+    Melee = false,
+    Sword = false,
+    Defense = false,
+    Gun = false,
+    DF = false,
+    Stats = "1",
     AutoTurnRaceV4 = false,
     BypassTele = false,
     KillMobAura = false,
@@ -1050,6 +1056,7 @@ local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, Int
 local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", PremiumOnly = false})
 local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184558565", PremiumOnly = false})
 local IQ = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
+local STS = Window:MakeTab({Name = "Stats", Icon = "rbxassetid://17184559957", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
@@ -1924,6 +1931,120 @@ spawn(function()
             if not game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
                 wait(.3)
                 Hop()
+            end
+        end
+    end
+end)
+
+-- // Stats Tab \\----------------------------
+
+STS:AddSlider({
+	Name = "Point To Add",
+	Min = 1,
+	Max = 100,
+	Default = 1,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Point",
+	Callback = function(Value)
+		_G.Settings.Stats = Value
+        SaveSettings()
+	end    
+})
+
+STS:AddToggle({
+	Name = "Melee",
+	Default = false,
+	Save = true,
+	Flag = "Melee",
+	Callback = function(Value)
+		_G.Settings.Melee = Value
+        SaveSettings()
+	end    
+})
+
+STS:AddToggle({
+	Name = "Defense",
+	Default = false,
+	Save = true,
+	Flag = "Defense",
+	Callback = function(Value)
+		_G.Settings.Defense = Value
+        SaveSettings()
+	end    
+})
+
+STS:AddToggle({
+	Name = "Sword",
+	Default = false,
+	Save = true,
+	Flag = "Sword",
+	Callback = function(Value)
+		_G.Settings.Sword = Value
+        SaveSettings()
+	end    
+})
+
+STS:AddToggle({
+	Name = "Gun",
+	Default = false,
+	Save = true,
+	Flag = "Gun",
+	Callback = function(Value)
+		_G.Settings.Gun = Value
+        SaveSettings()
+	end    
+})
+
+STS:AddToggle({
+	Name = "Blox Fruit",
+	Default = false,
+	Save = true,
+	Flag = "Save",
+	Callback = function(Value)
+		_G.Settings.DF = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if game.Players.localPlayer.Data.Points.Value >= _G.Settings.Stats then
+            if _G.Settings.Melee then
+                local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = _G.Settings.Stats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        elseif _G.Settings.Defense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Defense",
+                [3] = _G.Settings.Stats
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            elseif _G.Settings.Sword then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Sword",
+                    [3] = _G.Settings.Stats
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            elseif _G.Settings.Gun then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Gun",
+                    [3] = _G.Settings.Stats
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            elseif _G.Settings.DF then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = "Blox Fruit",
+                    [3] = _G.Settings.Stats
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
             end
         end
     end
