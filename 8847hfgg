@@ -6,6 +6,7 @@ _G.Settings = {
     SelectTool = "Melee",
     FastCoolDown = "0.175",
     BringMobRange = 250,
+    SaberHop = false,
     TweenSpeed = 200,
     AutoTurnRaceV3 = false,
     AutoTurnRaceV4 = false,
@@ -1659,6 +1660,17 @@ local ToggleSaber = IQ:AddToggle({
 	Flag = "Auto Saber",
 	Callback = function(Value)
         _G.Settings.TakenSaber = Value
+        SaveSettings()
+	end    
+})
+
+local ToggleSaber = IQ:AddToggle({
+	Name = "Auto Saber(Hop)",
+	Default = _G.Settings.SaberHop,
+	Save = true,
+	Flag = "Auto Saber",
+	Callback = function(Value)
+        _G.Settings.SaberHop = Value
         SaveSettings()
 	end    
 })
