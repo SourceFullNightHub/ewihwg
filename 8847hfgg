@@ -790,7 +790,8 @@ function NearestEntrace(aI)
             ["Mansion"] = Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
             ["Great Tree"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
             ["DoorBossNPCPirate"] = Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
-            ["DoorBossNPCPirate2"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
+            ["DoorBossNPCPirate2"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656),
+            ["Temple"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586)
         }
     elseif NewWorld then
         TableLocations = {
@@ -857,6 +858,31 @@ function Tween(Pos)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
         end
 		tween:Play()
+    end
+end
+function Teleport(CFR)
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (CFR.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+        if not CFR then return end
+        if Distance > 1 then
+            Speed = _G.Settings.TweenSpeed
+        end
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear),{CFrame = CFR})
+        local NearestEntraceFunction = NearestEntrace(CFR)
+		if NearestEntraceFunction then
+            tween:Cancel()
+			RETeleport(NearestEntraceFunction)
+		end
+        if Distance <= 300 then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFR
+        end
+		tween:Play()
+        NoCLip = true
+        wait(Distance/Speed)
+        NoCLip = false
     end
 end
 function TweenOld(CFm)
@@ -1057,6 +1083,8 @@ local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", Pr
 local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184558565", PremiumOnly = false})
 local IQ = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
 local STS = Window:MakeTab({Name = "Stats", Icon = "rbxassetid://17184559957", PremiumOnly = false})
+local SE = Window:MakeTab({Name = "Sea Event", Icon = "rbxassetid://17184407740", PremiumOnly = false})
+local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413595", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
@@ -1942,7 +1970,7 @@ STS:AddSlider({
 	Name = "Point To Add",
 	Min = 1,
 	Max = 100,
-	Default = 1,
+	Default = _G.Settings.Stats,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "Point",
@@ -2049,6 +2077,163 @@ spawn(function()
         end
     end
 end)
+
+--// Sea Event \\ ----------------------------
+
+SE:AddParagraph("Sea Event","Sea Event has many functions such as Auto Shark, Auto Terrorshark, Auto Piranha, Auto Fish Crew Member and some others such as Auto Find Kitsune Island and Auto Collect Azure")
+
+
+-- // Race V4 \\ -----------------------------
+
+RC:AddParagraph("Mirage Island","Mirage Island includes Auto Pull lever, Auto Mirage Island,...")
+
+function getHighestPoint()
+    if not game.workspace.Map:FindFirstChild("MysticIsland") then
+        return nil
+    end
+    for r, v in pairs(game:GetService("Workspace").Map.MysticIsland:GetDescendants()) do
+        if v:IsA("MeshPart") then
+            if v.MeshId == "rbxassetid://6745037796" then
+                return v
+            end
+        end
+    end
+end
+
+function TweentoHighestPoint()
+    if getHighestPoint() then
+        Teleport(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
+    end
+end
+
+RC:AddButton({
+	Name = "Teleport To Top On Mirage",
+	Callback = function()
+        TweentoHighestPoint()
+  	end    
+})
+
+function Mirage()
+    repeat wait()
+    until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
+    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        AllNPCS = getnilinstances()
+        for r, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+            table.insert(AllNPCS, v)
+        end
+        for r, v in pairs(AllNPCS) do
+            if v.Name == "Advanced Fruit Dealer" then
+                Teleport(v.HumanoidRootPart.CFrame)
+            end
+        end
+    end
+end
+
+RC:AddButton({
+	Name = "Teleport To Mirage",
+	Callback = function()
+        Mirage()
+  	end    
+})
+
+local Section = RC:AddSection({
+	Name = "Teleport Upgrated Race"
+})
+
+local ConNPCTemplete = CFrame.new(28612.7148, 14896.4893, 103.860237)
+function TweenTopOnGreatTree()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586))
+    Teleport(ConNPCTemplete)
+    if (ConNPCTemplete.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "TeleportBack")
+    end
+end
+
+RC:AddButton({
+	Name = "Teleport To Top On Great Tree",
+	Callback = function()
+        TweenTopOnGreatTree()
+  	end    
+})
+
+function TweenTemplete()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586))
+end
+
+RC:AddButton({
+	Name = "Teleport To Temple",
+	Callback = function()
+        TweenTemplete()
+  	end    
+})
+
+RC:AddButton({
+	Name = "Teleport To Lever Pull",
+	Callback = function()
+        Teleport(CFrame.new(28576.4688,14939.2832,76.5164413))
+  	end    
+})
+
+local PosTemplete = CFrame.new(28282.5703125, 14896.8505859375, 105.1042709350586)
+RC:AddButton({
+	Name = "Teleport To Current Race Door",
+	Callback = function()
+        if taodangosea3 then
+            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude > 1000 then
+                TweenTemplete()
+            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude < 1000 then
+                wait(1)
+                if game:GetService("Players").LocalPlayer.Data.Race.Value == "Fishman" then
+                    wait(1)
+                    Teleport(CFrame.new(28224.056640625, 14889.4267578125, -210.5872039794922))
+                elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Human" then
+                    wait(1)
+                    Teleport(CFrame.new(29237.294921875, 14889.4267578125, -206.94955444335938))
+                elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Cyborg" then
+                    wait(1)
+                    Teleport(CFrame.new(28492.4140625, 14894.4267578125, -422.1100158691406))
+                elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Skypiea" then
+                    wait(1)
+                    Teleport(CFrame.new(28967.408203125, 14918.0751953125, 234.31198120117188))
+                elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Ghoul" then
+                    wait(1)
+                    Teleport(CFrame.new(28672.720703125, 14889.1279296875, 454.5961608886719))
+                elseif game:GetService("Players").LocalPlayer.Data.Race.Value == "Mink" then
+                    wait(1)
+                    Teleport(CFrame.new(29020.66015625, 14889.4267578125, -379.2682800292969))
+                end
+            end
+        end
+  	end    
+})
+
+RC:AddButton({
+	Name = "Teleport To Clock",
+	Callback = function()
+        if taodangosea3 then
+            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude > 1000 then
+                TweenTemplete()
+            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude < 1000 then
+                wait(1)
+                Teleport(CFrame.new(29551.9941, 15069.002, -85.5179291))
+            end
+        end
+  	end    
+})
+
+RC:AddButton({
+	Name = "Teleport To Anclient One",
+	Callback = function()
+        if taodangosea3 then
+            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude > 1000 then
+                TweenTemplete()
+            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosTemplete.Position).Magnitude < 1000 then
+                wait(1)
+                Teleport(CFrame.new(28973.0879, 14889.9756, -120.298691))
+            end
+        end
+  	end    
+})
 
 -- // Settings Tab \\ -------------------------
 
