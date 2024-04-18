@@ -819,6 +819,13 @@ function EquipTool(NameTool)
         Your.Character.Humanoid:EquipTool(tool)
     end
 end
+function CheckInventory(Item)
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+        if v.Name == Item then
+            return v
+        end
+    end
+end
 function Bypass(Ps)
     repeat wait()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
@@ -1658,7 +1665,7 @@ local ToggleSaber = IQ:AddToggle({
 
 spawn(function()
     while wait() do
-        if _G.Settings.TakenSaber and Your.Data.Level.Value >= 200 then
+        if _G.Settings.TakenSaber and Your.Data.Level.Value >= 200 and not CheckInventory("Saber") then
             if not CheckSaberDoors() then
                 if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
                     if ButtonsInJungle() then
@@ -1770,7 +1777,7 @@ end)
 
 spawn(function()
     while wait() do
-        if _G.Settings.TakenSaber and _G.Settings.SaberHop then
+        if _G.Settings.TakenSaber and _G.Settings.SaberHop and not CheckInventory("Saber") then
             if not game.ReplicatedStorage:FindFirstChild("Saber Expert") then
                 wait(3)
                 Hop()
