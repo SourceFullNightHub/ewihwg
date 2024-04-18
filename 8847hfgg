@@ -1664,7 +1664,7 @@ local ToggleSaber = IQ:AddToggle({
 	end    
 })
 
-local ToggleSaber = IQ:AddToggle({
+local ToggleSaberHop = IQ:AddToggle({
 	Name = "Auto Saber(Hop)",
 	Default = _G.Settings.SaberHop,
 	Save = true,
