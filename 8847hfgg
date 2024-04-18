@@ -770,7 +770,6 @@ function RETeleport(aJ)
     oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     char = game.Players.LocalPlayer.Character.HumanoidRootPart
     char.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
-    task.wait(0.5)
 end
 function Tween(Pos)
     if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -790,6 +789,9 @@ function Tween(Pos)
         end
 		tween:Play()
     end
+end
+function ToTarget(ab, ab, b1)
+    Tween(b1)
 end
 function EnableBuso()
     if not Your.Character:FindFirstChild("HasBuso") then
@@ -830,7 +832,6 @@ function SendKey(Key)
 end
 local CbFw = getupvalues(require(Your.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
-
 function GetCurrentBlade() 
     local p13 = CbFw2.activeController
     local ret = p13.blades[1]
@@ -838,7 +839,6 @@ function GetCurrentBlade()
     while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
     return ret
 end
-
 function AttackNoCD()
     if not _G.AutomasteryFruit or _G.AutomasteryGun then
         if not _G.NextIsland then
@@ -889,6 +889,25 @@ function AttackNoCD()
             end
         end
     end
+end
+function CheckSaberDoors()
+    for i, v in pairs(game:GetService("Workspace").Map.Jungle.Final:GetChildren()) do
+        if v:IsA("Part") and not v.CanCollide then
+            return true
+        end
+    end
+end
+function ButtonsInJungle()
+    for r, v in pairs(game:GetService("Workspace").Map.Jungle.QuestPlates:GetChildren()) do
+        if v:IsA("Model") then
+            if v.Button:FindFirstChild("TouchInterest") then
+                return v
+            end
+        end
+    end
+end
+function CheckDoorGetCup()
+    return workspace.Map.Desert.Burn.Part.CanCollide == false
 end
 -- // Icon Show Ui \\ --
 local ScreenGui = Instance.new("ScreenGui")
@@ -947,7 +966,7 @@ local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, Int
 
 local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", PremiumOnly = false})
 local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184558565", PremiumOnly = false})
-local I = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
+local IQ = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
@@ -1607,6 +1626,123 @@ spawn(function()
     end
 end)
 
+-- // Item tab \\ -----------------------------
+
+local Section = IQ:AddSection({Name = "Sea 1 All Item"})
+
+ST:AddToggle({
+	Name = "Auto Saber",
+	Default = _G.Settings.TakenSaber,
+	Save = true,
+	Flag = "Auto Saber",
+	Callback = function(Value)
+        _G.Settings.TakenSaber = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.TakenSaber and Your.Data.Level.Value >= 200 then
+            if not CheckSaberDoors() then
+                if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
+                    if ButtonsInJungle() then
+                        local Kickhoat = ButtonsInJungle()
+                        pcall(function()
+                            Tween(Kickhoat.Button.CFrame)
+                        end)
+                    end
+                else
+                    if CheckDoorGetCup() then
+                        if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") ~= 0 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") ~= 1 then
+                            print("con cac gi vay ha")
+                            if not Your.Backpack:FindFirstChild("Cup") and not Your.Character:FindFirstChild("Cup") then
+                                if (game:GetService("Workspace").Map.Desert.Cup.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
+                                    firetouchinterest(game:GetService("Workspace").Map.Desert.Cup,Your.Character.HumanoidRootPart, 0)
+                                    firetouchinterest(game:GetService("Workspace").Map.Desert.Cup, Your.Character.HumanoidRootPart, 1)
+                                else
+                                    Tween(game:GetService("Workspace").Map.Desert.Cup.CFrame)
+                                end
+                            elseif Your.Backpack:FindFirstChild("Cup") and Your.Character:FindFirstChild("Cup") then
+                                print("lay duoc cup roi bay di thang ngu")
+                                EquipTool("Cup")
+                                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Backpack.Cup.Handle:FindFirstChild("TouchInterest") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cup") and game:GetService("Players").LocalPlayer.Character.Cup.Handle:FindFirstChild("TouchInterest") then
+                                    Tween(CFrame.new(1395.77307, 37.4733238, -1324.34631, -0.999978602, -6.53588605e-09, 0.00654155109, -6.57083277e-09, 1, -5.32077493e-09, -0.00654155109, -5.3636442e-09, -0.999978602))
+                                elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup") and not game:GetService("Players").LocalPlayer.Backpack.Cup.Handle:FindFirstChild("TouchInterest") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cup") and not game:GetService("Players").LocalPlayer.Character.Cup.Handle:FindFirstChild("TouchInterest") then
+                                    if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(1457.8768310547, 88.377502441406, -1390.6892089844)).Magnitude > 8 then
+                                        ToTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, CFrame.new(1457.8768310547, 88.377502441406, -1390.6892089844).Position, CFrame.new(1457.8768310547, 88.377502441406, -1390.6892089844))
+                                    else
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress", "SickMan")
+                                    end
+                                end
+                            end
+                        elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 0 then
+                            print("viet code moi tay vcl")
+                            if game.ReplicatedStorage:FindFirstChild("Mob Leader") or game.Workspace.Enemies:FindFirstChild("Mob Leader") then
+                                for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+                                    if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and v.Name == "Mob Leader" then
+                                        repeat wait()
+                                            EnableBuso()
+                                            EquipTool(ToolFarm)
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Head.CanCollide = false
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        until not v or not v.Parent or v.Humanoid.Health <= 0
+                                    end
+                                end
+                            else
+                            end
+                        elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 1 then
+                            if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Relic") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Relic") then
+                                if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - CFrame.new(-1404.07996, 29.8520069, 5.26677656, 0.888123989, -4.0340602e-09, 0.459603906, 7.5884703e-09, 1, -5.8864642e-09, -0.459603906, 8.71560069e-09, 0.888123989)).Magnitude > 8 then
+                                    Tween(CFrame.new(-1404.07996, 29.8520069, 5.26677656, 0.888123989, -4.0340602e-09, 0.459603906, 7.5884703e-09, 1, -5.8864642e-09, -0.459603906, 8.71560069e-09, 0.888123989))
+                                else
+                                    game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon")
+                                end
+                            else
+                                EquipTool("Relic")
+                                ToTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, CFrame.new(-1405.3677978516, 29.977333068848, 4.5685839653015).Position, CFrame.new(-1405.3677978516, 29.977333068848, 4.5685839653015))
+                            end
+                        end
+                    else
+                        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Torch") and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch") then
+                            Tween(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
+                        else
+                            EquipTool("Torch")
+                        end
+                        if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - game:GetService("Workspace").Map.Desert.Burn.Fire.Position).Magnitude < 3 then
+                            firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 0) 
+                            firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 1)
+                        else
+                            Tween(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
+                        end
+                    end
+                end
+            else
+                if game.Workspace.Enemies:FindFirstChild("Saber Expert") then
+                    for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.Name == "Saber Expert" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                            repeat wait()
+                                EnableBuso()
+                                EquipTool(ToolFarm)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            until not v or not v.Parent or v.Humanoid.Health <= 0
+                        end
+                    end
+                else
+                    Tween(CFrame.new(5278.04932, 2.15167475, 944.101929))
+                end
+            end
+        end
+    end
+end)
+
 -- // Settings Tab \\ -------------------------
 
 local Section = ST:AddSection({Name = "FastAtack & Bring Mob"})
@@ -1671,7 +1807,7 @@ spawn(function()
             pcall(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if _G.Settings.StartFarm and BringLevel and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (MobLevel.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 120 then
+                    if _G.Settings.StartFarm and BringLevel and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v.Name == Mob and (Mob == "Factory Staff" or Mob == "Monkey" or Mob == "Dragon Crew Warrior" or Mob == "Dragon Crew Archer") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (MobLevel.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                         v.HumanoidRootPart.CFrame = MobLevel
                         v.Humanoid:ChangeState(5)
                         v.HumanoidRootPart.CanCollide = false
@@ -1683,7 +1819,7 @@ spawn(function()
                             v.Humanoid.Animator:Destroy()
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    elseif _G.Settings.StartFarm and BringLevel and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (MobLevel.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 120 then
+                    elseif _G.Settings.StartFarm and BringLevel and v.Name == Mob and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (MobLevel.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                         v.HumanoidRootPart.CFrame = MobLevel
                         v.Humanoid:ChangeState(5)
                         v.HumanoidRootPart.CanCollide = false
@@ -1709,7 +1845,7 @@ spawn(function()
                 Checknhiemvu()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if BringMobCastleHauted and _G.Settings.StartFarm then
-                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 120 then
+                        if (v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.CFrame = CFrameHauntedMob
                             v.Humanoid:ChangeState(5)
                             v.HumanoidRootPart.CanCollide = false
@@ -1724,7 +1860,7 @@ spawn(function()
                         end
                     end
                     if _G.Settings.StartFarm and BringCakeIslandMob then
-                        if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 120 then
+                        if (v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.CFrame = PosMobCake
                             v.Humanoid:ChangeState(5)
                             v.HumanoidRootPart.CanCollide = false
