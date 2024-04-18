@@ -1072,6 +1072,68 @@ local Section = G:AddSection({
 	Name = "Settings"
 })
 
+ST:AddDropdown({
+	Name = "FastAttack Cooldown",
+	Default = _G.Settings.FastCoolDown,
+	Options = {"0", "0.0015", "0.00175", "0.01", "0.15", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
+	Callback = function(Value)
+		_G.Settings.FastCoolDown = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait(0.01) do
+        if _G.Settings.FastCoolDown then
+            if _G.Settings.FastCoolDown == "0" then
+                _G.Settings.FastCoolDown = 0
+            elseif _G.Settings.FastCoolDown == "0.0015" then
+                _G.Settings.FastCoolDown = 0.0015
+            elseif _G.Settings.FastCoolDown == "0.00175" then
+                _G.Settings.FastCoolDown = 0.00175
+            elseif _G.Settings.FastCoolDown == "0.01" then
+                _G.Settings.FastCoolDown = 0.01
+            elseif _G.Settings.FastCoolDown == "0.0175" then
+                _G.Settings.FastCoolDown = 0.0175
+            elseif _G.Settings.FastCoolDown == "0.05" then
+                _G.Settings.FastCoolDown = 0.05
+            elseif _G.Settings.FastCoolDown == "0.075" then
+                _G.Settings.FastCoolDown = 0.075
+            elseif _G.Settings.FastCoolDown == "0.1" then
+                _G.Settings.FastCoolDown = 0.1
+            elseif _G.Settings.FastCoolDown == "0.15" then
+                _G.Settings.FastCoolDown = 0.15
+            elseif _G.Settings.FastCoolDown == "0.15" then
+                _G.Settings.FastCoolDown = 0.15
+            elseif _G.Settings.FastCoolDown == "0.16" then
+                _G.Settings.FastCoolDown = 0.16
+            elseif _G.Settings.FastCoolDown == "0.165" then
+                _G.Settings.FastCoolDown = 0.165
+            elseif _G.Settings.FastCoolDown == "0.17" then
+                _G.Settings.FastCoolDown = 0.17
+            elseif _G.Settings.FastCoolDown == "0.175" then
+                _G.Settings.FastCoolDown = 0.175
+            elseif _G.Settings.FastCoolDown == "0.18" then
+                _G.Settings.FastCoolDown = 0.18
+            elseif _G.Settings.FastCoolDown == "0.185" then
+                _G.Settings.FastCoolDown = 0.185
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Settings.FastAttack then
+            pcall(function()
+                repeat task.wait(_G.Settings.FastCoolDown)
+                    AttackNoCD()
+                until not _G.Settings.FastAttack
+            end)
+        end
+    end
+end)
+
 G:AddSlider({
 	Name = "Bring Mob Range",
 	Min = 180,
@@ -1125,6 +1187,16 @@ G:AddToggle({
         SaveSettings()
 	end    
 })
+
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoTurnRaceV4 then
+            if Your.Character:FindFirstChild("RaceEnergy") and Your.Character.RaceEnergy.Value >= 1 and not Your.Character.RaceTransformed.Value then
+                SendKey("Y")
+            end
+        end
+    end
+end)
 
 G:AddToggle({
 	Name = "Bypass Teleport",
@@ -1219,8 +1291,10 @@ spawn(function()
                         end
                     else
                         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                            if string.find(v.Name, NameMob) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 10 and not game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
-                                Tween(v.CFrame * CFrame.new(2, 20, 2))
+                            if string.find(v.Name, NameMob) then 
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(NameMob) then
+                                    Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                end
                             end
                         end
                     end
@@ -1578,68 +1652,6 @@ spawn(function()
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
     end)
-end)
-
-ST:AddDropdown({
-	Name = "FastAttack Cooldown",
-	Default = _G.Settings.FastCoolDown,
-	Options = {"0", "0.0015", "0.00175", "0.01", "0.15", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
-	Callback = function(Value)
-		_G.Settings.FastCoolDown = Value
-        SaveSettings()
-	end    
-})
-
-spawn(function()
-    while wait(0.01) do
-        if _G.Settings.FastCoolDown then
-            if _G.Settings.FastCoolDown == "0" then
-                _G.Settings.FastCoolDown = 0
-            elseif _G.Settings.FastCoolDown == "0.0015" then
-                _G.Settings.FastCoolDown = 0.0015
-            elseif _G.Settings.FastCoolDown == "0.00175" then
-                _G.Settings.FastCoolDown = 0.00175
-            elseif _G.Settings.FastCoolDown == "0.01" then
-                _G.Settings.FastCoolDown = 0.01
-            elseif _G.Settings.FastCoolDown == "0.0175" then
-                _G.Settings.FastCoolDown = 0.0175
-            elseif _G.Settings.FastCoolDown == "0.05" then
-                _G.Settings.FastCoolDown = 0.05
-            elseif _G.Settings.FastCoolDown == "0.075" then
-                _G.Settings.FastCoolDown = 0.075
-            elseif _G.Settings.FastCoolDown == "0.1" then
-                _G.Settings.FastCoolDown = 0.1
-            elseif _G.Settings.FastCoolDown == "0.15" then
-                _G.Settings.FastCoolDown = 0.15
-            elseif _G.Settings.FastCoolDown == "0.15" then
-                _G.Settings.FastCoolDown = 0.15
-            elseif _G.Settings.FastCoolDown == "0.16" then
-                _G.Settings.FastCoolDown = 0.16
-            elseif _G.Settings.FastCoolDown == "0.165" then
-                _G.Settings.FastCoolDown = 0.165
-            elseif _G.Settings.FastCoolDown == "0.17" then
-                _G.Settings.FastCoolDown = 0.17
-            elseif _G.Settings.FastCoolDown == "0.175" then
-                _G.Settings.FastCoolDown = 0.175
-            elseif _G.Settings.FastCoolDown == "0.18" then
-                _G.Settings.FastCoolDown = 0.18
-            elseif _G.Settings.FastCoolDown == "0.185" then
-                _G.Settings.FastCoolDown = 0.185
-            end
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if _G.Settings.FastAttack then
-            pcall(function()
-                repeat task.wait(_G.Settings.FastCoolDown)
-                    AttackNoCD()
-                until not _G.Settings.FastAttack
-            end)
-        end
-    end
 end)
 
 ST:AddToggle({
