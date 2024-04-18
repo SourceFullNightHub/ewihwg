@@ -933,7 +933,7 @@ UIStroke.Parent = ImageButton
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+            if _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -950,7 +950,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+            if _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
                 for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -1630,7 +1630,7 @@ end)
 
 local Section = IQ:AddSection({Name = "Sea 1 All Item"})
 
-ST:AddToggle({
+IQ:AddToggle({
 	Name = "Auto Saber",
 	Default = _G.Settings.TakenSaber,
 	Save = true,
