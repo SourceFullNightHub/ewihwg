@@ -1673,8 +1673,7 @@ spawn(function()
                             print("con cac gi vay ha")
                             if not Your.Backpack:FindFirstChild("Cup") and not Your.Character:FindFirstChild("Cup") then
                                 if (game:GetService("Workspace").Map.Desert.Cup.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 3 then
-                                    firetouchinterest(game:GetService("Workspace").Map.Desert.Cup,Your.Character.HumanoidRootPart, 0)
-                                    firetouchinterest(game:GetService("Workspace").Map.Desert.Cup, Your.Character.HumanoidRootPart, 1)
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
                                 else
                                     TweenOld(game:GetService("Workspace").Map.Desert.Cup.CFrame)
                                 end
