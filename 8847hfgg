@@ -883,8 +883,6 @@ function AttackNoCD()
                             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                             game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
-                            game:GetService'VirtualUser':CaptureController()
-                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                         end
                     end)
                 end
@@ -948,10 +946,10 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sou
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
 local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", PremiumOnly = false})
-local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17176292358", PremiumOnly = false})
-local I = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17176293352", PremiumOnly = false})
-local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17176289388", PremiumOnly = false})
-local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17176299916", PremiumOnly = false})
+local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184402270", PremiumOnly = false})
+local I = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
+local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
+local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
 --// About Tab \\ ----
 
@@ -1633,7 +1631,7 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait(.1) do
+    while wait() do
         if _G.Settings.FastAttack then
             pcall(function()
                 repeat task.wait(_G.Settings.FastCoolDown)
