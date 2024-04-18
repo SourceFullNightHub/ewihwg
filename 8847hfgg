@@ -1696,16 +1696,18 @@ spawn(function()
                             print("viet code moi tay vcl")
                             if game.ReplicatedStorage:FindFirstChild("Mob Leader") or game.Workspace.Enemies:FindFirstChild("Mob Leader") then
                                 for i, v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
-                                    if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and v.Name == "Mob Leader" then
-                                        repeat wait()
-                                            EnableBuso()
-                                            EquipTool(ToolFarm)
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.Head.CanCollide = false
-                                            TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        until not v or not v.Parent or v.Humanoid.Health <= 0
+                                    if v.Name == "Mob Leader" then
+                                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                            repeat wait()
+                                                EnableBuso()
+                                                EquipTool(ToolFarm)
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Head.CanCollide = false
+                                                TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            until not v or not v.Parent or v.Humanoid.Health <= 0
+                                        end
                                     end
                                 end
                             else
