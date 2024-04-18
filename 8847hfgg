@@ -1746,10 +1746,13 @@ spawn(function()
                                 v.Head.CanCollide = false
                                 TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until not v or not v.Parent or v.Humanoid.Health <= 0
+                            if v.Humanoid.Health <= 0 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
+                            end
                         end
                     end
                 else
-                    TweenOld(CFrame.new(5278.04932, 2.15167475, 944.101929))
+                    TweenOld(CFrame.new(-1424.92334, 30.19524, -4.31849194))
                 end
             end
         end
