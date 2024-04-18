@@ -1690,6 +1690,8 @@ spawn(function()
                                     end
                                 end
                             end
+                        elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == nil then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
                         elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 0 then
                             print("viet code moi tay vcl")
                             if game.ReplicatedStorage:FindFirstChild("Mob Leader") or game.Workspace.Enemies:FindFirstChild("Mob Leader") then
