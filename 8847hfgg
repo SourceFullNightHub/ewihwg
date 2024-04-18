@@ -946,7 +946,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Sou
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
 local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", PremiumOnly = false})
-local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184402270", PremiumOnly = false})
+local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184558565", PremiumOnly = false})
 local I = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
