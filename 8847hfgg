@@ -1645,7 +1645,7 @@ end)
 
 local Section = IQ:AddSection({Name = "Sea 1 All Item"})
 
-IQ:AddToggle({
+local ToggleSaber = IQ:AddToggle({
 	Name = "Auto Saber",
 	Default = _G.Settings.TakenSaber,
 	Save = true,
@@ -1747,6 +1747,7 @@ spawn(function()
                                 TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             until not v or not v.Parent or v.Humanoid.Health <= 0
                             if v.Humanoid.Health <= 0 then
+                                ToggleSaber:Set(false)
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
                             end
                         end
