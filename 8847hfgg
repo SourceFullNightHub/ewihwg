@@ -1900,7 +1900,7 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                        until v.Humanoid.Health <= 0 or not _G.Autoditthansam or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                        until v.Humanoid.Health <= 0 or not _G.Settings.TakenPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                     end
                 end
             else
