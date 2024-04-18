@@ -1726,13 +1726,7 @@ spawn(function()
                             TweenOld(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
                         else
                             EquipTool("Torch")
-                            if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - game:GetService("Workspace").Map.Desert.Burn.Fire.Position).Magnitude < 3 then
-                                wait(0.5)
-                                firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 0) 
-                                firetouchinterest(game.Players.LocalPlayer.Character.Torch.Handle, game:GetService("Workspace").Map.Desert.Burn.Fire, 1)
-                            else
-                                TweenOld(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
-                            end
+                            TweenOld(CFrame.new(1114.61475, 5.04679728, 4350.22803, -0.648466587, -1.28799094e-09, 0.761243105, -5.70652914e-10, 1, 1.20584542e-09, -0.761243105, 3.47544882e-10, -0.648466587))
                         end
                     end
                 end
