@@ -2211,7 +2211,7 @@ spawn(function()
                         if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
                             TPB(CFrame.new(-44842.3945, 10.7790766, 16911.3477))
                         end
-                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or game:GetService("Workspace").SeaBeasts:FindFirstChild("SeaBeast1") or CheckBoatToFarm() or getgenv().StartSeaEvent == false
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or Your.Character.Humanoid.Sit == false or getgenv().StartSeaEvent == false
                 end
             end
         end
