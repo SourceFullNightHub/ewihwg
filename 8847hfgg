@@ -1094,7 +1094,7 @@ UICorner.Parent = ImageButton
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+            if _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -1111,7 +1111,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true then
+            if _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
