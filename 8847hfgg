@@ -2495,6 +2495,147 @@ RC:AddButton({
   	end    
 })
 
+-- // Status Servers \\ --------
+
+local Section = IQ:AddSection({
+	Name = "STATUS SERVERS"
+})
+
+local LevelPlayers = STT:AddLabel("Your Level : Infinity")
+
+function CheckMoonTextureId()
+    if taodangosea1 then
+        return game:GetService("Lighting").FantasySky.MoonTextureId
+    elseif taodangosea2 then
+        return game:GetService("Lighting").FantasySky.MoonTextureId
+    elseif taodangosea3 then
+        return game:GetService("Lighting").Sky.MoonTextureId
+    end
+end
+
+function CheckMoon()
+    FM = "http://www.roblox.com/asset/?id=9709149431"
+    NearFM = "http://www.roblox.com/asset/?id=9709149052"
+    Bad1 = "http://www.roblox.com/asset/?id=9709143733"
+    Bad2 = "http://www.roblox.com/asset/?id=9709150401"
+    NotMoon = "http://www.roblox.com/asset/?id=9709149680"
+    MoonTextureId = CheckMoonTextureId()
+    if MoonTextureId == FM then
+        return "Full Moon"
+    elseif MoonTextureId == NearFM then
+        return "Next Night"
+    elseif MoonTextureId == Bad1 or MoonTextureId == Bad2 then
+        return "Bad Moon"
+    elseif MoonTextureId == NotMoon then
+        return "Deo co"
+    end
+end
+
+local Moon = STT:AddLabel("Moon : Deo co")
+
+local Elite = STT:AddLabel("Elite : Not Spawned")
+
+local Mirage = STT:AddLabel("Mirage Island : Not Spawned")
+
+local Kitsune = STT:AddLabel("Kitsune Island : Not Spawned")
+
+local FruitSpawn = STT:AddLabel("Fruit Not Spawned : Not Spawned")
+
+spawn(function()
+    while wait() do
+        LevelPlayers:Set("Your Level : ".. game.Players.LocalPlayer.Data.Level.Value.. " ")
+    end
+end)
+
+spawn(function()
+    while wait() do
+        Moon:Set("Moon : ".. CheckMoon() .. " ")
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+            Mirage:Set("Mirage Island : Spawned")
+        else
+            Mirage:Set("Mirage Island : Not Spawned")
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
+            Kitsune:Set("Kitsune Island : Spawned")
+        else
+            Kitsune:Set("Kitsune Island : Not Spawned")
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            Elite:Set("Elite : Spawned")
+        else
+            Elite:Set("Elite : Not Spawned")
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        for i,v in pairs(game.Workspace:GetChildren()) do
+            if string.find(v.Name, "Fruit") then
+                FruitSpawn:Set("Fruit Spawned : Spawned")
+            else
+                FruitSpawn:Set("Fruit Not Spawned : Not Spawned")
+            end
+        end
+    end
+end)
+
+local Section = IQ:AddSection({
+	Name = "SERVERS"
+})
+
+STT:AddTextbox({
+	Name = "Put Job Id Here",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		getgenv().Jobid = Value
+	end	  
+})
+
+STT:AddButton({
+	Name = "Join Job Id",
+	Callback = function()
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId,getgenv().Jobid, game.Players.LocalPlayer)
+  	end    
+})
+
+STT:AddButton({
+	Name = "Copy Job Id",
+	Callback = function()
+        setclipboard(game.JobId)
+  	end    
+})
+
+STT:AddButton({
+	Name = "Rejoin",
+	Callback = function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+  	end    
+})
+
+STT:AddButton({
+	Name = "Hop Servers",
+	Callback = function()
+        Hop()
+  	end    
+})
+
 -- // Shop Tab \\ -----------------------------
 
 local Section = SH:AddSection({
