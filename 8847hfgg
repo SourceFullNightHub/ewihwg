@@ -978,12 +978,10 @@ function SendKey(Key)
     wait(0.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
 end
-function CheckYourBoat(Boat)
-    for i, v in pairs(game.Workspace.Boats:GetChildren()) do
-        if v.Name == Boat then
-            if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
-                return true
-            end
+function CheckYourBoat(cainao)
+    for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
+        if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+            return true
         end
     end
 end
