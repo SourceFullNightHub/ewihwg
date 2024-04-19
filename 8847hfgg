@@ -22,7 +22,16 @@ _G.Settings = {
     TakenSaber = false,
     AutoCastleRaid = false,
     AutoFactory = false,
+    SpeedValue = 250,
+    EnableSpeedBoat = false,
+    RemoveDeath = false,
+    RemoveDamage = false,
+    RemoveNotify = false,
     FastAttack = true,
+    StartSeaEvent = false,
+    AutoShark = false,
+    PiranhabulonFishCrew = false,
+    AutoTerrorshark = false,
     BringMob = true,
     WhiteScreen = false,
     AutoRejoin = false
@@ -902,6 +911,34 @@ end
 function ToTarget(ab, ab, b1)
     TweenOld(b1)
 end
+function TweenBoats(CFZ)
+    local info = TweenInfo.new((game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat.CFrame.Position - CFZ.Position).Magnitude/300, Enum.EasingStyle.Linear)
+    tween = game:GetService("TweenService"):Create(game:GetService("Workspace").Boats.PirateGrandBrigade.VehicleSeat, info, {CFrame = CFZ})
+    tween:Play()
+    
+    local tweenfunc = {}
+    
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+    
+    return tweenfunc
+end
+    
+function TeleToShip(CFS)
+    if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then tween:Cancel() repeat wait() until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 wait(7) return end
+    local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - CFS.Position).Magnitude/_G.Settings.TweenSpeed, Enum.EasingStyle.Linear)
+    tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = CFS})
+	tween:Play()
+    
+    local tweenfunc = {}
+    
+    function tweenfunc:Stop()
+        tween:Cancel()
+    end
+    
+    return tweenfunc
+end
 function EnableBuso()
     if not Your.Character:FindFirstChild("HasBuso") then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
@@ -945,6 +982,15 @@ function SendKey(Key)
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Key,false,game)
     wait(0.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
+end
+function CheckYourBoat(Boat)
+    for i, v in pairs(game.Workspace.Boats:GetChildren()) do
+        if v.Name == Boat then
+            if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                return true
+            end
+        end
+    end
 end
 local CbFw = getupvalues(require(Your.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
@@ -1086,6 +1132,7 @@ local STS = Window:MakeTab({Name = "Stats", Icon = "rbxassetid://17184559957", P
 local SE = Window:MakeTab({Name = "Sea Event", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413595", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
+local SH = Window:MakeTab({Name = "Shop", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
 --// About Tab \\ ----
@@ -1953,17 +2000,6 @@ spawn(function()
     end
 end)
 
-spawn(function()
-    while wait() do
-        if _G.Settings.TakenPoleHop and _G.Settings.TakenPole then
-            if not game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
-                wait(.3)
-                Hop()
-            end
-        end
-    end
-end)
-
 -- // Stats Tab \\----------------------------
 
 STS:AddSlider({
@@ -1982,7 +2018,7 @@ STS:AddSlider({
 
 STS:AddToggle({
 	Name = "Melee",
-	Default = false,
+	Default = _G.Settings.Melee,
 	Save = true,
 	Flag = "Melee",
 	Callback = function(Value)
@@ -1993,7 +2029,7 @@ STS:AddToggle({
 
 STS:AddToggle({
 	Name = "Defense",
-	Default = false,
+	Default = _G.Settings.Defense,
 	Save = true,
 	Flag = "Defense",
 	Callback = function(Value)
@@ -2004,7 +2040,7 @@ STS:AddToggle({
 
 STS:AddToggle({
 	Name = "Sword",
-	Default = false,
+	Default = _G.Settings.Sword,
 	Save = true,
 	Flag = "Sword",
 	Callback = function(Value)
@@ -2015,7 +2051,7 @@ STS:AddToggle({
 
 STS:AddToggle({
 	Name = "Gun",
-	Default = false,
+	Default = _G.Settings.Gun,
 	Save = true,
 	Flag = "Gun",
 	Callback = function(Value)
@@ -2026,7 +2062,7 @@ STS:AddToggle({
 
 STS:AddToggle({
 	Name = "Blox Fruit",
-	Default = false,
+	Default = _G.Settings.DF,
 	Save = true,
 	Flag = "Save",
 	Callback = function(Value)
@@ -2082,6 +2118,141 @@ end)
 
 SE:AddParagraph("Sea Event","Sea Event has many functions such as Auto Shark, Auto Terrorshark, Auto Piranha, Auto Fish Crew Member and some others such as Auto Find Kitsune Island and Auto Collect Azure")
 
+SE:AddSlider({
+	Name = "Speed Boat Value",
+	Min = 250,
+	Max = 350,
+	Default = _G.Settings.SpeedValue,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Value",
+	Callback = function(Value)
+		_G.Settings.SpeedValue = Value
+	end    
+})
+
+SE:AddToggle({
+	Name = "Enable Speed Boats",
+	Default = _G.Settings.EnableSpeedBoat,
+	Save = true,
+	Flag = "Enable Speed Boats",
+	Callback = function(Value)
+		_G.Settings.EnableSpeedBoat = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.EnableSpeedBoat then
+            for i, v in pairs(game.Workspace.Boats:GetChildren()) do
+                if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                    v:FindFirstChild("VehicleSeat").MaxSpeed = _G.Settings.SpeedValue
+                end
+            end
+        end
+    end
+end)
+
+SE:AddToggle({
+	Name = "Start Sea Event",
+	Default = _G.Settings.StartSeaEvent,
+	Save = true,
+	Flag = "Start Sea Event",
+	Callback = function(Value)
+		_G.Settings.StartSeaEvent = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.StartSeaEvent then
+            if not CheckYourBoat("PirateGrandBrigade") then
+                if not CheckEnemies("Shark") and not CheckEnemies("Terrorshark") and not CheckEnemies("Piranha") and not CheckEnemies("Fish Crew Member") then
+                    BuyBoats = TeleToShip(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+                    if (CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                        if BuyBoats then 
+                            BuyBoats:Stop() 
+                        end
+                        local args = {
+                            [1] = "BuyBoat",
+                            [2] = "PirateGrandBrigade"
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    end
+                end
+            elseif CheckYourBoat("PirateGrandBrigade") then
+                if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                    if not CheckEnemies("Shark") and not CheckEnemies("Terrorshark") and not CheckEnemies("Piranha") and not CheckEnemies("Fish Crew Member") then
+                        for i, v in pairs(game.Workspace.Boats:GetChildren()) do
+                            if v:FindFirstChild("Owner") then
+                                if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
+                                    table.foreach(v:GetDescendants(), function(a, child)
+                                        if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
+                                            child.CanCollide = false
+                                        end
+                                    end)
+                                    TeleToShip(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 1, 0))
+                                end
+                            end
+                        end
+                    end
+                else
+                    repeat wait()
+                        if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
+                            TweenBoats(CFrame.new(-44842.3945, 10.7790766, 16911.3477))
+                        end
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Shark") or game:GetService("Workspace").Enemies:FindFirstChild("Terrorshark") or game:GetService("Workspace").Enemies:FindFirstChild("Piranha") or game:GetService("Workspace").Enemies:FindFirstChild("Fish Crew Member") or _G.Settings.StartSeaEvent == false
+                    Your.Character.Humanoid.Sit = false
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Settings.StartSeaEvent then
+            if CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") then
+                Your.Character.Humanoid.Sit = false
+            end
+        end
+    end
+end)
+
+SE:AddToggle({
+	Name = "Auto Shark",
+	Default = _G.Settings.AutoShark,
+	Save = true,
+	Flag = "Save",
+	Callback = function(Value)
+		_G.Settings.AutoShark = Value
+        SaveSettings()
+	end    
+})
+
+SE:AddToggle({
+	Name = "Auto Piranha + Fish Crew Member",
+	Default = _G.Settings.PiranhabulonFishCrew,
+	Save = true,
+	Flag = "Save",
+	Callback = function(Value)
+		_G.Settings.PiranhabulonFishCrew = Value
+        SaveSettings()
+	end    
+})
+
+SE:AddToggle({
+	Name = "Auto Terrorshark",
+	Default = _G.Settings.AutoTerrorshark,
+	Save = true,
+	Flag = "Save",
+	Callback = function(Value)
+		_G.Settings.AutoTerrorshark = Value
+        SaveSettings()
+	end    
+})
 
 -- // Race V4 \\ -----------------------------
 
@@ -2231,6 +2402,297 @@ RC:AddButton({
             end
         end
   	end    
+})
+
+-- // Shop Tab \\ -----------------------------
+
+local Section = SH:AddSection({
+	Name = "Melee Style"
+})
+
+SH:AddDropdown({
+	Name = "Select Melee",
+	Default = "",
+	Options = {"Black Leg", "Electro", "Fishman Karate", "Dragon Claw", "Superhuman", "Death Step", "Sharkman Karate", "Electric Claw", "Dragon Talon", "Godhuman", "Sanguine Art"},
+	Callback = function(Value)
+		Muamelee = Value
+        if Muamelee == "Black Leg" then
+            _G.UsingTool = "Black Leg",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+        elseif Muamelee == "Electro" then
+            _G.UsingTool = "Electro",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+        elseif Muamelee == "Fishman Karate" then
+            _G.UsingTool = "Fishman Karate",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+        elseif Muamelee == "Dragon Claw" then
+            _G.UsingTool = "Dragon Claw",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
+        elseif Muamelee == "Superhuman" then
+            _G.UsingTool = "Superhuman",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+        elseif Muamelee == "Death Step" then
+            _G.UsingTool = "Death Step",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
+        elseif Muamelee == "Sharkman Karate" then
+            _G.UsingTool = "SharkMan Karate",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+        elseif Muamelee == "Electric Claw" then
+            _G.UsingTool = "Electric Claw",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+        elseif Muamelee == "Dragon Talon" then
+            _G.UsingTool = "Dragon Talon",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
+        elseif Muamelee == "Godhuman" then
+            _G.UsingTool = "Godhuman",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+        elseif Muamelee == "Sanguine Art" then
+            _G.UsingTool = "SanguineArt",
+            wait(0.5)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt")
+        end 
+    end    
+})
+
+local Section = SH:AddSection({
+    Name = "Haki :"
+})
+
+SH:AddButton({
+    Name = "Buy Buso Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Buso")
+    end    
+})
+
+SH:AddButton({
+    Name = "Buy Geppo Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Geppo")
+    end    
+})
+
+SH:AddButton({
+    Name = "Buy Flash Step(Soru)",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyHaki","Soru")
+    end    
+})
+
+SH:AddButton({
+    Name = "Buy Observation(Ken) Haki",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("KenTalk","Buy")
+    end    
+})
+
+local Section = SH:AddSection({
+    Name = "Race :"
+})
+
+SH:AddButton({
+    Name = "Buy Ghoul Race",
+    Callback = function()
+        local a = {
+            [1] = "Ectoplasm",
+            [2] = "BuyCheck",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+        local a = {
+            [1] = "Ectoplasm",
+            [2] = "Change",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+    end    
+})
+
+SH:AddButton({
+    Name = "Buy Cyborg Race",
+    Callback = function()
+        local a = {
+            [1] = "CyborgTrainer",
+            [2] = "Buy"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+    end    
+})
+
+local Section = SH:AddSection({
+    Name = "Other"
+})
+
+SH:AddButton({
+    Name = "Cutlass Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
+    end    
+})
+
+SH:AddButton({
+    Name = "Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
+    end    
+})
+
+SH:AddButton({
+    Name = "Iron Mace",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
+    end    
+})
+
+SH:AddButton({
+    Name = "Dual Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
+    end    
+})
+
+SH:AddButton({
+    Name = "Triple Katana",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
+    end    
+})
+
+SH:AddButton({
+    Name = "Pipe",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
+    end    
+})
+
+SH:AddButton({
+    Name = "Dual-Headed Blade ",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
+    end    
+})
+
+SH:AddButton({
+    Name = "Bisento",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
+    end    
+})
+
+SH:AddButton({
+    Name = "Soul Cane",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
+    end    
+})
+
+SH:AddButton({
+    Name = "Pole v.2(Need Pole V1)",
+    Callback = function()
+        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ThunderGodTalk")
+    end    
+})
+
+local Section = SH:AddSection({
+    Name = "Gun"
+})
+
+SH:AddButton({
+    Name = "Slingshot",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
+    end    
+})
+
+SH:AddButton({
+    Name = "Musket",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
+    end    
+})
+
+SH:AddButton({
+    Name = "Flintlock",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
+    end    
+})
+
+SH:AddButton({
+    Name = "Refined Slingshot",
+    Callback = function()
+          game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
+    end    
+})
+
+SH:AddButton({
+    Name = "Refined Flintlock",
+    Callback = function()
+        local args = {
+            [1] = "BuyItem",
+            [2] = "Refined Flintlock"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end    
+})
+
+SH:AddButton({
+    Name = "Cannon",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
+    end    
+})
+
+SH:AddButton({
+    Name = "Kabucha",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
+    end    
+})
+
+SH:AddButton({
+    Name = "Bizarre Rifle",
+    Callback = function()
+        local A_1 = "Ectoplasm"
+        local A_2 = "Buy"
+        local A_3 = 1
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2, A_3) 
+        local A_1 = "Ectoplasm"
+        local A_2 = "Buy"
+        local A_3 = 1
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2, A_3)
+    end    
+})
+
+SH:AddButton({
+    Name = "Refund Stats",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+    end    
+})
+
+SH:AddButton({
+    Name = "Race Random",
+    Callback = function()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
+    end    
 })
 
 -- // Settings Tab \\ -------------------------
@@ -2428,7 +2890,7 @@ local Section = ST:AddSection({Name = "Game booters"})
 
 ST:AddToggle({
 	Name = "Remove Notification",
-	Default = _G.Settings.AutoRejoin,
+	Default = _G.Settings.RemoveNotify,
 	Save = true,
 	Flag = "Remove Notification",
 	Callback = function(Value)
@@ -2446,22 +2908,54 @@ spawn(function()
         end
     end
 end)
+
+ST:AddToggle({
+	Name = "Remove Damage Counter",
+	Default = _G.Settings.RemoveDamage,
+	Save = true,
+	Flag = "Remove Damage Counter",
+	Callback = function(Value)
+        _G.Settings.RemoveDamage = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.RemoveDamage == true then
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        elseif _G.Settings.RemoveDamage == false then
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+        end
+    end
+end)
+
+ST:AddToggle({
+	Name = "Remove Effect Death[Lag]",
+	Default = _G.Settings.RemoveDeath,
+	Save = true,
+	Flag = "Remove Effect Death",
+	Callback = function(Value)
+        _G.Settings.RemoveDeath = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.RemoveDeath then
+            if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+                game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+            end
+            if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+                game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+            end
+        end
+    end
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
-end
-getgenv().NoDieEffect = true
-if getgenv().NoDieEffect then
-    pcall(function()
-        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-            game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        end
-        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        end
-    end)
 end
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
