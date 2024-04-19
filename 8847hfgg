@@ -1129,10 +1129,10 @@ local AB = Window:MakeTab({Name = "About", Icon = "rbxassetid://15541504459", Pr
 local G = Window:MakeTab({Name = "Main", Icon = "rbxassetid://17184558565", PremiumOnly = false})
 local IQ = Window:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349", PremiumOnly = false})
 local STS = Window:MakeTab({Name = "Stats", Icon = "rbxassetid://17184559957", PremiumOnly = false})
-local SE = Window:MakeTab({Name = "Sea Event", Icon = "rbxassetid://17184407740", PremiumOnly = false})
+local SE = Window:MakeTab({Name = "Sea Event", Icon = "rbxassetid://17184412007", PremiumOnly = false})
 local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413595", PremiumOnly = false})
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
-local SH = Window:MakeTab({Name = "Shop", Icon = "rbxassetid://17184407740", PremiumOnly = false})
+local SH = Window:MakeTab({Name = "Shop", Icon = "rbxassetid://17195489739", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
 
 --// About Tab \\ ----
