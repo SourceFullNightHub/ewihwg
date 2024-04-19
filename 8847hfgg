@@ -2247,7 +2247,7 @@ spawn(function()
                     if v.Name == "Shark" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                         repeat task.wait()
                             EnableBuso()
-                            EquipTool(_G.UsingTool)
+                            EquipTool(ToolFarm)
                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                             v.HumanoidRootPart.Transparency = 1
                             v.Humanoid.JumpPower = 0
@@ -2285,7 +2285,7 @@ spawn(function()
                         if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat task.wait()
                                 EnableBuso()
-                                EquipTool(_G.UsingTool)
+                                EquipTool(ToolFarm)
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.Transparency = 1
                                 v.Humanoid.JumpPower = 0
@@ -2323,7 +2323,7 @@ spawn(function()
                     if v.Name == "Terrorshark" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                         repeat task.wait()
                             EnableBuso()
-                            EquipTool(_G.UsingTool)
+                            EquipTool(ToolFarm)
                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                             v.HumanoidRootPart.Transparency = 1
                             v.Humanoid.JumpPower = 0
@@ -2549,49 +2549,49 @@ SH:AddDropdown({
 	Callback = function(Value)
 		Muamelee = Value
         if Muamelee == "Black Leg" then
-            _G.UsingTool = "Black Leg",
+            ToolFarm = "Black Leg",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
         elseif Muamelee == "Electro" then
-            _G.UsingTool = "Electro",
+            ToolFarm = "Electro",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
         elseif Muamelee == "Fishman Karate" then
-            _G.UsingTool = "Fishman Karate",
+            ToolFarm = "Fishman Karate",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
         elseif Muamelee == "Dragon Claw" then
-            _G.UsingTool = "Dragon Claw",
+            ToolFarm = "Dragon Claw",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","1")
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","DragonClaw","2")
         elseif Muamelee == "Superhuman" then
-            _G.UsingTool = "Superhuman",
+            ToolFarm = "Superhuman",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
         elseif Muamelee == "Death Step" then
-            _G.UsingTool = "Death Step",
+            ToolFarm = "Death Step",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
         elseif Muamelee == "Sharkman Karate" then
-            _G.UsingTool = "SharkMan Karate",
+            ToolFarm = "SharkMan Karate",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate",true)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
         elseif Muamelee == "Electric Claw" then
-            _G.UsingTool = "Electric Claw",
+            ToolFarm = "Electric Claw",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
         elseif Muamelee == "Dragon Talon" then
-            _G.UsingTool = "Dragon Talon",
+            ToolFarm = "Dragon Talon",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
         elseif Muamelee == "Godhuman" then
-            _G.UsingTool = "Godhuman",
+            ToolFarm = "Godhuman",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
         elseif Muamelee == "Sanguine Art" then
-            _G.UsingTool = "SanguineArt",
+            ToolFarm = "SanguineArt",
             wait(0.5)
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySanguineArt")
         end 
