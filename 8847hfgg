@@ -2574,7 +2574,7 @@ local Section = STT:AddSection({
 
 local ToggleHopMoon = STT:AddToggle({
 	Name = "Hop Until Full Moon / Near Full Moon",
-	Default = false,
+	Default = _G.Settings.HopUntilMoon,
 	Save = true,
 	Flag = "Hop Until Full Moon / Near Full Moon",
 	Callback = function(Value)
@@ -2591,35 +2591,20 @@ function CheckMoonTextureId()
         return game:GetService("Lighting").Sky.MoonTextureId
     end
 end
-function CheckMoonBad()
-    Bad1 = "http://www.roblox.com/asset/?id=9709143733"
-    Bad2 = "http://www.roblox.com/asset/?id=9709150401"
-    NotMoon = "http://www.roblox.com/asset/?id=9709149680"
-    MoonTextureId = CheckMoonTextureId()
-    if MoonTextureId == Bad1 or MoonTextureId == Bad2 then
-        return
-    elseif MoonTextureId == NotMoon then
-        return
-    end
-end
-function CheckFM()
-    FM = "http://www.roblox.com/asset/?id=9709149431"
-    NearFM = "http://www.roblox.com/asset/?id=9709149052"
-    MoonTextureId = CheckMoonTextureId()
-    if MoonTextureId == FM then
-        return
-    elseif MoonTextureId == NearFM then
-        return
-    end
-end
 spawn(function()
     while wait() do
         pcall(function()
             if _G.Settings.HopUntilMoon then
-                if CheckMoonBad() then
+                Bad1 = "http://www.roblox.com/asset/?id=9709143733"
+                Bad2 = "http://www.roblox.com/asset/?id=9709150401"
+                NotMoon = "http://www.roblox.com/asset/?id=9709149680"
+                FM = "http://www.roblox.com/asset/?id=9709149431"
+                NearFM = "http://www.roblox.com/asset/?id=9709149052"
+                MoonTextureId = CheckMoonTextureId()
+                if MoonTextureId == Bad1 or MoonTextureId == Bad2 or MoonTextureId == NotMoon then
                     wait(_G.Settings.TimeToHop)
                     Hop()
-                elseif CheckFM() then
+                elseif MoonTextureId == FM or MoonTextureId == NearFM then
                     ToggleHopMoon:Set(false)
                 end
             end
@@ -2629,7 +2614,7 @@ end)
 
 local ToggleHopmirage = STT:AddToggle({
 	Name = "Hop Until Mirage",
-	Default = false,
+	Default = _G.Settings.HopUntilMirage,
 	Save = true,
 	Flag = "Hop Until Mirage",
 	Callback = function(Value)
