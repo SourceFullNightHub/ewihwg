@@ -1506,10 +1506,10 @@ spawn(function()
         if _G.Settings.StartFarm then
             pcall(function()
                 if _G.Settings.SelectModeFarm == "Level" and _G.Settings.StartFarm then
-                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 149 then
-                        if CheckEnemies("Shanda") or CheckEnemies("Royal Squad") or CheckEnemies("Royal Soldier")then
+                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 99 then
+                        if CheckEnemies("Shanda") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "Shanda" or v.Name == "Royal Soldier" or  v.Name == "Royal Squad" then
+                                if v.Name == "Shanda" then
                                     if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                         repeat wait()
                                             EquipTool(ToolFarm)
@@ -1526,9 +1526,14 @@ spawn(function()
                                 end
                             end
                         else
-                            Tween(CFrame.new(-7746.09863, 5627.63965, -1231.61877))
+                            Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                                if v.Name == "Shanda" then
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                end
+                            end
                         end
-                    elseif Your.Data.Level.Value >= 150 then
+                    elseif Your.Data.Level.Value >= 100 then
                         Checknhiemvu()
                         if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -3504,7 +3509,7 @@ spawn(function()
                         end
                     end
                     if BringSky and _G.Settings.StartFarm then
-                        if (v.Name == "Shanda" or v.Name == "Royal Soldier" or  v.Name == "Royal Squad") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
+                        if (v.Name == "Shanda")  and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.CFrame = MobSky
                             v.Humanoid:ChangeState(5)
                             v.HumanoidRootPart.CanCollide = false
