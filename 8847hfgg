@@ -991,9 +991,13 @@ function Bypass(Ps)
     if Your.Character:FindFirstChild("PartTele") then
         repeat task.wait()
             task.wait(0.5)
-            Your.Character.PartTele.CFrame = Ps
+            if Your.Character:FindFirstChild("PartTele") then
+                Your.Character.PartTele.CFrame = Ps
+            end
             task.wait(0.1)
-            Your.Character.PrimaryPart.CFrame = Ps
+            if Your.Character:FindFirstChild("PrimaryPart") then
+                Your.Character.PrimaryPart.CFrame = Ps
+            end
             task.wait(0.5)
             Your.Character:WaitForChild("Humanoid"):ChangeState(15)
         until Your.Character:FindFirstChild("Humanoid") and Your.Character.Humanoid.Health > 0
