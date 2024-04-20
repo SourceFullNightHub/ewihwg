@@ -988,14 +988,16 @@ function CheckInventory(Item)
     end
 end
 function Bypass(Ps)
-    repeat wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
-        game.Players.LocalPlayer.Character.Head:Destroy()
-        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-        wait(2)
-        game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Ps
-        wait(3)
-    until (Ps.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+    if Your.Character:FindFirstChild("PartTele") then
+        repeat task.wait()
+            task.wait(0.5)
+            Your.Character.PartTele.CFrame = Ps
+            task.wait(0.1)
+            Your.Character.PrimaryPart.CFrame = Ps
+            task.wait(0.5)
+            Your.Character:WaitForChild("Humanoid"):ChangeState(15)
+        until Your.Character:FindFirstChild("Humanoid") and Your.Character.Humanoid.Health > 0
+    end
 end
 function Click()
     game:GetService'VirtualUser':CaptureController()
