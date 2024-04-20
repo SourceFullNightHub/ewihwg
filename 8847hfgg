@@ -12,6 +12,7 @@ _G.Settings = {
     TimeToHop = 5,
     TweenSpeed = 200,
     AutoTurnRaceV3 = false,
+    Sea2
     Melee = false,
     Sword = false,
     Defense = false,
@@ -2139,50 +2140,48 @@ local TakenPole = IQ:AddToggle({
 	Save = true,
 	Flag = "Auto Sea 2",
 	Callback = function(Value)
-        _G.Settings.Sea2 = Value
+        _G.Settings.AutoSecondSea = Value
         SaveSettings()
 	end    
 })
 
 spawn(function()
     while wait() do
-        if _G.Settings.Sea2 and Your.Data.Level.Value >= 700 then
-            if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
-                Tween(CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563))
-                if (CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+        pcall(function()
+            if _G.Settings.AutoSecondSea and Your.Data.Level.Value >= 700 and Sea1 then
+                if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
+                    Tween(CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563))
+                    if (CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                    end
+                    wait(0.5)
+                    EquipTool("Key")
+                    wait(0.5)
+                    Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
                 end
-                wait(0.5)
-                EquipTool("Key")
-                wait(0.5)
-                Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
-            end
-        elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
-            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if v.Name == "Ice Admiral" then
-                    if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.Settings.Sea2 then
-                        repeat task.wait()
-                            EquipTool(ToolFarm)
-                            EnableBuso()                                            
-                            v.HumanoidRootPart.CanCollide = false
-                            v.Humanoid.WalkSpeed = 0
-                            v.Head.CanCollide = false
-                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                        until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.Sea2
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+            elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Ice Admiral" then
+                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.Settings.AutoSecondSea then
+                            repeat task.wait()
+                                EquipTool(ToolFarm)
+                                EnableBuso()                                            
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.AutoSecondSea
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                        end
                     end
                 end
             end
-        end
+        end)
     end
 end)
 
 local Section = IQ:AddSection({Name = "Sea 2 All Quest and Item"})
-
-local Section = IQ:AddSection({
-	Name = "AUTO QUEST"
-})
 
 IQ:AddToggle({
 	Name = "Auto Bartilo Quest",
