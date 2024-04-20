@@ -1513,6 +1513,7 @@ spawn(function()
                                 end
                             end
                         else
+                            Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
                             if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
                                 Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                             end
