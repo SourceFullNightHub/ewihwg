@@ -1506,30 +1506,34 @@ spawn(function()
         if _G.Settings.StartFarm then
             pcall(function()
                 if _G.Settings.SelectModeFarm == "Level" and _G.Settings.StartFarm then
-                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 49 then
-                        if game:GetService("Workspace").Enemies:FindFirstChild("Shanda") then
+                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 149 then
+                        if CheckEnemies("Shanda") or CheckEnemies("Royal Squad") or CheckEnemies("Royal Soldier")then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == "Shanda" and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        EquipTool(ToolFarm)
-                                        EnableBuso()                                            
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        BringSky = true
-                                        MobSky = v.HumanoidRootPart.CFrame
-                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                if v.Name == "Shanda" or v.Name == "Royal Soldier" or  v.Name == "Royal Squad" then
+                                    if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            EquipTool(ToolFarm)
+                                            EnableBuso()                                            
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            BringSky = true
+                                            MobSky = v.HumanoidRootPart.CFrame
+                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    end
                                 end
                             end
                         else
                             Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
-                            if game:GetService("ReplicatedStorage"):FindFirstChild("Shanda") then
-                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Shanda").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                                if v.Name == "Shanda" or v.Name == "Royal Soldier" or  v.Name == "Royal Squad" then
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 50 then
+                    elseif Your.Data.Level.Value >= 150 then
                         Checknhiemvu()
                         if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
