@@ -2310,22 +2310,22 @@ end)
 
 local ToggleAutoGhoul = IQ:AddToggle({
 	Name = "Auto Ghoul Race",
-	Default = _G.Settings.Settings.AutoGhoulRace,
+	Default = _G.Settings.AutoGhoulRace,
 	Save = true,
 	Flag = "Auto Ghoul Race",
 	Callback = function(Value)
-        _G.Settings.Settings.AutoGhoulRace = Value
+        _G.Settings.AutoGhoulRace = Value
         SaveSettings()
 	end    
 })
 
 local ToggleAutoGhoul = IQ:AddToggle({
 	Name = "Auto Ghoul Race(Hop)",
-	Default = _G.Settings.Settings.AutoGhoulRaceHop,
+	Default = _G.Settings.AutoGhoulRaceHop,
 	Save = true,
 	Flag = "Auto Ghoul Race Hop",
 	Callback = function(Value)
-        _G.Settings.Settings.AutoGhoulRaceHop = Value
+        _G.Settings.AutoGhoulRaceHop = Value
         SaveSettings()
 	end    
 })
