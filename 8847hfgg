@@ -1527,11 +1527,6 @@ spawn(function()
                             end
                         else
                             Tween(CFrame.new(-7746.09863, 5627.63965, -1231.61877))
-                            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-                                if v.Name == "Shanda" or v.Name == "Royal Soldier" or  v.Name == "Royal Squad" then
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                end
-                            end
                         end
                     elseif Your.Data.Level.Value >= 150 then
                         Checknhiemvu()
