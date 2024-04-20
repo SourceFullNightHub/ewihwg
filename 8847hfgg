@@ -989,12 +989,15 @@ function CheckInventory(Item)
 end
 function Bypass(Ps)
     if Your.Character:FindFirstChild("PartTele") then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
+        game.Players.LocalPlayer.Character.Head:Destroy()
+        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+        wait(2)
+        game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Ps
         repeat task.wait()
             task.wait(0.5)
             if Your.Character:FindFirstChild("PartTele") then
                 Your.Character.PartTele.CFrame = Ps
-            else
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
             end
             task.wait(0.1)
             if Your.Character:FindFirstChild("PrimaryPart") then
@@ -1002,6 +1005,7 @@ function Bypass(Ps)
             end
             task.wait(0.5)
             Your.Character:WaitForChild("Humanoid"):ChangeState(15)
+            wait(3)
         until Your.Character:FindFirstChild("Humanoid") and Your.Character.Humanoid.Health > 0
     end
 end
