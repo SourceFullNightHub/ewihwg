@@ -1693,21 +1693,23 @@ G:AddToggle({
 spawn(function()
     while wait() do
         if _G.Settings.KillMobAura then
-            for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 1000 and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                    repeat wait()
-                        EnableBuso()
-                        EquipTool(ToolFarm)
-                        v.Humanoid.WalkSpeed = 0
-                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                        v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
-                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                        MobAura = true
-                        PosAura = v.HumanoidRootPart.CFrame
-                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.KillMobAura == false
+            pcall(function()
+                for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 1000 and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                        repeat wait()
+                            EnableBuso()
+                            EquipTool(ToolFarm)
+                            v.Humanoid.WalkSpeed = 0
+                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            MobAura = true
+                            PosAura = v.HumanoidRootPart.CFrame
+                        until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.KillMobAura == false
+                    end
                 end
-            end
+            end)
         end
     end
 end)
@@ -2067,20 +2069,404 @@ spawn(function()
                     end
                 end
             else
-                if game.ReplicatedStorage:FindFirstChild("Thunder God") then
-                    if _G.Settings.BypassTele then
-                        if (PosWaitThunder.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
-                        elseif (PosWaitThunder.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-                            Tween(PosWaitThunder)
-                        end
-                    else
-                        Tween(PosWaitThunder)
-                    end
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                 else
                     if _G.Settings.TakenPoleHop then
                         Hop()
                     end
+                end
+            end
+        end
+    end
+end)
+
+local TakenPole = IQ:AddToggle({
+	Name = "Auto Glass Cyborg",
+	Default = _G.Settings.TakenGlassCyborg,
+	Save = true,
+	Flag = "Auto Glass Cyborg",
+	Callback = function(Value)
+        _G.Settings.TakenGlassCyborg = Value
+        SaveSettings()
+	end    
+})
+
+local TakenPole = IQ:AddToggle({
+	Name = "Auto Glass Cyborg(Hop)",
+	Default = _G.Settings.TakenGlassCyborgHop,
+	Save = true,
+	Flag = "Auto Glass Cyborg Hop",
+	Callback = function(Value)
+        _G.Settings.TakenGlassCyborgHop = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.TakenGlassCyborg and Sea1 then
+            if game:GetService("Workspace").Enemies:FindFirstChild("Cyborg") then
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Cyborg" and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent then
+                        repeat wait()
+                            EnableBuso()
+                            EquipTool(ToolFarm)
+                            v.Humanoid.WalkSpeed = 0
+                            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Head.CanCollide = false
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        until v.Humanoid.Health <= 0 or not _G.Settings.TakenPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                    end
+                end
+            else
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                else
+                    if _G.Settings.TakenGlassCyborgHop then
+                        Hop()
+                    end
+                end
+            end
+        end
+    end
+end)
+
+local TakenPole = IQ:AddToggle({
+	Name = "Auto Sea 2",
+	Default = _G.Settings.Sea2,
+	Save = true,
+	Flag = "Auto Sea 2",
+	Callback = function(Value)
+        _G.Settings.Sea2 = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.Sea2 and Your.Data.Level.Value >= 700 then
+            if game.Workspace.Map.Ice.Door.CanCollide == true and game.Workspace.Map.Ice.Door.Transparency == 0 then
+                Tween(CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563))
+                if (CFrame.new(4851.8720703125, 5.6514348983765, 718.47094726563).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                end
+                wait(0.5)
+                EquipTool("Key")
+                wait(0.5)
+                Tween(CFrame.new(1347.7124, 37.3751602, -1325.6488))
+            end
+        elseif game.Workspace.Map.Ice.Door.CanCollide == false and game.Workspace.Map.Ice.Door.Transparency == 1 then
+            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if v.Name == "Ice Admiral" then
+                    if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and _G.Settings.Sea2 then
+                        repeat task.wait()
+                            EquipTool(ToolFarm)
+                            EnableBuso()                                            
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Humanoid.WalkSpeed = 0
+                            v.Head.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.Sea2
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                    end
+                end
+            end
+        end
+    end
+end)
+
+local Section = IQ:AddSection({Name = "Sea 2 All Quest and Item"})
+
+local Section = IQ:AddSection({
+	Name = "AUTO QUEST"
+})
+
+IQ:AddToggle({
+	Name = "Auto Bartilo Quest",
+	Default = _G.Settings.AutoBartilo,
+	Save = true,
+	Flag = "Auto Bartilo Quest",
+	Callback = function(Value)
+        _G.Settings.AutoBartilo = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoBartilo then
+            if game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 0 then
+                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Swan Pirates") and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then 
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Swan Pirate") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Swan Pirate" then
+                                repeat task.wait()
+                                    EquipTool(ToolFarm)
+                                    EnableBuso()
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))													
+                                    PosMobBartilo =  v.HumanoidRootPart.CFrame
+                                    BringBartilo = true
+                                    sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                                until not v.Parent or v.Humanoid.Health <= 0 or _G.Settings.AutoBartilo == false or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                BringBartilo = false
+                            end
+                        end
+                    else
+                        repeat 
+                            Tween(CFrame.new(932.624451, 156.106079, 1180.27466)) 
+                            wait() 
+                        until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(932.624451, 156.106079, 1180.27466)).Magnitude <= 10
+                    end
+                else
+                    repeat 
+                        Tween(CFrame.new(-456.28952, 73.0200958, 299.895966)) 
+                        wait() 
+                    until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-456.28952, 73.0200958, 299.895966)).Magnitude <= 10
+                    wait(1.1)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest","BartiloQuest",1)
+                end 
+            elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 1 then
+                if game:GetService("Workspace").Enemies:FindFirstChild("Jeremy") then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == "Jeremy" then
+                            repeat task.wait()
+                                EquipTool(ToolFarm)
+                                EnableBuso()
+                                v.HumanoidRootPart.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                PosJeremy = v.HumanoidRootPart.CFrame
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))			
+                                sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                            until not v.Parent or v.Humanoid.Health <= 0 or _G.Settings.AutoBartilo == false
+                        end
+                    end
+                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Jeremy") then
+                    repeat 
+                        Tween(CFrame.new(-456.28952, 73.0200958, 299.895966)) 
+                        wait() 
+                    until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-456.28952, 73.0200958, 299.895966)).Magnitude <= 10
+                    wait(1.1)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo")
+                    wait(1)
+                    repeat 
+                        Tween(CFrame.new(2099.88159, 448.931, 648.997375)) 
+                        wait() 
+                    until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(2099.88159, 448.931, 648.997375)).Magnitude <= 10
+                    wait(2)
+                else
+                    repeat 
+                        Tween(CFrame.new(2099.88159, 448.931, 648.997375)) 
+                        wait() 
+                    until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(2099.88159, 448.931, 648.997375)).Magnitude <= 10
+                end
+            elseif game:GetService("Players").LocalPlayer.Data.Level.Value >= 800 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BartiloQuestProgress","Bartilo") == 2 then
+                repeat 
+                    Tween(CFrame.new(-1850.49329, 13.1789551, 1750.89685)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1850.49329, 13.1789551, 1750.89685)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1858.87305, 19.3777466, 1712.01807)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1858.87305, 19.3777466, 1712.01807)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1803.94324, 16.5789185, 1750.89685)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1803.94324, 16.5789185, 1750.89685)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1858.55835, 16.8604317, 1724.79541)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1858.55835, 16.8604317, 1724.79541)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1869.54224, 15.987854, 1681.00659)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1869.54224, 15.987854, 1681.00659)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1800.0979, 16.4978027, 1684.52368)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1800.0979, 16.4978027, 1684.52368)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1819.26343, 14.795166, 1717.90625)) 
+                    wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1819.26343, 14.795166, 1717.90625)).Magnitude <= 10
+                wait(1)
+                repeat 
+                    Tween(CFrame.new(-1813.51843, 14.8604736, 1724.79541)) 
+                wait() 
+                until not _G.Settings.AutoBartilo or (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-1813.51843, 14.8604736, 1724.79541)).Magnitude <= 10
+            end
+        end 
+    end
+end)
+
+local ToggleAutoGhoul = IQ:AddToggle({
+	Name = "Auto Ghoul Race",
+	Default = _G.Settings.Settings.AutoGhoulRace,
+	Save = true,
+	Flag = "Auto Ghoul Race",
+	Callback = function(Value)
+        _G.Settings.Settings.AutoGhoulRace = Value
+        SaveSettings()
+	end    
+})
+
+local ToggleAutoGhoul = IQ:AddToggle({
+	Name = "Auto Ghoul Race(Hop)",
+	Default = _G.Settings.Settings.AutoGhoulRaceHop,
+	Save = true,
+	Flag = "Auto Ghoul Race Hop",
+	Callback = function(Value)
+        _G.Settings.Settings.AutoGhoulRaceHop = Value
+        SaveSettings()
+	end    
+})
+
+local PosCursedBoss = CFrame.new(913.893311, 187.405502, 33598.7578)
+local PosGhoulRace = CFrame.new(923.748596, 125.529785, 33454.4883)
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoGhoulRace and Sea2 then
+            if game.Players.LocalPlayer.Data.Race.Value ~= "Ghoul" then
+                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if BypassTP then
+                        if (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 2000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
+                            Tween(PosGhoulRace)
+                            wait(0.5)
+                            local args = {[1] = "Ectoplasm", [2] = "BuyCheck", [3] = 4}
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            local args = {[1] = "Ectoplasm", [2] = "Change", [3] = 4}
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        end
+                    else
+                        Tween(PosGhoulRace)
+                        wait(0.5)
+                        local args = {[1] = "Ectoplasm", [2] = "BuyCheck", [3] = 4}
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                        local args = {[1] = "Ectoplasm", [2] = "Change", [3] = 4}
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    end
+                elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cursed Captain") then
+                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Cursed Captain" then
+                                if v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and v.Parent and _G.Settings.AutoGhoulRace then
+                                    repeat wait()
+                                        EnableBuso()
+                                        EquipTool(ToolFarm)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.Settings.AutoGhoulRace == false
+                                end
+                            end
+                        end
+                    else
+                        Tween(PosCursedBoss)
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain") then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        else
+                            if _G.Settings.AutoGhoulRaceHop then
+                                Hop()
+                            end
+                        end
+                    end
+                end
+            else
+                if game.Players.LocalPlayer.Data.Race.Value == "Ghoul" then
+                    ToggleAutoGhoul:Set(false)
+                end
+            end
+        end
+    end
+end)
+
+IQ:AddToggle({
+	Name = "Auto Swan",
+	Default = _G.Settings.AutoSwan,
+	Save = true,
+	Flag = "Auto Swan",
+	Callback = function(Value)
+        _G.Settings.AutoSwan = Value
+        SaveSettings()
+	end    
+})
+
+local PosSwanRoom = CFrame.new(2284.91211, 15.1520348, 905.48291)
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoSwan and Sea2 then
+            if game:GetService("Workspace").Enemies:FindFirstChild("Don Swan") then
+                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                        if v.Name == "Don Swan" then
+                            repeat wait()
+                                EnableBuso()
+                                EquipTool(ToolFarm)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                v.Humanoid.WalkSpeed = 0
+                                v.HumanoidRootPart.CanCollide = false
+                            until v.Humanoid.Health <= 0 or not _G.Settings.AutoSwan or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
+                            _G.AutoClick = false
+                        end
+                    end
+                end
+            else
+                Tween(PosSwanRoom)
+            end
+        end
+    end
+end)
+
+IQ:AddToggle({
+	Name = "Auto Darkbeard",
+	Default = _G.Settings.AutoCacden,
+	Save = true,
+	Flag = "Auto Darkbeard",
+	Callback = function(Value)
+        _G.Settings.AutoCacden = Value
+        SaveSettings()
+	end    
+})
+
+local PosChimden = CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531)
+spawn(function()
+    while wait() do
+        if _G.Settings.AutoCacden and taodangosea2 then
+            if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard")  then
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if v.Name == "Darkbeard" then
+                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                            repeat task.wait()
+                                EnableBuso()
+                                EquipTool(ToolFarm)
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            until _G.Settings.AutoCacden == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                        end
+                    end
+                end
+            else
+                Tween(PosChimden)
+                if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                 end
             end
         end
