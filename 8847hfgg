@@ -993,6 +993,8 @@ function Bypass(Ps)
             task.wait(0.5)
             if Your.Character:FindFirstChild("PartTele") then
                 Your.Character.PartTele.CFrame = Ps
+            else
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
             end
             task.wait(0.1)
             if Your.Character:FindFirstChild("PrimaryPart") then
