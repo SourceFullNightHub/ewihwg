@@ -988,26 +988,24 @@ function CheckInventory(Item)
     end
 end
 function Bypass(Ps)
-    if Your.Character:FindFirstChild("PartTele") then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
-        game.Players.LocalPlayer.Character.Head:Destroy()
-        game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-        wait(2)
-        game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Ps
-        repeat task.wait()
-            task.wait(0.5)
-            if Your.Character:FindFirstChild("PartTele") then
-                Your.Character.PartTele.CFrame = Ps
-            end
-            task.wait(0.1)
-            if Your.Character:FindFirstChild("PrimaryPart") then
-                Your.Character.PrimaryPart.CFrame = Ps
-            end
-            task.wait(0.5)
-            Your.Character:WaitForChild("Humanoid"):ChangeState(15)
-            wait(3)
-        until Your.Character:FindFirstChild("Humanoid") and Your.Character.Humanoid.Health > 0
-    end
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
+    game.Players.LocalPlayer.Character.Head:Destroy()
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+    wait(2)
+    game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Ps
+    repeat task.wait()
+        task.wait(0.5)
+        if Your.Character:FindFirstChild("PartTele") then
+            Your.Character.PartTele.CFrame = Ps
+        end
+        task.wait(0.1)
+        if Your.Character:FindFirstChild("PrimaryPart") then
+            Your.Character.PrimaryPart.CFrame = Ps
+        end
+        task.wait(0.5)
+        Your.Character:WaitForChild("Humanoid"):ChangeState(15)
+        wait(3)
+    until Your.Character:FindFirstChild("Humanoid") and Your.Character.Humanoid.Health > 0
 end
 function Click()
     game:GetService'VirtualUser':CaptureController()
@@ -1139,7 +1137,7 @@ UICorner.Parent = ImageButton
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
+            if _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -1156,7 +1154,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
+            if _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -2354,18 +2352,18 @@ spawn(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
                         elseif (PosGhoulRace.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
                             Tween(PosGhoulRace)
-                            wait(0.5)
-                            local args = {[1] = "Ectoplasm", [2] = "BuyCheck", [3] = 4}
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                            local args = {[1] = "Ectoplasm", [2] = "Change", [3] = 4}
+                            local args = {
+                                [1] = "Ectoplasm",
+                                [2] = "Change"
+                            }
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                         end
                     else
                         Tween(PosGhoulRace)
-                        wait(0.5)
-                        local args = {[1] = "Ectoplasm", [2] = "BuyCheck", [3] = 4}
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                        local args = {[1] = "Ectoplasm", [2] = "Change", [3] = 4}
+                        local args = {
+                            [1] = "Ectoplasm",
+                            [2] = "Change"
+                        }
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                     end
                 elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hellfire Torch") then
@@ -2457,7 +2455,7 @@ IQ:AddToggle({
 local PosChimden = CFrame.new(3677.08203125, 62.751937866211, -3144.8332519531)
 spawn(function()
     while wait() do
-        if _G.Settings.AutoCacden and taodangosea2 then
+        if _G.Settings.AutoCacden and Sea2 then
             if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard")  then
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == "Darkbeard" then
