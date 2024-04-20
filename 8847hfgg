@@ -7,6 +7,9 @@ _G.Settings = {
     FastCoolDown = "0.175",
     BringMobRange = 250,
     SaberHop = false,
+    HopUntilMoon = false,
+    HopUntilMirage = false,
+    TimeToHop = 5,
     TweenSpeed = 200,
     AutoTurnRaceV3 = false,
     Melee = false,
@@ -883,7 +886,7 @@ function Tween(Pos)
             tween:Cancel()
 			RETeleport(NearestEntraceFunction)
 		end
-        if Distance <= 350 then
+        if Distance <= 250 then
             tween:Cancel()
             game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
         end
@@ -915,7 +918,7 @@ function Teleport(CFR)
             tween:Cancel()
 			RETeleport(NearestEntraceFunction)
 		end
-        if Distance <= 350 then
+        if Distance <= 250 then
             tween:Cancel()
             game.Players.LocalPlayer.Character.PartTele.CFrame = CFR
         end
@@ -1009,7 +1012,12 @@ function SendKey(Key)
     wait(0.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
 end
-function CheckYourBoat(cainao)
+function CheckMirage()
+    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        return
+    end
+end
+function CheckYourBoat()
     for i, v in pairs(game:GetService("Workspace").Boats:GetChildren()) do
         if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer then
             return true
@@ -2560,7 +2568,90 @@ RC:AddButton({
 
 -- // Status Servers \\ --------
 
-local Section = IQ:AddSection({
+local Section = STT:AddSection({
+	Name = "Hop Until"
+})
+
+local ToggleHopMoon = STT:AddToggle({
+	Name = "Hop Until Full Moon / Near Full Moon",
+	Default = false,
+	Save = true,
+	Flag = "Hop Until Full Moon / Near Full Moon",
+	Callback = function(Value)
+		_G.Settings.HopUntilMoon = Value
+        SaveSettings()
+	end    
+})
+function CheckMoonTextureId()
+    if Sea1 then
+        return game:GetService("Lighting").FantasySky.MoonTextureId
+    elseif Sea2 then
+        return game:GetService("Lighting").FantasySky.MoonTextureId
+    elseif Sea3 then
+        return game:GetService("Lighting").Sky.MoonTextureId
+    end
+end
+function CheckMoonBad()
+    Bad1 = "http://www.roblox.com/asset/?id=9709143733"
+    Bad2 = "http://www.roblox.com/asset/?id=9709150401"
+    NotMoon = "http://www.roblox.com/asset/?id=9709149680"
+    MoonTextureId = CheckMoonTextureId()
+    if MoonTextureId == Bad1 or MoonTextureId == Bad2 then
+        return
+    elseif MoonTextureId == NotMoon then
+        return
+    end
+end
+function CheckFM()
+    FM = "http://www.roblox.com/asset/?id=9709149431"
+    NearFM = "http://www.roblox.com/asset/?id=9709149052"
+    MoonTextureId = CheckMoonTextureId()
+    if MoonTextureId == FM then
+        return
+    elseif MoonTextureId == NearFM then
+        return
+    end
+end
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.Settings.HopUntilMoon then
+                if CheckMoonBad() then
+                    wait(_G.Settings.TimeToHop)
+                    Hop()
+                elseif CheckFM() then
+                    ToggleHopMoon:Set(false)
+                end
+            end
+        end)
+    end
+end)
+
+local ToggleHopmirage = STT:AddToggle({
+	Name = "Hop Until Mirage",
+	Default = false,
+	Save = true,
+	Flag = "Hop Until Mirage",
+	Callback = function(Value)
+		_G.Settings.HopUntilMirage = Value
+        SaveSettings()
+	end    
+})
+
+spawn(function()
+    while wait() do
+        if _G.Settings.HopUntilMirage then
+            if not CheckMirage() then
+                wait(_G.Settings.TimeToHop)
+                Hop()
+            elseif CheckMirage() then
+                ToggleHopmirage:Set(false)
+            end
+        end
+    end
+end)
+
+local Section = STT:AddSection({
 	Name = "SERVERS"
 })
 
@@ -3082,6 +3173,20 @@ spawn(function()
         end
     end
 end)
+
+ST:AddSlider({
+	Name = "Time Hop Servers",
+	Min = 1,
+	Max = 10,
+	Default = _G.Settings.TimeToHop,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Time",
+	Callback = function(Value)
+		_G.Settings.TimeToHop = Value
+        SaveSettings()
+	end    
+})
 
 local Section = ST:AddSection({Name = "Game booters"})
 
