@@ -16,21 +16,21 @@ getgenv().Setting = {
     ["Item"] = {
         ["Melee"] = {["Enable"] = true,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1},
-            ["C"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+            ["X"] = {["Enable"] = false, ["Hold Time"] = 0.1},
+            ["C"] = {["Enable"] = false, ["Hold Time"] = 0.1}
         },
-        ["Blox Fruit"] = {["Enable"] = false,
+        ["Blox Fruit"] = {["Enable"] = true,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 1.5},
             ["X"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["C"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["V"] = {["Enable"] = true, ["Hold Time"] = 0},
-            ["F"] = {["Enable"] = true, ["Hold Time"] = 0}
+            ["C"] = {["Enable"] = false, ["Hold Time"] = 0},
+            ["V"] = {["Enable"] = false, ["Hold Time"] = 0},
+            ["F"] = {["Enable"] = false, ["Hold Time"] = 0}
         },
         ["Sword"] = {["Enable"] = true,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
-            ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1}
+            ["X"] = {["Enable"] = false, ["Hold Time"] = 0.1}
         },
-        ["Gun"] = {["Enable"] = true,
+        ["Gun"] = {["Enable"] = false,
             ["Z"] = {["Enable"] = true, ["Hold Time"] = 0.1},
             ["X"] = {["Enable"] = true, ["Hold Time"] = 0.1}
         } 
