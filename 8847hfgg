@@ -1540,10 +1540,10 @@ spawn(function()
                             local Cac = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
                             Cac = string.gsub(Cac, " %p(0/1)%p", "")
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible and not game:GetService("Workspace").Characters:FindFirstChild(Cac) then
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
                             end
                             if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
                             end
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
                                 for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
