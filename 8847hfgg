@@ -1555,9 +1555,11 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            SendKey("Z")
-                                            SendKey("X")
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 5, 2))
+                                            if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                                SendKey("Z")
+                                                SendKey("X")
+                                            end
                                         until v.Humanoid.Health <= 0 or not v.Parent or Your.Character.Humanoid.Health <= 0
                                     end
                                 end
