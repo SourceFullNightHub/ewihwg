@@ -1,3 +1,12 @@
+-- // Config
+
+getgenv().Config = {
+    ["Settings"] = {
+        ["Select Tool"] = "Melee",
+        ["Team"] = "Pirate"
+    },
+}
+
 -- // Settings :
 
 _G.Settings = {
@@ -344,3 +353,21 @@ spawn(function()
         end)
     end
 end)
+
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    if getgenv().Config["Settings"]["Team"] == "Pirates" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+        end
+    elseif getgenv().Config["Settings"]["Team"] == "Marines" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+        end
+    end
+end
