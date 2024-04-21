@@ -1569,6 +1569,7 @@ spawn(function()
                             end
                             if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                print(game.Players[Cac].Data.Level.Value)
                             end
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
                                 for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
