@@ -1018,6 +1018,19 @@ function CheckEnemies(MobName)
         return false
     end
 end
+function CountTarget(TargetCount, COUNT)
+    local count = 0
+    if type(TargetCount) == "string" then
+        count = select(2, TargetCount:gsub("%S+", ""))
+    elseif type(TargetCount) == "table" then
+        for _, value in ipairs(TargetCount) do
+            if type(value) == "string" then
+                count = count + select(2, value:gsub("%S+", ""))
+            end
+        end
+    end
+    return count == COUNT
+end
 function SendKey(Key)
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Key,false,game)
     wait(0.1)
@@ -1550,6 +1563,9 @@ spawn(function()
                             Cac = string.gsub(Cac, " %p(0/1)%p", "")
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible and not game:GetService("Workspace").Characters:FindFirstChild(Cac) then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            end
+                            if CountTarget(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible, 5) then
+                                Hop()
                             end
                             if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
