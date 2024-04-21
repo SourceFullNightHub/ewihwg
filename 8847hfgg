@@ -1128,10 +1128,10 @@ function CheckDoorGetCup()
     return workspace.Map.Desert.Burn.Part.CanCollide == false
 end
 NotifyList = {}
-function CheckNotify(text)
-    for i, v in pairs(game.Players.LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-        if v and v.Text and string.find(string.lower(v.Text), text) and not table.find(NotifyList, v) then
-            table.insert(NotifyList, v)
+function CheckNotify(msg)
+    for r, k in pairs(game.Players.LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+        if k and k.Text and string.find(string.lower(k.Text), msg) and not table.find(NotifyList, k) then
+            table.insert(NotifyList, k)
             return true
         end
     end
