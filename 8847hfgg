@@ -246,7 +246,7 @@ local MainSection = G:CreateSection({
     Side = "Left"
 })
 
-G:AddToggle{
+MainSection:AddToggle{
     Name = "Start Kaitun",
     Flag = "Start Kaitun",
     Value = _G.Settings.StartKaitun,
