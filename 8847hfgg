@@ -1127,14 +1127,15 @@ end
 function CheckDoorGetCup()
     return workspace.Map.Desert.Burn.Part.CanCollide == false
 end
+NotifyList = {}
 function CheckNotify(text)
-    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-        if v.Name == "NotificationTemplate" then
-            if string.find(v.Text, text) then
-                return
-            end
+    for i, v in pairs(game.Players.LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+        if v and v.Text and string.find(string.lower(v.Text), text) and not table.find(NotifyList, v) then
+            table.insert(NotifyList, v)
+            return true
         end
     end
+    return false
 end
 -- // Icon Show Ui \\ --
 local ScreenGui = Instance.new("ScreenGui")
