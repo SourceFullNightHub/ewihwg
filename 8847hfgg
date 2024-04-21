@@ -3761,4 +3761,23 @@ function BypassAntiCheats()
     end
 end
 BypassAntiCheats()
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    if getgenv().Team == "Pirates" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Pirates Teams")
+        end
+    elseif getgenv().Team == "Marines" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Marines Teams")
+        end
+    end
+end
 ---------------------------------------------------------------------------------------------------------------------------------------
