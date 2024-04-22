@@ -1636,12 +1636,18 @@ spawn(function()
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                 print(game.Players[Cac].Data.Level.Value)
                             end
-                            if CountQuestClaim >= 10 then
+                            if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.PvpDisabled.Visible == true then
+                                local args = {
+                                    [1] = "EnablePvp"
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                            end
+                            if CountQuestClaim >= 15 then
                                 OrionLib:MakeNotification({
                                     Name = "Night Hub",
                                     Content = "Hop Servers Because Not Players",
                                     Image = "rbxassetid://15541504459",
-                                    Time = 5
+                                    Time = 7
                                 })
                                 Hop()
                             end
@@ -1649,67 +1655,63 @@ spawn(function()
                                 for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
                                     if v:IsA("Model") and v.Name == Cac then
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
-                                            if game.Players.LocalPlayer.PlayerGui.Main.PvpDisabled.Visible then
-                                                repeat wait()
-                                                    EquipTool(ToolFarm)
-                                                    EnableBuso()                                            
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.Head.CanCollide = false
-                                                    v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
-                                                    if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                                                        SendKey("Z")
-                                                        SendKey("X")
-                                                    end
-                                                until v.Humanoid.Health <= 0 or not v.Parent or Your.Character.Humanoid.Health <= 0
-                                            else
-                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
-                                            end
+                                            repeat wait()
+                                                EquipTool(ToolFarm)
+                                                EnableBuso()                                            
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.Head.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                                    SendKey("Z")
+                                                    SendKey("X")
+                                                end
+                                            until v.Humanoid.Health <= 0 or not v.Parent or Your.Character.Humanoid.Health <= 0
                                         end
                                     end
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 300 or CheckNotify("QUEST COMPLETED") then
-                        Checknhiemvu()
-                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                            if _G.Settings.BypassTele then
-                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
-                                    Bypass(CFrameQuest)
-                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
-                                    Tween(CFrameQuest)
-                                end
-                            else
+                    end
+                elseif Your.Data.Level.Value >= 300 or CheckNotify("QUEST COMPLETED") then
+                    Checknhiemvu()
+                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                        if _G.Settings.BypassTele then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                                Bypass(CFrameQuest)
+                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
                                 Tween(CFrameQuest)
                             end
-                            if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
-                            end
-                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
-                            if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                        repeat wait()
-                                            EquipTool(ToolFarm)
-                                            EnableBuso()                                            
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.Head.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                            BringLevel = true
-                                            MobLevel = v.HumanoidRootPart.CFrame
-                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    end
+                        else
+                            Tween(CFrameQuest)
+                        end
+                        if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
+                        end
+                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                        if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        EquipTool(ToolFarm)
+                                        EnableBuso()                                            
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        BringLevel = true
+                                        MobLevel = v.HumanoidRootPart.CFrame
+                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                 end
-                            else
-                                for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                                    if string.find(v.Name, Mob) then 
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                            Tween(v.CFrame * CFrame.new(2, 20, 2))
-                                        end
+                            end
+                        else
+                            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                if string.find(v.Name, Mob) then 
+                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                                        Tween(v.CFrame * CFrame.new(2, 20, 2))
                                     end
                                 end
                             end
