@@ -1649,19 +1649,23 @@ spawn(function()
                                 for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
                                     if v:IsA("Model") and v.Name == Cac then
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
-                                            repeat wait()
-                                                EquipTool(ToolFarm)
-                                                EnableBuso()                                            
-                                                v.HumanoidRootPart.CanCollide = false
-                                                v.Humanoid.WalkSpeed = 0
-                                                v.Head.CanCollide = false
-                                                v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
-                                                if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                                                    SendKey("Z")
-                                                    SendKey("X")
-                                                end
-                                            until v.Humanoid.Health <= 0 or not v.Parent or Your.Character.Humanoid.Health <= 0
+                                            if game.Players.LocalPlayer.PlayerGui.Main.PvpDisabled.Visible then
+                                                repeat wait()
+                                                    EquipTool(ToolFarm)
+                                                    EnableBuso()                                            
+                                                    v.HumanoidRootPart.CanCollide = false
+                                                    v.Humanoid.WalkSpeed = 0
+                                                    v.Head.CanCollide = false
+                                                    v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                    if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                                        SendKey("Z")
+                                                        SendKey("X")
+                                                    end
+                                                until v.Humanoid.Health <= 0 or not v.Parent or Your.Character.Humanoid.Health <= 0
+                                            else
+                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                                            end
                                         end
                                     end
                                 end
