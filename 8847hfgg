@@ -1552,7 +1552,50 @@ spawn(function()
         if _G.Settings.StartFarm then
             pcall(function()
                 if _G.Settings.SelectModeFarm == "Level" and _G.Settings.StartFarm then
-                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 49 then
+                    Checknhiemvu()
+                    if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 9 then
+                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            if _G.Settings.BypassTele then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                                    Bypass(CFrameQuest)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
+                                    Tween(CFrameQuest)
+                                end
+                            else
+                                Tween(CFrameQuest)
+                            end
+                            if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
+                            end
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                            if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            EquipTool(ToolFarm)
+                                            EnableBuso()                                            
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            BringLevel = true
+                                            MobLevel = v.HumanoidRootPart.CFrame
+                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    end
+                                end
+                            else
+                                for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                    if string.find(v.Name, Mob) then 
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    elseif Your.Data.Level.Value >= 10 and Your.Data.Level.Value <= 49 then
                         if CheckEnemies("Shanda") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Shanda" then
