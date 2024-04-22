@@ -724,65 +724,87 @@ function Checknhiemvu()
     end
 end
 function Hop()
-	local PlaceID = game.PlaceId
-	local AllIDs = {}
-	local foundAnything = ""
-	local actualHour = os.date("!*t").hour
-	local Deleted = false
-	function TPReturner()
-		local Site;
-		if foundAnything == "" then
-			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-		else
-			Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-		end
-		local ID = ""
-		if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-			foundAnything = Site.nextPageCursor
-		end
-		local num = 0;
-		for i,v in pairs(Site.data) do
-			local Possible = true
-			ID = tostring(v.id)
-			if tonumber(v.maxPlayers) > tonumber(v.playing) then
-				for _,Existing in pairs(AllIDs) do
-					if num ~= 0 then
-						if ID == tostring(Existing) then
-							Possible = false
-						end
-					else
-						if tonumber(actualHour) ~= tonumber(Existing) then
-							local delFile = pcall(function()
-								AllIDs = {}
-								table.insert(AllIDs, actualHour)
-							end)
-						end
-					end
-					num = num + 1
-				end
-				if Possible == true then
-					table.insert(AllIDs, ID)
-					wait()
-					pcall(function()
-						wait()
-						game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-					end)
-					wait(4)
-				end
-			end
-		end
-	end
-	function Teleport() 
-		while wait() do
-			pcall(function()
-				TPReturner()
-				if foundAnything ~= "" then
-					TPReturner()
-				end
-			end)
-		end
-	end
-	Teleport()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    function TPReturner()
+        local Site
+        if foundAnything == "" then
+            Site =
+                game.HttpService:JSONDecode(
+                game:HttpGet(
+                    "https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"
+                )
+            )
+        else
+            Site =
+                game.HttpService:JSONDecode(
+                game:HttpGet(
+                    "https://games.roblox.com/v1/games/" ..
+                        PlaceID .. "/servers/Public?sortOrder=Asc&limit=100&cursor=" .. foundAnything
+                )
+            )
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0
+        for i, v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _, Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile =
+                                pcall(
+                                function()
+                                    AllIDs = {}
+                                    table.insert(AllIDs, actualHour)
+                                end
+                            )
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(
+                        function()
+                            wait()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(
+                                PlaceID,
+                                ID,
+                                game.Players.LocalPlayer
+                            )
+                        end
+                    )
+                    wait(4)
+                end
+            end
+        end
+    end
+    function Teleport()
+        while wait() do
+            pcall(
+                function()
+                    TPReturner()
+                    if foundAnything ~= "" then
+                        TPReturner()
+                    end
+                end
+            )
+        end
+    end
+    Teleport()
 end
 function NearestEntrace(aI)
     vcspos = aI.Position
@@ -1522,6 +1544,7 @@ spawn(function()
     end
 end)
 
+CountQuestClaim = 0
 local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
 spawn(function()
@@ -1559,13 +1582,20 @@ spawn(function()
                     elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 then
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                             game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
+                            CountQuestClaim = CountQuestClaim + 1
                         elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                             local Cac = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
                             Cac = string.gsub(Cac, " %p(0/1)%p", "")
                             if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible and not game:GetService("Workspace").Characters:FindFirstChild(Cac) then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                             end
-                            if CountTarget(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible, 5) then
+                            if CountQuestClaim >= 10 then
+                                OrionLib:MakeNotification({
+                                    Name = "Night Hub",
+                                    Content = "Hop Servers Because Not Players",
+                                    Image = "rbxassetid://15541504459",
+                                    Time = 5
+                                })
                                 Hop()
                             end
                             if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
