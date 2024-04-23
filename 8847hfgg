@@ -41,8 +41,9 @@ _G.Settings = {
     AutoRejoin = false
 }
 
+join = game.Players.localPlayer.Neutral == false
 function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
+    if readfile and writefile and isfile and isfolder and join == true then
         if not isfolder("Night Hub") then
             makefolder("Night Hub")
         end
@@ -68,7 +69,7 @@ function LoadSettings()
     end
 end
 function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
+    if readfile and writefile and isfile and isfolder and join == true then
         if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
             LoadSettings()
         else
@@ -916,7 +917,7 @@ function WaitHRP(q0)
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end 
 function Tween(Pos)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
@@ -948,7 +949,7 @@ function Tween(Pos)
     end
 end
 function Teleport(CFR)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
         Distance = (CFR.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
@@ -983,7 +984,7 @@ function Teleport(CFR)
     end
 end
 function TweenOld(CFm)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
         Distance = (CFm.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
