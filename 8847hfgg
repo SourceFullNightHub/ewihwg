@@ -1070,17 +1070,17 @@ Type = 1
 spawn(function()
     while wait(.1) do
         if Type == 1 then
-            PosFarm = CFrame.new(0, 20 ,0)
+            PosFarm = CFrame.new(0, 20 ,30)
 		elseif Type == 2 then
-			PosFarm = CFrame.new(0, 16 ,-30)
+			PosFarm = CFrame.new(0, 12 ,-30)
 		elseif Type == 3 then
-			PosFarm = CFrame.new(30, 18 ,0)
+			PosFarm = CFrame.new(30, 16 ,0)
 		elseif Type == 4 then
-			PosFarm = CFrame.new(0, 18 ,30)	
+			PosFarm = CFrame.new(0, 12 ,30)	
 		elseif Type == 5 then
 			PosFarm = CFrame.new(-30, 16 ,0)
 		elseif Type == 6 then
-			PosFarm = CFrame.new(0, 20 ,0)
+			PosFarm = CFrame.new(30, 20 ,0)
         end
     end
 end)
