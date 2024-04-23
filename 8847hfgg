@@ -1741,6 +1741,8 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                game:GetService "VirtualUser":CaptureController()
+                                                game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
                                                 if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                                                     SendKey("Z")
                                                     SendKey("X")
@@ -1859,6 +1861,8 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                game:GetService "VirtualUser":CaptureController()
+                                                game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
                                                 if (v.HumanoidRootPart.Position - Your.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                                                     SendKey("Z")
                                                     SendKey("X")
