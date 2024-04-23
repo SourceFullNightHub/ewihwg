@@ -1066,6 +1066,38 @@ function CountTarget(TargetCount, COUNT)
     end
     return count == COUNT
 end
+Type = 1
+spawn(function()
+    while wait(.1) do
+        if Type == 1 then
+            PosFarm = CFrame.new(0, 20 ,0)
+		elseif Type == 2 then
+			PosFarm = CFrame.new(0, 16 ,-30)
+		elseif Type == 3 then
+			PosFarm = CFrame.new(30, 18 ,0)
+		elseif Type == 4 then
+			PosFarm = CFrame.new(0, 18 ,30)	
+		elseif Type == 5 then
+			PosFarm = CFrame.new(-30, 16 ,0)
+		elseif Type == 6 then
+			PosFarm = CFrame.new(0, 20 ,0)
+        end
+    end
+end)
+spawn(function()
+    while wait(.1) do
+        Type = 1
+        wait(0.5)
+        Type = 2
+        wait(0.5)
+        Type = 3
+        wait(0.5)
+        Type = 4
+        wait(0.5)
+        Type = 5
+        wait(0.5)
+    end
+end)
 function SendKey(Key)
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Key,false,game)
     wait(0.1)
@@ -1557,6 +1589,7 @@ spawn(function()
     end
 end)
 
+checkcac = false
 CountQuestClaim = 0
 local CakeIsland = CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375)
 local PosBone = CFrame.new(-9515.75, 174.8521728515625, 6079.40625)
@@ -1565,6 +1598,7 @@ spawn(function()
         if _G.Settings.StartFarm then
             pcall(function()
                 if _G.Settings.SelectModeFarm == "Level" and _G.Settings.StartFarm then
+                    checkcac = true
                     Checknhiemvu()
                     if Your.Data.Level.Value >= 1 and Your.Data.Level.Value <= 9 then
                         if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
@@ -1592,7 +1626,7 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                             BringLevel = true
                                             MobLevel = v.HumanoidRootPart.CFrame
                                         until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1602,7 +1636,7 @@ spawn(function()
                                 for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
                                     if string.find(v.Name, Mob) then 
                                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.CFrame * PosFarm)
                                         end
                                     end
                                 end
@@ -1620,7 +1654,7 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                             BringSky = true
                                             MobSky = v.HumanoidRootPart.CFrame
                                         until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1631,7 +1665,7 @@ spawn(function()
                             Tween(CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922))
                             for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
                                 if v.Name == "God's Guard" then
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 end
                             end
                         end
@@ -1647,7 +1681,7 @@ spawn(function()
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                             BringSky = true
                                             MobSky = v.HumanoidRootPart.CFrame
                                         until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1658,7 +1692,7 @@ spawn(function()
                             Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
                             for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
                                 if v.Name == "Shanda" then
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 end
                             end
                         end
@@ -1721,7 +1755,7 @@ spawn(function()
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                         BringSky = true
                                         MobSky = v.HumanoidRootPart.CFrame
                                     until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1732,7 +1766,7 @@ spawn(function()
                         Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
                         for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
                             if v.Name == "Shanda" then
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             end
                         end
                     end
@@ -1763,7 +1797,7 @@ spawn(function()
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                         BringLevel = true
                                         MobLevel = v.HumanoidRootPart.CFrame
                                     until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
@@ -1773,7 +1807,7 @@ spawn(function()
                             for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
                                 if string.find(v.Name, Mob) then 
                                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                        Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.CFrame * PosFarm)
                                     end
                                 end
                             end
@@ -1792,7 +1826,7 @@ spawn(function()
                                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                             BringMobCastleHauted = true
                                             CFrameHauntedMob = v.HumanoidRootPart.CFrame
                                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
@@ -1823,7 +1857,7 @@ spawn(function()
                                         v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Head.CanCollide = false
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                     until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                 end
                             end
@@ -1848,7 +1882,7 @@ spawn(function()
                                                     v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
-                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                                     BringCakeIslandMob = true
                                                     PosMobCake = v.HumanoidRootPart.CFrame
                                                 until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
@@ -1931,7 +1965,7 @@ spawn(function()
                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             MobAura = true
                             PosAura = v.HumanoidRootPart.CFrame
                         until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.KillMobAura == false
@@ -1986,7 +2020,7 @@ spawn(function()
                                     v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Head.CanCollide = false
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.Settings.AutoElite == false
                             end
                         end
@@ -2033,7 +2067,7 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.AutoCastleRaid
                         end
                     end
@@ -2181,7 +2215,7 @@ spawn(function()
                                                     v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
-                                                    TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                                    TweenOld(v.HumanoidRootPart.CFrame * PosFarm)
                                                 until not v or not v.Parent or v.Humanoid.Health <= 0
                                             end
                                         end
@@ -2221,11 +2255,14 @@ spawn(function()
                                 v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                 v.HumanoidRootPart.CanCollide = false
                                 v.Head.CanCollide = false
-                                TweenOld(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                TweenOld(v.HumanoidRootPart.CFrame * PosFarm)
                             until not v or not v.Parent or v.Humanoid.Health <= 0
                             if v.Humanoid.Health <= 0 then
                                 ToggleSaber:Set(false)
                                 ToggleSaberHop:Set(false)
+                                if checkcac == true then
+                                    ToggleFarm:Set(true)
+                                end
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
                             end
                         end
@@ -2233,7 +2270,7 @@ spawn(function()
                 else
                     TweenOld(CFrame.new(-1424.92334, 30.19524, -4.31849194))
                     if game.ReplicatedStorage:FindFirstChild("Saber Expert") then
-                        Tween(game.ReplicatedStorage:FindFirstChild("Saber Expert").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        Tween(game.ReplicatedStorage:FindFirstChild("Saber Expert").HumanoidRootPart.CFrame * PosFarm)
                     else
                         if _G.Settings.SaberHop and not game.ReplicatedStorage:FindFirstChild("Saber Expert") then
                             wait(3)
@@ -2271,7 +2308,7 @@ local TakenPoleHop = IQ:AddToggle({
 local PosWaitThunder = CFrame.new(-7748.0185546875, 5606.80615234375, -2305.898681640625)
 spawn(function()
     while wait() do
-        if _G.Settings.TakenPole and Sea1 then
+        if _G.Settings.TakenPole and Sea1 and not CheckInventory("Pole (1st Form)") then
             if game:GetService("Workspace").Enemies:FindFirstChild("Thunder God") then
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == "Thunder God" and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent then
@@ -2282,13 +2319,13 @@ spawn(function()
                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                         until v.Humanoid.Health <= 0 or not _G.Settings.TakenPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                     end
                 end
             else
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * PosFarm)
                 else
                     if _G.Settings.TakenPoleHop then
                         Hop()
@@ -2334,13 +2371,13 @@ spawn(function()
                             v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                         until v.Humanoid.Health <= 0 or not _G.Settings.TakenPole or not v:FindFirstChild("HumanoidRootPart") or not v.Parent
                     end
                 end
             else
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg").HumanoidRootPart.CFrame * PosFarm)
                 else
                     if _G.Settings.TakenGlassCyborgHop then
                         Hop()
@@ -2387,7 +2424,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             until v.Humanoid.Health <= 0 or not v.Parent or not _G.Settings.AutoSecondSea
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
                         end
@@ -2424,7 +2461,7 @@ spawn(function()
                                     EnableBuso()
                                     v.HumanoidRootPart.CanCollide = false
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))													
+                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)													
                                     PosMobBartilo =  v.HumanoidRootPart.CFrame
                                     BringBartilo = true
                                     sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
@@ -2456,7 +2493,7 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(100,100,100)
                                 PosJeremy = v.HumanoidRootPart.CFrame
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))			
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)			
                                 sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
                             until not v.Parent or v.Humanoid.Health <= 0 or _G.Settings.AutoBartilo == false
                         end
@@ -2585,7 +2622,7 @@ spawn(function()
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                     until v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v.Parent or _G.Settings.AutoGhoulRace == false
                                 end
                             end
@@ -2593,7 +2630,7 @@ spawn(function()
                     else
                         Tween(PosCursedBoss)
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain") then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain").HumanoidRootPart.CFrame * PosFarm)
                         else
                             if _G.Settings.AutoGhoulRaceHop then
                                 Hop()
@@ -2632,7 +2669,7 @@ spawn(function()
                             repeat wait()
                                 EnableBuso()
                                 EquipTool(ToolFarm)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                 v.Humanoid.WalkSpeed = 0
                                 v.HumanoidRootPart.CanCollide = false
@@ -2674,7 +2711,7 @@ spawn(function()
                                 v.Humanoid.WalkSpeed = 0
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             until _G.Settings.AutoCacden == false or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
                         end
                     end
@@ -2682,7 +2719,7 @@ spawn(function()
             else
                 Tween(PosChimden)
                 if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
-                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * PosFarm)
                 end
             end
         end
@@ -2955,7 +2992,7 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             FarmPos = v.HumanoidRootPart.CFrame
                             MonFarm = v.Name
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             game.Players.LocalPlayer.Character.Humanoid.Sit = false
                         until _G.Settings.AutoShark == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                     end
@@ -2993,7 +3030,7 @@ spawn(function()
                                 v.HumanoidRootPart.CanCollide = false
                                 FarmPos = v.HumanoidRootPart.CFrame
                                 MonFarm = v.Name
-                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             until _G.Settings.PiranhabulonFishCrew == false or not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                         end
@@ -3031,7 +3068,7 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             FarmPos = v.HumanoidRootPart.CFrame
                             MonFarm = v.Name
-                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
                             game.Players.LocalPlayer.Character.Humanoid.Sit = false
                             game:GetService'VirtualUser':CaptureController()
                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
