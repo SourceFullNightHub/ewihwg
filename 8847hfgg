@@ -1194,12 +1194,12 @@ end
 function CheckDoorGetCup()
     return workspace.Map.Desert.Burn.Part.CanCollide == false
 end
-NotifyList = {}
-function CheckNotify(msg)
-    for r, k in pairs(game.Players.LocalPlayer.PlayerGui.Notifications:GetChildren()) do
-        if k and k.Text and string.find(string.lower(k.Text), msg) and not table.find(NotifyList, k) then
-            table.insert(NotifyList, k)
-            return true
+function CheckNotifyComplete()
+    for i, v in pairs(game:GetService("Players")["LocalPlayer"].PlayerGui:FindFirstChild("Notifications"):GetChildren()) do
+        if a.Name == "NotificationTemplate" then
+            if string.lower(v.Text):find("quest completed") then
+                return true
+            end
         end
     end
     return false
@@ -1267,6 +1267,15 @@ local RC = Window:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413
 local STT = Window:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884", PremiumOnly = false})
 local SH = Window:MakeTab({Name = "Shop", Icon = "rbxassetid://17195489739", PremiumOnly = false})
 local ST = Window:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740", PremiumOnly = false})
+
+function Notify(Tit, le)
+    OrionLib:MakeNotification({
+        Name = "Night Hub",
+        Content = Tit,
+        Image = "rbxassetid://15541504459",
+        Time = le
+    })
+end
 
 --// About Tab \\ ----
 
@@ -1696,7 +1705,7 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and not CheckNotify("quest completed") then
+                    elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and not CheckNotifyComplete() then
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                             game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
                             CountQuestClaim = CountQuestClaim + 1
@@ -1742,82 +1751,113 @@ spawn(function()
                                 end
                             end
                         end
-                    end
-                elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and CheckNotify("quest completed") then
-                    if CheckEnemies("Shanda") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Shanda" then
-                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        EquipTool(ToolFarm)
-                                        EnableBuso()                                            
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                                        BringSky = true
-                                        MobSky = v.HumanoidRootPart.CFrame
-                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                    elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and CheckNotifyComplete() then
+                        if CheckEnemies("Shanda") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Shanda" then
+                                    if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            EquipTool(ToolFarm)
+                                            EnableBuso()                                            
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                                            BringSky = true
+                                            MobSky = v.HumanoidRootPart.CFrame
+                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    end
+                                end
+                            end
+                        else
+                            Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
+                            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                                if v.Name == "Shanda" then
+                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                                 end
                             end
                         end
-                    else
-                        Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
-                        for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-                            if v.Name == "Shanda" then
-                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                            end
-                        end
-                    end
-                elseif Your.Data.Level.Value >= 300 then
-                    Checknhiemvu()
-                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                        if _G.Settings.BypassTele then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
-                                Bypass(CFrameQuest)
-                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
+                    elseif Your.Data.Level.Value >= 300 and Your.Data.Level.Value <= 349 then
+                        Checknhiemvu()
+                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                            if _G.Settings.BypassTele then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                                    Bypass(CFrameQuest)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
+                                    Tween(CFrameQuest)
+                                end
+                            else
                                 Tween(CFrameQuest)
                             end
-                        else
-                            Tween(CFrameQuest)
-                        end
-                        if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
-                        end
-                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
-                        if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        EquipTool(ToolFarm)
-                                        EnableBuso()                                            
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                                        BringLevel = true
-                                        MobLevel = v.HumanoidRootPart.CFrame
-                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                end
+                            if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, NumberQuest)
                             end
-                        else
-                            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                                if string.find(v.Name, Mob) then 
-                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
-                                        Tween(v.CFrame * PosFarm)
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
+                            if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if v.Name == Mob and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            EquipTool(ToolFarm)
+                                            EnableBuso()                                            
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                            Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                                            BringLevel = true
+                                            MobLevel = v.HumanoidRootPart.CFrame
+                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    end
+                                end
+                            else
+                                for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                    if string.find(v.Name, Mob) then 
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude > 5 and not game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                                            Tween(v.CFrame * PosFarm)
+                                        end
                                     end
                                 end
                             end
                         end
-                    end
-                elseif _G.Settings.SelectModeFarm == "Bone" and _G.Settings.StartFarm and Sea3 then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
-                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
+                        
+                    elseif _G.Settings.SelectModeFarm == "Bone" and _G.Settings.StartFarm and Sea3 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+                            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    if v.Name == "Reborn Skeleton" or v.Name == "Living Zombie" or v.Name == "Demonic Soul" or v.Name == "Posessed Mummy" then
+                                        if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.Settings.StartFarm) then
+                                            repeat wait()
+                                                EnableBuso()
+                                                EquipTool(ToolFarm)
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Head.CanCollide = false
+                                                Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                                                BringMobCastleHauted = true
+                                                CFrameHauntedMob = v.HumanoidRootPart.CFrame
+                                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
+                                        end
+                                    end
+                                end
+                            end
+                        else
+                            if _G.Settings.BypassTele then
+                                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude > 2000 then
+                                    Bypass(PosBone)
+                                elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude < 2000 then
+                                    Tween(PosBone)
+                                end
+                            else
+                                Tween(PosBone)
+                            end
+                        end
+                    elseif _G.Settings.SelectModeFarm == "Cake Prince" and _G.Settings.StartFarm and Sea3 then
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Cake Prince" or v.Name == "Dough King" then
                                     if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.Settings.StartFarm) then
                                         repeat wait()
                                             EnableBuso()
@@ -1827,99 +1867,69 @@ spawn(function()
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
                                             Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                                            BringMobCastleHauted = true
-                                            CFrameHauntedMob = v.HumanoidRootPart.CFrame
-                                        until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm
+                                        until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
                                     end
                                 end
                             end
-                        end
-                    else
-                        if _G.Settings.BypassTele then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude > 2000 then
-                                Bypass(PosBone)
-                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - PosBone.Position).Magnitude < 2000 then
-                                Tween(PosBone)
-                            end
                         else
-                            Tween(PosBone)
-                        end
-                    end
-                elseif _G.Settings.SelectModeFarm == "Cake Prince" and _G.Settings.StartFarm and Sea3 then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Cake Prince" or v.Name == "Dough King" then
-                                if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.Settings.StartFarm) then
-                                    repeat wait()
-                                        EnableBuso()
-                                        EquipTool(ToolFarm)
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Head.CanCollide = false
-                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not _G.Settings.StartFarm or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1
+                            if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
+                                Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                            elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+                                Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                            else
+                                if MobSummon == 0 then
                                 end
-                            end
-                        end
-                    else
-                        if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
-                            Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
-                        elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
-                            Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
-                        else
-                            if MobSummon == 0 then
-                            end
-                            if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
-                                if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker") then
-                                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                        if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
-                                            if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.Settings.StartFarm) then
-                                                repeat wait()
-                                                    EnableBuso()
-                                                    EquipTool(ToolFarm)
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Head.CanCollide = false
-                                                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                                                    BringCakeIslandMob = true
-                                                    PosMobCake = v.HumanoidRootPart.CFrame
-                                                until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
+                                if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+                                    if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker") then
+                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
+                                                if v.Humanoid.Health > 0 and (v:FindFirstChild("HumanoidRootPart") or v.Parent or _G.Settings.StartFarm) then
+                                                    repeat wait()
+                                                        EnableBuso()
+                                                        EquipTool(ToolFarm)
+                                                        v.Humanoid.WalkSpeed = 0
+                                                        v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+                                                        v.HumanoidRootPart.CanCollide = false
+                                                        v.Head.CanCollide = false
+                                                        Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                                                        BringCakeIslandMob = true
+                                                        PosMobCake = v.HumanoidRootPart.CFrame
+                                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0
+                                                end
                                             end
                                         end
-                                    end
-                                else
-                                    if _G.Settings.BypassTele then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude > 2000 then
-                                            Bypass(CakeIsland)
-                                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude < 2000 then
+                                    else
+                                        if _G.Settings.BypassTele then
+                                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude > 2000 then
+                                                Bypass(CakeIsland)
+                                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeIsland.Position).Magnitude < 2000 then
+                                                Tween(CakeIsland)
+                                            end
+                                        else
                                             Tween(CakeIsland)
                                         end
-                                    else
-                                        Tween(CakeIsland)
-                                    end
-                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
-                                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
-                                    else
-                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
-                                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
+                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
+                                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                         else
-                                            if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
-                                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                            if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard") then
+                                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Guard").HumanoidRootPart.CFrame * CFrame.new(2,20,2)) 
                                             else
-                                                if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
-                                                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                                if game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff") then
+                                                    Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Baking Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                                else
+                                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker") then
+                                                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Head Baker").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                                    end
                                                 end
                                             end
                                         end
                                     end
-                                end
-                            else
-                                if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
-                                    Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
-                                elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
-                                    Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                                else
+                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") then
+                                        Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                                    elseif game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+                                        Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                                    end
                                 end
                             end
                         end
