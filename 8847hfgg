@@ -956,11 +956,24 @@ function TweenOld(CFm)
         Distance = (CFm.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-        if not CFm then return end 
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / _G.Settings.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = CFm})
-        if Distance <= 350 then
+        if not CFm then return end
+        if not Your.Character:FindFirstChild("PartTele") then
+            local PartTele = Instance.new("Part", Your.Character) -- Create part
+            PartTele.Size = Vector3.new(10,1,10)
+            PartTele.Name = "PartTele"
+            PartTele.Anchored = true
+            PartTele.Transparency = 1
+            PartTele.CanCollide = false
+            PartTele.CFrame = WaitHRP(Your).CFrame 
+            PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                WaitHRP(Your).CFrame = PartTele.CFrame
+            end)
+        end
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / _G.Settings.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = CFm})
+        if Distance <= 250 then
             tween:Cancel()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFm
+            game.Players.LocalPlayer.Character.PartTele.CFrame = CFm
         end
 		tween:Play()
     end
@@ -1182,7 +1195,7 @@ UICorner.Parent = ImageButton
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
+            if _G.Settings.TakenGlassCyborg or _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
                     Noclip.Name = "BodyClip"
@@ -1199,7 +1212,7 @@ end)
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
+            if _G.Settings.TakenGlassCyborg or _G.Settings.AutoCacden or _G.Settings.AutoSwan or _G.Settings.AutoGhoulRace or _G.Settings.KillMobAura or _G.Settings.StartSeaEvent or _G.Settings.AutoShark or _G.Settings.PiranhabulonFishCrew or _G.Settings.AutoTerrorshark or _G.Settings.TakenPole or _G.Settings.TakenSaber or _G.Settings.StartFarm or _G.Settings.AutoFactory or _G.Settings.AutoElite or _G.Settings.AutoCastleRaid == true or NoCLip then
                 for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -1595,7 +1608,34 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 10 and Your.Data.Level.Value <= 49 then
+                    elseif Your.Data.Level.Value >= 10 and Your.Data.Level.Value <= 39 then
+                        if CheckEnemies("God's Guard") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "God's Guard" then
+                                    if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            EquipTool(ToolFarm)
+                                            EnableBuso()                                            
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                            BringSky = true
+                                            MobSky = v.HumanoidRootPart.CFrame
+                                        until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    end
+                                end
+                            end
+                        else
+                            Tween(CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922))
+                            for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                                if v.Name == "God's Guard" then
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                end
+                            end
+                        end
+                    elseif Your.Data.Level.Value >= 40 and Your.Data.Level.Value <= 49 then
                         if CheckEnemies("Shanda") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Shanda" then
@@ -1615,7 +1655,7 @@ spawn(function()
                                 end
                             end
                         else
-                            Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                            Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
                             for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
                                 if v.Name == "Shanda" then
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
@@ -1635,12 +1675,6 @@ spawn(function()
                             if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                 print(game.Players[Cac].Data.Level.Value)
-                            end
-                            if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.PvpDisabled.Visible == true then
-                                local args = {
-                                    [1] = "EnablePvp"
-                                }
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                             end
                             if CountQuestClaim >= 15 then
                                 OrionLib:MakeNotification({
@@ -1830,6 +1864,17 @@ spawn(function()
                     end
                 end
             end)
+        end
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.PvpDisabled.Visible == true and _G.Settings.StartFarm and Sea1 then
+            local args = {
+                [1] = "EnablePvp"
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         end
     end
 end)
@@ -2152,6 +2197,7 @@ spawn(function()
                             until not v or not v.Parent or v.Humanoid.Health <= 0
                             if v.Humanoid.Health <= 0 then
                                 ToggleSaber:Set(false)
+                                ToggleSaberHop:Set(false)
                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","PlaceRelic")
                             end
                         end
@@ -2161,23 +2207,12 @@ spawn(function()
                     if game.ReplicatedStorage:FindFirstChild("Saber Expert") then
                         Tween(game.ReplicatedStorage:FindFirstChild("Saber Expert").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     else
-                        if _G.Settings.SaberHop then
+                        if _G.Settings.SaberHop and not game.ReplicatedStorage:FindFirstChild("Saber Expert") then
                             wait(3)
                             Hop()
                         end
                     end
                 end
-            end
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if _G.Settings.TakenSaber and _G.Settings.SaberHop and not CheckInventory("Saber") then
-            if not game.ReplicatedStorage:FindFirstChild("Saber Expert") then
-                wait(3)
-                Hop()
             end
         end
     end
@@ -3649,7 +3684,7 @@ spawn(function()
                         end
                     end
                     if BringSky and _G.Settings.StartFarm then
-                        if (v.Name == "Shanda")  and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
+                        if (v.Name == "Shanda" or v.Name == "God's Guard") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and v.Parent and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.Settings.BringMobRange then
                             v.HumanoidRootPart.CFrame = MobSky
                             v.Humanoid:ChangeState(5)
                             v.HumanoidRootPart.CanCollide = false
