@@ -1608,7 +1608,7 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 10 and Your.Data.Level.Value <= 39 then
+                    elseif Your.Data.Level.Value >= 10 and Your.Data.Level.Value <= 29 then
                         if CheckEnemies("God's Guard") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "God's Guard" then
@@ -1635,7 +1635,7 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 40 and Your.Data.Level.Value <= 49 then
+                    elseif Your.Data.Level.Value >= 30 and Your.Data.Level.Value <= 49 then
                         if CheckEnemies("Shanda") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Shanda" then
@@ -1662,7 +1662,7 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 then
+                    elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and not CheckNotify("quest completed") then
                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                             game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
                             CountQuestClaim = CountQuestClaim + 1
@@ -1694,6 +1694,7 @@ spawn(function()
                                                 EnableBuso()                                            
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
+                                                v.Humanoid.Health = 50
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
                                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
@@ -1708,7 +1709,34 @@ spawn(function()
                             end
                         end
                     end
-                elseif Your.Data.Level.Value >= 300 or CheckNotify("QUEST COMPLETED") then
+                elseif Your.Data.Level.Value >= 50 and Your.Data.Level.Value <= 299 and CheckNotify("quest completed") then
+                    if CheckEnemies("Shanda") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Shanda" then
+                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        EquipTool(ToolFarm)
+                                        EnableBuso()                                            
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        BringSky = true
+                                        MobSky = v.HumanoidRootPart.CFrame
+                                    until not _G.Settings.StartFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                end
+                            end
+                        end
+                    else
+                        Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
+                        for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                            if v.Name == "Shanda" then
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                            end
+                        end
+                    end
+                elseif Your.Data.Level.Value >= 300 then
                     Checknhiemvu()
                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
