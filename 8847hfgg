@@ -41,9 +41,8 @@ _G.Settings = {
     AutoRejoin = false
 }
 
-join = game.Players.localPlayer.Neutral == false
 function LoadSettings()
-    if readfile and writefile and isfile and isfolder and join == true then
+    if readfile and writefile and isfile and isfolder then
         if not isfolder("Night Hub") then
             makefolder("Night Hub")
         end
@@ -69,7 +68,7 @@ function LoadSettings()
     end
 end
 function SaveSettings()
-    if readfile and writefile and isfile and isfolder and join == true then
+    if readfile and writefile and isfile and isfolder then
         if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
             LoadSettings()
         else
@@ -121,6 +120,28 @@ if not game:IsLoaded() then
     repeat
         game.Loaded:Wait()
     until game:IsLoaded()
+end
+
+----------------------------------------------------------------------------------------------------
+
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    if getgenv().Team == "Pirates" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Pirates Teams", 5)
+        end
+    elseif getgenv().Team == "Marines" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Marines Teams", 5)
+        end
+    end
 end
 
 -- function :
@@ -917,7 +938,7 @@ function WaitHRP(q0)
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end 
 function Tween(Pos)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
@@ -949,7 +970,7 @@ function Tween(Pos)
     end
 end
 function Teleport(CFR)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         Distance = (CFR.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
@@ -984,7 +1005,7 @@ function Teleport(CFR)
     end
 end
 function TweenOld(CFm)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and join == true then
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         Distance = (CFm.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
@@ -1287,6 +1308,7 @@ spawn(function()
     end)
 end)
 ------------------------------------------------// Library \\------------------------------------------------------------------------------
+if not game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/chill')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false, IntroEnabled = false, IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
@@ -4078,23 +4100,5 @@ function BypassAntiCheats()
     end
 end
 BypassAntiCheats()
-if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    if getgenv().Team == "Pirates" then
-        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
-            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                b:Fire()
-            end
-            v.Function()
-            Notify("Join Pirates Teams")
-        end
-    elseif getgenv().Team == "Marines" then
-        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
-            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                b:Fire()
-            end
-            v.Function()
-            Notify("Join Marines Teams")
-        end
-    end
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 end
----------------------------------------------------------------------------------------------------------------------------------------
