@@ -91,59 +91,6 @@ function SaveSettings()
 end
 LoadSettings()
 
-repeat
-    wait()
-until game.Players
-repeat
-    wait()
-until game.Players.LocalPlayer
-repeat
-    wait()
-until game.ReplicatedStorage
-repeat
-    wait()
-until game.ReplicatedStorage:FindFirstChild("Remotes")
-repeat
-    wait()
-until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-repeat
-    wait()
-until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main")
-repeat
-    wait()
-until game:GetService("Players")
-repeat
-    wait()
-until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Energy")
-wait(0.1)
-if not game:IsLoaded() then
-    repeat
-        game.Loaded:Wait()
-    until game:IsLoaded()
-end
-
-----------------------------------------------------------------------------------------------------
-
-if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
-    if getgenv().Team == "Pirates" then
-        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
-            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                b:Fire()
-            end
-            v.Function()
-            Notify("Join Pirates Teams", 5)
-        end
-    elseif getgenv().Team == "Marines" then
-        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
-            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
-                b:Fire()
-            end
-            v.Function()
-            Notify("Join Marines Teams", 5)
-        end
-    end
-end
-
 -- function :
 
 if game.PlaceId == 2753915549 then
@@ -778,86 +725,39 @@ function Checknhiemvu()
 end
 function Hop()
     local PlaceID = game.PlaceId
-    local AllIDs = {}
-    local foundAnything = ""
-    local actualHour = os.date("!*t").hour
-    local Deleted = false
-    function TPReturner()
-        local Site
-        if foundAnything == "" then
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" .. PlaceID .. "/servers/Public?sortOrder=Asc&limit=100"
-                )
-            )
-        else
-            Site =
-                game.HttpService:JSONDecode(
-                game:HttpGet(
-                    "https://games.roblox.com/v1/games/" ..
-                        PlaceID .. "/servers/Public?sortOrder=Asc&limit=100&cursor=" .. foundAnything
-                )
-            )
-        end
-        local ID = ""
-        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-            foundAnything = Site.nextPageCursor
-        end
-        local num = 0
-        for i, v in pairs(Site.data) do
-            local Possible = true
-            ID = tostring(v.id)
-            if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                for _, Existing in pairs(AllIDs) do
-                    if num ~= 0 then
-                        if ID == tostring(Existing) then
-                            Possible = false
-                        end
-                    else
-                        if tonumber(actualHour) ~= tonumber(Existing) then
-                            local delFile =
-                                pcall(
-                                function()
-                                    AllIDs = {}
-                                    table.insert(AllIDs, actualHour)
-                                end
-                            )
-                        end
-                    end
-                    num = num + 1
-                end
-                if Possible == true then
-                    table.insert(AllIDs, ID)
-                    wait()
-                    pcall(
-                        function()
-                            wait()
-                            game:GetService("TeleportService"):TeleportToPlaceInstance(
-                                PlaceID,
-                                ID,
-                                game.Players.LocalPlayer
-                            )
-                        end
-                    )
-                    wait(4)
+    local TeleportService = game:GetService("TeleportService")
+    local players = game:GetService("Players"):GetPlayers()
+
+    local targetServerID = nil
+
+    for _, player in ipairs(players) do
+        local success, errorMessage = pcall(function()
+            local servers = TeleportService:GetGamePlaceServers(PlaceID)
+            for _, server in ipairs(servers) do
+                if server.playing >= 9 and server.playing <= 11 and server.maxPlayers == 12 then
+                    targetServerID = server.id
+                    break
                 end
             end
+        end)
+        
+        if not success then
+            warn(errorMessage)
         end
     end
-    function Teleport()
-        while wait() do
-            pcall(
-                function()
-                    TPReturner()
-                    if foundAnything ~= "" then
-                        TPReturner()
-                    end
-                end
-            )
+
+    if targetServerID then
+        local success, errorMessage = pcall(function()
+            TeleportService:TeleportToPlaceInstance(PlaceID, targetServerID)
+        end)
+        
+        if not success then
+            warn(errorMessage)
+            Hop()
         end
+    else
+        warn("Không tìm thấy máy chủ thích hợp.")
     end
-    Teleport()
 end
 function NearestEntrace(aI)
     vcspos = aI.Position
@@ -4082,6 +3982,25 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
+    if getgenv().Team == "Pirates" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Pirates Teams", 5)
+        end
+    elseif getgenv().Team == "Marines" then
+        for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do
+            for a, b in pairs(getconnections(game:GetService("UserInputService").TouchTapInWorld)) do
+                b:Fire()
+            end
+            v.Function()
+            Notify("Join Marines Teams", 5)
+        end
+    end
 end
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
