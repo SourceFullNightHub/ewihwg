@@ -2213,7 +2213,7 @@ while wait() do
     end
 end
 
-local Section = H:CreateSections({Text = "Select Method Farm"})
+local SelectMthodSection = H:CreateSections({Text = "Select Method Farm"})
 
 H:CreateDropdown({
     Name = "Select Method Farm",
