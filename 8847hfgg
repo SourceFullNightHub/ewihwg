@@ -2123,6 +2123,26 @@ spawn(function()
         wait(0.5)
     end
 end)
+function Bypass(Ps)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Ps
+    game.Players.LocalPlayer.Character.Head:Destroy()
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+    wait(2)
+    game.Players.LocalPlayer.Character.PrimaryPart.CFrame = Ps
+    repeat task.wait()
+        task.wait(0.5)
+        if plr.Character:FindFirstChild("PartTele") then
+            plr.Character.PartTele.CFrame = Ps
+        end
+        task.wait(0.1)
+        if plr.Character:FindFirstChild("PrimaryPart") then
+            plr.Character.PrimaryPart.CFrame = Ps
+        end
+        task.wait(0.5)
+        plr.Character:WaitForChild("Humanoid"):ChangeState(15)
+        wait(3)
+    until plr.Character:FindFirstChild("Humanoid") and plr.Character.Humanoid.Health > 0
+end
 function EnableBuso()
     if not plr:FindFirstChild("HasBuso") then
         game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Buso")
