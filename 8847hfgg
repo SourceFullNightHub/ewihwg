@@ -2084,11 +2084,6 @@ function Tween(CFg)
             end)
         end
         tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.TweenSmooth, TweenInfo.new(Distance / 180, Enum.EasingStyle.Linear),{CFrame = CFg})
-        local NearestEntraceFunction = NearestEntrace(CFg)
-		if NearestEntraceFunction then
-            tween:Cancel()
-			RETeleport(NearestEntraceFunction)
-		end
         if Distance <= 250 then
             tween:Cancel()
             game.Players.LocalPlayer.Character.TweenSmooth.CFrame = CFg
