@@ -2199,14 +2199,15 @@ function KillMob(Trget)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                bring = v.HumanoidRootPart.CFrame
                 repeat task.wait()
-                    v.Humanoid.WalkSpeed = 0
-                    v.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame
-                    v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                    v.Head.CanCollide = false
-                    v.HumanoidRootPart.CanCollide = false
                     EnableBuso()
                     Equip(ToolF)
+                    v.Humanoid.WalkSpeed = 0
+                    v.HumanoidRootPart.CFrame = bring
+                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                    v.Head.CanCollide = false
+                    v.HumanoidRootPart.CanCollide = false
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 until v.Humanoid.Health <= 0 or not v.Parent
             end
