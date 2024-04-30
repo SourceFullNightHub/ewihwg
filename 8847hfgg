@@ -2190,7 +2190,7 @@ function KillMob(Trget)
                     v.Head.CanCollide = false
                     v.HumanoidRootPart.CanCollide = false
                     EnableBuso()
-
+                    Equip(ToolF)
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 until v.Humanoid.Health <= 0 or not v.Parent
             end
