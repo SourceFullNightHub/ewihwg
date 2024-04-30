@@ -109,6 +109,10 @@ function Library:CreateWindow(Options)
     local UIPadding_6 = Instance.new("UIPadding")
     local ChannelContainer = Instance.new("Frame")
     local UICorner_6 = Instance.new("UICorner")
+    local ScreenGui = Instance.new("ScreenGui")
+    local ImageButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local Visble = true
 
     ScreenGui.Parent = game.CoreGui
 
@@ -119,6 +123,23 @@ function Library:CreateWindow(Options)
     Main.BorderSizePixel = 0
     Main.Position = UDim2.new(0.421519041, 0, 0.170040488, 0)
     Main.Size = UDim2.new(0, 535, 0, 328)
+
+    ImageButton.Parent = ScreenGui
+    ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ImageButton.BackgroundTransparency = 1.000
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Position = UDim2.new(0.0298672561, 0, 0.0951417014, 0)
+    ImageButton.Size = UDim2.new(0, 25, 0, 25)
+    ImageButton.Image = "rbxassetid://15541504459"
+    ImageButton.Draggable = true
+    ImageButton.MouseButton1Click:Connect(function()
+        Visble = not Visble
+        Main.Visible = Visble
+    end)
+
+    UICorner.CornerRadius = UDim.new(0, 23)
+    UICorner.Parent = ImageButton
 
     UICorner.CornerRadius = UDim.new(0, 4)
     UICorner.Parent = Main
@@ -2112,10 +2133,29 @@ function EnableBuso()
         game.ReplicatedStorage.Remotes.CommF_:InvokeServer("Buso")
     end
 end
+function CheckWeapons(ng)
+    ToolF = ""
+    for i, v in pairs(plr.BackPack:GetChildren()) do
+        if v.Name == ng and v:IsA("Tool") then
+            ToolF = v.Name
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.Name == ng then
+            ToolF = v.Name
+        end
+    end
+    return ToolF
+end
 function Equip(Tool)
-    if plr.BackPack:FindFirstChild(Tool) then
-        local is = plr.BackPack:FindFirstChild(Tool)
-        plr.Character.Humanoid:EquipTool(is)
+    if Tool == nil then return end
+    if _G.Settings.SelectTool == "" or _G.Settings.SelectTool == nil then
+        _G.Settings.SelectTool = "Melee"
+    end
+    is = GetWeapon(_G.Settings.SelectTool)
+    if plr.Backpack:FindFirstChild(Tool) then
+        local This = plr.Backpack:FindFirstChild(Tool)
+        plr.Character.Humanoid:EquipTool(This)
     end
 end
 function CheckEnemies(Mob)
@@ -2174,32 +2214,6 @@ end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local ScreenGui = Instance.new("ScreenGui")
-local ImageButton = Instance.new("ImageButton")
-local UICorner = Instance.new("UICorner")
-local Visble = true
-
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageButton.BackgroundTransparency = 1.000
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.0298672561, 0, 0.0951417014, 0)
-ImageButton.Size = UDim2.new(0, 25, 0, 25)
-ImageButton.Image = "rbxassetid://15541504459"
-ImageButton.Draggable = true
-ImageButton.MouseButton1Click:Connect(function()
-    Visble = not Visble
-    Main.Visible = Visble
-end)
-
-UICorner.CornerRadius = UDim.new(0, 23)
-UICorner.Parent = ImageButton
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 local Lib = Library:CreateWindow({Title = "Night Hub", Creator = "By !Nightx"})
 
 local A = Lib:CreateTab({Name = "About", Icon = "rbxassetid://17325442535"})
@@ -2223,23 +2237,7 @@ H:CreateDropdown({
     end
 })
 
-while wait() do
-    if _G.Settings.SelectTool == "Melee" then
-        for i, v in pairs(plr.Backpack:GetChildren()) do
-            if v.ToolTip == "Melee" and plr.Backpack:FindFirstChild(tostring(v.Name)) then
-                Tool = v.Name
-            end
-        end
-    elseif _G.Settings.SelectTool == "Sword" then
-        for i, v in pairs(plr.Backpack:GetChildren()) do
-            if v.ToolTip == "Sword" and plr.Backpack:FindFirstChild(tostring(v.Name)) then
-                Tool = v.Name
-            end
-        end
-    end
-end
-
-local SelectMthodSection = H:CreateSections({Text = "Select Method Farm"})
+H:CreateSections({Text = "Select Method Farm"})
 
 H:CreateDropdown({
     Name = "Select Method Farm",
