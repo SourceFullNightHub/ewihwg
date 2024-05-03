@@ -2,75 +2,94 @@
 
 # Library :
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/skidhubtaotaodamchet"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 ```
 
 # Create Window :
 ```lua
-local Main = Library.CreateMain({Title = 'Blox Fruit', Desc = '- Blox Fruit'})
+local Windows = Library:CreateWindow({Title = 'Night Hub', Creator = '! Nightx'})
 ```
 # Create Notify :
 ```lua
-Library.CreateNoti({
-   Title = "Night Hub",
-   Desc = "Notify",
-   ShowTime = 5,
+Library:MakeNotify({
+   Name = "Night Hub",
+   Content = "Is This Notify",
+   Time = 5,
 }) 
 ```
 
 # Create Tab :
 ```lua
-local Page1 = Main.CreatePage({Page_Name = 'Page1', Page_Title = ''})
+local Tab = Windows:MakeTab({Name = 'Tab', Icon = 'rbxassetid://17184558565'})
 ```
 
 # Create Section :
 ```lua
-local Section1 = Page1.CreateSection('Section')
+local Section = Tab:CreateSection('Section')
 ```
 
 # Create Buttons :
 ```lua
-Section1.CreateButton({Title = 'Buttons'}, function()
-    print("Hi")  
-end)
+Tab:CreateButton({
+    Name = "Button",
+    Description = "Is This Description",
+    CallBack = function()
+        print('Hello World')
+    end
+})
 ```
 
 # Create Toggle :
 ```lua
-Section1.CreateToggle({Title = 'Toggle', Desc = '', Default = false}, function(Value)
-    print(Value)
-end)
+Tab:CreateToggle({
+    Name = "Toggle",
+    Description = "Is This Description",
+    Default = false,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
 ```
 
 # Create DropDown :
 ```lua
-Section1.CreateDropdown({Title = 'DropDown', List = {"1", "2", "3", "4"}, Default = "0.15", Search = true, Selected = true}, function(Value)
-    print(Value)
-end)
+Tab:CreateDropdown({
+    Name = "Dropdown",
+    Description = "Is This Description",
+    List = {"1", "2", "3"},
+    Default = "1",
+    CallBack = function(Value)
+        print(Value)
+    end
+})
 ```
 
 # Create Slider :
 ```lua
-Section1.CreateSlider({Title = "Slider", Min = 1, Max = 100, Default = 1, Precise = false}, function(Value)
-    print(Value)
-end)
+Tab:CreateSlider({
+    Name = "Slider",
+    Min = 1,
+    Max = 100,
+    Default = 50,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
 ```
 
-# Create Label :
+# Create Paragraph :
 ```
-local Label = Section1.CreateLabel({Title = "Label"})
+local Paragra = Tab:CreateParagraph({Title = "Paragraph", Content = "Description"})
 ```
 
-# Create Key Bind :
+# Create Create TextBox :
 ```lua
-Section2.CreateBind({Title = 'Key Bind', Key = Enum.KeyCode.RightControl}, function()
-	    print("Key Bind")
-end)
-```
-
-# Create TextBox :
-```lua
-Section11.CreateBox({Title = 'Sellect Amount Honey', Placeholder = 'Type here', Number_Only = true}, function(Value)
-   print(Value)
-end)
+Tab:CreateTextBox({
+    Name = "TextBox",
+    Description = "Is This Description",
+    Default = "Hi",
+    CallBack = function(Value)
+        print(Value)
+    end
+})
 ```
