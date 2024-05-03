@@ -78,7 +78,7 @@ Tab:CreateSlider({
 ```
 
 # Create Paragraph :
-```
+```lua
 local Paragra = Tab:CreateParagraph({Title = "Paragraph", Content = "Description"})
 ```
 
