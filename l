@@ -1125,6 +1125,7 @@ function NightLib:CreateWindow(Options)
             List.Size = UDim2.new(1, 0, 1, 0)
             List.CanvasSize = UDim2.new(0, 0, 0, 0)
             List.ScrollBarThickness = 0
+            List.ClipsDescendants = true
             spawn(function()
                 while wait() do
                     List.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_3.AbsoluteContentSize.Y)
@@ -1212,7 +1213,7 @@ function NightLib:CreateWindow(Options)
             DropClick.MouseButton1Click:Connect(function()
                 if Dropped == false then
                     Dropped = true
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0.155, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.170, 55),"Out","Quad",0.3,true)
                     TweenService:Create(
                         ListFrame,
                         TweenInfo.new(0.2 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
