@@ -688,7 +688,7 @@ function NightLib:CreateWindow(Options)
             local ImageLabel = Instance.new("ImageLabel")
             local PaddingT = Instance.new("UIPadding")
             local PaddingT2 = Instance.new("UIPadding")
-            local Toggled = Options.Default
+            local Toggled = false
             local ToggleFunc = {}
 
             Toggle.Name = "Toggle"
