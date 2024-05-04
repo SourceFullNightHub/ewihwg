@@ -750,7 +750,7 @@ function NightLib:CreateWindow(Options)
 
             CheckerFrame.Name = "CheckerFrame"
             CheckerFrame.Parent = Toggle
-            CheckerFrame.BackgroundColor3 = Color3.fromRGB(42, 251, 255)
+            CheckerFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
             CheckerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
             CheckerFrame.BorderSizePixel = 0
             CheckerFrame.ClipsDescendants = true
@@ -767,6 +767,7 @@ function NightLib:CreateWindow(Options)
             ImageLabel.Size = UDim2.new(1, 0, 1, 0)
             ImageLabel.Image = "rbxassetid://17335294568"
             ImageLabel.ImageColor3 = Color3.fromRGB(0, 0, 0)
+            ImageLabel.Visible = Options.Default
 
             ToggleClick.MouseButton1Click:Connect(function()
                 if Toggled == false then
