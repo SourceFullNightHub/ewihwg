@@ -1221,6 +1221,11 @@ function NightLib:CreateWindow(Options)
                             Visible = true
                         }
                     ):Play()
+                    TweenService:Create(
+						IcoDrop,
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+						{ImageColor3 = Color3.fromRGB(32, 140, 255)}
+					):Play()
                 else
                     Dropped = false
                     Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
@@ -1231,6 +1236,11 @@ function NightLib:CreateWindow(Options)
                             Visible = false
                         }
                     ):Play()
+                    TweenService:Create(
+						IcoDrop,
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
+					):Play()
                 end
             end)
             
