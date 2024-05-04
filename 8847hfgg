@@ -1,1429 +1,3 @@
-_G.Settings = {
-    SelectTool = "Melee",
-    SelectMethodFarm = "",
-    StFarm = falsee
-}
-
---------------------------------------------------------------------------------------------------------------------------------
-
-local plr = game.Players.LocalPlayer
-local uis = game:GetService("UserInputService")
-local Runservice = game:GetService("RunService")
-local httpservice = game:GetService("HttpService")
-local mouse = plr:GetMouse()
-local TweenService = game:GetService("TweenService")
-local Library = {}
-
-local function MakeDraggable(topbarobject, object)
-	local Dragging = nil
-	local DragInput = nil
-	local DragStart = nil
-	local StartPosition = nil
-
-	local function Update(input)
-		local Delta = input.Position - DragStart
-		local pos =
-			UDim2.new(
-				StartPosition.X.Scale,
-				StartPosition.X.Offset + Delta.X,
-				StartPosition.Y.Scale,
-				StartPosition.Y.Offset + Delta.Y
-			)
-		object.Position = pos
-	end
-
-	topbarobject.InputBegan:Connect(
-		function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				Dragging = true
-				DragStart = input.Position
-				StartPosition = object.Position
-
-				input.Changed:Connect(
-					function()
-						if input.UserInputState == Enum.UserInputState.End then
-							Dragging = false
-						end
-					end
-				)
-			end
-		end
-	)
-
-	topbarobject.InputChanged:Connect(
-		function(input)
-			if
-				input.UserInputType == Enum.UserInputType.MouseMovement or
-					input.UserInputType == Enum.UserInputType.Touch
-			then
-				DragInput = input
-			end
-		end
-	)
-
-	uis.InputChanged:Connect(
-		function(input)
-			if input == DragInput and Dragging then
-				Update(input)
-			end
-		end
-	)
-end
-
-function Library:CreateWindow(Options)
-    Options = Options or {}
-    Options.Title = Options.Title or "Night Hub"
-    Options.Creator = Options.Creator or "- By ! Nightx"
-
-    local ScreenGui = Instance.new("ScreenGui")
-    local Main = Instance.new("Frame")
-    local UICorner = Instance.new("UICorner")
-    local UIStroke = Instance.new("UIStroke")
-    local TopFrame = Instance.new("Frame")
-    local UICorner_2 = Instance.new("UICorner")
-    local TopSmallFrame = Instance.new("Frame")
-    local Line = Instance.new("Frame")
-    local Creator = Instance.new("TextLabel")
-    local UIPadding = Instance.new("UIPadding")
-    local Name = Instance.new("TextLabel")
-    local UIPadding_2 = Instance.new("UIPadding")
-    local TabHolder = Instance.new("Frame")
-    local Line_2 = Instance.new("Frame")
-    local UICorner_3 = Instance.new("UICorner")
-    local ScrollingTab = Instance.new("ScrollingFrame")
-    local UIPadding_3 = Instance.new("UIPadding")
-    local UIListLayout = Instance.new("UIListLayout")
-    local shadowHolder = Instance.new("Frame")
-    local umbraShadow = Instance.new("ImageLabel")
-    local penumbraShadow = Instance.new("ImageLabel")
-    local ambientShadow = Instance.new("ImageLabel")
-    local AvatarUser = Instance.new("Frame")
-    local UICorner_4 = Instance.new("UICorner")
-    local Hide1 = Instance.new("Frame")
-    local Hide = Instance.new("Frame")
-    local Frame = Instance.new("Frame")
-    local Avataruser = Instance.new("ImageLabel")
-    local UICorner_5 = Instance.new("UICorner")
-    local UIStroke_2 = Instance.new("UIStroke")
-    local TextLabel = Instance.new("TextLabel")
-    local UIPadding_6 = Instance.new("UIPadding")
-    local ChannelContainer = Instance.new("Frame")
-    local UICorner_6 = Instance.new("UICorner")
-    local ScreenGui = Instance.new("ScreenGui")
-    local ImageButton = Instance.new("ImageButton")
-    local UICorner = Instance.new("UICorner")
-    local Visble = true
-
-    ScreenGui.Parent = game.CoreGui
-
-    Main.Name = "Main"
-    Main.Parent = ScreenGui
-    Main.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
-    Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Main.BorderSizePixel = 0
-    Main.Position = UDim2.new(0.421519041, 0, 0.170040488, 0)
-    Main.Size = UDim2.new(0, 535, 0, 328)
-
-    ImageButton.Parent = ScreenGui
-    ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    ImageButton.BackgroundTransparency = 1.000
-    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    ImageButton.BorderSizePixel = 0
-    ImageButton.Position = UDim2.new(0.0298672561, 0, 0.0951417014, 0)
-    ImageButton.Size = UDim2.new(0, 25, 0, 25)
-    ImageButton.Image = "rbxassetid://15541504459"
-    ImageButton.Draggable = true
-    ImageButton.MouseButton1Click:Connect(function()
-        Visble = not Visble
-        Main.Visible = Visble
-    end)
-
-    UICorner.CornerRadius = UDim.new(0, 23)
-    UICorner.Parent = ImageButton
-
-    UICorner.CornerRadius = UDim.new(0, 4)
-    UICorner.Parent = Main
-
-    UIStroke.Color = Color3.fromRGB(225, 227, 255)
-    UIStroke.Parent = Main
-
-    TopFrame.Name = "Top Frame"
-    TopFrame.Parent = Main
-    TopFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    TopFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TopFrame.BorderSizePixel = 0
-    TopFrame.Size = UDim2.new(0, 535, 0, 38)
-
-    UICorner_2.CornerRadius = UDim.new(0, 4)
-    UICorner_2.Parent = TopFrame
-
-    TopSmallFrame.Name = "Top Small Frame"
-    TopSmallFrame.Parent = TopFrame
-    TopSmallFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    TopSmallFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TopSmallFrame.BorderSizePixel = 0
-    TopSmallFrame.Position = UDim2.new(0, 0, 0.54559809, 0)
-    TopSmallFrame.Size = UDim2.new(0, 532, 0, 18)
-
-    Line.Name = "Line"
-    Line.Parent = TopFrame
-    Line.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
-    Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Line.BorderSizePixel = 0
-    Line.Position = UDim2.new(0, 0, 1, 0)
-    Line.Size = UDim2.new(1, 0, 0, 1)
-
-    Creator.Name = "Creator"
-    Creator.Parent = TopFrame
-    Creator.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Creator.BackgroundTransparency = 1.000
-    Creator.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Creator.BorderSizePixel = 0
-    Creator.Position = UDim2.new(0.17, 0, 0, 0)
-    Creator.Size = UDim2.new(0, 100, 1.00584829, 0)
-    Creator.Font = Enum.Font.SourceSansBold
-    Creator.Text = Options.Creator
-    Creator.TextColor3 = Color3.fromRGB(145, 145, 145)
-    Creator.TextSize = 15.000
-    Creator.TextXAlignment = Enum.TextXAlignment.Left
-
-    UIPadding.Parent = Creator
-
-    Name.Name = "Name"
-    Name.Parent = TopFrame
-    Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Name.BackgroundTransparency = 1.000
-    Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Name.BorderSizePixel = 0
-    Name.Size = UDim2.new(0, 109, 0, 37)
-    Name.Font = Enum.Font.SourceSansBold
-    Name.Text = Options.Title
-    Name.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Name.TextSize = 18.000
-    Name.TextXAlignment = Enum.TextXAlignment.Left
-
-    UIPadding_2.Parent = Name
-    UIPadding_2.PaddingLeft = UDim.new(0, 16)
-
-    TabHolder.Name = "Tab Holder"
-    TabHolder.Parent = Main
-    TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    TabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TabHolder.BorderSizePixel = 0
-    TabHolder.Position = UDim2.new(0, 0, 0.118902437, 0)
-    TabHolder.Size = UDim2.new(0, 167, 0, 286)
-
-    Line_2.Name = "Line"
-    Line_2.Parent = TabHolder
-    Line_2.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
-    Line_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Line_2.BorderSizePixel = 0
-    Line_2.Position = UDim2.new(1.01191616, 0, 0, 0)
-    Line_2.Size = UDim2.new(0, -1, 1.00999999, 0)
-
-    UICorner_3.CornerRadius = UDim.new(0, 4)
-    UICorner_3.Parent = TabHolder
-
-    ScrollingTab.Name = "Scrolling Tab"
-    ScrollingTab.Parent = TabHolder
-    ScrollingTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    ScrollingTab.BackgroundTransparency = 1.000
-    ScrollingTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    ScrollingTab.BorderSizePixel = 0
-    ScrollingTab.Position = UDim2.new(0, 0, 2.66762044e-08, 0)
-    ScrollingTab.Selectable = false
-    ScrollingTab.Size = UDim2.new(0, 168, 0, 244)
-    ScrollingTab.CanvasSize = UDim2.new(0, 0, 0, 0)
-    ScrollingTab.ScrollBarThickness = 0
-    spawn(function()
-        while wait() do
-            ScrollingTab.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 12)
-        end
-    end)
-    
-    UIPadding_3.Parent = ScrollingTab
-    UIPadding_3.PaddingBottom = UDim.new(0, 8)
-    UIPadding_3.PaddingLeft = UDim.new(0, 4)
-    UIPadding_3.PaddingTop = UDim.new(0, 8)
-
-    UIListLayout.Parent = ScrollingTab
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout.Padding = UDim.new(0, 8)
-
-    shadowHolder.Name = "shadowHolder"
-    shadowHolder.Parent = Main
-    shadowHolder.BackgroundTransparency = 1.000
-    shadowHolder.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    shadowHolder.Position = UDim2.new(-0.00363564189, 0, -0.031338945, 0)
-    shadowHolder.Size = UDim2.new(1.01100278, 0, 1.04143631, 0)
-    shadowHolder.ZIndex = 0
-
-    umbraShadow.Name = "umbraShadow"
-    umbraShadow.Parent = shadowHolder
-    umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-    umbraShadow.BackgroundTransparency = 1.000
-    umbraShadow.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    umbraShadow.Position = UDim2.new(0.49438405, 0, 0.49926877, 6)
-    umbraShadow.Size = UDim2.new(1.01488185, 10, 1.0037961, 10)
-    umbraShadow.ZIndex = 0
-    umbraShadow.Image = "rbxassetid://1316045217"
-    umbraShadow.ImageTransparency = 0.860
-    umbraShadow.ScaleType = Enum.ScaleType.Slice
-    umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-    penumbraShadow.Name = "penumbraShadow"
-    penumbraShadow.Parent = shadowHolder
-    penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-    penumbraShadow.BackgroundTransparency = 1.000
-    penumbraShadow.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    penumbraShadow.Position = UDim2.new(0.49438405, 0, 0.49926877, 6)
-    penumbraShadow.Size = UDim2.new(1.01488185, 10, 1.0037961, 10)
-    penumbraShadow.ZIndex = 0
-    penumbraShadow.Image = "rbxassetid://1316045217"
-    penumbraShadow.ImageTransparency = 0.880
-    penumbraShadow.ScaleType = Enum.ScaleType.Slice
-    penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-    ambientShadow.Name = "ambientShadow"
-    ambientShadow.Parent = shadowHolder
-    ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
-    ambientShadow.BackgroundTransparency = 1.000
-    ambientShadow.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    ambientShadow.Position = UDim2.new(0.49438405, 0, 0.49926877, 6)
-    ambientShadow.Size = UDim2.new(1.01488185, 10, 1.0037961, 10)
-    ambientShadow.ZIndex = 0
-    ambientShadow.Image = "rbxassetid://1316045217"
-    ambientShadow.ImageTransparency = 0.880
-    ambientShadow.ScaleType = Enum.ScaleType.Slice
-    ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
-
-    AvatarUser.Name = "Avatar User"
-    AvatarUser.Parent = TabHolder
-    AvatarUser.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
-    AvatarUser.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    AvatarUser.BorderSizePixel = 0
-    AvatarUser.Position = UDim2.new(0, 0, 0.878434002, 0)
-    AvatarUser.Size = UDim2.new(0, 167, 0, 37)
-
-    UICorner_4.Parent = AvatarUser
-
-    Hide1.Name = "Hide1"
-    Hide1.Parent = AvatarUser
-    Hide1.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
-    Hide1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Hide1.BorderSizePixel = 0
-    Hide1.Position = UDim2.new(0, 0, -0.243243247, 0)
-    Hide1.Size = UDim2.new(0, 167, 0, 21)
-
-    Hide.Name = "Hide"
-    Hide.Parent = AvatarUser
-    Hide.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
-    Hide.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Hide.BorderSizePixel = 0
-    Hide.Position = UDim2.new(0.815477192, 0, 0.32432431, 0)
-    Hide.Size = UDim2.new(0, 30, 0, 25)
-
-    Frame.Parent = AvatarUser
-    Frame.BackgroundColor3 = Color3.fromRGB(144, 144, 144)
-    Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Frame.BorderSizePixel = 0
-    Frame.Position = UDim2.new(0, 0, -0.243243247, 0)
-    Frame.Size = UDim2.new(0, 168, 0, 1)
-
-    Avataruser.Name = "Avatar user"
-    Avataruser.Parent = AvatarUser
-    Avataruser.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Avataruser.BackgroundTransparency = 1.000
-    Avataruser.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Avataruser.BorderSizePixel = 0
-    Avataruser.Position = UDim2.new(0.0357142873, 0, -0.162162155, 0)
-    Avataruser.Size = UDim2.new(0, 40, 0, 40)
-    Avataruser.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
-    
-    local function setAvatarImage(player)
-        if player.Character then
-            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-            if humanoid then
-                local head = player.Character:FindFirstChild("Head")
-                if head then
-                    local face = head:FindFirstChild("face")
-                    if face then
-                        Avataruser.Image = face.Texture
-                    end
-                end
-            end
-        end
-    end
-    
-    game:GetService("Players").PlayerAdded:Connect(function(player)
-        setAvatarImage(player)
-    end)
-    
-    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
-        setAvatarImage(player)
-    end
-
-    UICorner_5.CornerRadius = UDim.new(1, 0)
-    UICorner_5.Parent = Avataruser
-
-    UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
-    UIStroke_2.Parent = Avataruser
-
-    TextLabel.Parent = AvatarUser
-    TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    TextLabel.BackgroundTransparency = 1.000
-    TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TextLabel.BorderSizePixel = 0
-    TextLabel.Position = UDim2.new(0.273809522, 0, -0.216216221, 0)
-    TextLabel.Size = UDim2.new(0, 122, 0, 45)
-    TextLabel.Font = Enum.Font.SourceSansBold
-    TextLabel.Text = game.Players.LocalPlayer.Name
-    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TextLabel.TextSize = 14.000
-    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-
-    UIPadding_6.Parent = TextLabel
-    UIPadding_6.PaddingLeft = UDim.new(0, 7)
-
-    ChannelContainer.Name = "Channel Container"
-    ChannelContainer.Parent = Main
-    ChannelContainer.AnchorPoint = Vector2.new(1, 0)
-    ChannelContainer.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
-    ChannelContainer.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    ChannelContainer.BorderSizePixel = 0
-    ChannelContainer.Position = UDim2.new(0.999981284, 0, 0.118902437, 0)
-    ChannelContainer.Size = UDim2.new(0, 366, 0, 288)
-
-    UICorner_6.CornerRadius = UDim.new(0, 4)
-    UICorner_6.Parent = ChannelContainer
-
-    MakeDraggable(TopFrame, Main)
-
-    function Library:CreateNotify(Options)
-        Options = Options or {}
-        Options.Name = Options.Name or 'Night Hub'
-        Options.Content = Options.Content or "Is This Notify"
-        Options.Icon = Options.Icon or "rbxassetid://17317584331"
-        Options.Time = Options.Time or 5
-        
-        local Notify = Instance.new("Frame")
-        local Coginoidi = Instance.new("TextLabel")
-        local UIPadding_12 = Instance.new("UIPadding")
-        local UIStroke_8 = Instance.new("UIStroke")
-        local Title_6 = Instance.new("TextLabel")
-        local UICorner_14 = Instance.new("UICorner")
-        local UIPadding_13 = Instance.new("UIPadding")
-        local IconNotify = Instance.new("ImageLabel")
-        local UICorner_15 = Instance.new("UICorner")
-    
-        Notify.Name = "Notify"
-        Notify.Parent = ScreenGui
-        Notify.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        Notify.BackgroundTransparency = 0.350
-        Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Notify.BorderSizePixel = 0
-        Notify.Position = UDim2.new(12.675405264, 0, 0.815789461, 0)
-        Notify.Size = UDim2.new(0, 327, 0, 81)
-    
-        Coginoidi.Name = "Coginoidi"
-        Coginoidi.Parent = Notify
-        Coginoidi.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Coginoidi.BackgroundTransparency = 1.000
-        Coginoidi.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Coginoidi.BorderSizePixel = 0
-        Coginoidi.Position = UDim2.new(0, 0, 0.415733069, 0)
-        Coginoidi.Size = UDim2.new(1, 0, 0.584266961, 0)
-        Coginoidi.Font = Enum.Font.GothamBold
-        Coginoidi.Text = Options.Content
-        Coginoidi.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Coginoidi.TextSize = 14.000
-        Coginoidi.TextWrapped = true
-        Coginoidi.TextXAlignment = Enum.TextXAlignment.Left
-    
-        UIPadding_12.Parent = Coginoidi
-        UIPadding_12.PaddingBottom = UDim.new(0, 16)
-        UIPadding_12.PaddingLeft = UDim.new(0, 12)
-    
-        UIStroke_8.Color = Color3.fromRGB(255, 255, 255)
-        UIStroke_8.Parent = Notify
-    
-        Title_6.Name = "Title"
-        Title_6.Parent = Notify
-        Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Title_6.BackgroundTransparency = 1.000
-        Title_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Title_6.BorderSizePixel = 0
-        Title_6.Position = UDim2.new(5.59955538e-07, 0, 0, 0)
-        Title_6.Size = UDim2.new(0, 327, 0, 33)
-        Title_6.Font = Enum.Font.Unknown
-        Title_6.Text = Options.Name
-        Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title_6.TextSize = 14.000
-        Title_6.TextXAlignment = Enum.TextXAlignment.Left
-    
-        UICorner_14.Parent = Title_6
-    
-        UIPadding_13.Parent = Title_6
-        UIPadding_13.PaddingLeft = UDim.new(0, 40)
-    
-        IconNotify.Name = "Icon Notify"
-        IconNotify.Parent = Title_6
-        IconNotify.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        IconNotify.BackgroundTransparency = 1.000
-        IconNotify.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        IconNotify.BorderSizePixel = 0
-        IconNotify.Position = UDim2.new(-0.128596231, 0, 0.0909090936, 0)
-        IconNotify.Size = UDim2.new(0, 27, 0, 27)
-        IconNotify.Image = Options.Icon
-    
-        UICorner_15.Parent = Notify
-    
-        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.737, 0, 0.797, 0)}):Play()
-    
-        wait(Options.Time - 0.88)
-        TweenService:Create(IconNotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
-        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
-        wait(0.3)
-        TweenService:Create(UIStroke_8, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0.9}):Play()
-        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
-        TweenService:Create(Coginoidi, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
-        wait(0.05)
-    
-        Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-        wait(1.35)
-        Notify:Destroy()
-    end
-
-    local UITab = {}
-
-    function UITab:CreateTab(Options)
-        Options = Options or {}
-        Options.Name = Options.Name or "Tab 1"
-        Options.Icon = Options.Icon or "rbxassetid://17184558565"
-
-        local ButtonDisabledTab = Instance.new("TextButton")
-        local UIPadding_5 = Instance.new("UIPadding")
-        local IconTab_2 = Instance.new("ImageLabel")
-        local Tab1 = Instance.new("ScrollingFrame")
-        local UIPadding_7 = Instance.new("UIPadding")
-        local UIListLayout_2 = Instance.new("UIListLayout")
-        local NameTab = Instance.new("TextLabel")
-        local ChannelName = ""
-        defaut = false
-        
-        ButtonDisabledTab.Name = "ButtonDisabledTab"
-        ButtonDisabledTab.Parent = ScrollingTab
-        ButtonDisabledTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        ButtonDisabledTab.BackgroundTransparency = 1.000
-        ButtonDisabledTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        ButtonDisabledTab.BorderSizePixel = 0
-        ButtonDisabledTab.Size = UDim2.new(1, 0, 0, 30)
-        ButtonDisabledTab.Font = Enum.Font.Unknown
-        ButtonDisabledTab.Text = Options.Name
-        ButtonDisabledTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-        ButtonDisabledTab.TextSize = 14.000
-        ButtonDisabledTab.TextXAlignment = Enum.TextXAlignment.Left
-
-        UIPadding_5.Parent = ButtonDisabledTab
-        UIPadding_5.PaddingLeft = UDim.new(0, 40)
-
-        IconTab_2.Name = "Icon Tab"
-        IconTab_2.Parent = ButtonDisabledTab
-        IconTab_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        IconTab_2.BackgroundTransparency = 1.000
-        IconTab_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        IconTab_2.ImageColor3 = Color3.fromRGB(144, 144, 144)
-        IconTab_2.BorderSizePixel = 0
-        IconTab_2.Position = UDim2.new(-0.30252099, 0, 0.0666666701, 0)
-        IconTab_2.Size = UDim2.new(0, 25, 0, 25)
-        IconTab_2.Image = Options.Icon
-
-        Tab1.Name = "Tab 1"
-        Tab1.Parent = ChannelContainer
-        Tab1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Tab1.BackgroundTransparency = 1.000
-        Tab1.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Tab1.BorderSizePixel = 0
-        Tab1.Selectable = false
-        Tab1.Size = UDim2.new(1, 0, 1, 0)
-        Tab1.CanvasSize = UDim2.new(0, 0, 3, 5)
-        Tab1.ScrollBarThickness = 0
-        Tab1.Visible = false
-        spawn(function()
-            while wait() do
-                Tab1.CanvasSize = UDim2.new(0,0,0,UIListLayout_2.AbsoluteContentSize.Y + 70)
-            end
-        end)
-
-        UIPadding_7.Parent = Tab1
-        UIPadding_7.PaddingBottom = UDim.new(0, 8)
-        UIPadding_7.PaddingLeft = UDim.new(0, 8)
-        UIPadding_7.PaddingRight = UDim.new(0, 8)
-        UIPadding_7.PaddingTop = UDim.new(0, 8)
-
-        UIListLayout_2.Parent = Tab1
-        UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-        UIListLayout_2.Padding = UDim.new(0, 10)
-
-        NameTab.Name = "Name Tab"
-        NameTab.Parent = Tab1
-        NameTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        NameTab.BackgroundTransparency = 1.000
-        NameTab.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        NameTab.BorderSizePixel = 0
-        NameTab.Size = UDim2.new(1, 0, 0, 19)
-        NameTab.Font = Enum.Font.SourceSansBold
-        NameTab.Text = Options.Name
-        NameTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-        NameTab.TextSize = 18.000
-
-        ButtonDisabledTab.MouseEnter:Connect(function()
-            if ChannelName ~= ButtonDisabledTab.Name then
-                ButtonDisabledTab.TextColor3 = Color3.fromRGB(255,255,255)
-                IconTab_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
-            end
-        end)
-        
-        ButtonDisabledTab.MouseLeave:Connect(function()
-            if ChannelName ~= ButtonDisabledTab.Name then
-                ButtonDisabledTab.TextColor3 = Color3.fromRGB(114, 118, 125)
-                IconTab_2.ImageColor3 = Color3.fromRGB(144, 144, 144)
-            end
-        end)   
-
-        ButtonDisabledTab.MouseButton1Click:Connect(function()
-            for i, v in next, ChannelContainer:GetChildren() do
-                if v.Name == "Tab 1" then
-                    v.Visible = false
-                end
-                Tab1.Visible = true
-            end
-            for i, v in next, ScrollingTab:GetChildren() do
-                if v.ClassName == "TextButton" then
-                    v.TextColor3 = Color3.fromRGB(144, 144, 144)
-                    v.BackgroundTransparency = 1.000
-                end
-            end
-            ButtonDisabledTab.TextColor3 = Color3.fromRGB(255,255,255)
-            ButtonDisabledTab.BackgroundTransparency = 0.9
-            ChannelName = ButtonDisabledTab.Name
-        end)
-        
-        if default == false then
-            default = true
-            ButtonDisabledTab.TextColor3 = Color3.fromRGB(144,144,144)
-            ChannelName = ButtonDisabledTab.Name
-            ChannelContainer.Visible = true
-            Tab1.Visible = false
-        end
-
-        local TabContent = {}
-
-        function TabContent:CreateSections(Options)
-            Options = Options or {}
-            Options.Text = Options.Text or "Sections"
-
-            local Section = Instance.new("TextLabel")
-            local UIPadding_8 = Instance.new("UIPadding")
-            local UIStroke_3 = Instance.new("UIStroke")
-            local UICorner_7 = Instance.new("UICorner")
-
-            Section.Name = "Section"
-            Section.Parent = Tab1
-            Section.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-            Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Section.BorderSizePixel = 0
-            Section.Position = UDim2.new(0, 0, 0.106617644, 0)
-            Section.Size = UDim2.new(0, 348, 0, 22)
-            Section.Font = Enum.Font.SourceSansBold
-            Section.Text = Options.Text
-            Section.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Section.TextSize = 16.000
-            Section.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_8.Parent = Section
-            UIPadding_8.PaddingLeft = UDim.new(0, 7)
-
-            UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-            UIStroke_3.Color = Color3.fromRGB(144, 144, 144)
-            UIStroke_3.Parent = Section
-
-            UICorner_7.Parent = Section
-            
-        end
-
-        function TabContent:CreateButton(Options)
-            Options = Options or {}
-            Options.Name = Options.Name or "Button"
-            Options.Description = Options.Description or ""
-            Options.CallBack = Options.CallBack or function() end
-
-            local Button = Instance.new("Frame")
-            local UICorner_9 = Instance.new("UICorner")
-            local UIStroke_5 = Instance.new("UIStroke")
-            local Content_2 = Instance.new("TextButton")
-            local UIPadding_10 = Instance.new("UIPadding")
-            local ImageLabel = Instance.new("ImageLabel")
-            local Desc = Instance.new("TextLabel")
-            local UIPadding_11 = Instance.new("UIPadding")
-
-            Button.Name = "Button"
-            Button.Parent = Tab1
-            Button.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-            Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Button.BorderSizePixel = 0
-            Button.Position = UDim2.new(0, 0, 0.400735289, 0)
-            Button.Size = UDim2.new(0, 348, 0, 80)
-
-            UICorner_9.CornerRadius = UDim.new(0, 4)
-            UICorner_9.Parent = Button
-
-            UIStroke_5.Color = Color3.fromRGB(100, 100, 100)
-            UIStroke_5.Parent = Button
-
-            Content_2.Name = "Content"
-            Content_2.Parent = Button
-            Content_2.Active = false
-            Content_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content_2.BackgroundTransparency = 1.000
-            Content_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content_2.BorderSizePixel = 0
-            Content_2.ClipsDescendants = true
-            Content_2.Selectable = false
-            Content_2.Size = UDim2.new(1, 0, 0.981485009, 0)
-            Content_2.Text = Options.Name
-            Content_2.Font = Enum.Font.Unknown
-            Content_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Content_2.TextSize = 14.000
-            Content_2.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_10.Parent = Content_2
-            UIPadding_10.PaddingBottom = UDim.new(0, 50)
-            UIPadding_10.PaddingLeft = UDim.new(0, 7)
-
-            ImageLabel.Parent = Content_2
-            ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            ImageLabel.BackgroundTransparency = 1.000
-            ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            ImageLabel.BorderSizePixel = 0
-            ImageLabel.Position = UDim2.new(0.90476191, 0, 0.122463182, 0)
-            ImageLabel.Size = UDim2.new(0, 25, 0, 25)
-            ImageLabel.Image = "rbxassetid://17300168059"
-
-            Desc.Name = "Desc"
-            Desc.Parent = Button
-            Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Desc.BackgroundTransparency = 1.000
-            Desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Desc.BorderSizePixel = 0
-            Desc.Position = UDim2.new(0.00287356321, 0, 0.443984985, 0)
-            Desc.Size = UDim2.new(0, 348, 0, 43)
-            Desc.Font = Enum.Font.SourceSansBold
-            Desc.Text = Options.Description
-            Desc.TextColor3 = Color3.fromRGB(144, 144, 144)
-            Desc.TextSize = 14.000
-            Desc.TextWrapped = true
-            Desc.TextXAlignment = Enum.TextXAlignment.Left
-            Desc.TextYAlignment = Enum.TextYAlignment.Top
-
-            UIPadding_11.Parent = Desc
-            UIPadding_11.PaddingLeft = UDim.new(0, 7)
-
-            Content_2.MouseEnter:Connect(function()
-                TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                    BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-                }):Play()
-            end)
-            
-            Content_2.MouseButton1Click:Connect(function()
-                pcall(Options.CallBack)
-                Content_2.TextSize = 20
-                TweenService:Create(Content_2, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                    TextSize = 14
-                }):Play()
-            end)
-            
-            Content_2.MouseLeave:Connect(function()
-                TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                    BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-                }):Play()
-            end)            
-
-        end
-
-        function TabContent:CreateToggle(Options)
-            Options = Options or {}
-            Options.Name = Options.Name or "Toggle"
-            Options.Description = Options.Description or ""
-            Options.Default = Options.Default or false
-            Options.CallBack = Options.CallBack or function() end
-
-            local Toggle = Instance.new("Frame")
-            local UICorner_10 = Instance.new("UICorner")
-            local UIStroke_6 = Instance.new("UIStroke")
-            local Content_3 = Instance.new("TextButton")
-            local UIPadding_12 = Instance.new("UIPadding")
-            local CheckerFrame = Instance.new("Frame")
-            local UICorner_11 = Instance.new("UICorner")
-            local ImageLabel_2 = Instance.new("ImageLabel")
-            local Desc_2 = Instance.new("TextLabel")
-            local UIPadding_13 = Instance.new("UIPadding")
-            local Toggled = Options.Default
-            
-            Toggle.Name = "Toggle"
-            Toggle.Parent = Tab1
-            Toggle.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-            Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Toggle.BorderSizePixel = 0
-            Toggle.Position = UDim2.new(0, 0, 0.14705883, 0)
-            Toggle.Size = UDim2.new(0, 348, 0, 88)
-
-            UICorner_10.CornerRadius = UDim.new(0, 4)
-            UICorner_10.Parent = Toggle
-
-            UIStroke_6.Color = Color3.fromRGB(100, 100, 100)
-            UIStroke_6.Parent = Toggle
-
-            Content_3.Name = "Content"
-            Content_3.Parent = Toggle
-            Content_3.Active = false
-            Content_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content_3.BackgroundTransparency = 1.000
-            Content_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content_3.BorderSizePixel = 0
-            Content_3.ClipsDescendants = true
-            Content_3.Selectable = false
-            Content_3.Size = UDim2.new(1, 0, 0.989439547, 0)
-            Content_3.Font = Enum.Font.Unknown
-            Content_3.Text = Options.Name
-            Content_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Content_3.TextSize = 14.000
-            Content_3.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_12.Parent = Content_3
-            UIPadding_12.PaddingBottom = UDim.new(0, 50)
-            UIPadding_12.PaddingLeft = UDim.new(0, 7)
-
-            CheckerFrame.Name = "CheckerFrame"
-            CheckerFrame.Parent = Content_3
-            CheckerFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-            CheckerFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            CheckerFrame.BorderSizePixel = 0
-            CheckerFrame.Position = UDim2.new(0.90476191, 0, 0.192487791, 0)
-            CheckerFrame.Size = UDim2.new(0, 25, 0, 25)
-
-            UICorner_11.Parent = CheckerFrame
-
-            ImageLabel_2.Parent = CheckerFrame
-            ImageLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            ImageLabel_2.BackgroundTransparency = 1.000
-            ImageLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            ImageLabel_2.BorderSizePixel = 0
-            ImageLabel_2.Position = UDim2.new(0.0799999982, 0, 0.0799999982, 0)
-            ImageLabel_2.Size = UDim2.new(0, 20, 0, 20)
-            ImageLabel_2.Image = "rbxassetid://17313815487"
-            ImageLabel_2.Visible = false
-
-            Desc_2.Name = "Desc"
-            Desc_2.Parent = Toggle
-            Desc_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Desc_2.BackgroundTransparency = 1.000
-            Desc_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Desc_2.BorderSizePixel = 0
-            Desc_2.Position = UDim2.new(0, 0, 0.43262136, 0)
-            Desc_2.Size = UDim2.new(0, 348, 0, 49)
-            Desc_2.Font = Enum.Font.SourceSansBold
-            Desc_2.Text = Options.Description
-            Desc_2.TextColor3 = Color3.fromRGB(144, 144, 144)
-            Desc_2.TextSize = 14.000
-            Desc_2.TextWrapped = true
-            Desc_2.TextXAlignment = Enum.TextXAlignment.Left
-            Desc_2.TextYAlignment = Enum.TextYAlignment.Top
-
-            UIPadding_13.Parent = Desc_2
-            UIPadding_13.PaddingLeft = UDim.new(0, 7)
-
-            Content_3.MouseButton1Click:Connect(function()
-                if Toggled == false then
-
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(75, 117, 255)
-                    }):Play()
-                    
-                    TweenService:Create(ImageLabel_2, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        ImageTransparency = 0.5
-                    }):Play()
-                    
-                    ImageLabel_2.Visible = true
-                    wait(0.01)
-                    
-                    TweenService:Create(ImageLabel_2, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        ImageTransparency = 0
-                    }):Play()
-                    
-                else
-                    
-                    TweenService:Create(ImageLabel_2, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        ImageTransparency = 0.5
-                    }):Play()
-
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-                    }):Play()
-                    
-                    ImageLabel_2.Visible = false
-                    wait(0.01)
-                    
-                    TweenService:Create(ImageLabel_2, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        ImageTransparency = 0
-                    }):Play()                    
-                end
-                Toggled = not Toggled
-                pcall(Options.CallBack, Toggled)
-            end)
-
-        end
-
-        function TabContent:CreateSlider(Options)
-            Options = Options or {}
-            Options.Name = Options.Name or "Slider"
-            Options.Description = Options.Description or {}
-            Options.Min = Options.Min or 1
-            Options.Max = Options.Max or 100
-            Options.Default = Options.Default or 50
-            Options.CallBack = Options.CallBack or function() end
-
-            local Slider = Instance.new("Frame")
-            local UICorner_12 = Instance.new("UICorner")
-            local UIStroke_7 = Instance.new("UIStroke")
-            local Desc_3 = Instance.new("TextLabel")
-            local UIPadding_14 = Instance.new("UIPadding")
-            local SliderBack = Instance.new("Frame")
-            local UICorner_13 = Instance.new("UICorner")
-            local UIStroke_8 = Instance.new("UIStroke")
-            local Draggable = Instance.new("Frame")
-            local UICorner_14 = Instance.new("UICorner")
-            local Content_4 = Instance.new("TextLabel")
-            local UIPadding_15 = Instance.new("UIPadding")
-            local Value = Instance.new("TextLabel")
-            local SliderNhulon = {
-                Hover = false,
-                MouseDown = false,
-                Connection = false
-            }
-            
-            Slider.Name = "Slider"
-            Slider.Parent = Tab1
-            Slider.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-            Slider.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Slider.BorderSizePixel = 0
-            Slider.Position = UDim2.new(0, 0, 0.584558845, 0)
-            Slider.Size = UDim2.new(0, 348, 0, 104)
-
-            UICorner_12.CornerRadius = UDim.new(0, 4)
-            UICorner_12.Parent = Slider
-
-            UIStroke_7.Color = Color3.fromRGB(100, 100, 100)
-            UIStroke_7.Parent = Slider
-
-            Desc_3.Name = "Desc"
-            Desc_3.Parent = Slider
-            Desc_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Desc_3.BackgroundTransparency = 1.000
-            Desc_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Desc_3.BorderSizePixel = 0
-            Desc_3.Position = UDim2.new(0.00287356321, 0, 0.548151672, 0)
-            Desc_3.Size = UDim2.new(0, 348, 0, 43)
-            Desc_3.Font = Enum.Font.SourceSansBold
-            Desc_3.Text = Options.Description
-            Desc_3.TextColor3 = Color3.fromRGB(144, 144, 144)
-            Desc_3.TextSize = 14.000
-            Desc_3.TextWrapped = true
-            Desc_3.TextXAlignment = Enum.TextXAlignment.Left
-            Desc_3.TextYAlignment = Enum.TextYAlignment.Top
-
-            UIPadding_14.Parent = Desc_3
-            UIPadding_14.PaddingLeft = UDim.new(0, 7)
-
-            SliderBack.Name = "SliderBack"
-            SliderBack.Parent = Slider
-            SliderBack.BackgroundColor3 = Color3.fromRGB(95, 95, 95)
-            SliderBack.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            SliderBack.BorderSizePixel = 0
-            SliderBack.Position = UDim2.new(0.0201149434, 0, 0.355769217, 0)
-            SliderBack.Size = UDim2.new(0, 334, 0, 8)
-
-            UICorner_13.Parent = SliderBack
-
-            UIStroke_8.Parent = SliderBack
-
-            Draggable.Name = "Draggable"
-            Draggable.Parent = SliderBack
-            Draggable.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Draggable.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Draggable.BorderSizePixel = 0
-            Draggable.Size = UDim2.new(0, 167, 0, 8)
-
-            UICorner_14.Parent = Draggable
-
-            Content_4.Name = "Content"
-            Content_4.Parent = Slider
-            Content_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content_4.BackgroundTransparency = 1.000
-            Content_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content_4.BorderSizePixel = 0
-            Content_4.ClipsDescendants = true
-            Content_4.Position = UDim2.new(0, 0, -7.33595641e-07, 0)
-            Content_4.Size = UDim2.new(1, 0, 0.278846622, 0)
-            Content_4.Font = Enum.Font.Unknown
-            Content_4.Text = Options.Name
-            Content_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Content_4.TextSize = 14.000
-            Content_4.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_15.Parent = Content_4
-            UIPadding_15.PaddingLeft = UDim.new(0, 7)
-
-            Value.Name = "Value"
-            Value.Parent = Content_4
-            Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Value.BackgroundTransparency = 1.000
-            Value.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Value.BorderSizePixel = 0
-            Value.Position = UDim2.new(0.90476191, 0, 0.122463182, 0)
-            Value.Size = UDim2.new(0, 25, 0, 25)
-            Value.Font = Enum.Font.Unknown
-            Value.Text = tostring(Options.Default and math.floor((Options.Default / Options.Max) * (Options.Max - Options.Min) + Options.Min) or 1)
-            Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-
-
-            function SliderNhulon:SetValue(v)
-                if v == nil then
-                    local percentage = math.clamp((mouse.X - SliderBack.AbsolutePosition.X) / (SliderBack.AbsoluteSize.X), 0, 1)
-				    local value = math.floor(((Options.Max - Options.Min) * percentage) + Options.Min)
-
-                    Value.Text = tostring(value)
-                    Draggable.Size = UDim2.fromScale(percentage, 1)
-                else
-                    Value.Text = tostring(v)
-                    local value = math.floor(((v - Options.Min) / (Options.Max - Options.Min)), 1)
-                end
-                Options.CallBack(SliderNhulon:GetValue())
-            end
-
-            function SliderNhulon:GetValue()
-                return tonumber(Value.Text)
-            end
-
-            Draggable.MouseEnter:Connect(function()
-                SliderNhulon.Hover = true
-
-                TweenService:Create(Draggable, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(200, 200, 200)}):Play()     
-                TweenService:Create(UIStroke_8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(255, 255, 255)}):Play()     
-                TweenService:Create(UIStroke_7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(255, 255, 255)}):Play()     
-            end)
-
-            Draggable.MouseLeave:Connect(function()
-                SliderNhulon.Hover = false
-
-                TweenService:Create(UIStroke_8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                TweenService:Create(UIStroke_7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                TweenService:Create(Draggable, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(106, 106, 106)}):Play()     
-            end)
-
-            uis.InputBegan:Connect(function(input, gpe)
-                if gpe then return end
-
-                if input.UserInputType == Enum.UserInputType.MouseButton1 and SliderNhulon.Hover then
-                    SliderNhulon.MouseDown = true
-                    TweenService:Create(Draggable, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(200, 200, 200)}):Play()     
-                    TweenService:Create(UIStroke_7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(255, 255, 255)}):Play()     
-                    TweenService:Create(UIStroke_8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(255, 255, 255)}):Play()     
-                
-                    if not SliderNhulon.Connection then
-                        SliderNhulon.Connection = Runservice.RenderStepped:Connect(function()
-                            SliderNhulon:SetValue()
-                        end)
-                    end
-                end
-            end)
-
-            uis.InputEnded:Connect(function(input, gpe)
-                if gpe then return end
-                
-                if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    SliderNhulon.MouseDown = false
-
-                    if SliderNhulon.Hover then
-                        TweenService:Create(UIStroke_7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                        TweenService:Create(UIStroke_8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                        TweenService:Create(Draggable, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(106, 106, 106)}):Play()
-                    else
-                        TweenService:Create(UIStroke_7, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                        TweenService:Create(UIStroke_8, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(144, 144, 144)}):Play()     
-                        TweenService:Create(Draggable, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(106, 106, 106)}):Play()     
-                    end
-
-                    if SliderNhulon.Connection then SliderNhulon.Connection:Disconnect() end
-                    SliderNhulon.Connection = nil
-                    end                 
-                end)
-
-            return SliderNhulon
-        end
-
-        function TabContent:CreateDropdown(Options)
-            Options = Options or {}
-            Options.Name = Options.Name or "Dropdown"
-            Options.Description = Options.Description or ""
-            Options.List = Options.List or {}
-            Options.Default = Options.Default or ""
-            Options.CallBack = Options.CallBack or function() end
-
-            local Dropdown = Instance.new("Frame")
-            local UICorner_15 = Instance.new("UICorner")
-            local UIStroke_9 = Instance.new("UIStroke")
-            local Content_5 = Instance.new("TextButton")
-            local UIPadding_16 = Instance.new("UIPadding")
-            local IconFrame = Instance.new("Frame")
-            local IconDropdown = Instance.new("ImageLabel")
-            local TextLabel_2 = Instance.new("TextLabel")
-            local UIPadding_17 = Instance.new("UIPadding")
-            local Desc_4 = Instance.new("TextLabel")
-            local UIPadding_18 = Instance.new("UIPadding")
-            local ListFrame = Instance.new("Frame")
-            local UICorner_16 = Instance.new("UICorner")
-            local List = Instance.new("ScrollingFrame")
-            local UIPadding_19 = Instance.new("UIPadding")
-            local UIListLayout_3 = Instance.new("UIListLayout")
-            local Option = Instance.new("TextButton")
-            local Dropped = false
-
-            Dropdown.Name = "Dropdown"
-            Dropdown.Parent = Tab1
-            Dropdown.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-            Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Dropdown.BorderSizePixel = 0
-            Dropdown.Position = UDim2.new(0, 0, -0.0735294148, 0)
-            Dropdown.Size = UDim2.new(0, 348, 0, 137)
-
-            UICorner_15.CornerRadius = UDim.new(0, 4)
-            UICorner_15.Parent = Dropdown
-
-            UIStroke_9.Color = Color3.fromRGB(100, 100, 100)
-            UIStroke_9.Parent = Dropdown
-
-            Content_5.Name = "Content"
-            Content_5.Parent = Dropdown
-            Content_5.Active = false
-            Content_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content_5.BackgroundTransparency = 1.000
-            Content_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content_5.BorderSizePixel = 0
-            Content_5.ClipsDescendants = true
-            Content_5.Position = UDim2.new(0.00287356321, 0, 0, 0)
-            Content_5.Selectable = false
-            Content_5.Size = UDim2.new(0, 348, 0, 140)
-            Content_5.Font = Enum.Font.Unknown
-            Content_5.Text = Options.Name
-            Content_5.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Content_5.TextSize = 14.000
-            Content_5.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_16.Parent = Content_5
-            UIPadding_16.PaddingBottom = UDim.new(0, 85)
-            UIPadding_16.PaddingLeft = UDim.new(0, 7)
-            UIPadding_16.PaddingTop = UDim.new(0, 8)
-
-            Desc_4.Name = "Desc"
-            Desc_4.Parent = Content_5
-            Desc_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Desc_4.BackgroundTransparency = 1.000
-            Desc_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Desc_4.BorderSizePixel = 0
-            Desc_4.Position = UDim2.new(-0.0358169191, 0, 1.88929617, 0)
-            Desc_4.Size = UDim2.new(0, 348, 0, 43)
-            Desc_4.Font = Enum.Font.SourceSansBold
-            Desc_4.Text = Options.Description
-            Desc_4.TextColor3 = Color3.fromRGB(144, 144, 144)
-            Desc_4.TextSize = 14.000
-            Desc_4.TextWrapped = true
-            Desc_4.TextXAlignment = Enum.TextXAlignment.Left
-            Desc_4.TextYAlignment = Enum.TextYAlignment.Top
-
-            UIPadding_17.Parent = Desc_4
-            UIPadding_17.PaddingLeft = UDim.new(0, 12)
-
-            TextLabel_2.Parent = Content_5
-            TextLabel_2.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-            TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TextLabel_2.BorderSizePixel = 0
-            TextLabel_2.Position = UDim2.new(0.00184722175, 0, 0.906360686, 0)
-            TextLabel_2.Size = UDim2.new(0, 283, 0, 27)
-            TextLabel_2.Font = Enum.Font.SourceSansBold
-            TextLabel_2.Text = Options.Default
-            TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel_2.TextSize = 14.000
-            TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-
-            UIPadding_18.Parent = TextLabel_2
-            UIPadding_18.PaddingLeft = UDim.new(0, 7)
-
-            IconFrame.Name = "IconFrame"
-            IconFrame.Parent = Content_5
-            IconFrame.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-            IconFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            IconFrame.BorderSizePixel = 0
-            IconFrame.Position = UDim2.new(0.890086234, 0, 0.926372707, 0)
-            IconFrame.Size = UDim2.new(0, 25, 0, 25)
-
-            IconDropdown.Name = "Icon Dropdown"
-            IconDropdown.Parent = IconFrame
-            IconDropdown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            IconDropdown.BackgroundTransparency = 1.000
-            IconDropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            IconDropdown.BorderSizePixel = 0
-            IconDropdown.Position = UDim2.new(0.200000003, 0, 0.200000003, 0)
-            IconDropdown.Size = UDim2.new(0, 15, 0, 15)
-            IconDropdown.Image = "rbxassetid://17325676878"
-
-            ListFrame.Name = "ListFrame"
-            ListFrame.Parent = Dropdown
-            ListFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-            ListFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            ListFrame.BorderSizePixel = 0
-            ListFrame.Position = UDim2.new(0, 0, 0.521263361, 0)
-            ListFrame.Size = UDim2.new(0, 349, 0, 125)
-            ListFrame.Visible = false
-
-            UICorner_16.Parent = ListFrame
-
-            List.Name = "List"
-            List.Parent = ListFrame
-            List.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            List.BackgroundTransparency = 1.000
-            List.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            List.BorderSizePixel = 0
-            List.Selectable = false
-            List.Size = UDim2.new(1, 0, 1, 0)
-            List.CanvasSize = UDim2.new(0, 0, 0, 0)
-            List.ScrollBarThickness = 0
-            spawn(function()
-                while wait() do
-                    List.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_3.AbsoluteContentSize.Y)
-                end
-            end)
-
-            UIPadding_19.Parent = List
-            UIPadding_19.PaddingBottom = UDim.new(0, 6)
-            UIPadding_19.PaddingLeft = UDim.new(0, 6)
-            UIPadding_19.PaddingRight = UDim.new(0, 6)
-            UIPadding_19.PaddingTop = UDim.new(0, 6)
-
-            UIListLayout_3.Parent = List
-            UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
-            UIListLayout_3.Padding = UDim.new(0, 8)
-
-            Options.CallBack(TextLabel_2.Text)
-
-            for i, v in next, Options.List do
-                local Option = Instance.new("TextButton")
-
-                Option.Name = "Option"
-                Option.Parent = List
-                Option.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                Option.BackgroundTransparency = 1.000
-                Option.BorderColor3 = Color3.fromRGB(0, 0, 0)
-                Option.BorderSizePixel = 0
-                Option.Size = UDim2.new(1, 0, 0, 30)
-                Option.Font = Enum.Font.SourceSansBold
-                Option.Text = tostring(v)
-                Option.TextColor3 = Color3.fromRGB(144, 144, 144)
-                Option.TextSize = 14.000
-
-                Option.MouseEnter:Connect(function()
-                    TweenService:Create(
-                        Option,
-                        TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            TextTransparency = 0
-                        }
-                    ):Play()
-                end)
-    
-                Option.MouseLeave:Connect(function()
-                    TweenService:Create(
-                        Option,
-                        TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            TextTransparency = 0.5
-                        }
-                    ):Play()
-                end)
-    
-                Option.MouseButton1Click:Connect(function()
-                    Dropped = false
-                    ListFrame.Visible = false
-                    Dropdown:TweenSize(UDim2.new(0, 348, 0, 137),"Out","Quad",0.3,true)
-                    TweenService:Create(
-                        ListFrame,
-                        TweenInfo.new(0.1 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            Visible = false
-                        }
-                    ):Play()
-                    pcall(Option.Text)
-                    Options.CallBack(Option.Text)
-                    TextLabel_2.Text = Option.Text
-                end)
-            end
-
-            Content_5.MouseButton1Click:Connect(function()
-                if Dropped == false then
-                    Dropped = true
-                    Dropdown:TweenSize(UDim2.new(0, 348, 0.182, 137),"Out","Quad",0.3,true)
-                    TweenService:Create(
-                        ListFrame,
-                        TweenInfo.new(0.2,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            Visible = true
-                        }
-                    ):Play()
-                else
-                    Dropped = false
-                    Dropdown:TweenSize(UDim2.new(0, 348, 0, 137),"Out","Quad",0.3,true)
-                    TweenService:Create(
-                        ListFrame,
-                        TweenInfo.new(0.1 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            Visible = false
-                        }
-                    ):Play()
-                end
-            end)
-
-        end
-
-        function TabContent:CreateLabel(Options)
-            Options = Options or {}
-            Options.Text = Options.Text or ""
-
-            local Label = Instance.new("Frame")
-            local UICorner_8 = Instance.new("UICorner")
-            local UIStroke_4 = Instance.new("UIStroke")
-            local Content = Instance.new("TextLabel")
-            local UIPadding_9 = Instance.new("UIPadding")
-            local LabelUpdate = {}
-
-            Label.Name = "Label"
-            Label.Parent = Tab1
-            Label.BackgroundColor3 = Color3.fromRGB(71, 71, 71)
-            Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Label.BorderSizePixel = 0
-            Label.Position = UDim2.new(0, 0, 0.224264711, 0)
-            Label.Size = UDim2.new(0, 348, 0, 38)
-
-            UICorner_8.CornerRadius = UDim.new(0, 4)
-            UICorner_8.Parent = Label
-
-            UIStroke_4.Color = Color3.fromRGB(100, 100, 100)
-            UIStroke_4.Parent = Label
-
-            Content.Name = "Content"
-            Content.Parent = Label
-            Content.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content.BackgroundTransparency = 1.000
-            Content.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content.BorderSizePixel = 0
-            Content.ClipsDescendants = true
-            Content.Size = UDim2.new(1, 0, 1, 0)
-            Content.Font = Enum.Font.Unknown
-            Content.Text = Options.Text
-            Content.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Content.TextSize = 14.000
-            Content.TextWrapped = true
-            Content.TextXAlignment = Enum.TextXAlignment.Left
-            
-            UIPadding_9.Parent = Content
-            UIPadding_9.PaddingLeft = UDim.new(0, 7)
-
-            function LabelUpdate:Set(v)
-                Options.Text = v
-                LabelUpdate:update()
-            end
-
-            function LabelUpdate:update()
-                Content.Text = Options.Text
-
-                Content.Size = UDim2.new(Content.Size.X.Scale, Content.Size.X.Offset, 0, math.huge)
-                Content.Size = UDim2.new(Content.Size.X.Scale, Content.Size.X.Offset, 0, Content.TextBounds.Y)
-                Label.Size = UDim2.new(Content.Size.X.Scale, Content.Size.X.Offset, 0, Content.TextBounds.Y + 12)
-            end
-
-            LabelUpdate:update()
-            return LabelUpdate
-            
-        end
-
-        return TabContent
-
-    end
-
-    return UITab
-end
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("Night Hub") then
-            makefolder("Night Hub")
-        end
-        if not isfolder("Night Hub/Blox Fruits/") then
-            makefolder("Night Hub/Blox Fruits/")
-        end
-        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile(
-                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(_G.Settings)
-            )
-        else
-            local x =
-                game:GetService("HttpService"):JSONDecode(
-                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
-            )
-            for y, z in pairs(x) do
-                _G.Settings[y] = z
-            end
-        end
-    else
-        return
-    end
-end
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local x =
-                game:GetService("HttpService"):JSONDecode(
-                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
-            )
-            local A = {}
-            for y, z in pairs(_G.Settings) do
-                A[y] = z
-            end
-            writefile(
-                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(A)
-            )
-        end
-    else
-        return
-    end
-end
-LoadSettings()
-
 if game.PlaceId == 2753915549 then
     Sea1 = true
 elseif game.PlaceId == 4442272183 then
@@ -1442,615 +16,615 @@ function GetQuest()
         if YourLevel == 1 or YourLevel <= 9 then
             Mob = "Bandit"
             NumberQuest = 1
-            NameQuest = "BanditQuest1"
-            NameMob = "Bandit"
-            CFrameQuest = CFrame.new(1059.37195, 15.4495068, 1550.4231, 0.939700544, -0, -0.341998369, 0, 1, -0, 0.341998369, 0, 0.939700544)
-            CFrameMob = CFrame.new(1045.962646484375, 27.00250816345215, 1560.8203125)
+            NQuest = "BanditQuest1"
+            TitleMob = "Bandit"
+            CQuest = CFrame.new(1059.37195, 15.4495068, 1550.4231, 0.939700544, -0, -0.341998369, 0, 1, -0, 0.341998369, 0, 0.939700544)
+            CMob = CFrame.new(1045.962646484375, 27.00250816345215, 1560.8203125)
             elseif YourLevel == 10 or YourLevel <= 14 then
             Mob = "Monkey"
             NumberQuest = 1
-            NameQuest = "JungleQuest"
-            NameMob = "Monkey"
-            CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-            CFrameMob = CFrame.new(-1448.51806640625, 67.85301208496094, 11.46579647064209)
+            NQuest = "JungleQuest"
+            TitleMob = "Monkey"
+            CQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+            CMob = CFrame.new(-1448.51806640625, 67.85301208496094, 11.46579647064209)
             elseif YourLevel == 15 or YourLevel <= 29 then
             Mob = "Gorilla"
             NumberQuest = 2
-            NameQuest = "JungleQuest"
-            NameMob = "Gorilla"
-            CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-            CFrameMob = CFrame.new(-1129.8836669921875, 40.46354675292969, -525.4237060546875)
+            NQuest = "JungleQuest"
+            TitleMob = "Gorilla"
+            CQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+            CMob = CFrame.new(-1129.8836669921875, 40.46354675292969, -525.4237060546875)
             elseif YourLevel == 30 or YourLevel <= 39 then
             Mob = "Pirate"
             NumberQuest = 1
-            NameQuest = "BuggyQuest1"
-            NameMob = "Pirate"
-            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
-            CFrameMob = CFrame.new(-1103.513427734375, 13.752052307128906, 3896.091064453125)
+            NQuest = "BuggyQuest1"
+            TitleMob = "Pirate"
+            CQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
+            CMob = CFrame.new(-1103.513427734375, 13.752052307128906, 3896.091064453125)
             elseif YourLevel == 40 or YourLevel <= 59 then
             Mob = "Brute"
             NumberQuest = 2
-            NameQuest = "BuggyQuest1"
-            NameMob = "Brute"
-            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
-            CFrameMob = CFrame.new(-1140.083740234375, 14.809885025024414, 4322.92138671875)
+            NQuest = "BuggyQuest1"
+            TitleMob = "Brute"
+            CQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
+            CMob = CFrame.new(-1140.083740234375, 14.809885025024414, 4322.92138671875)
             elseif YourLevel == 60 or YourLevel <= 74 then
             Mob = "Desert Bandit"
             NumberQuest = 1
-            NameQuest = "DesertQuest"
-            NameMob = "Desert Bandit"
-            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
-            CFrameMob = CFrame.new(924.7998046875, 6.44867467880249, 4481.5859375)
+            NQuest = "DesertQuest"
+            TitleMob = "Desert Bandit"
+            CQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
+            CMob = CFrame.new(924.7998046875, 6.44867467880249, 4481.5859375)
             elseif YourLevel == 75 or YourLevel <= 89 then
             Mob = "Desert Officer"
             NumberQuest = 2
-            NameQuest = "DesertQuest"
-            NameMob = "Desert Officer"
-            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
-            CFrameMob = CFrame.new(1608.2822265625, 8.614224433898926, 4371.00732421875)
+            NQuest = "DesertQuest"
+            TitleMob = "Desert Officer"
+            CQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
+            CMob = CFrame.new(1608.2822265625, 8.614224433898926, 4371.00732421875)
             elseif YourLevel == 90 or YourLevel <= 99 then
             Mob = "Snow Bandit"
             NumberQuest = 1
-            NameQuest = "SnowQuest"
-            NameMob = "Snow Bandit"
-            CFrameQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
-            CFrameMob = CFrame.new(1354.347900390625, 87.27277374267578, -1393.946533203125)
+            NQuest = "SnowQuest"
+            TitleMob = "Snow Bandit"
+            CQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
+            CMob = CFrame.new(1354.347900390625, 87.27277374267578, -1393.946533203125)
             elseif YourLevel == 100 or YourLevel <= 119 then
             Mob = "Snowman"
             NumberQuest = 2
-            NameQuest = "SnowQuest"
-            NameMob = "Snowman"
-            CFrameQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
-            CFrameMob = CFrame.new(1201.6412353515625, 144.57958984375, -1550.0670166015625)
+            NQuest = "SnowQuest"
+            TitleMob = "Snowman"
+            CQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
+            CMob = CFrame.new(1201.6412353515625, 144.57958984375, -1550.0670166015625)
             elseif YourLevel == 120 or YourLevel <= 149 then
             Mob = "Chief Petty Officer"
             NumberQuest = 1
-            NameQuest = "MarineQuest2"
-            NameMob = "Chief Petty Officer"
-            CFrameQuest = CFrame.new(-5039.58643, 27.3500385, 4324.68018, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-4881.23095703125, 22.65204429626465, 4273.75244140625)
+            NQuest = "MarineQuest2"
+            TitleMob = "Chief Petty Officer"
+            CQuest = CFrame.new(-5039.58643, 27.3500385, 4324.68018, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-4881.23095703125, 22.65204429626465, 4273.75244140625)
             elseif YourLevel == 150 or YourLevel <= 174 then
             Mob = "Sky Bandit"
             NumberQuest = 1
-            NameQuest = "SkyQuest"
-            NameMob = "Sky Bandit"
-            CFrameQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
-            CFrameMob = CFrame.new(-4953.20703125, 295.74420166015625, -2899.22900390625)
+            NQuest = "SkyQuest"
+            TitleMob = "Sky Bandit"
+            CQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+            CMob = CFrame.new(-4953.20703125, 295.74420166015625, -2899.22900390625)
             elseif YourLevel == 175 or YourLevel <= 189 then
             Mob = "Dark Master"
             NumberQuest = 2
-            NameQuest = "SkyQuest"
-            NameMob = "Dark Master"
-            CFrameQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
-            CFrameMob = CFrame.new(-5259.8447265625, 391.3976745605469, -2229.035400390625)
+            NQuest = "SkyQuest"
+            TitleMob = "Dark Master"
+            CQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+            CMob = CFrame.new(-5259.8447265625, 391.3976745605469, -2229.035400390625)
             elseif YourLevel == 190 or YourLevel <= 209 then
             Mob = "Prisoner"
             NumberQuest = 1
-            NameQuest = "PrisonerQuest"
-            NameMob = "Prisoner"
-            CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
-            CFrameMob = CFrame.new(5098.9736328125, -0.3204058110713959, 474.2373352050781)
+            NQuest = "PrisonerQuest"
+            TitleMob = "Prisoner"
+            CQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
+            CMob = CFrame.new(5098.9736328125, -0.3204058110713959, 474.2373352050781)
             elseif YourLevel == 210 or YourLevel <= 249 then
             Mob = "Dangerous Prisoner"
             NumberQuest = 2
-            NameQuest = "PrisonerQuest"
-            NameMob = "Dangerous Prisoner"
-            CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
-            CFrameMob = CFrame.new(5654.5634765625, 15.633401870727539, 866.2991943359375)
+            NQuest = "PrisonerQuest"
+            TitleMob = "Dangerous Prisoner"
+            CQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
+            CMob = CFrame.new(5654.5634765625, 15.633401870727539, 866.2991943359375)
             elseif YourLevel == 250 or YourLevel <= 274 then
             Mob = "Toga Warrior"
             NumberQuest = 1
-            NameQuest = "ColosseumQuest"
-            NameMob = "Toga Warrior"
-            CFrameQuest = CFrame.new(-1580.04663, 6.35000277, -2986.47534, -0.515037298, 0, -0.857167721, 0, 1, 0, 0.857167721, 0, -0.515037298)
-            CFrameMob = CFrame.new(-1820.21484375, 51.68385696411133, -2740.6650390625)
+            NQuest = "ColosseumQuest"
+            TitleMob = "Toga Warrior"
+            CQuest = CFrame.new(-1580.04663, 6.35000277, -2986.47534, -0.515037298, 0, -0.857167721, 0, 1, 0, 0.857167721, 0, -0.515037298)
+            CMob = CFrame.new(-1820.21484375, 51.68385696411133, -2740.6650390625)
             elseif YourLevel == 275 or YourLevel <= 299 then
             Mob = "Gladiator"
             NumberQuest = 2
-            NameQuest = "ColosseumQuest"
-            NameMob = "Gladiator"
-            CFrameQuest = CFrame.new(-1580.04663, 6.35000277, -2986.47534, -0.515037298, 0, -0.857167721, 0, 1, 0, 0.857167721, 0, -0.515037298)
-            CFrameMob = CFrame.new(-1292.838134765625, 56.380882263183594, -3339.031494140625)
+            NQuest = "ColosseumQuest"
+            TitleMob = "Gladiator"
+            CQuest = CFrame.new(-1580.04663, 6.35000277, -2986.47534, -0.515037298, 0, -0.857167721, 0, 1, 0, 0.857167721, 0, -0.515037298)
+            CMob = CFrame.new(-1292.838134765625, 56.380882263183594, -3339.031494140625)
             elseif YourLevel == 300 or YourLevel <= 324 then
             Mob = "Military Soldier"
             NumberQuest = 1
-            NameQuest = "MagmaQuest"
-            NameMob = "Military Soldier"
-            CFrameQuest = CFrame.new(-5313.37012, 10.9500084, 8515.29395, -0.499959469, 0, 0.866048813, 0, 1, 0, -0.866048813, 0, -0.499959469)
-            CFrameMob = CFrame.new(-5411.16455078125, 11.081554412841797, 8454.29296875)
+            NQuest = "MagmaQuest"
+            TitleMob = "Military Soldier"
+            CQuest = CFrame.new(-5313.37012, 10.9500084, 8515.29395, -0.499959469, 0, 0.866048813, 0, 1, 0, -0.866048813, 0, -0.499959469)
+            CMob = CFrame.new(-5411.16455078125, 11.081554412841797, 8454.29296875)
             elseif YourLevel == 325 or YourLevel <= 374 then
             Mob = "Military Spy"
             NumberQuest = 2
-            NameQuest = "MagmaQuest"
-            NameMob = "Military Spy"
-            CFrameQuest = CFrame.new(-5313.37012, 10.9500084, 8515.29395, -0.499959469, 0, 0.866048813, 0, 1, 0, -0.866048813, 0, -0.499959469)
-            CFrameMob = CFrame.new(-5802.8681640625, 86.26241302490234, 8828.859375)
+            NQuest = "MagmaQuest"
+            TitleMob = "Military Spy"
+            CQuest = CFrame.new(-5313.37012, 10.9500084, 8515.29395, -0.499959469, 0, 0.866048813, 0, 1, 0, -0.866048813, 0, -0.499959469)
+            CMob = CFrame.new(-5802.8681640625, 86.26241302490234, 8828.859375)
             elseif YourLevel == 375 or YourLevel <= 399 then
             Mob = "Fishman Warrior"
             NumberQuest = 1
-            NameQuest = "FishmanQuest"
-            NameMob = "Fishman Warrior"
-            CFrameQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
-            CFrameMob = CFrame.new(60878.30078125, 18.482830047607422, 1543.7574462890625)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "FishmanQuest"
+            TitleMob = "Fishman Warrior"
+            CQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
+            CMob = CFrame.new(60878.30078125, 18.482830047607422, 1543.7574462890625)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
             end
             elseif YourLevel == 400 or YourLevel <= 449 then
             Mob = "Fishman Commando"
             NumberQuest = 2
-            NameQuest = "FishmanQuest"
-            NameMob = "Fishman Commando"
-            CFrameQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
-            CFrameMob = CFrame.new(61922.6328125, 18.482830047607422, 1493.934326171875)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "FishmanQuest"
+            TitleMob = "Fishman Commando"
+            CQuest = CFrame.new(61122.65234375, 18.497442245483, 1569.3997802734)
+            CMob = CFrame.new(61922.6328125, 18.482830047607422, 1493.934326171875)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
             end
             elseif YourLevel == 450 or YourLevel <= 474 then
             Mob = "God's Guard"
             NumberQuest = 1
-            NameQuest = "SkyExp1Quest"
-            NameMob = "God's Guard"
-            CFrameQuest = CFrame.new(-4721.88867, 843.874695, -1949.96643, 0.996191859, -0, -0.0871884301, 0, 1, -0, 0.0871884301, 0, 0.996191859)
-            CFrameMob = CFrame.new(-4710.04296875, 845.2769775390625, -1927.3079833984375)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "SkyExp1Quest"
+            TitleMob = "God's Guard"
+            CQuest = CFrame.new(-4721.88867, 843.874695, -1949.96643, 0.996191859, -0, -0.0871884301, 0, 1, -0, 0.0871884301, 0, 0.996191859)
+            CMob = CFrame.new(-4710.04296875, 845.2769775390625, -1927.3079833984375)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-4607.82275, 872.54248, -1667.55688))
             end
             elseif YourLevel == 475 or YourLevel <= 524 then
             Mob = "Shanda"
             NumberQuest = 2
-            NameQuest = "SkyExp1Quest"
-            NameMob = "Shanda"
-            CFrameQuest = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
-            CFrameMob = CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "SkyExp1Quest"
+            TitleMob = "Shanda"
+            CQuest = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
+            CMob = CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047))
             end
             elseif YourLevel == 525 or YourLevel <= 549 then
             Mob = "Royal Squad"
             NumberQuest = 1
-            NameQuest = "SkyExp2Quest"
-            NameMob = "Royal Squad"
-            CFrameQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-7624.25244140625, 5658.13330078125, -1467.354248046875)
+            NQuest = "SkyExp2Quest"
+            TitleMob = "Royal Squad"
+            CQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-7624.25244140625, 5658.13330078125, -1467.354248046875)
             elseif YourLevel == 550 or YourLevel <= 624 then
             Mob = "Royal Soldier"
             NumberQuest = 2
-            NameQuest = "SkyExp2Quest"
-            NameMob = "Royal Soldier"
-            CFrameQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-7836.75341796875, 5645.6640625, -1790.6236572265625)
+            NQuest = "SkyExp2Quest"
+            TitleMob = "Royal Soldier"
+            CQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-7836.75341796875, 5645.6640625, -1790.6236572265625)
             elseif YourLevel == 625 or YourLevel <= 649 then
             Mob = "Galley Pirate"
             NumberQuest = 1
-            NameQuest = "FountainQuest"
-            NameMob = "Galley Pirate"
-            CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
-            CFrameMob = CFrame.new(5551.02197265625, 78.90135192871094, 3930.412841796875)
+            NQuest = "FountainQuest"
+            TitleMob = "Galley Pirate"
+            CQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
+            CMob = CFrame.new(5551.02197265625, 78.90135192871094, 3930.412841796875)
             elseif YourLevel >= 650 then
             Mob = "Galley Captain"
             NumberQuest = 2
-            NameQuest = "FountainQuest"
-            NameMob = "Galley Captain"
-            CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
-            CFrameMob = CFrame.new(5441.95166015625, 42.50205993652344, 4950.09375)
+            NQuest = "FountainQuest"
+            TitleMob = "Galley Captain"
+            CQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
+            CMob = CFrame.new(5441.95166015625, 42.50205993652344, 4950.09375)
             end
             elseif Sea2 then
             if YourLevel == 700 or YourLevel <= 724 then
             Mob = "Raider"
             NumberQuest = 1
-            NameQuest = "Area1Quest"
-            NameMob = "Raider"
-            CFrameQuest = CFrame.new(-429.543518, 71.7699966, 1836.18188, -0.22495985, 0, -0.974368095, 0, 1, 0, 0.974368095, 0, -0.22495985)
-            CFrameMob = CFrame.new(-728.3267211914062, 52.779319763183594, 2345.7705078125)
+            NQuest = "Area1Quest"
+            TitleMob = "Raider"
+            CQuest = CFrame.new(-429.543518, 71.7699966, 1836.18188, -0.22495985, 0, -0.974368095, 0, 1, 0, 0.974368095, 0, -0.22495985)
+            CMob = CFrame.new(-728.3267211914062, 52.779319763183594, 2345.7705078125)
             elseif YourLevel == 725 or YourLevel <= 774 then
             Mob = "Mercenary"
             NumberQuest = 2
-            NameQuest = "Area1Quest"
-            NameMob = "Mercenary"
-            CFrameQuest = CFrame.new(-429.543518, 71.7699966, 1836.18188, -0.22495985, 0, -0.974368095, 0, 1, 0, 0.974368095, 0, -0.22495985)
-            CFrameMob = CFrame.new(-1004.3244018554688, 80.15886688232422, 1424.619384765625)
+            NQuest = "Area1Quest"
+            TitleMob = "Mercenary"
+            CQuest = CFrame.new(-429.543518, 71.7699966, 1836.18188, -0.22495985, 0, -0.974368095, 0, 1, 0, 0.974368095, 0, -0.22495985)
+            CMob = CFrame.new(-1004.3244018554688, 80.15886688232422, 1424.619384765625)
             elseif YourLevel == 775 or YourLevel <= 799 then
             Mob = "Swan Pirate"
             NumberQuest = 1
-            NameQuest = "Area2Quest"
-            NameMob = "Swan Pirate"
-            CFrameQuest = CFrame.new(638.43811, 71.769989, 918.282898, 0.139203906, 0, 0.99026376, 0, 1, 0, -0.99026376, 0, 0.139203906)
-            CFrameMob = CFrame.new(1068.664306640625, 137.61428833007812, 1322.1060791015625)
+            NQuest = "Area2Quest"
+            TitleMob = "Swan Pirate"
+            CQuest = CFrame.new(638.43811, 71.769989, 918.282898, 0.139203906, 0, 0.99026376, 0, 1, 0, -0.99026376, 0, 0.139203906)
+            CMob = CFrame.new(1068.664306640625, 137.61428833007812, 1322.1060791015625)
             elseif YourLevel == 800 or YourLevel <= 874 then
             Mob = "Factory Staff"
-            NameQuest = "Area2Quest"
+            NQuest = "Area2Quest"
             NumberQuest = 2
-            NameMob = "Factory Staff"
-            CFrameQuest = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
-            CFrameMob = CFrame.new(73.07867431640625, 81.86344146728516, -27.470672607421875)
+            TitleMob = "Factory Staff"
+            CQuest = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+            CMob = CFrame.new(73.07867431640625, 81.86344146728516, -27.470672607421875)
             elseif YourLevel == 875 or YourLevel <= 899 then
             Mob = "Marine Lieutenant"
             NumberQuest = 1
-            NameQuest = "MarineQuest3"
-            NameMob = "Marine Lieutenant"
-            CFrameQuest = CFrame.new(-2440.79639, 71.7140732, -3216.06812, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
-            CFrameMob = CFrame.new(-2821.372314453125, 75.89727783203125, -3070.089111328125)
+            NQuest = "MarineQuest3"
+            TitleMob = "Marine Lieutenant"
+            CQuest = CFrame.new(-2440.79639, 71.7140732, -3216.06812, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+            CMob = CFrame.new(-2821.372314453125, 75.89727783203125, -3070.089111328125)
             elseif YourLevel == 900 or YourLevel <= 949 then
             Mob = "Marine Captain"
             NumberQuest = 2
-            NameQuest = "MarineQuest3"
-            NameMob = "Marine Captain"
-            CFrameQuest = CFrame.new(-2440.79639, 71.7140732, -3216.06812, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
-            CFrameMob = CFrame.new(-1861.2310791015625, 80.17658233642578, -3254.697509765625)
+            NQuest = "MarineQuest3"
+            TitleMob = "Marine Captain"
+            CQuest = CFrame.new(-2440.79639, 71.7140732, -3216.06812, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
+            CMob = CFrame.new(-1861.2310791015625, 80.17658233642578, -3254.697509765625)
             elseif YourLevel == 950 or YourLevel <= 974 then
             Mob = "Zombie"
             NumberQuest = 1
-            NameQuest = "ZombieQuest"
-            NameMob = "Zombie"
-            CFrameQuest = CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146)
-            CFrameMob = CFrame.new(-5657.77685546875, 78.96973419189453, -928.68701171875)
+            NQuest = "ZombieQuest"
+            TitleMob = "Zombie"
+            CQuest = CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146)
+            CMob = CFrame.new(-5657.77685546875, 78.96973419189453, -928.68701171875)
             elseif YourLevel == 975 or YourLevel <= 999 then
             Mob = "Vampire"
             NumberQuest = 2
-            NameQuest = "ZombieQuest"
-            NameMob = "Vampire"
-            CFrameQuest = CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146)
-            CFrameMob = CFrame.new(-6037.66796875, 32.18463897705078, -1340.6597900390625)
+            NQuest = "ZombieQuest"
+            TitleMob = "Vampire"
+            CQuest = CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146)
+            CMob = CFrame.new(-6037.66796875, 32.18463897705078, -1340.6597900390625)
             elseif YourLevel == 1000 or YourLevel <= 1049 then
             Mob = "Snow Trooper"
             NumberQuest = 1
-            NameQuest = "SnowMountainQuest"
-            NameMob = "Snow Trooper"
-            CFrameQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
-            CFrameMob = CFrame.new(549.1473388671875, 427.3870544433594, -5563.69873046875)
+            NQuest = "SnowMountainQuest"
+            TitleMob = "Snow Trooper"
+            CQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
+            CMob = CFrame.new(549.1473388671875, 427.3870544433594, -5563.69873046875)
             elseif YourLevel == 1050 or YourLevel <= 1099 then
             Mob = "Winter Warrior"
             NumberQuest = 2
-            NameQuest = "SnowMountainQuest"
-            NameMob = "Winter Warrior"
-            CFrameQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
-            CFrameMob = CFrame.new(1142.7451171875, 475.6398010253906, -5199.41650390625)
+            NQuest = "SnowMountainQuest"
+            TitleMob = "Winter Warrior"
+            CQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
+            CMob = CFrame.new(1142.7451171875, 475.6398010253906, -5199.41650390625)
             elseif YourLevel == 1100 or YourLevel <= 1124 then
             Mob = "Lab Subordinate"
             NumberQuest = 1
-            NameQuest = "IceSideQuest"
-            NameMob = "Lab Subordinate"
-            CFrameQuest = CFrame.new(-6064.06885, 15.2422857, -4902.97852, 0.453972578, -0, -0.891015649, 0, 1, -0, 0.891015649, 0, 0.453972578)
-            CFrameMob = CFrame.new(-5707.4716796875, 15.951709747314453, -4513.39208984375)
+            NQuest = "IceSideQuest"
+            TitleMob = "Lab Subordinate"
+            CQuest = CFrame.new(-6064.06885, 15.2422857, -4902.97852, 0.453972578, -0, -0.891015649, 0, 1, -0, 0.891015649, 0, 0.453972578)
+            CMob = CFrame.new(-5707.4716796875, 15.951709747314453, -4513.39208984375)
             elseif YourLevel == 1125 or YourLevel <= 1174 then
             Mob = "Horned Warrior"
             NumberQuest = 2
-            NameQuest = "IceSideQuest"
-            NameMob = "Horned Warrior"
-            CFrameQuest = CFrame.new(-6064.06885, 15.2422857, -4902.97852, 0.453972578, -0, -0.891015649, 0, 1, -0, 0.891015649, 0, 0.453972578)
-            CFrameMob = CFrame.new(-6341.36669921875, 15.951770782470703, -5723.162109375)
+            NQuest = "IceSideQuest"
+            TitleMob = "Horned Warrior"
+            CQuest = CFrame.new(-6064.06885, 15.2422857, -4902.97852, 0.453972578, -0, -0.891015649, 0, 1, -0, 0.891015649, 0, 0.453972578)
+            CMob = CFrame.new(-6341.36669921875, 15.951770782470703, -5723.162109375)
             elseif YourLevel == 1175 or YourLevel <= 1199 then
             Mob = "Magma Ninja"
             NumberQuest = 1
-            NameQuest = "FireSideQuest"
-            NameMob = "Magma Ninja"
-            CFrameQuest = CFrame.new(-5428.03174, 15.0622921, -5299.43457, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
-            CFrameMob = CFrame.new(-5449.6728515625, 76.65874481201172, -5808.20068359375)
+            NQuest = "FireSideQuest"
+            TitleMob = "Magma Ninja"
+            CQuest = CFrame.new(-5428.03174, 15.0622921, -5299.43457, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
+            CMob = CFrame.new(-5449.6728515625, 76.65874481201172, -5808.20068359375)
             elseif YourLevel == 1200 or YourLevel <= 1249 then
             Mob = "Lava Pirate"
             NumberQuest = 2
-            NameQuest = "FireSideQuest"
-            NameMob = "Lava Pirate"
-            CFrameQuest = CFrame.new(-5428.03174, 15.0622921, -5299.43457, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
-            CFrameMob = CFrame.new(-5213.33154296875, 49.73788070678711, -4701.451171875)
+            NQuest = "FireSideQuest"
+            TitleMob = "Lava Pirate"
+            CQuest = CFrame.new(-5428.03174, 15.0622921, -5299.43457, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
+            CMob = CFrame.new(-5213.33154296875, 49.73788070678711, -4701.451171875)
             elseif YourLevel == 1250 or YourLevel <= 1274 then
             Mob = "Ship Deckhand"
             NumberQuest = 1
-            NameQuest = "ShipQuest1"
-            NameMob = "Ship Deckhand"
-            CFrameQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
-            CFrameMob = CFrame.new(1212.0111083984375, 150.79205322265625, 33059.24609375)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "ShipQuest1"
+            TitleMob = "Ship Deckhand"
+            CQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
+            CMob = CFrame.new(1212.0111083984375, 150.79205322265625, 33059.24609375)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1275 or YourLevel <= 1299 then
             Mob = "Ship Engineer"
             NumberQuest = 2
-            NameQuest = "ShipQuest1"
-            NameMob = "Ship Engineer"
-            CFrameQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
-            CFrameMob = CFrame.new(919.4786376953125, 43.54401397705078, 32779.96875)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "ShipQuest1"
+            TitleMob = "Ship Engineer"
+            CQuest = CFrame.new(1037.80127, 125.092171, 32911.6016)
+            CMob = CFrame.new(919.4786376953125, 43.54401397705078, 32779.96875)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1300 or YourLevel <= 1324 then
             Mob = "Ship Steward"
             NumberQuest = 1
-            NameQuest = "ShipQuest2"
-            NameMob = "Ship Steward"
-            CFrameQuest = CFrame.new(968.80957, 125.092171, 33244.125)
-            CFrameMob = CFrame.new(919.4385375976562, 129.55599975585938, 33436.03515625)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "ShipQuest2"
+            TitleMob = "Ship Steward"
+            CQuest = CFrame.new(968.80957, 125.092171, 33244.125)
+            CMob = CFrame.new(919.4385375976562, 129.55599975585938, 33436.03515625)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1325 or YourLevel <= 1349 then
             Mob = "Ship Officer"
             NumberQuest = 2
-            NameQuest = "ShipQuest2"
-            NameMob = "Ship Officer"
-            CFrameQuest = CFrame.new(968.80957, 125.092171, 33244.125)
-            CFrameMob = CFrame.new(1036.0179443359375, 181.4390411376953, 33315.7265625)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "ShipQuest2"
+            TitleMob = "Ship Officer"
+            CQuest = CFrame.new(968.80957, 125.092171, 33244.125)
+            CMob = CFrame.new(1036.0179443359375, 181.4390411376953, 33315.7265625)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
             elseif YourLevel == 1350 or YourLevel <= 1374 then
             Mob = "Arctic Warrior"
             NumberQuest = 1
-            NameQuest = "FrostQuest"
-            NameMob = "Arctic Warrior"
-            CFrameQuest = CFrame.new(5667.6582, 26.7997818, -6486.08984, -0.933587909, 0, -0.358349502, 0, 1, 0, 0.358349502, 0, -0.933587909)
-            CFrameMob = CFrame.new(5966.24609375, 62.97002029418945, -6179.3828125)
-            if _G.AutoLevel and(CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
+            NQuest = "FrostQuest"
+            TitleMob = "Arctic Warrior"
+            CQuest = CFrame.new(5667.6582, 26.7997818, -6486.08984, -0.933587909, 0, -0.358349502, 0, 1, 0, 0.358349502, 0, -0.933587909)
+            CMob = CFrame.new(5966.24609375, 62.97002029418945, -6179.3828125)
+            if _G.StFarm and(CQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10000 then
             game: GetService("ReplicatedStorage").Remotes.CommF_: InvokeServer("requestEntrance", Vector3.new(-6508.5581054688, 5000.034996032715, -132.83953857422))
             end
             elseif YourLevel == 1375 or YourLevel <= 1424 then
             Mob = "Snow Lurker"
             NumberQuest = 2
-            NameQuest = "FrostQuest"
-            NameMob = "Snow Lurker"
-            CFrameQuest = CFrame.new(5667.6582, 26.7997818, -6486.08984, -0.933587909, 0, -0.358349502, 0, 1, 0, 0.358349502, 0, -0.933587909)
-            CFrameMob = CFrame.new(5407.07373046875, 69.19437408447266, -6880.88037109375)
+            NQuest = "FrostQuest"
+            TitleMob = "Snow Lurker"
+            CQuest = CFrame.new(5667.6582, 26.7997818, -6486.08984, -0.933587909, 0, -0.358349502, 0, 1, 0, 0.358349502, 0, -0.933587909)
+            CMob = CFrame.new(5407.07373046875, 69.19437408447266, -6880.88037109375)
             elseif YourLevel == 1425 or YourLevel <= 1449 then
             Mob = "Sea Soldier"
             NumberQuest = 1
-            NameQuest = "ForgottenQuest"
-            NameMob = "Sea Soldier"
-            CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
-            CFrameMob = CFrame.new(-3028.2236328125, 64.67451477050781, -9775.4267578125)
+            NQuest = "ForgottenQuest"
+            TitleMob = "Sea Soldier"
+            CQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
+            CMob = CFrame.new(-3028.2236328125, 64.67451477050781, -9775.4267578125)
             elseif YourLevel >= 1450 then
             Mob = "Water Fighter"
             NumberQuest = 2
-            NameQuest = "ForgottenQuest"
-            NameMob = "Water Fighter"
-            CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
-            CFrameMob = CFrame.new(-3352.9013671875, 285.01556396484375, -10534.841796875)
+            NQuest = "ForgottenQuest"
+            TitleMob = "Water Fighter"
+            CQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
+            CMob = CFrame.new(-3352.9013671875, 285.01556396484375, -10534.841796875)
             end
             elseif Sea3 then
             if YourLevel == 1500 or YourLevel <= 1524 then
             Mob = "Pirate Millionaire"
             NumberQuest = 1
-            NameQuest = "PiratePortQuest"
-            NameMob = "Pirate Millionaire"
-            CFrameQuest = CFrame.new(-290.074677, 42.9034653, 5581.58984, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
-            CFrameMob = CFrame.new(-245.9963836669922, 47.30615234375, 5584.1005859375)
+            NQuest = "PiratePortQuest"
+            TitleMob = "Pirate Millionaire"
+            CQuest = CFrame.new(-290.074677, 42.9034653, 5581.58984, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
+            CMob = CFrame.new(-245.9963836669922, 47.30615234375, 5584.1005859375)
             elseif YourLevel == 1525 or YourLevel <= 1574 then
             Mob = "Pistol Billionaire"
             NumberQuest = 2
-            NameQuest = "PiratePortQuest"
-            NameMob = "Pistol Billionaire"
-            CFrameQuest = CFrame.new(-290.074677, 42.9034653, 5581.58984, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
-            CFrameMob = CFrame.new(-187.3301544189453, 86.23987579345703, 6013.513671875)
+            NQuest = "PiratePortQuest"
+            TitleMob = "Pistol Billionaire"
+            CQuest = CFrame.new(-290.074677, 42.9034653, 5581.58984, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
+            CMob = CFrame.new(-187.3301544189453, 86.23987579345703, 6013.513671875)
             elseif YourLevel == 1575 or YourLevel <= 1599 then
             Mob = "Dragon Crew Warrior"
             NumberQuest = 1
-            NameQuest = "AmazonQuest"
-            NameMob = "Dragon Crew Warrior"
-            CFrameQuest = CFrame.new(5832.83594, 51.6806107, -1101.51563, 0.898790359, -0, -0.438378751, 0, 1, -0, 0.438378751, 0, 0.898790359)
-            CFrameMob = CFrame.new(6141.140625, 51.35136413574219, -1340.738525390625)
+            NQuest = "AmazonQuest"
+            TitleMob = "Dragon Crew Warrior"
+            CQuest = CFrame.new(5832.83594, 51.6806107, -1101.51563, 0.898790359, -0, -0.438378751, 0, 1, -0, 0.438378751, 0, 0.898790359)
+            CMob = CFrame.new(6141.140625, 51.35136413574219, -1340.738525390625)
             elseif YourLevel == 1600 or YourLevel <= 1624 then
             Mob = "Dragon Crew Archer"
-            NameQuest = "AmazonQuest"
+            NQuest = "AmazonQuest"
             NumberQuest = 2
-            NameMob = "Dragon Crew Archer"
-            CFrameQuest = CFrame.new(5833.1147460938, 51.60498046875, -1103.0693359375)
-            CFrameMob = CFrame.new(6616.41748046875, 441.7670593261719, 446.0469970703125)
+            TitleMob = "Dragon Crew Archer"
+            CQuest = CFrame.new(5833.1147460938, 51.60498046875, -1103.0693359375)
+            CMob = CFrame.new(6616.41748046875, 441.7670593261719, 446.0469970703125)
             elseif YourLevel == 1625 or YourLevel <= 1649 then
             Mob = "Female Islander"
-            NameQuest = "AmazonQuest2"
+            NQuest = "AmazonQuest2"
             NumberQuest = 1
-            NameMob = "Female Islander"
-            CFrameQuest = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
-            CFrameMob = CFrame.new(4685.25830078125, 735.8078002929688, 815.3425903320312)
+            TitleMob = "Female Islander"
+            CQuest = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
+            CMob = CFrame.new(4685.25830078125, 735.8078002929688, 815.3425903320312)
             elseif YourLevel == 1650 or YourLevel <= 1699 then
             Mob = "Giant Islander"
-            NameQuest = "AmazonQuest2"
+            NQuest = "AmazonQuest2"
             NumberQuest = 2
-            NameMob = "Giant Islander"
-            CFrameQuest = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
-            CFrameMob = CFrame.new(4729.09423828125, 590.436767578125, -36.97627639770508)
+            TitleMob = "Giant Islander"
+            CQuest = CFrame.new(5446.8793945313, 601.62945556641, 749.45672607422)
+            CMob = CFrame.new(4729.09423828125, 590.436767578125, -36.97627639770508)
             elseif YourLevel == 1700 or YourLevel <= 1724 then
             Mob = "Marine Commodore"
             NumberQuest = 1
-            NameQuest = "MarineTreeIsland"
-            NameMob = "Marine Commodore"
-            CFrameQuest = CFrame.new(2180.54126, 27.8156815, -6741.5498, -0.965929747, 0, 0.258804798, 0, 1, 0, -0.258804798, 0, -0.965929747)
-            CFrameMob = CFrame.new(2286.0078125, 73.13391876220703, -7159.80908203125)
+            NQuest = "MarineTreeIsland"
+            TitleMob = "Marine Commodore"
+            CQuest = CFrame.new(2180.54126, 27.8156815, -6741.5498, -0.965929747, 0, 0.258804798, 0, 1, 0, -0.258804798, 0, -0.965929747)
+            CMob = CFrame.new(2286.0078125, 73.13391876220703, -7159.80908203125)
             elseif YourLevel == 1725 or YourLevel <= 1774 then
             Mob = "Marine Rear Admiral"
-            NameMob = "Marine Rear Admiral"
-            NameQuest = "MarineTreeIsland"
+            TitleMob = "Marine Rear Admiral"
+            NQuest = "MarineTreeIsland"
             NumberQuest = 2
-            CFrameQuest = CFrame.new(2179.98828125, 28.731239318848, -6740.0551757813)
-            CFrameMob = CFrame.new(3656.773681640625, 160.52406311035156, -7001.5986328125)
+            CQuest = CFrame.new(2179.98828125, 28.731239318848, -6740.0551757813)
+            CMob = CFrame.new(3656.773681640625, 160.52406311035156, -7001.5986328125)
             elseif YourLevel == 1775 or YourLevel <= 1799 then
             Mob = "Fishman Raider"
             NumberQuest = 1
-            NameQuest = "DeepForestIsland3"
-            NameMob = "Fishman Raider"
-            CFrameQuest = CFrame.new(-10581.6563, 330.872955, -8761.18652, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
-            CFrameMob = CFrame.new(-10407.5263671875, 331.76263427734375, -8368.5166015625)
+            NQuest = "DeepForestIsland3"
+            TitleMob = "Fishman Raider"
+            CQuest = CFrame.new(-10581.6563, 330.872955, -8761.18652, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
+            CMob = CFrame.new(-10407.5263671875, 331.76263427734375, -8368.5166015625)
             elseif YourLevel == 1800 or YourLevel <= 1824 then
             Mob = "Fishman Captain"
             NumberQuest = 2
-            NameQuest = "DeepForestIsland3"
-            NameMob = "Fishman Captain"
-            CFrameQuest = CFrame.new(-10581.6563, 330.872955, -8761.18652, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
-            CFrameMob = CFrame.new(-10994.701171875, 352.38140869140625, -9002.1103515625)
+            NQuest = "DeepForestIsland3"
+            TitleMob = "Fishman Captain"
+            CQuest = CFrame.new(-10581.6563, 330.872955, -8761.18652, -0.882952213, 0, 0.469463557, 0, 1, 0, -0.469463557, 0, -0.882952213)
+            CMob = CFrame.new(-10994.701171875, 352.38140869140625, -9002.1103515625)
             elseif YourLevel == 1825 or YourLevel <= 1849 then
             Mob = "Forest Pirate"
             NumberQuest = 1
-            NameQuest = "DeepForestIsland"
-            NameMob = "Forest Pirate"
-            CFrameQuest = CFrame.new(-13234.04, 331.488495, -7625.40137, 0.707134247, -0, -0.707079291, 0, 1, -0, 0.707079291, 0, 0.707134247)
-            CFrameMob = CFrame.new(-13274.478515625, 332.3781433105469, -7769.58056640625)
+            NQuest = "DeepForestIsland"
+            TitleMob = "Forest Pirate"
+            CQuest = CFrame.new(-13234.04, 331.488495, -7625.40137, 0.707134247, -0, -0.707079291, 0, 1, -0, 0.707079291, 0, 0.707134247)
+            CMob = CFrame.new(-13274.478515625, 332.3781433105469, -7769.58056640625)
             elseif YourLevel == 1850 or YourLevel <= 1899 then
             Mob = "Mythological Pirate"
             NumberQuest = 2
-            NameQuest = "DeepForestIsland"
-            NameMob = "Mythological Pirate"
-            CFrameQuest = CFrame.new(-13234.04, 331.488495, -7625.40137, 0.707134247, -0, -0.707079291, 0, 1, -0, 0.707079291, 0, 0.707134247)
-            CFrameMob = CFrame.new(-13680.607421875, 501.08154296875, -6991.189453125)
+            NQuest = "DeepForestIsland"
+            TitleMob = "Mythological Pirate"
+            CQuest = CFrame.new(-13234.04, 331.488495, -7625.40137, 0.707134247, -0, -0.707079291, 0, 1, -0, 0.707079291, 0, 0.707134247)
+            CMob = CFrame.new(-13680.607421875, 501.08154296875, -6991.189453125)
             elseif YourLevel == 1900 or YourLevel <= 1924 then
             Mob = "Jungle Pirate"
             NumberQuest = 1
-            NameQuest = "DeepForestIsland2"
-            NameMob = "Jungle Pirate"
-            CFrameQuest = CFrame.new(-12680.3818, 389.971039, -9902.01953, -0.0871315002, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, -0.0871315002)
-            CFrameMob = CFrame.new(-12256.16015625, 331.73828125, -10485.8369140625)
+            NQuest = "DeepForestIsland2"
+            TitleMob = "Jungle Pirate"
+            CQuest = CFrame.new(-12680.3818, 389.971039, -9902.01953, -0.0871315002, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, -0.0871315002)
+            CMob = CFrame.new(-12256.16015625, 331.73828125, -10485.8369140625)
             elseif YourLevel == 1925 or YourLevel <= 1974 then
             Mob = "Musketeer Pirate"
             NumberQuest = 2
-            NameQuest = "DeepForestIsland2"
-            NameMob = "Musketeer Pirate"
-            CFrameQuest = CFrame.new(-12680.3818, 389.971039, -9902.01953, -0.0871315002, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, -0.0871315002)
-            CFrameMob = CFrame.new(-13457.904296875, 391.545654296875, -9859.177734375)
+            NQuest = "DeepForestIsland2"
+            TitleMob = "Musketeer Pirate"
+            CQuest = CFrame.new(-12680.3818, 389.971039, -9902.01953, -0.0871315002, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, -0.0871315002)
+            CMob = CFrame.new(-13457.904296875, 391.545654296875, -9859.177734375)
             elseif YourLevel == 1975 or YourLevel <= 1999 then
             Mob = "Reborn Skeleton"
             NumberQuest = 1
-            NameQuest = "HauntedQuest1"
-            NameMob = "Reborn Skeleton"
-            CFrameQuest = CFrame.new(-9479.2168, 141.215088, 5566.09277, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-            CFrameMob = CFrame.new(-8763.7236328125, 165.72299194335938, 6159.86181640625)
+            NQuest = "HauntedQuest1"
+            TitleMob = "Reborn Skeleton"
+            CQuest = CFrame.new(-9479.2168, 141.215088, 5566.09277, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+            CMob = CFrame.new(-8763.7236328125, 165.72299194335938, 6159.86181640625)
             elseif YourLevel == 2000 or YourLevel <= 2024 then
             Mob = "Living Zombie"
             NumberQuest = 2
-            NameQuest = "HauntedQuest1"
-            NameMob = "Living Zombie"
-            CFrameQuest = CFrame.new(-9479.2168, 141.215088, 5566.09277, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-            CFrameMob = CFrame.new(-10144.1318359375, 138.62667846679688, 5838.0888671875)
+            NQuest = "HauntedQuest1"
+            TitleMob = "Living Zombie"
+            CQuest = CFrame.new(-9479.2168, 141.215088, 5566.09277, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+            CMob = CFrame.new(-10144.1318359375, 138.62667846679688, 5838.0888671875)
             elseif YourLevel == 2025 or YourLevel <= 2049 then
             Mob = "Demonic Soul"
             NumberQuest = 1
-            NameQuest = "HauntedQuest2"
-            NameMob = "Demonic Soul"
-            CFrameQuest = CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-9505.8720703125, 172.10482788085938, 6158.9931640625)
+            NQuest = "HauntedQuest2"
+            TitleMob = "Demonic Soul"
+            CQuest = CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-9505.8720703125, 172.10482788085938, 6158.9931640625)
             elseif YourLevel == 2050 or YourLevel <= 2074 then
             Mob = "Posessed Mummy"
             NumberQuest = 2
-            NameQuest = "HauntedQuest2"
-            NameMob = "Posessed Mummy"
-            CFrameQuest = CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-9582.0224609375, 6.251527309417725, 6205.478515625)
+            NQuest = "HauntedQuest2"
+            TitleMob = "Posessed Mummy"
+            CQuest = CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-9582.0224609375, 6.251527309417725, 6205.478515625)
             elseif YourLevel == 2075 or YourLevel <= 2099 then
             Mob = "Peanut Scout"
             NumberQuest = 1
-            NameQuest = "NutsIslandQuest"
-            NameMob = "Peanut Scout"
-            CFrameQuest = CFrame.new(-2104.3908691406, 38.104167938232, -10194.21875, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-2143.241943359375, 47.72198486328125, -10029.9951171875)
+            NQuest = "NutsIslandQuest"
+            TitleMob = "Peanut Scout"
+            CQuest = CFrame.new(-2104.3908691406, 38.104167938232, -10194.21875, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-2143.241943359375, 47.72198486328125, -10029.9951171875)
             elseif YourLevel == 2100 or YourLevel <= 2124 then
             Mob = "Peanut President"
             NumberQuest = 2
-            NameQuest = "NutsIslandQuest"
-            NameMob = "Peanut President"
-            CFrameQuest = CFrame.new(-2104.3908691406, 38.104167938232, -10194.21875, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-1859.35400390625, 38.10316848754883, -10422.4296875)
+            NQuest = "NutsIslandQuest"
+            TitleMob = "Peanut President"
+            CQuest = CFrame.new(-2104.3908691406, 38.104167938232, -10194.21875, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-1859.35400390625, 38.10316848754883, -10422.4296875)
             elseif YourLevel == 2125 or YourLevel <= 2149 then
             Mob = "Ice Cream Chef"
             NumberQuest = 1
-            NameQuest = "IceCreamIslandQuest"
-            NameMob = "Ice Cream Chef"
-            CFrameQuest = CFrame.new(-820.64825439453, 65.819526672363, -10965.795898438, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-872.24658203125, 65.81957244873047, -10919.95703125)
+            NQuest = "IceCreamIslandQuest"
+            TitleMob = "Ice Cream Chef"
+            CQuest = CFrame.new(-820.64825439453, 65.819526672363, -10965.795898438, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-872.24658203125, 65.81957244873047, -10919.95703125)
             elseif YourLevel == 2150 or YourLevel <= 2199 then
             Mob = "Ice Cream Commander"
             NumberQuest = 2
-            NameQuest = "IceCreamIslandQuest"
-            NameMob = "Ice Cream Commander"
-            CFrameQuest = CFrame.new(-820.64825439453, 65.819526672363, -10965.795898438, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-            CFrameMob = CFrame.new(-558.06103515625, 112.04895782470703, -11290.7744140625)
+            NQuest = "IceCreamIslandQuest"
+            TitleMob = "Ice Cream Commander"
+            CQuest = CFrame.new(-820.64825439453, 65.819526672363, -10965.795898438, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+            CMob = CFrame.new(-558.06103515625, 112.04895782470703, -11290.7744140625)
             elseif YourLevel == 2200 or YourLevel <= 2224 then
             Mob = "Cookie Crafter"
             NumberQuest = 1
-            NameQuest = "CakeQuest1"
-            NameMob = "Cookie Crafter"
-            CFrameQuest = CFrame.new(-2021.32007, 37.7982254, -12028.7295, 0.957576931, -8.80302053e-08, 0.288177818, 6.9301187e-08, 1, 7.51931211e-08, -0.288177818, -5.2032135e-08, 0.957576931)
-            CFrameMob = CFrame.new(-2374.13671875, 37.79826354980469, -12125.30859375)
+            NQuest = "CakeQuest1"
+            TitleMob = "Cookie Crafter"
+            CQuest = CFrame.new(-2021.32007, 37.7982254, -12028.7295, 0.957576931, -8.80302053e-08, 0.288177818, 6.9301187e-08, 1, 7.51931211e-08, -0.288177818, -5.2032135e-08, 0.957576931)
+            CMob = CFrame.new(-2374.13671875, 37.79826354980469, -12125.30859375)
             elseif YourLevel == 2225 or YourLevel <= 2249 then
             Mob = "Cake Guard"
             NumberQuest = 2
-            NameQuest = "CakeQuest1"
-            NameMob = "Cake Guard"
-            CFrameQuest = CFrame.new(-2021.32007, 37.7982254, -12028.7295, 0.957576931, -8.80302053e-08, 0.288177818, 6.9301187e-08, 1, 7.51931211e-08, -0.288177818, -5.2032135e-08, 0.957576931)
-            CFrameMob = CFrame.new(-1598.3070068359375, 43.773197174072266, -12244.5810546875)
+            NQuest = "CakeQuest1"
+            TitleMob = "Cake Guard"
+            CQuest = CFrame.new(-2021.32007, 37.7982254, -12028.7295, 0.957576931, -8.80302053e-08, 0.288177818, 6.9301187e-08, 1, 7.51931211e-08, -0.288177818, -5.2032135e-08, 0.957576931)
+            CMob = CFrame.new(-1598.3070068359375, 43.773197174072266, -12244.5810546875)
             elseif YourLevel == 2250 or YourLevel <= 2274 then
             Mob = "Baking Staff"
             NumberQuest = 1
-            NameQuest = "CakeQuest2"
-            NameMob = "Baking Staff"
-            CFrameQuest = CFrame.new(-1927.91602, 37.7981339, -12842.5391, -0.96804446, 4.22142143e-08, 0.250778586, 4.74911062e-08, 1, 1.49904711e-08, -0.250778586, 2.64211941e-08, -0.96804446)
-            CFrameMob = CFrame.new(-1887.8099365234375, 77.6185073852539, -12998.3505859375)
+            NQuest = "CakeQuest2"
+            TitleMob = "Baking Staff"
+            CQuest = CFrame.new(-1927.91602, 37.7981339, -12842.5391, -0.96804446, 4.22142143e-08, 0.250778586, 4.74911062e-08, 1, 1.49904711e-08, -0.250778586, 2.64211941e-08, -0.96804446)
+            CMob = CFrame.new(-1887.8099365234375, 77.6185073852539, -12998.3505859375)
             elseif YourLevel == 2275 or YourLevel <= 2299 then
             Mob = "Head Baker"
             NumberQuest = 2
-            NameQuest = "CakeQuest2"
-            NameMob = "Head Baker"
-            CFrameQuest = CFrame.new(-1927.91602, 37.7981339, -12842.5391, -0.96804446, 4.22142143e-08, 0.250778586, 4.74911062e-08, 1, 1.49904711e-08, -0.250778586, 2.64211941e-08, -0.96804446)
-            CFrameMob = CFrame.new(-2216.188232421875, 82.884521484375, -12869.2939453125)
+            NQuest = "CakeQuest2"
+            TitleMob = "Head Baker"
+            CQuest = CFrame.new(-1927.91602, 37.7981339, -12842.5391, -0.96804446, 4.22142143e-08, 0.250778586, 4.74911062e-08, 1, 1.49904711e-08, -0.250778586, 2.64211941e-08, -0.96804446)
+            CMob = CFrame.new(-2216.188232421875, 82.884521484375, -12869.2939453125)
             elseif YourLevel == 2300 or YourLevel <= 2324 then
             Mob = "Cocoa Warrior"
             NumberQuest = 1
-            NameQuest = "ChocQuest1"
-            NameMob = "Cocoa Warrior"
-            CFrameQuest = CFrame.new(233.22836303710938, 29.876001358032227, -12201.2333984375)
-            CFrameMob = CFrame.new(-21.55328369140625, 80.57499694824219, -12352.3876953125)
+            NQuest = "ChocQuest1"
+            TitleMob = "Cocoa Warrior"
+            CQuest = CFrame.new(233.22836303710938, 29.876001358032227, -12201.2333984375)
+            CMob = CFrame.new(-21.55328369140625, 80.57499694824219, -12352.3876953125)
             elseif YourLevel == 2325 or YourLevel <= 2349 then
             Mob = "Chocolate Bar Battler"
             NumberQuest = 2
-            NameQuest = "ChocQuest1"
-            NameMob = "Chocolate Bar Battler"
-            CFrameQuest = CFrame.new(233.22836303710938, 29.876001358032227, -12201.2333984375)
-            CFrameMob = CFrame.new(582.590576171875, 77.18809509277344, -12463.162109375)
+            NQuest = "ChocQuest1"
+            TitleMob = "Chocolate Bar Battler"
+            CQuest = CFrame.new(233.22836303710938, 29.876001358032227, -12201.2333984375)
+            CMob = CFrame.new(582.590576171875, 77.18809509277344, -12463.162109375)
             elseif YourLevel == 2350 or YourLevel <= 2374 then
             Mob = "Sweet Thief"
             NumberQuest = 1
-            NameQuest = "ChocQuest2"
-            NameMob = "Sweet Thief"
-            CFrameQuest = CFrame.new(150.5066375732422, 30.693693161010742, -12774.5029296875)
-            CFrameMob = CFrame.new(165.1884765625, 76.05885314941406, -12600.8369140625)
+            NQuest = "ChocQuest2"
+            TitleMob = "Sweet Thief"
+            CQuest = CFrame.new(150.5066375732422, 30.693693161010742, -12774.5029296875)
+            CMob = CFrame.new(165.1884765625, 76.05885314941406, -12600.8369140625)
             elseif YourLevel == 2375 or YourLevel <= 2399 then
             Mob = "Candy Rebel"
             NumberQuest = 2
-            NameQuest = "ChocQuest2"
-            NameMob = "Candy Rebel"
-            CFrameQuest = CFrame.new(150.5066375732422, 30.693693161010742, -12774.5029296875)
-            CFrameMob = CFrame.new(134.86563110351562, 77.2476806640625, -12876.5478515625)
+            NQuest = "ChocQuest2"
+            TitleMob = "Candy Rebel"
+            CQuest = CFrame.new(150.5066375732422, 30.693693161010742, -12774.5029296875)
+            CMob = CFrame.new(134.86563110351562, 77.2476806640625, -12876.5478515625)
             elseif YourLevel == 2400 or YourLevel <= 2424 then
             Mob = "Candy Pirate"
             NumberQuest = 1
-            NameQuest = "CandyQuest1"
-            NameMob = "Candy Pirate"
-            CFrameQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
-            CFrameMob = CFrame.new(-1310.5003662109375, 26.016523361206055, -14562.404296875)
+            NQuest = "CandyQuest1"
+            TitleMob = "Candy Pirate"
+            CQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
+            CMob = CFrame.new(-1310.5003662109375, 26.016523361206055, -14562.404296875)
             elseif YourLevel == 2425 or YourLevel <= 2449 then
             Mob = "Snow DeMob"
             NumberQuest = 2
-            NameQuest = "CandyQuest1"
-            NameMob = "Snow DeMob"
-            CFrameQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
-            CFrameMob = CFrame.new(-880.2006225585938, 71.24776458740234, -14538.609375)
+            NQuest = "CandyQuest1"
+            TitleMob = "Snow DeMob"
+            CQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
+            CMob = CFrame.new(-880.2006225585938, 71.24776458740234, -14538.609375)
             elseif YourLevel == 2450 or YourLevel <= 2474 then
             Mob = "Isle Outlaw"
             NumberQuest = 1
-            NameQuest = "TikiQuest1"
-            NameMob = "Isle Outlaw"
-            CFrameQuest = CFrame.new(-16545.9355, 55.6863556, -173.230499)
-            CFrameMob = CFrame.new(-16120.6035, 116.520554, -103.038849)
+            NQuest = "TikiQuest1"
+            TitleMob = "Isle Outlaw"
+            CQuest = CFrame.new(-16545.9355, 55.6863556, -173.230499)
+            CMob = CFrame.new(-16120.6035, 116.520554, -103.038849)
             elseif YourLevel == 2475 or YourLevel <= 2524 then
             Mob = "Island Boy"
             NumberQuest = 2
-            NameQuest = "TikiQuest1"
-            NameMob = "Island Boy"
-            CFrameQuest = CFrame.new(-16545.9355, 55.6863556, -173.230499)
-            CFrameMob = CFrame.new(-16751.3125, 121.226219, -264.015015)
+            NQuest = "TikiQuest1"
+            TitleMob = "Island Boy"
+            CQuest = CFrame.new(-16545.9355, 55.6863556, -173.230499)
+            CMob = CFrame.new(-16751.3125, 121.226219, -264.015015)
             elseif YourLevel >= 2525 then
             Mob = "Isle Champion"
             NumberQuest = 2
-            NameQuest = "TikiQuest2"
-            NameMob = "Isle Champion"
-            CFrameQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
-            CFrameMob = CFrame.new(-16933.2129, 93.3503036, 999.450989)
+            NQuest = "TikiQuest2"
+            TitleMob = "Isle Champion"
+            CQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
+            CMob = CFrame.new(-16933.2129, 93.3503036, 999.450989)
         end
     end
 end
@@ -2064,12 +638,6 @@ function Tween(CFg)
         game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
         game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
         if not CFg then return end
-        if not plr.Character.HumanoidRootPart:FindFirstChild("NClip") then
-            local NClip = Instance.new("BodyVelocity", plr.Character.HumanoidRootPart)
-            NClip.Name = "NClip"
-            NClip.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-            NClip.Velocity = Vector3.new(0, 0, 0)
-        end
         if not plr.Character:FindFirstChild("TweenSmooth") then
             local TweenSmooth = Instance.new("Part", plr.Character) -- Create part
             TweenSmooth.Size = Vector3.new(10,1,10)
@@ -2095,17 +663,17 @@ Type = 1
 spawn(function()
     while wait(.1) do
         if Type == 1 then
-            PosFarm = CFrame.new(0, 20 ,15)
+            PosFarm = CFrame.new(0, 20 ,12)
 		elseif Type == 2 then
-			PosFarm = CFrame.new(0, 12 ,-15)
+			PosFarm = CFrame.new(0, 10 ,-12)
 		elseif Type == 3 then
-			PosFarm = CFrame.new(15, 16 ,0)
+			PosFarm = CFrame.new(12, 13 ,0)
 		elseif Type == 4 then
-			PosFarm = CFrame.new(0, 12 ,15)	
+			PosFarm = CFrame.new(0, 11 ,12)	
 		elseif Type == 5 then
-			PosFarm = CFrame.new(-15, 16 ,0)
+			PosFarm = CFrame.new(-12, 14 ,0)
 		elseif Type == 6 then
-			PosFarm = CFrame.new(15, 20 ,0)
+			PosFarm = CFrame.new(12, 18 ,0)
         end
     end
 end)
@@ -2149,7 +717,7 @@ function EnableBuso()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     end
 end
-function CheckWeapons(ng)
+function GetWP(ng)
     ToolF = ""
     for i, v in pairs(plr.BackPack:GetChildren()) do
         if v.Name == ng and v:IsA("Tool") then
@@ -2165,19 +733,19 @@ function CheckWeapons(ng)
 end
 function Equip(Tool)
     if Tool == nil then return end
-    if _G.Settings.SelectTool == "" or _G.Settings.SelectTool == nil then
-        _G.Settings.SelectTool = "Melee"
+    if _G.SelectTool == "" or _G.SelectTool == nil then
+        _G.SelectTool = "Melee"
     end
-    is = GetWeapon(_G.Settings.SelectTool)
+    Tool = GetWP(_G.SelectTool)
     if plr.Backpack:FindFirstChild(Tool) then
         local This = plr.Backpack:FindFirstChild(Tool)
         plr.Character.Humanoid:EquipTool(This)
     end
 end
 function CheckEnemies(Mob)
-    v = game.Workspace.Enemies:FindFirstChild(Mob)
-    if v then
-        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+    Mb = game.Workspace.Enemies:FindFirstChild(Mob)
+    if Mb then
+        if Mb.Humanoid.Health > 0 and Mb.Parent and Mb:FindFirstChild("HumanoidRootPart") then
             return true
         end
     end
@@ -2195,101 +763,182 @@ function CheckTextQuest(Tit)
     end
     return false
 end
+function Click()
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+end
+function NoStun()
+    if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+        game.Players.LocalPlayer.Character.Stun.Changed:connect(function()
+            if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+                game.Players.LocalPlayer.Character.Stun.Value = 0
+            end
+        end)
+    end
+end
+function BringMob(nhulon)
+    for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+        if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+            v.HumanoidRootPart.CFrame = Stp
+            v.Humanoid:ChangeState(5)
+            v.HumanoidRootPart.CanCollide = false
+            v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+            v.HumanoidRootPart.Transparency = 1
+            v.Humanoid.WalkSpeed = 0
+            v.Humanoid.JumpPower = 0
+            if v.Humanoid:FindFirstChild("Animator") then
+                v.Humanoid.Animator:Destroy()
+            end
+            sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+        end
+    end
+end
 function KillMob(Trget)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                bring = v.HumanoidRootPart.CFrame
                 repeat task.wait()
                     EnableBuso()
-                    Equip(ToolF)
-                    v.Humanoid.WalkSpeed = 0
-                    v.HumanoidRootPart.CFrame = bring
+                    Equip()
                     v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                     v.Head.CanCollide = false
                     v.HumanoidRootPart.CanCollide = false
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                    Stp = v.HumanoidRootPart.CFrame
+                    Click()
+                    NoStun()
+                    BringMob(Trget)
                 until v.Humanoid.Health <= 0 or not v.Parent
+                BringMob = false
             end
         end
     end
 end
 function TakeQuest(cfRg, NameQuet, NumbQuest)
-    if _G.Settings.BypassTele then
-        if (cfRg.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 2500 then
-            Bypass(cfRg)
-        elseif (cfRg.Position - plr.Character.HumanoidRootPart.Position).Magnitude < 2500 then
-            Tween(cfRg)
-        end
-    else
-        Tween(cfRg)
-    end
+    Tween(cfRg)
     if (plr.Character.HumanoidRootPart.Position - cfRg.Position).Magnitude <= 10 then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuet, NumbQuest)
     end
 end
-
+function GetLevel(Lv)
+    if plr.Data.Level.Value >= Lv then
+        return Lv
+    end
+end
+function CheckGlassCake()
+    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+        return true
+    end
+    return false
+end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
+local Windows = Library:CreateWindow({Title = "Night Hub", Creator = "! Nightx"})
 
-local Lib = Library:CreateWindow({Title = "Night Hub", Creator = "By !Nightx"})
-
-local A = Lib:CreateTab({Name = "About", Icon = "rbxassetid://17325442535"})
-local H = Lib:CreateTab({Name = "Home", Icon = "rbxassetid://17184558565"})
-local I = Lib:CreateTab({Name = "Item", Icon = "rbxassetid://17184405349"})
-local S = Lib:CreateTab({Name = "Stats", Icon = "rbxassetid://17184559957"})
-local E = Lib:CreateTab({Name = "Sea Event", Icon = "rbxassetid://17184412007"})
-local U = Lib:CreateTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413595"})
-local V = Lib:CreateTab({Name = "Status Servers", Icon = "rbxassetid://17184408884"})
-local M = Lib:CreateTab({Name = "Misc", Icon = "rbxassetid://17195489739"})
-local T = Lib:CreateTab({Name = "Settings", Icon = "rbxassetid://17184407740"})
+local A = Windows:MakeTab({Name = "About", Icon = "rbxassetid://17325442535"})
+local H = Windows:MakeTab({Name = "Home", Icon = "rbxassetid://17184558565"})
+local I = Windows:MakeTab({Name = "Item", Icon = "rbxassetid://17184405349"})
+local S = Windows:MakeTab({Name = "Stats", Icon = "rbxassetid://17184559957"})
+local E = Windows:MakeTab({Name = "Sea Event", Icon = "rbxassetid://17184412007"})
+local U = Windows:MakeTab({Name = "Upgrated Race", Icon = "rbxassetid://17184413595"})
+local V = Windows:MakeTab({Name = "Status Servers", Icon = "rbxassetid://17184408884"})
+local M = Windows:MakeTab({Name = "Misc", Icon = "rbxassetid://17195489739"})
+local T = Windows:MakeTab({Name = "Settings", Icon = "rbxassetid://17184407740"})
 
 H:CreateDropdown({
     Name = "Select Tool",
     Description = "Select Tool To Farm",
     List = {"Melee", "Sword"},
-    Default = _G.Settings.SelectTool,
+    Default = "",
     CallBack = function(Value)
-        _G.Settings.SelectTool = Value
-        SaveSettings()
+        _G.SelectTool = Value
     end
 })
 
-H:CreateSections({Text = "Select Method Farm"})
+H:CreateSection({Text = "Select Method Farm"})
 
 H:CreateDropdown({
     Name = "Select Method Farm",
     Description = "Select Method Farm | EX : Cake Prince or Level or Bone",
     List = {"Level", "Cake Prince", "Bone"},
-    Default = _G.Settings.SelectMethodFarm,
+    Default = "",
     CallBack = function(Value)
-        _G.Settings.SelectMethodFarm = Value
-        SaveSettings()
+        _G.SelectMethodFarm = Value
     end
 })
 
 H:CreateToggle({
     Name = "Start Farm",
     Description = "Start Farm Method Your Selected",
-    Default = _G.Settings.StFarm,
+    Default = false,
     CallBack = function(Value)
-        _G.Settings.StFarm = Value
-        SaveSettings()
+        _G.StFarm = Value
     end
 })
 
-while wait() do
-    if _G.Settings.StFarm then
-        if _G.Settings.SelectMethodFarm == "Level" then
-            GetQuest()
-            if not CheckQuestVisible() or not CheckTextQuest(NameMob) then
-                TakeQuest(CFrameQuest, NameQuest, NumberQuest)
-            elseif CheckQuestVisible() and CheckTextQuest(NameMob) then
-                if CheckEnemies(Mob) then
-                    KillMob(Mob)
+spawn(function()
+    while task.wait() do
+        if _G.StFarm == true then
+            if _G.SelectMethodFarm == "Level" then
+                GetQuest()
+                if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
+                    TakeQuest(CQuest, NQuest, NumberQuest)
+                elseif CheckQuestVisible() and CheckTextQuest(TitleMob) then
+                    if CheckEnemies(Mob) then
+                        KillMob(Mob)
+                    else
+                        Tween(CMob)
+                    end
+                end
+            elseif _G.SelectMethodFarm == "Cake Prince" then
+                if CheckEnemies("Cake Prince") and not CheckGlassCake() then
+                    KillMob("Cake Prince")
                 else
-                    Tween(CFrameMob)
+                    if game.ReplicatedStorage:FindFirstChild("Cake Prince") then
+                        Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                    else
+                        if CheckGlassCake() and not CheckEnemies("Cake Prince") then
+                            if CheckEnemies("Baking Staff") or CheckEnemies("Cookie Crafter") or CheckEnemies("Cake Guard") or CheckEnemies("Head Baker") then
+                                KillMob("Baking Staff")
+                                KillMob("Cookie Crafter")
+                                KillMob("Cake Guard")
+                                KillMob("Head Baker")
+                            else
+                                Tween(CFrame.new(-2091.911865234375, 70.00884246826172, -12142.8359375))
+                            end
+                        end
+                    end
+                end
+            else
+                if CheckEnemies("Reborn Skeleton") or CheckEnemies("Living Zombie") or CheckEnemies("Demonic Soul") or CheckEnemies("Posessed Mummy") then
+                    KillMob("Posessed Mummy")
+                    KillMob("Reborn Skeleton")
+                    KillMob("Living Zombie")
+                    KillMob("Demonic Soul")
+                else
+                    Tween(CFrame.new(-9515.75, 174.8521728515625, 6079.40625))
                 end
             end
         end
     end
-end
+end)
+
+T:CreateSection({Text = "Settings FastAttack & Bring Mob"})
+
+T:CreateToggle({
+    Name = "Enable FastAttack",
+    Description = "Attack Fast And No CoolDown",
+    Default = true,
+    CallBack = function(Value)
+        _G.FastAttack = Value
+    end
+})
+
+T:CreateToggle({
+    Name = "Enable BringMob",
+    Description = "Bring Mob If Farm",
+    Default = true,
+    CallBack = function(Value)
+        _G.Bring = Value
+    end
+})
