@@ -1204,6 +1204,11 @@ function NightLib:CreateWindow(Options)
                             Visible = false
                         }
                     ):Play()
+                    TweenService:Create(
+						IcoDrop,
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
+					):Play()
                     pcall(Option1.Text)
                     Options.CallBack(Option1.Text)
                     Selected.Text = Option1.Text
