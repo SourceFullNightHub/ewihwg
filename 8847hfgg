@@ -882,37 +882,35 @@ function AttackNoCD()
                     game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                     game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                     game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+                        game.Players.LocalPlayer.Character.Stun.Changed:connect(function()
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
+                                game.Players.LocalPlayer.Character.Stun.Value = 0
+                            end
+                        end)
+                    end
                 end
             end)
         end
     end
 end
-function NoStun()
-    if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
-        game.Players.LocalPlayer.Character.Stun.Changed:connect(function()
-            if game.Players.LocalPlayer.Character:FindFirstChild("Stun") then
-                game.Players.LocalPlayer.Character.Stun.Value = 0
-            end
-        end)
-    end
-end
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 220 then
-                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                v.HumanoidRootPart.CFrame = Stp
-                v.HumanoidRootPart.CanCollide = false
-                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-                v.HumanoidRootPart.Transparency = 1
-                v.Humanoid.WalkSpeed = 0
+            if not string.find(v.Name, "Boss") and (v.HumanoidRootPart.Position - Stp.Position).magnitude <= 300 then
+                v.HumanoidRootPart.CFrame = PosMon
                 v.Humanoid.JumpPower = 0
+                v.Humanoid.WalkSpeed = 0
+                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                v.HumanoidRootPart.Transparency = 1
+                v.HumanoidRootPart.CanCollide = false
+                v.Head.CanCollide = false
                 if v.Humanoid:FindFirstChild("Animator") then
                     v.Humanoid.Animator:Destroy()
                 end
                 v.Humanoid:ChangeState(11)
                 v.Humanoid:ChangeState(14)
-                v.Humanoid:ChangeState(16)
+                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
             end
         end
     end)
@@ -923,11 +921,15 @@ function KillMob(Trget, Stopfunction)
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat task.wait()
                     EnableBuso()
-                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
-                    Stp = v.HumanoidRootPart.CFrame
+                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                    v.Humanoid.JumpPower = 0
                     v.HumanoidRootPart.CanCollide = false
-                    v.HumanoidRootPart.Size = Vector3.new(1, 1,1)
-                    NoStun()
+                    v.Humanoid.WalkSpeed = 0
+                    v.Humanoid:ChangeState(11)
+                    v.Humanoid:ChangeState(14)
+                    v.Humanoid:ChangeState(16)
+                    Stp = v.HumanoidRootPart.CFrame
+                    Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     BringMob(Trget)
                 until v.Humanoid.Health <= 0 or not v.Parent or not Stopfunction
             end
