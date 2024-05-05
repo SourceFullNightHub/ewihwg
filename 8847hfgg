@@ -897,7 +897,7 @@ end
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if not string.find(v.Name, "Boss") and (v.HumanoidRootPart.Position - Stp.Position).magnitude <= 300 then
+            if (v.Name == nhulon) and not string.find(v.Name, "Boss") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 300 then
                 v.HumanoidRootPart.CFrame = PosMon
                 v.Humanoid.JumpPower = 0
                 v.Humanoid.WalkSpeed = 0
