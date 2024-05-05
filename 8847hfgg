@@ -978,7 +978,7 @@ H:CreateDropdown({
     end
 })
 
-H:CreateSection({Text = "Tween"})
+H:CreateSection({Text = "Tween & Codes"})
 
 H:CreateButton({
     Name = "StopTween",
@@ -986,6 +986,49 @@ H:CreateButton({
     CallBack = function()
         Tween(plr.Character.HumanoidRootPart.CFrame)
         TweenSmooth:Destroy()
+    end
+})
+
+local tatcacode = {
+    "Sub2UncleKizaru",
+    "NEWTROLL",
+    "SUB2NOOBMASTER123",
+    "StrawHatMaine",
+    "Sub2OfficialNoobie",
+    "Sub2NoobMaster123",
+    "SUB2GAMERROBOT_EXP1",
+    "SUB2GAMERROBOT_RESET1",
+    "THEGREATACE",
+    "BIGNEWS",
+    "FUDD10",
+    "fudd10_v2",
+    "Bluxxy",
+    "Starcodeheo",
+    "JCWK",
+    "SUB2CAPTAINMAUI",
+    "Magicbus",
+    "Sub2Fer999",
+    "kittgaming",
+    "GAMERROBOT",
+    "SUBGAMERROBOT",
+    "ADMINGIVEAWAY",
+    "KITT_RESET",
+    "SECRET_ADMIN",
+    "Sub2Daigrock",
+    "Axiore",
+    "TantaiGaming"
+}
+
+H:CreateButton({
+    Name = "Redeem All Codes",
+    Description = "Redeem All Codes In Blox Fruits",
+    CallBack = function()
+        function Redeemcode(buoi)
+            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(buoi)
+        end
+        for i, v in pairs(tatcacode) do
+            Redeemcode(v)
+        end
     end
 })
 
