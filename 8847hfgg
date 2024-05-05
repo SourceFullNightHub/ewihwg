@@ -1087,11 +1087,11 @@ T:CreateToggle({
 
 spawn(function()
     while wait() do
-        if _G.Settings.FastAttack then
+        if _G.FastAttack then
             pcall(function()
                 repeat task.wait(0.01)
                     AttackNoCD()
-                until not _G.Settings.FastAttack
+                until not _G.FastAttack
             end)
         end
     end
