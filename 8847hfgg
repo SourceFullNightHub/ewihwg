@@ -899,11 +899,11 @@ end
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 220 then
                 sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                 v.HumanoidRootPart.CFrame = Stp
                 v.HumanoidRootPart.CanCollide = false
-                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                 v.HumanoidRootPart.Transparency = 1
                 v.Humanoid.WalkSpeed = 0
                 v.Humanoid.JumpPower = 0
@@ -926,7 +926,7 @@ function KillMob(Trget, Stopfunction)
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     Stp = v.HumanoidRootPart.CFrame
                     v.HumanoidRootPart.CanCollide = false
-                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                    v.HumanoidRootPart.Size = Vector3.new(1, 1,1)
                     NoStun()
                     BringMob(Trget)
                 until v.Humanoid.Health <= 0 or not v.Parent or not Stopfunction
@@ -1088,7 +1088,7 @@ spawn(function()
     while wait() do
         if _G.FastAttack then
             pcall(function()
-                repeat task.wait(0.01)
+                repeat task.wait(0.075)
                     AttackNoCD()
                 until not _G.FastAttack
             end)
