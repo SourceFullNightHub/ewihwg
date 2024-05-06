@@ -1045,7 +1045,6 @@ function EquipWeapon(Giet)
     Giet = GetWP(_G.SelectTool)
     local bucac = game.Players.LocalPlayer.Backpack:FindFirstChild(Giet)
     if bucac then
-        wait(0.5)
         game.Players.LocalPlayer.Character.Humanoid:EquipTool(bucac)
     end
 end
@@ -1435,6 +1434,32 @@ T:CreateToggle({
             game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
         else
             game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+        end
+    end
+})
+
+T:CreateToggle({
+    Name = "Remove Notifications",
+    Description = "Remove All Notifications In Game",
+    Default = false,
+    CallBack = function(Value)
+        if Value then
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+        else
+            game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+        end
+    end
+})
+
+T:CreateToggle({
+    Name = "Remove Damage Text",
+    Description = "Remove All Damage Text If Your Attack Mob",
+    Default = false,
+    CallBack = function(Value)
+        if Value then
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        else
+            game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
         end
     end
 })
