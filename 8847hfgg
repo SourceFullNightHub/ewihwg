@@ -914,6 +914,26 @@ function BringMob(nhulon)
         end
     end)
 end
+function BringMoNearest()
+    pcall(function()
+        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 300 then
+                v.HumanoidRootPart.CFrame = Near
+                v.Humanoid.JumpPower = 0
+                v.Humanoid.WalkSpeed = 0
+                v.HumanoidRootPart.Transparency = 1
+                v.HumanoidRootPart.CanCollide = false
+                v.Head.CanCollide = false
+                if v.Humanoid:FindFirstChild("Animator") then
+                    v.Humanoid.Animator:Destroy()
+                end
+                v.Humanoid:ChangeState(11)
+                v.Humanoid:ChangeState(14)
+                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+            end
+        end
+    end)
+end
 function KillMob(Trget, Stopfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
@@ -925,6 +945,18 @@ function KillMob(Trget, Stopfunction)
                     BringMob(Trget)
                 until v.Humanoid.Health <= 0 or not v.Parent or not Stopfunction
             end
+        end
+    end
+end
+function KillMobNearest(Nahfunction)
+    for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 1000 then
+            repeat task.wait()
+                EnableBuso()
+                Near = v.HumanoidRootPart.CFrame
+                Tween(v.HumanoidRootPart.CFrame * PosFarm)
+                BringMoNearest()
+            until v.Humanoid.Health <= 0 or not v.Parent or Nahfunction == false
         end
     end
 end
@@ -941,6 +973,9 @@ function TakeQuest(cfRg, NameQuet, NumbQuest)
     if (plr.Character.HumanoidRootPart.Position - cfRg.Position).Magnitude <= 10 then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuet, NumbQuest)
     end
+end
+function GetQuestions(Dextralnguvailon)
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Dextralnguvailon)
 end
 function GetLevel(Lv)
     if plr.Data.Level.Value >= Lv then
@@ -1106,6 +1141,81 @@ spawn(function()
                     end
                 end
             end)
+        end
+    end
+end)
+
+H:CreateSection({Text = "Others Farmming"})
+
+H:CreateToggle({
+    Name = "Auto Pirates Raid",
+    Description = "Auto Kill All Pirates Raid In Castle On The Sea",
+    Default = false,
+    CallBack = function(Value)
+        _G.PiratesRaid = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if _G.PiratesRaid then
+            if (CFrame.new(-5496.17432, 313.768921, -2841.53027).Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                KillMobNearest(_G.PiratesRaid)
+            else
+                Tween(CFrame.new(-5496.17432, 313.768921, -2841.53027))
+            end
+        end
+    end
+end)
+
+H:CreateToggle({
+    Name = "Auto Elite",
+    Description = "Auto Elite Hunter",
+    Default = false,
+    CallBack = function(Value)
+        _G.ChichElite = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if _G.ChichElite and Sea3 then
+            if not CheckTextQuest("Diablo") and not CheckTextQuest("Urban") and not CheckTextQuest("Deandre") then
+                GetQuestions("EliteHunter")
+            elseif CheckTextQuest("Diablo") or CheckTextQuest("Urban") or CheckTextQuest("Deandre") then
+                if CheckEnemies("Diablo") or CheckEnemies("Urban") or CheckEnemies("Deandre") then
+                    KillMob("Diablo", _G.ChichElite)
+                    KillMob("Urban", _G.ChichElite)
+                    KillMob("Deandre", _G.ChichElite)
+                else
+                    for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+                        if v.Name == "Diablo" or v.Name == "Urban" or v.Name == "Deandre" then
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+H:CreateToggle({
+    Name = "Auto Factory",
+    Description = "Auto Attack Factory In Second Sea",
+    Default = false,
+    CallBack = function(Value)
+        _G.DitFactory = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if _G.DitFactory and Sea2 then
+            if CheckEnemies("Core") then
+                Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+            else
+                Tween(CFrame.new(448.46756, 199.356781, -441.389252))
+            end
         end
     end
 end)
