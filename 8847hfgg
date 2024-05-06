@@ -1159,6 +1159,32 @@ H:CreateButton({
     end
 })
 
+H:CreateSection({ Text = "Settings Support Farm"})
+
+StatsList = {"Melee", "Defense", "Sword", "Gun", "Demon Fruit"}
+H:CreateDropdown({
+    Name = "Auto Stats",
+    Description = "Auto Stats",
+    List = StatsList,
+    Default = "",
+    CallBack = function(Value)
+        _G.DitStats = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if _G.DitStats then
+            local args = {
+                [1] = "AddPoint",
+                [2] = _G.DitStats, 
+                [3] = 9999
+                }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
 H:CreateSection({ Text = "Select Method Farm" })
 
 H:CreateDropdown({
@@ -1370,5 +1396,20 @@ T:CreateToggle({
     Default = false,
     CallBack = function(Value)
         _G.BypassTele = Value
+    end
+})
+
+T:CreateSection({ Text = "Players" })
+
+T:CreateToggle({
+    Name = "Walk On Water",
+    Description = "Walk On Water",
+    Default = true,
+    CallBack = function(Value)
+        if Value then
+            game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+        else
+            game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+        end
     end
 })
