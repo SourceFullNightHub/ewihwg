@@ -934,38 +934,12 @@ function BringMoNearest()
         end
     end)
 end
-function GetWP(Whatthehell)
-    ToolF = ""
-    for i , v in pairs(plr.BackPack:GetChildren()) do
-        if v:IsA("Tool") and v.Name == Whatthehell then
-            ToolF = v.Name
-        end
-    end
-    for i, v in pairs(plr.Character:GetChildren()) do
-        if v:IsA("Tool") and v.Name == Whatthehell then
-            ToolF = v.Name
-        end
-    end
-    return ToolF
-end
-function EquipWeapon(Tool)
-    if _G.SelectTool == "" or _G.SelectTool == nil then
-        _G.SelectTool = "Melee"
-    end
-    Tool = GetWP(_G.SelectTool)
-    if plr.BackPack:FindFirstChild(Tool) then
-        local memaybeo = plr.BackPack:FindFirstChild(Tool)
-        wait(0.1)
-        plr.Character.Humanoid:EquipTool(memaybeo)
-    end
-end
 function KillMob(Trget, Stopfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat task.wait()
                     EnableBuso()
-                    EquipWeapon()
                     Stp = v.HumanoidRootPart.CFrame
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     BringMob(Trget)
@@ -979,7 +953,6 @@ function KillMobNearest(Nahfunction)
         if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
             repeat task.wait()
                 EnableBuso()
-                EquipWeapon()
                 Near = v.HumanoidRootPart.CFrame
                 Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 BringMoNearest()
@@ -1258,11 +1231,22 @@ T:CreateToggle({
     end
 })
 
+T:CreateDropdown({
+    Name = "FastAttack Cooldown",
+    Description = "Select CoolDown Delay Attack",
+    List = {"0", "0.0015", "0.00175", "0.01", "0.0175", "0.05", "0.075", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"},
+    Default = "0.15",
+    CallBack = function(Value)
+        _G.FastAttackDelay = Value
+    end
+
+})
+
 spawn(function()
-    while wait() do
+    while task.wait() do
         if _G.FastAttack then
             pcall(function()
-                repeat task.wait(0.075)
+                repeat task.wait(_G.FastAttackDelay)
                     AttackNoCD()
                 until not _G.FastAttack
             end)
@@ -1278,8 +1262,6 @@ T:CreateToggle({
         _G.Bring = Value
     end
 })
-
-
 
 T:CreateToggle({
     Name = "Enable Bypass Teleport",
