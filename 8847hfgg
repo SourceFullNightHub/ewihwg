@@ -976,9 +976,10 @@ function KillMob(Trget, Stopfunction)
 end
 function KillMobNearest(Nahfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 1000 then
+        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
             repeat task.wait()
                 EnableBuso()
+                EquipWeapon()
                 Near = v.HumanoidRootPart.CFrame
                 Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 BringMoNearest()
