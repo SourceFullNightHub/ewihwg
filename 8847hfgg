@@ -1024,7 +1024,31 @@ function BringMoNearest()
         end
     end)
 end
-
+function GetWP(buoif)
+    Nahfck = ""
+    for i, v in pairs(plr.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == buoif then
+            Nahfck = v.Name
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == buoif then
+            Nahfck = v.Name
+        end
+    end
+    return Nahfck
+end
+function EquipWeapon(Giet)
+    if _G.SelectTool == "" or _G.SelectTool == nil then
+        _G.SelectTool = "Melee"
+    end
+    Giet = GetWP(_G.SelectTool)
+    local bucac = game.Players.LocalPlayer.Backpack:FindFirstChild(Giet)
+    if bucac then
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
 function KillMob(Trget, Stopfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
@@ -1032,6 +1056,7 @@ function KillMob(Trget, Stopfunction)
                 repeat
                     task.wait()
                     EnableBuso()
+                    EquipWeapon()
                     Stp = v.HumanoidRootPart.CFrame
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     BringMob(Trget)
@@ -1040,13 +1065,13 @@ function KillMob(Trget, Stopfunction)
         end
     end
 end
-
 function KillMobNearest(Nahfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
             repeat
                 task.wait()
                 EnableBuso()
+                EquipWeapon()
                 Near = v.HumanoidRootPart.CFrame
                 Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 BringMoNearest()
@@ -1054,7 +1079,6 @@ function KillMobNearest(Nahfunction)
         end
     end
 end
-
 function TakeQuest(cfRg, NameQuet, NumbQuest)
     if _G.BypassTele then
         if CheckDistancelonhon(cfRg, 2500) then
@@ -1069,24 +1093,20 @@ function TakeQuest(cfRg, NameQuet, NumbQuest)
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuet, NumbQuest)
     end
 end
-
 function GetQuestions(Dextralnguvailon)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Dextralnguvailon)
 end
-
 function GetLevel(Lv)
     if plr.Data.Level.Value >= Lv then
         return Lv
     end
 end
-
 function CheckGlassCake()
     if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
         return true
     end
     return false
 end
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 local Windows = Library:CreateWindow({ Title = "Night Hub", Creator = "! Nightx" })
