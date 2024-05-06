@@ -1096,9 +1096,9 @@ end
 function GetQuestions(Dextralnguvailon)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Dextralnguvailon)
 end
-function GetLevel(Lv)
-    if plr.Data.Level.Value >= Lv then
-        return Lv
+function GetLevel(LvLow, LvHigh)
+    if plr.Data.Level.Value >= LvLow and plr.Data.Level.Value <= LvHigh then
+        return
     end
 end
 function CheckGlassCake()
@@ -1172,7 +1172,6 @@ H:CreateButton({
         function Redeemcode(buoi)
             game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(buoi)
         end
-
         for i, v in pairs(tatcacode) do
             Redeemcode(v)
         end
@@ -1230,7 +1229,13 @@ spawn(function()
     while task.wait() do
         if _G.StFarm then
             pcall(function()
-                if _G.SelectMethodFarm == "Level" then
+                if _G.SelectMethodFarm == "" or _G.SelectMethodFarm == nil then
+                    Library:MakeNotify({
+                        Name = "Night Hub",
+                        Content = "Select Method Farm Please",
+                        Time = 5,
+                     })
+                elseif _G.SelectMethodFarm == "Level" then
                     GetQuest()
                     if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
                         TakeQuest(CQuest, NQuest, NumberQuest)
