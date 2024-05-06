@@ -934,12 +934,38 @@ function BringMoNearest()
         end
     end)
 end
+function GetWP(Whatthehell)
+    ToolF = ""
+    for i , v in pairs(plr.BackPack:GetChildren()) do
+        if v:IsA("Tool") and v.Name == Whatthehell then
+            ToolF = v.Name
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.Name == Whatthehell then
+            ToolF = v.Name
+        end
+    end
+    return ToolF
+end
+function EquipWeapon(Tool)
+    if _G.SelectTool == "" or _G.SelectTool == nil then
+        _G.SelectTool = "Melee"
+    end
+    Tool = GetWP(_G.SelectTool)
+    if plr.BackPack:FindFirstChild(Tool) then
+        local memaybeo = plr.BackPack:FindFirstChild(Tool)
+        wait(0.1)
+        plr.Character.Humanoid:EquipTool(memaybeo)
+    end
+end
 function KillMob(Trget, Stopfunction)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if v.Name == Trget then
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat task.wait()
                     EnableBuso()
+                    EquipWeapon()
                     Stp = v.HumanoidRootPart.CFrame
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     BringMob(Trget)
