@@ -1046,7 +1046,7 @@ function EquipWeapon(Giet)
     local bucac = game.Players.LocalPlayer.Backpack:FindFirstChild(Giet)
     if bucac then
         wait(0.5)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bucac)
     end
 end
 function KillMob(Trget, Stopfunction)
