@@ -897,11 +897,10 @@ end
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if (v.Name == nhulon) and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 300 then
+            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 300 then
                 v.HumanoidRootPart.CFrame = Stp
                 v.Humanoid.JumpPower = 0
                 v.Humanoid.WalkSpeed = 0
-                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                 v.HumanoidRootPart.Transparency = 1
                 v.HumanoidRootPart.CanCollide = false
                 v.Head.CanCollide = false
@@ -921,13 +920,6 @@ function KillMob(Trget, Stopfunction)
             if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat task.wait()
                     EnableBuso()
-                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                    v.Humanoid.JumpPower = 0
-                    v.HumanoidRootPart.CanCollide = false
-                    v.Humanoid.WalkSpeed = 0
-                    v.Humanoid:ChangeState(11)
-                    v.Humanoid:ChangeState(14)
-                    v.Humanoid:ChangeState(16)
                     Stp = v.HumanoidRootPart.CFrame
                     Tween(v.HumanoidRootPart.CFrame * PosFarm)
                     BringMob(Trget)
