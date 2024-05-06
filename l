@@ -284,7 +284,7 @@ function NightLib:CreateWindow(Options)
         Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Notify.BorderSizePixel = 0
-        Notify.Position = UDim2.new(0.769000947, 0, 0.825910926, 0)
+        Notify.Position = UDim2.new(11.769000947, 0, 0.825910926, 0)
         Notify.Size = UDim2.new(0, 310, 0, 55)
     
         UICorner_11.CornerRadius = UDim.new(0, 3)
