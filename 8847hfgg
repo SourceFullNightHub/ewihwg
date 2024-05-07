@@ -1586,7 +1586,7 @@ local PoleTakenToggle = I:CreateToggle({
 spawn(function()
     while wait() do
         if _G.TakenPole and Sea1 then
-            if GetLevel <= 199 then
+            if LevelGet <= 199 then
                 Library:MakeNotify({
                     Name = "Night Hub",
                     Content = "Your Level Is Low(Your Level need to => 200)",
@@ -1600,7 +1600,7 @@ spawn(function()
                     Time = 5,
                 })
                 PoleTakenToggle:Set(false)
-            elseif not CheckInventory("Pole (1st Form)") and GetLevel >= 200 then
+            elseif not CheckInventory("Pole (1st Form)") and LevelGet >= 200 then
                 if CheckEnemies("Thunder God") then
                     KillMob("Thunder God", _G.TakenPole)
                 else
