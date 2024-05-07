@@ -1412,7 +1412,7 @@ spawn(function ()
     while task.wait() do
         if _G.TakenSaber and Sea1 then
             if not CheckInventory("Saber") then
-                Library:CreateNotify({
+                Library:MakeNotify({
                     Title = "Night Hub",
                     Content = "Sorry, Wait I Write Function",
                     Time = 5,
