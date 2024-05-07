@@ -1,3 +1,5 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 if game.PlaceId == 2753915549 then
     Sea1 = true
 elseif game.PlaceId == 4442272183 then
@@ -890,9 +892,34 @@ function CheckDistancebehon(cacc, chodeogi)
     end
 end
 
+function CheckSea(yamatekudasai)
+    if game.PlaceId == 2753915549 then
+        if yamatekudasai == 1 then
+            return true
+        end
+    elseif game.PlaceId == 4442272183 then
+        if yamatekudasai == 2 then
+            return true
+        end
+    elseif game.PlaceId == 7449423635 then
+        if yamatekudasai == 3 then
+            return true
+        end
+    end
+    return false
+end
+
 function Click()
-    game:GetService 'VirtualUser':CaptureController()
-    game:GetService 'VirtualUser':Button1Down(Vector2.new(1280, 672))
+    game:GetService'VirtualUser':CaptureController()
+    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+end
+
+function CheckInventory(OiOiOi)
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
+        if v.Name == OiOiOi then
+            return v
+        end
+    end
 end
 
 local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
@@ -960,7 +987,6 @@ function AttackNoCD()
         end
     end
 end
-
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -1111,6 +1137,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sourc
 local Windows = Library:CreateWindow({ Title = "Night Hub", Creator = "! Nightx" })
 
 local H = Windows:MakeTab({ Name = "Home", Icon = "rbxassetid://17184558565" })
+local I = Windows:MakeTab({ Name = "Item", Icon = "rbxassetid://17184405349" })
 local T = Windows:MakeTab({ Name = "Settings", Icon = "rbxassetid://17184407740" })
 
 H:CreateDropdown({
@@ -1370,6 +1397,32 @@ spawn(function()
     end
 end)
 
+I:CreateSection({ Text = "Sea 1 Item & Quest" })
+
+I:CreateToggle({
+    Name = "Auto Saber",
+    Description = "Auto Taken Saber(Kuttay)",
+    Default = false,
+    CallBack = function(Value)
+        _G.TakenSaber = Value
+    end
+})
+
+spawn(function ()
+    while task.wait() do
+        if _G.TakenSaber and Sea1 then
+            if not CheckInventory("Saber") then
+                Library:CreateNotify({
+                    Title = "Night Hub",
+                    Content = "Sorry, Wait I Write Function",
+                    Time = 5,
+                })
+                wait(6)
+            end
+        end
+    end
+end)
+
 T:CreateSection({ Text = "Settings FastAttack & Bring Mob & Bypass" })
 
 T:CreateToggle({
@@ -1389,7 +1442,6 @@ T:CreateDropdown({
     CallBack = function(Value)
         _G.FastAttackDelay = Value
     end
-
 })
 
 spawn(function()
