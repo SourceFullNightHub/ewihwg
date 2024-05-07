@@ -7,59 +7,59 @@ local TweenService = game:GetService("TweenService")
 local NightLib = {}
 
 local function MakeDraggable(topbarobject, object)
-	local Dragging = nil
-	local DragInput = nil
-	local DragStart = nil
-	local StartPosition = nil
+    local Dragging = nil
+    local DragInput = nil
+    local DragStart = nil
+    local StartPosition = nil
 
-	local function Update(input)
-		local Delta = input.Position - DragStart
-		local pos =
-			UDim2.new(
-				StartPosition.X.Scale,
-				StartPosition.X.Offset + Delta.X,
-				StartPosition.Y.Scale,
-				StartPosition.Y.Offset + Delta.Y
-			)
-		object.Position = pos
-	end
+    local function Update(input)
+        local Delta = input.Position - DragStart
+        local pos =
+            UDim2.new(
+                StartPosition.X.Scale,
+                StartPosition.X.Offset + Delta.X,
+                StartPosition.Y.Scale,
+                StartPosition.Y.Offset + Delta.Y
+            )
+        object.Position = pos
+    end
 
-	topbarobject.InputBegan:Connect(
-		function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				Dragging = true
-				DragStart = input.Position
-				StartPosition = object.Position
+    topbarobject.InputBegan:Connect(
+        function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                Dragging = true
+                DragStart = input.Position
+                StartPosition = object.Position
 
-				input.Changed:Connect(
-					function()
-						if input.UserInputState == Enum.UserInputState.End then
-							Dragging = false
-						end
-					end
-				)
-			end
-		end
-	)
+                input.Changed:Connect(
+                    function()
+                        if input.UserInputState == Enum.UserInputState.End then
+                            Dragging = false
+                        end
+                    end
+                )
+            end
+        end
+    )
 
-	topbarobject.InputChanged:Connect(
-		function(input)
-			if
-				input.UserInputType == Enum.UserInputType.MouseMovement or
-					input.UserInputType == Enum.UserInputType.Touch
-			then
-				DragInput = input
-			end
-		end
-	)
+    topbarobject.InputChanged:Connect(
+        function(input)
+            if
+                input.UserInputType == Enum.UserInputType.MouseMovement or
+                input.UserInputType == Enum.UserInputType.Touch
+            then
+                DragInput = input
+            end
+        end
+    )
 
-	uis.InputChanged:Connect(
-		function(input)
-			if input == DragInput and Dragging then
-				Update(input)
-			end
-		end
-	)
+    uis.InputChanged:Connect(
+        function(input)
+            if input == DragInput and Dragging then
+                Update(input)
+            end
+        end
+    )
 end
 function NightLib:CreateWindow(Options)
     Options = Options or {}
@@ -202,7 +202,7 @@ function NightLib:CreateWindow(Options)
     NameHub.BorderSizePixel = 0
     NameHub.Size = UDim2.new(1, 0, 1, 0)
     NameHub.Font = Enum.Font.GothamBold
-    NameHub.Text = "   ".. Options.Title
+    NameHub.Text = "   " .. Options.Title
     NameHub.TextColor3 = Color3.fromRGB(255, 255, 255)
     NameHub.TextSize = 15.000
     NameHub.TextWrapped = true
@@ -217,7 +217,7 @@ function NightLib:CreateWindow(Options)
     Cre.Position = UDim2.new(0.169708148, 0, 0, 0)
     Cre.Size = UDim2.new(0, 200, 0, 37)
     Cre.Font = Enum.Font.GothamBold
-    Cre.Text = "By ".. Options.Creator
+    Cre.Text = "By " .. Options.Creator
     Cre.TextColor3 = Color3.fromRGB(100, 100, 100)
     Cre.TextSize = 12.000
     Cre.TextXAlignment = Enum.TextXAlignment.Left
@@ -259,7 +259,7 @@ function NightLib:CreateWindow(Options)
     ChannelContainer.ClipsDescendants = true
     ChannelContainer.Position = UDim2.new(1, 0, 0.0958548859, 0)
     ChannelContainer.Size = UDim2.new(0, 412, 0, 348)
-    
+
     MakeDraggable(Top, Main)
 
     function NightLib:MakeNotify(Options)
@@ -268,7 +268,7 @@ function NightLib:CreateWindow(Options)
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
         Options.Time = Options.Time or 5
-    
+
         local Notify = Instance.new("Frame")
         local UICorner_11 = Instance.new("UICorner")
         local DropShadowHolder_2 = Instance.new("Frame")
@@ -278,7 +278,7 @@ function NightLib:CreateWindow(Options)
         local TextLabel = Instance.new("TextLabel")
         local PaddingN = Instance.new("UIPadding")
         local PaddingN2 = Instance.new("UIPadding")
-    
+
         Notify.Name = "Notify"
         Notify.Parent = ScreenGui
         Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -286,17 +286,17 @@ function NightLib:CreateWindow(Options)
         Notify.BorderSizePixel = 0
         Notify.Position = UDim2.new(11.769000947, 0, 0.825910926, 0)
         Notify.Size = UDim2.new(0, 310, 0, 55)
-    
+
         UICorner_11.CornerRadius = UDim.new(0, 3)
         UICorner_11.Parent = Notify
-    
+
         DropShadowHolder_2.Name = "DropShadowHolder"
         DropShadowHolder_2.Parent = Notify
         DropShadowHolder_2.BackgroundTransparency = 1.000
         DropShadowHolder_2.BorderSizePixel = 0
         DropShadowHolder_2.Size = UDim2.new(1, 0, 1, 0)
         DropShadowHolder_2.ZIndex = 0
-    
+
         DropShadow_2.Name = "DropShadow"
         DropShadow_2.Parent = DropShadowHolder_2
         DropShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -309,7 +309,7 @@ function NightLib:CreateWindow(Options)
         DropShadow_2.ImageTransparency = 0.500
         DropShadow_2.ScaleType = Enum.ScaleType.Slice
         DropShadow_2.SliceCenter = Rect.new(49, 49, 450, 450)
-    
+
         Title_6.Name = "Title"
         Title_6.Parent = Notify
         Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -325,11 +325,11 @@ function NightLib:CreateWindow(Options)
         Title_6.TextSize = 15.000
         Title_6.TextWrapped = true
         Title_6.TextXAlignment = Enum.TextXAlignment.Left
-    
+
         PaddingN.Parent = Title_6
         PaddingN.PaddingLeft = UDim.new(0, 29)
         PaddingN.PaddingBottom = UDim.new(0, 3)
-    
+
         Iconnotify.Name = "Iconnotify"
         Iconnotify.Parent = Notify
         Iconnotify.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -339,7 +339,7 @@ function NightLib:CreateWindow(Options)
         Iconnotify.Position = UDim2.new(0, 3, 0, 3)
         Iconnotify.Size = UDim2.new(0, 20, 0, 20)
         Iconnotify.Image = Options.Icon
-    
+
         TextLabel.Parent = Notify
         TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         TextLabel.BackgroundTransparency = 1.000
@@ -352,21 +352,22 @@ function NightLib:CreateWindow(Options)
         TextLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
         TextLabel.TextSize = 14.000
         TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
+
         PaddingN2.Parent = TextLabel
         PaddingN2.PaddingLeft = UDim.new(0, 6)
-    
-        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.737, 0, 0.797, 0)}):Play()
-        
+
+        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint),
+            { Position = UDim2.new(0.300, 0, 0.797, 0) }):Play()
+
         wait(Options.Time - 0.88)
-        TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
-        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
+        TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), { ImageTransparency = 1 }):Play()
+        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), { BackgroundTransparency = 0.6 }):Play()
         wait(0.3)
-        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
-        TweenService:Create(TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
+        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), { TextTransparency = 0.4 }):Play()
+        TweenService:Create(TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Quint), { TextTransparency = 0.5 }):Play()
         wait(0.05)
-    
-        Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
+
+        Notify:TweenPosition(UDim2.new(20, 0, 0, 0), 'In', 'Quint', 0.8, true)
         wait(1.35)
         Notify:Destroy()
     end
@@ -376,7 +377,7 @@ function NightLib:CreateWindow(Options)
         Options = Options or {}
         Options.Name = Options.Name or "Tab 1"
         Options.Icon = Options.Icon or "rbxassetid://17184558565"
-        
+
         local Tab1 = Instance.new("TextButton")
         local UICorner_4 = Instance.new("UICorner")
         local IcoTab_2 = Instance.new("ImageLabel")
@@ -395,7 +396,7 @@ function NightLib:CreateWindow(Options)
         Tab1.ClipsDescendants = true
         Tab1.Size = UDim2.new(1, 0, 0, 30)
         Tab1.Font = Enum.Font.GothamBold
-        Tab1.Text = "         "..Options.Name
+        Tab1.Text = "         " .. Options.Name
         Tab1.TextColor3 = Color3.fromRGB(222, 222, 222)
         Tab1.TextSize = 15.000
         Tab1.TextXAlignment = Enum.TextXAlignment.Left
@@ -428,7 +429,7 @@ function NightLib:CreateWindow(Options)
         TabEnable.Visible = false
         spawn(function()
             while wait() do
-                TabEnable.CanvasSize = UDim2.new(0,0,0,UIListLayout_2.AbsoluteContentSize.Y + 70)
+                TabEnable.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_2.AbsoluteContentSize.Y + 70)
             end
         end)
 
@@ -444,17 +445,17 @@ function NightLib:CreateWindow(Options)
 
         Tab1.MouseEnter:Connect(function()
             if ChannelName ~= Tab1.Name then
-                Tab1.TextColor3 = Color3.fromRGB(255,255,255)
+                Tab1.TextColor3 = Color3.fromRGB(255, 255, 255)
                 IcoTab_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
             end
         end)
-        
+
         Tab1.MouseLeave:Connect(function()
             if ChannelName ~= Tab1.Name then
                 Tab1.TextColor3 = Color3.fromRGB(114, 118, 125)
                 IcoTab_2.ImageColor3 = Color3.fromRGB(144, 144, 144)
             end
-        end)   
+        end)
 
         Tab1.MouseButton1Click:Connect(function()
             for i, v in next, ChannelContainer:GetChildren() do
@@ -469,15 +470,15 @@ function NightLib:CreateWindow(Options)
                     v.BackgroundTransparency = 1.000
                 end
             end
-            Tab1.TextColor3 = Color3.fromRGB(255,255,255)
+            Tab1.TextColor3 = Color3.fromRGB(255, 255, 255)
             Tab1.BackgroundColor3 = Color3.fromRGB(42, 251, 255)
             Tab1.BackgroundTransparency = 0.400
             ChannelName = Tab1.Name
         end)
-        
+
         if default == false then
             default = true
-            Tab1.TextColor3 = Color3.fromRGB(144,144,144)
+            Tab1.TextColor3 = Color3.fromRGB(144, 144, 144)
             ChannelContainer.Visible = true
             TabEnable.Visible = false
         end
@@ -498,19 +499,18 @@ function NightLib:CreateWindow(Options)
             Section.Position = UDim2.new(0, 0, 0.0119760484, 0)
             Section.Size = UDim2.new(1, 0, 0, 20)
             Section.Font = Enum.Font.GothamBold
-            Section.Text = "  "..Options.Text
+            Section.Text = "  " .. Options.Text
             Section.TextColor3 = Color3.fromRGB(255, 255, 255)
             Section.TextSize = 13.000
             Section.TextWrapped = true
             Section.TextXAlignment = Enum.TextXAlignment.Left
-            
         end
 
         function TabContent:CreateParagraph(Options)
             Options = Options or {}
-			Options.Title = Options.Title or "Paragraph"
-			Options.Content = Options.Content or "Description"
-            
+            Options.Title = Options.Title or "Paragraph"
+            Options.Content = Options.Content or "Description"
+
             local Paragraph = Instance.new("Frame")
             local UICorner_5 = Instance.new("UICorner")
             local Title = Instance.new("TextLabel")
@@ -541,7 +541,7 @@ function NightLib:CreateWindow(Options)
             Title.Position = UDim2.new(0, 0, 0, 6)
             Title.Size = UDim2.new(1, 0, 0, 16)
             Title.Font = Enum.Font.GothamBold
-            Title.Text = "  "..Options.Title
+            Title.Text = "  " .. Options.Title
             Title.TextColor3 = Color3.fromRGB(255, 255, 255)
             Title.TextSize = 15.000
             Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -559,7 +559,7 @@ function NightLib:CreateWindow(Options)
             Content.Position = UDim2.new(0, 0, 0, 23)
             Content.Size = UDim2.new(1, 0, 0, 26)
             Content.Font = Enum.Font.GothamBold
-            Content.Text = "   "..Options.Content
+            Content.Text = "   " .. Options.Content
             Content.TextColor3 = Color3.fromRGB(100, 100, 100)
             Content.TextSize = 12.000
             Content.TextWrapped = true
@@ -569,15 +569,16 @@ function NightLib:CreateWindow(Options)
             Paddin2g.PaddingLeft = UDim.new(0, 6)
 
             function ParagraphFunction:Set(Options)
-				Options = Options or {}
-				Options.Title = Options.Title or "Title"
-				Options.Content = Options.Content or "Content"
+                Options = Options or {}
+                Options.Title = Options.Title or "Title"
+                Options.Content = Options.Content or "Content"
 
-				Title.Text = tostring(Options.Title)
-				Content.Text = tostring(Options.Content)
-			end
-			ParagraphFunction:Set(Options)
-			return ParagraphFunction
+                Title.Text = tostring(Options.Title)
+                Content.Text = tostring(Options.Content)
+            end
+
+            ParagraphFunction:Set(Options)
+            return ParagraphFunction
         end
 
         function TabContent:CreateButton(Options)
@@ -585,7 +586,7 @@ function NightLib:CreateWindow(Options)
             Options.Name = Options.Name or "Button"
             Options.Description = Options.Description or ""
             Options.CallBack = Options.CallBack or function() end
-            
+
             local Button = Instance.new("Frame")
             local Title_2 = Instance.new("TextLabel")
             local Content_2 = Instance.new("TextLabel")
@@ -661,7 +662,7 @@ function NightLib:CreateWindow(Options)
             ButtonClick.Text = ""
             ButtonClick.TextColor3 = Color3.fromRGB(0, 0, 0)
             ButtonClick.TextSize = 14.000
-            
+
             ButtonClick.MouseButton1Click:Connect(function()
                 pcall(Options.CallBack)
                 Button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
@@ -669,7 +670,6 @@ function NightLib:CreateWindow(Options)
                     BackgroundColor3 = Color3.fromRGB(40, 40, 40)
                 }):Play()
             end)
-                    
         end
 
         function TabContent:CreateToggle(Options)
@@ -771,55 +771,54 @@ function NightLib:CreateWindow(Options)
 
             ToggleClick.MouseButton1Click:Connect(function()
                 if Toggled == false then
+                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                        {
+                            BackgroundColor3 = Color3.fromRGB(42, 251, 255)
+                        }):Play()
 
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(42, 251, 255)
-                    }):Play()
-                    
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0.5
                     }):Play()
-                    
+
                     ImageLabel.Visible = true
                     wait(0.01)
-                    
+
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0
                     }):Play()
-                    
                 else
-                    
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0.5
                     }):Play()
 
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-                    }):Play()
-                    
+                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                        {
+                            BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                        }):Play()
+
                     ImageLabel.Visible = false
                     wait(0.01)
-                    
+
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0
-                    }):Play()                    
+                    }):Play()
                 end
                 Toggled = not Toggled
                 pcall(Options.CallBack, Toggled)
             end)
-            
+
             if Options.Default == true then
                 TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                     BackgroundColor3 = Color3.fromRGB(42, 251, 255)
                 }):Play()
-                
+
                 TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                     ImageTransparency = 0.5
                 }):Play()
-                
+
                 ImageLabel.Visible = true
                 wait(0.01)
-                
+
                 TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                     ImageTransparency = 0
                 }):Play()
@@ -830,17 +829,18 @@ function NightLib:CreateWindow(Options)
 
             function ToggleFunc:Set(Value)
                 if Value then
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(42, 251, 255)
-                    }):Play()
-                    
+                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                        {
+                            BackgroundColor3 = Color3.fromRGB(42, 251, 255)
+                        }):Play()
+
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0.5
                     }):Play()
-                    
+
                     ImageLabel.Visible = true
                     wait(0.01)
-                    
+
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0
                     }):Play()
@@ -849,22 +849,25 @@ function NightLib:CreateWindow(Options)
                         ImageTransparency = 0.5
                     }):Play()
 
-                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                        BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-                    }):Play()
-                    
+                    TweenService:Create(CheckerFrame, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                        {
+                            BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                        }):Play()
+
                     ImageLabel.Visible = false
                     wait(0.01)
-                    
+
                     TweenService:Create(ImageLabel, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
                         ImageTransparency = 0
-                    }):Play()                    
+                    }):Play()
                 end
                 Toggled = not Toggled
                 pcall(Options.CallBack, Toggled)
             end
+
             return ToggleFunc
         end
+
         function TabContent:CreateSlider(Options)
             Options = Options or {}
             Options.Name = Options.Name or "Slider"
@@ -958,15 +961,17 @@ function NightLib:CreateWindow(Options)
             Value.BorderSizePixel = 0
             Value.Size = UDim2.new(1, 0, 1, 0)
             Value.Font = Enum.Font.GothamBold
-            Value.Text = tostring(Options.Default and math.floor((Options.Default / Options.Max) * (Options.Max - Options.Min) + Options.Min) or 1)
+            Value.Text = tostring(Options.Default and
+            math.floor((Options.Default / Options.Max) * (Options.Max - Options.Min) + Options.Min) or 1)
             Value.TextColor3 = Color3.fromRGB(0, 0, 0)
             Value.TextSize = 12.000
             pcall(tonumber(Value.Text))
 
             function SliderNhulon:SetValue(v)
                 if v == nil then
-                    local percentage = math.clamp((mouse.X - SliderFrame.AbsolutePosition.X) / (SliderFrame.AbsoluteSize.X), 0, 1)
-				    local value = math.floor(((Options.Max - Options.Min) * percentage) + Options.Min)
+                    local percentage = math.clamp(
+                    (mouse.X - SliderFrame.AbsolutePosition.X) / (SliderFrame.AbsoluteSize.X), 0, 1)
+                    local value = math.floor(((Options.Max - Options.Min) * percentage) + Options.Min)
 
                     Value.Text = tostring(value)
                     Draggable.Size = UDim2.fromScale(percentage, 1)
@@ -994,7 +999,7 @@ function NightLib:CreateWindow(Options)
 
                 if input.UserInputType == Enum.UserInputType.MouseButton1 and SliderNhulon.Hover then
                     SliderNhulon.MouseDown = true
-                
+
                     if not SliderNhulon.Connection then
                         SliderNhulon.Connection = Runservice.RenderStepped:Connect(function()
                             SliderNhulon:SetValue()
@@ -1005,15 +1010,16 @@ function NightLib:CreateWindow(Options)
 
             uis.InputEnded:Connect(function(input, gpe)
                 if gpe then return end
-                
+
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
                     SliderNhulon.MouseDown = false
                     if SliderNhulon.Connection then SliderNhulon.Connection:Disconnect() end
                     SliderNhulon.Connection = nil
-                    end                 
-                end)
+                end
+            end)
             return SliderNhulon
         end
+
         function TabContent:CreateDropdown(Options)
             Options = Options or {}
             Options.Name = Options.Name or "Dropdown"
@@ -1075,7 +1081,7 @@ function NightLib:CreateWindow(Options)
             Content_4.TextColor3 = Color3.fromRGB(100, 100, 100)
             Content_4.TextSize = 12.000
             Content_4.TextXAlignment = Enum.TextXAlignment.Left
-            
+
             PaddingD2.Parent = Content_4
             PaddingD2.PaddingLeft = UDim.new(0, 6)
 
@@ -1176,39 +1182,39 @@ function NightLib:CreateWindow(Options)
                 Option1.MouseEnter:Connect(function()
                     TweenService:Create(
                         Option1,
-                        TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                         {
                             TextTransparency = 0
                         }
                     ):Play()
                 end)
-    
+
                 Option1.MouseLeave:Connect(function()
                     TweenService:Create(
                         Option1,
-                        TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                         {
                             TextTransparency = 0.5
                         }
                     ):Play()
                 end)
-    
+
                 Option1.MouseButton1Click:Connect(function()
                     Dropped = false
                     ListFrame.Visible = false
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55), "Out", "Quad", 0.3, true)
                     TweenService:Create(
                         ListFrame,
-                        TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                         {
                             Visible = false
                         }
                     ):Play()
                     TweenService:Create(
-						IcoDrop,
-						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
-					):Play()
+                        IcoDrop,
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                        { ImageColor3 = Color3.fromRGB(255, 255, 255) }
+                    ):Play()
                     pcall(Option1.Text)
                     Options.CallBack(Option1.Text)
                     Selected.Text = Option1.Text
@@ -1218,44 +1224,44 @@ function NightLib:CreateWindow(Options)
             DropClick.MouseButton1Click:Connect(function()
                 if Dropped == false then
                     Dropped = true
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0.170, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.170, 55), "Out", "Quad", 0.3, true)
                     TweenService:Create(
                         ListFrame,
-                        TweenInfo.new(0.2 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                         {
                             Visible = true
                         }
                     ):Play()
                     TweenService:Create(
-						IcoDrop,
-						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-						{ImageColor3 = Color3.fromRGB(32, 140, 255)}
-					):Play()
+                        IcoDrop,
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                        { ImageColor3 = Color3.fromRGB(32, 140, 255) }
+                    ):Play()
                 else
                     Dropped = false
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55), "Out", "Quad", 0.3, true)
                     TweenService:Create(
                         ListFrame,
-                        TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
                         {
                             Visible = false
                         }
                     ):Play()
                     TweenService:Create(
-						IcoDrop,
-						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
-					):Play()
+                        IcoDrop,
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                        { ImageColor3 = Color3.fromRGB(255, 255, 255) }
+                    ):Play()
                 end
             end)
-            
         end
+
         function TabContent:CreateTextBox(Options)
             Options = Options or {}
             Options.Name = Options.Name or ""
             Options.Description = Options.Description or ""
             Options.Default = Options.Default or ""
-            Options.CallBack = Options.CallBack or function () end
+            Options.CallBack = Options.CallBack or function() end
 
             local TextBox = Instance.new("Frame")
             local Title_6 = Instance.new("TextLabel")
@@ -1333,22 +1339,25 @@ function NightLib:CreateWindow(Options)
             UICorner_11.Parent = Put
 
             function InputFunc:Set(Value)
-				Put.Text = Value
-			end
-			local Inputting = false
-			Put.Focused:Connect(function()
-				Inputting = true
-			end)
-			Put.FocusLost:Connect(function()
-				Inputting = false
-				Put.Size = UDim2.new(0, 100, 0, 27)
-				Options.CallBack(Put.Text)
-			end)
-			return InputFunc
-            
+                Put.Text = Value
+            end
+
+            local Inputting = false
+            Put.Focused:Connect(function()
+                Inputting = true
+            end)
+            Put.FocusLost:Connect(function()
+                Inputting = false
+                Put.Size = UDim2.new(0, 100, 0, 27)
+                Options.CallBack(Put.Text)
+            end)
+            return InputFunc
         end
+
         return TabContent
     end
+
     return Tab
 end
+
 return NightLib
