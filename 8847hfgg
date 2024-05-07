@@ -798,6 +798,38 @@ function Tween(CFg)
     end
 end
 
+function ToTarget(Pose)
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (Pose.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+        if not Pose then return end
+        if not plr.Character:FindFirstChild("TweenSmooth") then
+            local TweenSmooth = Instance.new("Part", plr.Character) -- Create part
+            TweenSmooth.Size = Vector3.new(10, 1, 10)
+            TweenSmooth.Name = "TweenSmooth"
+            TweenSmooth.Anchored = true
+            TweenSmooth.Transparency = 1
+            TweenSmooth.CanCollide = false
+            TweenSmooth.CFrame = WaitHRP(plr).CFrame
+            TweenSmooth:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                WaitHRP(plr).CFrame = TweenSmooth.CFrame
+            end)
+        end
+        taisaophaiskidkhitacothevietcode = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.TweenSmooth,
+            TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear), { CFrame = Pose })
+        if Distance <= 250 then
+            taisaophaiskidkhitacothevietcode:Cancel()
+            game.Players.LocalPlayer.Character.TweenSmooth.CFrame = Pose
+        end
+        taisaophaiskidkhitacothevietcode:Play()
+        if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+            TweenSmooth:Destroy()
+        end
+    end
+end
+
 Type = 1
 spawn(function()
     while wait(.1) do
@@ -892,6 +924,14 @@ function CheckDistancebehon(cacc, chodeogi)
     end
 end
 
+function EquipTool(Tls)
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Tls)
+    if tool then
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
+
 function CheckSea(yamatekudasai)
     if game.PlaceId == 2753915549 then
         if yamatekudasai == 1 then
@@ -920,6 +960,28 @@ function CheckInventory(OiOiOi)
             return v
         end
     end
+end
+
+function CheckSaberDoor()
+    for r, v in next, game:GetService("Workspace").Map.Jungle.Final:GetChildren() do
+        if v:IsA("Part") and not v.CanCollide then
+            return true
+        end
+    end
+end
+
+function CheckButtonJungle()
+    for r, v in pairs(game:GetService("Workspace").Map.Jungle.QuestPlates:GetChildren()) do
+        if v:IsA("Model") then
+            if v.Button:FindFirstChild("TouchInterest") then
+                return v
+            end
+        end
+    end
+end
+
+function CheckCup()
+    return game.Workspace.Map.Desert.Burn.Part.CanCollide == false
 end
 
 local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
@@ -1121,17 +1183,13 @@ end
 function GetQuestions(Dextralnguvailon)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(Dextralnguvailon)
 end
-function GetLevel(LvLow, LvHigh)
-    if plr.Data.Level.Value >= LvLow and plr.Data.Level.Value <= LvHigh then
-        return
-    end
-end
 function CheckGlassCake()
     if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
         return true
     end
     return false
 end
+local LevelGet = plr.Data.Level.Value
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 local Windows = Library:CreateWindow({ Title = "Night Hub", Creator = "! Nightx" })
@@ -1405,7 +1463,7 @@ end)
 
 I:CreateSection({ Text = "Sea 1 Item & Quest" })
 
-I:CreateToggle({
+local SaberTakenToggle = I:CreateToggle({
     Name = "Auto Saber",
     Description = "Auto Taken Saber(Kuttay)",
     Default = false,
@@ -1417,12 +1475,60 @@ I:CreateToggle({
 spawn(function ()
     while task.wait() do
         if _G.TakenSaber and Sea1 then
-            if not CheckInventory("Saber") then
-                Library:MakeNotify({
-                    Title = "Night Hub",
-                    Content = "Sorry, Wait I Write Function",
-                    Time = 5,
-                })
+            if not CheckInventory("Saber") and LevelGet >= 200 then
+                if not CheckSaberDoor() then
+                    if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
+                        if CheckButtonJungle() then
+                            ToTarget(CheckButtonJungle().Button.CFrame)
+                        end
+                    else
+                        if CheckCup() then
+                            if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") ~= 0 then
+                                print("lon")
+                                if not plr.Backpack:FindFirstChild("Cup") and not plr.Character:FindFirstChild("Cup") then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
+                                    wait(0.1)
+                                    EquipTool("Cup")
+                                    wait(0.5)
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","FillCup",plr.Character.Cup)
+                                    wait(0.5)
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan")
+                                end
+                            else
+                                if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == nil then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
+                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 0 then
+                                    if CheckEnemies("Mob Leader") then
+                                        KillMob("Mob Leader", _G.TakenSaber)
+                                    else
+                                        ToTarget(CFrame.new(-2967.59521, -4.91089821, 5328.70703))
+                                    end
+                                elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 1 then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
+                                    wait(0.1)
+                                    EquipTool("Relic")
+                                    wait(0.2)
+                                    ToTarget(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
+                                end
+                            end
+                        else
+                            ToTarget(CFrame.new(-1610.00757, 11.5049858, 164.001587, 0.984807551, -0.167722285, -0.0449818149, 0.17364943, 0.951244235, 0.254912198, 3.42372805e-05, -0.258850515, 0.965917408))
+                            wait(0.5)
+                            EquipTool("Torch")
+                        end
+                    end
+                else
+                    if CheckEnemies("Saber Expert") then
+                        KillMob("Saber Expert", _G.TakenSaber)
+                    else
+                        ToTarget(CFrame.new(-1458.89502, 29.8870335, -50.633564))
+                        if game.ReplicatedStorage:FindFirstChild("Saber Expert") then
+                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        else
+                            --Hop
+                        end
+                    end
+                end
             end
         end
     end
