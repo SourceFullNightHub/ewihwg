@@ -357,7 +357,7 @@ function NightLib:CreateWindow(Options)
         PaddingN2.PaddingLeft = UDim.new(0, 6)
 
         TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint),
-            { Position = UDim2.new(0.650, 0, 0.797, 0) }):Play()
+            { Position = UDim2.new(0.550, 0, 0.797, 0) }):Play()
 
         wait(Options.Time - 0.88)
         TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), { ImageTransparency = 1 }):Play()
