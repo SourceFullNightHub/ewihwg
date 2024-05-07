@@ -1500,12 +1500,17 @@ local SaberTakenToggle = I:CreateToggle({
     end
 })
 
-spawn(function ()
+spawn(function()
     while task.wait() do
         if _G.TakenSaber and Sea1 then
             if LevelGet >= 200 and CheckInventory("Saber") then
                 SaberTakenToggle:Set(false)
-            if LevelGet >= 200 and not CheckInventory("Saber") then
+                Library:MakeNotify({
+                    Name = "Night Hub",
+                    Content = "Your Are Have Saber",
+                    Time = 5,
+                 })
+            elseif LevelGet >= 200 and not CheckInventory("Saber") then
                 if not CheckSaberDoor() then
                     if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
                         if CheckButtonJungle() then
