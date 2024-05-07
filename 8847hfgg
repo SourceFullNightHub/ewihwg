@@ -1503,7 +1503,9 @@ local SaberTakenToggle = I:CreateToggle({
 spawn(function ()
     while task.wait() do
         if _G.TakenSaber and Sea1 then
-            if not CheckInventory("Saber") and LevelGet >= 200 then
+            if LevelGet >= 200 and CheckInventory("Saber") then
+                SaberTakenToggle:Set(false)
+            if LevelGet >= 200 and not CheckInventory("Saber") then
                 if not CheckSaberDoor() then
                     if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
                         if CheckButtonJungle() then
