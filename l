@@ -357,7 +357,7 @@ function NightLib:CreateWindow(Options)
         PaddingN2.PaddingLeft = UDim.new(0, 6)
 
         TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint),
-            { Position = UDim2.new(0.550, 0, 0.797, 0) }):Play()
+            { Position = UDim2.new(0.620, 0, 0.797, 0) }):Play()
 
         wait(Options.Time - 0.88)
         TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), { ImageTransparency = 1 }):Play()
@@ -1224,7 +1224,7 @@ function NightLib:CreateWindow(Options)
             DropClick.MouseButton1Click:Connect(function()
                 if Dropped == false then
                     Dropped = true
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0.170, 55), "Out", "Quad", 0.3, true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.140, 55), "Out", "Quad", 0.3, true)
                     TweenService:Create(
                         ListFrame,
                         TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
