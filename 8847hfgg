@@ -1520,7 +1520,7 @@ spawn(function ()
                                 ToTarget(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
                             end
                         else
-                            if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") ~= 0 then
+                            if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") ~= 0 and game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") ~= 1 then
                                 print("lon")
                                 if not plr.Backpack:FindFirstChild("Cup") and not plr.Character:FindFirstChild("Cup") then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
