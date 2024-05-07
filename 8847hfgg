@@ -1512,12 +1512,12 @@ spawn(function ()
                     else
                         if not CheckCup() then
                             if not plr.Backpack:FindFirstChild("Torch") and not plr.Character:FindFirstChild("Torch") then
-                                ToTarget(CFrame.new(-1610.00757, 11.5049858, 164.001587, 0.984807551, -0.167722285, -0.0449818149, 0.17364943, 0.951244235, 0.254912198, 3.42372805e-05, -0.258850515, 0.965917408))
+                                ToTarget(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
                                 wait(0.5)
                                 EquipTool("Torch")
                                 wait(0.5)
                             else
-                                ToTarget(game:GetService("Workspace").Map.Desert.Cup.CFrame)
+                                ToTarget(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
                             end
                         else
                             if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") ~= 0 then
