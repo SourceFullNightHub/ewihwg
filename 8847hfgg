@@ -1269,7 +1269,13 @@ spawn(function()
                         if CheckEnemies(Mob) then
                             KillMob(Mob, _G.StFarm)
                         else
-                            Tween(CMob)
+                            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                if string.find(v.Name,TitleMob) then
+                                    if not CheckEnemies(TitleMob) and (plr.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                                        Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                    end
+                                end
+                            end
                         end
                     end
                 elseif _G.SelectMethodFarm == "Cake Prince" then
@@ -1417,7 +1423,6 @@ spawn(function ()
                     Content = "Sorry, Wait I Write Function",
                     Time = 5,
                 })
-                wait(6)
             end
         end
     end
