@@ -1574,6 +1574,48 @@ spawn(function()
     end
 end)
 
+local PoleTakenToggle = I:CreateToggle({
+    Name = "Auto Pole",
+    Description = "Taken Pole",
+    Default = false,
+    CallBack = function(Value)
+        _G.TakenPole = Value
+    end
+})
+
+spawn(function()
+    while wait() do
+        if _G.TakenPole and Sea1 then
+            if GetLevel <= 199 then
+                Library:MakeNotify({
+                    Name = "Night Hub",
+                    Content = "Your Level Is Low(Your Level need to => 200)",
+                    Time = 5,
+                })
+                PoleTakenToggle:Set(false)
+            elseif CheckInventory("Pole (1st Form)") then
+                Library:MakeNotify({
+                    Name = "Night Hub",
+                    Content = "Your Are Have Pole",
+                    Time = 5,
+                })
+                PoleTakenToggle:Set(false)
+            elseif not CheckInventory("Pole (1st Form)") and GetLevel >= 200 then
+                if CheckEnemies("Thunder God") then
+                    KillMob("Thunder God", _G.TakenPole)
+                else
+                    Tween(CFrame.new(-7748.0185546875, 5606.80615234375, -2305.898681640625))
+                    if game.ReplicatedStorage:FindFirstChild("Thunder God") then
+                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                    else
+                        --Hop
+                    end
+                end
+            end
+        end
+    end
+end)
+
 T:CreateSection({ Text = "Settings FastAttack & Bring Mob & Bypass" })
 
 T:CreateToggle({
