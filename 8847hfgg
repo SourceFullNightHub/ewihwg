@@ -1482,7 +1482,11 @@ spawn(function ()
                             ToTarget(CheckButtonJungle().Button.CFrame)
                         end
                     else
-                        if CheckCup() then
+                        if not CheckCup() then
+                            ToTarget(CFrame.new(-1610.00757, 11.5049858, 164.001587, 0.984807551, -0.167722285, -0.0449818149, 0.17364943, 0.951244235, 0.254912198, 3.42372805e-05, -0.258850515, 0.965917408))
+                            wait(0.5)
+                            EquipTool("Torch")
+                        else
                             if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") ~= 0 then
                                 print("lon")
                                 if not plr.Backpack:FindFirstChild("Cup") and not plr.Character:FindFirstChild("Cup") then
@@ -1511,10 +1515,6 @@ spawn(function ()
                                     ToTarget(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
                                 end
                             end
-                        else
-                            ToTarget(CFrame.new(-1610.00757, 11.5049858, 164.001587, 0.984807551, -0.167722285, -0.0449818149, 0.17364943, 0.951244235, 0.254912198, 3.42372805e-05, -0.258850515, 0.965917408))
-                            wait(0.5)
-                            EquipTool("Torch")
                         end
                     end
                 else
