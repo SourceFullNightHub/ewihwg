@@ -1318,6 +1318,23 @@ function SendKey(Key)
 end
 local LevelGet = plr.Data.Level.Value
 CountQuestClaim = 0
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if NoClip == true then
+                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                    Noclip.Velocity = Vector3.new(0,0,0)
+                else
+                    plr.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+                end
+            end
+        end)
+    end
+end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
@@ -1365,6 +1382,8 @@ H:CreateButton({
     CallBack = function()
         Tween(plr.Character.HumanoidRootPart.CFrame)
         TweenSmooth:Destroy()
+        plr.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        NoClip = false
     end
 })
 
@@ -1528,6 +1547,7 @@ spawn(function()
                                                 v.Head.CanCollide = false
                                                 v.HumanoidRootPart.Size = Vector3.new(20 ,20 ,20)
                                                 TweenSkidcuaDomadic(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                NoClip = true
                                                 game:GetService "VirtualUser":CaptureController()
                                                 game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
                                                 if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
@@ -1537,6 +1557,7 @@ spawn(function()
                                                 end
                                             until v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
                                             _G.FastAttack = true
+                                            NoClip = false
                                         end
                                     end
                                 end
