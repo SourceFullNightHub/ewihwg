@@ -1839,6 +1839,33 @@ spawn(function()
     end
 end)
 
+S:CreateSection({ Text = "Servers" })
+
+S:CreateTextBox({
+    Name = "Put Job Id Here",
+    Description = "Put Job Id Here And Click the Button To Join Placed ID",
+    Default = "",
+    CallBack = function(Value)
+        _G.Job = Value
+    end
+})
+
+S:CreateButton({
+    Name = "Join Job Id",
+    Description = "Join Job ID Your Put In TextBox",
+    CallBack = function()
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.placeId, _G.Job, plr)
+    end
+})
+
+S:CreateButton({
+    Name = "Hop Servers",
+    Description = "Change Servers",
+    CallBack = function()
+        Hop()
+    end
+})
+
 T:CreateSection({ Text = "Settings FastAttack & Bring Mob & Bypass" })
 
 T:CreateToggle({
