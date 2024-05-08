@@ -1299,7 +1299,7 @@ function NightLib:CreateWindow(Options)
             Content_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
             Content_5.BorderSizePixel = 0
             Content_5.Position = UDim2.new(0, 0, 0, 28)
-            Content_5.Size = UDim2.new(0.899497509, 0, 0, 26)
+            Content_5.Size = UDim2.new(0.71, 0, 0, 26)
             Content_5.Font = Enum.Font.GothamBold
             Content_5.Text = Options.Description
             Content_5.TextColor3 = Color3.fromRGB(100, 100, 100)
