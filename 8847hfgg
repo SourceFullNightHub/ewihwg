@@ -1080,7 +1080,7 @@ end
 function BringMob(nhulon)
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= _G.BringRange then
+            if (v.Name == nhulon) and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Stp.Position).Magnitude <= 300 then
                 v.HumanoidRootPart.CFrame = Stp
                 v.Humanoid:ChangeState(11)
                 v.HumanoidRootPart.CanCollide = false
@@ -1112,7 +1112,7 @@ end
 function BringMoNearest()
     pcall(function()
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Near.Position).Magnitude <= _G.BringRange then
+            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - Near.Position).Magnitude <= 300 then
                 v.HumanoidRootPart.CFrame = Near
                 v.Humanoid:ChangeState(11)
                 v.HumanoidRootPart.CanCollide = false
@@ -1698,16 +1698,6 @@ T:CreateToggle({
     Default = true,
     CallBack = function(Value)
         _G.Bring = Value
-    end
-})
-
-T:CreateSlider({
-    Name = "Bring Mob Range",
-    Min = 200,
-    Max = 350,
-    Default = 300,
-    CallBack = function(Value)
-        _G.BringRange = Value
     end
 })
 
