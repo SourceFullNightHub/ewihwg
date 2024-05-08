@@ -1542,7 +1542,7 @@ spawn(function()
                                 end
                             end
                         end
-                    elseif LevelGet >= 300 then
+                    elseif LevelGet >= 90 then
                         GetQuest()
                         if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
                             TakeQuest(CQuest, NQuest, NumberQuest)
