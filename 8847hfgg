@@ -707,6 +707,72 @@ function GetQuest()
         end
     end
 end
+local bM = {}
+local HttpService = game:GetService("HttpService")
+function Hop(bO)
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        task.wait()
+    until tick() - ticklon >= 5
+    function Ditmemay()
+        for r = 1, 100 do
+            if ChooseRegion == nil or ChooseRegion == "" then
+                ChooseRegion = "Singapore"
+            else
+                game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text = ChooseRegion
+            end
+            local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and 5 < bO then
+                    if not bM[k] or tick() - bM[k].Time > 60 * 10 then
+                        bM[k] = {Time = tick()}
+                            print("Hop Servers Until > 10 Players")
+                        else
+                           print("Hop Servers Until > 10 Players")
+                        end
+                        game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                        return true
+                    elseif tick() - bM[k].Time > 60 * 60 then
+                        bM[k] = nil
+                    end
+                end
+            end
+        end
+        return false
+    end
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        Hop()
+                        v.Visible = false
+                    end
+                end
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                Hop()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
+        end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
+    end
+    while not Ditmemay() do
+        wait()
+    end
 
 function NearestEntrace(aI)
     vcspos = aI.Position
@@ -856,6 +922,30 @@ function ToTarget(Pose)
             TweenSmooth:Destroy()
         end
     end
+end
+
+function TweenSkidcuaDomadic(Pos)
+    Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 25 then
+        Speed = 5000
+    elseif Distance < 50 then
+        Speed = 2000
+    elseif Distance < 150 then
+        Speed = 800
+    elseif Distance < 250 then
+        Speed = 600
+    elseif Distance < 500 then
+        Speed = 300
+    elseif Distance < 750 then
+        Speed = 250
+    elseif Distance >= 1000 then
+        Speed = 200
+    end
+    game:GetService("TweenService"):Create(
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = Pos}
+    ):Play()
 end
 
 Type = 1
@@ -1217,7 +1307,72 @@ function CheckGlassCake()
     end
     return false
 end
+function SendKey(Key)
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,Key,false,game)
+    wait(0.1)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,Key,false,game)
+end
 local LevelGet = plr.Data.Level.Value
+CountQuestClaim = 0
+function SkipLevel()
+    if LevelGet >= 10 and LevelGet <= 39 then
+        if CheckEnemies("God's Guard") then
+            KillMob("God's Guard", _G.StFarm)
+        else
+            Tween(CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922))
+        end
+    elseif LevelGet >= 40 and LevelGet <= 49 then
+        if CheckEnemies("Shanda") then
+            KillMob("Shanda", _G.StFarm)
+        else
+            Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
+        end
+    elseif LevelGet >= 50 and LevelGet <= 60 then
+        if not CheckQuestVisible() then
+            GetQuestions("PlayerHunter")
+            CountQuestClaim = CountQuestClaim + 1
+        elseif CheckQuestVisible() then
+            local Nani = string.gsub(plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
+            Nani = string.gsub(Cac, " %p(0/1)%p", "")
+            if CheckQuestVisible() and not game:GetService("Workspace").Characters:FindFirstChild(Nani) then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+            end
+            if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                print(game.Players[Cac].Data.Level.Value)
+            end
+            if CountQuestClaim >= 15 then
+                Hop()
+            end
+            if CheckQuestVisible() then
+                for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
+                    if v:IsA("Model") and v.Name == Nani then
+                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
+                            repeat wait()
+                                EquipWeapon()
+                                EnableBuso()                                            
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Humanoid.Health = 50
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(20 ,20 ,20)
+                                TweenSkidcuaDomadic(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                game:GetService "VirtualUser":CaptureController()
+                                game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
+                                if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    SendKey("Z")
+                                    SendKey("X")
+                                    _G.FastAttack = false
+                                end
+                            until v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
+                            _G.FastAttack = true
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
