@@ -1170,7 +1170,7 @@ function NightLib:CreateWindow(Options)
                 Option1.Size = UDim2.new(1, 0, 0, 25)
                 Option1.Font = Enum.Font.GothamBold
                 Option1.Text = tostring(v)
-                Option1.TextColor3 = Color3.fromRGB(255, 255, 255)
+                Option1.TextColor3 = Color3.fromRGB(144, 144, 144)
                 Option1.TextSize = 14.000
 
                 Option1.MouseEnter:Connect(function()
@@ -1209,6 +1209,7 @@ function NightLib:CreateWindow(Options)
 						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
 						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
 					):Play()
+                    Option1.TextColor3 = Color3.fromRGB(255, 255, 255)
                     pcall(Option1.Text)
                     Options.CallBack(Option1.Text)
                     Selected.Text = Option1.Text
