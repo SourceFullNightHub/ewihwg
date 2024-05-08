@@ -1726,6 +1726,25 @@ T:CreateToggle({
 })
 
 T:CreateToggle({
+    Name = "Auto Buso",
+    Description = "Auto Turn On Buso Haki",
+    Default = true,
+    CallBack = function(Value)
+        getgenv().Buso = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if getgenv().Buso then
+            if not plr.Character:FindFirstChild("HasBuso") then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+            end
+        end
+    end
+end)
+
+T:CreateToggle({
     Name = "Remove Notifications",
     Description = "Remove All Notifications In Game",
     Default = false,
