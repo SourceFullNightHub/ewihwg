@@ -1528,17 +1528,38 @@ spawn(function()
                         Time = 5,
                      })
                 elseif _G.SelectMethodFarm == "Level" then
-                    GetQuest()
-                    if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
-                        TakeQuest(CQuest, NQuest, NumberQuest)
-                    elseif CheckQuestVisible() and CheckTextQuest(TitleMob) then
-                        if CheckEnemies(Mob) then
-                            KillMob(Mob, _G.StFarm)
-                        else
-                            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                                if string.find(v.Name,TitleMob) then
-                                    if not CheckEnemies(TitleMob) and (plr.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
-                                        Tween(v.CFrame * CFrame.new(2, 20, 2))
+                    if LevelGet >= 1 and LevelGet <= 9 then
+                        GetQuest()
+                        if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
+                            TakeQuest(CQuest, NQuest, NumberQuest)
+                        elseif CheckQuestVisible() and CheckTextQuest(TitleMob) then
+                            if CheckEnemies(Mob) then
+                                KillMob(Mob, _G.StFarm)
+                            else
+                                for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                    if string.find(v.Name,TitleMob) then
+                                        if not CheckEnemies(TitleMob) and (plr.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    elseif LevelGet >= 10 and LevelGet <= 299 then
+                        SkipLevel()
+                    elseif LevelGet >= 300 then
+                        GetQuest()
+                        if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
+                            TakeQuest(CQuest, NQuest, NumberQuest)
+                        elseif CheckQuestVisible() and CheckTextQuest(TitleMob) then
+                            if CheckEnemies(Mob) then
+                                KillMob(Mob, _G.StFarm)
+                            else
+                                for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                                    if string.find(v.Name,TitleMob) then
+                                        if not CheckEnemies(TitleMob) and (plr.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                        end
                                     end
                                 end
                             end
