@@ -1318,65 +1318,6 @@ function SendKey(Key)
 end
 local LevelGet = plr.Data.Level.Value
 CountQuestClaim = 0
-function SkipLevel()
-    if LevelGet >= 10 and LevelGet <= 39 then
-        if CheckEnemies("God's Guard") then
-            KillMob("God's Guard", _G.StFarm)
-        else
-            Tween(CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922))
-        end
-    elseif LevelGet >= 40 and LevelGet <= 49 then
-        if CheckEnemies("Shanda") then
-            KillMob("Shanda", _G.StFarm)
-        else
-            Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
-        end
-    elseif LevelGet >= 50 and LevelGet <= 60 then
-        if not CheckQuestVisible() then
-            GetQuestions("PlayerHunter")
-            CountQuestClaim = CountQuestClaim + 1
-        elseif CheckQuestVisible() then
-            local Nani = string.gsub(plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
-            Nani = string.gsub(Cac, " %p(0/1)%p", "")
-            if CheckQuestVisible() and not game:GetService("Workspace").Characters:FindFirstChild(Nani) then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-            end
-            if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                print(game.Players[Cac].Data.Level.Value)
-            end
-            if CountQuestClaim >= 15 then
-                Hop()
-            end
-            if CheckQuestVisible() then
-                for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
-                    if v:IsA("Model") and v.Name == Nani then
-                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
-                            repeat wait()
-                                EquipWeapon()
-                                EnableBuso()                                            
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Humanoid.WalkSpeed = 0
-                                v.Humanoid.Health = 50
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(20 ,20 ,20)
-                                TweenSkidcuaDomadic(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
-                                game:GetService "VirtualUser":CaptureController()
-                                game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
-                                if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                                    SendKey("Z")
-                                    SendKey("X")
-                                    _G.FastAttack = false
-                                end
-                            until v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
-                            _G.FastAttack = true
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function BypassAntiCheats()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
@@ -1546,7 +1487,63 @@ spawn(function()
                             end
                         end
                     elseif LevelGet >= 10 and LevelGet <= 299 then
-                        SkipLevel()
+                        if LevelGet >= 10 and LevelGet <= 39 then
+                            if CheckEnemies("God's Guard") then
+                                KillMob("God's Guard", _G.StFarm)
+                            else
+                                Tween(CFrame.new(-4628.0498046875, 866.92877197266, -1931.2352294922))
+                            end
+                        elseif LevelGet >= 40 and LevelGet <= 49 then
+                            if CheckEnemies("Shanda") then
+                                KillMob("Shanda", _G.StFarm)
+                            else
+                                Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
+                            end
+                        elseif LevelGet >= 50 and LevelGet <= 60 then
+                            if not CheckQuestVisible() then
+                                GetQuestions("PlayerHunter")
+                                CountQuestClaim = CountQuestClaim + 1
+                            elseif CheckQuestVisible() then
+                                local Nani = string.gsub(plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
+                                Nani = string.gsub(Cac, " %p(0/1)%p", "")
+                                if CheckQuestVisible() and not game:GetService("Workspace").Characters:FindFirstChild(Nani) then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                end
+                                if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    print(game.Players[Cac].Data.Level.Value)
+                                end
+                                if CountQuestClaim >= 15 then
+                                    Hop()
+                                end
+                                if CheckQuestVisible() then
+                                    for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
+                                        if v:IsA("Model") and v.Name == Nani then
+                                            if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
+                                                repeat wait()
+                                                    EquipWeapon()
+                                                    EnableBuso()                                            
+                                                    v.HumanoidRootPart.CanCollide = false
+                                                    v.Humanoid.WalkSpeed = 0
+                                                    v.Humanoid.Health = 50
+                                                    v.Head.CanCollide = false
+                                                    v.HumanoidRootPart.Size = Vector3.new(20 ,20 ,20)
+                                                    TweenSkidcuaDomadic(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                                    game:GetService "VirtualUser":CaptureController()
+                                                    game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
+                                                    if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                                        SendKey("Z")
+                                                        SendKey("X")
+                                                        _G.FastAttack = false
+                                                    end
+                                                until v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
+                                                _G.FastAttack = true
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
                     elseif LevelGet >= 300 then
                         GetQuest()
                         if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
