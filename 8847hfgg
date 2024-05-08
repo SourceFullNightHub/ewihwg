@@ -1477,6 +1477,17 @@ H:CreateToggle({
     end
 })
 
+if _G.StFarm then
+    if LevelGet >= 10 then
+        function Redeemcode(buoi)
+            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(buoi)
+        end
+        for i, v in pairs(tatcacode) do
+            Redeemcode(v)
+        end
+    end
+end
+
 spawn(function()
     while task.wait() do
         if _G.StFarm then
