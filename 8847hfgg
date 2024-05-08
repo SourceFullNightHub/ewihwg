@@ -1362,6 +1362,7 @@ local Windows = Library:CreateWindow({ Title = "Night Hub", Creator = "! Nightx"
 
 local H = Windows:MakeTab({ Name = "Home", Icon = "rbxassetid://17184558565" })
 local I = Windows:MakeTab({ Name = "Item", Icon = "rbxassetid://17184405349" })
+local S = Windows:MakeTab({ Name = "Status & Servers", Icon = "rbxassetid://17184408884" })
 local T = Windows:MakeTab({ Name = "Settings", Icon = "rbxassetid://17184407740" })
 
 H:CreateDropdown({
@@ -1802,6 +1803,36 @@ spawn(function()
                     end
                 end
             end
+        end
+    end
+end)
+
+S:CreateSection({ Text = "Stattus" })
+
+local CakePrinceCount = S:CreateParagraph({Title = "Cake Prince : Not Spawn", Content = "Need Kill : 0 Mob"})
+
+spawn(function()
+    while task.wait() do
+        if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41)})
+        elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40)})
+        elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39)})
+        else
+            CakePrinceCount:Set({Title = "Cake Prince : Spawned", Content = "Cake Prince Spawned"})
+        end
+    end
+end)
+
+local Elite = S:CreateParagraph({Title = "Elite : Not Spawn", Content = "Elite Mob Is Not Spawn"})
+
+spawn(function()
+    while wait() do
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            Elite:Set({Title = "Elite : Spawned", Content = "Elite Mob Is Spawned"})
+        else
+            Elite:Set({Title = "Elite : Not Spawn", Content = "Elite Mob Is Not Spawn"})
         end
     end
 end)
