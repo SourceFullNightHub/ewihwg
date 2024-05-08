@@ -1503,26 +1503,43 @@ local SaberTakenToggle = I:CreateToggle({
 spawn(function()
     while task.wait() do
         if _G.TakenSaber and Sea1 then
-            if LevelGet >= 200 and CheckInventory("Saber") then
+            if LevelGet <= 199 then
+                Library:MakeNotify({
+                    Name = "Night Hub",
+                    Content = "Your level is low(need to reach level 200 to use)",
+                    Time = 5,
+                 })
+                end
+            if CheckInventory("Saber") then
                 SaberTakenToggle:Set(false)
                 Library:MakeNotify({
                     Name = "Night Hub",
                     Content = "Your Are Have Saber",
                     Time = 5,
                  })
-            elseif LevelGet >= 200 and not CheckInventory("Saber") then
+                end
+            if LevelGet >= 200 and not CheckInventory("Saber") then
                 if not CheckSaberDoor() then
                     if game:GetService("Workspace").Map.Jungle.QuestPlates.Door.CanCollide then
                         if CheckButtonJungle() then
                             ToTarget(CheckButtonJungle().Button.CFrame)
+                            Library:MakeNotify({
+                                Name = "Night Hub",
+                                Content = "Go activate the buttons In Jungle",
+                                Time = 5,
+                             })
                         end
                     else
                         if not CheckCup() then
                             if not plr.Backpack:FindFirstChild("Torch") and not plr.Character:FindFirstChild("Torch") then
                                 ToTarget(game:GetService("Workspace").Map.Jungle.Torch.CFrame)
-                                wait(0.5)
+                                Library:MakeNotify({
+                                    Name = "Night Hub",
+                                    Content = "Get Torch",
+                                    Time = 5,
+                                 })
+                                wait(0.2)
                                 EquipTool("Torch")
-                                wait(0.5)
                             else
                                 ToTarget(game:GetService("Workspace").Map.Desert.Burn.Fire.CFrame)
                             end
@@ -1531,11 +1548,26 @@ spawn(function()
                                 print("lon")
                                 if not plr.Backpack:FindFirstChild("Cup") and not plr.Character:FindFirstChild("Cup") then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","GetCup")
+                                    Library:MakeNotify({
+                                        Name = "Night Hub",
+                                        Content = "Go activate the buttons In Jungle",
+                                        Time = 5,
+                                     })
                                     wait(0.1)
                                     EquipTool("Cup")
                                     wait(0.5)
+                                    Library:MakeNotify({
+                                        Name = "Night Hub",
+                                        Content = "Give the Cup to the thirsty old man",
+                                        Time = 5,
+                                     })
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","FillCup",plr.Character.Cup)
                                     wait(0.5)
+                                    Library:MakeNotify({
+                                        Name = "Night Hub",
+                                        Content = "Take Quest Kill Mob Leader",
+                                        Time = 5,
+                                     })
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","SickMan")
                                 end
                             else
@@ -1550,6 +1582,11 @@ spawn(function()
                                 elseif game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon") == 1 then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ProQuestProgress","RichSon")
                                     wait(0.1)
+                                    Library:MakeNotify({
+                                        Name = "Night Hub",
+                                        Content = "Equip Relic",
+                                        Time = 5,
+                                     })
                                     EquipTool("Relic")
                                     wait(0.2)
                                     ToTarget(CFrame.new(-1404.91504, 29.9773273, 3.80598116, 0.876514494, 5.66906877e-09, 0.481375456, 2.53851997e-08, 1, -5.79995607e-08, -0.481375456, 6.30572643e-08, 0.876514494))
@@ -1560,6 +1597,11 @@ spawn(function()
                 else
                     if CheckEnemies("Saber Expert") then
                         KillMob("Saber Expert", _G.TakenSaber)
+                        Library:MakeNotify({
+                            Name = "Night Hub",
+                            Content = "Kill Saber Expert",
+                            Time = 5,
+                         })
                     else
                         ToTarget(CFrame.new(-1458.89502, 29.8870335, -50.633564))
                         if game.ReplicatedStorage:FindFirstChild("Saber Expert") then
