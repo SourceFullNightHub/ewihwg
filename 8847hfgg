@@ -1813,15 +1813,17 @@ local CakePrinceCount = S:CreateParagraph({Title = "Cake Prince : Not Spawn", Co
 
 spawn(function()
     while task.wait() do
-        if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
-            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41)})
-        elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
-            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40)})
-        elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
-            CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39)})
-        else
-            CakePrinceCount:Set({Title = "Cake Prince : Spawned", Content = "Cake Prince Spawned"})
-        end
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41)})
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40)})
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                CakePrinceCount:Set({Title = "Cake Prince : Not Spawn", Content = "Need Kill : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39)})
+            else
+                CakePrinceCount:Set({Title = "Cake Prince : Spawned", Content = "Cake Prince Spawned"})
+            end
+        end)
     end
 end)
 
