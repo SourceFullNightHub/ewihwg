@@ -1498,7 +1498,7 @@ spawn(function()
                         else
                             Tween(CFrame.new(-7685.1474609375, 5601.0751953125, -441.38876342773))
                         end
-                    elseif LevelGet >= 50 and LevelGet <= 60 then
+                    elseif LevelGet >= 50 and LevelGet <= 80 then
                         if not CheckQuestVisible() then
                             GetQuestions("PlayerHunter")
                             CountQuestClaim = CountQuestClaim + 1
