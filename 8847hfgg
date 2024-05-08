@@ -1479,15 +1479,12 @@ H:CreateToggle({
 
 spawn(function()
     while task.wait() do
-        if _G.StFarm then
-            pcall(function()
+        pcall(function()
+            if _G.StFarm then
                 if _G.SelectMethodFarm == "" or _G.SelectMethodFarm == nil then
-                    Library:MakeNotify({
-                        Name = "Night Hub",
-                        Content = "Select Method Farm Please",
-                        Time = 5,
-                     })
-                elseif _G.SelectMethodFarm == "Level" then
+                    _G.SelectMethodFarm = "Level"
+                end
+                if _G.SelectMethodFarm == "Level" then
                     if LevelGet >= 1 and LevelGet <= 9 then
                         GetQuest()
                         if not CheckQuestVisible() or not CheckTextQuest(TitleMob) then
@@ -1626,8 +1623,8 @@ spawn(function()
                         end
                     end
                 end
-            end)
-        end
+            end
+        end)
     end
 end)
 
