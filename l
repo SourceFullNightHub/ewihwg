@@ -267,7 +267,7 @@ function NightLib:CreateWindow(Options)
         Options.Name = Options.Name or 'Night Hub'
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
-        Options.Time = Options.Time or 1
+        Options.Time = Options.Time or 5
     
         local Notify = Instance.new("Frame")
         local UICorner_11 = Instance.new("UICorner")
@@ -284,7 +284,7 @@ function NightLib:CreateWindow(Options)
         Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Notify.BorderSizePixel = 0
-        Notify.Position = UDim2.new(0.769000947, 0, 0.825910926, 0)
+        Notify.Position = UDim2.new(1, 0, 0.856, 0)
         Notify.Size = UDim2.new(0, 310, 0, 55)
     
         UICorner_11.CornerRadius = UDim.new(0, 3)
@@ -355,12 +355,20 @@ function NightLib:CreateWindow(Options)
     
         PaddingN2.Parent = TextLabel
         PaddingN2.PaddingLeft = UDim.new(0, 6)
-
-        TweenService:Create(Notify, TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Position = UDim2.new(0.640, 0, 0.797, 0)}):Play()
-		task.wait(2)
-		Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-		task.wait(5 / 2)
-		Notify:Destroy()
+    
+        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}):Play()
+        
+        wait(Options.Time - 0.88)
+        TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
+        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
+        wait(0.3)
+        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
+        TweenService:Create(TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
+        wait(0.05)
+    
+        Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
+        wait(1.35)
+        Notify:Destroy()
     end
 
     local Tab = {}
