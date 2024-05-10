@@ -267,7 +267,7 @@ function NightLib:CreateWindow(Options)
         Options.Name = Options.Name or 'Night Hub'
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
-        Options.Time = Options.Time or 5
+        Options.Time = Options.Time or 1
     
         local Notify = Instance.new("Frame")
         local UICorner_11 = Instance.new("UICorner")
@@ -355,20 +355,12 @@ function NightLib:CreateWindow(Options)
     
         PaddingN2.Parent = TextLabel
         PaddingN2.PaddingLeft = UDim.new(0, 6)
-    
-        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.7, 0, 0.797, 0)}):Play()
-        
-        wait(Options.Time - 0.88)
-        TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
-        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
-        wait(0.3)
-        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
-        TweenService:Create(TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
-        wait(0.05)
-    
-        Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-        wait(1.35)
-        Notify:Destroy()
+
+        TweenService:Create(Notify, TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Position = UDim2.new(0.7, 0, 0.797, 0)}):Play()
+		task.wait(tonumber(5))
+		Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
+		task.wait(tonumber(Options.Time) / 2)
+		Notify:Destroy()
     end
 
     local Tab = {}
