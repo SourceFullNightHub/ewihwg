@@ -268,6 +268,7 @@ function NightLib:CreateWindow(Options)
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
         Options.Time = Options.Time or 1
+        Options.Delay = Options.Delay or 5
 
         spawn(function()
     
@@ -357,6 +358,22 @@ function NightLib:CreateWindow(Options)
     
         PaddingN2.Parent = TextLabel
         PaddingN2.PaddingLeft = UDim.new(0, 6)
+
+        TweenService:Create(
+			Notify,
+			TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
+			{Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}
+		):Play()
+		task.wait(tonumber(Options.Delay))
+		TweenService:Create(
+			Notify,
+			TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
+			{Position = UDim2.new(2, 0, 0.856, 0)}
+		):Play()
+		task.wait(tonumber(Options.Time) / 2)
+		Notify.Active = false
+		task.wait(tonumber(Options.Time) / 2)
+		Notify:Destroy()
     
         TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}):Play()
         
