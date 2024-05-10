@@ -359,7 +359,7 @@ function NightLib:CreateWindow(Options)
         TweenService:Create(Notify, TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Position = UDim2.new(0.640, 0, 0.797, 0)}):Play()
 		task.wait(2)
 		Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-		task.wait(2 / 2)
+		task.wait(5 / 2)
 		Notify:Destroy()
     end
 
