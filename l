@@ -267,7 +267,7 @@ function NightLib:CreateWindow(Options)
         Options.Name = Options.Name or 'Night Hub'
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
-        Options.Time = Options.Time or 5
+        Options.Time = Options.Time or 1
     
         local Notify = Instance.new("Frame")
         local UICorner_11 = Instance.new("UICorner")
