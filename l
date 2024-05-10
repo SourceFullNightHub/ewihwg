@@ -268,6 +268,8 @@ function NightLib:CreateWindow(Options)
         Options.Content = Options.Content or "Is This Notify"
         Options.Icon = Options.Icon or "rbxassetid://17317584331"
         Options.Time = Options.Time or 1
+
+        spawn(function()
     
         local Notify = Instance.new("Frame")
         local UICorner_11 = Instance.new("UICorner")
@@ -284,7 +286,7 @@ function NightLib:CreateWindow(Options)
         Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Notify.BorderSizePixel = 0
-        Notify.Position = UDim2.new(1, 0, 0.856, 0)
+        Notify.Position = UDim2.new(2, 0, 0.856, 0)
         Notify.Size = UDim2.new(0, 310, 0, 55)
     
         UICorner_11.CornerRadius = UDim.new(0, 3)
@@ -369,6 +371,8 @@ function NightLib:CreateWindow(Options)
         Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
         wait(1.35)
         Notify:Destroy()
+
+        end)
     end
 
     local Tab = {}
