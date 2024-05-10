@@ -357,9 +357,9 @@ function NightLib:CreateWindow(Options)
         PaddingN2.PaddingLeft = UDim.new(0, 6)
 
         TweenService:Create(Notify, TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut), {Position = UDim2.new(0.7, 0, 0.730, 0)}):Play()
-		task.wait(tonumber(5))
+		task.wait(Options.Time)
 		Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-		task.wait(tonumber(Options.Time) / 2)
+		task.wait(2 / 2)
 		Notify:Destroy()
     end
 
