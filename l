@@ -374,20 +374,6 @@ function NightLib:CreateWindow(Options)
 		Notify.Active = false
 		task.wait(tonumber(Options.Time) / 2)
 		Notify:Destroy()
-    
-        TweenService:Create(Notify, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}):Play()
-        
-        wait(Options.Time - 0.88)
-        TweenService:Create(Iconnotify, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
-        TweenService:Create(Notify, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
-        wait(0.3)
-        TweenService:Create(Title_6, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
-        TweenService:Create(TextLabel, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
-        wait(0.05)
-    
-        Notify:TweenPosition(UDim2.new(20, 0, 0, 0),'In','Quint',0.8,true)
-        wait(1.35)
-        Notify:Destroy()
 
         end)
     end
