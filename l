@@ -4,6 +4,7 @@ local Runservice = game:GetService("RunService")
 local httpservice = game:GetService("HttpService")
 local mouse = plr:GetMouse()
 local TweenService = game:GetService("TweenService")
+local ScreenGui = Instance.new("ScreenGui")
 local NightLib = {}
 
 local function MakeDraggable(topbarobject, object)
@@ -61,12 +62,125 @@ local function MakeDraggable(topbarobject, object)
 		end
 	)
 end
+function NightLib:MakeNotify(Options)
+    Options = Options or {}
+    Options.Name = Options.Name or 'Night Hub'
+    Options.Content = Options.Content or "Is This Notify"
+    Options.Icon = Options.Icon or "rbxassetid://17317584331"
+    Options.Time = Options.Time or 1
+    Options.Delay = Options.Delay or 5
+
+    spawn(function()
+
+        local Notify = Instance.new("Frame")
+        local UICorner_11 = Instance.new("UICorner")
+        local DropShadowHolder_2 = Instance.new("Frame")
+        local DropShadow_2 = Instance.new("ImageLabel")
+        local Title_6 = Instance.new("TextLabel")
+        local Iconnotify = Instance.new("ImageLabel")
+        local TextLabel = Instance.new("TextLabel")
+        local PaddingN = Instance.new("UIPadding")
+        local PaddingN2 = Instance.new("UIPadding")
+
+        Notify.Name = "Notify"
+        Notify.Parent = ScreenGui
+        Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Notify.BorderSizePixel = 0
+        Notify.Position = UDim2.new(2, 0, 0.856, 0)
+        Notify.Size = UDim2.new(0, 310, 0, 55)
+
+        UICorner_11.CornerRadius = UDim.new(0, 3)
+        UICorner_11.Parent = Notify
+
+        DropShadowHolder_2.Name = "DropShadowHolder"
+        DropShadowHolder_2.Parent = Notify
+        DropShadowHolder_2.BackgroundTransparency = 1.000
+        DropShadowHolder_2.BorderSizePixel = 0
+        DropShadowHolder_2.Size = UDim2.new(1, 0, 1, 0)
+        DropShadowHolder_2.ZIndex = 0
+
+        DropShadow_2.Name = "DropShadow"
+        DropShadow_2.Parent = DropShadowHolder_2
+        DropShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
+        DropShadow_2.BackgroundTransparency = 1.000
+        DropShadow_2.BorderSizePixel = 0
+        DropShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+        DropShadow_2.Size = UDim2.new(1, 47, 1, 47)
+        DropShadow_2.ZIndex = 0
+        DropShadow_2.Image = "rbxassetid://6015897843"
+        DropShadow_2.ImageTransparency = 0.500
+        DropShadow_2.ScaleType = Enum.ScaleType.Slice
+        DropShadow_2.SliceCenter = Rect.new(49, 49, 450, 450)
+
+        Title_6.Name = "Title"
+        Title_6.Parent = Notify
+        Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Title_6.BackgroundTransparency = 1.000
+        Title_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Title_6.BorderSizePixel = 0
+        Title_6.ClipsDescendants = true
+        Title_6.Position = UDim2.new(0, 0, 0, 6)
+        Title_6.Size = UDim2.new(1, 0, 0, 16)
+        Title_6.Font = Enum.Font.GothamBold
+        Title_6.Text = Options.Name
+        Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Title_6.TextSize = 15.000
+        Title_6.TextWrapped = true
+        Title_6.TextXAlignment = Enum.TextXAlignment.Left
+
+        PaddingN.Parent = Title_6
+        PaddingN.PaddingLeft = UDim.new(0, 29)
+        PaddingN.PaddingBottom = UDim.new(0, 3)
+
+        Iconnotify.Name = "Iconnotify"
+        Iconnotify.Parent = Notify
+        Iconnotify.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Iconnotify.BackgroundTransparency = 1.000
+        Iconnotify.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Iconnotify.BorderSizePixel = 0
+        Iconnotify.Position = UDim2.new(0, 3, 0, 3)
+        Iconnotify.Size = UDim2.new(0, 20, 0, 20)
+        Iconnotify.Image = Options.Icon
+
+        TextLabel.Parent = Notify
+        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.BackgroundTransparency = 1.000
+        TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        TextLabel.BorderSizePixel = 0
+        TextLabel.Position = UDim2.new(0, 0, 0, 28)
+        TextLabel.Size = UDim2.new(1, 0, 0, 26)
+        TextLabel.Font = Enum.Font.GothamBold
+        TextLabel.Text = Options.Content
+        TextLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+        TextLabel.TextSize = 14.000
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+        PaddingN2.Parent = TextLabel
+        PaddingN2.PaddingLeft = UDim.new(0, 6)
+
+        TweenService:Create(
+            Notify,
+            TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
+            {Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}
+        ):Play()
+        task.wait(tonumber(Options.Delay))
+        TweenService:Create(
+            Notify,
+            TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
+            {Position = UDim2.new(2, 0, 0.856, 0)}
+        ):Play()
+        task.wait(tonumber(Options.Time) / 2)
+        Notify.Visible = false
+        task.wait(tonumber(Options.Time) / 2)
+        Notify:Destroy()
+    end)
+end
 function NightLib:CreateWindow(Options)
     Options = Options or {}
     Options.Title = Options.Title or "Night Hub"
     Options.Creator = Options.Creator or "- By ! Nightx"
 
-    local ScreenGui = Instance.new("ScreenGui")
     local Main = Instance.new("Frame")
     local UICorner = Instance.new("UICorner")
     local DropShadowHolder = Instance.new("Frame")
@@ -261,122 +375,6 @@ function NightLib:CreateWindow(Options)
     ChannelContainer.Size = UDim2.new(0, 412, 0, 348)
     
     MakeDraggable(Top, Main)
-
-    function NightLib:MakeNotify(Options)
-        Options = Options or {}
-        Options.Name = Options.Name or 'Night Hub'
-        Options.Content = Options.Content or "Is This Notify"
-        Options.Icon = Options.Icon or "rbxassetid://17317584331"
-        Options.Time = Options.Time or 1
-        Options.Delay = Options.Delay or 5
-
-        spawn(function()
-    
-        local Notify = Instance.new("Frame")
-        local UICorner_11 = Instance.new("UICorner")
-        local DropShadowHolder_2 = Instance.new("Frame")
-        local DropShadow_2 = Instance.new("ImageLabel")
-        local Title_6 = Instance.new("TextLabel")
-        local Iconnotify = Instance.new("ImageLabel")
-        local TextLabel = Instance.new("TextLabel")
-        local PaddingN = Instance.new("UIPadding")
-        local PaddingN2 = Instance.new("UIPadding")
-    
-        Notify.Name = "Notify"
-        Notify.Parent = ScreenGui
-        Notify.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-        Notify.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Notify.BorderSizePixel = 0
-        Notify.Position = UDim2.new(2, 0, 0.856, 0)
-        Notify.Size = UDim2.new(0, 310, 0, 55)
-    
-        UICorner_11.CornerRadius = UDim.new(0, 3)
-        UICorner_11.Parent = Notify
-    
-        DropShadowHolder_2.Name = "DropShadowHolder"
-        DropShadowHolder_2.Parent = Notify
-        DropShadowHolder_2.BackgroundTransparency = 1.000
-        DropShadowHolder_2.BorderSizePixel = 0
-        DropShadowHolder_2.Size = UDim2.new(1, 0, 1, 0)
-        DropShadowHolder_2.ZIndex = 0
-    
-        DropShadow_2.Name = "DropShadow"
-        DropShadow_2.Parent = DropShadowHolder_2
-        DropShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
-        DropShadow_2.BackgroundTransparency = 1.000
-        DropShadow_2.BorderSizePixel = 0
-        DropShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
-        DropShadow_2.Size = UDim2.new(1, 47, 1, 47)
-        DropShadow_2.ZIndex = 0
-        DropShadow_2.Image = "rbxassetid://6015897843"
-        DropShadow_2.ImageTransparency = 0.500
-        DropShadow_2.ScaleType = Enum.ScaleType.Slice
-        DropShadow_2.SliceCenter = Rect.new(49, 49, 450, 450)
-    
-        Title_6.Name = "Title"
-        Title_6.Parent = Notify
-        Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Title_6.BackgroundTransparency = 1.000
-        Title_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Title_6.BorderSizePixel = 0
-        Title_6.ClipsDescendants = true
-        Title_6.Position = UDim2.new(0, 0, 0, 6)
-        Title_6.Size = UDim2.new(1, 0, 0, 16)
-        Title_6.Font = Enum.Font.GothamBold
-        Title_6.Text = Options.Name
-        Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title_6.TextSize = 15.000
-        Title_6.TextWrapped = true
-        Title_6.TextXAlignment = Enum.TextXAlignment.Left
-    
-        PaddingN.Parent = Title_6
-        PaddingN.PaddingLeft = UDim.new(0, 29)
-        PaddingN.PaddingBottom = UDim.new(0, 3)
-    
-        Iconnotify.Name = "Iconnotify"
-        Iconnotify.Parent = Notify
-        Iconnotify.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Iconnotify.BackgroundTransparency = 1.000
-        Iconnotify.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        Iconnotify.BorderSizePixel = 0
-        Iconnotify.Position = UDim2.new(0, 3, 0, 3)
-        Iconnotify.Size = UDim2.new(0, 20, 0, 20)
-        Iconnotify.Image = Options.Icon
-    
-        TextLabel.Parent = Notify
-        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        TextLabel.BackgroundTransparency = 1.000
-        TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-        TextLabel.BorderSizePixel = 0
-        TextLabel.Position = UDim2.new(0, 0, 0, 28)
-        TextLabel.Size = UDim2.new(1, 0, 0, 26)
-        TextLabel.Font = Enum.Font.GothamBold
-        TextLabel.Text = Options.Content
-        TextLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
-        TextLabel.TextSize = 14.000
-        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-    
-        PaddingN2.Parent = TextLabel
-        PaddingN2.PaddingLeft = UDim.new(0, 6)
-
-        TweenService:Create(
-			Notify,
-			TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-			{Position = UDim2.new(0.695993006, 0, 0.827935219, 0)}
-		):Play()
-		task.wait(tonumber(Options.Delay))
-		TweenService:Create(
-			Notify,
-			TweenInfo.new(tonumber(Options.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),
-			{Position = UDim2.new(2, 0, 0.856, 0)}
-		):Play()
-		task.wait(tonumber(Options.Time) / 2)
-		Notify.Active = false
-		task.wait(tonumber(Options.Time) / 2)
-		Notify:Destroy()
-
-        end)
-    end
 
     local Tab = {}
     function Tab:MakeTab(Options)
