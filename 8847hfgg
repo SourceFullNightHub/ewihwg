@@ -1100,7 +1100,7 @@ function AttackNoCoolDown()
     end
 end
 
-local CbFw = getupvalues(require(Your.PlayerScripts.CombatFramework))
+local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
 
 function GetCurrentBlade() 
