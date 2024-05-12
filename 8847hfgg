@@ -928,7 +928,7 @@ function Tween(Pos)
         TweenInfo.new(Distance/325, Enum.EasingStyle.Linear),
         {CFrame = Pos}
     )
-    if plr.Datal.Level.Value >= 10 then
+    if plr.Data.Level.Value >= 10 then
         local NearestPotal = CheckNearestTeleporter(Pos)
         if NearestPotal then
             tween:Cancel()
