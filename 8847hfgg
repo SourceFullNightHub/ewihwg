@@ -2017,7 +2017,7 @@ H:CreateDropdown({
 
 spawn(function()
     while task.wait() do
-        if _G.S.DitStats then
+        if _G.DitStats then
             local args = {
                 [1] = "AddPoint",
                 [2] = _G.DitStats, 
