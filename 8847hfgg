@@ -2979,8 +2979,6 @@ spawn(function()
                                 TPB(CFrame.new(-44842.3945, 10.7790766, 16911.3477))
                             elseif (CFrame.new(-44842.3945, 10.7790766, 16911.3477).Position - plr.Character.HumanoidRootPart.Position).magnitude <= 10 then
                                 TPB(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
-                            elseif (CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375).Position - plr.Character.HumanoidRootPart.Position).magnitude <= 10 then
-                                TPB(CFrame.new(-44842.3945, 10.7790766, 16911.3477))
                             end 
                         until CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or CheckSeaBeast() or CheckGhoshShip() or CheckPirateBoat() or plr.Character.Humanoid.Sit == false or _G.S.StartSea == false
                     elseif plr.Character.Humanoid.Sit == false then
