@@ -1039,6 +1039,7 @@ function NightLib:CreateWindow(Options)
             local PaddingD = Instance.new("UIPadding")
             local PaddingD2 = Instance.new("UIPadding")
             local Selected = Instance.new("TextLabel")
+            local DropFunc = {}
             local Dropped = false
 
             Dropdown.Name = "Dropdown"
@@ -1254,7 +1255,81 @@ function NightLib:CreateWindow(Options)
 					):Play()
                 end
             end)
-            
+
+            function DropFunc:Set(OptionName)
+                for i, v in pairs(List:GetChildren()) do
+                    if v.ClassName == "Button" then
+                        if v.Name == OptionName then
+                            v.TextColor3 = Color3.fromRGB(255, 255, 255)
+                            Selected.Text = OptionName
+                            pcall(Selected.Text)
+                        end
+                    end
+                end
+            end
+
+            function DropFunc:Add(Option)
+                local Nahvaicaicut = Instance.new("TextButton")
+
+                Nahvaicaicut.Name = "Option1"
+                Nahvaicaicut.Parent = List
+                Nahvaicaicut.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                Nahvaicaicut.BackgroundTransparency = 1.000
+                Nahvaicaicut.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                Nahvaicaicut.BorderSizePixel = 0
+                Nahvaicaicut.ClipsDescendants = true
+                Nahvaicaicut.Size = UDim2.new(1, 0, 0, 25)
+                Nahvaicaicut.Font = Enum.Font.GothamBold
+                Nahvaicaicut.Text = Option
+                Nahvaicaicut.TextColor3 = Color3.fromRGB(144, 144, 144)
+                Nahvaicaicut.TextSize = 14.000
+
+                Nahvaicaicut.MouseButton1Click:Connect(function()
+                    Dropped = false
+                    ListFrame.Visible = false
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                    TweenService:Create(
+                        ListFrame,
+                        TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                        {
+                            Visible = false
+                        }
+                    ):Play()
+                    TweenService:Create(
+						IcoDrop,
+						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
+					):Play()
+                    Nahvaicaicut.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    Options.CallBack(Nahvaicaicut.Text)
+                    Selected.Text = Nahvaicaicut.Text
+                end)
+            end
+
+            function DropFunc:Refresh(Option)
+                for i, v in pairs(List:GetChildren()) do
+                    if v.Name == "Option1" then
+                        v:Destroy()
+                    end
+                end
+                Dropped = false
+                Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                TweenService:Create(
+                    ListFrame,
+                    TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                    {
+                        Visible = false
+                    }
+                ):Play()
+                TweenService:Create(
+                    IcoDrop,
+                    TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                    {ImageColor3 = Color3.fromRGB(255, 255, 255)}
+                ):Play()
+                DropFunc:Add(Option)
+                Selected.Text = ""
+			end
+            return DropFunc
         end
         function TabContent:CreateTextBox(Options)
             Options = Options or {}
