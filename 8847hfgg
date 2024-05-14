@@ -1668,7 +1668,7 @@ function KillSeaEvent(Mb, Stopfunction)
                 EquipWeapon()
                 Stp = dumatestthoi.HumanoidRootPart.CFrame
                 plr.Character.Humanoid.Sit = false
-                Tween(dumatestthoi.HumanoidRootPart.CFrame * CFSafe)
+                TPP(dumatestthoi.HumanoidRootPart.CFrame * CFSafe)
                 BringMob(Mb)
                 NoClip = true
             until dumatestthoi.Humanoid.Health <= 0 or not dumatestthoi.Parent or not Stopfunction
