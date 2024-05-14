@@ -1767,18 +1767,22 @@ end
 function CheckSeaBeast()
     for r, v in next, game.Workspace.SeaBeasts:GetChildren() do
         if v.Name == "SeaBeast1" then
-            local s = v.HealthBBG.Frame.TextLabel.Text
-            local c5 = s:gsub("/%d+,%d+", "")
-            local a = v.HealthBBG.Frame.TextLabel.Text
-            local ab
-            if string.find(c5, ",") then
-                ab = a:gsub("%d+,%d+/", "")
-            else
-                ab = a:gsub("%d+/", "")
-            end
-            local c = ab:gsub(",", "")
-            if tonumber(c) >= 34500 then
-                return v
+            if v:FindFirstChild("HumanoidRootPart") then
+                if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3500 then
+                    local s = v.HealthBBG.Frame.TextLabel.Text
+                    local c5 = s:gsub("/%d+,%d+", "")
+                    local a = v.HealthBBG.Frame.TextLabel.Text
+                    local ab
+                    if string.find(c5, ",") then
+                        ab = a:gsub("%d+,%d+/", "")
+                    else
+                        ab = a:gsub("%d+/", "")
+                    end
+                    local c = ab:gsub(",", "")
+                    if tonumber(c) >= 34500 then
+                        return v
+                    end
+                end
             end
         end
     end
@@ -2961,9 +2965,8 @@ E:CreateToggle({
 spawn(function()
     while wait() do
         if _G.S.StartSea and CheckShip() then
-            v = CheckSeaBeast()
             if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
-                if not CheckEnemies("Shark") and not CheckEnemies("Terrorshark") and not CheckEnemies("Fish Crew Member") and not (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 and not CheckGhoshShip() and not CheckPirateBoat() then
+                if not CheckEnemies("Shark") and not CheckEnemies("Terrorshark") and not CheckEnemies("Fish Crew Member") and not CheckSeaBeast() and not CheckGhoshShip() and not CheckPirateBoat() then
                     table.foreach(GetYourShip():GetDescendants(), function(a, child)
                         if child:IsA("BasePart") or child:IsA("MeshPart") or child:IsA("Part") then
                             child.CanCollide = false
@@ -3001,7 +3004,6 @@ spawn(function()
         if _G.S.StartSea then
             pcall(function()
                 if CheckShip() then
-                    v = CheckSeaBeast()
                     if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == true then
                         repeat wait()
                             if (CFrame.new(-17013.80078125, 10.962434768676758, 438.0169982910156).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
@@ -3009,7 +3011,7 @@ spawn(function()
                             elseif (CFrame.new(-44842.3945, 10.7790766, 16911.3477).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 10 then
                                 TPB(CFrame.new(-37952.49609375, 10.96342945098877, -1324.12109375))
                             end
-                        until CheckGhoshShip() or CheckPirateBoat() or (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 or CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or plr.Character.Humanoid.Sit == false or _G.S.StartSea == false
+                        until CheckGhoshShip() or CheckPirateBoat() or not CheckSeaBeast() or CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or plr.Character.Humanoid.Sit == false or _G.S.StartSea == false
                     end
                 end
             end)
@@ -3021,8 +3023,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.S.StartSea then
-                v = CheckSeaBeast()
-                if CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or CheckGhoshShip() or (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 or CheckPirateBoat() then
+                if CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or CheckGhoshShip() or CheckSeaBeast() or CheckPirateBoat() then
                     plr.Character.Humanoid.Sit = false
                 end
             end
