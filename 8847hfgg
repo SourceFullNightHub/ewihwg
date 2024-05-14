@@ -3041,11 +3041,17 @@ E:CreateToggle({
 
 spawn(function()
     while task.wait() do
-        if plr.Character.Humanoid.Health <= 3999 then
-            CFSafe = CFrame.new(20, 80, 20)
-        elseif plr.Character.Humanoid.Health >= 4000 then
-            CFSafe = CFrame.new(2, 20, 2)
-        end
+        pcall(function()
+            if _G.S.Y then
+                if plr.Character.Humanoid.Health < 4000 then
+                    CFSafe = CFrame.new(20, 80, 20)
+                elseif plr.Character.Humanoid.Health > 4000 then
+                    CFSafe = CFrame.new(2, 20, 2)
+                end
+            else
+                CFSafe = CFrame.new(2, 20, 2)
+            end
+        end)
     end
 end)
 
@@ -3191,17 +3197,24 @@ spawn(function()
         pcall(function()
             if _G.S.AutoSeaBeast and Sea3 then
                 if CheckSeaBeast() then
-                    local v = CheckSeaBeast()
-                    if v:FindFirstChild("HumanoidRootPart") then
-                        if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
-                            repeat task.wait()
-                                TeleportSeabeast(v)
-                                if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
-                                    SpamSkill = true
-                                end
-                            until not CheckSeaBeast() or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
-                            SpamSkill = false
+                    if not CheckEnemies("Shark") and not CheckEnemies("Terrorshark") and not CheckEnemies("Fish Crew Member") and not CheckEnemies("Piranha") then
+                        local v = CheckSeaBeast()
+                        if v:FindFirstChild("HumanoidRootPart") then
+                            if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
+                                repeat task.wait()
+                                    TeleportSeabeast(v)
+                                    if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
+                                        SpamSkill = true
+                                    end
+                                until not CheckSeaBeast() or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                                SpamSkill = false
+                            end
                         end
+                    elseif CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Fish Crew Member") or CheckEnemies("Piranha") then
+                        KillSeaEvent("Shark")
+                        KillSeaEvent("Terrorshark")
+                        KillSeaEvent("Fish Crew Member")
+                        KillSeaEvent("Piranha")
                     end
                 end
             end
