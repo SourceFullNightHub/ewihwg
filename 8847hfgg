@@ -2968,7 +2968,7 @@ spawn(function()
                             child.CanCollide = false
                         end
                     end)
-                    TPP(v:FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 1, 0))
+                    TPP(GetYourShip():FindFirstChild("VehicleSeat").CFrame * CFrame.new(0, 1, 0))
                 end
             end
         end
@@ -3016,7 +3016,7 @@ end)
 spawn(function()
     while wait() do
         if _G.S.StartSea then
-            if CheckEnemies("Shark") or game:CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or CheckGhoshShip() or CheckSeaBeast() or CheckPirateBoat() then
+            if CheckEnemies("Shark") or CheckEnemies("Terrorshark") or CheckEnemies("Piranha") or CheckEnemies("Fish Crew Member") or CheckGhoshShip() or CheckSeaBeast() or CheckPirateBoat() then
                 plr.Character.Humanoid.Sit = false
             end
         end
