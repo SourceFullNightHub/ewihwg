@@ -3124,7 +3124,7 @@ spawn(function()
                     if (CheckGhoshShip().Engine.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
                         repeat task.wait()
                             plr.Character.Humanoid.Sit = false
-                            Tween(CheckGhoshShip().Engine.CFrame * CFrame.new(0, -20, 0))
+                            spawn(Tween(CheckGhoshShip().Engine.CFrame * CFrame.new(0, -20, 0)), 1)
                             if (CheckGhoshShip().Engine.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
                                 SpamSkill = true
                                 AimSkill = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)
@@ -3150,11 +3150,12 @@ E:CreateToggle({
 
 spawn(function()
     while task.wait() do
-        if _G.S.AutoGhoshShip and Sea3 then
+        if _G.S.AutoShip and Sea3 then
             pcall(function()
                 if CheckPirateBoat() then
                     if (CheckPirateBoat().Engine.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 3000 then
                         repeat task.wait()
+                            spawn(Tween(CheckPirateBoat().Engine.CFrame * CFrame.new(0, -20, 0)), 1)
                             plr.Character.Humanoid.Sit = false
                             if (CheckPirateBoat().Engine.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
                                 SpamSkill = true
