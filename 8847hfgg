@@ -1578,7 +1578,7 @@ function EquipAllWeapon()
     u3 = {"Melee", "Blox Fruit", "Sword", "Gun"}
     u3_2 = {}
     for r, v in pairs(u3) do
-        u3_3 = GetWeapon(v)
+        u3_3 = GetWP(v)
         table.insert(u3_2, u3_3)
     end
     for r, v in pairs(u3_2) do
