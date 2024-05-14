@@ -3192,7 +3192,8 @@ spawn(function()
                                 if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 2500 then
                                     SpamSkill = true
                                 end
-                            until not CheckSeaBeast() or not v.Parent
+                            until not CheckSeaBeast() or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                            SpamSkill = false
                         end
                     end
                 end
