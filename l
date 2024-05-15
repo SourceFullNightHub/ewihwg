@@ -1269,41 +1269,43 @@ function NightLib:CreateWindow(Options)
             end
 
             function DropFunc:Add(Option)
-                local Nahvaicaicut = Instance.new("TextButton")
+                for i, v in next, Option do
+                    local Nahvaicaicut = Instance.new("TextButton")
 
-                Nahvaicaicut.Name = "Option1"
-                Nahvaicaicut.Parent = List
-                Nahvaicaicut.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-                Nahvaicaicut.BackgroundTransparency = 1.000
-                Nahvaicaicut.BorderColor3 = Color3.fromRGB(0, 0, 0)
-                Nahvaicaicut.BorderSizePixel = 0
-                Nahvaicaicut.ClipsDescendants = true
-                Nahvaicaicut.Size = UDim2.new(1, 0, 0, 25)
-                Nahvaicaicut.Font = Enum.Font.GothamBold
-                Nahvaicaicut.Text = Option
-                Nahvaicaicut.TextColor3 = Color3.fromRGB(144, 144, 144)
-                Nahvaicaicut.TextSize = 14.000
+                    Nahvaicaicut.Name = "Option1"
+                    Nahvaicaicut.Parent = List
+                    Nahvaicaicut.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                    Nahvaicaicut.BackgroundTransparency = 1.000
+                    Nahvaicaicut.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    Nahvaicaicut.BorderSizePixel = 0
+                    Nahvaicaicut.ClipsDescendants = true
+                    Nahvaicaicut.Size = UDim2.new(1, 0, 0, 25)
+                    Nahvaicaicut.Font = Enum.Font.GothamBold
+                    Nahvaicaicut.Text = tostring(v)
+                    Nahvaicaicut.TextColor3 = Color3.fromRGB(144, 144, 144)
+                    Nahvaicaicut.TextSize = 14.000
 
-                Nahvaicaicut.MouseButton1Click:Connect(function()
-                    Dropped = false
-                    ListFrame.Visible = false
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
-                    TweenService:Create(
-                        ListFrame,
-                        TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-                        {
-                            Visible = false
-                        }
-                    ):Play()
-                    TweenService:Create(
-						IcoDrop,
-						TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-						{ImageColor3 = Color3.fromRGB(255, 255, 255)}
-					):Play()
-                    Nahvaicaicut.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    Options.CallBack(Nahvaicaicut.Text)
-                    Selected.Text = Nahvaicaicut.Text
-                end)
+                    Nahvaicaicut.MouseButton1Click:Connect(function()
+                        Dropped = false
+                        ListFrame.Visible = false
+                        Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                        TweenService:Create(
+                            ListFrame,
+                            TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
+                            {
+                                Visible = false
+                            }
+                        ):Play()
+                        TweenService:Create(
+                            IcoDrop,
+                            TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                            {ImageColor3 = Color3.fromRGB(255, 255, 255)}
+                        ):Play()
+                        Nahvaicaicut.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        Options.CallBack(Nahvaicaicut.Text)
+                        Selected.Text = Nahvaicaicut.Text
+                    end)
+                end
             end
 
             function DropFunc:Refresh(Option)
