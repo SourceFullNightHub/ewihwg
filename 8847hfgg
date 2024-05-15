@@ -1935,37 +1935,6 @@ function CancelTween()
     NoClip = false
     return Tween(plr.Character.HumanoidRootPart.CFrame)
 end
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if _G.S.StFarm or _G.S.PiratesRaid or _G.S.ChichElite or _G.S.DitFactory or _G.S.TakenSaber or _G.S.TakenPole or _G.S.BopdaiCyborg or _G.S.BucacSea2 or _G.S.ChichBartilo or _G.S.DitGhoul or _G.S.Swanlacaichogi or _G.S.chimdenvschimtrang or _G.S.Thuyentruongbidien or _G.S.dodoclonv2 or _G.S.Bayyyyyyyyyy or _G.S.DonateForme or _G.S.TweentoIsland or TweenPly or _G.KillPlayer or _G.NearestKill or _G.S.StartSea or _G.S.AutoSeaBeast or _G.S.AutoGhoshShip or _G.S.AutoShip or _G.S.KillShark or _G.S.KillTerrorShark or _G.S.KillFishAndPirnha or NoClip == true then
-                if not plr.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = plr.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-                    Noclip.Velocity = Vector3.new(0,0,0)
-                end
-            else
-                plr.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if _G.S.StFarm or _G.S.PiratesRaid or _G.S.ChichElite or _G.S.DitFactory or _G.S.TakenSaber or _G.S.TakenPole or _G.S.BopdaiCyborg or _G.S.BucacSea2 or _G.S.ChichBartilo or _G.S.DitGhoul or _G.S.Swanlacaichogi or _G.S.chimdenvschimtrang or _G.S.Thuyentruongbidien or _G.S.dodoclonv2 or _G.S.Bayyyyyyyyyy or _G.S.DonateForme or _G.S.TweentoIsland or TweenPly or _G.KillPlayer or _G.NearestKill or _G.S.StartSea or _G.S.AutoSeaBeast or _G.S.AutoGhoshShip or _G.S.AutoShip or _G.S.KillShark or _G.S.KillTerrorShark or _G.S.KillFishAndPirnha or NoClip == true then
-                for i,v in pairs(plr.Character:GetDescendants()) do
-                    if v:IsA("BasePart") then
-                        v.CanCollide = false
-                    end
-                end
-            end
-        end)
-    end)
-end)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function BypassAntiCheats()
