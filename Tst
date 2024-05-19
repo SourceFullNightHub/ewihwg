@@ -80,14 +80,15 @@ task.spawn(function()
                 task.wait()
                 bs = tick()
             end
-            sas(function()
+            spawn(function()
                 for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
                     if not MasteryOption and v.Humanoid.Health > 0 then
                         if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
                             FastAttack()
                             task.wait()
                             Boost()
-                            EClick()
+                            game:GetService'VirtualUser':CaptureController()
+                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                         end
                     end
                 end
@@ -129,37 +130,9 @@ task.spawn(function()
         end
     end
 end)
-EnableCurv = true
-task.spawn(function()
-    local a = game.Players.LocalPlayer
-    local b = require(a.PlayerScripts.CombatFramework.Particle)
-    local c = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
-    if not shared.orl then
-        shared.orl = c.wrapAttackAnimationAsync
-    end
-    if not shared.cpc then
-        shared.cpc = b.play
-    end
-    if EnableCurv then
-        pcall(function()
-            c.wrapAttackAnimationAsync = function(d, e, f, g, h)
-                local i = c.getBladeHits(e, f, g)
-                if i then
-                    b.play = function()
-                    end
-                    d:Play(0.25, 0.25, 0.25)
-                    h(i)
-                    b.play = shared.cpc
-                    wait(.5)
-                    d:Stop()
-                end
-            end
-        end)
-    end
-end)
-
 EnableFastAttack = true
 
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
 CombatFrameworkR = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
 y = debug.getupvalues(CombatFrameworkR)[2]
 spawn(function()
