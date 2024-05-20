@@ -428,6 +428,16 @@ function GetMobSpawn(a)
         end
     end
 end
+local J = {}
+Mob = ""
+Mob1 = ""
+plr = game.Players.LocalPlayer
+local K = Instance.new("Folder")
+K.Parent = game.Workspace
+K.Name = "MobSpawns"
+repeat
+    wait()
+until game.Workspace:FindFirstChild("MobSpawns")
 function GetMobSpawnList(a)
     k = {}
     for r, v in next, game.Workspace.MobSpawns:GetChildren() do
@@ -604,11 +614,13 @@ task.spawn(function()
             end
             spawn(function()
                 for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if v.Humanoid.Health > 0 then
-                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
-                            FastAttack()
-                            task.wait()
-                            Boost()
+                    if v:FindFirstChild("Humanoid")
+                        if v.Humanoid.Health > 0 then
+                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                                FastAttack()
+                                task.wait()
+                                Boost()
+                            end
                         end
                     end
                 end
