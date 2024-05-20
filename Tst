@@ -8,980 +8,6 @@ else
     game.Players.LocalPlayer:Kick("Not Support This Game!")
 end
 
-function CheckOldQuest(a)
-    if Sea1 then
-        if a == 1 then
-            Name = "Bandit"
-            QuestName = "BanditQuest1"
-            LevelQuest = 1
-            NameMon = "Bandit"
-            CFrameMon = CFrame.new(1145, 17, 1634)
-            VectorMon = Vector3.new(1145, 17, 1634)
-            CFrameQuest = CFrame.new(1060, 17, 1547)
-            VectorQuest = Vector3.new(1060, 17, 1547)
-        elseif a == 3 then
-            Name = "Monkey"
-            QuestName = "JungleQuest"
-            LevelQuest = 1
-            NameMon = "Monkey"
-            CFrameMon = CFrame.new(-1496, 39, 35)
-            VectorMon = Vector3.new(-1496, 39, 35)
-            CFrameQuest = CFrame.new(-1602, 37, 152)
-            VectorQuest = Vector3.new(-1602, 37, 152)
-        elseif a == 4 then
-            Name = "Gorilla"
-            QuestName = "JungleQuest"
-            LevelQuest = 2
-            NameMon = "Gorilla"
-            CFrameMon = CFrame.new(-1237, 6, -486)
-            VectorMon = Vector3.new(-1237, 7, -486)
-            CFrameQuest = CFrame.new(-1602, 37, 152)
-            VectorQuest = Vector3.new(-1602, 37, 152)
-        elseif a == 6 then
-            Name = "Pirate"
-            QuestName = "BuggyQuest1"
-            LevelQuest = 1
-            NameMon = "Pirate"
-            CFrameMon = CFrame.new(-1115, 14, 3938)
-            VectorMon = Vector3.new(-1115, 14, 3938)
-            CFrameQuest = CFrame.new(-1140, 5, 3828)
-            VectorQuest = Vetor3.new(-1140, 5, 3828)
-        elseif a == 9 then
-            Name = "Desert Bandit"
-            QuestName = "DesertQuest"
-            LevelQuest = 1
-            NameMon = "Desert Bandit"
-            CFrameMon = CFrame.new(932, 7, 4484)
-            VectorMon = Vector3.new(932, 7, 4484)
-            CFrameQuest = CFrame.new(897, 7, 4388)
-            VectorQuest = Vector3.new(897, 7, 4388)
-        elseif a == 10 then
-            Name = "Desert Officer"
-            QuestName = "DesertQuest"
-            LevelQuest = 2
-            NameMon = "Desert Officer"
-            CFrameMon = CFrame.new(1572, 10, 4373)
-            VectorMon = Vector3.new(1572, 10, 4373)
-            CFrameQuest = CFrame.new(897, 7, 4388)
-            VectorQuest = Vector3.new(897, 7, 4388)
-        elseif a == 12 then
-            Name = "Snow Bandit"
-            QuestName = "SnowQuest"
-            LevelQuest = 1
-            NameMon = "Snow Bandits"
-            CFrameMon = CFrame.new(1289, 150, -1442)
-            VectorMon = Vector3.new(1289, 106, -1442)
-            CFrameQuest = CFrame.new(1386, 87, -1297)
-            VectorQuest = Vector3.new(1386, 87, -1297)
-        elseif a == 13 then
-            Name = "Snowman"
-            QuestName = "SnowQuest"
-            LevelQuest = 2
-            NameMon = "Snowman"
-            CFrameMon = CFrame.new(1289, 150, -1442)
-            VectorMon = Vector3.new(1289, 106, -1442)
-            CFrameQuest = CFrame.new(1386, 87, -1297)
-            VectorQuest = Vector3.new(1386, 87, -1297)
-        elseif a == 15 then
-            Name = "Chief Petty Officer"
-            QuestName = "MarineQuest2"
-            LevelQuest = 1
-            NameMon = "Chief Petty Officer"
-            CFrameMon = CFrame.new(-4855, 23, 4308)
-            VectorMon = Vector3.new(-4855, 23, 4308)
-            CFrameQuest = CFrame.new(-5036, 29, 4325)
-            VectorQuest = Vector3.new(-5036, 29, 4325)
-        elseif a == 17 then
-            Name = "Sky Bandit"
-            QuestName = "SkyQuest"
-            LevelQuest = 1
-            NameMon = "Sky Bandit"
-            CFrameMon = CFrame.new(-4981, 278, -2830)
-            VectorMon = Vector3.new(-4981, 278, -2830)
-            CFrameQuest = CFrame.new(-4842, 718, -2623)
-            VectorQuest = Vector3.new(-4842, 718, -2623)
-        elseif a == 18 then
-            Name = "Dark Master"
-            QuestName = "SkyQuest"
-            LevelQuest = 2
-            NameMon = "Dark Master"
-            CFrameMon = CFrame.new(-5250, 389, -2272)
-            VectorMon = Vector3.new(-5250, 389, -2272)
-            CFrameQuest = CFrame.new(-4842, 718, -2623)
-            VectorQuest = Vector3.new(-4842, 718, -2623)
-        elseif a == 20 then
-            Name = "Prisoner"
-            QuestName = "PrisonerQuest"
-            LevelQuest = 1
-            NameMon = "Prisoner"
-            CFrameMon = CFrame.new(5411, 96, 690)
-            VectorMon = Vector3.new(5411, 96, 690)
-            CFrameQuest = CFrame.new(5308, 2, 474)
-            VectorQuest = Vector3.new(5308, 2, 474)
-        elseif a == 21 then
-            Name = "Dangerous Prisoner"
-            QuestName = "PrisonerQuest"
-            LevelQuest = 2
-            NameMon = "Dangerous Prisoner"
-            CFrameMon = CFrame.new(5411, 96, 690)
-            VectorMon = Vector3.new(5411, 96, 690)
-            CFrameQuest = CFrame.new(5308, 2, 474)
-            VectorQuest = Vector3.new(5308, 2, 474)
-        elseif a == 23 then
-            Name = "Toga Warrior"
-            QuestName = "ColosseumQuest"
-            LevelQuest = 1
-            NameMon = "Toga Warrior"
-            CFrameMon = CFrame.new(-1770, 8, -2777)
-            VectorMon = Vector3.new(-1770, 8, -2777)
-            CFrameQuest = CFrame.new(-1576, 8, -2985)
-            VectorQuest = Vector3.new(-1576, 8, -2985)
-        elseif a == 25 then
-            Name = "Military Soldier"
-            QuestName = "MagmaQuest"
-            LevelQuest = 1
-            NameMon = "Military Soldier"
-            CFrameMon = CFrame.new(-5555.064453125, 16.73392105102539, 8377.623046875)
-            VectorMon = Vector3.new(-5555.064453125, 16.73392105102539, 8377.623046875)
-            CFrameQuest = CFrame.new(-5316, 12, 8517)
-            VectorQuest = Vector3.new(-5316, 12, 8517)
-        elseif a == 26 then
-            Name = "Military Spy"
-            QuestName = "MagmaQuest"
-            LevelQuest = 2
-            NameMon = "Military Spy"
-            CFrameMon = CFrame.new(-5806.056640625, 99.96672058105469, 8777.8447265625)
-            VectorMon = Vector3.new(-5806.056640625, 99.96672058105469, 8777.8447265625)
-            CFrameQuest = CFrame.new(-5316, 12, 8517)
-            VectorQuest = Vector3.new(-5316, 12, 8517)
-        elseif a == 28 then
-            Name = "Fishman Warrior"
-            QuestName = "FishmanQuest"
-            LevelQuest = 1
-            NameMon = "Fishman Warrior"
-            CFrameMon = CFrame.new(60859, 19, 1501)
-            VectorMon = Vector3.new(60859, 19, 1501)
-            CFrameQuest = CFrame.new(61123, 19, 1569)
-            VectorQuest = Vector3.new(61123, 19, 1569)
-        elseif a == 29 then
-            Name = "Fishman Commando"
-            QuestName = "FishmanQuest"
-            LevelQuest = 2
-            NameMon = "Fishman Commando"
-            CFrameMon = CFrame.new(61891, 19, 1470)
-            VectorMon = Vector3.new(61891, 19, 1470)
-            CFrameQuest = CFrame.new(61123, 19, 1569)
-            VectorQuest = Vector3.new(61123, 19, 1569)
-        elseif a == 31 then
-            Name = "God's Guard"
-            QuestName = "SkyExp1Quest"
-            LevelQuest = 1
-            NameMon = "God's Guards"
-            CFrameMon = CFrame.new(-4698, 845, -1912)
-            VectorMon = Vector3.new(-4698, 845, -1912)
-            CFrameQuest = CFrame.new(-4722, 845, -1954)
-            VectorQuest = Vector3.new(-4722, 846, -1954)
-        elseif a == 33 then
-            Name = "Shanda"
-            QuestName = "SkyExp1Quest"
-            LevelQuest = 2
-            NameMon = "Shandas"
-            CFrameMon = CFrame.new(-7685, 5567, -502)
-            VectorMon = Vector3.new(-7685, 5567, -502)
-            CFrameQuest = CFrame.new(-7862, 5546, -380)
-            VectorQuest = Vector3.new(-7862, 5546, -380)
-        elseif a == 34 then
-            Name = "Royal Squad"
-            QuestName = "SkyExp2Quest"
-            LevelQuest = 1
-            NameMon = "Royal Squad"
-            CFrameMon = CFrame.new(-7670, 5607, -1460)
-            VectorMon = Vector3.new(-7670, 5607, -1460)
-            CFrameQuest = CFrame.new(-7904, 5636, -1412)
-            VectorQuest = Vector3.new(-7904, 5636, -1412)
-        elseif a == 35 then
-            Name = "Royal Soldier"
-            QuestName = "SkyExp2Quest"
-            LevelQuest = 2
-            NameMon = "Royal Soldier"
-            CFrameMon = CFrame.new(-7828, 5607, -1744)
-            VectorMon = Vector3.new(-7828, 5607, -1744)
-            CFrameQuest = CFrame.new(-7904, 5636, -1412)
-            VectorQuest = Vector3.new(-7904, 5636, -1412)
-        elseif a == 37 then
-            Name = "Galley Pirate"
-            QuestName = "FountainQuest"
-            LevelQuest = 1
-            NameMon = "Galley Pirate"
-            CFrameMon = CFrame.new(5589, 45, 3996)
-            VectorMon = Vector3.new(5589, 45, 3996)
-            CFrameQuest = CFrame.new(5256, 39, 4050)
-            VectorQuest = Vector3.new(5256, 39, 4050)
-        elseif a == 38 then
-            Name = "Galley Captain"
-            QuestName = "FountainQuest"
-            LevelQuest = 2
-            NameMon = "Galley Captain"
-            CFrameMon = CFrame.new(5649, 39, 4936)
-            VectorMon = Vector3.new(5649, 39, 4936)
-            CFrameQuest = CFrame.new(5256, 39, 4050)
-            VectorQuest = Vector3.new(5256, 39, 4050)
-        end
-    end
-    if Sea2 then
-        if a == 1 then
-            Name = "Raider"
-            QuestName = "Area1Quest"
-            LevelQuest = 1
-            NameMon = "Raider"
-            CFrameQuest = CFrame.new(-425, 73, 1837)
-            VectorQuest = Vector3.new(-425, 73, 1837)
-            CFrameMon = CFrame.new(-746, 39, 2390)
-            VectorMon = Vector3.new(-746, 39, 2389)
-        elseif a == 2 then
-            Name = "Mercenary"
-            QuestName = "Area1Quest"
-            LevelQuest = 2
-            NameMon = "Mercenary"
-            CFrameQuest = CFrame.new(-425, 73, 1837)
-            VectorQuest = Vector3.new(-425, 73, 1837)
-            CFrameMon = CFrame.new(-874, 141, 1312)
-            VectorMon = Vector3.new(-874, 141, 1312)
-        elseif a == 3 then
-            Name = "Swan Pirate"
-            QuestName = "Area2Quest"
-            LevelQuest = 1
-            NameMon = "Swan Pirate"
-            CFrameQuest = CFrame.new(634, 73, 918)
-            VectorQuest = Vector3.new(634, 73, 918)
-            CFrameMon = CFrame.new(878, 122, 1235)
-            VectorMon = Vector3.new(878, 122, 1235)
-        elseif a == 4 then
-            Name = "Factory Staff"
-            QuestName = "Area2Quest"
-            LevelQuest = 2
-            NameMon = "Factory Staff"
-            CFrameQuest = CFrame.new(634, 73, 918)
-            VectorQuest = Vector3.new(634, 73, 918)
-            CFrameMon = CFrame.new(295, 73, -56)
-            VectorMon = Vector3.new(295, 73, -56)
-        elseif a == 6 then
-            Name = "Marine Lieutenant"
-            QuestName = "MarineQuest3"
-            LevelQuest = 1
-            NameMon = "Marine Lieutenant"
-            CFrameMon = CFrame.new(-2806, 73, -3038)
-            VectorMon = Vector3.new(-2806, 73, -3038)
-            CFrameQuest = CFrame.new(-2443, 73, -3219)
-            VectorQuest = Vector3.new(-2443, 73, -3219)
-        elseif a == 7 then
-            Name = "Marine Captain"
-            QuestName = "MarineQuest3"
-            LevelQuest = 2
-            NameMon = "Marine Captain"
-            CFrameMon = CFrame.new(-1869, 73, -3320)
-            VectorMon = Vector3.new(-1869, 73, -3320)
-            CFrameQuest = CFrame.new(-2443, 73, -3219)
-            VectorQuest = Vector3.new(-2443, 73, -3219)
-        elseif a == 9 then
-            Name = "Zombie"
-            QuestName = "ZombieQuest"
-            LevelQuest = 1
-            NameMon = "Zombie"
-            CFrameMon = CFrame.new(-5736, 126, -728)
-            VectorMon = Vector3.new(-5736, 126, -728)
-            CFrameQuest = CFrame.new(-5494, 49, -795)
-            VectorQuest = Vector3.new(-5494, 49, -794)
-        elseif a == 10 then
-            Name = "Vampire"
-            QuestName = "ZombieQuest"
-            LevelQuest = 2
-            NameMon = "Vampire"
-            CFrameMon = CFrame.new(-6033, 7, -1317)
-            VectorMon = Vector3.new(-6033, 7, -1317)
-            CFrameQuest = CFrame.new(-5494, 49, -795)
-            VectorQuest = Vector3.new(-5494, 49, -795)
-        elseif a == 12 then
-            Name = "Snow Trooper"
-            QuestName = "SnowMountainQuest"
-            LevelQuest = 1
-            NameMon = "Snow Trooper"
-            CFrameMon = CFrame.new(478, 402, -5362)
-            VectorMon = Vector3.new(478, 402, -5362)
-            CFrameQuest = CFrame.new(605, 402, -5371)
-            VectorQuest = Vector3.new(605, 402, -5371)
-        elseif a == 13 then
-            Name = "Winter Warrior"
-            QuestName = "SnowMountainQuest"
-            LevelQuest = 2
-            NameMon = "Winter Warrior"
-            CFrameMon = CFrame.new(1157, 430, -5188)
-            VectorMon = Vector3.new(1157, 430, -5188)
-            CFrameQuest = CFrame.new(605, 402, -5371)
-            VectorQuest = Vector3.new(605, 402, -5371)
-        elseif a == 16 then
-            Name = "Lab Subordinate"
-            QuestName = "IceSideQuest"
-            LevelQuest = 1
-            NameMon = "Lab Subordinate"
-            CFrameMon = CFrame.new(-5782, 42, -4484)
-            VectorMon = Vector3.new(-5782, 42, -4484)
-            CFrameQuest = CFrame.new(-6060, 16, -4905)
-            VectorQuest = Vector3.new(-6060, 16, -4905)
-        elseif a == 17 then
-            Name = "Horned Warrior"
-            QuestName = "IceSideQuest"
-            LevelQuest = 2
-            NameMon = "Horned Warrior"
-            CFrameMon = CFrame.new(-6406, 24, -5805)
-            VectorMon = Vector3.new(-6406, 24, -5805)
-            CFrameQuest = CFrame.new(-6060, 16, -4905)
-            VectorQuest = Vector3.new(-6060, 16, -4905)
-        elseif a == 18 then
-            Name = "Magma Ninja"
-            QuestName = "FireSideQuest"
-            LevelQuest = 1
-            NameMon = "Magma Ninja"
-            CFrameMon = CFrame.new(-5428, 78, -5959)
-            VectorMon = Vector3.new(-5428, 78, -5959)
-            CFrameQuest = CFrame.new(-5430, 16, -5295)
-            VectorQuest = Vector3.new(-5430, 16, -5296)
-        elseif a == 19 then
-            Name = "Lava Pirate"
-            QuestName = "FireSideQuest"
-            LevelQuest = 2
-            NameMon = "Lava Pirate"
-            CFrameMon = CFrame.new(-5270, 42, -4800)
-            VectorMon = Vector3.new(-5270, 42, -4800)
-            CFrameQuest = CFrame.new(-5430, 16, -5295)
-            VectorQuest = Vector3.new(-5430, 16, -5296)
-        elseif a == 21 then
-            Name = "Ship Deckhand"
-            QuestName = "ShipQuest1"
-            LevelQuest = 1
-            NameMon = "Ship Deckhand"
-            CFrameMon = CFrame.new(1198, 126, 33031)
-            VectorMon = Vector3.new(1198, 126, 33031)
-            CFrameQuest = CFrame.new(1038, 125, 32913)
-            VectorQuest = Vector3.new(1038, 125, 32913)
-        elseif a == 22 then
-            Name = "Ship Engineer"
-            QuestName = "ShipQuest1"
-            LevelQuest = 2
-            NameMon = "Ship Engineer"
-            CFrameMon = CFrame.new(918, 44, 32787)
-            VectorMon = Vector3.new(918, 44, 32787)
-            CFrameQuest = CFrame.new(1038, 125, 32913)
-            VectorQuest = Vector3.new(1038, 125, 32913)
-        elseif a == 23 then
-            Name = "Ship Steward"
-            QuestName = "ShipQuest2"
-            LevelQuest = 1
-            NameMon = "Ship Steward"
-            CFrameMon = CFrame.new(915, 130, 33419)
-            VectorMon = Vector3.new(915, 130, 33419)
-            CFrameQuest = CFrame.new(969, 125, 33245)
-            VectorQuest = Vector3.new(969, 125, 33245)
-        elseif a == 24 then
-            Name = "Ship Officer"
-            QuestName = "ShipQuest2"
-            LevelQuest = 2
-            NameMon = "Ship Officer"
-            CFrameMon = CFrame.new(916, 181, 33335)
-            VectorMon = Vector3.new(916, 181, 33335)
-            CFrameQuest = CFrame.new(969, 125, 33245)
-            VectorQuest = Vector3.new(969, 125, 33245)
-        elseif a == 26 then
-            Name = "Arctic Warrior"
-            QuestName = "FrostQuest"
-            LevelQuest = 1
-            NameMon = "Arctic Warrior"
-            CFrameMon = CFrame.new(6038, 29, -6231)
-            VectorMon = Vector3.new(6038, 29, -6231)
-            VectorQuest = Vector3.new(5669, 28, -6482)
-            CFrameQuest = CFrame.new(5669, 28, -6482)
-        elseif a == 27 then
-            Name = "Snow Lurker"
-            QuestName = "FrostQuest"
-            LevelQuest = 2
-            NameMon = "Snow Lurker"
-            CFrameMon = CFrame.new(5560, 42, -6826)
-            VectorMon = Vector3.new(5560, 42, -6826)
-            VectorQuest = Vector3.new(5669, 28, -6482)
-            CFrameQuest = CFrame.new(5669, 28, -6482)
-        elseif a == 29 then
-            Name = "Sea Soldier"
-            QuestName = "ForgottenQuest"
-            LevelQuest = 1
-            NameMon = "Sea Soldier"
-            CFrameMon = CFrame.new(-3022, 16, -9722)
-            VectorMon = Vector3.new(-3022, 16, -9722)
-            CFrameQuest = CFrame.new(-3054, 237, -10148)
-            VectorQuest = Vector3.new(-3054, 237, -10148)
-        elseif a == 30 then
-            Name = "Water Fighter"
-            QuestName = "ForgottenQuest"
-            LevelQuest = 2
-            NameMon = "Water Fighter"
-            CFrameMon = CFrame.new(-3385, 239, -10542)
-            VectorMon = Vector3.new(-3385, 239, -10542)
-            CFrameQuest = CFrame.new(-3054, 237, -10148)
-            VectorQuest = Vector3.new(-3054, 237, -10148)
-        end
-    end
-    if Sea3 then
-        if a == 1 then
-            Name = "Pirate Millionaire"
-            QuestName = "PiratePortQuest"
-            LevelQuest = 1
-            NameMon = "Pirate"
-            CFrameMon = CFrame.new(-373, 75, 5550)
-            VectorMon = Vector3.new(-373, 75, 5550)
-            CFrameQuest = CFrame.new(-288, 44, 5576)
-            VectorQuest = Vector3.new(-288, 44, 5576)
-        elseif a == 2 then
-            Name = "Pistol Billionaire"
-            QuestName = "PiratePortQuest"
-            LevelQuest = 2
-            NameMon = "Pistol"
-            CFrameMon = CFrame.new(-469, 74, 5904)
-            VectorMon = Vector3.new(-469, 74, 5904)
-            CFrameQuest = CFrame.new(-288, 44, 5576)
-            VectorQuest = Vector3.new(-288, 44, 5576)
-        elseif a == 4 then
-            Name = "Dragon Crew Warrior"
-            QuestName = "AmazonQuest"
-            LevelQuest = 1
-            NameMon = "Warrior"
-            CFrameMon = CFrame.new(6339, 52, -1213)
-            VectorMon = Vector3.new(6338, 52, -1213)
-            CFrameQuest = CFrame.new(5835, 52, -1105)
-            VectorQuest = Vector3.new(5835, 52, -1105)
-        elseif a == 5 then
-            Name = "Dragon Crew Archer"
-            QuestName = "AmazonQuest"
-            LevelQuest = 2
-            NameMon = "Archer"
-            CFrameMon = CFrame.new(6594, 383, 139)
-            VectorMon = Vector3.new(6594, 383, 139)
-            CFrameQuest = CFrame.new(5835, 52, -1105)
-            VectorQuest = Vector3.new(5835, 52, -1105)
-        elseif a == 6 then
-            Name = "Female Islander"
-            QuestName = "AmazonQuest2"
-            LevelQuest = 1
-            NameMon = "Female"
-            CFrameMon = CFrame.new(5308, 819, 1047)
-            VectorMon = Vector3.new(5308, 819, 1047)
-            CFrameQuest = CFrame.new(5443, 602, 751)
-            VectorQuest = Vector3.new(5443, 602, 751)
-        elseif a == 7 then
-            Name = "Giant Islander"
-            QuestName = "AmazonQuest2"
-            LevelQuest = 2
-            NameMon = "Giant Islanders"
-            CFrameMon = CFrame.new(4951, 602, -68)
-            VectorMon = Vector3.new(4951, 602, -68)
-            CFrameQuest = CFrame.new(5443, 602, 751)
-            VectorQuest = Vector3.new(5443, 602, 751)
-        elseif a == 9 then
-            Name = "Marine Commodore"
-            QuestName = "MarineTreeIsland"
-            LevelQuest = 1
-            NameMon = "Marine Commodore"
-            CFrameMon = CFrame.new(2447, 73, -7470)
-            VectorMon = Vector3.new(2447, 73, -7470)
-            CFrameQuest = CFrame.new(2180, 29, -6737)
-            VectorQuest = Vector3.new(2180, 29, -6737)
-        elseif a == 10 then
-            Name = "Marine Rear Admiral"
-            QuestName = "MarineTreeIsland"
-            LevelQuest = 2
-            NameMon = "Marine Rear Admiral"
-            CFrameMon = CFrame.new(3671, 161, -6932)
-            VectorMon = Vector3.new(3671, 161, -6932)
-            CFrameQuest = CFrame.new(2180, 29, -6737)
-            VectorQuest = Vector3.new(2180, 29, -6737)
-        elseif a == 12 then
-            Name = "Fishman Raider"
-            QuestName = "DeepForestIsland3"
-            LevelQuest = 1
-            NameMon = "Fishman Raider"
-            CFrameMon = CFrame.new(-10560, 332, -8466)
-            VectorMon = Vector3.new(-10560, 332, -8466)
-            CFrameQuest = CFrame.new(-10584, 332, -8758)
-            VectorQuest = Vector3.new(-10584, 332, -8758)
-        elseif a == 13 then
-            Name = "Fishman Captain"
-            QuestName = "DeepForestIsland3"
-            LevelQuest = 2
-            NameMon = "Fishman Captain"
-            CFrameMon = CFrame.new(-10993, 332, -8940)
-            VectorMon = Vector3.new(-10993, 332, -8940)
-            CFrameQuest = CFrame.new(-10584, 332, -8758)
-            VectorQuest = Vector3.new(-10584, 332, -8758)
-        elseif a == 14 then
-            Name = "Forest Pirate"
-            QuestName = "DeepForestIsland"
-            LevelQuest = 1
-            NameMon = "Forest Pirate"
-            CFrameMon = CFrame.new(-13479, 333, -7905)
-            VectorMon = Vector3.new(-13479, 333, -7905)
-            CFrameQuest = CFrame.new(-13232, 333, -7627)
-            VectorQuest = Vector3.new(-13232, 333, -7627)
-        elseif a == 15 then
-            Name = "Mythological Pirate"
-            QuestName = "DeepForestIsland"
-            LevelQuest = 2
-            NameMon = "Mythological Pirate"
-            CFrameMon = CFrame.new(-13545, 470, -6917)
-            VectorMon = Vector3.new(-13545, 470, -6917)
-            CFrameQuest = CFrame.new(-13232, 333, -7627)
-            VectorQuest = Vector3.new(-13232, 333, -7627)
-        elseif a == 16 then
-            Name = "Jungle Pirate"
-            QuestName = "DeepForestIsland2"
-            LevelQuest = 1
-            NameMon = "Jungle Pirate"
-            CFrameMon = CFrame.new(-12107, 332, -10549)
-            VectorMon = Vector3.new(-12106, 332, -10549)
-            CFrameQuest = CFrame.new(-12684, 391, -9902)
-            VectorQuest = Vector3.new(-12684, 391, -9902)
-        elseif a == 17 then
-            Name = "Musketeer Pirate"
-            QuestName = "DeepForestIsland2"
-            LevelQuest = 2
-            NameMon = "Musketeer Pirate"
-            CFrameMon = CFrame.new(-13286, 392, -9769)
-            VectorMon = Vector3.new(-13286, 392, -9768)
-            CFrameQuest = CFrame.new(-12684, 391, -9902)
-            VectorQuest = Vector3.new(-12684, 391, -9902)
-        elseif a == 19 then
-            Name = "Reborn Skeleton"
-            QuestName = "HauntedQuest1"
-            LevelQuest = 1
-            NameMon = "Reborn Skeleton"
-            CFrameMon = CFrame.new(-8760, 142, 6039)
-            VectorMon = Vector3.new(-8760, 142, 6039)
-            CFrameQuest = CFrame.new(-9482, 142, 5567)
-            VectorQuest = Vector3.new(-9482, 142, 5567)
-        elseif a == 20 then
-            Name = "Living Zombie"
-            QuestName = "HauntedQuest1"
-            LevelQuest = 2
-            NameMon = "Living Zombie"
-            CFrameMon = CFrame.new(-10144, 140, 5932)
-            VectorMon = Vector3.new(-10144, 140, 5932)
-            CFrameQuest = CFrame.new(-9482, 142, 5567)
-            VectorQuest = Vector3.new(-9482, 142, 5567)
-        elseif a == 21 then
-            Name = "Demonic Soul"
-            QuestName = "HauntedQuest2"
-            LevelQuest = 1
-            NameMon = "Demonic Soul"
-            CFrameMon = CFrame.new(-9507, 172, 6158)
-            VectorMon = Vector3.new(-9506, 172, 6158)
-            CFrameQuest = CFrame.new(-9513, 172, 6079)
-            VectorQuest = Vector3.new(-9513, 172, 6079)
-        elseif a == 22 then
-            Name = "Posessed Mummy"
-            QuestName = "HauntedQuest2"
-            LevelQuest = 2
-            NameMon = "Posessed Mummy"
-            CFrameMon = CFrame.new(-9577, 6, 6223)
-            VectorMon = Vector3.new(-9577, 6, 6223)
-            CFrameQuest = CFrame.new(-9513, 172, 6079)
-            VectorQuest = Vector3.new(-9513, 172, 6079)
-        elseif a == 24 then
-            Name = "Peanut Scout"
-            QuestName = "NutsIslandQuest"
-            LevelQuest = 1
-            NameMon = "Peanut Scout"
-            CFrameMon = CFrame.new(-2124, 123, -10435)
-            VectorMon = Vector3.new(-2124, 123, -10435)
-            CFrameQuest = CFrame.new(-2104, 38, -10192)
-            VectorQuest = Vector3.new(-2104, 38, -10192)
-        elseif a == 25 then
-            Name = "Peanut President"
-            QuestName = "NutsIslandQuest"
-            LevelQuest = 2
-            NameMon = "Peanut President"
-            CFrameMon = CFrame.new(-2124, 123, -10435)
-            VectorMon = Vector3.new(-2124, 123, -10435)
-            CFrameQuest = CFrame.new(-2104, 38, -10192)
-            VectorQuest = Vector3.new(-2104, 38, -10192)
-        elseif a == 26 then
-            Name = "Ice Cream Chef"
-            QuestName = "IceCreamIslandQuest"
-            LevelQuest = 1
-            NameMon = "Ice Cream Chef"
-            CFrameMon = CFrame.new(-641, 127, -11062)
-            VectorMon = Vector3.new(-641, 127, -11062)
-            CFrameQuest = CFrame.new(-822, 66, -10965)
-            VectorQuest = Vector3.new(-822, 66, -10965)
-        elseif a == 27 then
-            Name = "Ice Cream Commander"
-            QuestName = "IceCreamIslandQuest"
-            LevelQuest = 2
-            NameMon = "Ice Cream Commander"
-            CFrameMon = CFrame.new(-641, 127, -11062)
-            VectorMon = Vector3.new(-641, 127, -11062)
-            CFrameQuest = CFrame.new(-822, 66, -10965)
-            VectorQuest = Vector3.new(-822, 66, -10965)
-        elseif a == 29 then
-            Name = "Cookie Crafter"
-            QuestName = "CakeQuest1"
-            LevelQuest = 1
-            NameMon = "Cookie Crafter"
-            CFrameMon = CFrame.new(-2365, 38, -12099)
-            VectorMon = Vector3.new(-2365, 38, -12099)
-            CFrameQuest = CFrame.new(-2020, 38, -12025)
-            VectorQuest = Vector3.new(-2020, 38, -12025)
-        elseif a == 30 then
-            Name = "Cake Guard"
-            QuestName = "CakeQuest1"
-            LevelQuest = 2
-            NameMon = "Cake Guard"
-            CFrameMon = CFrame.new(-1651, 38, -12308)
-            VectorMon = Vector3.new(-1651, 38, -12308)
-            CFrameQuest = CFrame.new(-2020, 38, -12025)
-            VectorQuest = Vector3.new(-2020, 38, -12025)
-        elseif a == 31 then
-            Name = "Baking Staff"
-            QuestName = "CakeQuest2"
-            LevelQuest = 1
-            NameMon = "Baking Staff"
-            CFrameMon = CFrame.new(-1870, 38, -12938)
-            VectorMon = Vector3.new(-1870, 38, -12938)
-            CFrameQuest = CFrame.new(-1926, 38, -12850)
-            VectorQuest = Vector3.new(-1926, 38, -12850)
-        elseif a == 32 then
-            Name = "Head Baker"
-            QuestName = "CakeQuest2"
-            LevelQuest = 2
-            NameMon = "Head Baker"
-            CFrameMon = CFrame.new(-1926, 88, -12850)
-            VectorMon = CFrame.new(-1870, 38, -12938)
-            CFrameQuest = CFrame.new(-1926, 38, -12850)
-            VectorQuest = Vector3.new(-1926, 38, -12850)
-        elseif a == 34 then
-            Name = "Cocoa Warrior"
-            QuestName = "ChocQuest1"
-            LevelQuest = 1
-            NameMon = "Cocoa Warrior"
-            CFrameMon = CFrame.new(231, 23, -12194)
-            VectorMon = CFrame.new(231, 23, -12194)
-            CFrameQuest = CFrame.new(231, 23, -12194)
-            VectorQuest = Vector3.new(231, 23, -12194)
-        elseif a == 35 then
-            Name = "Chocolate Bar Battler"
-            QuestName = "ChocQuest1"
-            LevelQuest = 2
-            NameMon = "Chocolate Bar Battler"
-            CFrameMon = CFrame.new(231, 23, -12194)
-            VectorMon = CFrame.new(231, 23, -12194)
-            CFrameQuest = CFrame.new(231, 23, -12194)
-            VectorQuest = Vector3.new(231, 23, -12194)
-        elseif a == 36 then
-            Name = "Sweet Thief"
-            QuestName = "ChocQuest2"
-            LevelQuest = 1
-            NameMon = "Sweet Thief"
-            CFrameMon = CFrame.new(71, 77, -12632)
-            VectorMon = CFrame.new(71, 77, -12632)
-            CFrameQuest = CFrame.new(151, 23, -12774)
-            VectorQuest = Vector3.new(151, 23, -12774)
-        elseif a == 37 then
-            Name = "Candy Rebel"
-            QuestName = "ChocQuest2"
-            LevelQuest = 2
-            NameMon = "Candy Rebel"
-            CFrameMon = CFrame.new(134, 77, -12882)
-            VectorMon = CFrame.new(134, 77, -12882)
-            CFrameQuest = CFrame.new(151, 23, -12774)
-            VectorQuest = Vector3.new(151, 23, -12774)
-        elseif a == 39 then
-            Name = "Candy Pirate"
-            QuestName = "CandyQuest1"
-            LevelQuest = 1
-            NameMon = "Candy Pirates"
-            CFrameMon = CFrame.new(-1396.145751953125, 111.61504364013672, -14338.55078125)
-            VectorMon = CFrame.new(-1396.145751953125, 111.61504364013672, -14338.55078125)
-            CFrameQuest = CFrame.new(-1147.5802001953125, 14.133035659790039, -14445.3037109375)
-            VectorQuest = Vector3.new(-1147.5802001953125, 14.133035659790039, -14445.3037109375)
-        elseif a == 40 then
-            Name = "Snow Demon"
-            QuestName = "CandyQuest1"
-            LevelQuest = 2
-            NameMon = "Snow Demons"
-            CFrameMon = CFrame.new(-827.6851196289062, 88.83011627197266, -14275.3115234375)
-            VectorMon = CFrame.new(-827.6851196289062, 88.83011627197266, -14275.3115234375)
-            CFrameQuest = CFrame.new(-1147.5802001953125, 14.133035659790039, -14445.3037109375)
-            VectorQuest = Vector3.new(-1147.5802001953125, 14.133035659790039, -14445.3037109375)
-        elseif a == 42 then
-            Name = "Isle Outlaw"
-            QuestName = "TikiQuest1"
-            LevelQuest = 1
-            NameMon = "Isle Outlaw"
-            CFrameMon =
-                CFrame.new(
-                -16299.3252,
-                94.0675659,
-                -172.353226,
-                0.99993372,
-                1.59262612e-08,
-                -0.0115144337,
-                -1.50289505e-08,
-                1,
-                7.80157237e-08,
-                0.0115144337,
-                -7.78375053e-08,
-                0.99993372
-            )
-            VectorMon =
-                CFrame.new(
-                -16299.3252,
-                94.0675659,
-                -172.353226,
-                0.99993372,
-                1.59262612e-08,
-                -0.0115144337,
-                -1.50289505e-08,
-                1,
-                7.80157237e-08,
-                0.0115144337,
-                -7.78375053e-08,
-                0.99993372
-            )
-            CFrameQuest =
-                CFrame.new(
-                -16548.8516,
-                54.0840454,
-                -173.242691,
-                0.213092566,
-                -0,
-                -0.977032006,
-                0,
-                1,
-                -0,
-                0.977032006,
-                0,
-                0.213092566
-            )
-            VectorQuest =
-                Vector3.new(
-                -16548.8516,
-                54.0840454,
-                -173.242691,
-                0.213092566,
-                -0,
-                -0.977032006,
-                0,
-                1,
-                -0,
-                0.977032006,
-                0,
-                0.213092566
-            )
-        elseif a == 43 then
-            Name = "Island Boy"
-            QuestName = "TikiQuest1"
-            LevelQuest = 2
-            NameMon = "Island Boy"
-            CFrameMon =
-                CFrame.new(
-                -16853.3887,
-                192.103561,
-                -152.378189,
-                0.705479085,
-                -8.49727329e-08,
-                0.708730757,
-                5.86954414e-08,
-                1,
-                6.14680928e-08,
-                -0.708730757,
-                -1.76518711e-09,
-                0.705479085
-            )
-            VectorMon =
-                CFrame.new(
-                -16853.3887,
-                192.103561,
-                -152.378189,
-                0.705479085,
-                -8.49727329e-08,
-                0.708730757,
-                5.86954414e-08,
-                1,
-                6.14680928e-08,
-                -0.708730757,
-                -1.76518711e-09,
-                0.705479085
-            )
-            CFrameQuest =
-                CFrame.new(
-                -16548.8516,
-                54.0840454,
-                -173.242691,
-                0.213092566,
-                -0,
-                -0.977032006,
-                0,
-                1,
-                -0,
-                0.977032006,
-                0,
-                0.213092566
-            )
-            VectorQuest =
-                Vector3.new(
-                -16548.8516,
-                54.0840454,
-                -173.242691,
-                0.213092566,
-                -0,
-                -0.977032006,
-                0,
-                1,
-                -0,
-                0.977032006,
-                0,
-                0.213092566
-            )
-        elseif a == 44 then
-            Name = "Sun-kissed Warrior"
-            QuestName = "TikiQuest2"
-            LevelQuest = 1
-            NameMon = "Warrior"
-            CFrameMon =
-                CFrame.new(
-                -16202.3496,
-                75.2711868,
-                1096.79834,
-                -0.996208549,
-                7.38022621e-08,
-                -0.08699698,
-                7.80033815e-08,
-                1,
-                -4.48908821e-08,
-                0.08699698,
-                -5.1506742e-08,
-                -0.996208549
-            )
-            VectorMon =
-                CFrame.new(
-                -16202.3496,
-                75.2711868,
-                1096.79834,
-                -0.996208549,
-                7.38022621e-08,
-                -0.08699698,
-                7.80033815e-08,
-                1,
-                -4.48908821e-08,
-                0.08699698,
-                -5.1506742e-08,
-                -0.996208549
-            )
-            CFrameQuest =
-                CFrame.new(
-                -16780.2383,
-                82.1389999,
-                1033.18713,
-                -0.906431854,
-                1.29724e-08,
-                0.422352165,
-                1.32806277e-09,
-                1,
-                -2.7864429e-08,
-                -0.422352165,
-                -2.46962948e-08,
-                -0.906431854
-            )
-            VectorQuest =
-                Vector3.new(
-                -16780.2383,
-                82.1389999,
-                1033.18713,
-                -0.906431854,
-                1.29724e-08,
-                0.422352165,
-                1.32806277e-09,
-                1,
-                -2.7864429e-08,
-                -0.422352165,
-                -2.46962948e-08,
-                -0.906431854
-            )
-        elseif a == 45 then
-            Name = "Isle Champion"
-            QuestName = "TikiQuest2"
-            LevelQuest = 2
-            NameMon = "Isle Champion"
-            CFrameMon =
-                CFrame.new(
-                -16780.2383,
-                82.1389999,
-                1033.18713,
-                -0.906431854,
-                1.29724e-08,
-                0.422352165,
-                1.32806277e-09,
-                1,
-                -2.7864429e-08,
-                -0.422352165,
-                -2.46962948e-08,
-                -0.906431854
-            )
-            VectorMon =
-                CFrame.new(
-                -16780.2383,
-                82.1389999,
-                1033.18713,
-                -0.906431854,
-                1.29724e-08,
-                0.422352165,
-                1.32806277e-09,
-                1,
-                -2.7864429e-08,
-                -0.422352165,
-                -2.46962948e-08,
-                -0.906431854
-            )
-            CFrameQuest =
-                CFrame.new(
-                -16541.0215,
-                54.770813,
-                1051.46118,
-                0.0410757065,
-                -0,
-                -0.999156058,
-                0,
-                1,
-                -0,
-                0.999156058,
-                0,
-                0.0410757065
-            )
-            VectorQuest =
-                Vector3.new(
-                -16541.0215,
-                54.770813,
-                1051.46118,
-                0.0410757065,
-                -0,
-                -0.999156058,
-                0,
-                1,
-                -0,
-                0.999156058,
-                0,
-                0.0410757065
-            )
-        end
-    end
-end
-
 local plr = game.Players.LocalPlayer
 
 function Tweento(iuu)
@@ -995,6 +21,281 @@ function Tweento(iuu)
         {CFrame = iuu}
     )
     tween:Play()
+end
+
+local LocalPlayerLevelValue = plr.Data.Level.Value
+
+local Q = require(game.ReplicatedStorage.Quests)
+local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
+local function S()
+    local T = LocalPlayerLevelValue
+    local min = 0
+    if T >= 1450 and game.PlaceId == 4442272183 then
+        Mob1 = "Water Fighter"
+        Mob2 = "ForgottenQuest"
+        Mob3 = 2
+    elseif T >= 700 and game.PlaceId == 2753915549 then
+        Mob1 = "Galley Captain"
+        Mob2 = "FountainQuest"
+        Mob3 = 2
+    elseif
+        T >= 2075 and autofullymelee and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) ~= 1 and
+            game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true) == 1
+     then
+        Mob1 = "Posessed Mummy"
+        Mob2 = "HauntedQuest2"
+        Mob3 = 2
+    else
+        for r, v in pairs(Q) do
+            for M, N in pairs(v) do
+                local U = N.LevelReq
+                for O, P in pairs(N.Task) do
+                    if T >= U and U >= min and N.Task[O] > 1 and not table.find(R, tostring(r)) then
+                        min = U
+                        Mob1 = tostring(O)
+                        Mob2 = r
+                        Mob3 = M
+                    end
+                end
+            end
+        end
+    end
+end
+function CFrameQuest()
+    QuestPoses = {}
+    for r, v in pairs(getnilinstances()) do
+        if
+            v:IsA("Model") and v:FindFirstChild("Head") and v.Head:FindFirstChild("QuestBBG") and
+                v.Head.QuestBBG.Title.Text == "QUEST"
+         then
+            QuestPoses[v.Name] = v.Head.CFrame * CFrame.new(0, -2, 2)
+        end
+    end
+    for r, v in pairs(game.Workspace.NPCs:GetDescendants()) do
+        if v.Name == "QuestBBG" and v.Title.Text == "QUEST" then
+            QuestPoses[v.Parent.Parent.Name] = v.Parent.Parent.Head.CFrame * CFrame.new(0, -2, 2)
+        end
+    end
+    DialoguesList = {}
+    for r, v in pairs(require(game.ReplicatedStorage.DialoguesList)) do
+        DialoguesList[v] = r
+    end
+    local V = getscriptclosure(game:GetService("Players").LocalPlayer.PlayerScripts.NPC)
+    local W = {}
+    for k, v in pairs(debug.getprotos(V)) do
+        if #debug.getconstants(v) == 1 then
+            table.insert(W, debug.getconstant(v, 1))
+        end
+    end
+    local X = false
+    local Y = {}
+    for k, v in pairs(debug.getconstants(V)) do
+        if type(v) == "string" then
+            if v == "Players" then
+                X = false
+            end
+            if not X then
+                if v == "Blox Fruit Dealer" then
+                    X = true
+                end
+            else
+            end
+            if X then
+                table.insert(Y, v)
+            end
+        end
+    end
+    local Z = {}
+    QuestPoint = {}
+    for k, v in pairs(Y) do
+        if QuestPoses[v] then
+            Z[W[k]] = Y[k]
+        end
+    end
+    for r, v in next, Z do
+        QuestPoint[r] = QuestPoses[v]
+    end
+    QuestPoint["SkyExp1Quest"] =
+        CFrame.new(
+        -7857.28516,
+        5544.34033,
+        -382.321503,
+        -0.422592998,
+        0,
+        0.906319618,
+        0,
+        1,
+        0,
+        -0.906319618,
+        0,
+        -0.422592998
+    )
+end
+function CheckDoubleQuest()
+    local a = {}
+    for r, v in pairs(Q) do
+        for M, N in pairs(v) do
+            local U = N.LevelReq
+            for O, P in pairs(N.Task) do
+                if O == Mob1 then
+                    for _, a0 in next, v do
+                        if a0.LevelReq <= game.Players.LocalPlayer.Data.Level.Value and a0.Name ~= "Town Raid" then
+                            for a1, a2 in next, a0.Task do
+                                if a2 > 1 then
+                                    table.insert(a, a1)
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return a
+end
+local a3 = require(game.ReplicatedStorage:WaitForChild("GuideModule"))
+function CheckQuestData()
+    for r, v in next, a3.Data do
+        if r == "QuestData" then
+            return true
+        end
+    end
+    return false
+end
+function CheckNameDoubleQuest()
+    local a
+    if CheckQuestData() then
+        for r, v in next, a3.Data.QuestData.Task do
+            a = r
+        end
+    end
+    return a
+end
+function CheckNameDoubleQuest2()
+    local a
+    local a4 = {}
+    if CheckQuestData() then
+        for r, v in next, a3.Data.QuestData.Task do
+            a = r
+            table.insert(a4, r)
+        end
+    end
+    return a4
+end
+function CheckDoubleQuest2()
+    S()
+    local a5 = {}
+    if
+        game.Players.LocalPlayer.Data.Level.Value >= 10 and DbQ and CheckQuestData() and
+            CheckNameDoubleQuest() == Mob1 and
+            #CheckNameDoubleQuest() > 2
+     then
+        for r, v in pairs(Q) do
+            for M, N in pairs(v) do
+                for O, P in pairs(N.Task) do
+                    if tostring(O) == Mob1 then
+                        for a6, a7 in next, v do
+                            for a8, a9 in next, a7.Task do
+                                if a8 ~= Mob1 and a9 > 1 then
+                                    if a7.LevelReq <= game.Players.LocalPlayer.Data.Level.Value then
+                                        a5["Name"] = tostring(a8)
+                                        a5["NameQuest"] = r
+                                        a5["ID"] = a6
+                                    else
+                                        a5["Name"] = Mob1
+                                        a5["NameQuest"] = Mob2
+                                        a5["ID"] = Mob3
+                                    end
+                                    return a5
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    else
+        a5["Name"] = Mob1
+        a5["NameQuest"] = Mob2
+        a5["ID"] = Mob3
+        return a5
+    end
+    a5["Name"] = Mob1
+    a5["NameQuest"] = Mob2
+    a5["ID"] = Mob3
+    return a5
+end
+function MobLevel1OrMobLevel2()
+    local aa = {}
+    for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+        if
+            not table.find(aa, v.Name) and v:IsA("Model") and v.Name ~= "PirateBasic" and
+                not string.find(v.Name, "Brigade") and
+                v:FindFirstChild("Humanoid") and
+                v.Humanoid.Health > 0 and
+                v:FindFirstChild("HumanoidRootPart")
+         then
+            table.insert(aa, v.Name)
+        end
+    end
+    for r, v in pairs(aa) do
+        local ab = v
+        v = tostring(v:gsub(" %pLv. %d+%p", ""))
+        if tostring(v) == CheckNameDoubleQuest() then
+            return tostring(ab)
+        end
+    end
+    return false
+end
+local ad = game.ReplicatedStorage.Remotes["CommF_"]
+CFrameQuest()
+function GetQuest()
+    if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+        return
+    end
+    if not QuestPoint[tostring(CheckDoubleQuest2().NameQuest)] then
+        CFrameQuest()
+        return
+    end
+    if
+        (QuestPoint[CheckDoubleQuest2().NameQuest].Position -
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8
+     then
+        ad:InvokeServer("StartQuest", tostring(CheckDoubleQuest2().NameQuest), CheckDoubleQuest2().ID)
+    else
+        QuestCFrame = QuestPoint[CheckDoubleQuest2().NameQuest]
+        Tweento(QuestCFrame)
+    end
+end
+
+function CheckEnemies(muahahahah)
+    if game.Workspace.Enemies:FindFirstChild(muahahahah) then
+        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+            if v.Name == muahahahah and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                return v
+            end
+        end
+    end
+end
+
+function KillMob(Trget)
+    dumatestthoi = CheckEnemies(Trget)
+    if dumatestthoi then
+        if dumatestthoi.Humanoid.Health > 0 and dumatestthoi.Parent and dumatestthoi:FindFirstChild("HumanoidRootPart") then
+            repeat task.wait()
+                EnableBuso()
+                EquipWeapon()
+                Stp = dumatestthoi.HumanoidRootPart.CFrame
+                dumatestthoi.HumanoidRootPart.CFrame = Stp
+                plr.Character.Humanoid.Sit = false
+                dumatestthoi.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                Tween(dumatestthoi.HumanoidRootPart.CFrame * PosFarm)
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                BringMob(Trget)
+            until dumatestthoi.Humanoid.Health <= 0 or not dumatestthoi.Parent
+        end
+    end
 end
 
 spawn(function()
@@ -1055,43 +356,106 @@ spawn(function()
     end
 end)
 
+function GetMobSpawn(a)
+    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
+        if v.Name == a then
+            return v
+        end
+    end
+end
+function GetMobSpawnList(a)
+    k = {}
+    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
+        if v.Name == a then
+            table.insert(k, v)
+        end
+    end
+    return k
+end
+
+function GetMob()
+    local ae = {}
+    for r, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
+        if not table.find(ae, v.Name) then
+            table.insert(ae, v.Name)
+        end
+    end
+    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
+        for r, v in pairs(ae) do
+            local ab = v
+            v = tostring(v:gsub(" %pLv. %d+%p", ""))
+            if v == CheckNameDoubleQuest() then
+                return ab
+            end
+        end
+    else
+        return CheckNameDoubleQuest()
+    end
+end
+
 spawn(function()
     while wait() do
-        pcall(function()
-            if plr.PlayerGui.Main.Quest.Visible == false or not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Name) then
-                wait(0.5)
-                Tweento(CFrameQuest)
-                if (plr.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 10 then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", QuestName, LevelQuest)
-                end
-            elseif plr.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Name) then
-                if game.Workspace.Enemies:FindFirstChild(Name) then
-                    for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                        if v.Name == Name then
-                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                                repeat task.wait()
-                                    Stp = v.HumanoidRootPart.CFrame
-                                    v.HumanoidRootPart.CFrame = Stp
-                                    plr.Character.Humanoid.Sit = false
-                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                    Tweento(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                until v.Humanoid.Health <= 0 or not v.Parent
-                            end
-                        end
-                    end
+        if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+            if not MobLevel1OrMobLevel2() then
+                Check155 = tick()
+                Check156 = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                p2 = GetMobSpawnList(GetMob())
+                if
+                    tick() - Check155 >= 3 * 60 and
+                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
+                            Check156.Position).Magnitude <= 1500
+                 then
+                    print("Nah")
                 else
-                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if v.Name == Name then
-                            repeat wait()
-                                Tweento(v.CFrame * CFrame.new(2, 20, 2))
-                            until game.Workspace.Enemies:FindFirstChild(Name)
-                        end
+                    for r, v in pairs(p2) do
+                        pcall(
+                            function()
+                                if not MobLevel1OrMobLevel2() and h["Farm"] then
+                                    if
+                                        not game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild(
+                                            "Quest"
+                                        ).Visible
+                                     then
+                                        repeat
+                                            wait()
+                                        until game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild(
+                                            "Quest"
+                                        ).Visible
+                                    end
+                                    Tweento(v.CFrame * CFrame.new(0, 10, 8))
+                                    NoClip = true
+                                    if
+                                        (game.Players.LocalPlayer.Character.HumanoidRootPart.Position -
+                                            v.Position).Magnitude < 30 and
+                                            not v:FindFirstChild("mmb")
+                                     then
+                                    end
+                                end
+                            end
+                        )
+                    end
+                end
+            else
+                for r, v in pairs(game.workspace.Enemies:GetChildren()) do
+                    if
+                        v.Name == MobLevel1OrMobLevel2() and
+                            v:FindFirstChild("HumanoidRootPart") and
+                            v:FindFirstChild("Humanoid") and
+                            v.Humanoid.Health > 0
+                     then
+                        repeat
+                            KillMob(v)
+                        until not h["Farm"] or h["MethodFarm"] ~= "Level" or not v or
+                            not v:FindFirstChild("Humanoid") or
+                            not v:FindFirstChild("HumanoidRootPart") or
+                            v.Humanoid.Health <= 0 or
+                            not game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible
                     end
                 end
             end
-        end)
+        else
+            GetQuest()
+        end
     end
 end)
 
