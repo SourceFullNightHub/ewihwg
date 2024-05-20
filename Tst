@@ -490,23 +490,6 @@ H:CreateToggle({
 
 NoClip = true
 
-spawn(function()
-    while wait() do
-        if LevelFarm then
-            if tonumber(LevelFarm - 1) ~= 0 then
-                CheckOldQuest(tonumber(LevelFarm - 1))
-            end
-        end
-    end
-end)
-
-function GetMobSpawn(a)
-    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
-        if v.Name == a then
-            return v
-        end
-    end
-end
 local J = {}
 Mob = ""
 Mob1 = ""
@@ -517,6 +500,13 @@ K.Name = "MobSpawns"
 repeat
     wait()
 until game.Workspace:FindFirstChild("MobSpawns")
+function GetMobSpawn(a)
+    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
+        if v.Name == a then
+            return v
+        end
+    end
+end
 function GetMobSpawnList(a)
     k = {}
     for r, v in next, game.Workspace.MobSpawns:GetChildren() do
