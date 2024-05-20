@@ -5069,7 +5069,7 @@ spawn(function()
 								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
 								_G.Farm_Boss = true
 							elseif SelectMonster ~= nil then
-								
+								CheckLevel()
 								repeat wait()
 									TelePBoss(CFrameQ)
 									TP(CFrameQ)
@@ -5079,6 +5079,7 @@ spawn(function()
 								SelectMonster = nil
 								_G.Farm_Mon = nil
 							else
+								CheckLevel()
 								StatrMagnet = nil
 								repeat wait()
 									TelePBoss(CFrameQ)
