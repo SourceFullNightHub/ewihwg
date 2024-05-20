@@ -141,7 +141,7 @@ spawn(function()
     while wait() do
         pcall(function()
             CheckLevel2()
-            if plr.PlayerGui.Main.Quest.Visible == true or not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, namemon) then
+            if plr.PlayerGui.Main.Quest.Visible == false or not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, namemon) then
                 Tweento(npcpos)
                 if (plr.Character.HumanoidRootPart.Position - npcpos.Position).Magnitude <= 10 then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", namequest, questlv)
@@ -175,4 +175,164 @@ spawn(function()
             end
         end)
     end
+end)
+
+local CurveFrame = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework")))[2]
+local RunS = game:GetService("RunService")
+local Loop = RunS.RenderStepped
+function CurveFuckWeapon()
+    local p13 = CurveFrame.activeController
+    if not p13 then
+        return nil
+    end
+    
+    local wea = p13.blades[1]
+    if not wea then
+        return nil
+    end
+    
+    while wea.Parent ~= game.Players.LocalPlayer.Character do
+        wea = wea.Parent
+    end
+    
+    return wea
+end
+
+function getHits(Size)
+    local Hits = {}
+    
+    local function processHumanoid(Human)
+        if Human and Human.RootPart and Human.Health > 0 and game.Players.LocalPlayer:DistanceFromCharacter(Human.RootPart.Position) < Size + 5 then
+            table.insert(Hits, Human.RootPart)
+        end
+    end
+
+    for _, v in pairs(workspace.Enemies:GetChildren()) do
+        processHumanoid(v:FindFirstChildOfClass("Humanoid"))
+    end
+
+    for _, v in pairs(workspace.Characters:GetChildren()) do
+        if v ~= game.Players.LocalPlayer.Character then
+            processHumanoid(v:FindFirstChildOfClass("Humanoid"))
+        end
+    end
+    return Hits
+end
+function Boost()
+    task.spawn(function()
+        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(CurveFuckWeapon()))
+    end)
+end
+function Unboost()
+    task.spawn(function()
+        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("unequipWeapon", tostring(CurveFuckWeapon()))
+    end)
+end
+local cdnormal = 0
+local Animation = Instance.new("Animation")
+local CooldownFastAttack = 0
+FastAttack = function()
+    local ac = CurveFrame.activeController
+    if ac and ac.equipped then
+        task.spawn(function()
+            if tick() - cdnormal > 0.5 then
+                ac:attack()
+                cdnormal = tick()
+            else
+                Animation.AnimationId = ac.anims.basic[2]
+                ac.humanoid:LoadAnimation(Animation):Play(1, 1)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", getHits(120), 2, "")
+            end
+        end)
+    end
+end
+bs = tick()
+task.spawn(function()
+    while task.wait(.2) do
+        if NoClip then
+            FastI = true
+            if bs - tick() > 0.75 then
+                task.wait()
+                bs = tick()
+            end
+            spawn(function()
+                for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if v.Humanoid.Health > 0 then
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                            FastAttack()
+                            task.wait()
+                            Boost()
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+k = tick()
+task.spawn(function()
+    if FastI then
+        while task.wait(.2) do
+            if k - tick() > 0.75 then
+                task.wait()
+                k = tick()
+            end
+            pcall(function()
+                for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if v.Humanoid.Health > 0 then
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                            task.wait(.000025)
+                            Unboost()
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+task.spawn(function()
+    while task.wait() do
+        if FastI then
+            pcall(function()
+                CurveFrame.activeController.timeToNextAttack = -1
+                CurveFrame.activeController.focusStart = 0
+                CurveFrame.activeController.hitboxMagnitude = 60
+                CurveFrame.activeController.humanoid.AutoRotate = true
+                CurveFrame.activeController.increment = 1 + 1 / 1
+            end)
+        end
+    end
+end)
+
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if NoClip then
+            if typeof(y) == "table" then
+                pcall(function()
+                    CameraShaker:Stop()
+                    y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+                    y.activeController.timeToNextAttack = -1
+                    y.activeController.hitboxMagnitude = 60
+                    y.activeController.active = false
+                    y.activeController.timeToNextBlock = 0
+                    y.activeController.focusStart = 1655503339.0980349
+                    y.activeController.increment = 1
+                    y.activeController.blocking = false
+                    y.activeController.attacking = false
+                    y.activeController.humanoid.AutoRotate = true
+                end)
+            end
+        end
+    end)
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if NoClip == true then
+            game.Players.LocalPlayer.Character.Stun.Value = 0
+            game.Players.LocalPlayer.Character.Busy.Value = false        
+        end
+    end)
 end)
