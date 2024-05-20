@@ -79,7 +79,7 @@ function Tweento(iuu)
         {CFrame = iuu}
     )
     if plr.Data.Level.Value >= 10 then
-        local NearestPotal = CheckNearestTeleporter(Pos)
+        local NearestPotal = CheckNearestTeleporter(iuu)
         if NearestPotal then
             tween:Cancel()
             RETeleport(NearestPotal)
