@@ -79,7 +79,7 @@ function Tweento(iuu)
         {CFrame = iuu}
     )
     if plr.Data.Level.Value >= 10 then
-        local NearestPotal = CheckNearestTeleporter(Pos)
+        local NearestPotal = CheckNearestTeleporter(iuu)
         if NearestPotal then
             tween:Cancel()
             RETeleport(NearestPotal)
@@ -89,7 +89,89 @@ function Tweento(iuu)
 end
 
 local LocalPlayerLevelValue = plr.Data.Level.Value
-
+local ai = {
+    ["Bandit"] = true,
+    ["Monkey"] = true,
+    ["Gorilla"] = true,
+    ["Pirate"] = true,
+    ["Desert Bandit"] = true,
+    ["Desert Officer"] = true,
+    ["Snow Bandit"] = true,
+    ["Snowman"] = true,
+    ["Chief Petty Officer"] = false,
+    ["Sky Bandit"] = true,
+    ["Dark Master"] = true,
+    ["Prisoner"] = false,
+    ["Dangerous Prisoner"] = false,
+    ["Toga Warrior"] = true,
+    ["Military Soldier"] = true,
+    ["Military Spy"] = true,
+    ["Fishman Warrior"] = true,
+    ["Fishman Commando"] = true,
+    ["God's Guard"] = true,
+    ["Shanda"] = true,
+    ["Royal Squad"] = true,
+    ["Royal Soldier"] = true,
+    ["Galley Pirate"] = true,
+    ["Galley Captain"] = true,
+    ["Raider"] = false,
+    ["Mercenary"] = false,
+    ["Swan Pirate"] = true,
+    ["Factory Staff"] = false,
+    ["Marine Lieutenant"] = true,
+    ["Marine Captain"] = true,
+    ["Zombie"] = true,
+    ["Vampire"] = true,
+    ["Snow Trooper"] = false,
+    ["Winter Warrior"] = true,
+    ["Lab Subordinate"] = true,
+    ["Horned Warrior"] = true,
+    ["Magma Ninja"] = false,
+    ["Lava Pirate"] = true,
+    ["Ship Deckhand"] = false,
+    ["Ship Engineer"] = false,
+    ["Ship Steward"] = true,
+    ["Ship Officer"] = false,
+    ["Arctic Warrior"] = true,
+    ["Snow Lurker"] = true,
+    ["Sea Soldier"] = false,
+    ["Water Fighter"] = true,
+    ["Pirate Millionaire"] = false,
+    ["Pistol Billionaire"] = false,
+    ["Dragon Crew Warrior"] = false,
+    ["Dragon Crew Archer"] = false,
+    ["Female Islander"] = false,
+    ["Giant Islander"] = false,
+    ["Marine Commodore"] = false,
+    ["Marine Rear Admiral"] = true,
+    ["Fishman Raider"] = true,
+    ["Fishman Captain"] = false,
+    ["Forest Pirate"] = true,
+    ["Mythological Pirate"] = false,
+    ["Jungle Pirate"] = false,
+    ["Musketeer Pirate"] = true,
+    ["Reborn Skeleton"] = true,
+    ["Living Zombie"] = true,
+    ["Demonic Soul"] = true,
+    ["Posessed Mummy"] = true,
+    ["Peanut Scout"] = true,
+    ["Peanut President"] = true,
+    ["Ice Cream Chef"] = true,
+    ["Ice Cream Commander"] = true,
+    ["Cookie Crafter"] = true,
+    ["Cake Guard"] = true,
+    ["Baking Staff"] = true,
+    ["Head Baker"] = true,
+    ["Cocoa Warrior"] = true,
+    ["Chocolate Bar Battler"] = true,
+    ["Sweet Thief"] = true,
+    ["Candy Rebel"] = true,
+    ["Snow Demon"] = true,
+    ["Candy Pirate"] = true,
+    ["Isle Outlaw"] = true,
+    ["Island Boy"] = true,
+    ["Isle Champion"] = true
+}
 local Q = require(game.ReplicatedStorage.Quests)
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
 local function S()
@@ -348,16 +430,13 @@ function KillMob(Trget)
     if dumatestthoi then
         if dumatestthoi.Humanoid.Health > 0 and dumatestthoi.Parent and dumatestthoi:FindFirstChild("HumanoidRootPart") then
             repeat task.wait()
-                EnableBuso()
-                EquipWeapon()
                 Stp = dumatestthoi.HumanoidRootPart.CFrame
                 dumatestthoi.HumanoidRootPart.CFrame = Stp
                 plr.Character.Humanoid.Sit = false
                 dumatestthoi.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                Tween(dumatestthoi.HumanoidRootPart.CFrame * PosFarm)
+                Tweento(dumatestthoi.HumanoidRootPart.CFrame * PosFarm)
                 game:GetService'VirtualUser':CaptureController()
                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                BringMob(Trget)
             until dumatestthoi.Humanoid.Health <= 0 or not dumatestthoi.Parent
         end
     end
@@ -428,6 +507,16 @@ function GetMobSpawn(a)
         end
     end
 end
+local J = {}
+Mob = ""
+Mob1 = ""
+plr = game.Players.LocalPlayer
+local K = Instance.new("Folder")
+K.Parent = game.Workspace
+K.Name = "MobSpawns"
+repeat
+    wait()
+until game.Workspace:FindFirstChild("MobSpawns")
 function GetMobSpawnList(a)
     k = {}
     for r, v in next, game.Workspace.MobSpawns:GetChildren() do
@@ -604,11 +693,13 @@ task.spawn(function()
             end
             spawn(function()
                 for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if v.Humanoid.Health > 0 then
-                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
-                            FastAttack()
-                            task.wait()
-                            Boost()
+                    if v:FindFirstChild("Humanoid") then
+                        if v.Humanoid.Health > 0 then
+                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                                FastAttack()
+                                task.wait()
+                                Boost()
+                            end
                         end
                     end
                 end
