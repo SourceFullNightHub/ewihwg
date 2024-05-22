@@ -283,6 +283,104 @@ function KillMob(b, a)
     end
 end
 
+function MobLevel1OrMobLevel2()
+    local aa = {}
+    for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+        if
+            not table.find(aa, v.Name) and v:IsA("Model") and v.Name ~= "PirateBasic" and
+                not string.find(v.Name, "Brigade") and
+                v:FindFirstChild("Humanoid") and
+                v.Humanoid.Health > 0 and
+                v:FindFirstChild("HumanoidRootPart")
+         then
+            table.insert(aa, v.Name)
+        end
+    end
+    for r, v in pairs(aa) do
+        local ab = v
+        v = tostring(v:gsub(" %pLv. %d+%p", ""))
+        if tostring(v) == CheckNameDoubleQuest() then
+            return tostring(ab)
+        end
+    end
+    return false
+end
+
+local J = {}
+Mob = ""
+Mob1 = ""
+plr = game.Players.LocalPlayer
+local K = Instance.new("Folder")
+K.Parent = game.Workspace
+K.Name = "MobSpawns"
+repeat
+    wait()
+until game.Workspace:FindFirstChild("MobSpawns")
+function FunctionFoldermob()
+    print("FunctionFoldermob")
+    repeat
+        wait()
+        if game.Workspace:FindFirstChild("MobSpawns") then
+            game.Workspace.MobSpawns:Destroy()
+        end
+    until not game.Workspace:FindFirstChild("MobSpawns")
+    local K = Instance.new("Folder")
+    K.Parent = game.Workspace
+    K.Name = "MobSpawns"
+    wait()
+    repeat
+        wait()
+    until game.Workspace:FindFirstChild("MobSpawns")
+    for r, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+        local a = v:Clone()
+        a.Parent = game.Workspace.MobSpawns
+    end
+    local L = {}
+    for r, v in next, require(game:GetService("ReplicatedStorage").Quests) do
+        for M, N in next, v do
+            for O, P in next, N.Task do
+                if P > 1 then
+                    table.insert(L, O)
+                end
+            end
+        end
+    end
+    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
+        for r, v in pairs(getnilinstances()) do
+            if table.find(L, tostring(v.Name:gsub(" %pLv. %d+%p", ""))) then
+                local a = v:Clone()
+                a.Parent = game.Workspace.MobSpawns
+            end
+        end
+    else
+        for r, v in pairs(getnilinstances()) do
+            if table.find(L, v.Name) then
+                local a = v:Clone()
+                if a.Parent then
+                    a.Parent = game.Workspace.MobSpawns
+                end
+            end
+        end
+    end
+end
+FunctionFoldermob()
+function GetMobSpawn(a)
+    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
+        if v.Name == a then
+            return v
+        end
+    end
+end
+function GetMobSpawnList(a)
+    k = {}
+    for r, v in next, game.Workspace.MobSpawns:GetChildren() do
+        if v.Name == a then
+            table.insert(k, v)
+        end
+    end
+    return k
+end
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local ScreenGui = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
@@ -387,16 +485,20 @@ end)
 spawn(function()
     while wait() do
         if plr.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckDoubleQuest().Mob) then
-            if game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) then
+            if not MobLevel1OrMobLevel2() then
                 KillMob(CheckDoubleQuest().Mob, nclip)
-                Status.Text = "Status : Kill Mob ".. CheckDoubleQuest().Mob .. ""
-            else
-                for i,v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                    if v.Name == CheckDoubleQuest().Mob then
-                        repeat wait()
-                            Tween(v.CFrame * CFrame.new(2, 20, 2))
-                            Status.Text = "Status : Waitting Mob"
-                        until game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) or not nclip
+                p2 = GetMobSpawnList(GetMob())
+                for i , v in pairs(p2) do
+                    if not MobLevel1OrMobLevel2() and nclip then
+                        Tweento(v.CFrame * CFrame.new(0, 10, 8))
+                    else
+                        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                            if v.Name == MobLevel1OrMobLevel2() and v.Parent then
+                                repeat wait()
+                                    KillMob(v, nclip)
+                                until v.Humanoid.Health <= 0 or not v.Parent
+                            end
+                        end
                     end
                 end
             end
