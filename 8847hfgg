@@ -284,6 +284,7 @@ function KillMob(b, a)
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local ScreenGui = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local UIStroke = Instance.new("UIStroke")
@@ -291,8 +292,11 @@ local NameHub = Instance.new("TextLabel")
 local Status = Instance.new("TextLabel")
 local Cre = Instance.new("TextLabel")
 
+ScreenGui.Name = "ScreenGui"
+ScreenGui.Parent = game.CoreGui
+
 Main.Name = "Main"
-Main.Parent = game.StarterGui.ScreenGui
+Main.Parent = ScreenGui
 Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Main.BackgroundTransparency = 0.300
 Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -382,26 +386,24 @@ end)
 
 spawn(function()
     while wait() do
-        pcall(function()
-            if plr.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckDoubleQuest().Mob) then
-                if game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) then
-                    KillMob(CheckDoubleQuest().Mob, nclip)
-                    Status.Text = "Status : Kill Mob ".. CheckDoubleQuest().Mob .. ""
-                else
-                    for i,v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if v.Name == CheckDoubleQuest().Mob then
-                            repeat wait()
-                                Tween(v.CFrame * CFrame.new(2, 20, 2))
-                                Status.Text = "Status : Waitting Mob"
-                            until game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) or not nclip
-                        end
+        if plr.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, CheckDoubleQuest().Mob) then
+            if game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) then
+                KillMob(CheckDoubleQuest().Mob, nclip)
+                Status.Text = "Status : Kill Mob ".. CheckDoubleQuest().Mob .. ""
+            else
+                for i,v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                    if v.Name == CheckDoubleQuest().Mob then
+                        repeat wait()
+                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                            Status.Text = "Status : Waitting Mob"
+                        until game.Workspace.Enemies:FindFirstChild(CheckDoubleQuest().Mob) or not nclip
                     end
                 end
-            else
-                GetQ()
-                Status.Text = "Status : Take Quest"
             end
-        end)
+        else
+            GetQ()
+            Status.Text = "Status : Take Quest"
+        end
     end
 end)
 
