@@ -354,6 +354,11 @@ function NightLib:CreateWindow(Options)
     ScrollingTab.Size = UDim2.new(1, 0, 1, 0)
     ScrollingTab.CanvasSize = UDim2.new(0, 0, 0, 0)
     ScrollingTab.ScrollBarThickness = 1
+    game:GetService("RunService").Stepped:Connect(function()
+        pcall(function()
+            ScrollingTab.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
+        end)
+    end)
 
     UIPadding.Parent = ScrollingTab
     UIPadding.PaddingBottom = UDim.new(0, 6)
