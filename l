@@ -1067,7 +1067,7 @@ function NightLib:CreateWindow(Configs)
             DropdownClick.MouseButton1Click:Connect(function()
                 if Dropped == false then
                     Dropped = true
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0.275, 45),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.134, 45),"Out","Quad",0.3,true)
                     TweenService:Create(Ico_2, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
                     wait(0.2)
                     ListFrame.Visible = true
@@ -1080,7 +1080,7 @@ function NightLib:CreateWindow(Configs)
             end)
 
             function DropFunc:Set(OptionName)
-                for i, v in pairs(Options:GetChildren()) do
+                for i, v in pairs(List:GetChildren()) do
                     if v.ClassName == "Button" then
                         if v.Name == OptionName then
                             v.TextColor3 = Color3.fromRGB(255, 255, 255)
