@@ -7,12 +7,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sourc
 
 # Create Window :
 ```lua
-local Windows = Library:CreateWindow({Title = 'Night Hub', Creator = '! Nightx'})
+local Windows = Library:CreateWindow({Title = 'Night Hub', Cre = '! Nightx'})
 ```
 # Create Notify :
 ```lua
-Library:MakeNotify({
-   Name = "Night Hub",
+Library:Notify({
+   Title = "Night Hub",
    Content = "Is This Notify",
    Time = 5,
 }) 
@@ -20,12 +20,12 @@ Library:MakeNotify({
 
 # Create Tab :
 ```lua
-local Tab = Windows:MakeTab({Name = 'Tab', Icon = 'rbxassetid://17184558565'})
+local Tab = Windows:CreateTab({Name = 'Tab', Icon = 'rbxassetid://17184558565'})
 ```
 
 # Create Section :
 ```lua
-local Section = Tab:CreateSection('Section')
+local Section = Tab:CreateSection({Text = 'Section'})
 ```
 
 # Create Buttons :
