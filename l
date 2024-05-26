@@ -1354,89 +1354,94 @@ function NightLib:CreateWindow(Configs)
             Configs.Default = Configs.Default or ""
             Configs.CallBack = Configs.CallBack or function () end
 
-            local TextBox = Instance.new("Frame")
-            local Title_6 = Instance.new("TextLabel")
-            local UIPadding_6 = Instance.new("UIPadding")
-            local Content_5 = Instance.new("TextLabel")
-            local UIPadding_7 = Instance.new("UIPadding")
-            local Put = Instance.new("TextBox")
-            local UIStroke_2 = Instance.new("UIStroke")
-            local UICorner_11 = Instance.new("UICorner")
+            local TextBoxhahaha = Instance.new("Frame")
+            local UICorner_18 = Instance.new("UICorner")
+            local Title_5 = Instance.new("TextLabel")
+            local UIPadding_20 = Instance.new("UIPadding")
+            local Description_4 = Instance.new("TextLabel")
+            local UIPadding_21 = Instance.new("UIPadding")
+            local ehehehhe = Instance.new("TextBox")
+            local UICorner_19 = Instance.new("UICorner")
+            local UIStroke = Instance.new("UIStroke")
             local InputFunc = {}
 
-            TextBox.Name = "TextBox"
-            TextBox.Parent = Channel
-            TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-            TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            TextBox.BorderSizePixel = 0
-            TextBox.Size = UDim2.new(1, 0, 0, 55)
+            TextBoxhahaha.Name = "TextBoxhahaha"
+            TextBoxhahaha.Parent = Channel
+            TextBoxhahaha.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            TextBoxhahaha.BackgroundTransparency = 0.500
+            TextBoxhahaha.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextBoxhahaha.BorderSizePixel = 0
+            TextBoxhahaha.Position = UDim2.new(0.023584906, 0, 0.485565186, 0)
+            TextBoxhahaha.Size = UDim2.new(1, 0, 0, 45)
 
-            Title_6.Name = "Title"
-            Title_6.Parent = TextBox
-            Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Title_6.BackgroundTransparency = 1.000
-            Title_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Title_6.BorderSizePixel = 0
-            Title_6.ClipsDescendants = true
-            Title_6.Position = UDim2.new(0, 0, 0, 6)
-            Title_6.Size = UDim2.new(0.899497509, 0, 0, 16)
-            Title_6.Font = Enum.Font.GothamBold
-            Title_6.Text = Configs.Name
-            Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Title_6.TextSize = 15.000
-            Title_6.TextXAlignment = Enum.TextXAlignment.Left
+            UICorner_18.CornerRadius = UDim.new(0, 4)
+            UICorner_18.Parent = TextBoxhahaha
 
-            UIPadding_6.Parent = Title_6
-            UIPadding_6.PaddingLeft = UDim.new(0, 6)
+            Title_5.Name = "Title"
+            Title_5.Parent = TextBoxhahaha
+            Title_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Title_5.BackgroundTransparency = 1.000
+            Title_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Title_5.BorderSizePixel = 0
+            Title_5.Position = UDim2.new(0, 0, 0, 3)
+            Title_5.Size = UDim2.new(0.621962786, 0, 0, 16)
+            Title_5.Font = Enum.Font.GothamBold
+            Title_5.Text = Configs.Name
+            Title_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Title_5.TextSize = 12.000
+            Title_5.TextXAlignment = Enum.TextXAlignment.Left
 
-            Content_5.Name = "Content"
-            Content_5.Parent = TextBox
-            Content_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Content_5.BackgroundTransparency = 1.000
-            Content_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Content_5.BorderSizePixel = 0
-            Content_5.Position = UDim2.new(0, 0, 0, 28)
-            Content_5.Size = UDim2.new(0.71, 0, 0, 26)
-            Content_5.Font = Enum.Font.GothamBold
-            Content_5.Text = Configs.Description
-            Content_5.TextColor3 = Color3.fromRGB(100, 100, 100)
-            Content_5.TextSize = 12.000
-            Content_5.TextXAlignment = Enum.TextXAlignment.Left
+            UIPadding_20.Parent = Title_5
+            UIPadding_20.PaddingLeft = UDim.new(0, 5)
 
-            UIPadding_7.Parent = Content_5
-            UIPadding_7.PaddingLeft = UDim.new(0, 6)
+            Description_4.Name = "Description"
+            Description_4.Parent = TextBoxhahaha
+            Description_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Description_4.BackgroundTransparency = 1.000
+            Description_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Description_4.BorderSizePixel = 0
+            Description_4.Position = UDim2.new(0, 0, 0.422222227, 0)
+            Description_4.Size = UDim2.new(0, 263, 0, 26)
+            Description_4.Font = Enum.Font.GothamBold
+            Description_4.TextColor3 = Color3.fromRGB(100, 100, 100)
+            Description_4.TextSize = 10.000
+            Description_4.Text = Configs.Description
+            Description_4.TextWrapped = true
+            Description_4.TextXAlignment = Enum.TextXAlignment.Left
+            Description_4.TextYAlignment = Enum.TextYAlignment.Top
 
-            Put.Name = "Put"
-            Put.Parent = TextBox
-            Put.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            Put.BackgroundTransparency = 1.000
-            Put.BorderColor3 = Color3.fromRGB(0, 0, 0)
-            Put.BorderSizePixel = 0
-            Put.Position = UDim2.new(1, -110, 0, 15)
-            Put.Size = UDim2.new(0, 100, 0, 27)
-            Put.Font = Enum.Font.GothamBold
-            Put.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-            Put.Text = Configs.Default
-            Put.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Put.TextSize = 14.000
-            Put.ClipsDescendants = true
-            Configs.CallBack(Put.Text)
+            UIPadding_21.Parent = Description_4
+            UIPadding_21.PaddingLeft = UDim.new(0, 5)
+            UIPadding_21.PaddingTop = UDim.new(0, 4)
 
-            UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-            UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
-            UIStroke_2.Parent = Put
+            ehehehhe.Name = "ehehehhe"
+            ehehehhe.Parent = TextBoxhahaha
+            ehehehhe.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+            ehehehhe.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            ehehehhe.BorderSizePixel = 0
+            ehehehhe.Position = UDim2.new(0.738207519, 0, 0.155555561, 0)
+            ehehehhe.Size = UDim2.new(0, 100, 0, 30)
+            ehehehhe.Font = Enum.Font.GothamBold
+            ehehehhe.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+            ehehehhe.Text = Configs.Default
+            ehehehhe.TextColor3 = Color3.fromRGB(255, 255, 255)
+            ehehehhe.TextSize = 14.000
 
-            UICorner_11.CornerRadius = UDim.new(0, 3)
-            UICorner_11.Parent = Put
+            UICorner_19.CornerRadius = UDim.new(0, 4)
+            UICorner_19.Parent = ehehehhe
+
+            UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            UIStroke.Color = Color3.fromRGB(150, 150, 150)
+            UIStroke.Parent = ehehehhe
 
             function InputFunc:Set(Value)
-				Put.Text = Value
+				ehehehhe.Text = Value
 			end
-			Put.Focused:Connect(function()
+			ehehehhe.Focused:Connect(function()
 			end)
-			Put.FocusLost:Connect(function()
-				Put.Size = UDim2.new(0, 100, 0, 27)
-				Configs.CallBack(Put.Text)
+			ehehehhe.FocusLost:Connect(function()
+				ehehehhe.Size = UDim2.new(0, 100, 0, 27)
+				Configs.CallBack(ehehehhe.Text)
 			end)
 			return InputFunc
         end
