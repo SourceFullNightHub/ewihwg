@@ -1272,9 +1272,107 @@ function NightLib:CreateWindow(Configs)
             UIPadding_19.PaddingTop = UDim.new(0, 4)
             
         end
+        function TabContent:CreateTextBox(Options)
+            Options = Options or {}
+            Options.Name = Options.Name or ""
+            Options.Description = Options.Description or ""
+            Options.Default = Options.Default or ""
+            Options.CallBack = Options.CallBack or function () end
+
+            local TextBox = Instance.new("Frame")
+            local Title_6 = Instance.new("TextLabel")
+            local UIPadding_6 = Instance.new("UIPadding")
+            local Content_5 = Instance.new("TextLabel")
+            local UIPadding_7 = Instance.new("UIPadding")
+            local Put = Instance.new("TextBox")
+            local UIStroke_2 = Instance.new("UIStroke")
+            local UICorner_11 = Instance.new("UICorner")
+            local InputFunc = {}
+
+            TextBox.Name = "TextBox"
+            TextBox.Parent = TabEnable
+            TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextBox.BorderSizePixel = 0
+            TextBox.Size = UDim2.new(1, 0, 0, 55)
+
+            Title_6.Name = "Title"
+            Title_6.Parent = TextBox
+            Title_6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Title_6.BackgroundTransparency = 1.000
+            Title_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Title_6.BorderSizePixel = 0
+            Title_6.ClipsDescendants = true
+            Title_6.Position = UDim2.new(0, 0, 0, 6)
+            Title_6.Size = UDim2.new(0.899497509, 0, 0, 16)
+            Title_6.Font = Enum.Font.GothamBold
+            Title_6.Text = Options.Name
+            Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Title_6.TextSize = 15.000
+            Title_6.TextXAlignment = Enum.TextXAlignment.Left
+
+            UIPadding_6.Parent = Title_6
+            UIPadding_6.PaddingLeft = UDim.new(0, 6)
+
+            Content_5.Name = "Content"
+            Content_5.Parent = TextBox
+            Content_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Content_5.BackgroundTransparency = 1.000
+            Content_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Content_5.BorderSizePixel = 0
+            Content_5.Position = UDim2.new(0, 0, 0, 28)
+            Content_5.Size = UDim2.new(0.71, 0, 0, 26)
+            Content_5.Font = Enum.Font.GothamBold
+            Content_5.Text = Options.Description
+            Content_5.TextColor3 = Color3.fromRGB(100, 100, 100)
+            Content_5.TextSize = 12.000
+            Content_5.TextXAlignment = Enum.TextXAlignment.Left
+
+            UIPadding_7.Parent = Content_5
+            UIPadding_7.PaddingLeft = UDim.new(0, 6)
+
+            Put.Name = "Put"
+            Put.Parent = TextBox
+            Put.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Put.BackgroundTransparency = 1.000
+            Put.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Put.BorderSizePixel = 0
+            Put.Position = UDim2.new(1, -110, 0, 15)
+            Put.Size = UDim2.new(0, 100, 0, 27)
+            Put.Font = Enum.Font.GothamBold
+            Put.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+            Put.Text = Options.Default
+            Put.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Put.TextSize = 14.000
+            Put.ClipsDescendants = true
+            Options.CallBack(Put.Text)
+
+            UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
+            UIStroke_2.Parent = Put
+
+            UICorner_11.CornerRadius = UDim.new(0, 3)
+            UICorner_11.Parent = Put
+
+            function InputFunc:Set(Value)
+				Put.Text = Value
+			end
+			local Inputting = false
+			Put.Focused:Connect(function()
+				Inputting = true
+			end)
+			Put.FocusLost:Connect(function()
+				Inputting = false
+				Put.Size = UDim2.new(0, 100, 0, 27)
+				Options.CallBack(Put.Text)
+			end)
+			return InputFunc
+        end
+
         return InTab
     end
 
     return TabContent
 end
+
 return NightLib
