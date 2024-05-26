@@ -1080,7 +1080,7 @@ function NightLib:CreateWindow(Configs)
             end)
 
             function DropFunc:Set(OptionName)
-                for i, v in pairs(List:GetChildren()) do
+                for i, v in pairs(Options:GetChildren()) do
                     if v.ClassName == "Button" then
                         if v.Name == OptionName then
                             v.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1120,12 +1120,12 @@ function NightLib:CreateWindow(Configs)
                             }
                         ):Play()
                         TweenService:Create(
-                            IcoDrop,
+                            Ico_2,
                             TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
                             {ImageColor3 = Color3.fromRGB(255, 255, 255)}
                         ):Play()
                         Nahvaicaicut.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        Options.CallBack(Nahvaicaicut.Text)
+                        Configs.CallBack(Nahvaicaicut.Text)
                         Title_3.Text = "".. Configs.Name .. " : ".. Nahvaicaicut.Text .. ""
                     end)
                 end
@@ -1147,7 +1147,7 @@ function NightLib:CreateWindow(Configs)
                     }
                 ):Play()
                 TweenService:Create(
-                    IcoDrop,
+                    Ico_2,
                     TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
                     {ImageColor3 = Color3.fromRGB(255, 255, 255)}
                 ):Play()
@@ -1353,7 +1353,7 @@ function NightLib:CreateWindow(Configs)
             Options.Name = Options.Name or ""
             Options.Description = Options.Description or ""
             Options.Default = Options.Default or ""
-            Options.CallBack = Options.CallBack or function () end
+            Configs.CallBack = Configs.CallBack or function () end
 
             local TextBox = Instance.new("Frame")
             local Title_6 = Instance.new("TextLabel")
@@ -1421,7 +1421,7 @@ function NightLib:CreateWindow(Configs)
             Put.TextColor3 = Color3.fromRGB(255, 255, 255)
             Put.TextSize = 14.000
             Put.ClipsDescendants = true
-            Options.CallBack(Put.Text)
+            Configs.CallBack(Put.Text)
 
             UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
             UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
@@ -1440,7 +1440,7 @@ function NightLib:CreateWindow(Configs)
 			Put.FocusLost:Connect(function()
 				Inputting = false
 				Put.Size = UDim2.new(0, 100, 0, 27)
-				Options.CallBack(Put.Text)
+				Configs.CallBack(Put.Text)
 			end)
 			return InputFunc
         end
