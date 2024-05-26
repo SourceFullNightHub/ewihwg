@@ -626,8 +626,7 @@ function NightLib:CreateWindow(Configs)
             UIPadding_6.PaddingLeft = UDim.new(0, 5)
 
             function Lbel:Set(Text)
-                Configs.Text = Text
-                LabelTitle.Text = Configs.Text
+                LabelTitle.Text = Text
             end
             return Lbel
         end
@@ -1366,7 +1365,7 @@ function NightLib:CreateWindow(Configs)
             local InputFunc = {}
 
             TextBox.Name = "TextBox"
-            TextBox.Parent = TabEnable
+            TextBox.Parent = ScrollingTab
             TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
             TextBox.BorderSizePixel = 0
