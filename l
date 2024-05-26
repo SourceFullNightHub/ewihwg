@@ -1365,7 +1365,7 @@ function NightLib:CreateWindow(Configs)
             local InputFunc = {}
 
             TextBox.Name = "TextBox"
-            TextBox.Parent = ScrollingTab
+            TextBox.Parent = Channel
             TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
             TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
             TextBox.BorderSizePixel = 0
