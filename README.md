@@ -56,7 +56,7 @@ Tab:CreateToggle({
 Tab:CreateDropdown({
     Name = "Dropdown",
     Description = "Is This Description",
-    List = {"1", "2", "3"},
+    Options = {"1", "2", "3"},
     Default = "1",
     CallBack = function(Value)
         print(Value)
