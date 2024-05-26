@@ -892,7 +892,7 @@ function NightLib:CreateWindow(Configs)
             Configs = Configs or {}
             Configs.Name = Configs.Name or "Dropdown"
             Configs.Description = Configs.Description or ""
-            Configs.Configs = Configs.Configs or ""
+            Configs.Options = Configs.Options or ""
             Configs.Default = Configs.Default or ""
             Configs.CallBack = Configs.CallBack or function() end
 
@@ -1033,7 +1033,7 @@ function NightLib:CreateWindow(Configs)
                 end
             end)
 
-            for i, v in next, Configs.Configs do
+            for i, v in next, Configs.Options do
                 local Option1 = Instance.new("TextButton")
                 local UICorner_13 = Instance.new("UICorner")
 
