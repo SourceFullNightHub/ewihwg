@@ -1348,11 +1348,11 @@ function NightLib:CreateWindow(Configs)
             UIPadding_19.PaddingTop = UDim.new(0, 4)
             
         end
-        function TabContent:CreateTextBox(Options)
-            Options = Options or {}
-            Options.Name = Options.Name or ""
-            Options.Description = Options.Description or ""
-            Options.Default = Options.Default or ""
+        function InTab:CreateTextBox(Configs)
+            Configs = Configs or {}
+            Configs.Name = Configs.Name or ""
+            Configs.Description = Configs.Description or ""
+            Configs.Default = Configs.Default or ""
             Configs.CallBack = Configs.CallBack or function () end
 
             local TextBox = Instance.new("Frame")
@@ -1382,7 +1382,7 @@ function NightLib:CreateWindow(Configs)
             Title_6.Position = UDim2.new(0, 0, 0, 6)
             Title_6.Size = UDim2.new(0.899497509, 0, 0, 16)
             Title_6.Font = Enum.Font.GothamBold
-            Title_6.Text = Options.Name
+            Title_6.Text = Configs.Name
             Title_6.TextColor3 = Color3.fromRGB(255, 255, 255)
             Title_6.TextSize = 15.000
             Title_6.TextXAlignment = Enum.TextXAlignment.Left
@@ -1399,7 +1399,7 @@ function NightLib:CreateWindow(Configs)
             Content_5.Position = UDim2.new(0, 0, 0, 28)
             Content_5.Size = UDim2.new(0.71, 0, 0, 26)
             Content_5.Font = Enum.Font.GothamBold
-            Content_5.Text = Options.Description
+            Content_5.Text = Configs.Description
             Content_5.TextColor3 = Color3.fromRGB(100, 100, 100)
             Content_5.TextSize = 12.000
             Content_5.TextXAlignment = Enum.TextXAlignment.Left
@@ -1417,7 +1417,7 @@ function NightLib:CreateWindow(Configs)
             Put.Size = UDim2.new(0, 100, 0, 27)
             Put.Font = Enum.Font.GothamBold
             Put.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-            Put.Text = Options.Default
+            Put.Text = Configs.Default
             Put.TextColor3 = Color3.fromRGB(255, 255, 255)
             Put.TextSize = 14.000
             Put.ClipsDescendants = true
@@ -1433,12 +1433,9 @@ function NightLib:CreateWindow(Configs)
             function InputFunc:Set(Value)
 				Put.Text = Value
 			end
-			local Inputting = false
 			Put.Focused:Connect(function()
-				Inputting = true
 			end)
 			Put.FocusLost:Connect(function()
-				Inputting = false
 				Put.Size = UDim2.new(0, 100, 0, 27)
 				Configs.CallBack(Put.Text)
 			end)
