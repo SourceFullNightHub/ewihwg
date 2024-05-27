@@ -1,13 +1,259 @@
-local plrs = game:GetService("Players")
-local lp = plrs.LocalPlayer
-function Bypass(pos)
-    k = 0
-    repeat task.wait()
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack({"requestEntrance", Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625)}))
-        lp.Character.HumanoidRootPart.CFrame = pos
-        k = k + 1
-    until k >= 3
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates") 
-end
+local NaiHub = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Top = Instance.new("Frame")
+local nAMEhUB = Instance.new("TextLabel")
+local Line = Instance.new("Frame")
+local Nahh = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local Time = Instance.new("TextLabel")
+local FruitClaim = Instance.new("TextLabel")
+local NameFr = Instance.new("TextLabel")
+local ImageLabel = Instance.new("ImageLabel")
+local DropShadowHolder = Instance.new("Frame")
+local DropShadow = Instance.new("ImageLabel")
 
-Bypass(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
+NaiHub.Name = "NaiHub"
+NaiHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+Main.Name = "Main"
+Main.Parent = NaiHub
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.0461254604, 0, 0.315789461, 0)
+Main.Size = UDim2.new(0, 376, 0, 161)
+
+UICorner.CornerRadius = UDim.new(0, 4)
+UICorner.Parent = Main
+
+Top.Name = "Top"
+Top.Parent = Main
+Top.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Top.BackgroundTransparency = 1.000
+Top.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Top.BorderSizePixel = 0
+Top.Size = UDim2.new(1, 0, 0, 30)
+
+nAMEhUB.Name = "nAMEhUB"
+nAMEhUB.Parent = Top
+nAMEhUB.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+nAMEhUB.BackgroundTransparency = 1.000
+nAMEhUB.BorderColor3 = Color3.fromRGB(0, 0, 0)
+nAMEhUB.BorderSizePixel = 0
+nAMEhUB.Size = UDim2.new(1, 0, 0, 30)
+nAMEhUB.Font = Enum.Font.GothamBold
+nAMEhUB.Text = "Night Hub"
+nAMEhUB.TextColor3 = Color3.fromRGB(255, 255, 255)
+nAMEhUB.TextSize = 12.000
+
+Line.Name = "Line"
+Line.Parent = Top
+Line.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+Line.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Line.BorderSizePixel = 0
+Line.Position = UDim2.new(0, 0, 1, 0)
+Line.Size = UDim2.new(1, 0, 0, 1)
+
+Nahh.Name = "Nahh"
+Nahh.Parent = Main
+Nahh.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Nahh.BackgroundTransparency = 1.000
+Nahh.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Nahh.BorderSizePixel = 0
+Nahh.Position = UDim2.new(0, 0, 0.136563882, 0)
+Nahh.Size = UDim2.new(1, 0, -0.353955179, 196)
+
+UICorner_2.CornerRadius = UDim.new(0, 4)
+UICorner_2.Parent = Nahh
+
+Time.Name = "Time"
+Time.Parent = Nahh
+Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Time.BackgroundTransparency = 1.000
+Time.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Time.BorderSizePixel = 0
+Time.Position = UDim2.new(0.0372340418, 0, 0.152395785, 0)
+Time.Size = UDim2.new(0, 155, 0, 26)
+Time.Font = Enum.Font.GothamBold
+Time.Text = "Time : 0H 0M 0S"
+Time.TextColor3 = Color3.fromRGB(255, 255, 255)
+Time.TextSize = 12.000
+Time.TextXAlignment = Enum.TextXAlignment.Left
+
+FruitClaim.Name = "FruitClaim"
+FruitClaim.Parent = Nahh
+FruitClaim.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+FruitClaim.BackgroundTransparency = 1.000
+FruitClaim.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FruitClaim.BorderSizePixel = 0
+FruitClaim.Position = UDim2.new(0.0372340418, 0, 0.415198386, 0)
+FruitClaim.Size = UDim2.new(0, 155, 0, 26)
+FruitClaim.Font = Enum.Font.GothamBold
+FruitClaim.Text = "Fruit Claimed : 0"
+FruitClaim.TextColor3 = Color3.fromRGB(255, 255, 255)
+FruitClaim.TextSize = 12.000
+FruitClaim.TextXAlignment = Enum.TextXAlignment.Left
+
+NameFr.Name = "NameFr"
+NameFr.Parent = Nahh
+NameFr.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NameFr.BackgroundTransparency = 1.000
+NameFr.BorderColor3 = Color3.fromRGB(0, 0, 0)
+NameFr.BorderSizePixel = 0
+NameFr.Position = UDim2.new(0.0372340418, 0, 0.691215634, 0)
+NameFr.Size = UDim2.new(0, 155, 0, 26)
+NameFr.Font = Enum.Font.GothamBold
+NameFr.Text = "Fruit Name : Kilo-Kilo"
+NameFr.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameFr.TextSize = 12.000
+NameFr.TextXAlignment = Enum.TextXAlignment.Left
+
+ImageLabel.Parent = Nahh
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.664893627, 0, 0.143871218, 0)
+ImageLabel.Size = UDim2.new(0, 100, 0, 100)
+ImageLabel.Image = "http://www.roblox.com/asset/?id=17633360583"
+
+DropShadowHolder.Name = "DropShadowHolder"
+DropShadowHolder.Parent = Main
+DropShadowHolder.BackgroundTransparency = 1.000
+DropShadowHolder.BorderSizePixel = 0
+DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
+DropShadowHolder.ZIndex = 0
+
+DropShadow.Name = "DropShadow"
+DropShadow.Parent = DropShadowHolder
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1.000
+DropShadow.BorderSizePixel = 0
+DropShadow.Position = UDim2.new(0.494680882, 0, 0.496894449, 0)
+DropShadow.Size = UDim2.new(1.02659583, 47, 1.04347837, 47)
+DropShadow.ZIndex = 0
+DropShadow.Image = "rbxassetid://6014261993"
+DropShadow.ImageColor3 = Color3.fromRGB(30, 64, 255)
+DropShadow.ImageTransparency = 0.500
+DropShadow.ScaleType = Enum.ScaleType.Slice
+DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+function UpdateTime()
+    local GameTime = math.floor(workspace.DistributedGameTime+0.5)
+    local Hour = math.floor(GameTime/(60^2))%24
+    local Minute = math.floor(GameTime/(60^1))%60
+    local Second = math.floor(GameTime/(60^0))%60
+    Time.Text = "Client Time "..Hour.. "H "..Minute.."M  "..Second .. "S"
+end
+FruitCount = 0
+function GetFruits()
+    for i, v in pairs(game.Workspace:GetChildren()) do
+        if string.find(v.Name, "Fruit") then
+            Tween(v.Handle.CFrame)
+            FruitCount = FruitCount + 1
+        end
+    end
+end
+function StoreFruit()
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if string.find(v.Name, "Fruit") then
+            local args = {
+                [1] = "StoreFruit",
+                [2] = v:GetAttribute("OriginalName"),
+                [3] = v
+            }
+            game.ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(args))  
+        end
+    end
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if string.find(v.Name, "Fruit") then
+            local args = {
+                [1] = "StoreFruit",
+                [2] = v:GetAttribute("OriginalName"),
+                [3] = v
+            }
+            game.ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer(unpack(args))  
+        end
+    end
+end
+function CheckFruit()
+    for i, v in pairs(game.Workspace:GetChildren()) do
+        if string.find(v.Name, "Fruit") then
+            return true
+        end
+    end
+    return false
+end
+game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+function HopServer(bO)
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        task.wait()
+    until tick() - ticklon >= 1
+    local function Hop()
+        for r = 1, math.huge do
+            if ChooseRegion == nil or ChooseRegion == "" then
+                ChooseRegion = "Singapore"
+            else
+                plr.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text =
+                    ChooseRegion
+            end
+            local bP = game.ReplicatedStorage.__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and v["Count"] < bO then
+                    game.ReplicatedStorage.__ServerBrowser:InvokeServer("teleport", k)
+                end
+            end
+        end
+        return false
+    end 
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        HopServer()
+                        v.Visible = false
+                    end
+                end
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                HopServer()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
+        end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
+    end
+    while not Hop() do
+        wait()
+    end
+end
+spawn(function()
+    pcall(function()
+        while wait() do
+            if CheckFruit() then
+                GetFruits()
+                StoreFruit()
+                UpdateTime()
+                FruitClaim.Text = "Fruit Claimed : ".. FruitCount .. ""
+            elseif not CheckFruit() then
+                wait(5)
+                HopServer()
+            end
+        end
+    end)
+end)
