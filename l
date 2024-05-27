@@ -839,6 +839,7 @@ function NightLib:CreateWindow(Configs)
             Check.Position = UDim2.new(0, 0, 0.100000001, 0)
             Check.Size = UDim2.new(0, 19, 0, 19)
             Check.Image = "rbxassetid://17335294568"
+            Check.Visible = Configs.Default
 
             ToggleClick.MouseButton1Click:Connect(function()
                 if Toggled == false then
