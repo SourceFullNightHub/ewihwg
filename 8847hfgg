@@ -1,1 +1,13 @@
-nigga
+local plrs = game:GetService("Players")
+local lp = plrs.LocalPlayer
+function Bypass(pos)
+    k = 0
+    repeat task.wait()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack({"requestEntrance", Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625)}))
+        lp.Character.HumanoidRootPart.CFrame = pos
+        k = k + 1
+    until k >= 3
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam","Pirates") 
+end
+
+Bypass(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
