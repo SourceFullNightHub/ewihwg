@@ -992,6 +992,7 @@ function NightLib:CreateWindow(Configs)
             Ico_2.BorderSizePixel = 0
             Ico_2.Position = UDim2.new(1, -30, 0, 11)
             Ico_2.Size = UDim2.new(0, 20, 0, 20)
+            Ico_2.Rotation = -90.000
             Ico_2.Image = "rbxassetid://17584979104"
 
             ListFrame.Name = "ListFrame"
