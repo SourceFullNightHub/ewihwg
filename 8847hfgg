@@ -1,1 +1,451 @@
-:U
+-- + Astral Community 
+-- + Function File     
+-- + Developed by Teru, Mafumayu 
+-- + https://discord.gg/NjKYrNauaD
+
+--// Config
+getgenv().CF = getgenv().CF or {
+    ["Solara"] = false,
+    ["Bypass TP"] = true,
+    ["Distance X"] = 0,
+    ["Distance Y"] = 15,
+    ["Distance Z"] = 15,
+    ["Bring Distance"] = 350,
+    ["Bring Mob"] = true,
+    ["Tween Speed"] = 325,
+    ["High Y Tween"] = true,
+    ["Anti AFK"] = true,
+    ["Auto Rejoin"] = true
+}
+--// Player
+local plrs = game:GetService("Players")
+local lp = plrs.LocalPlayer
+--// Game
+local Workspace = game:GetService("Workspace")
+local Enemies = Workspace.Enemies
+local RS = game:GetService("ReplicatedStorage")
+--// Function
+local AF = {} -- ASTRAL FUNCTION
+function AF:FFC(OBJ, FIND) -- FIND FIRST CHILD
+    return OBJ:FindFirstChild(FIND)
+end
+function AF:CEC(Mob) -- CHECK ENEMIES CONDITION
+	if Mob and Mob.Parent and AF:FFC(Mob, "Humanoid") and Mob.Humanoid.Health > 0 and AF:FFC(Mob, "HumanoidRootPart") then
+		return true
+	end
+	return false
+end 
+function AF:PD(Player) -- GET PLAYER DATA
+    local datatable = {}
+    for i, v in (Player or lp).Data:GetChildren() do
+        pcall(function()
+            if v.Value then
+                datatable[v.Name] = v.Value
+            end
+        end)
+    end
+    return datatable
+end 
+function AF:GQBL(Level) -- GET QUEST BY LEVEL
+    local Level = Level or AF:PD().Level
+    local OldLevelReq = 0
+    local Quest = {}
+    local QuestReq2 = 0
+    if Level >= 700 and World1 then
+        Quest = {
+            ["NameQuest"] = "FountainQuest", 
+            ["LevelQuest"] = 2,
+            ["NameMon"] = "Galley Captain",
+            ["Mon"] = "Galley Captain [Lv. 650]",
+            ["CFrameQuest"] = CFrame.new(5258.2788085938, 38.526931762695, 4050.044921875)
+        }
+    elseif Level >= 1500 and World2 then
+        Quest = {
+            ["NameQuest"] = "Water Fighter", 
+            ["LevelQuest"] = 2,
+            ["NameMon"] = "ForgottenQuest",
+            ["Mon"] = "Water Fighter [Lv. 1450]",
+            ["CFrameQuest"] = CFrame.new(-3054.5827636719, 236.87213134766, -10147.790039063)
+        }
+    else
+        for NameQuest, QuestData in require(RS.Quests) do 
+            for LevelQuest, TableData in QuestData do
+                for _, QuestReq in TableData.Task do
+                    QuestReq2 = QuestReq
+                end
+                if NameQuest ~= "CitizenQuest" and NameQuest ~= "BartiloQuest" and QuestReq2 ~= 1 then
+                    if TableData.LevelReq <= Level and TableData.LevelReq >= OldLevelReq then
+                        Quest = {
+                            ["NameQuest"] = NameQuest, 
+                            ["LevelQuest"] = LevelQuest,
+                            ["NameMon"] = TableData.Name
+                        }
+                        OldLevelReq = TableData.LevelReq
+                        Quest["Mon"] = (Quest["NameMon"].." [Lv. "..OldLevelReq.."]")
+                    end
+                end
+            end
+        end
+        for i, v in require(RS.GuideModule).Data["NPCList"] do
+            for j, k in v["Levels"] do
+                if OldLevelReq == k then
+                    Quest["CFrameQuest"] = i["CFrame"]
+                end
+            end
+        end
+    end
+    Quest["CFrameMon"] = {}
+    local HaveCFrameMon = false
+    for i, v in Workspace._WorldOrigin.EnemySpawns:GetChildren() do
+        if v.Name == Quest["NameMon"] or v.Name == Quest["Mon"] then
+            HaveCFrameMon = true
+            table.insert(Quest["CFrameMon"], v.CFrame)
+        end
+    end
+    if not HaveCFrameMon then
+        Quest["CFrameMon"] = {Quest["CFrameQuest"]}
+    end
+    return Quest
+end 
+function AF:GDB() -- GET DOUBLE QUEST
+    local Level = AF:PD().Level
+    local Quest1 = AF:GQBL(Level)
+    local Quest2 = AF:GQBL(Level - 25)
+    local MonCheck1 = AF:FFC(Enemies, Quest1["NameMon"])
+    local MonCheck2 = AF:FFC(Enemies, Quest2["NameMon"])
+    if not (MonCheck1 and AF:CEC(MonCheck1)) and (MonCheck2 and AF:CEC(MonCheck2)) then
+        return Quest2
+    end
+    return Quest1
+end
+--// Tween / Bypass
+if game.PlaceId == 2753915549 then
+    AF.World = 1
+    AF.Portals = {
+    Vector3.new(-7894.6201171875, 5545.49169921875, -380.246346191406),
+    Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625),
+    Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
+    Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875)
+}
+elseif game.PlaceId == 4442272183 then
+    AF.World = 2
+    AF.Portals = {
+        Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312),
+        Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
+        Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
+        Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422)
+    }
+elseif game.PlaceId == 7449423635 then
+    AF.World = 3
+    AF.Portals = {
+        Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
+        Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953),
+        Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
+        Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
+        Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
+        Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
+    }
+end
+function AF:GP(Pos) -- GET PORTAL
+    local OldPortal, Dist = Vector3.new(0,0,0), math.huge
+    for _, Portal in Portals do
+        if (Portal - Pos.Position).Magnitude < Dist and OldPortal ~= Portal then
+            OldPortal, Dist = Portal, (Portal - Pos.Position).Magnitude
+        end
+    end
+    return OldPortal
+end 
+function AF:Bypass(is)
+    if AF:FFC(lp.Character, "PartTele") then
+        if Tween then
+            Tween:Cancel()
+        end
+        if AF:CIC() then
+            return
+        end
+        AF:WaitHRP(lp.Character).CFrame = is
+        lp.Character.PartTele.CFrame = AF:WaitHRP(lp.Character).CFrame
+        lp.Character:WaitForChild("Humanoid"):ChangeState(15)
+        task.wait(0.5)
+        repeat task.wait() until lp.Character:WaitForChild("Humanoid").Health <= 0
+        repeat task.wait()
+            if AF:FFC(lp.Character, "HumanoidRootPart") then
+                lp.Character.HumanoidRootPart.CFrame = is  
+            end
+            if AF:FFC(lp.Character, "PrimaryPart") then
+                lp.Character.PrimaryPart.CFrame = is  
+            end
+        until lp.Character:WaitForChild("Humanoid").Health > 0
+        if AF:FFC(lp.Character, "PartTele") then
+            lp.Character.PartTele.CFrame = AF:WaitHRP(lp.Character).CFrame 
+        end
+        task.wait(0.5)
+    end
+end
+function AF:GBP(pos) -- GET BYPASS POS
+    local a, b = nil, math.huge
+    for i, v in AF:FFC(game.Workspace._WorldOrigin.PlayerSpawns, tostring(lp.Team):GetChildren()) do
+        if tostring(v) ~= "Leviathan" and (v:GetModelCFrame().Position - Pos.Position).Magnitude < b then
+            a = v:GetModelCFrame()
+            b = (v:GetModelCFrame().Position - Pos.Position).Magnitude
+        end
+    end
+    return a
+end
+function AF:RE(ENTRANCE) -- REQUEST ENTRANCE
+    RS.Remotes.CommF_:InvokeServer(unpack({"requestEntrance", ENTRANCE}))
+    if AF:FFC(lp.Character, "PartTele") then
+        lp.Character.PartTele.CFrame = AF:WaitHRP(lp.Character).CFrame 
+    end
+    task.wait(1)
+end
+function AF:WaitHRP(q0) -- WAIT HUMANOID ROOT PART
+    if not q0 then return end
+    return q0:WaitForChild("HumanoidRootPart", 9) 
+end 
+function AF:CD(I, II) -- CALC DISTANCE
+    if not II then 
+        II = lp.Character.PrimaryPart.CFrame 
+    end 
+    return (Vector3.new(I.X, 0, I.Z)-Vector3.new(II.X, 0, II.Z)).Magnitude 
+end 
+function AF:CIC() -- CHECK IN COMBAT
+    return lp.PlayerGui.Main.InCombat.Visible and lp.PlayerGui.Main.InCombat.Text and (string.find(string.lower(lp.PlayerGui.Main.InCombat.Text),"risk"))
+end 
+function AF:TweenReal(Pos) -- REAL TWEEN FUNCTION
+    AF:WaitHRP(lp.Character)
+    if not AF:FFC(AF:WaitHRP(lp.Character), "Hold") then
+        local Hold = Instance.new("BodyVelocity", AF:WaitHRP(lp.Character))
+        Hold.Name = "Hold"
+        Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        Hold.Velocity = Vector3.new(0, 0, 0)
+    end
+    lp.Character:WaitForChild("Humanoid").Sit = false
+    if not AF:FFC(lp.Character, "PartTele") then
+        local PartTele = Instance.new("Part", lp.Character) 
+        PartTele.Transparency = 1
+        PartTele.Size = Vector3.new(10,10,10)
+        PartTele.Name = "PartTele"
+        PartTele.Anchored = true
+        PartTele.CanCollide = false
+        PartTele.CFrame = AF:WaitHRP(lp.Character).CFrame 
+        PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+            task.wait(0.01)
+            AF:WaitHRP(lp.Character).CFrame = PartTele.CFrame
+        end)
+    end
+    Portal = AF:GP(Pos) 
+    Spawn = AF:GBP(Pos) 
+    MyCFrame = AF:WaitHRP(lp.Character).CFrame
+    Distance = AF:CD(MyCFrame, Pos)
+    if AF:CD(Portal, Pos) < AF:CD(Pos) and AF:CD(Portal) > 800 then
+        return AF:RE(Portal)
+    end
+    if not AF:CIC() and getgenv().CF["Bypass TP"] and AF:CD(Pos) - AF:CD(Spawn, Pos) > 1000 and AF:CD(Spawn) > 1000 then
+        return AF:Bypass(Spawn)
+    end
+    lp.Character.PartTele.CFrame = CFrame.new(lp.Character.PartTele.CFrame.X, Pos.Y, lp.Character.PartTele.CFrame.Z)
+    Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+    Tween:Play() 
+end
+function AF:to(Pos) -- HIGH Y TWEEN
+    if getgenv().CF["High Y Tween"] and AF:CD(AF:WaitHRP(lp.Character).CFrame, Pos) > (getgenv().CF["Distance X"] + getgenv().CF["Distance Y"] + getgenv().CF["Distance Z"] + 10) then
+        AF:TweenReal(CFrame.new(Pos.X, Pos.Y + 1000, Pos.Z))
+    else
+        AF:TweenReal(Pos)
+    end
+end
+AF.EnemyRegion = {} 
+for _, enemy in Enemies:GetChildren() do 
+    if AF:CEC(enemy) then 
+        local ename = tostring(enemy) 
+        AF.EnemyRegion[ename] = AF.EnemyRegion[ename] or {} 
+        table.insert(AF.EnemyRegion, AF:WaitHRP(enemy).CFrame) 
+    end 
+end
+for _, part in Workspace["_WorldOrigin"].EnemySpawns:GetChildren() do 
+    if part.Name then 
+        local ename = tostring(part) 
+        AF.EnemyRegion[ename] = AF.EnemyRegion[ename] or {} 
+        table.insert(AF.EnemyRegion, part.CFrame) 
+    end 
+end 
+function AF:FER() -- FIND ENEMY REGION
+    a1, a2 = pcall(function() 
+        for _, ene in getnilinstances() do 
+            if AF:CEC(ene) then 
+                local ename = tostring(ene) 
+                AF.EnemyRegion[ename] = AF.EnemyRegion[ename] or {} 
+                table.insert(AF.EnemyRegion, AF:WaitHRP(ene).CFrame) 
+            end 
+        end 
+        return true
+    end) 
+    if not a1 or a2 then 
+        return AF:FER() 
+    end 
+end  
+AF:FER()
+function AF:GER(m) -- GET ENEMY REGION
+    local m = EnemyRegion[m] 
+    dist, res = math.huge, nil
+    for _, gg in m do 
+        local dist2 = CaculateDist(gg) 
+        if dist2 > 20 and dist2 < dist then 
+            dist = dist2 
+            res = gg 
+        end 
+    end 
+    return res 
+end 
+function AF:MobGet(TableMob) -- GET MOB BY TABLE
+    Mob = nil
+    DistMob = math.huge
+    for i, v in Enemies:GetChildren() do
+        if table.find(TableMob, v.Name) and AF:CEC(v) and AF:CD(AF:WaitHRP(v).CFrame, AF:WaitHRP(lp.Character).CFrame) < DistMob then
+            Mob = v 
+            DistMob = AF:CD(AF:WaitHRP(v).CFrame, AF:WaitHRP(lp.Character).CFrame)
+        end
+    end
+    return Mob
+end
+function AF:FPB(PosTable) -- FIND POS BRING
+    local TotalPos = Vector3.new()
+    local CountPos = 0
+    for i = 1, #PosTable do
+        local Pos = PosTable[i]
+        local EnoughDist = true
+        for j = 1, #PosTable do
+            if i ~= j then
+                local distance = (Pos - PosTable[j]).Magnitude
+                if distance >= (350 * j) then
+                    EnoughDist = false
+                    break
+                end
+            end
+        end
+        if EnoughDist then
+            TotalPos = TotalPos + Pos
+            CountPos = CountPos + 1
+        end
+    end
+    local PosBring = TotalPos / CountPos
+    return PosBring
+end
+function AF:Equip(Tool)
+    for _, item in lp.Backpack:GetChildren() do 
+        if item:IsA("Tool") and item.ToolTip == Tool then
+            lp.Character:WaitForChild("Humanoid"):EquipTool(item)
+            return item.Name
+        end 
+    end 
+    return false
+end
+AF.Fastattack = false
+AF.SpamSkilll = false
+AF.MasteryWea = "Melee"
+AF.WeaponUse = "Melee"
+function AF:IMNW(OBJ) -- IN MY NETWORK
+    if not getgenv().CF["Solara"] then
+        if not isnetworkowner(OBJ) then
+            return false
+        end
+    end
+    return true
+end
+function AF:KillMob(MobTable, Quest, Bring, Mastery, Stopfunction) -- KILL MOB FUNCTION
+    NearestMob = AF:MobGet(MobTable)
+    if NearestMob ~= nil then
+        repeat task.wait()
+            if AF:FFC(lp.Character, "Humanoid") and lp.Character.Humanoid.Health > 0 then
+                if AF:CEC(NearestMob) then
+                    AF:to(CFrame.new(AF:WaitHRP(NearestMob).Position + Vector3.new(getgenv().CF["Distance X"], getgenv().CF["Distance Y"], getgenv().CF["Distance Z"]))) 
+                    if (AF:WaitHRP(NearestMob).Position - AF:WaitHRP(lp.Character).Position).Magnitude <= getgenv().CF["Distance X"] + getgenv().CF["Distance Y"] + getgenv().CF["Distance Z"] + 5 then
+                        if Bring then
+                            BringTable = {}
+                            for j, k in Enemies:GetChildren() do
+                                if AF:CEC(k) and AF:IMNW(k) and k.Name == NearestMob.Name then
+                                    table.insert(BringTable, AF:WaitHRP(k).Position)
+                                end
+                            end
+                            if BringPos then
+                                if (BringPos - AF:FPB(BringTable)).Magnitude > 10 then
+                                    BringPos = AF:FPB(BringTable)
+                                end
+                            else
+                                BringPos = AF:FPB(BringTable)
+                            end
+                            if BringPos == nil then return end
+                            for j, k in Enemies:GetChildren() do
+                                if AF:CEC(k) and AF:IMNW(k) and k.Name == NearestMob.Name and (AF:WaitHRP(k).Position - BringPos).Magnitude <= 350 then
+                                    AF:WaitHRP(k).CFrame = CFrame.new(BringPos)
+                                    AF:WaitHRP(k).Size = Vector3.new(70,70,70)
+                                    AF:WaitHRP(k).CanCollide = false
+                                    k.Humanoid.JumpPower = 0
+                                    k.Humanoid.WalkSpeed = 0
+                                    k.Humanoid:ChangeState(14)
+                                end
+                            end
+                        end
+                        if not AF:FFC(lp.Character, "HasBuso") then
+                            RS.Remotes.CommF_:InvokeServer("Buso")
+                        end
+                        if Mastery then
+                            AF.Fastattack = false
+                            if AF:FFC(NearestMob, "Humanoid") and NearestMob.Humanoid.Health >= NearestMob.Humanoid.MaxHealth * (35/100) then 
+                                AF:Equip(AF.MasteryWea)
+                                AF.SpamSkill = true
+                            else
+                                AF.Fastattack = true
+                                AF:Equip(AF.WeaponUse)
+                            end
+                        else
+                            AF:Equip(AF.WeaponUse)
+                            AF.Fastattack = true
+                        end
+                    else
+                        AF.Fastattack = false
+                    end
+                end
+            end
+        until not NearestMob or not AF:CEC(NearestMob) or (Quest and lp.PlayerGui.Main.Quest.Visible == false) or not Stopfunction
+        AF.Fastattack = false
+    end
+end
+function AF:CACB()
+    for i, v in lp.Character:GetDescendants() do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock" or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+    end
+    for i, v in lp.PlayerScripts:GetDescendants() do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans" or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
+end
+uh = true
+spawn(function()
+    while wait() do
+        if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, AF:GQBL()["NameQuest"]) then
+            if game.Workspace.Enemies:FindFirstChild(AF:GQBL()["NameQuest"]) then
+                KillMob(AF:GQBL()["NameQuest"], true, true, false, uh)
+            else
+                for i,v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                    if string.find(v.Name, AF:GQBL()["NameQuest"]) then
+                        repeat wait()
+                            Tween(v.CFrame * CFrame.new(0, 20, 0))
+                        until CheckEnemies(AF:GQBL()["NameQuest"]) or not uh
+                    end
+                end
+            end
+        else
+            AF:TweenReal(AF:GQBL()["CFrameQuest"])
+        end
+    end
+end)
+return AF
