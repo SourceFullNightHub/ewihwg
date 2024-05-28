@@ -507,7 +507,7 @@ function NightLib:CreateWindow(Configs)
         Channel.Visible = false
         spawn(function()
             while wait() do
-                Channel.CanvasSize = UDim2.new(0,0,0,UIListLayout_2.AbsoluteContentSize.Y + 70)
+                Channel.CanvasSize = UDim2.new(0,0,0,UIListLayout_2.AbsoluteContentSize.Y + 20)
             end
         end)
 
