@@ -1389,70 +1389,70 @@ function CheckIsRaid()
     return Island
 end
 function KillMob(Trget, Stopfunction)
-    dumatestthoi = CheckEnemies(Trget)
-    if dumatestthoi then
-        if dumatestthoi.Humanoid.Health > 0 and dumatestthoi.Parent and dumatestthoi:FindFirstChild("HumanoidRootPart") then
+    v = CheckEnemies(Trget)
+    if v then
+        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
             repeat task.wait()
                 EnableBuso()
                 EquipWeapon()
-                dumatestthoi.HumanoidRootPart.Transparency = 1
-                dumatestthoi.Humanoid.JumpPower = 0
-                dumatestthoi.Humanoid.WalkSpeed = 0
-                dumatestthoi.HumanoidRootPart.CanCollide = false
-                Tween(dumatestthoi.HumanoidRootPart.CFrame * PosFarm)
+                v.HumanoidRootPart.Transparency = 1
+                v.Humanoid.JumpPower = 0
+                v.Humanoid.WalkSpeed = 0
+                v.HumanoidRootPart.CanCollide = false
+                Tween(v.HumanoidRootPart.CFrame * PosFarm)
                 game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                Stp = dumatestthoi.HumanoidRootPart.CFrame
+                Stp = v.HumanoidRootPart.CFrame
                 if _G.S.FastAttackSafeorNot == "FastAttack" then
                     game:GetService("VirtualUser"):CaptureController()
                     game:GetService("VirtualUser"):Button1Down(Vector2.new(0, 1, 0, 1))
                 end
                 BringMob(Trget)
-            until dumatestthoi.Humanoid.Health <= 0 or not dumatestthoi.Parent or not Stopfunction
+            until v.Humanoid.Health <= 0 or not v.Parent or not Stopfunction
         end
     end
 end
 function KillBoss(BName, Stopfunction)
-    Bucac = CheckBoss(BName)
-    if Bucac then
-        if Bucac.Humanoid.Health > 0 and Bucac.Parent and Bucac:FindFirstChild("HumanoidRootPart") then
+    a = CheckBoss(BName)
+    if a then
+        if a.Humanoid.Health > 0 and a.Parent and a:FindFirstChild("HumanoidRootPart") then
             repeat task.wait()
                 EnableBuso()
                 EquipWeapon()
-                Bucac.HumanoidRootPart.Transparency = 1
-                Bucac.Humanoid.JumpPower = 0
-                Bucac.Humanoid.WalkSpeed = 0
-                Bucac.HumanoidRootPart.CanCollide = false
-                Tween(Bucac.HumanoidRootPart.CFrame * PosFarm)
+                a.HumanoidRootPart.Transparency = 1
+                a.Humanoid.JumpPower = 0
+                a.Humanoid.WalkSpeed = 0
+                a.HumanoidRootPart.CanCollide = false
+                Tween(a.HumanoidRootPart.CFrame * PosFarm)
                 game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                Stp = Bucac.HumanoidRootPart.CFrame
+                Stp = a.HumanoidRootPart.CFrame
                 if _G.S.FastAttackSafeorNot == "FastAttack" then
                     game:GetService("VirtualUser"):CaptureController()
                     game:GetService("VirtualUser"):Button1Down(Vector2.new(0, 1, 0, 1))
                 end
-            until Bucac.Humanoid.Health <= 0 or not Bucac.Parent or not Stopfunction
+            until a.Humanoid.Health <= 0 or not a.Parent or not Stopfunction
         end
     end
 end
 function KillSeaEvent(Mb, Stopfunction)
-    dumatestthoi = CheckEnemies(Mb)
-    if dumatestthoi then
-        if dumatestthoi.Humanoid.Health > 0 and dumatestthoi.Parent and dumatestthoi:FindFirstChild("HumanoidRootPart") then
+    b = CheckEnemies(Mb)
+    if b then
+        if b.Humanoid.Health > 0 and b.Parent and b:FindFirstChild("HumanoidRootPart") then
             repeat task.wait()
                 EnableBuso()
                 EquipWeapon()
-                dumatestthoi.HumanoidRootPart.Transparency = 1
-                dumatestthoi.Humanoid.JumpPower = 0
-                dumatestthoi.Humanoid.WalkSpeed = 0
-                dumatestthoi.HumanoidRootPart.CanCollide = false
-                Tween(dumatestthoi.HumanoidRootPart.CFrame * CFSafe)
+                b.HumanoidRootPart.Transparency = 1
+                b.Humanoid.JumpPower = 0
+                b.Humanoid.WalkSpeed = 0
+                b.HumanoidRootPart.CanCollide = false
+                Tween(b.HumanoidRootPart.CFrame * CFSafe)
                 game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                Stp = dumatestthoi.HumanoidRootPart.CFrame
+                Stp = b.HumanoidRootPart.CFrame
                 if _G.S.FastAttackSafeorNot == "FastAttack" then
                     game:GetService("VirtualUser"):CaptureController()
                     game:GetService("VirtualUser"):Button1Down(Vector2.new(0, 1, 0, 1))
                 end
                 BringMob(Mb)
-            until dumatestthoi.Humanoid.Health <= 0 or not dumatestthoi.Parent or not Stopfunction
+            until b.Humanoid.Health <= 0 or not b.Parent or not Stopfunction
         end
     end
 end
@@ -2015,6 +2015,7 @@ H:CreateToggle({
 
 spawn(function()
     while task.wait() do
+        pcall(function()
             if _G.S.StFarm then
                 if _G.S.SelectMethodFarm == "" or _G.S.SelectMethodFarm == nil then
                     _G.S.SelectMethodFarm = "Level"
@@ -2029,7 +2030,7 @@ spawn(function()
                             Tween(GetMobInEnemySpawns(Mob).CFrame * CFrame.new(2, 20, 2))
                         end
                     end
-                elseif _G.S.SelectMethodFarm == "Cake Prince" then
+                elseif _G.S.SelectMethodFarm == "Cake Prince" and Sea3 then
                     if CheckEnemies("Cake Prince") and not CheckGlassCake() then
                         for i, v in pairs(WS.Enemies:GetChildren()) do
                             if v.Name == "Cake Prince" and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
@@ -2068,7 +2069,7 @@ spawn(function()
                             end
                         end
                     end
-                elseif _G.S.SelectMethodFarm == "Bone" then
+                elseif _G.S.SelectMethodFarm == "Bone" and Sea3 then
                     if CheckEnemies("Reborn Skeleton") or CheckEnemies("Living Zombie") or CheckEnemies("Demonic Soul") or CheckEnemies("Posessed Mummy") then
                         KillMob("Posessed Mummy", _G.S.StFarm)
                         KillMob("Reborn Skeleton", _G.S.StFarm)
@@ -2087,6 +2088,7 @@ spawn(function()
                     end
                 end
             end
+        end)
     end
 end)
 
@@ -5056,13 +5058,12 @@ function Unboost()
 end
 local cdnormal = 0
 local Animation = Instance.new("Animation")
-local CooldownFastAttack = 0
 FastAttack = function()
     pcall(function()
         local ac = CurveFrame.activeController
         if ac and ac.equipped then
             task.spawn(function()
-                if tick() - cdnormal > 0.5 then
+                if tick() - cdnormal > _G.S.FastAttackDelay then
                     ac:attack()
                     cdnormal = tick()
                 else
