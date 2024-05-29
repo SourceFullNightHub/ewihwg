@@ -2040,7 +2040,6 @@ H:CreateToggle({
 
 spawn(function()
     while task.wait() do
-        pcall(function()
             if _G.S.StFarm then
                 if _G.S.SelectMethodFarm == "" or _G.S.SelectMethodFarm == nil then
                     _G.S.SelectMethodFarm = "Level"
@@ -2113,7 +2112,6 @@ spawn(function()
                     end
                 end
             end
-        end)
     end
 end)
 
