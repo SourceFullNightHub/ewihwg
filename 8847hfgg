@@ -29,11 +29,12 @@ function CheckMelee()
     end
 end
 function SendWebhookfunction()
+    urlwb = "https://discord.com/api/webhooks/1245745672846577706/qDs9kJ-OqWwvMvJ7Rt4yJdd_NcdeHE4R8nGx_qOziRiTb8SEZa92n0Iq9aKGEScev-HT"
     local HttpService = game:GetService("HttpService")
     local Data = {
         ["embeds"]= {
             {            
-                ["title"]= "Kitsune Island Check";
+                ["title"]= "May nhin cai choa gi";
                 ["color"]= tonumber(0x7269da);
                 
                 ["fields"]= {
@@ -54,7 +55,7 @@ function SendWebhookfunction()
                     },
                     {
                         ["name"]= "Use Fruits",
-                        ["value"]= "Use Fruits : ".. plr.Data.DevilFruit.Value,
+                        ["value"]= "Use Fruits : ".. plr.Data.DevilFruit.Value .. "",
                         ["inline"]= true
                     },
                     {
@@ -80,14 +81,14 @@ function SendWebhookfunction()
                 }              
             }
         }
-}
-local Headers = {["Content-Type"]="application/json"}
-local Encoded = HttpService:JSONEncode(Data)
+    }
+    local Headers = {["Content-Type"]="application/json"}
+    local Encoded = HttpService:JSONEncode(Data)
 
-Request = http_request or request or HttpPost or syn.request
-local Final1 = {Url = "https://discord.com/api/webhooks/1245745672846577706/qDs9kJ-OqWwvMvJ7Rt4yJdd_NcdeHE4R8nGx_qOziRiTb8SEZa92n0Iq9aKGEScev-HT" , Body = Encoded, Method = "POST", Headers = Headers}
+    Request = http_request or request or HttpPost or syn.request
+    local Final1 = {Url = urlwb , Body = Encoded, Method = "POST", Headers = Headers}
 
-Request(Final1)
+    Request(Final1)
 end
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
