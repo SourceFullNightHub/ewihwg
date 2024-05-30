@@ -1,94 +1,111 @@
 local plr = game.Players.LocalPlayer
 
 function CheckSwords()
-    for r, v in next, plr.Backpack:GetChildren() do
+    for _, v in pairs(plr.Backpack:GetChildren()) do
         if v:IsA("Tool") and v.ToolTip == "Sword" then
             return v.Name
         end
     end
-    for r, v in next, plr.Character:GetChildren() do
+    for _, v in pairs(plr.Character:GetChildren()) do
         if v:IsA("Tool") and v.ToolTip == "Sword" then
             return v.Name
         end
     end
+    return "None"
 end
+
 function CheckGuns()
-    chemchep = plr.Backpack or plr.Character
-    for r, v in pairs(chemchep:GetChildren()) do
+    for _, v in pairs(plr.Backpack:GetChildren()) do
         if v:IsA("Tool") and v.ToolTip == "Gun" then
             return v.Name
         end
     end
+    for _, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == "Gun" then
+            return v.Name
+        end
+    end
+    return "None"
 end
+
 function CheckMelee()
-    conbuomxinh = plr.Backpack or plr.Character
-    for r, v in pairs(conbuomxinh:GetChildren()) do
+    for _, v in pairs(plr.Backpack:GetChildren()) do
         if v:IsA("Tool") and v.ToolTip == "Melee" then
             return v.Name
         end
     end
+    for _, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == "Melee" then
+            return v.Name
+        end
+    end
+    return "None"
 end
+
 function SendWebhookfunction()
-    urlwb = "https://discord.com/api/webhooks/1245745672846577706/qDs9kJ-OqWwvMvJ7Rt4yJdd_NcdeHE4R8nGx_qOziRiTb8SEZa92n0Iq9aKGEScev-HT"
+    local urlwb = "https://discord.com/api/webhooks/1245745672846577706/qDs9kJ-OqWwvMvJ7Rt4yJdd_NcdeHE4R8nGx_qOziRiTb8SEZa92n0Iq9aKGEScev-HT"
     local HttpService = game:GetService("HttpService")
+    local plrLevel = plr:FindFirstChild("Data") and plr.Data:FindFirstChild("Level") and plr.Data.Level.Value or "Unknown"
+    local plrFruit = plr:FindFirstChild("Data") and plr.Data:FindFirstChild("DevilFruit") and plr.Data.DevilFruit.Value or "None"
+
     local Data = {
-        ["embeds"]= {
-            {            
-                ["title"]= "May nhin cai choa gi";
-                ["color"]= tonumber(0x7269da);
-                
-                ["fields"]= {
+        ["embeds"] = {
+            {
+                ["title"] = "May nhin cai choa gi",
+                ["color"] = tonumber(0x7269da),
+                ["fields"] = {
                     {
-                        ["name"]= "Players Count",
-                        ["value"]= "```"..#game:GetService("Players"):GetPlayers().."/12```",
-                        ["inline"]= true
+                        ["name"] = "Players Count",
+                        ["value"] = "```"..#game:GetService("Players"):GetPlayers().."/12```",
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Tao tên là",
-                        ["value"]= "```".. game:GetService("Players").LocalPlayer.Name .."",
-                        ["inline"]= true
+                        ["name"] = "Tao tên là",
+                        ["value"] = "```".. plr.Name .."```",
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Tao Level",
-                        ["value"]= "```".. game:GetService("Players").LocalPlayer.Data.Level.Value .."",
-                        ["inline"]= true
+                        ["name"] = "Tao Level",
+                        ["value"] = "```".. plrLevel .."```",
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Use Fruits",
-                        ["value"]= "Use Fruits : ".. plr.Data.DevilFruit.Value,
-                        ["inline"]= true
+                        ["name"] = "Use Fruits",
+                        ["value"] = "Use Fruits : ".. plrFruit,
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Use Sword" ,
-                        ["value"]= "Use Sword : ".. CheckSwords() .. "",
-                        ["inline"]= true
+                        ["name"] = "Use Sword",
+                        ["value"] = "Use Sword : ".. CheckSwords(),
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Use Gun" ,
-                        ["value"]= "Use Gun : ".. CheckGuns() .. "",
-                        ["inline"]= true
+                        ["name"] = "Use Gun",
+                        ["value"] = "Use Gun : ".. CheckGuns(),
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Use Melee" ,
-                        ["value"]= "Use Melee : ".. CheckMelee() .. "",
-                        ["inline"]= true
+                        ["name"] = "Use Melee",
+                        ["value"] = "Use Melee : ".. CheckMelee(),
+                        ["inline"] = true
                     },
                     {
-                        ["name"]= "Nên làm",
-                        ["value"]= 'Dùng Night Hub đi vì nó rất béo',
-                        ["inline"]= true
-                    },
-                }              
+                        ["name"] = "Nên làm",
+                        ["value"] = 'Dùng Night Hub đi vì nó rất béo',
+                        ["inline"] = true
+                    }
+                }
             }
         }
-}
-local Headers = {["Content-Type"]="application/json"}
-local Encoded = HttpService:JSONEncode(Data)
+    }
 
-Request = http_request or request or HttpPost or syn.request
-local Final1 = {Url = urlwb , Body = Encoded, Method = "POST", Headers = Headers}
+    local Headers = {["Content-Type"] = "application/json"}
+    local Encoded = HttpService:JSONEncode(Data)
 
-Request(Final1)
+    local Request = http_request or request or HttpPost or syn.request
+    local Final1 = {Url = urlwb, Body = Encoded, Method = "POST", Headers = Headers}
+
+    Request(Final1)
 end
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -105,21 +122,16 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
---Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     C = Window:AddTab({ Title = "Cặc", Icon = "" })
 }
 
 local Options = Fluent.Options
 
-do
-
-    Tabs.C:AddButton({
-        Title = "Send webhooks cho thg gà kia xem",
-        Description = "mày tuối gì?",
-        Callback = function()
-            SendWebhookfunction()
-        end
-    })
-
-end
+Tabs.C:AddButton({
+    Title = "Send webhooks cho thg gà kia xem",
+    Description = "mày tuối gì?",
+    Callback = function()
+        SendWebhookfunction()
+    end
+})
