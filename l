@@ -6,7 +6,7 @@ local mouse = plr:GetMouse()
 local TweenService = game:GetService("TweenService")
 local NightHubScreen = Instance.new("ScreenGui")
 NightHubScreen.Name = "Night Hub Screen"
-NightHubScreen.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+NightHubScreen.Parent = game.CoreGui
 local NightLib = {}
 
 local function MakeDraggable(topbarobject, object)
