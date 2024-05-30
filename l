@@ -339,7 +339,7 @@ function NightLib:CreateWindow(Configs)
         ChannelContainer.Visible = false
         DropShadow.Visible = false
         ReadyClose = true
-        TweenService:Create(Main, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0)}):Play()
+        TweenService:Create(Main, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 0, 376)}):Play()
     end)
 
     LogoMiniSized.Name = "Logo Mini Sized"
