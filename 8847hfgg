@@ -19,8 +19,10 @@ function Tween(Pos)
                 AF:WaitHRP(plr.Character).CFrame = PartSmooth.CFrame
             end)
         end
-        if (PartSmooth.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
-            PartSmooth.CFrame = plr.Character.HumanoidRootPart.CFrame
+        if plr.Character:FindFirstChild("PartSmooth") then
+            if (plr.Character.PartSmooth.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+                plr.Character.PartSmooth.CFrame = plr.Character.HumanoidRootPart.CFrame
+            end
         end
         Tween = game:GetService("TweenService"):Create(plr.Character.PartSmooth, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
         Tween:Play()
