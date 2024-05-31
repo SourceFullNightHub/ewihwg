@@ -1,12 +1,14 @@
 local plr = game.Players.LocalPlayer
-function WaitHRP(q0) -- WAIT HUMANOID ROOT PART
+function WaitHRP(q0) 
     if not q0 then return end
-    return q0:WaitForChild("HumanoidRootPart", 9) 
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end 
-function Tween(Pos)
-    if plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
-        Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-        if not Pos then return end
+function Tween(CFm)
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (CFm.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+        if not CFm then return end
         if not plr.Character:FindFirstChild("PartTele") then
             local PartTele = Instance.new("Part", plr.Character) -- Create part
             PartTele.Size = Vector3.new(10,1,10)
@@ -20,13 +22,12 @@ function Tween(Pos)
                 WaitHRP(plr).CFrame = PartTele.CFrame
             end)
         end
-        if plr.Character:FindFirstChild("PartTele") then
-            if (plr.Character.PartTele.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
-                plr.Character.PartTele.CFrame = plr.Character.HumanoidRootPart.CFrame
-            end
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = CFm})
+        if Distance <= 250 then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.PartTele.CFrame = CFm
         end
-        Tween = game:GetService("TweenService"):Create(plr.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-        Tween:Play()
+		tween:Play()
     end
 end
 
