@@ -1,1 +1,30 @@
-:UU
+local plr = game.Players.LocalPlayer
+function WaitHRP(q0) -- WAIT HUMANOID ROOT PART
+    if not q0 then return end
+    return q0:WaitForChild("HumanoidRootPart", 9) 
+end 
+function Tween(Pos)
+    if plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+        if not WaitHRP(plr.Character, "PartSmooth") then
+            local PartSmooth = Instance.new("Part", plr.Character) 
+            PartSmooth.Transparency = 1
+            PartSmooth.Size = Vector3.new(10,10,10)
+            PartSmooth.Name = "PartSmooth"
+            PartSmooth.Anchored = true
+            PartSmooth.CanCollide = false
+            PartSmooth.CFrame = WaitHRP(plr.Character).CFrame 
+            PartSmooth:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                AF:WaitHRP(plr.Character).CFrame = PartSmooth.CFrame
+            end)
+        end
+        if (PartSmooth.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+            PartSmooth.CFrame = plr.Character.HumanoidRootPart.CFrame
+        end
+        Tween = game:GetService("TweenService"):Create(plr.Character.PartSmooth, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+        Tween:Play()
+    end
+end
+
+Tween(CFrame.new(-16207.501953125, 9.0863618850708, 475.1490783691406))
