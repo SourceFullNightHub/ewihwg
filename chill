@@ -6,23 +6,26 @@ end
 function Tween(Pos)
     if plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
         Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-        if not WaitHRP(plr.Character, "PartSmooth") then
-            local PartSmooth = Instance.new("Part", plr.Character) 
-            PartSmooth.Transparency = 1
-            PartSmooth.Size = Vector3.new(10,10,10)
-            PartSmooth.Name = "PartSmooth"
-            PartSmooth.Anchored = true
-            PartSmooth.CanCollide = false
-            PartSmooth.CFrame = WaitHRP(plr.Character).CFrame 
-            PartSmooth:GetPropertyChangedSignal("CFrame"):Connect(function()
+        if not Pos then return end
+        if not plr.Character:FindFirstChild("PartTele") then
+            local PartTele = Instance.new("Part", plr.Character) -- Create part
+            PartTele.Size = Vector3.new(10,1,10)
+            PartTele.Name = "PartTele"
+            PartTele.Anchored = true
+            PartTele.Transparency = 1
+            PartTele.CanCollide = false
+            PartTele.CFrame = WaitHRP(plr).CFrame 
+            PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
                 task.wait(0.01)
-                AF:WaitHRP(plr.Character).CFrame = PartSmooth.CFrame
+                WaitHRP(plr).CFrame = PartTele.CFrame
             end)
         end
-        if (plr.Character.PartSmooth.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
-            plr.Character.PartSmooth.CFrame = plr.Character.HumanoidRootPart.CFrame
+        if plr.Character:FindFirstChild("PartTele") then
+            if (plr.Character.PartTele.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+                plr.Character.PartTele.CFrame = plr.Character.HumanoidRootPart.CFrame
+            end
         end
-        Tween = game:GetService("TweenService"):Create(plr.Character.PartSmooth, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+        Tween = game:GetService("TweenService"):Create(plr.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
         Tween:Play()
     end
 end
