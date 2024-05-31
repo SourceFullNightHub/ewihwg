@@ -21,6 +21,10 @@ function Tween(CFm)
                 task.wait(0.01)
                 WaitHRP(plr).CFrame = PartTele.CFrame
             end)
+            plr.Character.HumanoidRootPart:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                PartTele.CFrame = WaitHRP(plr).CFrame
+            end)
         end
         tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = CFm})
         if Distance <= 250 then
