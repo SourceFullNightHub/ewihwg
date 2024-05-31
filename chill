@@ -27,8 +27,23 @@ function Tween(CFm)
             tween:Cancel()
             game.Players.LocalPlayer.Character.PartTele.CFrame = CFm
         end
+        if plr.Character:FindFirstChild("PartTele") then
+            if (plr.Character.PartTele.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+                plr.Character.PartTele.CFrame = WaitHRP(plr).CFrame
+            end
+        end
 		tween:Play()
     end
 end
+
+spawn(function()
+    while wait() do
+        if plr.Character:FindFirstChild("PartTele") then
+            if plr.Character.Health <= 0 or (plr.Character.PartTele.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+                plr.Character.PartTele.CFrame = WaitHRP(plr).CFrame
+            end
+        end
+    end
+end)
 
 Tween(CFrame.new(-16207.501953125, 9.0863618850708, 475.1490783691406))
