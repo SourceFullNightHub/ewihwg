@@ -21,8 +21,16 @@ function Tween(CFm)
                 task.wait(0.01)
                 WaitHRP(plr).CFrame = PartTele.CFrame
             end)
+            plr.Character.HumanoidRootPart:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                PartTele.CFrame = WaitHRP(plr).CFrame
+            end)
         end
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = CFm})
+        if plr.Character:FindFirstChild("PartTele") then
+            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = CFm})
+        elseif not plr.Character:FindFirstChild("PartTele") then
+            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = CFm})
+        end
         if Distance <= 250 then
             tween:Cancel()
             game.Players.LocalPlayer.Character.PartTele.CFrame = CFm
@@ -35,5 +43,15 @@ function Tween(CFm)
 		tween:Play()
     end
 end
+
+spawn(function()
+    while wait() do
+        if plr.Character:FindFirstChild("PartTele") then
+            if plr.Character.Health <= 0 or (plr.Character.PartTele.Position - plr.Character.HumanoidRootPart.Position).Magnitude >= 100 then
+                plr.Character.PartTele:Destroy()
+            end
+        end
+    end
+end)
 
 Tween(CFrame.new(-16207.501953125, 9.0863618850708, 475.1490783691406))
