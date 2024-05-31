@@ -4,8 +4,10 @@ function WaitHRP(q0)
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
 end 
 function Tween(Pos)
-    if plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
-        Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
         if not Pos then return end
         if not plr.Character:FindFirstChild("PartTele") then
             local PartTele = Instance.new("Part", plr.Character) -- Create part
@@ -25,8 +27,8 @@ function Tween(Pos)
                 plr.Character.PartTele.CFrame = plr.Character.HumanoidRootPart.CFrame
             end
         end
-        Tween = game:GetService("TweenService"):Create(plr.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-        Tween:Play()
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+        tween:Play()
     end
 end
 
