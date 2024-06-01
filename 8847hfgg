@@ -98,6 +98,38 @@ local function S()
         end
     end
 end
+local tatcacode = {
+    "Sub2UncleKizaru",
+    "NEWTROLL",
+    "SUB2NOOBMASTER123",
+    "StrawHatMaine",
+    "Sub2OfficialNoobie",
+    "Sub2NoobMaster123",
+    "SUB2GAMERROBOT_EXP1",
+    "SUB2GAMERROBOT_RESET1",
+    "THEGREATACE",
+    "BIGNEWS",
+    "FUDD10",
+    "fudd10_v2",
+    "Bluxxy",
+    "Starcodeheo",
+    "JCWK",
+    "SUB2CAPTAINMAUI",
+    "Magicbus",
+    "Sub2Fer999",
+    "kittgaming",
+    "GAMERROBOT",
+    "SUBGAMERROBOT",
+    "ADMINGIVEAWAY",
+    "KITT_RESET",
+    "SECRET_ADMIN",
+    "Sub2Daigrock",
+    "Axiore",
+    "TantaiGaming"
+}
+for i, v in pairs(tatcacode) do
+    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(v)
+end
 function CheckNearestTeleporter(aI)
     vcspos = aI.Position
     min = math.huge
