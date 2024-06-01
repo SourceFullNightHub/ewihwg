@@ -602,7 +602,7 @@ function Attack()
 end
 nah = true
 spawn(function()
-    while wait(.000000000000000025) do
+    while wait(.1) do
         if nah then
             pcall(function()
                 repeat task.wait(0.175)
