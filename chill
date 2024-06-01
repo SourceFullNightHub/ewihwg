@@ -11,10 +11,18 @@ local Q = require(game.ReplicatedStorage.Quests)
 local plr = game.Players.LocalPlayer
 local LocalPlayerLevelValue = plr.Data.Level.Value
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
-local function S()
+local function GetQuest()
     local T = LocalPlayerLevelValue
     local min = 0
-    if T >= 1450 and game.PlaceId == 4442272183 then
+    if T >= 1 and T <= 9 and game.PlaceId == 2753915549 then
+        Mob1 = "Bandit"
+        Mob2 = "BanditQuest1"
+        Mob3 = 1
+    elseif T >= 10 and T <= 15 then
+        Mob1 = "Monkey"
+        Mob2 = "JungleQuest"
+        Mob3 = 1
+    elseif T >= 1450 and game.PlaceId == 4442272183 then
         Mob1 = "Water Fighter"
         Mob2 = "ForgottenQuest"
         Mob3 = 2
@@ -246,7 +254,7 @@ function CheckNameDoubleQuest2()
     return a4
 end
 function CheckDoubleQuest2()
-    S()
+    GetQuest()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and CheckQuestData() and
