@@ -12,32 +12,74 @@ local plr = game.Players.LocalPlayer
 local LocalPlayerLevelValue = plr.Data.Level.Value
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizeMob2"}
 local function S()
-    Lvl = game: GetService("Players").LocalPlayer.Data.Level.Value
-    local T = LocalPlayerLevelValue
-    local min = 0
-    if T >= 1450 and game.PlaceId == 4442272183 then
-        Mob1 = "Water Fighter"
-        Mob2 = "ForgottenQuest"
-        Mob3 = 2
-    elseif T >= 700 and game.PlaceId == 2753915549 then
-        Mob1 = "Galley Captain"
-        Mob2 = "FountainQuest"
-        Mob3 = 2
-    else
-        for r, v in pairs(Q) do
-            for M, N in pairs(v) do
-                local U = N.LevelReq
-                for O, P in pairs(N.Task) do
-                    if T >= U and U >= min and N.Task[O] > 1 and not table.find(R, tostring(r)) then
-                        min = U
-                        Mob1 = tostring(O)
-                        Mob2 = r
-                        Mob3 = M
-                    end
+    local Lvl = game:GetService("Players").LocalPlayer.Data.Level.Value
+    if Lvl >= 1 and Lvl <= 9 then
+        if tostring(game.Players.LocalPlayer.Team) == "Marines" then
+            Mob1 = "Trainee"
+            Mob2 = "MarineQuest"
+            Mob3 = 1
+            npcpos = CFrame.new(-2709.67944, 24.5206585, 2104.24585, -0.744724929, -3.97967455e-08, -0.667371571, 4.32403588e-08, 1, -1.07884304e-07, 0.667371571, -1.09201515e-07, -0.744724929)
+        elseif tostring(game.Players.LocalPlayer.Team) == "Pirates" then
+            Mob1 = "Bandit"
+            Mob2 = "BanditQuest1"
+            Mob3 = 1
+            npcpos = CFrame.new(1059.99731, 16.9222069, 1549.28162, -0.95466274, 7.29721794e-09, 0.297689587, 1.05190106e-08, 1, 9.22064114e-09, -0.297689587, 1.19340022e-08, -0.95466274)
+        end
+    end
+    local GuideModule = require(game:GetService("ReplicatedStorage").GuideModule)
+    local Quests = require(game:GetService("ReplicatedStorage").Quests)
+    for i,v in pairs(GuideModule["Data"]["NPCList"]) do
+        for i1,v1 in pairs(v["Levels"]) do
+            if Lvl >= v1 then
+                if not levelreq then
+                    levelreq = 0
+                end
+                if v1 > levelreq then
+                    npcpos = i["CFrame"]
+                    Mob3 = i1
+                    levelreq = v1
+                end
+                if #v["Levels"] == 3 and Mob3 == 3 then
+                    npcpos = i["CFrame"]
+                    Mob3 = 2
+                    levelreq = v["Levels"][2]
                 end
             end
         end
-    end   
+    end
+    for i,v in pairs(Quests) do
+        for i1,v1 in pairs(v) do
+            if v1["LevelReq"] == levelreq and i ~= "CitizenQuest" then
+                Mob2 = i
+                for i2,v2 in pairs(v1["Task"]) do
+                    Mob1 = i2
+                end
+            end
+        end
+    end
+    if Mob2 == "MarineQuest2" then
+        Mob2 = "MarineQuest2"
+        Mob3 = 1
+        Mob1 = "Chief Petty Officer"
+        levelreq = 120
+    elseif Mob2 == "ImpelQuest" then
+        Mob2 = "PrisonerQuest"
+        Mob3 = 2
+        Mob1 = "Dangerous Prisoner"
+        levelreq = 210
+        npcpos = CFrame.new(5310.60547, 0.350014925, 474.946594, 0.0175017118, 0, 0.999846935, 0, 1, 0, -0.999846935, 0, 0.0175017118)
+    elseif Mob2 == "SkyExp1Quest" then
+        if Mob3 == 1 then
+            npcpos = CFrame.new(-4721.88867, 843.874695, -1949.96643, 0.996191859, -0, -0.0871884301, 0, 1, -0, 0.0871884301, 0, 0.996191859)
+        elseif Mob3 == 2 then
+            npcpos = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
+        end
+    elseif Mob2 == "Area2Quest" and Mob3 == 2 then
+        Mob2 = "Area2Quest"
+        Mob3 = 1
+        Mob1 = "Swan Pirate"
+        levelreq = 775
+    end
 end
 function HopServer(bO)
     if not bO then
@@ -182,11 +224,74 @@ function Tween(Pos)
     tween:Play()
 end
 function CFrameQuest()
-    for i,v in pairs(require(game.ReplicatedStorage.GuideModule)["Data"]["NPCList"]) do
-		if v["NPCName"] == require(game.ReplicatedStorage.GuideModule)["Data"]["LastClosestNPC"] then
-			return i["CFrame"]
-		end
-	end
+    QuestPoses = {}
+    for r, v in pairs(getnilinstances()) do
+        if
+            v:IsA("Model") and v:FindFirstChild("Head") and v.Head:FindFirstChild("QuestBBG") and
+                v.Head.QuestBBG.Title.Text == "QUEST"
+         then
+            QuestPoses[v.Name] = v.Head.CFrame * CFrame.new(0, -2, 2)
+        end
+    end
+    for r, v in pairs(game.Workspace.NPCs:GetDescendants()) do
+        if v.Name == "QuestBBG" and v.Title.Text == "QUEST" then
+            QuestPoses[v.Parent.Parent.Name] = v.Parent.Parent.Head.CFrame * CFrame.new(0, -2, 2)
+        end
+    end
+    DialoguesList = {}
+    for r, v in pairs(require(game.ReplicatedStorage.DialoguesList)) do
+        DialoguesList[v] = r
+    end
+    local V = getscriptclosure(game:GetService("Players").LocalPlayer.PlayerScripts.NPC)
+    local W = {}
+    for k, v in pairs(debug.getprotos(V)) do
+        if #debug.getconstants(v) == 1 then
+            table.insert(W, debug.getconstant(v, 1))
+        end
+    end
+    local X = false
+    local Y = {}
+    for k, v in pairs(debug.getconstants(V)) do
+        if type(v) == "string" then
+            if v == "Players" then
+                X = false
+            end
+            if not X then
+                if v == "Blox Fruit Dealer" then
+                    X = true
+                end
+            else
+            end
+            if X then
+                table.insert(Y, v)
+            end
+        end
+    end
+    local Z = {}
+    QuestPoint = {}
+    for k, v in pairs(Y) do
+        if QuestPoses[v] then
+            Z[W[k]] = Y[k]
+        end
+    end
+    for r, v in next, Z do
+        QuestPoint[r] = QuestPoses[v]
+    end
+    QuestPoint["SkyExp1Quest"] =
+        CFrame.new(
+        -7857.28516,
+        5544.34033,
+        -382.321503,
+        -0.422592998,
+        0,
+        0.906319618,
+        0,
+        1,
+        0,
+        -0.906319618,
+        0,
+        -0.422592998
+    )
 end
 function CheckDoubleQuest()
     local a = {}
