@@ -4,9 +4,6 @@ function RETeleport(aJ)
     oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     char = game.Players.LocalPlayer.Character.HumanoidRootPart
     char.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
-    if Your.Character:FindFirstChild("PartTele") then
-        Your.Character.PartTele.CFrame = WaitHRP(Your).CFrame 
-    end
     task.wait(0.01)
 end
 RETeleport(Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875))
