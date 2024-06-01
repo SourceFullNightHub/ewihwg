@@ -560,7 +560,6 @@ CountQuestClaim = 0
 spawn(function()
     while wait() do
         pcall(function()
-
             S()
             if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
                 if MobLevel1OrMobLevel2() then
@@ -575,7 +574,7 @@ spawn(function()
                     end
                 elseif not MobLevel1OrMobLevel2() then
                     for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if string.find(v.Name, Mob1) then
+                        if string.find(v.Name, MobLevel1OrMobLevel2()) then
                             Tween(v.CFrame * CFrame.new(0, 15, 0))
                         end
                     end
