@@ -560,83 +560,28 @@ CountQuestClaim = 0
 spawn(function()
     while wait() do
         pcall(function()
-            if plr.Data.Level.Value >= 1 and plr.Data.Level.Value <= 49 then
-                if CheckEnemies("Shanda") then
-                    KillMob("Shanda")
-                else
+
+            S()
+            if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+                if MobLevel1OrMobLevel2() then
+                    for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.Name == MobLevel1OrMobLevel2() then
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                repeat wait()
+                                    KillMob(v.Name)
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible == false
+                            end
+                        end
+                    end
+                elseif not MobLevel1OrMobLevel2() then
                     for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if string.find(v.Name, "Shanda") then
+                        if string.find(v.Name, Mob1) then
                             Tween(v.CFrame * CFrame.new(0, 15, 0))
                         end
                     end
                 end
-            elseif plr.Data.Level.Value >= 50 and plr.Data.Level.Value <= 99 then
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
-                    CountQuestClaim = CountQuestClaim + 1
-                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    local Cac = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
-                    Cac = string.gsub(Cac, " %p(0/1)%p", "")
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible and not game:GetService("Workspace").Characters:FindFirstChild(Cac) then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                    end
-                    if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value >= 150 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                        print(game.Players[Cac].Data.Level.Value)
-                    end
-                    if CountQuestClaim >= 6 then
-                        HopSever()
-                    end
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
-                        for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
-                            if v:IsA("Model") and v.Name == Cac then
-                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
-                                    repeat wait()
-                                        EquipWeapon()
-                                        EnableBuso()                                            
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Humanoid.Health = 50
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(1 ,1 ,1)
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
-                                        game:GetService "VirtualUser":CaptureController()
-                                        game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
-                                        if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                                            SendKey("Z")
-                                            SendKey("X")
-                                            _G.FastAttackOld = false
-                                        end
-                                    until v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
-                                    _G.FastAttackOld = true
-                                end
-                            end
-                        end
-                    end
-                end
-            elseif plr.Data.Level.Value >= 100 then
-                S()
-                if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
-                    if MobLevel1OrMobLevel2() then
-                        for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                            if v.Name == MobLevel1OrMobLevel2() then
-                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        KillMob(v.Name)
-                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible == false
-                                end
-                            end
-                        end
-                    elseif not MobLevel1OrMobLevel2() then
-                        for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                            if string.find(v.Name, Mob1) then
-                                Tween(v.CFrame * CFrame.new(0, 15, 0))
-                            end
-                        end
-                    end
-                else
-                    GetQuest()
-                end
+            else
+                GetQuest()
             end
         end)
     end
