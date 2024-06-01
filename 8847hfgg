@@ -358,6 +358,31 @@ function KillMob(Name)
     end
 end
 spawn(function()
+    while task.wait() do
+        pcall(function()
+            if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "BodyClip"
+                Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000,100000,100000)
+                Noclip.Velocity = Vector3.new(0,0,0)
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v.CanCollide = false
+                end
+            end
+        end)
+    end)
+end)
+spawn(function()
     while wait() do
         if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
             if MobLevel1OrMobLevel2() then
