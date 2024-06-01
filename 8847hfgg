@@ -11,7 +11,7 @@ local Q = require(game.ReplicatedStorage.Quests)
 local plr = game.Players.LocalPlayer
 local LocalPlayerLevelValue = plr.Data.Level.Value
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
-local function GetQuest()
+local function S()
     local T = LocalPlayerLevelValue
     local min = 0
     if T >= 1 and T <= 9 and game.PlaceId == 2753915549 then
@@ -254,7 +254,7 @@ function CheckNameDoubleQuest2()
     return a4
 end
 function CheckDoubleQuest2()
-    GetQuest()
+    S()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and CheckQuestData() and
