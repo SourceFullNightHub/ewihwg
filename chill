@@ -416,7 +416,7 @@ spawn(function()
                 for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
                     if v.Name == CheckDoubleQuest2().Name then
                         if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            KillMob(v)
+                            KillMob(v.Name)
                         end
                     end
                 end
