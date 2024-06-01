@@ -11,10 +11,18 @@ local Q = require(game.ReplicatedStorage.Quests)
 local plr = game.Players.LocalPlayer
 local LocalPlayerLevelValue = plr.Data.Level.Value
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
-local function S()
+local function GetQuest()
     local T = LocalPlayerLevelValue
     local min = 0
-    if T >= 1450 and game.PlaceId == 4442272183 then
+    if T >= 1 and T <= 9 and game.PlaceId == 2753915549 then
+        Mob1 = "Bandit"
+        Mob2 = "BanditQuest1"
+        Mob3 = 1
+    elseif T >= 10 and T <= 15 then
+        Mob1 = "Monkey"
+        Mob2 = "JungleQuest"
+        Mob3 = 1
+    elseif T >= 1450 and game.PlaceId == 4442272183 then
         Mob1 = "Water Fighter"
         Mob2 = "ForgottenQuest"
         Mob3 = 2
@@ -246,7 +254,7 @@ function CheckNameDoubleQuest2()
     return a4
 end
 function CheckDoubleQuest2()
-    S()
+    GetQuest()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and CheckQuestData() and
@@ -366,6 +374,38 @@ function EnableBuso()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     end
 end
+function InMyNetWork(object)
+    if isnetworkowner then
+        return isnetworkowner(object)
+    else
+        if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then 
+            return true
+        end
+        return false
+    end
+end
+
+function BringMob(nhulon)
+    pcall(function()
+        for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+            if v.Name == nhulon and v.Parent and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                if InMyNetWork(v.HumanoidRootPart) then
+                    v.HumanoidRootPart.CFrame = Stp
+                    v.Humanoid.JumpPower = 0
+                    v.Humanoid.WalkSpeed = 0
+                    v.HumanoidRootPart.Transparency = 1
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                    v.Humanoid:ChangeState(11)
+                end
+            end
+        end
+    end)
+end
 function KillMob(Name)
     v = CheckEnemies(Name)
     if v then
@@ -380,6 +420,9 @@ function KillMob(Name)
                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
                 game.Players.LocalPlayer.Character.Humanoid.Sit = false
                 Stp = v.HumanoidRootPart.CFrame
+                game:GetService'VirtualUser':CaptureController()
+                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                BringMob(Name)
             until v.Humanoid.Health <= 0 or not v.Parent
         end
     end
@@ -411,24 +454,137 @@ spawn(function()
 end)
 spawn(function()
     while wait() do
-        if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
-            if MobLevel1OrMobLevel2() then
-                for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if v.Name == MobLevel1OrMobLevel2() then
-                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            KillMob(v.Name)
+        pcall(function()
+            if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+                if MobLevel1OrMobLevel2() then
+                    for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.Name == MobLevel1OrMobLevel2() then
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                KillMob(v.Name)
+                            end
+                        end
+                    end
+                elseif not MobLevel1OrMobLevel2() then
+                    for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name, MobLevel1OrMobLevel2()) then
+                            Tween(v.CFrame * CFrame.new(0, 15, 0))
                         end
                     end
                 end
-            elseif not MobLevel1OrMobLevel2() then
-                for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                    if string.find(v.Name, MobLevel1OrMobLevel2()) then
-                        Tween(v.CFrame * CFrame.new(0, 15, 0))
+            else
+                GetQuest()
+            end
+        end)
+    end
+end)
+
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if typeof(y) == "table" then
+            pcall(function()
+                CameraShaker:Stop()
+                y.activeController.timeToNextAttack = 0
+                y.activeController.hitboxMagnitude = 60
+                y.activeController.active = false
+                y.activeController.timeToNextBlock = 0
+                y.activeController.focusStart = 1655503339.0980349
+                y.activeController.increment = 1
+                y.activeController.blocking = false
+                y.activeController.attacking = false
+                y.activeController.humanoid.AutoRotate = true
+            end)
+        end
+    end)
+end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+        game.Players.LocalPlayer.Character.Stun.Value = 0
+        game.Players.LocalPlayer.Character.Busy.Value = false        
+    end)
+end)
+
+task.spawn(function()
+    local a = game.Players.LocalPlayer
+    local b = require(a.PlayerScripts.CombatFramework.Particle)
+    local c = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
+    if not shared.orl then
+        shared.orl = c.wrapAttackAnimationAsync
+    end
+    if not shared.cpc then
+        shared.cpc = b.play
+    end
+    if nah then
+        pcall(function()
+            c.wrapAttackAnimationAsync = function(d, e, f, g, h)
+                local i = c.getBladeHits(e, f, g)
+                if i then
+                    b.play = function()
                     end
+                    d:Play(0.25, 0.25, 0.25)
+                    h(i)
+                    b.play = shared.cpc
+                    wait(.5)
+                    d:Stop()
                 end
             end
-        else
-            GetQuest()
+        end)
+    end
+end)
+function GetBladeHit()
+    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local p13 = CmrFwLib.activeController
+    local weapon = p13.blades[1]
+    if not weapon then 
+        return weapon
+    end
+    while weapon.Parent ~= game.Players.LocalPlayer.Character do
+        weapon = weapon.Parent 
+    end
+    return weapon
+end
+function Attack()
+    local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+    local CmrFwLib = CombatFrameworkLib[2]
+    local plr = game.Players.LocalPlayer
+    for i = 1, 1 do
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        bladehit = cac
+        if #bladehit > 0 then
+            pcall(function()
+                CmrFwLib.activeController.timeToNextAttack = 1
+                CmrFwLib.activeController.attacking = false
+                CmrFwLib.activeController.blocking = false
+                CmrFwLib.activeController.timeToNextBlock = 0
+                CmrFwLib.activeController.increment = 1 + 1 / 1
+                CmrFwLib.activeController.hitboxMagnitude = 60
+                CmrFwLib.activeController.focusStart = 0
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+            end)
+        end
+    end
+end
+nah = true
+spawn(function()
+    while wait(.000000000000000025) do
+        if nah then
+            pcall(function()
+                repeat task.wait(0.175)
+                    Attack()
+                until not nah
+            end)
         end
     end
 end)
