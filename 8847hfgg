@@ -13,34 +13,26 @@ local LocalPlayerLevelValue = plr.Data.Level.Value
 local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizeMob2"}
 local function S()
     Lvl = game: GetService("Players").LocalPlayer.Data.Level.Value
-    if Sea1 then
-        if Lvl == 1 or Lvl <= 9 then
-            Mob = "Bandit"
-            Mob3 = 1
-            Mob2 = "BanditQuest1"
-        elseif Lvl == 10 or Lvl <= 14 then
-            Mob1 = "Monkey"
-            Mob2 = "JungleQuest"
-            Mob3 = 1
-        elseif T >= 1450 and game.PlaceId == 4442272183 then
-            Mob1 = "Water Fighter"
-            Mob2 = "ForgottenQuest"
-            Mob3 = 2
-        elseif T >= 700 and game.PlaceId == 2753915549 then
-            Mob1 = "Galley Captain"
-            Mob2 = "FountainQuest"
-            Mob3 = 2
-        else
-            for r, v in pairs(Q) do
-                for M, N in pairs(v) do
-                    local U = N.LevelReq
-                    for O, P in pairs(N.Task) do
-                        if T >= U and U >= min and N.Task[O] > 1 and not table.find(R, tostring(r)) then
-                            min = U
-                            Mob1 = tostring(O)
-                            Mob2 = r
-                            Mob3 = M
-                        end
+    local T = LocalPlayerLevelValue
+    local min = 0
+    if T >= 1450 and game.PlaceId == 4442272183 then
+        Mob1 = "Water Fighter"
+        Mob2 = "ForgottenQuest"
+        Mob3 = 2
+    elseif T >= 700 and game.PlaceId == 2753915549 then
+        Mob1 = "Galley Captain"
+        Mob2 = "FountainQuest"
+        Mob3 = 2
+    else
+        for r, v in pairs(Q) do
+            for M, N in pairs(v) do
+                local U = N.LevelReq
+                for O, P in pairs(N.Task) do
+                    if T >= U and U >= min and N.Task[O] > 1 and not table.find(R, tostring(r)) then
+                        min = U
+                        Mob1 = tostring(O)
+                        Mob2 = r
+                        Mob3 = M
                     end
                 end
             end
@@ -464,29 +456,49 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-        S()
-        if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
-            if MobLevel1OrMobLevel2() then
-                for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                    if v.Name == MobLevel1OrMobLevel2() then
-                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            repeat wait()
-                                KillMob(v.Name)
-                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible == false
+            if plr.Data.Level.Value >= 1 and plr.Data.Level.Value <= 49 then
+                if game.Workspace:FindFirstChild("Shanda") then
+                    for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.Name == "Shanda" then
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                repeat wait()
+                                    KillMob(v.Name)
+                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                            end
+                        end
+                    end
+                else
+                    for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name, "Shanda") then
+                            Tween(v.CFrame * CFrame.new(0, 15, 0))
                         end
                     end
                 end
-            elseif not MobLevel1OrMobLevel2() then
-                for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                    if string.find(v.Name, Mob1) then
-                        Tween(v.CFrame * CFrame.new(0, 15, 0))
+            elseif plr.Data.Level.Value >= 50 then
+                S()
+                if game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+                    if MobLevel1OrMobLevel2() then
+                        for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                            if v.Name == MobLevel1OrMobLevel2() then
+                                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        KillMob(v.Name)
+                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible == false
+                                end
+                            end
+                        end
+                    elseif not MobLevel1OrMobLevel2() then
+                        for i, v in pairs(game.Workspace["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                            if string.find(v.Name, Mob1) then
+                                Tween(v.CFrame * CFrame.new(0, 15, 0))
+                            end
+                        end
                     end
+                else
+                    GetQuest()
                 end
             end
-        else
-            GetQuest()
-        end
-    end)
+        end)
     end
 end)
 
