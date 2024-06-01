@@ -330,15 +330,40 @@ function GetQuest()
         Tween(QuestCFrame)
     end
 end
-function CheckEnemies(N)
-    if game.workspace.Enemies:FindFirstChild(N) then
-        for i, v in pairs(game.workspace.Enemies:GetChildren()) do
-            if v.Name == N then
-                if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                    return v
-                end
+function CheckEnemies(muahahahah)
+    if game.Workspace.Enemies:FindFirstChild(muahahahah) then
+        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+            if v.Name == muahahahah and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                return v
             end
         end
+    end
+end
+function GetWP(buoif)
+    Nahfck = ""
+    for i, v in pairs(plr.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == buoif then
+            Nahfck = v.Name
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == buoif then
+            Nahfck = v.Name
+        end
+    end
+    return Nahfck
+end
+function EquipWeapon(Giet)
+    Giet = GetWP("Melee")
+    local bucac = game.Players.LocalPlayer.Backpack:FindFirstChild(Giet)
+    if bucac then
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bucac)
+    end
+end
+function EnableBuso()
+    if not plr.Character:FindFirstChild("HasBuso") then
+        local args = { [1] = "Buso" }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     end
 end
 function KillMob(Name)
@@ -346,6 +371,8 @@ function KillMob(Name)
     if v then
         if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
             repeat task.wait()
+                EquipWeapon()
+                EnableBuso()
                 v.HumanoidRootPart.Transparency = 1
                 v.Humanoid.JumpPower = 0
                 v.Humanoid.WalkSpeed = 0
@@ -389,9 +416,7 @@ spawn(function()
                 for r, v in pairs(game.workspace.Enemies:GetChildren()) do
                     if v.Name == MobLevel1OrMobLevel2() then
                         if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            repeat wait()
-                                KillMob(v)
-                            until not v or not v:FindFirstChild("Humanoid") or not v:FindFirstChild("HumanoidRootPart") or v.Humanoid.Health <= 0 or not game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible
+                            KillMob(v)
                         end
                     end
                 end
