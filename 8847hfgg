@@ -479,7 +479,7 @@ spawn(function()
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                         print(game.Players[Cac].Data.Level.Value)
                     end
-                    if CountQuestClaim >= 15 then
+                    if CountQuestClaim >= 6 then
                         HopSever()
                     end
                     if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
