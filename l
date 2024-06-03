@@ -275,7 +275,7 @@ function NightLib:CreateWindow(Configs)
     CloseOpen.BorderSizePixel = 0
     CloseOpen.Position = UDim2.new(0.00696864119, 0, 0.457489878, 0)
     CloseOpen.Size = UDim2.new(0, 35, 0, 35)
-    CloseOpen.Image = "rbxassetid://15541504459"
+    CloseOpen.Image = "rbxassetid://17717048927"
     CloseOpen.MouseButton1Click:Connect(function()
         if ReadyClose == true then
             TweenService:Create(Main, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 598, 0, 376)}):Play()
