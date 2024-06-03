@@ -184,9 +184,8 @@ else
     game.Players.LocalPlayer:Kick("Not Support This Game!")
 end
 
-local Q = require(game.ReplicatedStorage.Quests)
 local plr = game.Players.LocalPlayer
-local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
+local QuestKhac = {"BartiloQuest", "CitizenQuest"}
 local function S()
     local Lvl = game:GetService("Players").LocalPlayer.Data.Level.Value
     local T = Lvl
@@ -227,7 +226,7 @@ local function S()
     end
     for i,v in pairs(Quests) do
         for i1,v1 in pairs(v) do
-            if v1["LevelReq"] == levelreq and i ~= "CitizenQuest" and N.Task[i1] > 1 and Lvl >= v1["LevelReq"] then
+            if v1["LevelReq"] == levelreq and not table.find(QuestKhac, tostring(i)) then
                 Mob2 = i
                 for i2,v2 in pairs(v1["Task"]) do
                     Mob1 = i2
