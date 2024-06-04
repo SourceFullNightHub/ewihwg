@@ -1,1 +1,3 @@
-print("mày nhìn cái chóa gì?")
+for i, v in pairs(game.ReplicatedStorage.Remotes.CommF_:GetChildren()) do
+    print(i, v)
+end
