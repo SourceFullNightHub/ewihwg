@@ -128,9 +128,9 @@ function NightLib:Notify(Configs)
         UIPadding_21.PaddingLeft = UDim.new(0, 6)
         UIPadding_21.PaddingTop = UDim.new(0, 3)
 
-        TweenService:Create(Notify,TweenInfo.new(tonumber(Configs.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),{Position = UDim2.new(0.707564592, 0, 0.815789461, 0)}):Play()
+        TweenService:Create(Notify,TweenInfo.new(.1, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),{Position = UDim2.new(0.707564592, 0, 0.815789461, 0)}):Play()
         task.wait(tonumber(Configs.Time))
-        TweenService:Create(Notify,TweenInfo.new(tonumber(Configs.Time), Enum.EasingStyle.Back, Enum.EasingDirection.InOut),{Position = UDim2.new(2, 0, 0.856, 0)}):Play() 
+        TweenService:Create(Notify,TweenInfo.new(.1, Enum.EasingStyle.Back, Enum.EasingDirection.InOut),{Position = UDim2.new(2, 0, 0.856, 0)}):Play() 
         task.wait(tonumber(Configs.Time) / 2)
         Notify.Visible = false
         task.wait(tonumber(Configs.Time) / 2)
