@@ -130,14 +130,14 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     if conchosetting and type(conchosetting) == "table" then 
-                        if conchosetting and conchosetting["Mastery Farm"] then 
+                        if conchosetting and conchosetting.AutoMastery then 
                             ToiCanOxi = 2 
                             atack()
-                            if _G.S.FastAttackDelay and type(_G.S.FastAttackDelay) == "number" and _G.S.FastAttackDelay >= 0.1 then 
-                                wait(_G.S.FastAttackDelay)
+                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
+                                wait(conchosetting.FastAttackDelay)
                             else
-                                _G.S.FastAttackDelay = 0.2 
-                                wait(_G.S.FastAttackDelay)
+                                conchosetting.FastAttackDelay = 0.2 
+                                wait(conchosetting.FastAttackDelay)
                             end
                         elseif CountAttack < FastAttackSettings["CDAAT"] then 
                             ToiCanOxi = ToiCanOxi +1
@@ -145,11 +145,11 @@ function FastAttackConnectorFunction()
                         elseif CountAttack >= FastAttackSettings["CDAAT"] then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
-                            if _G.S.FastAttackDelay and type(_G.S.FastAttackDelay) == "number" and _G.S.FastAttackDelay >= 0.1 then 
-                                wait(_G.S.FastAttackDelay*2)
+                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
+                                wait(conchosetting.FastAttackDelay*2)
                             else
-                                _G.S.FastAttackDelay = 0.2 
-                                wait(_G.S.FastAttackDelay*2)
+                                conchosetting.FastAttackDelay = 0.2 
+                                wait(conchosetting.FastAttackDelay*2)
                             end
                         end
                     end
