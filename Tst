@@ -1,1 +1,30 @@
-hahaaha
+_G.S = {
+    FastAttackDelay = 80,
+    FastAttackWait = 100
+}
+
+FastSkidYMF = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
+function AttackFunction()
+    FastSkidYMF:Attack()
+end
+function Click()
+    local bc = game:GetService("VirtualUser")
+    bc:CaptureController()
+    bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+end
+spawn(
+    function()
+        while wait() do
+            if UseFastAttack then
+                FastSkidYMF:InputSetting(_G.S)
+                FastSkidYMF:InputValue(_G.S.FastAttackDelay, _G.S.FastAttackWait)
+                FastSkidYMF:Attack(true)
+            else
+                FastSkidYMF:Attack(false)
+            end
+        end
+    end
+)
+UseFastAttack = true
+_G.S.FastAttackDelay = 150
+_G.S.FastAttackWait = 5
