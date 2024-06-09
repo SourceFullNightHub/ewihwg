@@ -114,7 +114,7 @@ function FastAttackConnectorFunction()
             AttackFunctgggggion()
         end)
     end
-    ToiCanOxi = 0
+    bulonvoibucackhacginhau = 0
     conchosetting = {}
     function ReturnFunctions:GetMethod()
         MethodAttack = "Slow"
@@ -127,21 +127,21 @@ function FastAttackConnectorFunction()
         while task.wait() do 
             if UFFF then 
                 pcall(function()
-                    if conchosetting and conchosetting["Mastery Farm"] then 
-                        ToiCanOxi = 2 
-                        atack()
-                        if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
-                            wait(conchosetting.FastAttackDelay)
-                        else
-                            conchosetting.FastAttackDelay = 0.2 
-                            wait(conchosetting.FastAttackDelay)
-                        end
-                    elseif conchosetting and type(conchosetting) == "table" then 
-                        if CountAttack < FastAttackSettings["CDAAT"] then 
-                            ToiCanOxi = ToiCanOxi +1
+                    if conchosetting and type(conchosetting) == "table" then 
+                        if conchosetting and conchosetting.AutoFarmMastery then 
+                            bulonvoibucackhacginhau = 2 
+                            atack()
+                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
+                                wait(conchosetting.FastAttackDelay)
+                            else
+                                conchosetting.FastAttackDelay = 0.2 
+                                wait(conchosetting.FastAttackDelay)
+                            end
+                        elseif CountAttack < FastAttackSettings["CDAAT"] then 
+                            bulonvoibucackhacginhau = bulonvoibucackhacginhau +1
                             atack()
                         elseif CountAttack >= FastAttackSettings["CDAAT"] then 
-                            ToiCanOxi = ToiCanOxi +1
+                            bulonvoibucackhacginhau = bulonvoibucackhacginhau +1
                             atack()
                             if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
                                 wait(conchosetting.FastAttackDelay*2)
