@@ -1,3 +1,8 @@
+_G.S = {
+    FastAttackDelay = 80,
+    FastAttackWait = 100
+}
+
 FastSkidYMF = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
 function AttackFunction()
     FastSkidYMF:Attack()
