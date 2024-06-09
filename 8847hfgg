@@ -12,6 +12,8 @@ function FastAttackConnectorFunction()
     local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
     local cooldownfastattack = tick()
 
+
+    --[Function RmFzdCBBdHRhY2s=]
     
     ReturnFunctions = {}
     function CurrentWeapon()
@@ -37,7 +39,7 @@ function FastAttackConnectorFunction()
             return nil
         end
         local ac = CombatFrameworkR.activeController
-        ac.hitboxMagnitude = 80
+        ac.hitboxMagnitude = 55
         if ac and ac.equipped then
             for indexincrement = 1, 1 do
                 local bladehit =require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.LocalPlayer.Character,{game.Players.LocalPlayer.Character.HumanoidRootPart},60)
@@ -114,7 +116,7 @@ function FastAttackConnectorFunction()
             AttackFunctgggggion()
         end)
     end
-    bulonvoibucackhacginhau = 0
+    ToiCanOxi = 0
     conchosetting = {}
     function ReturnFunctions:GetMethod()
         MethodAttack = "Slow"
@@ -128,26 +130,26 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     if conchosetting and type(conchosetting) == "table" then 
-                        if conchosetting and conchosetting.AutoFarmMastery then 
-                            bulonvoibucackhacginhau = 2 
+                        if conchosetting and conchosetting["Mastery Farm"] then 
+                            ToiCanOxi = 2 
                             atack()
-                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
-                                wait(conchosetting.FastAttackDelay)
+                            if _G.S.FastAttackDelay and type(_G.S.FastAttackDelay) == "number" and _G.S.FastAttackDelay >= 0.1 then 
+                                wait(_G.S.FastAttackDelay)
                             else
-                                conchosetting.FastAttackDelay = 0.2 
-                                wait(conchosetting.FastAttackDelay)
+                                _G.S.FastAttackDelay = 0.2 
+                                wait(_G.S.FastAttackDelay)
                             end
                         elseif CountAttack < FastAttackSettings["CDAAT"] then 
-                            bulonvoibucackhacginhau = bulonvoibucackhacginhau +1
+                            ToiCanOxi = ToiCanOxi +1
                             atack()
                         elseif CountAttack >= FastAttackSettings["CDAAT"] then 
-                            bulonvoibucackhacginhau = bulonvoibucackhacginhau +1
+                            ToiCanOxi = ToiCanOxi +1
                             atack()
-                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
-                                wait(conchosetting.FastAttackDelay*2)
+                            if _G.S.FastAttackDelay and type(_G.S.FastAttackDelay) == "number" and _G.S.FastAttackDelay >= 0.1 then 
+                                wait(_G.S.FastAttackDelay*2)
                             else
-                                conchosetting.FastAttackDelay = 0.2 
-                                wait(conchosetting.FastAttackDelay*2)
+                                _G.S.FastAttackDelay = 0.2 
+                                wait(_G.S.FastAttackDelay*2)
                             end
                         end
                     end
@@ -169,7 +171,7 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     local Fastflux = getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))[2]
-                    Fastflux.activeController.hitboxMagnitude = 80
+                    Fastflux.activeController.hitboxMagnitude = 55
                     Fastflux.activeController.timeToNextAttack = 0
                     Fastflux.activeController.attacking = false
                     Fastflux.activeController.increment = 3
@@ -186,7 +188,7 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     local Fastflux = getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))[2]
-                    Fastflux.activeController.hitboxMagnitude = 80
+                    Fastflux.activeController.hitboxMagnitude = 55
                     Fastflux.activeController.timeToNextAttack = 0
                     Fastflux.activeController.attacking = false
                     Fastflux.activeController.increment = 3
