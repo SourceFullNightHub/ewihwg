@@ -37,7 +37,7 @@ function FastAttackConnectorFunction()
             return nil
         end
         local ac = CombatFrameworkR.activeController
-        ac.hitboxMagnitude = 55
+        ac.hitboxMagnitude = 80
         if ac and ac.equipped then
             for indexincrement = 1, 1 do
                 local bladehit =require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.LocalPlayer.Character,{game.Players.LocalPlayer.Character.HumanoidRootPart},60)
@@ -169,7 +169,7 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     local Fastflux = getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))[2]
-                    Fastflux.activeController.hitboxMagnitude = 55
+                    Fastflux.activeController.hitboxMagnitude = 80
                     Fastflux.activeController.timeToNextAttack = 0
                     Fastflux.activeController.attacking = false
                     Fastflux.activeController.increment = 3
@@ -186,7 +186,7 @@ function FastAttackConnectorFunction()
             if UFFF then 
                 pcall(function()
                     local Fastflux = getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))[2]
-                    Fastflux.activeController.hitboxMagnitude = 55
+                    Fastflux.activeController.hitboxMagnitude = 80
                     Fastflux.activeController.timeToNextAttack = 0
                     Fastflux.activeController.attacking = false
                     Fastflux.activeController.increment = 3
