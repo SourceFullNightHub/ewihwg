@@ -6,7 +6,7 @@ local mouse = plr:GetMouse()
 local TweenService = game:GetService("TweenService")
 local NightHubScreen = Instance.new("ScreenGui")
 NightHubScreen.Name = "Night Hub Screen"
-NightHubScreen.Parent = game.CoreGui
+NightHubScreen.Parent = game.Players.LocalPlayer.PlayerGui
 local NightLib = {}
 
 local function MakeDraggable(topbarobject, object)
@@ -173,6 +173,42 @@ function NightLib:CreateWindow(Configs)
     local No = Instance.new("TextButton")
     local UICorner_21 = Instance.new("UICorner")
     local Desc = Instance.new("TextLabel")
+    local plr = game.Players.LocalPlayer
+    local Logo = Instance.new("ImageLabel")
+    local UICorner = Instance.new("UICorner")
+    local heheheh = Instance.new("Frame")
+
+    heheheh.Name = "heheheh"
+    heheheh.Parent = NightHubScreen
+    heheheh.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    heheheh.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    heheheh.BorderSizePixel = 0
+    heheheh.Size = UDim2.new(1, 0, 1, 0)
+    heheheh.Visible = false
+
+    Logo.Name = "Logo"
+    Logo.Parent = NightHubScreen
+    Logo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Logo.BackgroundTransparency = 1.000
+    Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Logo.BorderSizePixel = 0
+    Logo.Position = UDim2.new(0.981549799, 0, 0.959514141, 0)
+    Logo.Size = UDim2.new(0, 20, 0, 20)
+    Logo.Image = "rbxassetid://17717048927"
+
+    UICorner.CornerRadius = UDim.new(0, 4)
+    UICorner.Parent = Logo
+
+    TweenService:Create(Logo, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 100, 0, 100)}):Play()
+    TweenService:Create(Logo, TweenInfo.new(4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 1800}):Play()
+    TweenService:Create(Logo, TweenInfo.new(4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.273985237, 0, 0.127530366, 0)}):Play()
+    wait(2)
+    TweenService:Create(Logo, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageTransparency = 1}):Play()
+    TweenService:Create(Logo, TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0.000}):Play()
+    TweenService:Create(Logo, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(0, 598, 0, 376)}):Play()
+    wait(2)
+    Logo.Visible = false
+    TweenService:Create(Main, TweenInfo.new(3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Visible = true}):Play()
 
     Sure.Name = "Sure?"
     Sure.Parent = NightHubScreen
@@ -266,6 +302,7 @@ function NightLib:CreateWindow(Configs)
     Main.BorderSizePixel = 0
     Main.Position = UDim2.new(0.273985237, 0, 0.127530366, 0)
     Main.Size = UDim2.new(0, 598, 0, 376)
+    Main.Visible = false
 
     CloseOpen.Name = "CloseOpen"
     CloseOpen.Parent = NightHubScreen
@@ -1453,5 +1490,10 @@ function NightLib:CreateWindow(Configs)
 
     return TabContent
 end
+
+local MainWindows = NightLib:CreateWindow({
+    Title = "Night Hub",
+    Creator = "Night"
+})
 
 return NightLib
