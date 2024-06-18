@@ -1491,9 +1491,4 @@ function NightLib:CreateWindow(Configs)
     return TabContent
 end
 
-local MainWindows = NightLib:CreateWindow({
-    Title = "Night Hub",
-    Creator = "Night"
-})
-
 return NightLib
