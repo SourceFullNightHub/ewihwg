@@ -1461,6 +1461,7 @@ function NightLib:CreateWindow(Configs)
             ehehehhe.Position = UDim2.new(0.738207519, 0, 0.155555561, 0)
             ehehehhe.Size = UDim2.new(0, 100, 0, 30)
             ehehehhe.Font = Enum.Font.GothamBold
+            ehehehhe.ClipsDescendants = true
             ehehehhe.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
             ehehehhe.Text = Configs.Default
             ehehehhe.TextColor3 = Color3.fromRGB(255, 255, 255)
