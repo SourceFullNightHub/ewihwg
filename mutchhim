@@ -1,38 +1,60 @@
-local Your = game.Players.LocalPlayer
-function WaitHRP(q0) 
-    if not q0 then return end
-    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
-end 
-function Tween(Pos)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-        if not Pos then return end
-        if not Your.Character:FindFirstChild("PartTele") then
-            local PartTele = Instance.new("Part", Your.Character) -- Create part
-            PartTele.Size = Vector3.new(10,1,10)
-            PartTele.Name = "PartTele"
-            PartTele.Anchored = true
-            PartTele.Transparency = 1
-            PartTele.CanCollide = false
-            PartTele.CFrame = WaitHRP(Your).CFrame 
-            PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                task.wait(0.01)
-                WaitHRP(Your).CFrame = PartTele.CFrame
-            end)
-            spawn(function()
-                while wait() do
-                    PartTele.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+function isnil(thing)
+    return (thing == nil)
+end
+local function round(n)
+    return math.floor(tonumber(n) + 0.5)
+end
+Number = math.random(1, 1000000)
+function ESPPlayers()
+    for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+                if not isnil(v.Character) then
+                    if ESP then
+                        if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild("ESP Players" .. Number) then
+                            local BillboardGui = Instance.new("BillboardGui", v.Character.Head)
+                            BillboardGui.Name = "ESP Players" .. Number
+                            BillboardGui.ExtentsOffset = Vector3.new(0, 1, 0)
+                            BillboardGui.Size = UDim2.new(1, 200, 1, 30)
+                            BillboardGui.Adornee = v.Character.Head
+                            BillboardGui.AlwaysOnTop = true
+                            local NamePlayers = Instance.new("TextLabel", BillboardGui)
+                            NamePlayers.Font = Enum.Font.GothamSemibold
+                            NamePlayers.FontSize = "Size14"
+                            NamePlayers.TextWrapped = true
+                            NamePlayers.Text =
+                                ("["..v.Name .. "]"..
+                                        "[" ..
+                                            v.Team .. "]"..
+                                                "\n[Health : " ..
+                                                    round(
+                                                        v.Character.Humanoid.Health * 100 /
+                                                            v.Character.Humanoid.MaxHealth
+                                                    ).. "]")
+                            NamePlayers.Size = UDim2.new(1, 0, 1, 0)
+                            NamePlayers.TextYAlignment = "Top"
+                            NamePlayers.BackgroundTransparency = 1
+                            NamePlayers.TextStrokeTransparency = 0.5
+                            NamePlayers.TextColor3 = Color3.fromRGB(255, 0, 191)
+                        else
+                            v.Character.Head["ESP Players" .. Number].TextLabel.Text =
+                            "["..v.Name .. "]"..
+                                        "[" ..
+                                            v.Team .. "]"..
+                                                "\n[Health : " ..
+                                                    round(
+                                                        v.Character.Humanoid.Health
+                                                    ).. "]"
+                        end
+                    else
+                        if v.Character.Head:FindFirstChild("ESP Players" .. Number) then
+                            v.Character.Head:FindFirstChild("ESP Players" .. Number):Destroy()
+                        end
+                    end
                 end
-            end)
-        end
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-        if Distance <= 250 then
-            tween:Cancel()
-            game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
-        end
-		tween:Play()
     end
 end
-Tween(CFrame.new(10000, 1000000, 10000))
+ESP = true
+spawn(function()
+    while wait() do
+        ESPPlayers()
+    end
+end)
