@@ -77,7 +77,8 @@ function NightLib:CreateNotify(Config)
         local UIPadding_20 = Instance.new("UIPadding")
         local Desc_7 = Instance.new("TextLabel")
         local UIPadding_21 = Instance.new("UIPadding")
-
+        
+    pcall(function()
         Notify.Name = "Notify"
         Notify.Parent = NightHubScreen
         Notify.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -132,6 +133,7 @@ function NightLib:CreateNotify(Config)
         Notify.Visible = false
         task.wait(tonumber(Config.Time) / 2)
         Notify:Destroy()
+    end)
 end
 
 function NightLib:CreateWindow(Config)
@@ -550,6 +552,8 @@ function NightLib:CreateWindow(Config)
             Config.Description = Config.Description or ""
             Config.CallBack = Config.CallBack or function() end
 
+            pcall(function()
+
                 local Button = Instance.new("Frame")
                 local UICorner_10 = Instance.new("UICorner")
                 local ButtonClick = Instance.new("TextButton")
@@ -637,6 +641,7 @@ function NightLib:CreateWindow(Config)
                     Button.BackgroundColor3 = Color3.fromRGB(112, 112, 112)
                     TweenService:Create(Button, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(30, 30, 30)}):Play()
             end)
+        end)
         end
         function TabContent:CreateToggle(Config)
             Config = Config or {}
@@ -658,6 +663,8 @@ function NightLib:CreateWindow(Config)
                 local UICorner_13 = Instance.new("UICorner")
                 local Tggle = {}
                 Toggled = false
+
+                pcall(function()
 
                 Toggle.Name = "Toggle"
                 Toggle.Parent = Channel
@@ -775,6 +782,8 @@ function NightLib:CreateWindow(Config)
                     pcall(Config.CallBack, Toggled)
                 end
                 return Tggle
+
+            end)
         end
         function TabContent:CreateDropdown(Config)
             Config = Config or {}
@@ -783,6 +792,8 @@ function NightLib:CreateWindow(Config)
             Config.Options = Config.Options or ""
             Config.Default = Config.Default or ""
             Config.CallBack = Config.CallBack or function() end
+
+            pcall(function()
 
             local Dropdown = Instance.new("Frame")
             local UICorner_17 = Instance.new("UICorner")
@@ -1011,6 +1022,7 @@ function NightLib:CreateWindow(Config)
                 Title_5.Text = Config.Name
             end
             return DropFunc
+        end)
         end
         function TabContent:CreateSlider(Config)
             Config = Config or {}
@@ -1019,6 +1031,8 @@ function NightLib:CreateWindow(Config)
             Config.Min = Config.Min or 1
             Config.Default = Config.Default or 50
             Config.CallBack = Config.CallBack or function() end
+
+            pcall(function()
 
             local Slider = Instance.new("Frame")
             local UICorner_19 = Instance.new("UICorner")
@@ -1136,6 +1150,7 @@ function NightLib:CreateWindow(Config)
 			end)
 			SliderFunc:Set(tonumber(Config.Default))
 			return SliderFunc       
+        end)
         end
         function TabContent:CreateLabel(Config)
             Config = Config or {}
