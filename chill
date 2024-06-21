@@ -2,7 +2,7 @@
 
 local plr = game.Players.LocalPlayer
 local WS = game.Workspace
-local RC = WS.ReplicatedStorage
+local RC = game.ReplicatedStorage
 local IsLevel = plr.Data.Level.Value
 
 if game.PlaceId == 2753915549 then
@@ -443,7 +443,7 @@ end
 
 function Byp(nahupgrade)
     if CheckDistancelonhon(nahupgrade, 2500) then
-        Bypass(nahupgrade)
+        BypassTeleport(nahupgrade)
     elseif CheckDistancebehon(nahupgrade, 2500) then
         Tween(nahupgrade)
     end
@@ -1072,7 +1072,6 @@ function CheckNotifyComplete()
     return false
 end
 while task.wait() do
-    pcall(function()
         if Sea1 then
             if IsLevel < 200 and not CheckInventory("Saber") then
                 if IsLevel >= 1 and IsLevel <= 29 then
@@ -1880,5 +1879,4 @@ while task.wait() do
                             end
                         end
                     end
-                end)
             end
