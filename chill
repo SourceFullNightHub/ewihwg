@@ -1470,7 +1470,6 @@ spawn(function()
 end)
 spawn(function()
     while wait() do
-        pcall(function()
             if Kaitun then
                 if not CheckFruit() then
                     if plr.Data.Level.Value >= 1 and plr.Data.Level.Value <= 29 then
@@ -1570,6 +1569,5 @@ spawn(function()
                 Tween(CheckFruit().Handle.CFrame)
                 StoreFruit()
             end
-        end)
     end
 end)
