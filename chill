@@ -4,6 +4,137 @@ local plr = game.Players.LocalPlayer
 local WS = game.Workspace
 local Rc = game.ReplicatedStorage
 local BlackListLocation = {}
+for i, v in pairs(game.Workspace.Map:GetDescendants()) do
+    if
+        v.Name == "Tavern" or v.Name == "SmileFactory" or v.Name == "Tree" or v.Name == "Rocks" or
+            v.Name == "PartHouse" or
+            v.Name == "Hotel" or
+            v.Name == "Walplriece" or
+            v.Name == "MiddlePillars" or
+            v.Name == "Cloud" or
+            v.Name == "PluginGrass" or
+            v.Name == "BigHouse" or
+            v.Name == "SmallHouse" or
+            v.Name == "Detail"
+     then
+        v:Destroy()
+    end
+end
+for i, v in pairs(game.ReplicatedStorage.Unloaded:GetDescendants()) do
+    if
+        v.Name == "Tavern" or v.Name == "SmileFactory" or v.Name == "Tree" or v.Name == "Rocks" or
+            v.Name == "PartHouse" or
+            v.Name == "Hotel" or
+            v.Name == "Walplriece" or
+            v.Name == "MiddlePillars" or
+            v.Name == "Cloud" or
+            v.Name == "PluginGrass" or
+            v.Name == "BigHouse" or
+            v.Name == "SmallHouse" or
+            v.Name == "Detail"
+     then
+        v:Destroy()
+    end
+end
+for i, v in pairs(plr.Character:GetDescendants()) do
+    if v:IsA("Accessory") or v.Name == "Pants" or v.Name == "Shirt" then
+        v:Destroy()
+    end
+end
+local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = false
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i, v in pairs(g:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+    elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+        v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+        v.Lifetime = NumberRange.new(0)
+    elseif v:IsA("Explosion") then
+        v.BlastPressure = 1
+        v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+        v.Enabled = false
+    elseif v:IsA("MeshPart") then
+        v.Material = "Plastic"
+        v.Reflectance = 0
+        v.TextureID = 10385902758728957
+    end
+end
+for i, e in pairs(l:GetChildren()) do
+    if
+        e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or
+            e:IsA("BloomEffect") or
+            e:IsA("DepthOfFieldEffect")
+     then
+        e.Enabled = false
+    end
+end
+_G.S = {
+    DelayAttack = 80,
+    TimeWait = 5
+}
+function LoadSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfolder("Night Hub") then
+            makefolder("Night Hub")
+        end
+        if not isfolder("Night Hub/Blox Fruits/") then
+            makefolder("Night Hub/Blox Fruits/")
+        end
+        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            writefile(
+                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(_G.S)
+            )
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            for y, z in pairs(x) do
+                _G.S[y] = z
+            end
+        end
+    else
+        return
+    end
+end
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            local A = {}
+            for y, z in pairs(_G.S) do
+                A[y] = z
+            end
+            writefile(
+                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(A)
+            )
+        end
+    else
+        return
+    end
+end
+LoadSettings()
 function CheckNearestTeleporter(vcs)
     vcspos = vcs.Position
     min = math.huge
@@ -437,6 +568,48 @@ function Bypass(Ps)
         Tween(Ps)
     end
 end
+Fastbeo = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
+function AttackFunction()
+    Fastbeo:Attack()
+end
+function Click()
+    local bc = game:GetService("VirtualUser")
+    bc:CaptureController()
+    bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+end
+spawn(
+    function()
+        while wait() do
+            if FastNCooldown then
+                Fastbeo:InputSetting(_G.S)
+                Fastbeo:InputValue(_G.S.DelayAttack, _G.S.TimeWait)
+                Fastbeo:Attack(true)
+            else
+                Fastbeo:Attack(false)
+            end
+        end
+    end
+)
+
+task.spawn(function()
+    while task.wait() do
+        if FastNCooldown then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if v.Humanoid.Health > 0 then
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                            repeat task.wait()
+                                FastNCooldown = true
+                                Click()
+                            until v.Humanoid.Health <= 0 or not v:FindFirstChild("Humanoid") or (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 100
+                            FastNCooldown = false
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
 function CheckFruit()
     for i, v in pairs(WS:GetChildren()) do
         if string.find(v.Name, "Fruit") then
