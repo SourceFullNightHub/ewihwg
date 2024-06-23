@@ -482,7 +482,7 @@ function NightLib:CreateWindow(Configs)
         TabDisable.Font = Enum.Font.GothamBold
         TabDisable.Text = Configs.Name
         TabDisable.TextColor3 = Color3.fromRGB(144, 144, 144)
-        TabDisable.TextSize = 17.000
+        TabDisable.TextSize = 15.000
 
         EnableFrame_2.Name = "EnableFrame"
         EnableFrame_2.Parent = TabDisable
