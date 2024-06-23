@@ -1131,7 +1131,7 @@ function NightLib:CreateWindow(Configs)
             Click_2.MouseButton1Click:Connect(function()
                 if Dropped == false then
                     Dropped = true
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0.150, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.100, 55),"Out","Quad",0.3,true)
                     TweenService:Create(Icon, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
                     wait(0.2)
                     ListFrame.Visible = true
