@@ -939,7 +939,7 @@ function NightLib:CreateWindow(Configs)
             Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
             Dropdown.BorderSizePixel = 0
             Dropdown.Position = UDim2.new(0, 0, 0.453571439, 0)
-            Dropdown.Size = UDim2.new(1, 0, 0, 55)
+            Dropdown.Size = UDim2.new(1, 0, 0.010, 55)
 
             Features_5.Name = "Features"
             Features_5.Parent = Dropdown
@@ -1119,7 +1119,7 @@ function NightLib:CreateWindow(Configs)
                 Option.MouseButton1Click:Connect(function()
                     Dropped = false
                     ListFrame.Visible = false
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.010, 55),"Out","Quad",0.3,true)
                     TweenService:Create(Icon, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = -90.000}):Play()
                     Option.TextColor3 = Color3.fromRGB(255, 255, 255)
                     pcall(Option.Text)
@@ -1137,7 +1137,7 @@ function NightLib:CreateWindow(Configs)
                     ListFrame.Visible = true
                 else
                     Dropped = false
-                    Dropdown:TweenSize(UDim2.new(1, 0, 0, 55),"Out","Quad",0.3,true)
+                    Dropdown:TweenSize(UDim2.new(1, 0, 0.010, 55),"Out","Quad",0.3,true)
                     TweenService:Create(Icon, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = -90.000}):Play()
                     ListFrame.Visible = false
                 end
@@ -1174,7 +1174,7 @@ function NightLib:CreateWindow(Configs)
                     Nahvaicaicut.MouseButton1Click:Connect(function()
                         Dropped = false
                         ListFrame.Visible = false
-                        Dropdown:TweenSize(UDim2.new(1, 0, 0.037, 55),"Out","Quad",0.3,true)
+                        Dropdown:TweenSize(UDim2.new(1, 0, 0.010, 55),"Out","Quad",0.3,true)
                         TweenService:Create(
                             ListFrame,
                             TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
@@ -1197,7 +1197,7 @@ function NightLib:CreateWindow(Configs)
                     end
                 end
                 Dropped = false
-                Dropdown:TweenSize(UDim2.new(1, 0, 0.037, 55),"Out","Quad",0.3,true)
+                Dropdown:TweenSize(UDim2.new(1, 0, 0.010, 55),"Out","Quad",0.3,true)
                 TweenService:Create(
                     ListFrame,
                     TweenInfo.new(0 ,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
