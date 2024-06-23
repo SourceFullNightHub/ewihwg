@@ -706,7 +706,7 @@ function NightLib:CreateWindow(Configs)
             UICorner_8.Parent = Button
 
             Button.MouseEnter:Connect(function()
-                Button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                Button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             end)
 
             Button.MouseLeave:Connect(function()
@@ -837,7 +837,7 @@ function NightLib:CreateWindow(Configs)
             UICorner_11.Parent = Toggle
 
             Toggle.MouseEnter:Connect(function()
-                Toggle.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                Toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             end)
 
             Toggle.MouseLeave:Connect(function()
@@ -1089,7 +1089,7 @@ function NightLib:CreateWindow(Configs)
             UIListLayout_3.Padding = UDim.new(0, 7)
 
             Dropdown.MouseEnter:Connect(function()
-                Dropdown.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                Dropdown.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             end)
 
             Dropdown.MouseLeave:Connect(function()
@@ -1316,7 +1316,7 @@ function NightLib:CreateWindow(Configs)
             TextLabel_2.TextSize = 14.000
 
             Slider.MouseEnter:Connect(function()
-                Slider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                Slider.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             end)
 
             Slider.MouseLeave:Connect(function()
@@ -1441,7 +1441,7 @@ function NightLib:CreateWindow(Configs)
             UIStroke_5.Parent = Put
 
             Textbox.MouseEnter:Connect(function()
-                Textbox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+                Textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             end)
 
             Textbox.MouseLeave:Connect(function()
