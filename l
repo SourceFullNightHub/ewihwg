@@ -807,6 +807,7 @@ function SitinksLib:CreateWindow(Configs)
             Listtt.BorderColor3 = Color3.fromRGB(0, 0, 0)
             Listtt.BorderSizePixel = 0
             Listtt.Size = UDim2.new(1, 0, 1, 0)
+            Listtt.ClipsDescendants = true
 
             UIListLayout_4.Parent = Listtt
             UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
@@ -1701,4 +1702,96 @@ function SitinksLib:CreateWindow(Configs)
     end
     return TabCre
 end
-return SitinksLib
+ 
+local Windows = SitinksLib:CreateWindow({Title = "Sitinks Hub"})
+
+local F = Windows:CreateTab({Name = "Farm"})
+
+local S = Windows:CreateTab({Name = "Stack Farm"})
+
+F:CreateSection({Text = "Fuck u"})
+
+F:CreateSectionContent({
+    Text = "Show Me Your Dick"
+})
+
+Countbeo = 0
+F:CreateButton({
+    Name = "Click de beo then",
+    Description = 'memaybeo',
+    CallBack = function()
+        print("Adu may beo vay")
+    end
+})
+
+local ToggleStartFarm = F:CreateToggle({
+    Name = "Start Farm",
+    Description = "Not",
+    Default = true,
+    Settings = true,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "Đ",
+    Default = false,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "ị",
+    Default = false,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "t",
+    Default = false,
+    CallBack = function(Value)
+        print(Value)
+    end
+})
+
+local never = F:CreateDropdown({
+    Name = "Lol",
+    Description = "shit",
+    Options = {"1", "2", "3"},
+    Default = "1",
+    CallBack = function(Value)
+        print(Value)
+    end
+})
+
+F:CreateSlider({
+    Name = "WalkSpeed",
+    Max = 300,
+    Min = 50,
+    Default = 100,
+    CallBack = function(Value)
+        plr.Character.Humanoid.WalkSpeed = Value
+    end
+})
+
+F:CreateTextBox({
+    Name = 'shit',
+    Default = "",
+    CallBack = function(Value)
+        plr.Character.Humanoid.WalkSpeed = tonumber(Value)
+    end
+})
+
+F:CreateLabel({Text = "Con cu"})
+F:CreateParagraph({Title = "Con cu sieu dai", Content = "Not have"})
+
+never:Refresh({"Shit", "Lol"})
+SitinksLib:Notify({
+    Title = "Notification",
+    Description = "Shit",
+    Time = 5
+})
