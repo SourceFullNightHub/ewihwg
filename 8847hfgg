@@ -8,12 +8,6 @@ function FastAttackConnectorFunction()
     local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
     local CombatFrameworkR = getupvalues(CombatFramework)[2]
     local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
-    local RigControllerR = getupvalues(RigController)[2]
-    local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
-    local cooldownfastattack = tick()
-
-
-    --[Function RmFzdCBBdHRhY2s=]
     
     ReturnFunctions = {}
     function CurrentWeapon()
@@ -105,8 +99,8 @@ function FastAttackConnectorFunction()
         CameraShakerR:Stop()
     end)
     function ReturnFunctions:InputValue(CDAAT,TimeWait)
-        FastAttackSettings["CDAAT"] = CDAAT
-        FastAttackSettings["TimeWait"] = TimeWait
+        conchosetting.DelayAttack = CDAAT
+        conchosetting.DelayAttack = TimeWait
     end
     function ReturnFunctions:InputSetting(tbbb)
         conchosetting = tbbb
@@ -120,7 +114,7 @@ function FastAttackConnectorFunction()
     conchosetting = {}
     function ReturnFunctions:GetMethod()
         MethodAttack = "Slow"
-        if CountAttack < FastAttackSettings["CDAAT"] then 
+        if CountAttack < conchosetting.DelayAttack then 
             MethodAttack = "Fast"
         end 
         return MethodAttack
@@ -139,10 +133,10 @@ function FastAttackConnectorFunction()
                                 conchosetting.DelayAttack = 0.2 
                                 wait(conchosetting.DelayAttack)
                             end
-                        elseif CountAttack < FastAttackSettings["CDAAT"] then 
+                        elseif CountAttack < conchosetting.DelayAttack then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
-                        elseif CountAttack >= FastAttackSettings["CDAAT"] then 
+                        elseif CountAttack >= conchosetting.DelayAttack then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
                             if conchosetting.DelayAttack and type(conchosetting.DelayAttack) == "number" and conchosetting.DelayAttack >= 0.1 then 
@@ -160,7 +154,7 @@ function FastAttackConnectorFunction()
     spawn(function()
         while task.wait() do 
             pcall(function() 
-                if tick()-TickCountAttack >= FastAttackSettings["TimeWait"] then 
+                if tick()-TickCountAttack >= conchosetting.DelayAttack then 
                     CountAttack = 0 
                 end
             end)
@@ -208,9 +202,9 @@ function FastAttackConnectorFunction()
         while wait() do 
             if UFFF then
                 pcall(function() 
-                    if CountAttack >= FastAttackSettings["CDAAT"] then 
+                    if CountAttack >= conchosetting.DelayAttack then 
                         TickFastAttackF = tick()
-                        repeat wait() until tick()-TickFastAttackF >= FastAttackSettings["TimeWait"]
+                        repeat wait() until tick()-TickFastAttackF >= conchosetting.DelayAttack
                         CountAttack = 0
                     end    
                 end)  
