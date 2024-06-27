@@ -80,6 +80,7 @@ local lp = game.Players
 local WS = game.Workspace
 local Rc = game.ReplicatedStorage
 local Race = plr.Data.Race.Value
+local lvl = plr.Data.Level.Value
 
 if game.PlaceId == 2753915549 then
     Sea1 = true
@@ -1091,6 +1092,19 @@ function BringMob(vvvv)
     end
 end
 
+function CheckQuestCompleted()
+    for a, a in pairs(
+        game:GetService("Players")["LocalPlayer"].PlayerGui:FindFirstChild("Notifications"):GetChildren()
+    ) do
+        if a.Name == "NotificationTemplate" then
+            if string.lower(a.Text):find("quest completed") then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 game:GetService("RunService").RenderStepped:connect(function()
     sethiddenproperty(plr, "SimulationRadius", math.huge)
 end)
@@ -1110,6 +1124,103 @@ function KillEnemy(v, Bring, S)
         until a.Humanoid.Health <= 0 or not a.Parent or not a:FindFirstChild("HumanoidRootPart") or S == false
         NoClip = false
         FastNCooldown = false
+    end
+end
+
+spawn(
+    function()
+        while wait() do
+            pcall(
+                function()
+                    if
+                            NoClip == true
+                     then
+                        if not plr.Character.Head:FindFirstChild("BodyClip") then
+                            local bv = Instance.new("BodyVelocity")
+                            bv.Name = "BodyClip"
+                            bv.Velocity = Vector3.new(0, 0, 0)
+                            bv.MaxForce = Vector3.new(9999999, 9999999, 9999999)
+                            bv.P = 15000
+                            bv.Parent = plr.Character.Head
+                        end
+                        for i, v in pairs(plr.Character:GetDescendants()) do
+                            if v:IsA("BasePart") then
+                                v.CanCollide = false
+                            end
+                        end
+                    else
+                        if plr.Character.Head:FindFirstChild("BodyClip") then
+                            plr.Character.Head:FindFirstChild("BodyClip"):Destroy()
+                        end
+                        plr.Character.Humanoid:ChangeState()
+                    end
+                end
+            )
+        end
+    end
+)
+
+function DisableTween(aL)
+    if not aL then
+        NoClip = false
+        if plr.Character.Head:FindFirstChild("BodyClip") then
+            plr.Character.Head:FindFirstChild("BodyClip"):Destroy()
+        end
+        if plr.Character.Head:FindFirstChild("PartTele") then
+            plr.Character.Head:FindFirstChild("PartTele"):Destroy()
+        end
+        CancelTween()
+        return Tween(plr.Character.HumanoidRootPart.CFrame)
+    end
+end
+
+CountQuestKill = 0
+function KillPlayers()
+    if not CheckQuestVisible() then
+        game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("PlayerHunter")
+        CountQuestKill = CountQuestKill + 1
+    elseif CheckQuestVisible() then
+        local Cac = string.gsub(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Defeat ", "")
+        Cac = string.gsub(Cac, " %p(0/1)%p", "")
+        if CheckQuestVisible() and not game:GetService("Workspace").Characters:FindFirstChild(Cac) then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+        end
+        if game.Players[Cac].Data.Level.Value < 20 or game.Players[Cac].Data.Level.Value <= (lvl - 150) or game.Players[Cac].Data.Level.Value >= (lvl + 150) then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+            print(game.Players[Cac].Data.Level.Value)
+        end
+        if CountQuestKill >= 15 then
+            HopServer()
+        end
+        if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("Quest").Visible then
+            for r, v in next, game:GetService("Workspace").Characters:GetChildren() do
+                if v:IsA("Model") and v.Name == Cac then
+                    if CheckTextQuest(v.Name) then
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false then
+                            repeat wait()
+                                EquipWeapon()
+                                EnableBuso()                                            
+                                SizePart(v)
+                                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
+                                NoClip = true
+                                if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    SendKey("Z")
+                                    SendKey("X")
+                                    _G.S.FastAttack = false
+                                    game:GetService "VirtualUser":CaptureController()
+                                    game:GetService "VirtualUser":Button1Down(Vector2.new(1280, 672))
+                                end
+                            until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true or v.Humanoid.Health <= 0 or not v.Parent or plr.Character.Humanoid.Health <= 0
+                            NoClip = false
+                            _G.S.FastAttack = true
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                        end
+                    end
+                end
+            end
+        end
     end
 end
 
@@ -1140,8 +1251,8 @@ spawn(
 )
 
 local S = Windows:CreateTab({Name = 'Shop'})
-
 local T = Windows:CreateTab({Name = 'Settings Farm'})
+local F = Windows:CreateTab({Name = 'Farm'})
 
 T:CreateSection({Text = 'Skills Turning'})
 
@@ -1261,3 +1372,147 @@ BypassToggle:CreateToggle({
     end
 })
 
+F:CreateSection({Text = 'Select Tool'})
+
+F:CreateDropdown({
+    Name = "Select Tool",
+    Description = "Select Tool To Farm",
+    Options = {"Melee", "Sword"},
+    Default = _G.S.SelectTool,
+    CallBack = function(Value)
+        _G.S.SelectTool = Value
+        SaveSettings()
+    end
+})
+
+F:CreateSection({Text = 'Settings'})
+
+F:CreateButton({
+    Name = "Boost FPS",
+    Description = "",
+    CallBack = function()
+        print('Hello World')
+    end
+})
+
+F:CreateButton({
+    Name = "Cancel Tween",
+    Description = "",
+    CallBack = function()
+        DisableTween(A)
+    end
+})
+
+F:CreateSection({Text = 'Farm'})
+
+F:CreateDropdown({
+    Name = "Select Method Farm",
+    Description = "Select Method Farm < Cake Prince > or < Level > or < Bone >",
+    Options = {"Level", "Cake Prince", "Bone"},
+    Default = _G.S.SelectMethodFarm,
+    CallBack = function(Value)
+        _G.S.SelectMethodFarm = Value
+        SaveSettings()
+    end
+})
+
+local ToggleStartFarm = F:CreateToggle({
+    Name = "Start Farm",
+    Description = "Start Farm Mode Farm Your Selected",
+    Default = false,
+    Settings = true,
+    CallBack = function(Value)
+        _G.S.StartFarm = Value
+        SaveSettings()
+        DisableTween(_G.S.StartFarm)
+    end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "Double Quest",
+    Default = _G.S.DoubleQuest,
+    CallBack = function(Value)
+        _G.S.DoubleQuest = Value
+        SaveSettings()
+   end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "Accept Quest",
+    Default = _G.S.AcceptQuest,
+    CallBack = function(Value)
+        _G.S.AcceptQuest = Value
+        SaveSettings()
+   end
+})
+
+ToggleStartFarm:CreateToggle({
+    Name = "No Summon Cake Prince",
+    Default = _G.S.SummonCakePrince,
+    CallBack = function(Value)
+        _G.S.SummonCakePrince = Value
+        SaveSettings()
+   end
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.S.StartFarm then
+                if _G.S.SelectMethodFarm == "Level" then
+                    if lvl >= 1 and lvl <= 29 then
+                        if CheckEnemies("Sky Bandit") then
+                            repeat wait()
+                                KillEnemy("Sky Bandit", true, _G.S.StartFarm)
+                            until not CheckEnemies("Sky Bandit") or _G.S.StartFarm == false or lvl >= 30
+                        else
+                            NoClip = true
+                            Byp(CFrame.new(-4953.20703125, 295.74420166015625, -2899.22900390625))
+                        end
+                    elseif lvl >= 30 and lvl <= 49 then
+                        if CheckEnemies("Shanda") then
+                            repeat wait()
+                                KillEnemy("Shanda", true, _G.S.StartFarm)
+                            until not CheckEnemies("Shanda") or _G.S.StartFarm == false or lvl >= 50
+                        else
+                            NoClip = true
+                            Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                        end
+                    elseif lvl >= 50 and lvl <= 299 then
+                        if not CheckQuestCompleted() then
+                            KillPlayers()
+                        else
+                            if CheckEnemies("Shanda") then
+                                repeat wait()
+                                    KillEnemy("Shanda", true, _G.S.StartFarm)
+                                until not CheckEnemies("Shanda") or _G.S.StartFarm == false or lvl >= 300
+                            else
+                                NoClip = true
+                                Tween(CFrame.new(-7678.48974609375, 5566.40380859375, -497.2156066894531))
+                            end
+                        end
+                    elseif lvl >= 300 then
+                        if CheckQuestVisible() then
+                            if MobLevel1OrMobLevel2() then
+                                for i, v in pairs(WS.Enemies:GetChildren()) do
+                                    if v.Name == MobLevel1OrMobLevel2() then
+                                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                            repeat wait()
+                                                KillEnemy(v.Name, true, _G.S.StartFarm)
+                                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or not CheckQuestVisible() or _G.S.StartFarm == false
+                                        end
+                                    end
+                                end
+                            elseif not MobLevel1OrMobLevel2() then
+                                cac = GetMobSpawnList(GetMob())
+                                for i, v in pairs(cac) do
+                                    Tween(v.CFrame * CFrame.new(2, 20, 2))
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
