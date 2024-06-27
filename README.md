@@ -7,7 +7,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sourc
 
 # Create Window :
 ```lua
-local Windows = Library:CreateWindow({Title = 'Night Hub', Cre = '! Nightx'})
+local Windows = Library:CreateWindow({Title = 'Night Hub'})
 ```
 # Create Notify :
 ```lua
