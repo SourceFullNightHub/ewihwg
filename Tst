@@ -1133,9 +1133,6 @@ function KillBoss(v, S)
             a.HumanoidRootPart.Transparency = 1
             a.HumanoidRootPart.CanCollide = false
             a.Head.CanCollide = false
-            if Bring == nil or Bring == true then
-                BringMob(v)
-            end
             FastNCooldown = true
             NoClip = true
         until a.Humanoid.Health <= 0 or not a.Parent or not a:FindFirstChild("HumanoidRootPart") or S == false
@@ -1434,6 +1431,46 @@ F:CreateDropdown({
 
 F:CreateSection({Text = 'Settings'})
 
+local tatcacode = {
+    "Sub2UncleKizaru",
+    "NEWTROLL",
+    "SUB2NOOBMASTER123",
+    "StrawHatMaine",
+    "Sub2OfficialNoobie",
+    "Sub2NoobMaster123",
+    "SUB2GAMERROBOT_EXP1",
+    "SUB2GAMERROBOT_RESET1",
+    "THEGREATACE",
+    "BIGNEWS",
+    "FUDD10",
+    "fudd10_v2",
+    "Bluxxy",
+    "Starcodeheo",
+    "JCWK",
+    "SUB2CAPTAINMAUI",
+    "Magicbus",
+    "Sub2Fer999",
+    "kittgaming",
+    "GAMERROBOT",
+    "SUBGAMERROBOT",
+    "ADMINGIVEAWAY",
+    "KITT_RESET",
+    "SECRET_ADMIN",
+    "Sub2Daigrock",
+    "Axiore",
+    "TantaiGaming"
+}
+
+F:CreateButton({
+    Name = "Redeem All Codes",
+    Description = "",
+    CallBack = function()
+        for i, v in pairs(tatcacode) do
+            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(v)
+        end
+    end
+})
+
 F:CreateButton({
     Name = "Boost FPS",
     Description = "",
@@ -1595,7 +1632,6 @@ local HauntedCastleMob = {
 
 spawn(function()
     while wait() do
-        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1724,6 +1760,7 @@ spawn(function()
                                     Tween(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
                                 end
                             end
+                        elseif CheckQuestVisible() and CheckTextQuest("Posessed Mummy") then
                             if CheckEnemies("Reborn Skeleton") or CheckEnemies("Living Zombie") or CheckEnemies("Demonic Soul") or CheckEnemies("Posessed Mummy") then
                                 for i, v in pairs(WS.Enemies:GetChildren()) do
                                     if table.find(HauntedCastleMob, v.Name) then
@@ -1763,6 +1800,5 @@ spawn(function()
                     end
                 end
             end
-        end)
     end
 end)
