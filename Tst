@@ -944,7 +944,12 @@ function DeleteLava()
         end
     end
 end
-
+function CheckCakePrinceSpawned()
+    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+        return true
+    end
+    return false
+end
 function CheckReplicatedStorage(Mn)
     for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
         if v.Name == Mn then
@@ -1091,6 +1096,31 @@ end)
 
 function KillEnemy(v, Bring, S)
     a = CheckEnemies(v)
+    if a.Humanoid.Health > 0 and a.Parent and a:FindFirstChild("HumanoidRootPart") and S then
+        repeat task.wait()
+            EnableBuso()
+            EquipWeapon()
+            Tween(a.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+            cac = a.HumanoidRootPart.CFrame
+            a.HumanoidRootPart.CFrame = cac
+            a.Humanoid.JumpPower = 0
+            a.Humanoid.WalkSpeed = 0
+            a.HumanoidRootPart.Transparency = 1
+            a.HumanoidRootPart.CanCollide = false
+            a.Head.CanCollide = false
+            if Bring == nil or Bring == true then
+                BringMob(v)
+            end
+            FastNCooldown = true
+            NoClip = true
+        until a.Humanoid.Health <= 0 or not a.Parent or not a:FindFirstChild("HumanoidRootPart") or S == false
+        NoClip = false
+        FastNCooldown = false
+    end
+end
+
+function KillBoss(v, S)
+    a = CheckBoss(v)
     if a.Humanoid.Health > 0 and a.Parent and a:FindFirstChild("HumanoidRootPart") and S then
         repeat task.wait()
             EnableBuso()
@@ -1408,7 +1438,84 @@ F:CreateButton({
     Name = "Boost FPS",
     Description = "",
     CallBack = function()
-        
+        for i, v in pairs(game.Workspace.Map:GetDescendants()) do
+            if
+                v.Name == "Tavern" or v.Name == "SmileFactory" or v.Name == "Tree" or v.Name == "Rocks" or
+                    v.Name == "PartHouse" or
+                    v.Name == "Hotel" or
+                    v.Name == "Walplriece" or
+                    v.Name == "MiddlePillars" or
+                    v.Name == "Cloud" or
+                    v.Name == "PluginGrass" or
+                    v.Name == "BigHouse" or
+                    v.Name == "SmallHouse" or
+                    v.Name == "Detail"
+             then
+                v:Destroy()
+            end
+        end
+        for i, v in pairs(game.ReplicatedStorage.Unloaded:GetDescendants()) do
+            if
+                v.Name == "Tavern" or v.Name == "SmileFactory" or v.Name == "Tree" or v.Name == "Rocks" or
+                    v.Name == "PartHouse" or
+                    v.Name == "Hotel" or
+                    v.Name == "Walplriece" or
+                    v.Name == "MiddlePillars" or
+                    v.Name == "Cloud" or
+                    v.Name == "PluginGrass" or
+                    v.Name == "BigHouse" or
+                    v.Name == "SmallHouse" or
+                    v.Name == "Detail"
+             then
+                v:Destroy()
+            end
+        end
+        for i, v in pairs(plr.Character:GetDescendants()) do
+            if v:IsA("Accessory") or v.Name == "Pants" or v.Name == "Shirt" then
+                v:Destroy()
+            end
+        end
+        local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+        local g = game
+        local w = g.Workspace
+        local l = g.Lighting
+        local t = w.Terrain
+        t.WaterWaveSize = 0
+        t.WaterWaveSpeed = 0
+        t.WaterReflectance = 0
+        t.WaterTransparency = 0
+        l.GlobalShadows = false
+        l.FogEnd = 9e9
+        l.Brightness = 0
+        settings().Rendering.QualityLevel = "Level01"
+        for i, v in pairs(g:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+            elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+                v.Transparency = 1
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Lifetime = NumberRange.new(0)
+            elseif v:IsA("Explosion") then
+                v.BlastPressure = 1
+                v.BlastRadius = 1
+            elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                v.Enabled = false
+            elseif v:IsA("MeshPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                v.TextureID = 10385902758728957
+            end
+        end
+        for i, e in pairs(l:GetChildren()) do
+            if
+                e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or
+                    e:IsA("BloomEffect") or
+                    e:IsA("DepthOfFieldEffect")
+             then
+                e.Enabled = false
+            end
+        end
     end
 })
 
@@ -1472,6 +1579,20 @@ ToggleStartFarm:CreateToggle({
    end
 })
 
+local MobCakePrince = {
+    "Baking Staff",
+    "Cookie Crafter",
+    "Cake Guard",
+    "Head Baker"
+}
+
+local HauntedCastleMob = {
+    "Reborn Skeleton",
+    "Posessed Mummy",
+    "Living Zombie",
+    "Demonic Soul",
+}
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -1529,6 +1650,115 @@ spawn(function()
                             end
                         else
                             GetQuest()
+                        end
+                    end
+                elseif _G.S.SelectMethodFarm == "Cake Prince" and Sea3 then
+                    if CheckCakePrinceSpawned() then
+                        if CheckBoss("Cake Prince") then
+                            repeat wait()
+                                KillBoss("Cake Prince", _G.S.StartFarm)
+                            until not CheckBoss("Cake Prince") or not _G.S.StartFarm or not CheckCakePrinceSpawned()
+                        end
+                    elseif not CheckCakePrinceSpawned() then
+                        if not CheckBoss("Cake Prince") then
+                            if _G.S.AcceptQuest then
+                                if not CheckQuestVisible() or not CheckTextQuest("Cookie Crafter") then
+                                    if CheckDistance(CFrame.new(-2020.6177978515625, 37.793975830078125, -12029.17578125)) <= 10 then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "CakeQuest1", 1)
+                                    else
+                                        if _G.S.BypassTele then
+                                            Byp(CFrame.new(-2020.6177978515625, 37.793975830078125, -12029.17578125))
+                                        else
+                                            Tween(CFrame.new(-2020.6177978515625, 37.793975830078125, -12029.17578125))
+                                        end
+                                    end
+                                elseif CheckQuestVisible() and CheckTextQuest("Cookie Crafter") then      
+                                    if CheckEnemies("Baking Staff") or CheckEnemies("Cookie Crafter") or CheckEnemies("Cake Guard") or CheckEnemies("Head Baker") then
+                                        for i, v in pairs(WS.Enemies:GetChildren()) do
+                                            if table.find(MobCakePrince, v.Name) then
+                                                if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                                    repeat wait()
+                                                        KillEnemy(v.Name, true, _G.S.StartFarm)
+                                                    until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.S.StartFarm == false or CheckCakePrinceSpawned()
+                                                end
+                                            end
+                                        end
+                                    else
+                                        if _G.S.BypassTele then
+                                            Byp(CFrame.new(-2136.31177, 73.9832458, -12327.4492, 0.996233284, -3.53329632e-08, 0.0867136046, 4.28375344e-08, 1, -8.46835277e-08, -0.0867136046, 8.80791475e-08, 0.996233284))
+                                        else
+                                            Tween(CFrame.new(-2136.31177, 73.9832458, -12327.4492, 0.996233284, -3.53329632e-08, 0.0867136046, 4.28375344e-08, 1, -8.46835277e-08, -0.0867136046, 8.80791475e-08, 0.996233284))
+                                        end
+                                    end
+                                end
+                            else
+                                if CheckEnemies("Baking Staff") or CheckEnemies("Cookie Crafter") or CheckEnemies("Cake Guard") or CheckEnemies("Head Baker") then
+                                    for i, v in pairs(WS.Enemies:GetChildren()) do
+                                        if table.find(MobCakePrince, v.Name) then
+                                            if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                                repeat wait()
+                                                    KillEnemy(v.Name, true, _G.S.StartFarm)
+                                                until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.S.StartFarm == false or CheckCakePrinceSpawned()
+                                            end
+                                        end
+                                    end
+                                else
+                                    if _G.S.BypassTele then
+                                        Byp(CFrame.new(-2136.31177, 73.9832458, -12327.4492, 0.996233284, -3.53329632e-08, 0.0867136046, 4.28375344e-08, 1, -8.46835277e-08, -0.0867136046, 8.80791475e-08, 0.996233284))
+                                    else
+                                        Tween(CFrame.new(-2136.31177, 73.9832458, -12327.4492, 0.996233284, -3.53329632e-08, 0.0867136046, 4.28375344e-08, 1, -8.46835277e-08, -0.0867136046, 8.80791475e-08, 0.996233284))
+                                    end
+                                end
+                            end
+                        end
+                    end
+                elseif _G.S.SelectMethodFarm == "Bone" and Sea3 then
+                    if _G.S.AcceptQuest then
+                        if not CheckQuestVisible() or not CheckTextQuest("Posessed Mummy") then
+                            if CheckDistance(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0)) <= 10 then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "HauntedQuest2", 2)
+                            else
+                                if _G.S.BypassTele then
+                                    Byp(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                                else
+                                    Tween(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                                end
+                            end
+                            if CheckEnemies("Reborn Skeleton") or CheckEnemies("Living Zombie") or CheckEnemies("Demonic Soul") or CheckEnemies("Posessed Mummy") then
+                                for i, v in pairs(WS.Enemies:GetChildren()) do
+                                    if table.find(HauntedCastleMob, v.Name) then
+                                        if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                            repeat wait()
+                                                KillEnemy(v.Name, true, _G.S.StartFarm)
+                                            until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.S.StartFarm == false
+                                        end
+                                    end                
+                                end
+                            else
+                                if _G.S.BypassTele then
+                                    Byp(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                                else
+                                    Tween(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                                end
+                            end
+                        end
+                    else
+                        if CheckEnemies("Reborn Skeleton") or CheckEnemies("Living Zombie") or CheckEnemies("Demonic Soul") or CheckEnemies("Posessed Mummy") then
+                            for i, v in pairs(WS.Enemies:GetChildren()) do
+                                if table.find(HauntedCastleMob, v.Name) then
+                                    if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                                        repeat wait()
+                                            KillEnemy(v.Name, true, _G.S.StartFarm)
+                                        until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or _G.S.StartFarm == false
+                                    end
+                                end                
+                            end
+                        else
+                            if _G.S.BypassTele then
+                                Byp(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                            else
+                                Tween(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                            end
                         end
                     end
                 end
