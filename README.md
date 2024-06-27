@@ -77,6 +77,10 @@ Tab:CreateSlider({
     end
 })
 ```
+# Label
+```lua
+Tab:CreateLabel({Text = "Label"})
+```
 
 # Create Paragraph :
 ```lua
