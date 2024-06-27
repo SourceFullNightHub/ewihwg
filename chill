@@ -99,7 +99,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 end)
 
 local QuestKhac = {"BartiloQuest", "CitizenQuest"}
-function QuestGet()
+function S()
     local Lvl = game:GetService("Players").LocalPlayer.Data.Level.Value
     local T = Lvl
     local min = 0
@@ -1457,7 +1457,6 @@ ToggleStartFarm:CreateToggle({
 
 spawn(function()
     while wait() do
-        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1509,10 +1508,11 @@ spawn(function()
                                     Tween(v.CFrame * CFrame.new(2, 20, 2))
                                 end
                             end
+                        else
+                            GetQuest()
                         end
                     end
                 end
             end
-        end)
     end
 end)
