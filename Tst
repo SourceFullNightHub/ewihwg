@@ -79,6 +79,7 @@ local plr = game.Players.LocalPlayer
 local lp = game.Players
 local WS = game.Workspace
 local Rc = game.ReplicatedStorage
+Fastbeo = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
 local Race = plr.Data.Race.Value
 local lvl = plr.Data.Level.Value
 
@@ -1214,7 +1215,7 @@ function KillPlayers()
                             repeat wait()
                                 EquipWeapon()
                                 EnableBuso()                                            
-                                SizePart(v)
+                                v.HumanoidRootPart.Size = Vector3.new(30, 30, 30)
                                 Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 2, 2))
                                 NoClip = true
                                 if (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
@@ -1239,30 +1240,7 @@ function KillPlayers()
 end
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
-Fastbeo = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
 local Windows = Library:CreateWindow({Title = 'Sitinks Hub'})
-
-function AttackFunction()
-    Fastbeo:Attack()
-end
-function Click()
-    local bc = game:GetService("VirtualUser")
-    bc:CaptureController()
-    bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
-end
-spawn(
-    function()
-        while wait() do
-            if FastNCooldown then
-                Fastbeo:InputSetting(_G.S)
-                Fastbeo:InputValue(_G.S.DelayAttack, _G.S.TimeWait)
-                Fastbeo:Attack(true)
-            else
-                Fastbeo:Attack(false)
-            end
-        end
-    end
-)
 
 local S = Windows:CreateTab({Name = 'Shop'})
 local T = Windows:CreateTab({Name = 'Settings Farm'})
@@ -1337,6 +1315,28 @@ local ToggleFastATtack = T:CreateToggle({
     end
 })
 
+function AttackFunction()
+    Fastbeo:Attack()
+end
+function Click()
+    local bc = game:GetService("VirtualUser")
+    bc:CaptureController()
+    bc:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+end
+spawn(
+    function()
+        while task.wait() do
+            if FastNCooldown then
+                Fastbeo:InputSetting(_G.S)
+                Fastbeo:InputValue(_G.S.DelayAttack, _G.S.TimeWait)
+                Fastbeo:Attack(true)
+            else
+                Fastbeo:Attack(false)
+            end
+        end
+    end
+)
+
 task.spawn(function()
     while task.wait() do
         if _G.FastAttack then
@@ -1346,7 +1346,6 @@ task.spawn(function()
                         if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
                             repeat task.wait()
                                 FastNCooldown = true
-                                Click()
                             until v.Humanoid.Health <= 0 or not v:FindFirstChild("Humanoid") or (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 100
                             FastNCooldown = false
                         end
@@ -1430,6 +1429,33 @@ F:CreateDropdown({
 })
 
 F:CreateSection({Text = 'Settings'})
+
+StatsOptions = {"Melee", "Defense", "Sword", "Gun", "Demon Fruit"}
+F:CreateDropdown({
+    Name = "Select Stats",
+    Description = "",
+    Options = StatsOptions,
+    Default = _G.S.Stats,
+    CallBack = function(Value)
+        _G.S.Stats = Value
+        SaveSettings()
+    end
+})
+
+spawn(
+    function()
+        while wait() do
+            if _G.S.Stats then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = _G.S.Stats,
+                    [3] = 9999
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
 
 local tatcacode = {
     "Sub2UncleKizaru",
@@ -1632,6 +1658,7 @@ local HauntedCastleMob = {
 
 spawn(function()
     while wait() do
+        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1800,5 +1827,6 @@ spawn(function()
                     end
                 end
             end
+        end)
     end
 end)
