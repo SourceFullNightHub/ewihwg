@@ -99,7 +99,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 end)
 
 local QuestKhac = {"BartiloQuest", "CitizenQuest"}
-function S()
+function QuestG()
     local Lvl = game:GetService("Players").LocalPlayer.Data.Level.Value
     local T = Lvl
     local min = 0
@@ -614,7 +614,7 @@ function CheckNameMobDoubleQuest()
     return a
 end
 function CheckDoubleQuestSkidcuaYMF()
-    S()
+    QuestG()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and _G.S.DoubleQuest and CheckDataQuest() and
@@ -1056,7 +1056,7 @@ function BringMob(vvvv)
         if
             v.Name == vvvv and v.Parent and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and
                 (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                _G.S.BringRange
+                300
          then
             v.HumanoidRootPart.CFrame = cac
             v.Humanoid.JumpPower = 0
@@ -1442,6 +1442,7 @@ ToggleStartFarm:CreateToggle({
 
 spawn(function()
     while wait() do
+        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1499,5 +1500,6 @@ spawn(function()
                     end
                 end
             end
+        end)
     end
 end)
