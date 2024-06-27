@@ -20,12 +20,12 @@ Library:Notify({
 
 # Create Tab :
 ```lua
-local Tab = Windows:CreateTab({Name = 'Tab', Icon = 'rbxassetid://17184558565'})
+local Tab = Windows:CreateTab({Name = 'Tab'})
 ```
 
 # Create Section :
 ```lua
-local Section = Tab:CreateSection({Text = 'Section'})
+Tab:CreateSection({Text = 'Section'})
 ```
 
 # Create Buttons :
@@ -45,6 +45,7 @@ Tab:CreateToggle({
     Name = "Toggle",
     Description = "Is This Description",
     Default = false,
+    Settings = false,
     CallBack = function(Value)
         print(Value)
     end
@@ -79,14 +80,13 @@ Tab:CreateSlider({
 
 # Create Paragraph :
 ```lua
-local Paragra = Tab:CreateParagraph({Title = "Paragraph", Content = "Description"})
+Tab:CreateParagraph({Title = "Paragraph", Content = "Description"})
 ```
 
 # Create Create TextBox :
 ```lua
 Tab:CreateTextBox({
     Name = "TextBox",
-    Description = "Is This Description",
     Default = "Hi",
     CallBack = function(Value)
         print(Value)
