@@ -99,7 +99,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 end)
 
 local QuestKhac = {"BartiloQuest", "CitizenQuest"}
-function S()
+function QuestG()
     local Lvl = game:GetService("Players").LocalPlayer.Data.Level.Value
     local T = Lvl
     local min = 0
@@ -614,7 +614,7 @@ function CheckNameMobDoubleQuest()
     return a
 end
 function CheckDoubleQuestSkidcuaYMF()
-    S()
+    QuestG()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and _G.S.DoubleQuest and CheckDataQuest() and
@@ -1056,7 +1056,7 @@ function BringMob(vvvv)
         if
             v.Name == vvvv and v.Parent and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and
                 (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                _G.S.BringRange
+                300
          then
             v.HumanoidRootPart.CFrame = cac
             v.Humanoid.JumpPower = 0
@@ -1093,14 +1093,16 @@ function KillEnemy(v, Bring, S)
     a = CheckEnemies(v)
     if a.Humanoid.Health > 0 and a.Parent and a:FindFirstChild("HumanoidRootPart") and S then
         repeat task.wait()
+            EnableBuso()
+            EquipWeapon()
+            Tween(a.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+            cac = a.HumanoidRootPart.CFrame
             a.HumanoidRootPart.CFrame = cac
             a.Humanoid.JumpPower = 0
             a.Humanoid.WalkSpeed = 0
             a.HumanoidRootPart.Transparency = 1
             a.HumanoidRootPart.CanCollide = false
             a.Head.CanCollide = false
-            Tween(a.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-            cac = a.HumanoidRootPart.CFrame
             if Bring == nil or Bring == true then
                 BringMob(v)
             end
@@ -1298,6 +1300,36 @@ end)
 
 T:CreateSection({Text = 'Farm Settings'})
 
+local ToggleFastATtack = T:CreateToggle({
+    Name = "Enable FastAttack",
+    Description = "FastAttack very mups and useful",
+    Default = true,
+    Settings = false,
+    CallBack = function(Value)
+        _G.FastAttack = Value
+    end
+})
+
+task.spawn(function()
+    while task.wait() do
+        if _G.FastAttack then
+            pcall(function()
+                for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if v.Humanoid.Health > 0 then
+                        if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                            repeat task.wait()
+                                FastNCooldown = true
+                                Click()
+                            until v.Humanoid.Health <= 0 or not v:FindFirstChild("Humanoid") or (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 100
+                            FastNCooldown = false
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 T:CreateDropdown({
     Name = "FastAttack Delay",
     Description = "Delay Attack",
@@ -1376,7 +1408,7 @@ F:CreateButton({
     Name = "Boost FPS",
     Description = "",
     CallBack = function()
-        print('Hello World')
+        
     end
 })
 
@@ -1442,6 +1474,7 @@ ToggleStartFarm:CreateToggle({
 
 spawn(function()
     while wait() do
+        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1490,6 +1523,7 @@ spawn(function()
                             elseif not MobLevel1OrMobLevel2() then
                                 cac = GetMobSpawnList(GetMob())
                                 for i, v in pairs(cac) do
+                                    NoClip = true
                                     Tween(v.CFrame * CFrame.new(2, 20, 2))
                                 end
                             end
@@ -1499,5 +1533,6 @@ spawn(function()
                     end
                 end
             end
+        end)
     end
 end)
