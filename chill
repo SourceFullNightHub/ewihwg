@@ -1133,9 +1133,6 @@ function KillBoss(v, S)
             a.HumanoidRootPart.Transparency = 1
             a.HumanoidRootPart.CanCollide = false
             a.Head.CanCollide = false
-            if Bring == nil or Bring == true then
-                BringMob(v)
-            end
             FastNCooldown = true
             NoClip = true
         until a.Humanoid.Health <= 0 or not a.Parent or not a:FindFirstChild("HumanoidRootPart") or S == false
@@ -1255,7 +1252,7 @@ function Click()
 end
 spawn(
     function()
-        while wait() do
+        while task.wait() do
             if FastNCooldown then
                 Fastbeo:InputSetting(_G.S)
                 Fastbeo:InputValue(_G.S.DelayAttack, _G.S.TimeWait)
@@ -1434,6 +1431,73 @@ F:CreateDropdown({
 
 F:CreateSection({Text = 'Settings'})
 
+StatsOptions = {"Melee", "Defense", "Sword", "Gun", "Demon Fruit"}
+F:CreateDropdown({
+    Name = "Select Stats",
+    Description = "",
+    Options = StatsOptions,
+    Default = _G.S.Stats,
+    CallBack = function(Value)
+        _G.S.Stats = Value
+        SaveSettings()
+    end
+})
+
+spawn(
+    function()
+        while wait() do
+            if _G.S.Stats then
+                local args = {
+                    [1] = "AddPoint",
+                    [2] = _G.S.Stats,
+                    [3] = 9999
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            end
+        end
+    end
+)
+
+local tatcacode = {
+    "Sub2UncleKizaru",
+    "NEWTROLL",
+    "SUB2NOOBMASTER123",
+    "StrawHatMaine",
+    "Sub2OfficialNoobie",
+    "Sub2NoobMaster123",
+    "SUB2GAMERROBOT_EXP1",
+    "SUB2GAMERROBOT_RESET1",
+    "THEGREATACE",
+    "BIGNEWS",
+    "FUDD10",
+    "fudd10_v2",
+    "Bluxxy",
+    "Starcodeheo",
+    "JCWK",
+    "SUB2CAPTAINMAUI",
+    "Magicbus",
+    "Sub2Fer999",
+    "kittgaming",
+    "GAMERROBOT",
+    "SUBGAMERROBOT",
+    "ADMINGIVEAWAY",
+    "KITT_RESET",
+    "SECRET_ADMIN",
+    "Sub2Daigrock",
+    "Axiore",
+    "TantaiGaming"
+}
+
+F:CreateButton({
+    Name = "Redeem All Codes",
+    Description = "",
+    CallBack = function()
+        for i, v in pairs(tatcacode) do
+            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(v)
+        end
+    end
+})
+
 F:CreateButton({
     Name = "Boost FPS",
     Description = "",
@@ -1595,6 +1659,7 @@ local HauntedCastleMob = {
 
 spawn(function()
     while wait() do
+        pcall(function()
             if _G.S.StartFarm then
                 if _G.S.SelectMethodFarm == "Level" then
                     if lvl >= 1 and lvl <= 29 then
@@ -1763,5 +1828,6 @@ spawn(function()
                     end
                 end
             end
+        end)
     end
 end)
