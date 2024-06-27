@@ -99,8 +99,8 @@ function FastAttackConnectorFunction()
         CameraShakerR:Stop()
     end)
     function ReturnFunctions:InputValue(CDAAT,TimeWait)
-        conchosetting.FastAttackDelay = CDAAT
-        conchosetting.FastAttackDelay = TimeWait
+        conchosetting.SelectDelay = CDAAT
+        conchosetting.SelectDelay = TimeWait
     end
     function ReturnFunctions:InputSetting(tbbb)
         conchosetting = tbbb
@@ -114,7 +114,7 @@ function FastAttackConnectorFunction()
     conchosetting = {}
     function ReturnFunctions:GetMethod()
         MethodAttack = "Slow"
-        if CountAttack < conchosetting.FastAttackDelay then 
+        if CountAttack < conchosetting.SelectDelay then 
             MethodAttack = "Fast"
         end 
         return MethodAttack
@@ -127,23 +127,23 @@ function FastAttackConnectorFunction()
                         if conchosetting and conchosetting.AutoMastery then 
                             ToiCanOxi = 2 
                             atack()
-                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
-                                wait(conchosetting.FastAttackDelay)
+                            if conchosetting.SelectDelay and type(conchosetting.SelectDelay) == "number" and conchosetting.SelectDelay >= 0.1 then 
+                                wait(conchosetting.SelectDelay)
                             else
-                                conchosetting.FastAttackDelay = 0.2 
-                                wait(conchosetting.FastAttackDelay)
+                                conchosetting.SelectDelay = 0.2 
+                                wait(conchosetting.SelectDelay)
                             end
-                        elseif CountAttack < conchosetting.FastAttackDelay then 
+                        elseif CountAttack < conchosetting.SelectDelay then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
-                        elseif CountAttack >= conchosetting.FastAttackDelay then 
+                        elseif CountAttack >= conchosetting.SelectDelay then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
-                            if conchosetting.FastAttackDelay and type(conchosetting.FastAttackDelay) == "number" and conchosetting.FastAttackDelay >= 0.1 then 
-                                wait(conchosetting.FastAttackDelay*2)
+                            if conchosetting.SelectDelay and type(conchosetting.SelectDelay) == "number" and conchosetting.SelectDelay >= 0.1 then 
+                                wait(conchosetting.SelectDelay*2)
                             else
-                                conchosetting.FastAttackDelay = 0.2 
-                                wait(conchosetting.FastAttackDelay*2)
+                                conchosetting.SelectDelay = 0.2 
+                                wait(conchosetting.SelectDelay*2)
                             end
                         end
                     end
@@ -154,7 +154,7 @@ function FastAttackConnectorFunction()
     spawn(function()
         while task.wait() do 
             pcall(function() 
-                if tick()-TickCountAttack >= conchosetting.FastAttackDelay then 
+                if tick()-TickCountAttack >= conchosetting.SelectDelay then 
                     CountAttack = 0 
                 end
             end)
@@ -202,9 +202,9 @@ function FastAttackConnectorFunction()
         while wait() do 
             if UFFF then
                 pcall(function() 
-                    if CountAttack >= conchosetting.FastAttackDelay then 
+                    if CountAttack >= conchosetting.SelectDelay then 
                         TickFastAttackF = tick()
-                        repeat wait() until tick()-TickFastAttackF >= conchosetting.FastAttackDelay
+                        repeat wait() until tick()-TickFastAttackF >= conchosetting.SelectDelay
                         CountAttack = 0
                     end    
                 end)  
