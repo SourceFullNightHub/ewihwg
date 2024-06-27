@@ -41,7 +41,7 @@ Tab:CreateButton({
 
 # Create Toggle :
 ```lua
-Tab:CreateToggle({
+local ToggleShit = Tab:CreateToggle({
     Name = "Toggle",
     Description = "Is This Description",
     Default = false,
@@ -52,6 +52,15 @@ Tab:CreateToggle({
 })
 ```
 
+# Settings Toggle
+```lua
+ToggleShit:CreateToggle({
+    Name = "Toggle",
+    Default = false,
+    CallBack = function(Value)
+      print(Value)
+   end
+})
 # Create DropDown :
 ```lua
 Tab:CreateDropdown({
