@@ -1051,26 +1051,6 @@ function MoonTextureId()
     end
 end
 
-function SizePart(v)
-    v.HumanoidRootPart.CFrame = cac
-    v.Humanoid.JumpPower = 0
-    v.Humanoid.WalkSpeed = 0
-    v.HumanoidRootPart.Transparency = 1
-    v.HumanoidRootPart.CanCollide = false
-    v.Head.CanCollide = false
-    if v.Humanoid:FindFirstChild("Animator") then
-        v.Humanoid.Animator:Destroy()
-    end
-    v.Humanoid:ChangeState(11)
-    if not v.HumanoidRootPart:FindFirstChild("Dungim") then
-        local lock = Instance.new("BodyVelocity")
-        lock.Parent = v
-        lock.Name = "Dungim"
-        lock.MaxForce = Vector3.new(100000, 100000, 100000)
-        lock.Velocity = Vector3.new(0, 0, 0)
-    end
-end
-
 function BringMob(vvvv)
     for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
         if
@@ -1113,9 +1093,14 @@ function KillEnemy(v, Bring, S)
     a = CheckEnemies(v)
     if a.Humanoid.Health > 0 and a.Parent and a:FindFirstChild("HumanoidRootPart") and S then
         repeat task.wait()
-            SizePart(a)
             Tween(a.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
             cac = a.HumanoidRootPart.CFrame
+            a.HumanoidRootPart.CFrame = cac
+            a.Humanoid.JumpPower = 0
+            a.Humanoid.WalkSpeed = 0
+            a.HumanoidRootPart.Transparency = 1
+            a.HumanoidRootPart.CanCollide = false
+            a.Head.CanCollide = false
             if Bring == nil or Bring == true then
                 BringMob(v)
             end
@@ -1391,7 +1376,7 @@ F:CreateButton({
     Name = "Boost FPS",
     Description = "",
     CallBack = function()
-        print('Hello World')
+        
     end
 })
 
@@ -1419,7 +1404,7 @@ F:CreateDropdown({
 local ToggleStartFarm = F:CreateToggle({
     Name = "Start Farm",
     Description = "Start Farm Mode Farm Your Selected",
-    Default = false,
+    Default = _G.S.StartFarm,
     Settings = true,
     CallBack = function(Value)
         _G.S.StartFarm = Value
