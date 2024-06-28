@@ -91,7 +91,12 @@ Tab:CreateSlider({
 ```lua
 Tab:CreateLabel({Text = "Label"})
 ```
-
+# Section Large
+```lua
+Tab:CreateSectionContent({
+    Text = "Section Large"
+})
+```
 # Create Paragraph :
 ```lua
 Tab:CreateParagraph({Title = "Paragraph", Content = "Description"})
