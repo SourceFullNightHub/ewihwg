@@ -1294,7 +1294,7 @@ function SitinksLib:CreateWindow(Configs)
 
             function DropFunc:Set(OptionName)
                 for i, v in pairs(List:GetChildren()) do
-                    if v.ClassName == "Button" then
+                    if v.ClassName == "TextButton" then
                         if v.Name == OptionName then
                             v.TextColor3 = Color3.fromRGB(255, 255, 255)
                             Value_2.Text = OptionName
