@@ -133,11 +133,11 @@ function FastAttackConnectorFunction()
                         if conchosetting and conchosetting.AutoMastery then 
                             ToiCanOxi = 2 
                             atack()
-                            if conchosetting.DelayAttack and type(conchosetting.DelayAttack) == "number" and conchosetting.DelayAttack >= 0.1 then 
-                                wait(conchosetting.DelayAttack)
+                            if conchosetting.SelectDelay and type(conchosetting.SelectDelay) == "number" and conchosetting.SelectDelay >= 0.1 then 
+                                wait(conchosetting.SelectDelay)
                             else
-                                conchosetting.DelayAttack = 0.2 
-                                wait(conchosetting.DelayAttack)
+                                conchosetting.SelectDelay = 0.2 
+                                wait(conchosetting.SelectDelay)
                             end
                         elseif CountAttack < FastAttackSettings["CDAAT"] then 
                             ToiCanOxi = ToiCanOxi +1
@@ -145,11 +145,11 @@ function FastAttackConnectorFunction()
                         elseif CountAttack >= FastAttackSettings["CDAAT"] then 
                             ToiCanOxi = ToiCanOxi +1
                             atack()
-                            if conchosetting.DelayAttack and type(conchosetting.DelayAttack) == "number" and conchosetting.DelayAttack >= 0.1 then 
-                                wait(conchosetting.DelayAttack*2)
+                            if conchosetting.SelectDelay and type(conchosetting.SelectDelay) == "number" and conchosetting.SelectDelay >= 0.1 then 
+                                wait(conchosetting.SelectDelay*2)
                             else
-                                conchosetting.DelayAttack = 0.2 
-                                wait(conchosetting.DelayAttack*2)
+                                conchosetting.SelectDelay = 0.2 
+                                wait(conchosetting.SelectDelay*2)
                             end
                         end
                     end
