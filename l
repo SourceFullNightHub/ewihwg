@@ -1102,7 +1102,7 @@ function SitinksLib:CreateWindow(Configs)
             Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
             Dropdown.BorderSizePixel = 0
             Dropdown.Position = UDim2.new(0, 0, 0.568513095, 0)
-            Dropdown.Size = UDim2.new(1, 0, 0.0469872393, 63)
+            Dropdown.Size = UDim2.new(1, 0, 0.0469872393, 55)
 
             UICorner_15.CornerRadius = UDim.new(0, 2)
             UICorner_15.Parent = Dropdown
