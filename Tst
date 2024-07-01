@@ -190,52 +190,36 @@ function WaitHRP(q0)
 end 
 
 function Tween(Pos)
-    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-        if not Pos then return end
-        if not plr.Character:FindFirstChild("PartTele") then
-            local PartTele = Instance.new("Part", plr.Character) -- Create part
-            PartTele.Size = Vector3.new(10,1,10)
-            PartTele.Name = "PartTele"
-            PartTele.Anchored = true
-            PartTele.Transparency = 1
-            PartTele.CanCollide = false
-            PartTele.CFrame = WaitHRP(plr).CFrame 
-            PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                task.wait(0.01)
-                WaitHRP(plr).CFrame = PartTele.CFrame
-            end)
+    pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            oldcframe = plr.Character.HumanoidRootPart.CFrame
+            mmb = Pos.Position
+            TargetY = Pos.Y
+            if (mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude > 500 then
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
+            end
+            local tweenfunc = {}
+            local tweenservice = game:service"TweenService"
+            local Bul = TweenInfo.new((mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / 325, Enum.EasingStyle.Linear)
+            local tween = tweenservice:Create(plr.Character["HumanoidRootPart"], Bul, {CFrame = Pos})
+            tween:Play()
+            function tweenfunc:Stop()
+                tween:Cancel()
+            end
+            tween.Completed:Wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,
+                TargetY,
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+            )
+            if not tween then
+                return tween
+            end
+            return tweenfunc
         end
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-        if Distance <= 300 then
-            tween:Cancel()
-            game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
-        end
-        tween:Play()
-        tween.Completed:Wait()
-    end
+    end)
 end
-
-spawn(function()
-    while task.wait() do
-        if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-            if plr.Character:FindFirstChild("PartTele") then
-                plr.Character:FindFirstChild("PartTele"):Destroy()
-            end
-        end
-    end
-end)
-spawn(function()
-    while task.wait() do
-        if plr.Character:FindFirstChild("PartTele") then
-            if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                plr.Character:FindFirstChild("PartTele"):Destroy()
-            end
-        end
-    end
-end)
 
 local Quest = require(game.ReplicatedStorage.Quests)
 local AntiThisQyest = {"BartiloQuest", "CitizenQuest"}
@@ -709,6 +693,7 @@ function KillMob(cac)
                     PosBring = v.HumanoidRootPart.CFrame
                     BringMon(cac)
                 until v.Humanoid.Health <= 0 or not v.Parent
+                NoClip(false)
             end
         end
     end)
@@ -748,7 +733,7 @@ local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
     Name = "Auto Farm",
     Description = "Start Farm Method You Select",
     Default = Configs["Auto Farm"],
-    Configs = true,
+    Settings = true,
     CallBack = function(Value)
         Configs["Auto Farm"] = Value
         SaveSettings()
@@ -878,7 +863,7 @@ end)
 
 spawn(function()
     while task.wait() do
-        repeat task.wait(0.175)
+        repeat task.wait(0.05)
             DetectFastAttack()
         until not Configs["Auto Farm"]
     end
