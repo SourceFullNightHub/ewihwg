@@ -30,50 +30,61 @@ if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseT
 end
 
 --------------------------------------------------------------------------------------------------------------------------
+local Configs = {
+    ["Select Weapon"] = "Melee",
+    ["Select Method Farm"] = "Level Farm",
+    ["Auto Farm"] = false
+}
 
-local Configs = {}
-local HttpService = game:GetService("HttpService")
-local FolderName = "Sitinks Hub"
-local NameGameFile = "-BloxFruit.json"
-local SaveFileName = game.Players.LocalPlayer.Name..NameGameFile
-local SettingHopServer = {}
-local DefaultSettingHopServer = {}
-function SaveSettings(fff,fff2)
-    if fff~=nil then
-        Configs[fff] = fff2
+function LoadSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfolder("Sitinks Hub") then
+            makefolder("Sitinks Hub")
+        end
+        if not isfolder("Sitinks Hub/Blox Fruits/") then
+            makefolder("Sitinks Hub/Blox Fruits/")
+        end
+        if not isfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            writefile(
+                "Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(Configs)
+            )
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            for y, z in pairs(x) do
+                Configs[y] = z
+            end
+        end
+    else
+        return
     end
-    HttpService = game:GetService("HttpService")
-    if not isfolder(FolderName) then
-        makefolder(FolderName)
+end
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            local A = {}
+            for y, z in pairs(Configs) do
+                A[y] = z
+            end
+            writefile(
+                "Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(A)
+            )
+        end
+    else
+        return
     end
-    writefile(FolderName.."/" .. SaveFileName, HttpService:JSONEncode(Configs))
 end
-
-function ReadSetting()
-local s,e = pcall(function()
-    HttpService = game:GetService("HttpService")
-    if not isfolder(FolderName) then
-        makefolder(FolderName)
-    end
-    return HttpService:JSONDecode(readfile(FolderName.."/" .. SaveFileName))
-end)
-if s then return e
-else
-    SaveSettings()
-    return ReadSetting()
-end
-end
-Configs = ReadSetting()
-if not pcall(function() readfile(FolderName.."/" .. "Jobid.json") end) then
-    writefile(FolderName.."/" .. "Jobid.json", game:GetService("HttpService"):JSONEncode(DefaultSettingHopServer))
-end
-function CheckJobIdServer()
-    local mmb = {}
-    for i,v in next,game:GetService("HttpService"):JSONDecode(readfile(FolderName.."/" .. "Jobid.json")) do
-        table.insert(mmb,i) 
-    end
-    return mmb 
-end
+LoadSettings()
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -203,32 +214,28 @@ function Tween(Pos)
                 tween:Cancel()
                 game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
             end
-            tween:Play()
             tween.Completed:Wait()
+            tween:Play()
         end
     end)
 end
 
 spawn(function()
     while task.wait() do
-        pcall(function()
-            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-                if plr.Character:FindFirstChild("PartTele") then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
+        if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
+            if plr.Character:FindFirstChild("PartTele") then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
             end
-        end)
+        end
     end
 end)
 spawn(function()
     while task.wait() do
-        pcall(function()
-            if plr.Character:FindFirstChild("PartTele") then
-                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
+        if plr.Character:FindFirstChild("PartTele") then
+            if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
             end
-        end)
+        end
     end
 end)
 
@@ -721,7 +728,8 @@ StackAutoFarmTab:CreateDropdown({
     Options = {"Melee", "Sword"},
     Default = Configs["Select Weapon"],
     CallBack = function(Value)
-        SaveSettings("Select Weapon", Value)
+        Configs["Select Weapon"] = Value
+        SaveSettings()
     end
 })
 
@@ -733,7 +741,8 @@ StackAutoFarmTab:CreateDropdown({
     Options = {"Level Farm", "Cake Prince", "Bone"},
     Default = Configs["Select Method Farm"],
     CallBack = function(Value)
-        SaveSettings("Select Method Farm", Value)
+        Configs["Select Method Farm"] = Value
+        SaveSettings()
     end
 })
 
@@ -743,7 +752,8 @@ local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
     Default = Configs["Auto Farm"],
     Configs = true,
     CallBack = function(Value)
-        SaveSettings("Auto Farm", Value)
+        Configs["Auto Farm"] = Value
+        SaveSettings()
     end
 })
 
@@ -751,7 +761,8 @@ ToggleAutoFarm:CreateToggle({
     Name = "Double Quest",
     Default = Configs["Double Quest"],
     CallBack = function(Value)
-      SaveSettings("Double Quest", Value)
+        Configs["Double Quest"] = Value
+        SaveSettings()
    end
 })
 
@@ -759,7 +770,8 @@ ToggleAutoFarm:CreateToggle({
     Name = "Accept Quest",
     Default = Configs["Accept Quest"],
     CallBack = function(Value)
-      SaveSettings("Accept Quest", Value)
+        Configs["Accept Quest"] = Value
+        SaveSettings()
    end
 })
 
