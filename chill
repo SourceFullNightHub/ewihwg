@@ -878,7 +878,7 @@ end)
 
 spawn(function()
     while task.wait() do
-        repeat task.wait(0.175)
+        repeat task.wait(0.1)
             DetectFastAttack()
         until not Configs["Auto Farm"]
     end
