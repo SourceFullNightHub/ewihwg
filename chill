@@ -793,6 +793,21 @@ function AutoFarm()
                         end
                     end
                 end
+            elseif not MobLevel1OrMobLevel2() then
+                if Sea1 or Sea2 then
+                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name, MobLevel1OrMobLevel2()) then
+                            NoClip(true)
+                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                        end
+                    end
+                else
+                    shit = GetMobSpawnList(GetMob())
+                    for a, b in pairs(shit) do
+                        NoClip(true)
+                        Tween(b.CFrame * CFrame.new(2, 20, 2))
+                    end
+                end
             end
         else
             GetQuest()
@@ -851,5 +866,13 @@ spawn(function()
         if Configs["Auto Farm"] then
             AutoFarm()
         end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        repeat task.wait(0.175)
+            DetectFastAttack()
+        until not Configs["Auto Farm"]
     end
 end)
