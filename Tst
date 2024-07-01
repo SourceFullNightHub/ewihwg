@@ -209,7 +209,7 @@ function Tweento(C)
     if game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0 and game:GetService("Players").LocalPlayer.Character.HumanoidRootPart then
         if plr.Character.Humanoid.Sit == true then
             plr.Character.Humanoid.Sit = false
-            plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0,10,0)
+            plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10 ,0)
         end
         Distance = (C.Position - plr.Character.HumanoidRootPart.Position).Magnitude
         if Distance <= 200 then
@@ -221,7 +221,6 @@ function Tweento(C)
             tween:Cancel()
             requestEntrance(NearestPortal)
         end
-        tween.Completed:Wait()
     end
 end
 
@@ -384,10 +383,6 @@ function KillMon(a)
             NoClip(false)
         end
     end
-end
-
-function StackFunction()
-    
 end
 
 --------------------------------------------------------------------------------------------------------------------------
