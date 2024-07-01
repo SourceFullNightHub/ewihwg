@@ -699,9 +699,8 @@ function BringMon(xx)
 end
 
 function KillMob(cac)
-    pcall(function()
-        v = GetEnemy(cac)
-        if v then
+    for i, v in pairs(WS.Enemies:GetChildren()) do
+        if v.Name == cac then
             if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                 repeat wait()
                     Buso()
@@ -713,7 +712,7 @@ function KillMob(cac)
                 until v.Humanoid.Health <= 0 or not v.Parent
             end
         end
-    end)
+    end
 end
 
 --------------------------------------------------------------------------------------------------------------------------
