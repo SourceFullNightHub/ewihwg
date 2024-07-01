@@ -333,20 +333,17 @@ function Tweento(C)
             plr.Character.Humanoid.Sit = false
             plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,10,0)
         end
-        Distance = C.Position
+        Distance = (C.Position - plr.Character.HumanoidRootPart.Position).Magnitude
         if (plr.Character.HumanoidRootPart.Position - Distance).Magnitude <= 200 then
             plr.Character.HumanoidRootPart.CFrame = C
         end
-        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Position)).Magnitude / 325, {CFrame = C})
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = C})
         local NearestPortal = CheckNearestTeleporter(C)
         if NearestPortal then
             tween:Cancel()
             requestEntrance(NearestPortal)
         end
         tween.Completed:Wait()
-        if not tween then
-            return tween
-        end
     end
 end
 
@@ -612,10 +609,8 @@ end
 
 spawn(function()
     while wait() do
-        pcall(function()
-            if Configs["Auto Farm"] then
-                AutoFarm()
-            end
-        end)
+        if Configs["Auto Farm"] then
+            AutoFarm()
+        end
     end
 end)
