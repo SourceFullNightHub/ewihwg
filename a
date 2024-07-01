@@ -31,7 +31,7 @@ end
 
 --------------------------------------------------------------------------------------------------------------------------
 
-local Settings = {}
+local Configs = {}
 local HttpService = game:GetService("HttpService")
 local FolderName = "Sitinks Hub"
 local NameGameFile = "-BloxFruit.json"
@@ -40,13 +40,13 @@ local SettingHopServer = {}
 local DefaultSettingHopServer = {}
 function SaveSettings(fff,fff2)
     if fff~=nil then
-        Settings[fff] = fff2
+        Configs[fff] = fff2
     end
     HttpService = game:GetService("HttpService")
     if not isfolder(FolderName) then
         makefolder(FolderName)
     end
-    writefile(FolderName.."/" .. SaveFileName, HttpService:JSONEncode(Settings))
+    writefile(FolderName.."/" .. SaveFileName, HttpService:JSONEncode(Configs))
 end
 
 function ReadSetting()
@@ -85,12 +85,9 @@ local Workspace = game:GetService("Workspace")
 local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
 local CombatFrameworkR = getupvalues(CombatFramework)[2]
 local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
-local RigControllerR = getupvalues(RigController)[2]
 local Notifygame = require(game.ReplicatedStorage:WaitForChild("Notification"))
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 FastKillTrial = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
-local Race = plr.Data.Race.Value
-local plrLevel = plr.Data.Level.Value
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -175,6 +172,65 @@ function DetectFastAttack()
         end
     end
 end
+
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end 
+
+function Tween(Pos)
+    pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+            if not Pos then return end
+            if not plr.Character:FindFirstChild("PartTele") then
+                local PartTele = Instance.new("Part", plr.Character) -- Create part
+                PartTele.Size = Vector3.new(10,1,10)
+                PartTele.Name = "PartTele"
+                PartTele.Anchored = true
+                PartTele.Transparency = 1
+                PartTele.CanCollide = false
+                PartTele.CFrame = WaitHRP(plr).CFrame 
+                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+                    task.wait(0.01)
+                    WaitHRP(plr).CFrame = PartTele.CFrame
+                end)
+            end
+            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+            if Distance <= 300 then
+                tween:Cancel()
+                game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
+            end
+            tween:Play()
+            tween.Completed:Wait()
+        end
+    end)
+end
+
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
+                if plr.Character:FindFirstChild("PartTele") then
+                    plr.Character:FindFirstChild("PartTele"):Destroy()
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if plr.Character:FindFirstChild("PartTele") then
+                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
+                    plr.Character:FindFirstChild("PartTele"):Destroy()
+                end
+            end
+        end)
+    end
+end)
 
 local Quest = require(game.ReplicatedStorage.Quests)
 local AntiThisQyest = {"BartiloQuest", "CitizenQuest"}
@@ -513,65 +569,6 @@ function CheckNotify(Tex)
     return false
 end
 
-function WaitHRP(q0) 
-    if not q0 then return end
-    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
-end 
-
-function Tween(Pos)
-    pcall(function()
-        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-            if not Pos then return end
-            if not plr.Character:FindFirstChild("PartTele") then
-                local PartTele = Instance.new("Part", plr.Character) -- Create part
-                PartTele.Size = Vector3.new(10,1,10)
-                PartTele.Name = "PartTele"
-                PartTele.Anchored = true
-                PartTele.Transparency = 1
-                PartTele.CanCollide = false
-                PartTele.CFrame = WaitHRP(plr).CFrame 
-                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                    task.wait(0.01)
-                    WaitHRP(plr).CFrame = PartTele.CFrame
-                end)
-            end
-            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-            if Distance <= 300 then
-                tween:Cancel()
-                game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
-            end
-            tween:Play()
-            tween.Completed:Wait()
-        end
-    end)
-end
-
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-                if plr.Character:FindFirstChild("PartTele") then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
-            end
-        end)
-    end
-end)
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if plr.Character:FindFirstChild("PartTele") then
-                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
-            end
-        end)
-    end
-end)
-
 function Buso()
     if not plr.Character:FindFirstChild("HasBuso") then
         local args = {[1] = "Buso"}
@@ -744,7 +741,7 @@ local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
     Name = "Auto Farm",
     Description = "Start Farm Method You Select",
     Default = Configs["Auto Farm"],
-    Settings = true,
+    Configs = true,
     CallBack = function(Value)
         SaveSettings("Auto Farm", Value)
     end
@@ -791,6 +788,21 @@ function AutoFarm()
                                 KillMob(v.Name)
                             until v.Humanoid.Health <= 0 or not v.Parent or  plr.PlayerGui.Main.Quest.Visible == false or not Configs["Auto Farm"]
                         end
+                    end
+                end
+            elseif not MobLevel1OrMobLevel2() then
+                if Sea1 or Sea2 then
+                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name, MobLevel1OrMobLevel2()) then
+                            NoClip(true)
+                            Tween(v.CFrame * CFrame.new(2, 20, 2))
+                        end
+                    end
+                else
+                    shit = GetMobSpawnList(GetMob())
+                    for a, b in pairs(shit) do
+                        NoClip(true)
+                        Tween(b.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
             end
