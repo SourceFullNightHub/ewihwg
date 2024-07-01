@@ -337,7 +337,7 @@ function Tweento(C)
         if (plr.Character.HumanoidRootPart.Position - Distance).Magnitude <= 200 then
             plr.Character.HumanoidRootPart.CFrame = C
         end
-        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Positon)).Magnitude / 325, {CFrame = C})
+        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Position)).Magnitude / 325, {CFrame = C})
         local NearestPortal = CheckNearestTeleporter(C)
         if NearestPortal then
             tween:Cancel()
@@ -602,7 +602,18 @@ function AutoFarm()
                         end
                     end
                 end
+            else
+                NoClip(true)
+                Tweento(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
             end
         end
     end
 end
+
+spawn(function()
+    while wait() do
+        if Configs["Auto Farm"] then
+            AutoFarm()
+        end
+    end
+end)
