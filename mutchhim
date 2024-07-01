@@ -30,7 +30,7 @@ if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseT
 end
 
 --------------------------------------------------------------------------------------------------------------------------
-local Configs = {
+Configs = {
     ["Select Weapon"] = "Melee",
     ["Select Method Farm"] = "Level Farm",
     ["Auto Farm"] = false
@@ -214,8 +214,8 @@ function Tween(Pos)
                 tween:Cancel()
                 game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
             end
-            tween.Completed:Wait()
             tween:Play()
+            tween.Completed:Wait()
         end
     end)
 end
