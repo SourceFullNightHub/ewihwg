@@ -602,6 +602,9 @@ function AutoFarm()
                         end
                     end
                 end
+            else
+                NoClip(true)
+                Tweento(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
             end
         end
     end
