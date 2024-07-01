@@ -90,7 +90,7 @@ local Notifygame = require(game.ReplicatedStorage:WaitForChild("Notification"))
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 FastKillTrial = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
 local Race = plr.Data.Race.Value
-local YourLevel = plr.Data.Level.Value
+local plrLevel = plr.Data.Level.Value
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -102,126 +102,6 @@ elseif game.PlaceId == 7449423635 then
     Sea3 = true
 else
     game.Players.LocalPlayer:Kick("Not Support This Game!")
-end
-
-function GetEnemies(a)
-    if WS.Enemies:FindFirstChild(a) then
-        for r, v in pairs(WS.Enemies:GetChildren()) do
-            if v.Name == a then
-                if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                    return v
-                end
-            end
-        end
-    end
-end
-
-function GetEnemy(aa)
-    for r, v in pairs(WS.Enemies:GetChildren()) do
-        if v.Name == aa then
-            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                return v
-            end
-        end
-    end
-    for r, v in pairs(Rc:GetChildren()) do
-        if v.Name == aa then
-            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-                return v
-            end
-        end
-    end
-end
-
-function CheckNearestTeleporter(aI)
-    vcspos = aI.Position
-    min = math.huge
-    min2 = math.huge
-    local y = game.PlaceId
-    if y == 2753915549 then
-        OldWorld = true
-    elseif y == 4442272183 then
-        NewWorld = true
-    elseif y == 7449423635 then
-        ThreeWorld = true
-    end
-    if ThreeWorld then
-        TableLocations = {
-            ["Caslte On The Sea"] = Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
-            ["Hydra"] = Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953),
-            ["Mansion"] = Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
-            ["Great Tree"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
-            ["Ngu1"] = Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
-            ["ngu2"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
-        }
-    elseif NewWorld then
-        TableLocations = {
-            ["Mansion"] = Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312),
-            ["Flamingo"] = Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
-            ["122"] = Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
-            ["3032"] = Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422)
-        }
-    elseif OldWorld then
-        TableLocations = {
-            ["1"] = Vector3.new(-7894.6201171875, 5545.49169921875, -380.2467346191406),
-            ["2"] = Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625),
-            ["3"] = Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
-            ["4"] = Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875)
-        }
-    end
-    TableLocations2 = {}
-    for r, v in pairs(TableLocations) do
-        TableLocations2[r] = (v - vcspos).Magnitude
-    end
-    for r, v in pairs(TableLocations2) do
-        if v < min then
-            min = v
-            min2 = v
-        end
-    end
-    for r, v in pairs(TableLocations2) do
-        if v < min then
-            min = v
-            min2 = v
-        end
-    end
-    for r, v in pairs(TableLocations2) do
-        if v <= min then
-            choose = TableLocations[r]
-        end
-    end
-    min3 = (vcspos - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if min2 <= min3 then
-        return choose
-    end
-end
-
-function requestEntrance(aJ)
-    args = {"requestEntrance", aJ}
-    game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(args))
-    oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-    char = game.Players.LocalPlayer.Character.HumanoidRootPart
-    char.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
-    task.wait(0.5)
-end
-
-function Tweento(C)
-    if game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0 and game:GetService("Players").LocalPlayer.Character.HumanoidRootPart then
-        if plr.Character.Humanoid.Sit == true then
-            plr.Character.Humanoid.Sit = false
-            plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10 ,0)
-        end
-        Distance = (C.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-        if Distance <= 200 then
-            plr.Character.HumanoidRootPart.CFrame = C
-        end
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = C})
-        local NearestPortal = CheckNearestTeleporter(C)
-        if NearestPortal then
-            tween:Cancel()
-            requestEntrance(NearestPortal)
-        end
-    end
 end
 
 BladeHits = function(Value)
@@ -300,6 +180,64 @@ DetectFastAttack = function()
 end
 DetectFastAttack()
 
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end 
+
+function Tween(Pos)
+    pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+            if not Pos then return end
+            if not plr.Character:FindFirstChild("PartTele") then
+                local PartTele = Instance.new("Part", plr.Character) -- Create part
+                PartTele.Size = Vector3.new(10,1,10)
+                PartTele.Name = "PartTele"
+                PartTele.Anchored = true
+                PartTele.Transparency = 1
+                PartTele.CanCollide = false
+                PartTele.CFrame = WaitHRP(plr).CFrame 
+                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+                    task.wait(0.01)
+                    WaitHRP(plr).CFrame = PartTele.CFrame
+                end)
+            end
+            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+            if Distance <= 250 then
+                tween:Cancel()
+                game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
+            end
+            tween:Play()
+        end
+    end)
+end
+
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
+                if plr.Character:FindFirstChild("PartTele") then
+                    plr.Character:FindFirstChild("PartTele"):Destroy()
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            if plr.Character:FindFirstChild("PartTele") then
+                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
+                    plr.Character:FindFirstChild("PartTele"):Destroy()
+                end
+            end
+        end)
+    end
+end)
+
 function Buso()
     if not plr.Character:FindFirstChild("HasBuso") then
         local args = {[1] = "Buso"}
@@ -333,19 +271,6 @@ function EquipWeapon(Tool)
     end
 end
 
-function BringMon(Vominhhungsieudeptrai)
-    v = GetEnemy(Vominhhungsieudeptrai)
-    if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-        v.HumanoidRootPart.CanCollide = false
-        v.Humanoid.WalkSpeed = 0
-        v.Humanoid.JumpPower = 0
-        v.Head.CanCollide = false
-        v.HumanoidRootPart.CFrame = BringPos
-        sethiddenproperty(plr, "SimulationRadius", math.huge)
-        v.Humanoid:ChangeState(14)
-    end
-end
-
 function NoClip(Value)
     if Value == true then
         if not plr.Character.Head:FindFirstChild("NoClip") then
@@ -368,19 +293,84 @@ function NoClip(Value)
     end
 end
 
-function KillMon(a)
-    if GetEnemy(a) then
-        v = GetEnemy(a)
+function GetEnemies(a)
+    if WS.Enemies:FindFirstChild(a) then
+        for r, v in pairs(WS.Enemies:GetChildren()) do
+            if v.Name == a then
+                if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                    return v
+                end
+            end
+        end
+    end
+end
+
+function GetEnemy(aa)
+    for r, v in pairs(WS.Enemies:GetChildren()) do
+        if v.Name == aa then
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                return v
+            end
+        end
+    end
+    for r, v in pairs(Rc:GetChildren()) do
+        if v.Name == aa then
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                return v
+            end
+        end
+    end
+end
+
+function CheckDistance(Target1, TARGET2)
+    if not TARGET2 then
+        TARGET2 = plr.Character.HumanoidRootPart
+    end
+    dau, buoi =
+    pcall(function()
+        i = Target1.Position
+        v = TARGET2.Position
+    end)
+    if dau then
+        i = Target1.Position
+        v = TARGET2.Position
+        return (i - v).Magnitude
+    end
+end
+
+function BringMon(xx)
+    for i, v in pairs(WS.Enemies:GetChildren()) do
+        if v.Name == xx then
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                if CheckDistance(v.HumanoidRootPart) <= 300 then
+                    v.HumanoidRootPart.CFrame = PosBring
+                    v.Humanoid.JumpPower = 0
+                    v.Humanoid.WalkSpeed = 0
+                    v.HumanoidRootPart.Transparency = 1
+                    v.HumanoidRootPart.CanCollide = false
+                    v.Head.CanCollide = false
+                    if v.Humanoid:FindFirstChild("Animator") then
+                        v.Humanoid.Animator:Destroy()
+                    end
+                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                    v.Humanoid:ChangeState(11)
+                end
+            end
+        end
+    end
+end
+
+function KillMob(cac)
+    v = GetEnemy(cac)
+    if v then
         if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
             repeat wait()
                 Buso()
                 EquipWeapon()
                 NoClip(true)
-                BringPos = v.HumanoidRootPart.CFrame
-                Tweento(v.HumanoidRootPart.CFrame * CFrame.new(2, 16, 2))
-                BringMon(a)
-            until not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
-            NoClip(false)
+                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 15, 2))
+                BringMon(cac)
+            until v.Humanoid.Health <= 0 or not v.Parent
         end
     end
 end
@@ -446,44 +436,29 @@ local CakePrinceMob = {
     "Head Baker"
 }
 
-function CheckKatakuriSpawned()
-    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
-        return true
-    end
-    return false
-end
-
 function AutoFarm()
     if Configs["Select Method Farm"] == "Cake Prince" then
-        if not CheckKatakuriSpawned() then
+        if not game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
             if GetEnemy("Cake Prince") then
                 repeat wait()
-                    KillMon("Cake Prince")
-                until CheckKatakuriSpawned() or not Configs["Auto Farm"] or not GetEnemy("Cake Prince")
+                    KillMob("Cake Prince")
+                until not GetEnemy("Cake Prince") or Configs["Select Method Farm"] ~= "Cake Prince" or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 or Configs["Auto Farm"] == false
             end
         else
             if GetEnemies("Baking Staff") or GetEnemies("Cookie Crafter") or GetEnemies("Cake Guard") or GetEnemies("Head Baker") then
-                for i, v in pairs(WS.Enemies:GetChildren()) do
+                for i,v in pairs(WS.Enemies:GetChildren()) do
                     if table.find(CakePrinceMob, v.Name) then
                         if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                             repeat wait()
-                                KillMon(v.Name)
-                            until not Configs["Auto Farm"] or not CheckKatakuriSpawned() or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                                KillMob(v.Name)
+                            until v.Humanoid.Health <= 0 or not v.Parent or not game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 or Configs["Select Method Farm"] ~= "Cake Prince" or Configs["Auto Farm"] == false
                         end
                     end
                 end
             else
                 NoClip(true)
-                Tweento(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+                Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
             end
         end
     end
 end
-
-spawn(function()
-    while wait() do
-        if Configs["Auto Farm"] then
-            AutoFarm()
-        end
-    end
-end)
