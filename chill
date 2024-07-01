@@ -192,31 +192,28 @@ end
 function Tween(Pos)
     pcall(function()
         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-            if not Pos then return end
-            if not plr.Character:FindFirstChild("PartTele") then
-                local PartTele = Instance.new("Part", plr.Character) -- Create part
-                PartTele.Size = Vector3.new(10,1,10)
-                PartTele.Name = "PartTele"
-                PartTele.Anchored = true
-                PartTele.Transparency = 1
-                PartTele.CanCollide = false
-                PartTele.CFrame = WaitHRP(plr).CFrame 
-                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                    task.wait(0.01)
-                    WaitHRP(plr).CFrame = PartTele.CFrame
-                end)
-            end
+            oldcframe = plr.Character.HumanoidRootPart.CFrame
+            mmb = Pos.Position
+            TargetY = Pos.Y
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
             local tweenfunc = {}
-            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-            if Distance <= 300 then
-                tween:Cancel()
-                game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
-            end
+            local tweenservice = game:service"TweenService"
+            local Bul = TweenInfo.new((mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / 325, Enum.EasingStyle.Linear)
+            local tween = tweenservice:Create(plr.Character["HumanoidRootPart"], Bul, {CFrame = Pos})
             tween:Play()
-            tween.Completed:Wait() 
+            function tweenfunc:Stop()
+                tween:Cancel()
+            end
+            tween.Completed:Wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,
+                TargetY,
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+            )
+            if not tween then
+                return tween
+            end
             return tweenfunc
         end
     end)
