@@ -361,18 +361,20 @@ function BringMon(xx)
 end
 
 function KillMob(cac)
-    v = GetEnemy(cac)
-    if v then
-        if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
-            repeat wait()
-                Buso()
-                EquipWeapon()
-                NoClip(true)
-                Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 15, 2))
-                BringMon(cac)
-            until v.Humanoid.Health <= 0 or not v.Parent
+    pcall(function()
+        v = GetEnemy(cac)
+        if v then
+            if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                repeat wait()
+                    Buso()
+                    EquipWeapon()
+                    NoClip(true)
+                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 15, 2))
+                    BringMon(cac)
+                until v.Humanoid.Health <= 0 or not v.Parent
+            end
         end
-    end
+    end)
 end
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -436,4 +438,37 @@ local CakePrinceMob = {
     "Head Baker"
 }
 
-Tween(CFrame.new(28612.7148, 14896.4893, 103.860237))
+function AutoFarm()
+    if Configs["Select Method Farm"] == "Cake Prince" then
+        if not game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+            if GetEnemy("Cake Prince") then
+                repeat wait()
+                    KillMob("Cake Prince")
+                until not GetEnemy("Cake Prince") or Configs["Select Method Farm"] ~= "Cake Prince" or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 or Configs["Auto Farm"] == false
+            end
+        else
+            if GetEnemies("Baking Staff") or GetEnemies("Cookie Crafter") or GetEnemies("Cake Guard") or GetEnemies("Head Baker") then
+                for i,v in pairs(WS.Enemies:GetChildren()) do
+                    if table.find(CakePrinceMob, v.Name) then
+                        if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                            repeat wait()
+                                KillMob(v.Name)
+                            until v.Humanoid.Health <= 0 or not v.Parent or not game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 or Configs["Select Method Farm"] ~= "Cake Prince" or Configs["Auto Farm"] == false
+                        end
+                    end
+                end
+            else
+                NoClip(true)
+                Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+            end
+        end
+    end
+end
+
+spawn(function()
+    while wait() do
+        if Configs["Auto Farm"] then
+            AutoFarm()
+        end
+    end
+end)
