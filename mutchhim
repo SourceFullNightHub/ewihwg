@@ -196,7 +196,7 @@ function Tween(Pos)
             mmb = Pos.Position
             TargetY = Pos.Y
             if (mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude > 500 then
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 145, oldcframe.Z)
             end
             local tweenfunc = {}
             local tweenservice = game:service"TweenService"
