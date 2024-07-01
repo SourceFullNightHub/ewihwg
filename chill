@@ -462,10 +462,10 @@ end
 function BringMon(Vominhhungsieudeptrai)
     v = GetEnemy(Vominhhungsieudeptrai)
     if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-        v.HumanoidRootPart.Cancollide = false
+        v.HumanoidRootPart.CanCollide = false
         v.Humanoid.WalkSpeed = 0
         v.Humanoid.JumpPower = 0
-        v.Head.Cancollide = false
+        v.Head.CanCollide = false
         v.HumanoidRootPart.CFrame = BringPos
         sethiddenproperty(plr, "SimulationRadius", math.huge)
         v.Humanoid:ChangeState(14)
@@ -499,12 +499,12 @@ function KillMon(a)
         v = GetEnemy(a)
         if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
             repeat wait()
-                BringMon(a)
                 Buso()
                 EquipWeapon()
                 NoClip(true)
                 BringPos = v.HumanoidRootPart.CFrame
                 Tweento(v.HumanoidRootPart.CFrame * CFrame.new(2, 16, 2))
+                BringMon(a)
             until not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
             NoClip(false)
         end
@@ -612,8 +612,10 @@ end
 
 spawn(function()
     while wait() do
-        if Configs["Auto Farm"] then
-            AutoFarm()
-        end
+        pcall(function()
+            if Configs["Auto Farm"] then
+                AutoFarm()
+            end
+        end)
     end
 end)
