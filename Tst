@@ -104,128 +104,6 @@ else
     game.Players.LocalPlayer:Kick("Not Support This Game!")
 end
 
-Mob = ""
-Mob1 = ""
-plr = game.Players.LocalPlayer
-if game.Workspace:FindFirstChild("MobSpawns") then
-    for i, v in pairs(game.Workspace:GetChildren()) do
-        if v.Name == "MobSpawns" then
-            v:Destroy()
-        end
-    end
-end
-local CreateFoldermmb = Instance.new("Folder")
-CreateFoldermmb.Parent = game.Workspace
-CreateFoldermmb.Name = "MobSpawns"
-
-function RemoveLevelTitle(v)
-    return tostring(tostring(v):gsub(" %pLv. %d+%p", ""):gsub(" %pRaid Boss%p", ""):gsub(" %pBoss%p", ""))
-end 
-task.spawn(
-    function()
-        while task.wait() do 
-            for i,v in pairs(game.workspace.MobSpawns:GetChildren()) do  
-                v.Name = RemoveLevelTitle(v.Name)
-            end
-            task.wait(50)
-        end
-    end
-)
-
-function MobDepTrai()
-    MobDepTraiTable = {}
-    for i, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-        table.insert(MobDepTraiTable, v)
-    end
-    local tablefoldermmb = {}
-    for i, v in next, require(game:GetService("ReplicatedStorage").Quests) do
-        for i1, v1 in next, v do
-            for i2, v2 in next, v1.Task do
-                if v2 > 1 then
-                    table.insert(tablefoldermmb, i2)
-                end
-            end
-        end
-    end
-    for i, v in pairs(getnilinstances()) do
-        if table.find(tablefoldermmb, RemoveLevelTitle(v.Name)) then
-            table.insert(MobDepTraiTable, v)
-        end
-    end
-    return MobDepTraiTable
-end
-local MobSpawnList = MobDepTrai()
-function ReloadFolderMob()
-    for i, v in next, game.Workspace.MobSpawns:GetChildren() do
-        v:Destroy()
-    end
-    for i, v in pairs(MobSpawnList) do
-        if v then
-            if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
-                MobNew = Instance.new("Part")
-                MobNew.CFrame = v.HumanoidRootPart.CFrame
-                MobNew.Name = v.Name
-                MobNew.Anchored = true
-                MobNew.Transparency = 1
-                MobNew.CanCollide = false
-                MobNew.Parent = game.Workspace.MobSpawns
-            elseif v:IsA("Part") then
-                MobNew = v:Clone()
-                MobNew.Parent = game.Workspace.MobSpawns
-            end
-        end
-    end
-end
-ReloadFolderMob()
-function GetMobSpawnList(a)
-    a = RemoveLevelTitle(a)
-    k = {}
-    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
-        if v.Name == a then
-            table.insert(k, v)
-        end
-    end
-    return k
-end
-function GetMob()
-    local tablegetmob = {}
-    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
-        if not table.find(tablegetmob, v.Name) then
-            table.insert(tablegetmob, v.Name)
-        end
-    end
-    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
-        for i, v in pairs(tablegetmob) do
-            local b = v
-            v = tostring(v:gsub(" %pLv. %d+%p", ""))
-            if v == CheckNameMobDoubleQuest() then
-                return b
-            end
-        end
-    else
-        return CheckNameMobDoubleQuest()
-    end
-end
-function GetMobName(Name)
-    local tablegetmob = {}
-    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
-        if not table.find(tablegetmob, v.Name) then
-            table.insert(tablegetmob, v.Name)
-        end
-    end
-    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
-        for i, v in pairs(tablegetmob) do
-            local b = v
-            v = tostring(v:gsub(" %pLv. %d+%p", ""))
-            if v == Name then
-                return b
-            end
-        end
-    else
-        return Name
-    end
-end
-
 function GetEnemies(a)
     if WS.Enemies:FindFirstChild(a) then
         for r, v in pairs(WS.Enemies:GetChildren()) do
@@ -331,10 +209,10 @@ function Tweento(C)
     if game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0 and game:GetService("Players").LocalPlayer.Character.HumanoidRootPart then
         if plr.Character.Humanoid.Sit == true then
             plr.Character.Humanoid.Sit = false
-            plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,10,0)
+            plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0,10,0)
         end
         Distance = (C.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-        if (plr.Character.HumanoidRootPart.Position - Distance).Magnitude <= 200 then
+        if Distance <= 200 then
             plr.Character.HumanoidRootPart.CFrame = C
         end
         tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = C})
