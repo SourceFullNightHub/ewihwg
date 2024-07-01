@@ -344,9 +344,6 @@ function Tweento(C)
             requestEntrance(NearestPortal)
         end
         tween.Completed:Wait()
-        if not tween then
-            return tween
-        end
     end
 end
 
@@ -499,12 +496,12 @@ function KillMon(a)
         v = GetEnemy(a)
         if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
             repeat wait()
-                BringMon(a)
                 Buso()
                 EquipWeapon()
                 NoClip(true)
                 BringPos = v.HumanoidRootPart.CFrame
                 Tweento(v.HumanoidRootPart.CFrame * CFrame.new(2, 16, 2))
+                BringMon(a)
             until not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
             NoClip(false)
         end
