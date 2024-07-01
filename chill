@@ -214,32 +214,28 @@ function Tween(Pos)
                 tween:Cancel()
                 game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
             end
-            tween:Play()
             tween.Completed:Wait()
+            tween:Play()
         end
     end)
 end
 
 spawn(function()
     while task.wait() do
-        pcall(function()
-            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-                if plr.Character:FindFirstChild("PartTele") then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
+        if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
+            if plr.Character:FindFirstChild("PartTele") then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
             end
-        end)
+        end
     end
 end)
 spawn(function()
     while task.wait() do
-        pcall(function()
-            if plr.Character:FindFirstChild("PartTele") then
-                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
+        if plr.Character:FindFirstChild("PartTele") then
+            if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
             end
-        end)
+        end
     end
 end)
 
