@@ -30,50 +30,61 @@ if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseT
 end
 
 --------------------------------------------------------------------------------------------------------------------------
+Configs = {
+    ["Select Weapon"] = "Melee",
+    ["Select Method Farm"] = "Level Farm",
+    ["Auto Farm"] = false
+}
 
-local Configs = {}
-local HttpService = game:GetService("HttpService")
-local FolderName = "Sitinks Hub"
-local NameGameFile = "-BloxFruit.json"
-local SaveFileName = game.Players.LocalPlayer.Name..NameGameFile
-local SettingHopServer = {}
-local DefaultSettingHopServer = {}
-function SaveSettings(fff,fff2)
-    if fff~=nil then
-        Configs[fff] = fff2
+function LoadSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfolder("Sitinks Hub") then
+            makefolder("Sitinks Hub")
+        end
+        if not isfolder("Sitinks Hub/Blox Fruits/") then
+            makefolder("Sitinks Hub/Blox Fruits/")
+        end
+        if not isfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            writefile(
+                "Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(Configs)
+            )
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            for y, z in pairs(x) do
+                Configs[y] = z
+            end
+        end
+    else
+        return
     end
-    HttpService = game:GetService("HttpService")
-    if not isfolder(FolderName) then
-        makefolder(FolderName)
+end
+function SaveSettings()
+    if readfile and writefile and isfile and isfolder then
+        if not isfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
+            LoadSettings()
+        else
+            local x =
+                game:GetService("HttpService"):JSONDecode(
+                readfile("Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
+            )
+            local A = {}
+            for y, z in pairs(Configs) do
+                A[y] = z
+            end
+            writefile(
+                "Sitinks Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
+                game:GetService("HttpService"):JSONEncode(A)
+            )
+        end
+    else
+        return
     end
-    writefile(FolderName.."/" .. SaveFileName, HttpService:JSONEncode(Configs))
 end
-
-function ReadSetting()
-local s,e = pcall(function()
-    HttpService = game:GetService("HttpService")
-    if not isfolder(FolderName) then
-        makefolder(FolderName)
-    end
-    return HttpService:JSONDecode(readfile(FolderName.."/" .. SaveFileName))
-end)
-if s then return e
-else
-    SaveSettings()
-    return ReadSetting()
-end
-end
-Configs = ReadSetting()
-if not pcall(function() readfile(FolderName.."/" .. "Jobid.json") end) then
-    writefile(FolderName.."/" .. "Jobid.json", game:GetService("HttpService"):JSONEncode(DefaultSettingHopServer))
-end
-function CheckJobIdServer()
-    local mmb = {}
-    for i,v in next,game:GetService("HttpService"):JSONDecode(readfile(FolderName.."/" .. "Jobid.json")) do
-        table.insert(mmb,i) 
-    end
-    return mmb 
-end
+LoadSettings()
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -85,12 +96,9 @@ local Workspace = game:GetService("Workspace")
 local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
 local CombatFrameworkR = getupvalues(CombatFramework)[2]
 local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
-local RigControllerR = getupvalues(RigController)[2]
 local Notifygame = require(game.ReplicatedStorage:WaitForChild("Notification"))
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
 FastKillTrial = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
-local Race = plr.Data.Race.Value
-local plrLevel = plr.Data.Level.Value
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -175,6 +183,59 @@ function DetectFastAttack()
         end
     end
 end
+
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end 
+
+function Tween(Pos)
+    if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+        game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+        game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
+        if not Pos then return end
+        if not plr.Character:FindFirstChild("PartTele") then
+            local PartTele = Instance.new("Part", plr.Character) -- Create part
+            PartTele.Size = Vector3.new(10,1,10)
+            PartTele.Name = "PartTele"
+            PartTele.Anchored = true
+            PartTele.Transparency = 1
+            PartTele.CanCollide = false
+            PartTele.CFrame = WaitHRP(plr).CFrame 
+            PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+                task.wait(0.01)
+                WaitHRP(plr).CFrame = PartTele.CFrame
+            end)
+        end
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
+        if Distance <= 300 then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
+        end
+        tween:Play()
+        tween.Completed:Wait()
+    end
+end
+
+spawn(function()
+    while task.wait() do
+        if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
+            if plr.Character:FindFirstChild("PartTele") then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
+            end
+        end
+    end
+end)
+spawn(function()
+    while task.wait() do
+        if plr.Character:FindFirstChild("PartTele") then
+            if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
+                plr.Character:FindFirstChild("PartTele"):Destroy()
+            end
+        end
+    end
+end)
 
 local Quest = require(game.ReplicatedStorage.Quests)
 local AntiThisQyest = {"BartiloQuest", "CitizenQuest"}
@@ -513,65 +574,6 @@ function CheckNotify(Tex)
     return false
 end
 
-function WaitHRP(q0) 
-    if not q0 then return end
-    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
-end 
-
-function Tween(Pos)
-    pcall(function()
-        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-            if not Pos then return end
-            if not plr.Character:FindFirstChild("PartTele") then
-                local PartTele = Instance.new("Part", plr.Character) -- Create part
-                PartTele.Size = Vector3.new(10,1,10)
-                PartTele.Name = "PartTele"
-                PartTele.Anchored = true
-                PartTele.Transparency = 1
-                PartTele.CanCollide = false
-                PartTele.CFrame = WaitHRP(plr).CFrame 
-                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                    task.wait(0.01)
-                    WaitHRP(plr).CFrame = PartTele.CFrame
-                end)
-            end
-            tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.PartTele, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = Pos})
-            if Distance <= 300 then
-                tween:Cancel()
-                game.Players.LocalPlayer.Character.PartTele.CFrame = Pos
-            end
-            tween:Play()
-            tween.Completed:Wait()
-        end
-    end)
-end
-
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if plr.Character.Humanoid.Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-                if plr.Character:FindFirstChild("PartTele") then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
-            end
-        end)
-    end
-end)
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            if plr.Character:FindFirstChild("PartTele") then
-                if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                    plr.Character:FindFirstChild("PartTele"):Destroy()
-                end
-            end
-        end)
-    end
-end)
-
 function Buso()
     if not plr.Character:FindFirstChild("HasBuso") then
         local args = {[1] = "Buso"}
@@ -724,7 +726,8 @@ StackAutoFarmTab:CreateDropdown({
     Options = {"Melee", "Sword"},
     Default = Configs["Select Weapon"],
     CallBack = function(Value)
-        SaveSettings("Select Weapon", Value)
+        Configs["Select Weapon"] = Value
+        SaveSettings()
     end
 })
 
@@ -736,7 +739,8 @@ StackAutoFarmTab:CreateDropdown({
     Options = {"Level Farm", "Cake Prince", "Bone"},
     Default = Configs["Select Method Farm"],
     CallBack = function(Value)
-        SaveSettings("Select Method Farm", Value)
+        Configs["Select Method Farm"] = Value
+        SaveSettings()
     end
 })
 
@@ -746,7 +750,8 @@ local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
     Default = Configs["Auto Farm"],
     Configs = true,
     CallBack = function(Value)
-        SaveSettings("Auto Farm", Value)
+        Configs["Auto Farm"] = Value
+        SaveSettings()
     end
 })
 
@@ -754,7 +759,8 @@ ToggleAutoFarm:CreateToggle({
     Name = "Double Quest",
     Default = Configs["Double Quest"],
     CallBack = function(Value)
-      SaveSettings("Double Quest", Value)
+        Configs["Double Quest"] = Value
+        SaveSettings()
    end
 })
 
@@ -762,7 +768,8 @@ ToggleAutoFarm:CreateToggle({
     Name = "Accept Quest",
     Default = Configs["Accept Quest"],
     CallBack = function(Value)
-      SaveSettings("Accept Quest", Value)
+        Configs["Accept Quest"] = Value
+        SaveSettings()
    end
 })
 
