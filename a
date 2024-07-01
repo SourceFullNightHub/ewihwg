@@ -333,11 +333,11 @@ function Tweento(C)
             plr.Character.Humanoid.Sit = false
             plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,10,0)
         end
-        Distance = C.Position
-        if (plr.Character.HumanoidRootPart.Position - Distance).Magnitude <= 200 then
+        Distance = (C.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+        if Distance <= 200 then
             plr.Character.HumanoidRootPart.CFrame = C
         end
-        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Position)).Magnitude / 325, {CFrame = C})
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear),{CFrame = C})
         local NearestPortal = CheckNearestTeleporter(C)
         if NearestPortal then
             tween:Cancel()
