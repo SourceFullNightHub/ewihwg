@@ -29,65 +29,53 @@ if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseT
     until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
 end
 
-_G.S = {
-    Turnv3 = false,
-    Turnv4 = false,
-    AutoTurnObservation = false,
-    SelectDelay = "0.3",
-    TimeWait = 20,
-    DelayAttack = 80,
-    MethodTween = true
-}
+--------------------------------------------------------------------------------------------------------------------------
 
-function LoadSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfolder("Night Hub") then
-            makefolder("Night Hub")
-        end
-        if not isfolder("Night Hub/Blox Fruits/") then
-            makefolder("Night Hub/Blox Fruits/")
-        end
-        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            writefile(
-                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(_G.S)
-            )
-        else
-            local x =
-                game:GetService("HttpService"):JSONDecode(
-                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
-            )
-            for y, z in pairs(x) do
-                _G.S[y] = z
-            end
-        end
-    else
-        return
+local Settings = {}
+local HttpService = game:GetService("HttpService")
+local FolderName = "Sitinks Hub"
+local NameGameFile = "-BloxFruit.json"
+local SaveFileName = game.Players.LocalPlayer.Name..NameGameFile
+local SettingHopServer = {}
+local DefaultSettingHopServer = {}
+function SaveSettings(fff,fff2)
+    if fff~=nil then
+        Settings[fff] = fff2
     end
-end
-function SaveSettings()
-    if readfile and writefile and isfile and isfolder then
-        if not isfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-            LoadSettings()
-        else
-            local x =
-                game:GetService("HttpService"):JSONDecode(
-                readfile("Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json")
-            )
-            local A = {}
-            for y, z in pairs(_G.S) do
-                A[y] = z
-            end
-            writefile(
-                "Night Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json",
-                game:GetService("HttpService"):JSONEncode(A)
-            )
-        end
-    else
-        return
+    HttpService = game:GetService("HttpService")
+    if not isfolder(FolderName) then
+        makefolder(FolderName)
     end
+    writefile(FolderName.."/" .. SaveFileName, HttpService:JSONEncode(Settings))
 end
-LoadSettings()
+
+function ReadSetting()
+local s,e = pcall(function()
+    HttpService = game:GetService("HttpService")
+    if not isfolder(FolderName) then
+        makefolder(FolderName)
+    end
+    return HttpService:JSONDecode(readfile(FolderName.."/" .. SaveFileName))
+end)
+if s then return e
+else
+    SaveSettings()
+    return ReadSetting()
+end
+end
+Configs = ReadSetting()
+if not pcall(function() readfile(FolderName.."/" .. "Jobid.json") end) then
+    writefile(FolderName.."/" .. "Jobid.json", game:GetService("HttpService"):JSONEncode(DefaultSettingHopServer))
+end
+function CheckJobIdServer()
+    local mmb = {}
+    for i,v in next,game:GetService("HttpService"):JSONDecode(readfile(FolderName.."/" .. "Jobid.json")) do
+        table.insert(mmb,i) 
+    end
+    return mmb 
+end
+
+--------------------------------------------------------------------------------------------------------------------------
 
 local plr = game.Players.LocalPlayer
 local lp = game.Players
@@ -100,9 +88,11 @@ local CombatFrameworkR = getupvalues(CombatFramework)[2]
 local Rc = game.ReplicatedStorage
 local Notifygame = require(game.ReplicatedStorage:WaitForChild("Notification"))
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/l"))()
-Fastbeo = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
+FastKillTrial = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/8847hfgg"))()
 local Race = plr.Data.Race.Value
 local YourLevel = plr.Data.Level.Value
+
+--------------------------------------------------------------------------------------------------------------------------
 
 if game.PlaceId == 2753915549 then
     Sea1 = true
@@ -112,6 +102,128 @@ elseif game.PlaceId == 7449423635 then
     Sea3 = true
 else
     game.Players.LocalPlayer:Kick("Not Support This Game!")
+end
+
+Mob = ""
+Mob1 = ""
+plr = game.Players.LocalPlayer
+if game.Workspace:FindFirstChild("MobSpawns") then
+    for i, v in pairs(game.Workspace:GetChildren()) do
+        if v.Name == "MobSpawns" then
+            v:Destroy()
+        end
+    end
+end
+local CreateFoldermmb = Instance.new("Folder")
+CreateFoldermmb.Parent = game.Workspace
+CreateFoldermmb.Name = "MobSpawns"
+
+function RemoveLevelTitle(v)
+    return tostring(tostring(v):gsub(" %pLv. %d+%p", ""):gsub(" %pRaid Boss%p", ""):gsub(" %pBoss%p", ""))
+end 
+task.spawn(
+    function()
+        while task.wait() do 
+            for i,v in pairs(game.workspace.MobSpawns:GetChildren()) do  
+                v.Name = RemoveLevelTitle(v.Name)
+            end
+            task.wait(50)
+        end
+    end
+)
+
+function MobDepTrai()
+    MobDepTraiTable = {}
+    for i, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+        table.insert(MobDepTraiTable, v)
+    end
+    local tablefoldermmb = {}
+    for i, v in next, require(game:GetService("ReplicatedStorage").Quests) do
+        for i1, v1 in next, v do
+            for i2, v2 in next, v1.Task do
+                if v2 > 1 then
+                    table.insert(tablefoldermmb, i2)
+                end
+            end
+        end
+    end
+    for i, v in pairs(getnilinstances()) do
+        if table.find(tablefoldermmb, RemoveLevelTitle(v.Name)) then
+            table.insert(MobDepTraiTable, v)
+        end
+    end
+    return MobDepTraiTable
+end
+local MobSpawnList = MobDepTrai()
+function ReloadFolderMob()
+    for i, v in next, game.Workspace.MobSpawns:GetChildren() do
+        v:Destroy()
+    end
+    for i, v in pairs(MobSpawnList) do
+        if v then
+            if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+                MobNew = Instance.new("Part")
+                MobNew.CFrame = v.HumanoidRootPart.CFrame
+                MobNew.Name = v.Name
+                MobNew.Anchored = true
+                MobNew.Transparency = 1
+                MobNew.CanCollide = false
+                MobNew.Parent = game.Workspace.MobSpawns
+            elseif v:IsA("Part") then
+                MobNew = v:Clone()
+                MobNew.Parent = game.Workspace.MobSpawns
+            end
+        end
+    end
+end
+ReloadFolderMob()
+function GetMobSpawnList(a)
+    a = RemoveLevelTitle(a)
+    k = {}
+    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
+        if v.Name == a then
+            table.insert(k, v)
+        end
+    end
+    return k
+end
+function GetMob()
+    local tablegetmob = {}
+    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
+        if not table.find(tablegetmob, v.Name) then
+            table.insert(tablegetmob, v.Name)
+        end
+    end
+    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
+        for i, v in pairs(tablegetmob) do
+            local b = v
+            v = tostring(v:gsub(" %pLv. %d+%p", ""))
+            if v == CheckNameMobDoubleQuest() then
+                return b
+            end
+        end
+    else
+        return CheckNameMobDoubleQuest()
+    end
+end
+function GetMobName(Name)
+    local tablegetmob = {}
+    for i, v in pairs(game.Workspace.MobSpawns:GetChildren()) do
+        if not table.find(tablegetmob, v.Name) then
+            table.insert(tablegetmob, v.Name)
+        end
+    end
+    if string.find(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()[1].Name, "Lv.") then
+        for i, v in pairs(tablegetmob) do
+            local b = v
+            v = tostring(v:gsub(" %pLv. %d+%p", ""))
+            if v == Name then
+                return b
+            end
+        end
+    else
+        return Name
+    end
 end
 
 function GetEnemies(a)
@@ -313,3 +425,192 @@ DetectFastAttack = function()
     end)
 end
 DetectFastAttack()
+
+function Buso()
+    if not plr.Character:FindFirstChild("HasBuso") then
+        local args = {[1] = "Buso"}
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    end
+end
+
+function GetTool(Akiki)
+    NameTool = ""
+    for i, v in pairs(plr.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == Akiki then
+            NameTool = v.Name
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == Akiki then
+            NameTool = v.Name
+        end
+    end
+    return NameTool
+end
+
+function EquipWeapon(Tool)
+    if Configs["Select Weapon"] == nil or Configs["Select Weapon"] == "" then
+        Configs["Select Weapon"] = "Melee"
+    end
+    Tool = GetTool(Configs["Select Weapon"])
+    local bucac = game.Players.LocalPlayer.Backpack:FindFirstChild(Tool)
+    if bucac then
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(bucac)
+    end
+end
+
+function BringMon(Vominhhungsieudeptrai)
+    v = GetEnemy(Vominhhungsieudeptrai)
+    if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 300 then
+        v.HumanoidRootPart.Cancollide = false
+        v.Humanoid.WalkSpeed = 0
+        v.Humanoid.JumpPower = 0
+        v.Head.Cancollide = false
+        v.HumanoidRootPart.CFrame = BringPos
+        sethiddenproperty(plr, "SimulationRadius", math.huge)
+        v.Humanoid:ChangeState(14)
+    end
+end
+
+function NoClip(Value)
+    if Value == true then
+        if not plr.Character.Head:FindFirstChild("NoClip") then
+            local BodyVelocityTrash = Instance.new("BodyVelocity")
+            BodyVelocityTrash.Name = "NoClip"
+            BodyVelocityTrash.Parent = plr.Character.Head
+            BodyVelocityTrash.Velocity = Vector3.new(0, 0, 0)
+            BodyVelocityTrash.MaxForce = Vector3.new(9999999, 9999999, 9999999)
+            BodyVelocityTrash.P = 15000
+        end
+        for i, v in pairs(plr.Character:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.CanCollide = false
+            end
+        end
+    else
+        if plr.Character.Head:FindFirstChild("NoClip") then
+            plr.Character.Head:FindFirstChild("NoClip"):Destroy()
+        end
+    end
+end
+
+function KillMon(a)
+    if GetEnemy(a) then
+        v = GetEnemy(a)
+        if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+            repeat wait()
+                BringMon(a)
+                Buso()
+                EquipWeapon()
+                NoClip(true)
+                BringPos = v.HumanoidRootPart.CFrame
+                Tweento(v.HumanoidRootPart.CFrame * CFrame.new(2, 16, 2))
+            until not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+            NoClip(false)
+        end
+    end
+end
+
+function StackFunction()
+    
+end
+
+--------------------------------------------------------------------------------------------------------------------------
+
+local Window = Library:CreateWindow({Title = "Sitinks Hub"})
+
+local StackAutoFarmTab = Window:CreateTab({Name = "Stack Auto Farm"})
+
+StackAutoFarmTab:CreateDropdown({
+    Name = "Select Weapon",
+    Description = "Select Weapon To Farm",
+    Options = {"Melee", "Sword"},
+    Default = Configs["Select Weapon"],
+    CallBack = function(Value)
+        SaveSettings("Select Weapon", Value)
+    end
+})
+
+StackAutoFarmTab:CreateSection({Text = 'Farm'})
+
+StackAutoFarmTab:CreateDropdown({
+    Name = "Select Method Farm",
+    Description = "",
+    Options = {"Level", "Cake Prince", "Bone"},
+    Default = Configs["Select Method Farm"],
+    CallBack = function(Value)
+        SaveSettings("Select Method Farm", Value)
+    end
+})
+
+local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
+    Name = "Auto Farm",
+    Description = "Start Farm Method You Select",
+    Default = Configs["Auto Farm"],
+    Settings = true,
+    CallBack = function(Value)
+        SaveSettings("Auto Farm", Value)
+    end
+})
+
+ToggleAutoFarm:CreateToggle({
+    Name = "Double Quest",
+    Default = Configs["Double Quest"],
+    CallBack = function(Value)
+      SaveSettings("Double Quest", Value)
+   end
+})
+
+ToggleAutoFarm:CreateToggle({
+    Name = "Accept Quest",
+    Default = Configs["Accept Quest"],
+    CallBack = function(Value)
+      SaveSettings("Accept Quest", Value)
+   end
+})
+
+local CakePrinceMob = {
+    "Baking Staff",
+    "Cookie Crafter",
+    "Cake Guard",
+    "Head Baker"
+}
+
+function CheckKatakuriSpawned()
+    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+        return true
+    end
+    return false
+end
+
+function AutoFarm()
+    if Configs["Select Method Farm"] == "Cake Prince" then
+        if not CheckKatakuriSpawned() then
+            if GetEnemy("Cake Prince") then
+                repeat wait()
+                    KillMon("Cake Prince")
+                until CheckKatakuriSpawned() or not Configs["Auto Farm"] or not GetEnemy("Cake Prince")
+            end
+        else
+            if GetEnemies("Baking Staff") or GetEnemies("Cookie Crafter") or GetEnemies("Cake Guard") or GetEnemies("Head Baker") then
+                for i, v in pairs(WS.Enemies:GetChildren()) do
+                    if table.find(CakePrinceMob, v.Name) then
+                        if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                            repeat wait()
+                                KillMon(v.Name)
+                            until not Configs["Auto Farm"] or not CheckKatakuriSpawned() or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+spawn(function()
+    while wait() do
+        if Configs["Auto Farm"] then
+            AutoFarm()
+        end
+    end
+end)
