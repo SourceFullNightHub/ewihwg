@@ -337,7 +337,7 @@ function Tweento(C)
         if (plr.Character.HumanoidRootPart.Position - Distance).Magnitude <= 200 then
             plr.Character.HumanoidRootPart.CFrame = C
         end
-        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Positon)).Magnitude / 325, {CFrame = C})
+        tween = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new((Distance - plr.Character.HumanoidRootPart.Position)).Magnitude / 325, {CFrame = C})
         local NearestPortal = CheckNearestTeleporter(C)
         if NearestPortal then
             tween:Cancel()
@@ -462,10 +462,10 @@ end
 function BringMon(Vominhhungsieudeptrai)
     v = GetEnemy(Vominhhungsieudeptrai)
     if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 300 then
-        v.HumanoidRootPart.Cancollide = false
+        v.HumanoidRootPart.CanCollide = false
         v.Humanoid.WalkSpeed = 0
         v.Humanoid.JumpPower = 0
-        v.Head.Cancollide = false
+        v.Head.CanCollide = false
         v.HumanoidRootPart.CFrame = BringPos
         sethiddenproperty(plr, "SimulationRadius", math.huge)
         v.Humanoid:ChangeState(14)
