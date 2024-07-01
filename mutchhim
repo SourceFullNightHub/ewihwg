@@ -184,6 +184,76 @@ function DetectFastAttack()
     end
 end
 
+function CheckNearestTeleporter(aI)
+    vcspos = aI.Position
+    min = math.huge
+    min2 = math.huge
+    local y = game.PlaceId
+    if y == 2753915549 then
+        OldWorld = true
+    elseif y == 4442272183 then
+        NewWorld = true
+    elseif y == 7449423635 then
+        ThreeWorld = true
+    end
+    if ThreeWorld then
+        TableLocations = {
+            ["Caslte On The Sea"] = Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125),
+            ["Mansion"] = Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125),
+            ["Great Tree"] = Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586),
+            ["Ngu1"] = Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875),
+            ["ngu2"] = Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)
+        }
+    elseif NewWorld then
+        TableLocations = {
+            ["Mansion"] = Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312),
+            ["Flamingo"] = Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
+            ["122"] = Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
+            ["3032"] = Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422)
+        }
+    elseif OldWorld then
+        TableLocations = {
+            ["1"] = Vector3.new(-7894.6201171875, 5545.49169921875, -380.2467346191406),
+            ["2"] = Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625),
+            ["3"] = Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
+            ["4"] = Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875)
+        }
+    end
+    TableLocations2 = {}
+    for r, v in pairs(TableLocations) do
+        TableLocations2[r] = (v - vcspos).Magnitude
+    end
+    for r, v in pairs(TableLocations2) do
+        if v < min then
+            min = v
+            min2 = v
+        end
+    end
+    for r, v in pairs(TableLocations2) do
+        if v < min then
+            min = v
+            min2 = v
+        end
+    end
+    for r, v in pairs(TableLocations2) do
+        if v <= min then
+            choose = TableLocations[r]
+        end
+    end
+    min3 = (vcspos - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if min2 <= min3 then
+        return choose
+    end
+end
+function requestEntrance(aJ)
+    args = {"requestEntrance", aJ}
+    game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack(args))
+    oldcframe = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    char = game.Players.LocalPlayer.Character.HumanoidRootPart
+    char.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
+    task.wait(0.5)
+end
+
 function WaitHRP(q0) 
     if not q0 then return end
     return q0.Character:WaitForChild("HumanoidRootPart", 9) 
@@ -196,13 +266,18 @@ function Tween(Pos)
             mmb = Pos.Position
             TargetY = Pos.Y
             if (mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude > 500 then
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 145, oldcframe.Z)
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 80, oldcframe.Z)
             end
             local tweenfunc = {}
             local tweenservice = game:service"TweenService"
             local Bul = TweenInfo.new((mmb - plr.Character:WaitForChild("HumanoidRootPart").Position).Magnitude / 325, Enum.EasingStyle.Linear)
             local tween = tweenservice:Create(plr.Character["HumanoidRootPart"], Bul, {CFrame = Pos})
             tween:Play()
+            local bulonnighthub = CheckNearestTeleporter(Pos)
+            if bulonnighthub then
+                tween:Cancel()
+                requestEntrance(bulonnighthub)
+            end
             function tweenfunc:Stop()
                 tween:Cancel()
             end
@@ -248,6 +323,62 @@ local function DataQuest()
                 end
             end
         end
+    end
+end
+
+function HopServer(bO)
+    if not bO then
+        bO = 10
+    end
+    ticklon = tick()
+    repeat
+        wait()
+    until tick() - ticklon >= 1
+    local function Hop()
+        for r = 1, math.huge do
+            if ChooseRegion == nil or ChooseRegion == "" then
+                ChooseRegion = "Singapore"
+            else
+                plr.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text = ChooseRegion
+            end
+            local bP = game.ReplicatedStorage.__ServerBrowser:InvokeServer(r)
+            for k, v in pairs(bP) do
+                if k ~= game.JobId and v["Count"] < bO then
+                    game.ReplicatedStorage.__ServerBrowser:InvokeServer("teleport", k)
+                end
+            end
+        end
+        return false
+    end
+    if not getgenv().Loaded then
+        local function bQ(v)
+            if v.Name == "ErrorPrompt" then
+                if v.Visible then
+                    if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                        HopServer()
+                        v.Visible = false
+                    end
+                end
+                v:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if v.Visible then
+                            if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                HopServer()
+                                v.Visible = false
+                            end
+                        end
+                    end
+                )
+            end
+        end
+        for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+            bQ(v)
+        end
+        game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+        getgenv().Loaded = true
+    end
+    while not Hop() do
+        wait()
     end
 end
 
@@ -422,7 +553,7 @@ function GetQuest()
         ad:InvokeServer("StartQuest", tostring(CheckDoubleQuestSkidcuaYMF().Mob2), CheckDoubleQuestSkidcuaYMF().ID)
     else
         QuestCFrame = QuestPoint[CheckDoubleQuestSkidcuaYMF().Mob2]
-        NoClip(true)
+        NoClip = true
         Tween(QuestCFrame)
     end
 end
@@ -439,6 +570,19 @@ end
 local CreateFoldermmb = Instance.new("Folder")
 CreateFoldermmb.Parent = game.Workspace
 CreateFoldermmb.Name = "MobSpawns"
+
+function CheckBackpack(Item)
+    for i, v in pairs(plr.Backpack:GetChildren()) do
+        if v.Name == Item then
+            return v
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if v.Name == Item then
+            return v
+        end
+    end
+end
 
 function RemoveLevelTitle(v)
     return tostring(tostring(v):gsub(" %pLv. %d+%p", ""):gsub(" %pRaid Boss%p", ""):gsub(" %pBoss%p", ""))
@@ -591,28 +735,6 @@ function EquipWeapon(Tool)
     end
 end
 
-function NoClip(Value)
-    if Value == true then
-        if not plr.Character.Head:FindFirstChild("NoClip") then
-            local BodyVelocityTrash = Instance.new("BodyVelocity")
-            BodyVelocityTrash.Name = "NoClip"
-            BodyVelocityTrash.Parent = plr.Character.Head
-            BodyVelocityTrash.Velocity = Vector3.new(0, 0, 0)
-            BodyVelocityTrash.MaxForce = Vector3.new(9999999, 9999999, 9999999)
-            BodyVelocityTrash.P = 15000
-        end
-        for i, v in pairs(plr.Character:GetDescendants()) do
-            if v:IsA("BasePart") then
-                v.CanCollide = false
-            end
-        end
-    else
-        if plr.Character.Head:FindFirstChild("NoClip") then
-            plr.Character.Head:FindFirstChild("NoClip"):Destroy()
-        end
-    end
-end
-
 function GetEnemies(a)
     if WS.Enemies:FindFirstChild(a) then
         for r, v in pairs(WS.Enemies:GetChildren()) do
@@ -688,16 +810,86 @@ function KillMob(cac)
                 repeat wait()
                     Buso()
                     EquipWeapon()
-                    NoClip(true)
+                    NoClip = true
                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 15, 2))
                     PosBring = v.HumanoidRootPart.CFrame
                     BringMon(cac)
                 until v.Humanoid.Health <= 0 or not v.Parent
-                NoClip(false)
+                NoClip = false
             end
         end
     end)
 end
+
+function DetectNearestChest()
+    local Distance = math.huge
+    local NameChest
+    for k, v in pairs(game.Workspace:GetChildren()) do
+        if string.match(v.Name, "Chest")  then
+            if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < Distance then
+                Distance = (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude
+                NameChest = v
+            end
+        end
+    end
+    if not NameChest then 
+        for i,v in next,game:GetService("Workspace").Map:GetDescendants() do
+            if v:IsA("Part") and string.find(v.Name, "Chest")  then
+                if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < Distance then
+                    Distance = (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude
+                    NameChest = v
+                end
+            end
+        end
+    end
+    return NameChest 
+end
+
+function CancelTween()
+    NoClip = false
+    if plr.Character.Head:FindFirstChild("BodyClip") then
+        plr.Character.Head:FindFirstChild("BodyClip"):Destroy()
+    end
+    return Tween(plr.Character.HumanoidRootPart.CFrame)
+end
+
+function DisableTween(aL)
+    if not aL then
+        NoClip = false
+        if plr.Character.Head:FindFirstChild("BodyClip") then
+            plr.Character.Head:FindFirstChild("BodyClip"):Destroy()
+        end
+        CancelTween()
+        return Tween(plr.Character.HumanoidRootPart.CFrame)
+    end
+end
+
+spawn(function()
+    while wait() do
+        if NoClip == true then
+            if plr.Character:FindFirstChild("Head") then
+                if not plr.Character.Head:FindFirstChild("BodyClip") then
+                    local bv = Instance.new("BodyVelocity")
+                    bv.Name = "BodyClip"
+                    bv.Velocity = Vector3.new(0, 0, 0)
+                    bv.MaxForce = Vector3.new(9999999, 9999999, 9999999)
+                    bv.P = 15000
+                    bv.Parent = plr.Character.Head
+                end
+                for i, v in pairs(plr.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            else
+                if plr.Character.Head:FindFirstChild("BodyClip") then
+                    plr.Character.Head:FindFirstChild("BodyClip"):Destroy()
+                end
+                plr.Character.Humanoid:ChangeState()
+            end
+        end
+    end
+end)
 
 --------------------------------------------------------------------------------------------------------------------------
 
@@ -736,6 +928,7 @@ local ToggleAutoFarm = StackAutoFarmTab:CreateToggle({
     Settings = true,
     CallBack = function(Value)
         Configs["Auto Farm"] = Value
+        DisableTween(Configs["Auto Farm"])
         SaveSettings()
     end
 })
@@ -788,8 +981,11 @@ function AutoFarm()
             elseif not MobLevel1OrMobLevel2() then
                 shit = GetMobSpawnList(GetMob())
                 for a, b in pairs(shit) do
-                    NoClip(true)
-                    Tween(b.CFrame * CFrame.new(2, 20, 2))
+                    repeat wait()
+                        NoClip = true
+                        Tween(b.CFrame * CFrame.new(2, 20, 2))
+                    until MobLevel1OrMobLevel2() or not Configs["Auto Farm"]
+                    NoClip = false
                 end
             end
         else
@@ -814,10 +1010,10 @@ function AutoFarm()
                     end
                 end
             else
-                NoClip(true)
+                NoClip = true
                 Fuck = GetMobSpawnList(GetMobName("Cake Guard"))
                 for i ,v in pairs(Fuck) do
-                    NoClip(true)
+                    NoClip = true
                     Tween(v.CFrame * CFrame.new(2, 20, 2))
                 end
             end
@@ -834,10 +1030,10 @@ function AutoFarm()
                 end
             end
         else
-            NoClip(true)
+            NoClip = true
             Fuck = GetMobSpawnList(GetMobName("Demonic Soul"))
             for i ,v in pairs(Fuck) do
-                NoClip(true)
+                NoClip = true
                 Tween(v.CFrame * CFrame.new(2, 20, 2))
             end
         end
@@ -852,6 +1048,82 @@ spawn(function()
     end
 end)
 
+local ToggleAutoChest = StackAutoFarmTab:CreateToggle({
+    Name = "Start Auto Chest",
+    Description = "",
+    Default = Configs["Auto Chest"],
+    Settings = true,
+    CallBack = function(Value)
+        Configs["Auto Chest"] = Value
+        DisableTween(Configs["Auto Chest"])
+        SaveSettings()
+    end
+})
+
+ToggleAutoChest:CreateToggle({
+    Name = "Stop After Legendary Item",
+    Default = Configs["Stop Legendary Item"],
+    CallBack = function(Value)
+        Configs["Stop Legendary Item"] = Value
+        SaveSettings()
+   end
+})
+
+ToggleAutoChest:CreateToggle({
+    Name = "Auto Chest Hop",
+    Default = Configs["Auto Chest Hop"],
+    CallBack = function(Value)
+        Configs["Auto Chest Hop"] = Value
+        SaveSettings()
+   end
+})
+
+spawn(function()
+    while wait() do
+        if Configs["Stop Legendary Item"] then
+            if CheckBackpack("God's Chalice") or CheckBackpack("Fist Of Darkness") then
+                ToggleAutoChest:Set(false)
+            end
+        end
+    end
+end)
+
+CountChest = 0
+spawn(function()
+    while wait() do
+        if Configs["Auto Chest"] then
+            v = DetectNearestChest()
+            if v then
+                repeat wait()
+                    Tween(v.CFrame)
+                    NoClip = true
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude <= 2 then
+                        firetouchinterest(v, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+                        firetouchinterest(v, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+                    end
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude <= 5 then 
+                        game:service("VirtualInputManager"):SendKeyEvent(true, "W", false, game)
+                        task.wait()
+                        game:service("VirtualInputManager"):SendKeyEvent(false, "W", false, game)
+                    end
+                    if Configs["Auto Chest Hop"] == true then
+                        if CountChest >= 40 then
+                            HopServer()
+                        end
+                    end
+                until not Configs["Auto Chest Hop"] or not v.Parent
+                CountChest = CountChest + 1
+                CancelTween()
+                NoClip = false
+            else
+                if Configs["Auto Chest Hop"] == true then
+                    HopServer()
+                end
+            end
+        end
+    end
+end)
+
 spawn(function()
     while task.wait() do
         repeat task.wait(0.05)
@@ -859,3 +1131,4 @@ spawn(function()
         until not Configs["Auto Farm"]
     end
 end)
+
