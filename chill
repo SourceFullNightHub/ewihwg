@@ -831,7 +831,7 @@ function AutoFarm()
                     if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                         repeat wait()
                             KillMob(v.Name)
-                        until v.Humanoid.Health <= 0 or not v.Parent or not game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 or Configs["Select Method Farm"] ~= "Cake Prince" or Configs["Auto Farm"] == false
+                        until v.Humanoid.Health <= 0 or not v.Parent or not Configs["Auto Farm"]
                     end
                 end
             end
