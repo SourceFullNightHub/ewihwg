@@ -620,12 +620,10 @@ function AutoFarm()
     if not IsAutoFarm then
         return
     end
-    local MethodFarmMob
     if Configs["Select Method Farm"] == "Cake Prince" then
-        MethodFarmMob = MobCakeIsland
-        if DetectMob(MethodFarmMob) then
+        if DetectMob(MobCakeIsland) then
             for r, v in pairs(WS.Enemies) do
-                if table.find(MethodFarmMob, v.Name) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
+                if table.find(MobCakeIsland, v.Name) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                     repeat task.wait()
                         SizePart(v)
                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
