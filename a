@@ -133,10 +133,11 @@ function BringMob(cac)
 end
 
 function DetectMob(MobName)
-    for i, v in pairs(WS.Enemies:GetChildren()) do
-        local stringgsub = v.Name:gsub(" %pLv. %d+%p", "")
-        if ((typeof(MobName) == "table" and (table.find(MobName, v.Name) or table.find(MobName, stringgsub))) or (v.Name == MobName or MobName == stringgsub)) and v:IsA('Model') and v:FindFirstChild('Humanoid') and v.Humanoid.Health > 0 and v:FindFirstChild('HumanoidRootPart') then
-            return v
+    if game.Workspace.Enemies:FindFirstChild(MobName) then
+        for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+            if (v.Name == MobName or table.find(MobName, v.Name)) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                return v
+            end
         end
     end
 end
