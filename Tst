@@ -135,6 +135,7 @@ end
 function DetectMob(MobName)
     if game.Workspace.Enemies:FindFirstChild(MobName) then
         for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+            local stringgsub = v.Name:gsub(" %pLv. %d+%p", "")
             if (((typeof(MobName) == "table" and (table.find(MobName, v.Name) or table.find(MobName, stringgsub))) or (v.Name == MobName or MobName == stringgsub))) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                 return v
             end
@@ -163,6 +164,36 @@ end
 
 function StackFarm()
     
+end
+
+local Quest = require(game.ReplicatedStorage.Quests)
+local UselessQuest = {"BartiloQuest", "CitizenQuest"}
+local function AutoUpdateQuest()
+    local lvlPl = plr.Data.Level.Value
+    local min = 0
+    if lvlPl >= 1450 and game.PlaceId == 4442272183 then 
+        Mob1 = "Water Fighter"
+        Mob2 = "ForgottenQuest"
+        Mob3 = 2
+    elseif lvlPl >= 700 and game.PlaceId == 2753915549 then
+        Mob1 = "Galley Captain"
+        Mob2 = "FountainQuest"
+        Mob3 = 2
+    else
+        for i,v in pairs(Quest) do
+            for i1,v1 in pairs(v) do
+                local lvlreq = v1.LevelReq
+                for i2,v2 in pairs(v1.Task) do
+                    if lvlPl >= lvlreq and lvlreq >= min and v1.Task[i2] > 1 and not table.find(UselessQuest, tostring(i)) then
+                        min = lvlreq
+                        Mob1 = tostring(i2)
+                        Mob2 = i
+                        Mob3 = i1
+                    end
+                end
+            end
+        end
+    end
 end
 
 function CFrameQuest()
@@ -255,7 +286,7 @@ function CheckNameMobDoubleQuest()
     return a
 end
 function CheckDoubleQuestSkidcuaYMF()
-    S()
+    AutoUpdateQuest()
     local a5 = {}
     if
         game.Players.LocalPlayer.Data.Level.Value >= 10 and _G.S.DoubleQuest and CheckDataQuest() and
@@ -559,6 +590,21 @@ function DetectFastAttack()
     end
 end
 
+function KillMob(C, a)
+    for i, v in pairs(WS.Enemies:GetChildren()) do
+        local stringgsub = v.Name:gsub(" %pLv. %d+%p", "")
+        if (((typeof(C) == "table" and (table.find(C, v.Name) or table.find(C, stringgsub))) or (v.Name == C or C == stringgsub))) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+            repeat wait()
+                Buso()
+                EquipWeapon()
+                Stp = v.HumanoidRootPart.CFrame
+                BringMob(C)
+                Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
+            until not a or not v:FindFirstChild("Humanoid") or v:FindFirstChild("Humanoid").Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart")
+        end
+    end
+end
+
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
@@ -576,11 +622,19 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    SettingsFarm = Window:AddTab({ Title = "Settings Farm", Icon = "settings-2" }),
-    MainFarm = Window:AddTab({ Title = "Main Farm", Icon = "house" })
+    StatusServers = Window:AddTab({ Title = "Status & Servers", Icon = "bar-chart"}),
+    SettingsFarm = Window:AddTab({ Title = "Settings Farm", Icon = "settings-2"}),
+    MainFarm = Window:AddTab({ Title = "Main Farm", Icon = "house"})
 }
 
 local Options = Fluent.Options
+
+-- // Status Servers \\ --
+
+local StatusFarm = Tabs.StatusServers:AddParagraph({
+    Title = "Status Farm : Not Farm",
+    Content = "Status : Please Farm"
+})
 
 -- // Settings Farm \\ --
 
@@ -718,23 +772,6 @@ local MobHauntedCastle = {
     "Posessed Mummy [Lv. 2050]",
 }
 
-function SizePart(v)
-    v.HumanoidRootPart.CanCollide = false
-    v.Humanoid:ChangeState(11)
-    for i,x in next,v:GetDescendants() do 
-        if (x:IsA("Part") or x:IsA("MeshPart")) and not string.find(v.Name,"Leg") and  x.CanCollide then 
-            x.CanCollide = false 
-        end
-    end
-    if not v.HumanoidRootPart:FindFirstChild("minhnghiadz") then
-        local lock = Instance.new("BodyVelocity")
-        lock.Parent = v
-        lock.Name = "minhnghiadz"
-        lock.MaxForce = Vector3.new(100000, 100000, 100000)
-        lock.Velocity = Vector3.new(0, 0, 0)
-    end
-end
-
 IsAutoFarm = true
 function AutoFarm()
     if not IsAutoFarm then
@@ -742,15 +779,11 @@ function AutoFarm()
     end
     if Configs["Select Method Farm"] == "Cake Prince" then
         if DetectMob(MobCakeIsland) then
-            for r, v in pairs(WS.Enemies) do
+            for r, v in pairs(WS.Enemies:GetChildren()) do
                 if table.find(MobCakeIsland, v.Name) and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                     repeat task.wait()
-                        Buso()
-                        EquipWeapon()
-                        SizePart(v)
-                        Stp = v.HumanoidRootPart.CFrame
-                        BringMob(v.Name)
-                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                        KillMob(v.Name, Configs["Auto Farm"])
+                        StatusFarm:SetDesc("Killing Mob".. v.Name)
                     until not Configs["Auto Farm"] or Configs["Select Method Farm"] ~= "Cake Prince" or not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
                 end
             end
@@ -759,7 +792,8 @@ function AutoFarm()
                 repeat wait()
                     NoClip = true
                     Tween(v.CFrame * CFrame.new(2, 20, 2))
-                until not Configs["Auto Farm"] or Configs["Select Method Farm"] ~= "Cake Prince" or DetectMob("Cake Guard") or CheckDistancebyCFrame(v)
+                    StatusFarm:SetDesc("Waitting Mob...")
+                until not Configs["Auto Farm"] or Configs["Select Method Farm"] ~= "Cake Prince" or DetectMob("Cake Guard") or CheckDistancebyCFrame(v) <= 100
             end
         end
     end
