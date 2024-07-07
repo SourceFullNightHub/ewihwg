@@ -2277,20 +2277,12 @@ spawn(function()
     end
 end)
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local task = task or require(game:GetService("ReplicatedStorage"):WaitForChild("task"))
-task.spawn(function()
-    local hookFunction = hookfunction or hookfunc or function(...) end
-    local Container = ReplicatedStorage:WaitForChild("Effect"):WaitForChild("Container")
-    local CameraShaker = require(ReplicatedStorage:WaitForChild("Util"):WaitForChild("CameraShaker"))
-    local Death = require(Container:WaitForChild("Death"))
-    local Respawn = require(Container:WaitForChild("Respawn"))
-    hookFunction(Death, function() 
-        return nil 
-    end)
-    hookFunction(Respawn, function() 
-        return nil 
-    end)
-    game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-    CameraShaker:Stop()
+WS._WorldOrigin.ChildAdded:Connect(function(v)
+    if v.Name =='DamageCounter' then 
+        v.Enabled  = false 
+    end
 end)
+local Death = require(game:GetService("ReplicatedStorage").Effect.Container.Death)
+hookfunction(Death, function()end)
+local Respawn = require(game:GetService("ReplicatedStorage").Effect.Container.Respawn)
+hookfunction(Respawn, function()end)
