@@ -358,20 +358,128 @@ end
 
 function KillMob(V1, V2)
     thismob = DetectMob2(V1)
-    if ((typeof(V1) == "table") and table.find(V1, thismob.Name) or (thismob.Name == V1) and thismob.Parent and thismob:FindFirstChild("HumanoidRootPart") and thismob:FindFirstChild("Humanoid") and thismob.Humanoid.Health > 0) then
-        repeat wait()
-            Buso()
-            EquipWeapon()
-            Tween(thismob.HumanoidRootPart.CFrame * CFrame.new(0, 16, 12))
-            game.Players.LocalPlayer.Character.Humanoid.Sit = false
-            BringPos = thismob.HumanoidRootPart.CFrame
-            BringMob(V1)
-            NoClip = true
-        until not thismob.Parent or not thismob:FindFirstChild("Humanoid") or thismob:FindFirstChild("Humanoid").Health <= 0 or not thismob:FindFirstChild("HumanoidRootPart") or V2
-        NoClip = false
-        CancelTween()
+    repeat wait()
+        Buso()
+        EquipWeapon()
+        Tween(thismob.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
+        BringPos = thismob.HumanoidRootPart.CFrame
+        BringMob(V1)
+        NoClip = true
+    until not thismob.Parent or not thismob:FindFirstChild("Humanoid") or thismob:FindFirstChild("Humanoid").Health <= 0 or not thismob:FindFirstChild("HumanoidRootPart") or V2
+    NoClip = false
+    CancelTween()
+end
+
+spawn(function()
+    while wait() do
+        if NoClip == true then
+            if plr.Character:FindFirstChild("Head") then
+                if not plr.Character:FindFirstChild("NoClip") then
+                    local Bucaccho = Instance.new("BodyVelocity", plr.Character)
+                    Bucaccho.P = 1500
+                    Bucaccho.Name = "NoClip"
+                    Bucaccho.MaxForce = Vector3.new(0, 100000, 0)
+                    Bucaccho.Velocity = Vector3.new(0, 0, 0)
+                end
+                for i, v in pairs(plr.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        else
+            if plr.Character:FindFirstChild("Head") then
+                if plr.Character:FindFirstChild("NoClip") then
+                    plr.Character:FindFirstChild("NoClip"):Destroy()
+                end
+            end
+        end
+    end
+end)
+
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local CombatFramework = require(Players.LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
+
+BladeHits = function(Value)
+    local Hits = {}
+    for _, Hit in ipairs(Workspace.Enemies:GetChildren()) do
+        local Humanoid = Hit and Hit:FindFirstChildOfClass("Humanoid")
+        if Humanoid and Humanoid.Health > 0 then
+            local RootPart = Humanoid.RootPart
+            if RootPart and Players.LocalPlayer:DistanceFromCharacter(RootPart.Position) < Value then
+                table.insert(Hits, RootPart)
+            end
+        end
+    end
+    return Hits
+end
+PlayerHits = function(Value)
+    local Hits = {}
+    for _, Char in ipairs(Workspace.Characters:GetChildren()) do
+        if Char.Name ~= Players.LocalPlayer.Name then
+            local Humanoid = Char and Char:FindFirstChildOfClass("Humanoid")
+            if Humanoid and Humanoid.RootPart and Humanoid.Health > 0 then
+                if Players.LocalPlayer:DistanceFromCharacter(Humanoid.RootPart.Position) < Value then
+                    table.insert(Hits, Humanoid.RootPart)
+                end
+            end
+        end
+    end
+    return Hits
+end
+AddAttack = function(Hit)
+    local ac = CombatFrameworkR.activeController
+    if ac and ac.equipped then
+        if #Hit > 0 then
+            local agrs1 = getupvalue(ac.attack, 5)
+            local agrs2 = getupvalue(ac.attack, 6)
+            local agrs3 = getupvalue(ac.attack, 4)
+            local agrs4 = getupvalue(ac.attack, 7)
+            local agrs5 = (agrs1 * 798405 + agrs3 * 727595) % agrs2
+            local agrs6 = agrs3 * 798405
+
+            agrs5 = (agrs5 * agrs2 + agrs6) % 1099511627776
+            agrs1 = math.floor(agrs5 / agrs2)
+            agrs3 = agrs5 - agrs1 * agrs2
+            agrs4 = agrs4 + 1
+
+            setupvalue(ac.attack, 5, agrs1)
+            setupvalue(ac.attack, 6, agrs2)
+            setupvalue(ac.attack, 4, agrs3)
+            setupvalue(ac.attack, 7, agrs4)
+            local Blade = ac.currentWeaponModel
+            if Blade then
+                ReplicatedStorage.RigControllerEvent:FireServer("weaponChange", Blade.Name)
+                for i, v in pairs(ac.animator.anims.basic) do
+                    v:Play()
+                end
+                ReplicatedStorage.Remotes.Validator:FireServer(math.floor(agrs5 / 1099511627776 * 16777215), agrs4)
+                ReplicatedStorage.RigControllerEvent:FireServer("hit", Hit, 1, "")
+            end
+        end
     end
 end
+AttackFunc = function()
+    AddAttack(BladeHits(65))
+    AddAttack(PlayerHits(65))
+end
+local Tick = tick()
+local Delay = 0.1
+RunAttack = function()
+    spawn(function()
+        while task.wait() do 
+            if (tick() - Tick) >= math.clamp(Delay, 0.100, 1) then
+                task.spawn(AttackFunc)
+                Tick = tick()
+            end
+        end 
+    end)
+end
+RunAttack()
 
 spawn(function()
     while wait() do
