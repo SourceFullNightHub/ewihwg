@@ -1970,6 +1970,10 @@ local ToggleAutoSaber = GItem:MakeToggle({
         if Bulon["AUTO SABER"] == false then
             MultiFarm = false
         end
+        if Bulon["AUTO SABER"] == false then
+            SetTitleStatus("Status : Not Farm")
+            SetDescStatus("")
+        end
         SaveSettings()
         DisableTween(Bulon["AUTO SABER"])
     end
@@ -2126,6 +2130,10 @@ local ToggleAutoSaber = GItem:MakeToggle({
         Bulon["AUTO POLE"] = Value
         if Bulon["AUTO POLE"] == false then
             MultiFarm = false
+        end
+        if Bulon["AUTO POLE"] == false then
+            SetTitleStatus("Status : Not Farm")
+            SetDescStatus("")
         end
         SaveSettings()
         DisableTween(Bulon["AUTO POLE"])
