@@ -1699,6 +1699,10 @@ function SkipLevel()
                                             NoClip = true
                                             Buso()
                                             Click()
+                                            if GetDistance(v.HumanoidRootPart.Position) <= 10 then
+                                                SendKey("X")
+                                                SendKey("Z")
+                                            end
                                         until v:FindFirstChild("Humanoid").Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true
                                     elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
