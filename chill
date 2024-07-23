@@ -2,7 +2,7 @@ local plr = game.Players.LocalPlayer
 function TweenObject(Tenbien, TweenCFrame,obj,ts)
     if not ts then ts = 350 end
     if not Tenbien:FindFirstChild("SmoothPart") then
-        local PartObject = Instance.new("Part", plr.Character) -- Create part
+        local PartObject = Instance.new("Part", Tenbien) -- Create part
         PartObject.Size = Vector3.new(10,1,10)
         PartObject.Name = "PartObject"
         PartObject.Anchored = true
