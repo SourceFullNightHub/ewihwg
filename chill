@@ -1,1 +1,112 @@
+local plr = game.Players.LocalPlayer
 
+function GetYourShip()
+    for i, v in pairs(game.Workspace.Boats:GetChildren()) do
+        if v:FindFirstChild("Owner") then
+            if v:FindFirstChild("Owner").Value == game.Players.LocalPlayer.Name then
+                return v
+            end
+        end
+    end
+end
+
+function WaitHRP(q0) 
+    if not q0 then return end
+    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
+end 
+function GetBackback(Item)
+    for i, v in pairs(plr.Backpack:GetChildren()) do
+        if ((typeof(Item) == "table" and table.find(Item, v.Name)) or (typeof(Item) == "string" and v.Name == Item)) then
+            return v
+        end
+    end
+    for i, v in pairs(plr.Character:GetChildren()) do
+        if ((typeof(Item) == "table" and table.find(Item, v.Name)) or (typeof(Item) == "string" and v.Name == Item)) then
+            return v
+        end
+    end
+end
+function Tween(Pos)
+    pcall(function()
+        if plr.Character:FindFirstChild("Humanoid").Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
+            Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+            plr.Character:WaitForChild("HumanoidRootPart", 9)
+            plr.Character:WaitForChild("Head", 9)
+            if not Pos then return end
+            if not plr.Character:FindFirstChild("PartTele") then
+                local PartTele = Instance.new("Part", plr.Character) -- Create part
+                PartTele.Size = Vector3.new(10,1,10)
+                PartTele.Name = "PartTele"
+                PartTele.Anchored = true
+                PartTele.Transparency = 1
+                PartTele.CanCollide = false
+                PartTele.CFrame = WaitHRP(plr).CFrame 
+                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
+                    task.wait(0.01)
+                    WaitHRP(plr).CFrame = PartTele.CFrame
+                end)
+            end
+            tween = game:GetService("TweenService"):Create(plr.Character.PartTele, TweenInfo.new(Distance / 160, Enum.EasingStyle.Quad) , {CFrame = Pos})
+            if Distance <= 250 then
+                tween:Cancel()
+                plr.Character.PartTele.CFrame = Pos
+            end
+            if plr.Character.Humanoid.Sit == true then
+                plr.Character.Humanoid.Sit = false
+                plr.Character.PartTele.CFrame = CFrame.new(plr.Character.PartTele.CFrame.X, plr.Character.PartTele.CFrame.Y + 30, plr.Character.PartTele.CFrame.Z)
+            end
+            tween:Play()
+        end
+    end)
+end
+
+function TweenObject(MainObject, TweenCFrame,obj,ts)
+    if not ts then ts = 350 end
+    if not MainObject then
+        local SmoothPart = Instance.new("Part", MainObject)
+        SmoothPart.Size = Vector3.new(10,1,10)
+        SmoothPart.Name = "SmoothPart"
+        SmoothPart.Anchored = true
+        SmoothPart.Transparency = 1
+        SmoothPart.CanCollide = false
+        SmoothPart.CFrame = obj.CFrame 
+        SmoothPart:GetPropertyChangedSignal("CFrame"):Connect(function()
+            task.wait(0.01)
+            obj.CFrame = SmoothPart.CFrame
+        end)
+    end
+    local tween_s = game:GetService("TweenService")
+    local info = TweenInfo.new((TweenCFrame.Position - obj.Position).Magnitude / ts, Enum.EasingStyle.Linear)
+    tween = tween_s:Create(game:GetService("Workspace").Boats:FindFirstChild("PirateBrigade").SmoothPart ,info ,{CFrame = TweenCFrame})
+    tween:Play() 
+end
+
+function GetDistance(a)
+    if typeof(a) == "CFrame" then
+        return (a.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+    elseif typeof(a) == "Vector3" then
+        return (a - plr.Character.HumanoidRootPart.Position).Magnitude
+    end
+end
+
+spawn(function()
+    while wait() do
+        if not GetYourShip() then
+            if GetDistance(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781)) <= 10 then
+                local args = {
+                    [1] = "BuyBoat",
+                    [2] = "Guardian"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+            else
+                Tween(CFrame.new(-16927.451171875, 9.0863618850708, 433.8642883300781))
+            end
+        elseif GetYourShip() then
+            if plr.Character.Humanoid.Sit == false then
+                Tween(GetYourShip().VehicleSeat.CFrame * CFrame.new(0, 1, 0))
+            elseif plr.Character.Humanoid.Sit == true then
+                TweenObject(GetYourShip(), CFrame.new(-44842.3945, 10.7790766, 16911.3477), GetYourShip().VehicleSeat)
+            end
+        end
+    end
+end)
