@@ -123,7 +123,7 @@ function LoadSettings()
     end
 end
 function SaveSettings()
-    if readfile and writefile and isfile and isfolder and isloadedui then
+    if readfile and writefile and isfile and isfolder then
         if not isfile("Sitink Hub/Blox Fruits/" .. plr.Name .. ".json") then
             LoadSettings()
         else
@@ -144,6 +144,8 @@ function SaveSettings()
         return
     end
 end
+
+LoadSettings()
 
 function HopServer(bO)
     if not bO then
@@ -281,9 +283,6 @@ function requestEntrance(ac)
     oldcframe = plr.Character.HumanoidRootPart.CFrame
     char = plr.Character.HumanoidRootPart
     char.CFrame = CFrame.new(oldcframe.X, oldcframe.Y + 50, oldcframe.Z)
-    if plr.Character:FindFirstChild("PartTele") then
-        plr.Character:FindFirstChild("PartTele").CFrame = plr.Character.HumanoidRootPart.CFrame
-    end
 end
 function GetBackpack(Item)
     for i, v in pairs(plr.Backpack:GetChildren()) do
@@ -297,66 +296,57 @@ function GetBackpack(Item)
         end
     end
 end
-function WaitHRP(q0) 
-    if not q0 then return end
-    return q0.Character:WaitForChild("HumanoidRootPart", 9) 
-end 
-function Tween(Pos)
+function Tween(TargetCFrame, TweenSpeed)
     pcall(function()
-        if plr.Character:FindFirstChild("Humanoid").Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") then
-            Distance = (Pos.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
-            game.Players.LocalPlayer.Character:WaitForChild("Head", 9)
-            if not Pos then return end
-            if not plr.Character:FindFirstChild("PartTele") then
-                local PartTele = Instance.new("Part", plr.Character) -- Create part
-                PartTele.Size = Vector3.new(10,1,10)
-                PartTele.Name = "PartTele"
-                PartTele.Anchored = true
-                PartTele.Transparency = 1
-                PartTele.CanCollide = false
-                PartTele.CFrame = WaitHRP(plr).CFrame 
-                PartTele:GetPropertyChangedSignal("CFrame"):Connect(function()
-                    task.wait(0.01)
-                    WaitHRP(plr).CFrame = PartTele.CFrame
-                end)
+        if game:GetService("Players").LocalPlayer and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") and plr.Character.Humanoid.Health > 0 then
+            if TweenSpeed == nil or TweenSpeed ~= "number" then
+                TweenSpeed = tonumber(Bulon["Tween Speed"])
             end
+
+            TargetY = TargetCFrame.Y
+            TargetPos = TargetCFrame.Position
             tweenservice = game:GetService("TweenService")
-            inf = TweenInfo.new(Distance / Bulon["Tween Speed"], Enum.EasingStyle.Linear)
-            tween = tweenservice:Create(plr.Character.PartTele, inf, {CFrame = Pos})
+            oldcframe = plr.Character.HumanoidRootPart.CFrame
+            Distance = (TargetPos - plr.Character.HumanoidRootPart.Position).Magnitude
+            IsLow = plr.Character.Humanoid.Health * 30  / 100
+            NotLow = plr.Character.Humanoid.Health * 70 / 100
+            local tweenfunc = {}
             if Distance <= 250 then
-                tween:Cancel()
-                plr.Character.PartTele.CFrame = Pos
+                plr.Character.HumanoidRootPart.CFrame = TargetCFrame
             end
-            local DetectNearTeleporter = DetectTeleporter(Pos)
-            if DetectNearTeleporter then
-                tween:Cancel()
-                requestEntrance(DetectNearTeleporter)
+
+            if Distance > 2500 then
+                local DetectPortal = DetectTeleporter(TargetCFrame)
+                if DetectPortal then
+                    pcall(function()
+                        tween:Cancel()
+                    end)
+                    requestEntrance(DetectPortal)
+                end
             end
-            if plr.Character.Humanoid.Sit == true then
-                plr.Character.Humanoid.Sit = false
-                plr.Character.PartTele.CFrame = CFrame.new(plr.Character.PartTele.CFrame.X, plr.Character.PartTele.CFrame.Y + 30, plr.Character.PartTele.CFrame.Z)
+
+            if (plr.Character.HumanoidRootPart.Position.Position - TargetPos).Magnitude > 5 then
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.CFrame.Z, plr.Character.HumanoidRootPart.CFrame.Y + 80, plr.Character.HumanoidRootPart.CFrame.X)
+                local inf = TweenInfo.new(Distance / TweenSpeed, Enum.EasingStyle.Linear)
+                local tween = tweenservice:Create(plr.Character.HumanoidRootPart, inf, {CFrame = TargetCFrame})
+                tween:Play()
+                function tweenfunc:Stop()
+                    tween:Cancel()
+                end
+                tween.Completed:Wait()
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.CFrame.X, TargetY, plr.Character.HumanoidRootPart.CFrame.Z)
             end
-            tween:Play()
+            return tweenfunc
         end
     end)
 end
 
 spawn(function()
     while task.wait() do
-        if plr.Character:FindFirstChild("Humanoid").Health <= 0 or not plr.Character:FindFirstChild("HumanoidRootPart") then
-            if plr.Character:FindFirstChild("PartTele") then
-                plr.Character:FindFirstChild("PartTele"):Destroy()
-            end
-        end
-    end
-end)
-spawn(function()
-    while task.wait() do
-        if plr.Character:FindFirstChild("PartTele") then
-            if (plr.Character.HumanoidRootPart.Position - plr.Character:FindFirstChild("PartTele").Position).Magnitude >= 100 then
-                plr.Character:FindFirstChild("PartTele"):Destroy()
-            end
+        if tween and tween.PlaybackState == Enum.PlaybackState.Playing then
+            NoClip = true
+        elseif tween then
+            NoClip = false
         end
     end
 end)
@@ -396,9 +386,6 @@ function BypassTo(TeruIsNigga)
             end
             if GetDistance(TeruIsNigga.Position) > 4500 then
                 repeat wait()
-                    if plr.Character:FindFirstChild("PartTele") then
-                        plr.Character.PartTele.CFrame = GetPosBypass(TeruIsNigga).Part.CFrame
-                    end
                     plr.Character:FindFirstChild("Head"):Destroy()
                     plr.Character.HumanoidRootPart.CFrame = GetPosBypass(TeruIsNigga).Part.CFrame
                     plr.Character:WaitForChild("Humanoid"):ChangeState(15)
@@ -408,6 +395,7 @@ function BypassTo(TeruIsNigga)
                 until GetDistance(TeruIsNigga.Position) <= 4500 or plr.Character.Humanoid.Health == 0
             end
         elseif DetectFruitBackback() then
+            NoClip = true
             Tween(TeruIsNigga)
         end
     end)
@@ -419,6 +407,7 @@ function ToBypass(gay)
             BypassTo(gay)
         until GetDistance(gay.Position) <= 4500 or not plr.Character:FindFirstChild("Humanoid") or plr.Character:FindFirstChild("Humanoid").Health <= 0
     elseif GetDistance(gay.Position) < 4500 then
+        NoClip = true
         Tween(gay)
     end
 end
@@ -555,9 +544,6 @@ function DisableTween(nigga)
     if not nigga and isloadedui then
         if plr.Character.Head:FindFirstChild("Nigga") then
             plr.Character.Head:FindFirstChild("Nigga"):Destroy()
-        end
-        if plr.Character:FindFirstChild("PartTele") then
-            plr.Character:FindFirstChild("PartTele"):Destroy()
         end
         NoClip = false
         CancelTween()
@@ -876,6 +862,7 @@ function GetQuest()
     if (NpcPos().Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 10 then
         Rc.Remotes["CommF_"]:InvokeServer("StartQuest", tostring(CheckDoubleQuestSkidcuaYMF().Mob2), CheckDoubleQuestSkidcuaYMF().ID)
     else
+        NoClip = true
         ToBypass(NpcPos())
     end
 end
@@ -1281,6 +1268,7 @@ function PullLever()
             WS.Map["Temple of Time"].Lever.Lever.CFrame.Z < bo.Z - bp
      then
         TweenTemple()
+        NoClip = true
         Tween(WS.Map["Temple of Time"].Lever.Part.CFrame)
         for r, v in pairs(WS.Map["Temple of Time"].Lever:GetDescendants()) do
             if v.Name == "ProximityPrompt" then
@@ -1324,19 +1312,6 @@ gg.__namecall =
         return old(...)
     end
 )
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-spawn(function()
-    while task.wait() do
-        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        hookfunction(game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn"), function()
-            return nil
-        end)
-        hookfunction(game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death"), function()
-            return nil
-        end)
-    end
-end)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1828,6 +1803,16 @@ local ToggleAntiFlagReset = StToggle:MakeToggle({
     Default = Bulon["Anti Flag Reset"],
     Callback = function(Value)
         Bulon["Anti Flag Reset"] = Value
+        SaveSettings()
+    end
+})
+
+local ToggleAntiLow = StToggle:MakeToggle({
+    Name = "Same Y Low Health",
+    Description = "",
+    Default = Bulon["Same Y Low Health"],
+    Callback = function(Value)
+        Bulon["Same Y Low Health"] = Value
         SaveSettings()
     end
 })
@@ -2364,13 +2349,14 @@ function SkipLevel()
             repeat wait()
                 SetDescStatus("Killing Mob Sky Bandit")
                 KillMob("Sky Bandit", not Bulon["Auto Farm"] or plr.Data.Level.Value < 30)
-            until Bulon["Auto Farm"] or IsStackFarm or plr.Data.Level.Value >= 30 or not DetectMob("Sky Bandit")
+            until Bulon["Auto Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 30 or not DetectMob("Sky Bandit")
         else
             for i, v in pairs(GetMobNameList(GetMobName("Sky Bandit"))) do
                 repeat wait()
                     SetDescStatus("Waitting Mob Sky Bandit")
+                    NoClip = true
                     Tween(v.CFrame * CFrame.new(0, 15, 0))
-                until DetectMob("Sky Bandit") or Bulon["Auto Farm"] or IsStackFarm or plr.Data.Level.Value >= 30 or GetDistance(v.Position) <= 30
+                until DetectMob("Sky Bandit") or Bulon["Auto Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 30 or GetDistance(v.Position) <= 30
             end
         end
     elseif plr.Data.Level.Value >= 30 and plr.Data.Level.Value <= 49 then
@@ -2378,13 +2364,14 @@ function SkipLevel()
             repeat wait()
                 SetDescStatus("Killing Mob Shanda")
                 KillMob("Shanda", not Bulon["Auto Farm"] or IsStackFarm or plr.Data.Level.Value < 50)
-            until Bulon["Auto Farm"] or IsStackFarm or plr.Data.Level.Value >= 50 or not DetectMob("Shanda")
+            until Bulon["Auto Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 50 or not DetectMob("Shanda")
         else
             for i, v in pairs(GetMobNameList(GetMobName("Shanda"))) do
                 repeat wait()
                     SetDescStatus("Waitting Mob Shanda")
                     Tween(v.CFrame * CFrame.new(0, 15, 0))
-                until DetectMob("Shanda") or Bulon["Auto Farm"] or IsStackFarm or plr.Data.Level.Value >= 50 or GetDistance(v.Position) <= 30
+                    NoClip = true
+                until DetectMob("Shanda") or Bulon["Auto Farm"] == false or IsStackFarm or plr.Data.Level.Value >= 50 or GetDistance(v.Position) <= 30
             end
         end
     elseif plr.Data.Level.Value >= 50 and plr.Data.Level.Value <= 299 then
@@ -2446,10 +2433,11 @@ function SkipLevel()
             if DetectMob("Shanda") then
                 repeat wait()
                     KillMob("Shanda",not Bulon["Auto Farm"] or KillDone == false or IsStackFarm or plr.Data.Level.Value < 300)
-                until Bulon["Auto Farm"] or IsStackFarm or  plr.Data.Level.Value >= 300 or not DetectMob("Shanda")
+                until Bulon["Auto Farm"] == false or IsStackFarm or  plr.Data.Level.Value >= 300 or not DetectMob("Shanda")
             else
                 for i, v in pairs(GetMobNameList(GetMobName("Shanda"))) do
                     repeat wait()
+                        NoClip = true
                         Tween(v.CFrame * CFrame.new(0, 15, 0))
                     until DetectMob("Shanda") or Bulon["Auto Farm"] == false or IsStackFarm or KillDone == false or plr.Data.Level.Value >= 300 or GetDistance(v.Position) <= 30
                 end
@@ -2503,7 +2491,6 @@ spawn(function()
                                 SetDescStatus("Waitting Mob "..v.Name)
                                 ToBypass(v.CFrame * CFrame.new(0, 15, 0))
                             until DetectMob(TableMobBones) or Bulon["Select Method Farm"] ~= "Bones Farm" or Bulon["Auto Farm"] == false or IsStackFarm or GetDistance(v.Position) <= 30
-                            NoClip = false
                         end
                     end
                 end
@@ -2534,7 +2521,6 @@ spawn(function()
                                     SetDescStatus("Waitting Mob "..v.Name)
                                     ToBypass(v.CFrame * CFrame.new(0, 15, 0))
                                 until DetectMob(TableMobCakes) or Bulon["Select Method Farm"] ~= "Cake Prince" or Bulon["Auto Farm"] == false or IsStackFarm or GetDistance(v.Position) <= 30
-                                NoClip = false
                             end
                         end
                     end
@@ -2842,6 +2828,7 @@ spawn(function()
                         Rc.Remotes["CommF_"]:InvokeServer("StartQuest", tostring(GetBoss()["Boss2"]), GetBoss()["ID"])
                     else
                         SetDescStatus("Claim Quest")
+                        NoClip = true
                         Tween(GetBoss()["PosQuest"])
                     end
                 elseif Bulon["Claim Quest Bosses"] and plr.PlayerGui.Main.Quest.Visible == true then
@@ -2908,16 +2895,19 @@ spawn(function()
                     if WS.Map.Jungle.QuestPlates.Door.CanCollide then
                         pcall(function()
                             SetDescStatus("Tween To Button In Jungle")
+                            NoClip = true
                             ToBypass(CheckButtonJungle().Button.CFrame)
                         end)
                     else
                         if game.Workspace.Map.Desert.Burn.Part.CanCollide == true then
                             if not GetBackpack("Torch") then
                                 SetDescStatus("Get Torch")
+                                NoClip = true
                                 Tween(WS.Map.Jungle.Torch.CFrame)
                             elseif GetBackpack("Torch") then
                                 SetDescStatus("Tween To Desert Door")
                                 EquipTool("Torch")
+                                NoClip = true
                                 Tween(
                                     CFrame.new(
                                         1114.61475,
@@ -2953,6 +2943,7 @@ spawn(function()
                                             Rc.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon")
                                         else
                                             SetDescStatus("Teleport To Mob Leader Spawn")
+                                            NoClip = true
                                             Tween(CFrame.new(-2967.59521, -4.91089821, 5328.70703))
                                         end
                                     elseif Rc.Remotes.CommF_:InvokeServer("ProQuestProgress", "RichSon") == 1 then
@@ -3101,6 +3092,7 @@ spawn(function()
                 elseif GetBackpack("Hidden Key") then
                     SetDescStatus("Equip Hidden Key And Teleport To Pos Rengoku Box")
                     EquipTool("Hidden Key")
+                    NoClip = true
                     Tween(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
                 end
             end
@@ -3198,6 +3190,7 @@ spawn(function()
                     repeat wait()
                         SetDescStatus("Summon Darkbeard")
                         if GetDistance(WS.Map.DarkbeardArena.Summoner.Detection.Position) > 10 then
+                            NoClip = true
                             Tween(WS.Map.DarkbeardArena.Summoner.Detection.CFrame)
                         elseif GetDistance(WS.Map.DarkbeardArena.Summoner.Detection.Position) <= 10 then
                             EquipTool("Fist Of Darkness")
@@ -3402,16 +3395,20 @@ spawn(function()
                         SetDescStatus("Equip God's Chalice And Teleport To Part Color Pick")
                         EquipTool("God's Chalice")
                         wait(.1)
+                        NoClip = true
                         Tween(WS.Map["Boat Castle"].Summoner.Detection.CFrame)
                     else
                         if DetectHakiColorPart().BrickColor.Name == "Hot pink"  then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Winter Sky")
+                            NoClip = true
                             Tween(DetectHakiColorPart().CFrame)
                         elseif DetectHakiColorPart().BrickColor.Name == "Really red"  then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Pure Red")
+                            NoClip = true
                             Tween(DetectHakiColorPart().CFrame)
                         elseif DetectHakiColorPart().BrickColor.Name == "Oyster"  then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Snow White")
+                            NoClip = true
                             Tween(DetectHakiColorPart().CFrame)
                         end
                     end 
@@ -3531,28 +3528,31 @@ spawn(function()
     while wait() do
         if Bulon["Auto Yama"] then
             if EliteProgess >= 30 then
-                SetTitleStatus("Status : Auto Yama")
-                if GetDistance(game.Workspace.Map.Waterfall.SealedKatana.Handle.Position) > 10 then
-                    SetDescStatus("Tween to Yama Pos")
-                    Tween(game.Workspace.Map.Waterfall.SealedKatana.Handle.CFrame * CFrame.new(2, 15, 2))
-                else
-                    if DetectMob("Ghosh") then
-                        KillAura()
+                if not GetInventory("Yama") then
+                    SetTitleStatus("Status : Auto Yama")
+                    if GetDistance(game.Workspace.Map.Waterfall.SealedKatana.Handle.Position) > 10 then
+                        SetDescStatus("Tween to Yama Pos")
+                        NoClip = true
+                        Tween(game.Workspace.Map.Waterfall.SealedKatana.Handle.CFrame * CFrame.new(2, 15, 2))
                     else
-                        SetDescStatus("Huaw!!!!, dit me thanh kiem nang wuaaaaaaaaaaa!!!")
-                        fireclickdetector(game.Workspace.Map.Waterfall.SealedKatana.Handle.ClickDetector)
+                        if DetectMob("Ghosh") then
+                            KillAura()
+                        else
+                            SetDescStatus("Huaw!!!!, dit me thanh kiem nang wuaaaaaaaaaaa!!!")
+                            fireclickdetector(game.Workspace.Map.Waterfall.SealedKatana.Handle.ClickDetector)
+                        end
                     end
-                end
-            elseif EliteProgess < 30 then
-                if Bulon["Auto Elite"] then
-                    SetDescStatus("Dit me may kill elite di!!!")
-                    Library:MakeNotify({
-                        Title = "Sitink Hub",
-                        Content = "Turn On Auto Elite Hunter and need to farm " .. 30 - tonumber(EliteProgess) .. " Elite more to get Yama!!!",
-                        Description = "Auto Yama",
-                        Time = 5 
-                    })
-                    wait(6)
+                elseif EliteProgess < 30 then
+                    if Bulon["Auto Elite"] then
+                        SetDescStatus("Dit me may kill elite di!!!")
+                        Library:MakeNotify({
+                            Title = "Sitink Hub",
+                            Content = "Turn On Auto Elite Hunter and need to farm " .. 30 - tonumber(EliteProgess) .. " Elite more to get Yama!!!",
+                            Description = "Auto Yama",
+                            Time = 5 
+                        })
+                        wait(6)
+                    end
                 end
             end
         end
@@ -3593,7 +3593,7 @@ end
 spawn(function()
     while wait() do
         if Bulon["Auto Tushita"] then
-            if plr.Data.Level.Value >= 2000 then
+            if plr.Data.Level.Value >= 2000 and not GetInventory("Tushita") then
                 if not WS.Map.Turtle:FindFirstChild("TushitaGate") then
                     SetTitleStatus("Status : Auto Tushita")
                     if DetectMob2("Longma") then
@@ -3607,11 +3607,13 @@ spawn(function()
                     if not GetBackpack("Holy Torch") then
                         if DetectMob2(TableDauBuoiAcMin) then
                             SetDescStatus("Teleport To Door Get Holy Torch")
+                            NoClip = true
                             Tween(WS.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
                         end
                     elseif GetBackpack("Holy Torch") then
                         EquipTool("Holy Torch")
                         SetDescStatus("Di thap duoc di thang ngu")
+                        NoClip = true
                         Tween(GetTorch().CFrame)
                     end
                 end
@@ -3722,6 +3724,7 @@ spawn(function()
                         if game.Lighting.Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149431" and (game.Lighting.ClockTime > 15 or game.Lighting.ClockTime < 5) then
                             if (game.Lighting.ClockTime > 18 or game.Lighting.ClockTime < 5) then 
                                 if GetDistance(CFrame.new(-8654.314453125, 140.9499053955078, 6167.5283203125)) > 10 then
+                                    NoClip = true
                                     Tween(CFrame.new(-8654.314453125, 140.9499053955078, 6167.5283203125))
                                 else
                                     game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("gravestoneEvent", 2)
@@ -3745,6 +3748,7 @@ spawn(function()
                         end 
                         if not game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("GuitarPuzzleProgress", "Check").Swamp then
                             if GetDistance(CFrame.new(-10171.7607421875, 138.62667846679688, 6008.0654296875)) > 100 then
+                                NoClip = true
                                 ToBypass(CFrame.new(-10171.7607421875, 138.62667846679688, 6008.0654296875))
                             else
                                 if GetPlayersInThisCFrame(CFrame.new(-10171.7607421875, 138.62667846679688, 6008.0654296875), 750) then
@@ -3761,7 +3765,7 @@ spawn(function()
                                             if v.Name == "Living Zombie" then
                                                 if v.Humanoid.Health > 0 and v.Parent and v:FindFirstChild("HumanoidRootPart") then
                                                     repeat task.wait()
-                                                        v.HumanoidRootPart.CFrame = CFrame.new(-10171.7607421875, 138.62667846679688, 6008.0654296875)
+                                                        BringZombie()
                                                         Buso()
                                                         EquipWeapon()
                                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
@@ -3781,6 +3785,7 @@ spawn(function()
                             end
                         elseif not game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("GuitarPuzzleProgress", "Check").Gravestones then
                             if GetDistance(CFrame.new(-8761.4765625, 142.10487365722656, 6086.07861328125)) > 50 then
+                                NoClip = true
                                 Tween(CFrame.new(-8761.4765625, 142.10487365722656, 6086.07861328125))
                             else
                                 local ClickSigns = {
@@ -3798,12 +3803,14 @@ spawn(function()
                             end
                         elseif not game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("GuitarPuzzleProgress", "Check").Ghost then
                             if GetDistance(CFrame.new(-9755.6591796875, 271.0661315917969, 6290.61474609375)) > 30 then
+                                NoClip = true
                                 Tween(CFrame.new(-9755.6591796875, 271.0661315917969, 6290.61474609375))
                             else
                                 game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("GuitarPuzzleProgress", "Ghost")
                             end
                         elseif not game.ReplicatedStorage.Remotes["CommF_"]:InvokeServer("GuitarPuzzleProgress", "Check").Trophies then
                             if GetDistance(CFrame.new(-9530.0126953125, 6.104853630065918, 6054.83349609375)) > 30 then
+                                NoClip = true
                                 Tween(CFrame.new(-9530.0126953125, 6.104853630065918, 6054.83349609375))
                             else
                                 local SkidTsuo = game.workspace.Map["Haunted Castle"].Tablet
@@ -3958,6 +3965,7 @@ end)
 
 function Good4()
     if not IsCastleRaidc then
+        NoClip = true
         Tween(CFrame.new(-4993.22314, 557.519348, -2962.49756, 0.506485403, 0, 0.86224854, 0, 1, -0, -0.86224854, 0, 0.506485403))
     else
         local v = DetectCastleRaiding()
@@ -4014,9 +4022,11 @@ function Evil1()
     v = DetectMob2("Pirate Millionaire")
     if v then
         repeat wait()
+            NoClip = true
             ToBypass(v.HumanoidRootPart.CFrame)
         until plr.Character:FindFirstChild("Humanoid").Health <= 0
     else
+        NoClip = true
         ToBypass(CFrame.new(-245.9963836669922, 47.30615234375, 5584.1005859375))
     end
 end
@@ -4137,6 +4147,7 @@ spawn(function()
                                 if (WS.Map.Turtle.Cursed[Dismension].Position-plr.Character.HumanoidRootPart.Position).Magnitude < 10 then
                                     fireproximityprompt(WS.Map.Turtle.Cursed[Dismension].ProximityPrompt)
                                 else
+                                    NoClip = true
                                     Tween(WS.Map.Turtle.Cursed[Dismension].CFrame)
                                 end
                             end
@@ -4146,10 +4157,12 @@ spawn(function()
                             end
                             if GoodQuest == 4 and EvilQuest == 4 then
                                 if GetDistance(WS.Map.Turtle.Cursed.Pedestal3.Position) > 10 then
+                                    NoClip = true
                                     Tween(WS.Map.Turtle.Cursed.Pedestal3.CFrame)
                                 else
                                     if WS.Map.Turtle.Cursed.PlacedGem.Transparency == 0 then
                                         if not DetectMob2("Cursed Skeleton Boss [Lv. 2025] [Boss]") then
+                                            NoClip = true
                                             Tween(CFrame.new(-12341.66796875, 603.3455810546875, -6550.6064453125))
                                         else
                                             if DetectMob2("Cursed Skeleton Boss [Lv. 2025] [Boss]") then
@@ -4177,8 +4190,10 @@ spawn(function()
                                             until Bulon["Auto CDK"] == false or GetInventory("Dual Cursed Katana")
                                         else
                                             if GetDistance(PosCake) > 1500 then
+                                                NoClip = true
                                                 ToBypass(PosCake)
                                             elseif GetDistance(PosCake) < 1500 then
+                                                NoClip = true
                                                 Tween(PosCake)
                                                 HopServer()
                                             end
@@ -4186,6 +4201,7 @@ spawn(function()
                                     elseif GetDistance(game:GetService("Workspace")["_WorldOrigin"].Locations["Heavenly Dimension"].Position) < 2000 then
                                         if game:GetService("Workspace").Map.HeavenlyDimension.Exit.BrickColor == BrickColor.new("Cloudy grey") then 
                                             plr.Character.HumanoidRootPart.CFrame = WS.Map.HeavenlyDimension.Exit.CFrame
+                                            NoClip = true
                                             Tween(WS.Map.HeavenlyDimension.Exit.CFrame)
                                         else
                                             local v = GetSomeMobs()
@@ -4223,18 +4239,21 @@ spawn(function()
                                             elseif GetBackpack("Hallow Essence") then
                                                 if GetDistance(WS.Map["Haunted Castle"].Summoner.Detection.Position) > 30 then
                                                     Tween(WS.Map["Haunted Castle"].Summoner.Detection.CFrame)
+                                                    NoClip = true
                                                 else
                                                     EquipTool("Hallow Essence")
                                                 end
                                             end
                                         else
                                             repeat wait()
+                                                NoClip = true
                                                 ToBypass(v.HumanoidRootPart.CFrame)
                                             until Bulon["Auto CDK"] == false or GetInventory("Dual Cursed Katana") or WS["_WorldOrigin"].Locations:FindFirstChild("Hell Dimension") 
                                         end
                                     elseif GetDistance(game:GetService("Workspace")["_WorldOrigin"].Locations["Hell Dimension"].Position) < 2000 then
                                         if WS.Map.HellDimension.Exit.BrickColor == BrickColor.new("Olivine") then
                                             plr.Character.HumanoidRootPart.CFrame = WS.Map.HellDimension.Exit.CFrame
+                                            NoClip = true
                                             Tween(WS.Map.HellDimension.Exit.CFrame)
                                         else
                                             local v = GetSomeMobs()
@@ -4420,6 +4439,7 @@ spawn(function()
                     elseif GetBackpack("Library Key") then
                         SetDescStatus("Open Door Death Step")
                         EquipTool("Library Key")
+                        NoClip = true
                         Tween(CFrame.new(6375.9126, 296.634583, -6843.14062, -0.849467814, 1.5493983e-08, -0.527640462, 3.70608895e-08, 1, -3.0301031e-08, 0.527640462, -4.5294577e-08, -0.849467814))
                     end
                 else
@@ -4458,10 +4478,12 @@ spawn(function()
                             Rc.Remotes["CommF_"]:InvokeServer("DressrosaQuestProgress","Detective")      
                         else
                             SetDescStatus("Teleport To NPC In ImpelDown")
+                            NoClip = true
                             Tween(CFrame.new(4852.2895507813, 5.651451587677, 718.53070068359))
                         end
                     elseif GetBackpack("Key") then
                         SetDescStatus("Teleport To Ice Door")
+                        NoClip = true
                         Tween(game.Workspace.Map.Ice.Door.CFrame)
                         EquipTool("Key")
                     end
@@ -4527,6 +4549,7 @@ spawn(function()
                             Rc.Remotes.CommF_:InvokeServer("StartQuest", "BartiloQuest", 1)
                         else
                             SetDescStatus("Teleport To NPC Bartilo")
+                            NoClip = true
                             Tween(CFrame.new(-456.28952, 73.0200958, 299.895966))
                         end
                     elseif plr.PlayerGui.Main.Quest.Visible and string.find(plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "50") and string.find(plr.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Swan Pirate") then
@@ -4541,6 +4564,7 @@ spawn(function()
                                     repeat wait()
                                         NoClip = true
                                         SetDescStatus("Waitting Mob "..v.Name)
+                                        NoClip = true
                                         Tween(v.CFrame * CFrame.new(0, 15, 0))
                                     until DetectMob2("Swan Pirate") or Bulon["Auto Bartilo Quest"]  or GetDistance(v.Position) <= 30 or BartiloProgess == 1
                                 end
@@ -4561,6 +4585,7 @@ spawn(function()
                     if BartiloProgess == 2 then
                         if GetDistance(Vector3.new(-1835.65, 10.4325, 1679.75)) > 100 then
                             SetDescStatus("Tween to Pos -1835.65, 10.4325, 1679.75")
+                            NoClip = true
                             Tween(CFrame.new(-1835.65, 10.4325, 1679.75))
                         else
                             repeat wait()
@@ -4654,6 +4679,7 @@ spawn(function()
                             if GetDistance(WS.Flower1.Position) > 10 then
                                 SetDescStatus("Tween to Flower 1")
                                 Tween(WS.Flower1.CFrame)
+                                NoClip = true
                             elseif GetDistance(WS.Flower1.Position) <= 10 then
                                 firetouchinterest(WS.Flower1, plr.Character.HumanoidRootPart, 0)
                                 firetouchinterest(WS.Flower1, plr.Character.HumanoidRootPart, 1)
@@ -4662,6 +4688,7 @@ spawn(function()
                             if GetDistance(WS.Flower1.Position) > 10 then
                                 SetDescStatus("Tween to Flower 2")
                                 Tween(WS.Flower2.CFrame)
+                                NoClip = true
                             elseif GetDistance(WS.Flower2.Position) <= 10 then
                                 firetouchinterest(WS.Flower2, plr.Character.HumanoidRootPart, 0)
                                 firetouchinterest(WS.Flower2, plr.Character.HumanoidRootPart, 1)
@@ -4746,6 +4773,7 @@ spawn(function()
                                     repeat wait()
                                         SetDescStatus("Killing Players : ".. v.Name)
                                         Tween(v.HumanoidRootPart.CFrame * CFrame.new(0 ,0, 2))
+                                        NoClip = true
                                         EquipWeapon()
                                         Buso()
                                         Click()
@@ -4797,6 +4825,7 @@ spawn(function()
                         if not DetectMob("rip_indra") then
                             if GetDistance(CFrame.new(-1926.78772, 12.1678171, 1739.80884, 0.956294656, -0, -0.292404652, 0, 1, -0, 0.292404652, 0, 0.956294656)) > 10 then
                                 SetDescStatus("Tween to Thang red head nung cac")
+                                NoClip = true
                                 Tween(CFrame.new(-1926.78772, 12.1678171, 1739.80884, 0.956294656, -0, -0.292404652, 0, 1, -0, 0.292404652, 0, 0.956294656))
                             else
                                 SetDescStatus("Go to rip_indra")
@@ -4876,7 +4905,8 @@ spawn(function()
     while wait() do
         if Bulon["Auto Find DF"] then
             if DetectFruit() then
-                Tween(DetectFruit().Handle.CFrame)
+                NoClip = true
+                ToBypass(DetectFruit().Handle.CFrame)
                 SetTitleStatus("Status : Teleport To Fruit")
             else
                 if Bulon["Hop Find DF"] == true then
@@ -5069,7 +5099,10 @@ end
 function TweenBlueGear()
     BlueGear = getBlueGear()
     if BlueGear then
+        NoClip = true
         Tween(BlueGear.CFrame)
+        wait(2)
+        NoClip = false
     end
 end
 
@@ -5096,6 +5129,7 @@ end
 function TeleHighPoint()
     if WS.Map:FindFirstChild("MysticIsland") then
         if getHighestPoint() then
+            NoClip = true
             Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
         end
     end
@@ -5159,6 +5193,7 @@ local ToggleAutoPullLeverHop = PullC:MakeToggle({
 
 function QuestHeadnungcac()
     if GetDistance(CFrame.new(2956.78, 2281.85, -7217.63)) > 10 then
+        NoClip = true
         Tween(CFrame.new(2956.78, 2281.85, -7217.63))
     else
         local args = {
@@ -5169,6 +5204,7 @@ function QuestHeadnungcac()
     end
     if GetDistance(CFrame.new(28610, 14897, 105, 1, 0, 0, 0, 1, 0, 0, 0, 1)) < 1000 then
         repeat wait()
+            NoClip = true
             Tween(CFrame.new(28610, 14897, 105, 1, 0, 0, 0, 1, 0, 0, 0, 1))
         until GetDistance(CFrame.new(28610, 14897, 105, 1, 0, 0, 0, 1, 0, 0, 0, 1)) <= 10
         local args = {
@@ -5200,7 +5236,7 @@ spawn(function()
                 elseif Rc.Remotes.CommF_:InvokeServer("RaceV4Progress", "Check") == 3 then
                     game.ReplicatedStorage.Remotes.CommF_:InvokeServer("RaceV4Progress", "Continue")
                 elseif DetectMirage() then
-                    if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor") then
+                    if not game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor") then
                         if getBlueGear() then
                             pcall(function()
                                 HighestPoint = getHighestPoint().CFrame * CFrame.new(0, 211.88, 0)
@@ -5208,10 +5244,12 @@ spawn(function()
                             Gear = getBlueGear()
                             if Gear and not Gear.CanCollide and Gear.Transparency ~= 1 then
                                 repeat wait()
+                                    NoClip = true
                                     Tween(getBlueGear().CFrame * CFrame.new(0, 3, 0))
                                 until not getBlueGear() or getBlueGear().Transparency == 1 or game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CheckTempleDoor")
                             elseif Gear and Gear.Transparency == 1 then
                                 if HighedPoint and (plr.Character.HumanoidRootPart.Position - HighedPoint.Position).Magnitude > 10 then
+                                    NoClip = true
                                     Tween(HighestPoint)
                                 elseif HighedPoint and (plr.Character.HumanoidRootPart.Position - HighedPoint.Position).Magnitude <= 10 then
                                     ToggleLockMoon:Set(true)
@@ -5262,8 +5300,10 @@ Rce:MakeButton({
     Description = "",
     Callback = function()
         repeat task.wait()
+            NoClip = true
             Tween(WS.Map["Temple of Time"][plr.Data.Race.Value.."Corridor"].Door.Door.RightDoor.Union.CFrame)
         until (WS.Map["Temple of Time"][plr.Data.Race.Value.."Corridor"].Door.Door.RightDoor.Union.CFrame.Position - plr.Character.HumanoidRootPart.Position).Magnitude < 8
+        NoClip = false
     end
 })
 
@@ -5272,8 +5312,10 @@ Rce:MakeButton({
     Description = "",
     Callback = function()
         repeat task.wait()
+            NoClip = true
             PullLever()
         until (WS.Map["Temple of Time"].Lever.Part.Position - plr.Character.HumanoidRootPart.Position).Magnitude < 8
+        NoClip = false
         Library:MakeNotify({
             Title = "Sitink Hub",
             Content = "Pull Lever Complete!!!",
@@ -5289,8 +5331,10 @@ Rce:MakeButton({
     Callback = function()
         repeat task.wait()
             TweenTemple()
+            NoClip = true
             Tween(CFrame.new(28973.0879, 14889.9756, -120.298691))
         until (CFrame.new(28973.0879, 14889.9756, -120.298691).Position - plr.Character.HumanoidRootPart.Position).Magnitude < 8
+        NoClip = false
     end
 })
 
@@ -5300,8 +5344,10 @@ Rce:MakeButton({
     Callback = function()
         repeat task.wait()
             TweenTemple()
+            NoClip = true
             Tween(CFrame.new(29551.9941, 15069.002, -85.5179291))
         until (CFrame.new(29551.9941, 15069.002, -85.5179291).Position - plr.Character.HumanoidRootPart.Position).Magnitude < 8
+        NoClip = false
     end
 })
 
@@ -5387,6 +5433,7 @@ spawn(function()
                 elseif UGay == "Skypiea" then
                     if WS["_WorldOrigin"].Locations["Trial of the King"] and GetDistance(WS["_WorldOrigin"].Locations["Trial of the King"].CFrame.Position) <= 1000 then
                         Tween(WS.Map.SkyTrial.Model.FinishPart.CFrame)
+                        NoClip = true
                         task.wait(3)
                     end
                 elseif UGay == "Ghoul" then
@@ -5417,16 +5464,19 @@ spawn(function()
                     if WS["_WorldOrigin"].Locations["Trial of Speed"] then
                         if GetDistance(WS["_WorldOrigin"].Locations["Trial of Speed"].Position) <= 1000 then
                             Tween(WS.StartPoint.CFrame * CFrame.new(0, 2, 0))
+                            NoClip = true
                         end
                     end
                 elseif UGay == "Cyborg" then
                     if GetDistance(CFrame.new(-20021.8691,10090.4893,-16.37994,-0.976144373,6.71342875e-08,-0.217122361,8.46145412e-08,1,-7.1212007e-08,0.217122361,-8.78849065e-08,-0.976144373)) <= 1000 then
                         Tween(CFrame.new(-20021.8691,10090.4893,-16.37994,-0.976144373,6.71342875e-08,-0.217122361,8.46145412e-08,1,-7.1212007e-08,0.217122361,-8.78849065e-08,-0.976144373))
+                        NoClip = true
                     end
                 end
             else
                 if IsTrial and not plr.PlayerGui.Main.Timer.Visible then
                     Tween(WS.Map["Temple of Time"][plr.Data.Race.Value.."Corridor"].Door.Door.RightDoor.Union.CFrame)
+                    NoClip = true
                 end
             end
         end
@@ -5497,6 +5547,16 @@ spawn(function()
     end
 end)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Death = require(game.ReplicatedStorage.Effect.Container.Death)
+Respawn = require(game.ReplicatedStorage.Effect.Container.Respawn)
+hookfunction(Death, function() return end)
+hookfunction(Respawn, function() return end)
+spawn(function()
+    while task.wait() do
+        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+    end
+end)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local HttpService = game:GetService("HttpService")
 local Data =
 {
@@ -5517,7 +5577,7 @@ local Data =
                 },
                 {
                     ["name"] = "Script Job Id",
-                    ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)```',
+                    ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", plr)```',
                     ["inline"] = true
                 },
             }
@@ -5555,7 +5615,7 @@ spawn(function()
                             },
                             {
                                 ["name"] = "Script Job Id",
-                                ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)```',
+                                ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", plr)```',
                                 ["inline"] = true
                             },
                         }
@@ -5596,7 +5656,7 @@ spawn(function()
                             },
                             {
                                 ["name"] = "Script Job Id",
-                                ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)```',
+                                ["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", plr)```',
                                 ["inline"] = true
                             },
                         }
@@ -5620,5 +5680,4 @@ game:GetService("CorePackages").Packages["_Index"].Utils.Utils:Destroy()
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 game:GetService("StarterGui"):SetCore("SendNotification", {Title = "sitink hub", Text = "Loading complete", Duration = 5})
 isloadedui = true
-LoadSettings()
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
