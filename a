@@ -1,1 +1,593 @@
+-- // Sitink Hub Rewrite \\ --
 
+if getgenv().ScriptExecuted then
+	print("Script Executed")
+end
+getgenv().ScriptExecuted = true
+repeat
+	task.wait()
+until game:IsLoaded() and game.Players and game.Players.LocalPlayer  
+if game:GetService("CoreGui"):FindFirstChild("Me may beo") then
+	game:GetService("CoreGui"):FindFirstChild("Me may beo"):Destroy()
+end
+if islclosure(loadstring) then
+	while true do
+        -- Get laggy for user if crack
+	end 
+end
+getgenv().LoadingFunction = true
+if getgenv().LoadingFunction then
+	print("Script : Loading Function")
+end
+repeat
+	task.wait()
+until game:IsLoaded() and game.Players and game.Players.LocalPlayer
+if islclosure(loadstring) then
+	while true do
+        -- Get laggy for user if crack
+	end
+end
+HttpService = game:GetService("HttpService")
+
+a = {}
+local plr = game.Players.LocalPlayer
+local Rc = game.ReplicatedStorage
+local plrcharacter = plr.Character
+local NameHub = "Sitink Hub"
+local PlayerName = plr.Name
+local placeid = game.PlaceId
+function SaveSettings(ValueFunction, Value)
+	if ValueFunction ~= nil then
+		a[ValueFunction] = Value
+	end
+	if not isfolder(NameHub) then
+		makefolder(NameHub)
+	end
+	if not isfolder(NameHub .. "/" .. "Blox Fruits") then
+		makefolder(NameHub .. "/" .. "Blox Fruits")
+	end
+	writefile(NameHub .. "/" .. "Blox Fruits" .. PlayerName, HttpService:JSONEncode(a))
+end
+
+function LoadedSettings()
+	local a, b = pcall(function()
+		if not isfolder(NameHub) then
+			return SaveSettings()
+		end
+		HttpService:JSONEncode(readfile(NameHub .. "/" .. "Blox Fruits" .. PlayerName))
+	end)
+	if a then
+		return b
+	else
+		SaveSettings()
+		return LoadedSettings()
+	end
+end
+
+a = LoadedSettings()
+
+if placeid == 2753915549 then
+	Old_World = true
+elseif placeid == 4442272183 then
+	New_World = true
+elseif placeid == 7449423635 then
+	Third_World = true
+end
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/MinhNghia2k11/Ui-Library/main/Source"))()
+function GetTextureMoon()
+	if Old_World then
+		return game:GetService("Lighting").FantasySky.MoonTextureId
+	elseif New_World then
+		return game:GetService("Lighting").FantasySky.MoonTextureId
+	elseif Third_World then
+		return game:GetService("Lighting").Sky.MoonTextureId
+	end
+end
+
+if Third_World then
+	TableRequestEntrance = {
+		Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125), -- Castle On The Sea
+		Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953), -- Hydra Island
+		Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125), -- Mansion
+		Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586), -- Great Tree
+		Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875), -- Out Beautiful Pirate Domain
+		Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656), -- In Beautiful Pirate Domain
+		Vector3.new(2957.833740234375, 2286.495361328125, -7217.05078125) -- In Templte Of Time
+	}
+elseif New_World then
+	TableRequestEntrance = {
+		Vector3.new(-288.46246337890625, 306.130615234375, 597.9988403320312), -- out Mansion Don Swan
+		Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625), -- In Mansion Don Swan
+		Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422), -- Out Cursed Ship
+		Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422) -- In Cursed Ship
+	}
+elseif Old_World then
+	TableRequestEntrance = {
+		Vector3.new(-7894.6201171875, 5545.49169921875, -380.2467346191406), -- Sky 3
+		Vector3.new(-4607.82275390625, 872.5422973632812, -1667.556884765625), -- Sky 2
+		Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875), -- In Under Water City
+		Vector3.new(3876.280517578125, 35.10614013671875, -1939.3201904296875) -- Out Under Water City
+	}
+end
+
+function AntiLowHealth(abac)
+	plrcharacter.HumanoidRootPart.CFrame = CFrame.new(plrcharacter.HumanoidRootPart.CFrame.Z, abac, plrcharacter.HumanoidRootPart.CFrame.X)
+end
+function Tween(TargetPos)
+	pcall(function()
+		PosTarget = TargetPos.Position
+		Distance = (PosTarget - plrcharacter.HumanoidRootPart.Position).Magnitude
+		if Distance <= 250 then
+			tween:Cancel()
+			plrcharacter.HumanoidRootPart.CFrame = TargetPos
+		end
+		LowHealth = plrcharacter.Humanoid.Health * 30 / 100
+		NotLow = plrcharacter.Humanoid.Health * 70 / 100
+		if plr.Character.Health <= LowHealth then
+			tween:Cancel()
+			OldY = plrcharacter.HumanoidRootPart.CFrame.Y
+			repeat
+				wait()
+				AntiLowHealth(math.random(1000, 100000))
+			until plr.Character.Health > NotLow
+			AntiLowHealth(OldY)
+		end
+		for i, v in pairs(TableRequestEntrance) do
+			if (v - PosTarget).Magnitude <= 7000 and Distance >= 2500 then
+				tween:Cancel()
+				game.ReplicatedStorage.Remotes.CommF_:InvokeServer("requestEntrance", v)
+				AntiLowHealth(plrcharacter.HumanoidRootPart.CFrame.Y + 80)
+			end
+		end
+		if Distance >= 3500 then
+			repeat
+				wait()
+				plrcharacter.HumanoidRootPart.CFrame = TargetPos
+				plrcharacter.Head:Destroy()
+				game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+				wait(2)
+				plrcharacter.PrimaryPart.CFrame = TargetPos
+				wait(3)
+			until Distance < 3500 or plrcharacter.Humanoid.Health == 0
+		end
+		local tweenservice = game:GetService("TweenService")
+		local Info = TweenInfo.new(Distance / 325, Enum.EasingStyle.Linear)
+		tween = tweenservice:Create(plrcharacter.HumanoidRootPart, Info, {
+			CFrame = TargetPos
+		})
+		tween:Play()
+	end)
+end
+
+function GetWeaponType(Type) -- Melee or Sword
+	for i, v in pairs(plr.Backpack:GetChildren() and plr.Character:GetChildren()) do
+		if v:IsA("Tool") and v.ToolTip == Type then
+			return v.Name
+		end
+	end
+end
+
+function EquipWP()
+	local chubin = a["Select Weapon"]
+	if chubin == nil or chubin == "" then
+		chubin = "Melee"
+	end
+	local wp = GetWeaponType(chubin)
+	local v1 = plr.Backpack:FindFirstChild(wp)
+	if v1 then
+		plrcharacter.Humanoid:EquipTool(v1)
+	end
+end
+
+function FireRemotes(eventname)
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(eventname)
+end
+
+function Buso()
+	if not plrcharacter:FindFirstChild("HasBuso") then
+		FireRemotes("Buso")
+	end
+end
+
+function RemoveLvTitle(beos)
+	return tostring(tostring(beos):gsub(" %pLv. %d+%p", ""):gsub(" %pRaid Boss%p", ""):gsub(" %pBoss%p", ""))
+end
+
+function DetectMob(ac, replicatedcheck)
+	local buj = ""
+	for i, v in next, ac do
+		buj[i] = RemoveLvTitle(v)
+	end
+	for i, v in pairs(workspace.Enemies:GetChildren()) do
+		if ((typeof(ac) == "table" and table.find(ac, v.Name) or table.find(RemoveLvTitle(ac), v.Name)) or typeof(ac) == "string" and string.find(v.Name, ac) or v.Name == ac or v.Name == RemoveLvTitle(ac)) and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Parent and v.Humanoid.Health > 0 then
+			return v
+		end
+	end
+	if replicatedcheck then
+		for i, v in pairs(Rc:GetChildren()) do
+			if ((typeof(ac) == "table" and table.find(ac, v.Name) or table.find(RemoveLvTitle(ac), v.Name)) or typeof(ac) == "string" and string.find(v.Name, ac) or v.Name == ac or v.Name == RemoveLvTitle(ac)) and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Parent and v.Humanoid.Health > 0 then
+				return v
+			end
+		end
+	end
+end
+
+function GetBackpack(asingon)
+	for i, v in pairs(plr.Backpack:GetChildren() and plrcharacter:GetChildren()) do
+		if v.Name == asingon then
+			return v
+		end
+	end
+end
+
+task.spawn(function()
+	while wait() do
+		if setscriptable then
+			setscriptable(game.Players.LocalPlayer, "SimulationRadius", true)
+		end
+		if sethiddenproperty then
+			sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+		end
+	end
+end)
+
+function InMyNetWork(object)
+	if isnetworkowner then
+		return isnetworkowner(object)
+	else
+		if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 200 then 
+			return true
+		end
+		return false
+	end
+end
+
+function GetDistance(uisoioi)
+	if typeof(uisoioi) == "CFrame" then
+		return (uisoioi.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+	elseif typeof(uisoioi) == "Vector3" then
+		return (uisoioi - plr.Character.HumanoidRootPart.Position).Magnitude
+	end
+end
+
+function BringMob(why)
+	for i, v in pairs(workspace.Enemies:GetChildren()) do
+		if v.Name == why and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Parent then
+			if GetDistance(v.HumanoidRootPart.CFrame) <= 350 then
+				if InMyNetWork(v.HumanoidRootPart) then
+					v.HumanoidRootPart.CFrame = LockCFrame
+					v.Humanoid.JumpPower = 0
+					v.Humanoid.WalkSpeed = 0
+					v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+					v.HumanoidRootPart.CanCollide = false
+					v.Head.CanCollide = false
+					v.Humanoid:ChangeState(14)
+					v.Humanoid:ChangeState(11)
+				end
+			end
+		end
+	end
+end
+
+function KillMob(target, enablebring, valuestop)
+	pcall(function()
+		for i, v in pairs(workspace.Enemies:GetChildren()) do
+			if ((typeof(target) == "table" and table.find(target, v.Name) or table.find(RemoveLvTitle(target), v.Name)) or typeof(target) == "string" and string.find(v.Name, target) or v.Name == target or v.Name == RemoveLvTitle(target)) and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Parent and v.Humanoid.Health > 0 and not valuestop then
+				repeat
+					task.wait()
+					EquipWP()
+					Buso()
+					Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+					if enablebring == true then
+						BringMob(target)
+					end
+					NoClip = true
+				until v.Humanoid.Health <= 0 or not v.Parent or not v:FindFirstChild("HumanoidRootPart") or valuestop
+				NoClip = false
+			end
+		end
+	end)
+end
+
+function GetMiragePuzzle()
+	if Rc.Remotes.CommF_:InvokeServer("CheckTempleDoor") then
+		return true
+	end
+	return false
+end
+
+function CheckStatusMiragePuzzle()
+	if GetMiragePuzzle() then
+		return "Completed"
+	else
+		return "Not Completed"
+	end
+end
+
+function EnableKen()
+	if not plr.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+		game:GetService('VirtualUser'):CaptureController()
+		game:GetService('VirtualUser'):SetKeyDown('0x65')
+		wait(2)
+		game:GetService('VirtualUser'):SetKeyUp('0x65')
+	end
+end
+
+function CanTurnV4()
+	if plr.Character:FindFirstChild("RaceEnergy") and plr.Character.RaceEnergy.Value >= 1 and not plr.Character.RaceTransformed.Value then
+		return true
+	end
+	return false
+end
+
+function SendKey(KeyName, HoldTime)
+	if HoldTime == nil then
+		HoldTime = 0.3
+	end
+	game:service("VirtualInputManager"):SendKeyEvent(true, KeyName, false, game)
+	task.wait(HoldTime)
+	game:service("VirtualInputManager"):SendKeyEvent(false, KeyName, false, game)
+end
+
+local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
+local Animation = Instance.new("Animation")
+function CurrentWeapon()
+    local ac = CombatFrameworkR.activeController
+    local ret = ac.blades[1]
+    if not ret then
+        return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    end
+    pcall(
+        function()
+            while ret.Parent ~= game.Players.LocalPlayer.Character do
+                ret = ret.Parent
+            end
+        end
+    )
+    if not ret then
+        return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    end
+    return ret
+end
+function DoAttack()
+    if game.Players.LocalPlayer.Character.Stun.Value ~= 0 then
+        return nil
+    end
+    local ac = CombatFrameworkR.activeController
+    ac.hitboxMagnitude = 55
+    if ac and ac.equipped then
+        for indexincrement = 1, 1 do
+            local bladehit =require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.LocalPlayer.Character,{game.Players.LocalPlayer.Character.HumanoidRootPart},60)
+            if #bladehit > 0 then
+                local AcAttack8 = debug.getupvalue(ac.attack, 5)
+                local AcAttack9 = debug.getupvalue(ac.attack, 6)
+                local AcAttack7 = debug.getupvalue(ac.attack, 4)
+                local AcAttack10 = debug.getupvalue(ac.attack, 7)
+                local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
+                local NumberAc13 = AcAttack7 * 798405
+                (function()
+                    NumberAc12 = (NumberAc12 * AcAttack9 + NumberAc13) % 1099511627776
+                    AcAttack8 = math.floor(NumberAc12 / AcAttack9)
+                    AcAttack7 = NumberAc12 - AcAttack8 * AcAttack9
+                end)()
+                AcAttack10 = AcAttack10 + 1
+                debug.setupvalue(ac.attack, 5, AcAttack8)
+                debug.setupvalue(ac.attack, 6, AcAttack9)
+                debug.setupvalue(ac.attack, 4, AcAttack7)
+                debug.setupvalue(ac.attack, 7, AcAttack10)
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and ac.blades and ac.blades[1] then
+                    Animation.AnimationId = ac.anims.basic[2]
+                    ac.humanoid:LoadAnimation(Animation):Play(1, 1)
+                    game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10)
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(CurrentWeapon()))
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
+                end
+            end
+        end
+    end
+end
+
+FireAttack = 0  
+TickStartAttack = tick()
+spawn(function()
+    local MT = getrawmetatable(game)
+    local OldNameCall = MT.__namecall
+    setreadonly(MT, false)
+    MT.__namecall = newcclosure(function(self, ...)
+        local Method = getnamecallmethod()
+        local Args = {...}
+        if Method == 'FireServer' and self.Name == "RigControllerEvent" and  Args[1] == "hit"  then
+            FireAttack = FireAttack + 1 
+            TickStartAttack = tick()
+        end
+        return OldNameCall(self, unpack(Args))
+    end)
+end)
+
+function Attack()
+    pcall(function()
+        DoAttack()
+    end)
+end
+
+function Attack2()
+    if FireAttack <= 70 then
+        Attack()
+        FireAttack = FireAttack + 1
+    elseif FireAttack >= 70 then
+        Attack()
+        task.wait(0.1 + Delay)
+    end
+end
+
+spawn(function()
+    while task.wait(0.0000000001) do
+        repeat task.wait(0.00000000001)
+            Attack2()
+        until game.Players.LocalPlayer.Character.Stun.Value ~= 0
+    end
+end)
+
+local Windows = Lib:MakeWindow({
+	Name = "Sitink Hub", 
+	Description = "- Blox Fruit", 
+	LogoInfo = "rbxassetid://18448428761",
+	NameInfo = "Owner Info",
+	NamePlayers = "! Nightx",
+	InfoColor = Color3.fromRGB(255, 38, 42),
+	LogoPlayers = "rbxassetid://18448428761",
+	InfoDesc = "discord.gg/JURvkuHr28"
+})
+
+local SettingsFarm = Windows:MakeTab({
+	Name = "Settings Farm"
+})
+
+local StFarm = SettingsFarm:MakeSection({
+	Title = "Dropdown Settings",
+	Content = "Select Weapon, FastAttack Delay"
+})
+
+local DropdownSelectWeapon = StFarm:MakeDropdown({
+	Name = "Select Weapon",
+	Description = "",
+	Options = {
+		"Melee",
+		"Sword"
+	},
+	Default = a["Select Weapon"],
+	Callback = function(Value)
+		SaveSettings("Select Weapon", Value)
+	end
+})
+
+local function ChangeFastDelay(typedelay)
+	if typedelay == "Normal" then
+		Delay = 0.09
+	elseif typedelay == "Fast" then
+		Delay = 0.07
+	elseif typedelay == "Best Faster" then
+		Delay = 0.04
+	end
+end
+
+local DropdownDelayAttack = StFarm:MakeDropdown({
+	Name = "Delay Attack",
+	Description = "",
+	Options = {
+		"Normal",
+		"Fast",
+		"Best Faster"
+	},
+	Default = a["FastDelay"],
+	Callback = function(Value)
+		SaveSettings("FastDelay", Value)
+		ChangeFastDelay(a["FastDelay"])
+	end
+})
+
+local StToggle = SettingsFarm:MakeSection({
+	Title = "Toggle Settings",
+	Content = ""
+})
+
+local ToggleObservation = StToggle:MakeToggle({
+	Name = "Auto Observation",
+	Description = "",
+	Default = a["Auto Observation"],
+	Callback = function(Value)
+		SaveSettings("Auto Observation", Value)
+	end
+})
+
+local ToggleTurnv4 = StToggle:MakeToggle({
+	Name = "Auto Race V4",
+	Description = "",
+	Default = a["Auto Race V4"],
+	Callback = function(Value)
+		SaveSettings("Auto Race V4", Value)
+	end
+})
+
+spawn(function()
+	while wait() do
+		if a["Auto Observation"] and not not plr.PlayerGui.ScreenGui:FindFirstChild("ImageLabel") then
+			EnableKen()
+		end
+		if a["Auto Race V4"] and CanTurnV4() then
+			SendKey("Y")
+		end
+	end
+end)
+
+local MainFarm = Windows:MakeTab({
+	Name = "Main Farm"
+})
+
+local MFarmSection = MainFarm:MakeSection({
+	Title = "Main Farm",
+	Content = ""
+})
+
+MFarmSection:Section("Method Farm")
+
+local DropdownMethodFarm = MFarmSection:MakeDropdown({
+	Name = "Delay Attack",
+	Description = "",
+	Options = {
+		"Level Farm",
+		"Bones Farm",
+		"Cake Prince Farm"
+	},
+	Default = a["Method Farm"],
+	Callback = function(Value)
+		SaveSettings("Method Farm", Value)
+	end
+})
+
+local ToggleAutoFarm = MFarmSection:MakeToggle({
+    Name = "Auto Farm",
+    Description = "Start Farm Method You Selected",
+    Default = a["Auto Farm"],
+    Callback = function(Value)
+        SaveSettings("Auto Farm", Value)
+    end
+})
+
+local TableKatakuri = {
+    "Cake Prince",
+    "Dough King"
+}
+
+spawn(function()
+    while wait() do
+		if a["Auto Farm"] then
+			if a["Method Farm"] == "Cake Prince Farm" then
+				if not DetectMob(TableKatakuri, true) then
+					TableCakeMobs = {
+						"Cookie Crafter [Lv. 2200]",
+						"Cake Guard [Lv. 2225]",
+						"Baking Staff [Lv. 2250]",
+						"Head Baker [Lv. 2275]"
+					}
+					if DetectMob(TableCakeMobs) then
+						repeat wait()
+							KillMob(TableCakeMobs, true, a["Auto Farm"] == false or a["Method Farm"] ~= "Cake Prince Farm")
+						until a["Auto Farm"] == false or a["Method Farm"] ~= "Cake Prince Farm"
+					else
+						Tween(CFrame.new(-2136.31177, 73.9832458, -12327.4492, 0.996233284, -3.53329632e-08, 0.0867136046, 4.28375344e-08, 1, -8.46835277e-08, -0.0867136046, 8.80791475e-08, 0.996233284))
+					end
+				else
+					if GetDistance(DetectMob(TableKatakuri, true).Position) < 1000 then
+						repeat wait()
+							KillMob(TableKatakuri, true, a["Auto Farm"] == false or a["Method Farm"] ~= "Cake Prince Farm")
+						until a["Auto Farm"] == false or a["Method Farm"] ~= "Cake Prince Farm"
+					else
+						Tween(CFrame.new(-2125.64282, 70.3262863, -12400.6777))
+					end
+				end
+			end
+        end
+    end
+end)
