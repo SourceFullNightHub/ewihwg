@@ -11,7 +11,7 @@ local SitinkLib = {}
 local CoreGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local function MakeDraggable(topbarobject, object)
-	local DraggableUI = nil
+	local Dragging = nil
 	local DragInput = nil
 	local DragStart = nil
 	local StartPosition = nil
@@ -31,14 +31,14 @@ local function MakeDraggable(topbarobject, object)
 	topbarobject.InputBegan:Connect(
 		function(input)
 			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				DraggableUI = true
+				Dragging = true
 				DragStart = input.Position
 				StartPosition = object.Position
 
 				input.Changed:Connect(
 					function()
 						if input.UserInputState == Enum.UserInputState.End then
-							DraggableUI = false
+							Dragging = false
 						end
 					end
 				)
@@ -50,7 +50,7 @@ local function MakeDraggable(topbarobject, object)
 		function(input)
 			if
 				input.UserInputType == Enum.UserInputType.MouseMovement or
-					input.UserInputType == Enum.UserInputType.Touch
+				input.UserInputType == Enum.UserInputType.Touch
 			then
 				DragInput = input
 			end
@@ -59,7 +59,7 @@ local function MakeDraggable(topbarobject, object)
 
 	uis.InputChanged:Connect(
 		function(input)
-			if input == DragInput and DraggableUI then
+			if input == DragInput and Dragging then
 				Update(input)
 			end
 		end
@@ -80,7 +80,7 @@ function SitinkLib:AddNotification(NotifyConfig)
 	local UIPadding_2 = Instance.new("UIPadding")
 	local Close = Instance.new("Frame")
 	local CloseButton = Instance.new("ImageButton")
-    spawn(function()
+	spawn(function()
 		if not CoreGui:FindFirstChild("NotifyGui") then
 			local NotifyGui = Instance.new("ScreenGui")
 			NotifyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -109,7 +109,7 @@ function SitinkLib:AddNotification(NotifyConfig)
 							TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
 							{Position = UDim2.new(0, 0, 1, -((v.Size.Y.Offset + 12) * Count))}
 						):Play()
-						
+
 					end
 				end
 			)
@@ -218,6 +218,8 @@ function SitinkLib:AddWindows(cf)
 	cf = {}
 	cf.Title = cf.Title or ""
 	cf.Logo = cf.Logo or ""
+	cf["Enable Loading Ui"] = cf["Enable Loading Ui"] or false
+	cf["Time to load ui"] = cf["Time to load ui"] or 5
 
 	local SitinkGUI = Instance.new("ScreenGui")
 	local Main = Instance.new("Frame")
@@ -241,6 +243,171 @@ function SitinkLib:AddWindows(cf)
 	local ClickkGUI = Instance.new("Frame")
 	local UICorner_35 = Instance.new("UICorner")
 	local c = Instance.new("TextButton")
+	local DropShadowHolder_2 = Instance.new("Frame")
+	local DropShadow_2 = Instance.new("ImageLabel")
+	local Loading = Instance.new("Frame")
+	local UICorner_36 = Instance.new("UICorner")
+	local DropShadowHolder_3 = Instance.new("Frame")
+	local DropShadow_3 = Instance.new("ImageLabel")
+	local Title_17 = Instance.new("TextLabel")
+	local LoadingFrame = Instance.new("Frame")
+	local Load = Instance.new("Frame")
+	local TextLabel = Instance.new("TextLabel")
+
+	DropShadowHolder.Name = "DropShadowHolder"
+	DropShadowHolder.Parent = Main
+	DropShadowHolder.BackgroundTransparency = 1.000
+	DropShadowHolder.BorderSizePixel = 0
+	DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
+	DropShadowHolder.ZIndex = 0
+
+	DropShadow.Name = "DropShadow"
+	DropShadow.Parent = DropShadowHolder
+	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	DropShadow.BackgroundTransparency = 1.000
+	DropShadow.BorderSizePixel = 0
+	DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow.ZIndex = 0
+	DropShadow.Image = "rbxassetid://6014261993"
+	DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow.ImageTransparency = 0.500
+	DropShadow.ScaleType = Enum.ScaleType.Slice
+	DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+	ClickkGUI.Name = "ClickkGUI"
+	ClickkGUI.Parent = SitinkGUI
+	ClickkGUI.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	ClickkGUI.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ClickkGUI.BorderSizePixel = 0
+	ClickkGUI.Position = UDim2.new(0.0855721384, 0, 0.139676109, 0)
+	ClickkGUI.Size = UDim2.new(0, 45, 0, 45)
+
+	UICorner_35.Parent = ClickkGUI
+
+	c.Name = "c"
+	c.Parent = ClickkGUI
+	c.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	c.BackgroundTransparency = 1.000
+	c.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	c.BorderSizePixel = 0
+	c.Size = UDim2.new(1, 0, 1, 0)
+	c.Font = Enum.Font.GothamBold
+	c.Text = "OFF"
+	c.TextColor3 = Color3.fromRGB(255, 255, 255)
+	c.TextSize = 13.000
+	c.MouseButton1Click:Connect(function()
+		if c.Text == "OFF" then
+			Main.Visible = false
+			c.Text = "ON"
+		elseif c.Text == "ON" then
+			c.Text = "OFF"
+			Main.Visible = true
+		end
+	end)
+
+	DropShadowHolder_2.Name = "DropShadowHolder"
+	DropShadowHolder_2.Parent = ClickkGUI
+	DropShadowHolder_2.BackgroundTransparency = 1.000
+	DropShadowHolder_2.BorderSizePixel = 0
+	DropShadowHolder_2.Size = UDim2.new(1, 0, 1, 0)
+	DropShadowHolder_2.ZIndex = 0
+
+	DropShadow_2.Name = "DropShadow"
+	DropShadow_2.Parent = DropShadowHolder_2
+	DropShadow_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow_2.BackgroundTransparency = 1.000
+	DropShadow_2.BorderSizePixel = 0
+	DropShadow_2.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow_2.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow_2.ZIndex = 0
+	DropShadow_2.Image = "rbxassetid://6014261993"
+	DropShadow_2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow_2.ImageTransparency = 0.500
+	DropShadow_2.ScaleType = Enum.ScaleType.Slice
+	DropShadow_2.SliceCenter = Rect.new(49, 49, 450, 450)
+
+	Loading.Name = "Loading"
+	Loading.Parent = SitinkGUI
+	Loading.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+	Loading.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Loading.BorderSizePixel = 0
+	Loading.Position = UDim2.new(0.268656731, 0, 0.230769232, 0)
+	Loading.Size = UDim2.new(0, 440, 0, 243)
+
+	UICorner_36.CornerRadius = UDim.new(0, 2)
+	UICorner_36.Parent = Loading
+
+	DropShadowHolder_3.Name = "DropShadowHolder"
+	DropShadowHolder_3.Parent = Loading
+	DropShadowHolder_3.BackgroundTransparency = 1.000
+	DropShadowHolder_3.BorderSizePixel = 0
+	DropShadowHolder_3.Size = UDim2.new(1, 0, 1, 0)
+	DropShadowHolder_3.ZIndex = 0
+
+	DropShadow_3.Name = "DropShadow"
+	DropShadow_3.Parent = DropShadowHolder_3
+	DropShadow_3.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow_3.BackgroundTransparency = 1.000
+	DropShadow_3.BorderSizePixel = 0
+	DropShadow_3.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow_3.Size = UDim2.new(1, 47, 1, 47)
+	DropShadow_3.ZIndex = 0
+	DropShadow_3.Image = "rbxassetid://6015897843"
+	DropShadow_3.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow_3.ImageTransparency = 0.500
+	DropShadow_3.ScaleType = Enum.ScaleType.Slice
+	DropShadow_3.SliceCenter = Rect.new(49, 49, 450, 450)
+
+	Title_17.Name = "Title"
+	Title_17.Parent = Loading
+	Title_17.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title_17.BackgroundTransparency = 1.000
+	Title_17.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title_17.BorderSizePixel = 0
+	Title_17.Position = UDim2.new(0, 0, 0.094650209, 0)
+	Title_17.Size = UDim2.new(0, 440, 0, 80)
+	Title_17.Font = Enum.Font.GothamBold
+	Title_17.Text = "Sitink Hub Loading..."
+	Title_17.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title_17.TextSize = 28.000
+
+	LoadingFrame.Name = "LoadingFrame"
+	LoadingFrame.Parent = Loading
+	LoadingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	LoadingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	LoadingFrame.BorderSizePixel = 0
+	LoadingFrame.Position = UDim2.new(0.0500000007, 0, 0.732510269, 0)
+	LoadingFrame.Size = UDim2.new(0, 400, 0, 40)
+
+	Load.Name = "Load"
+	Load.Parent = LoadingFrame
+	Load.BackgroundColor3 = Color3.fromRGB(48, 79, 255)
+	Load.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Load.BorderSizePixel = 0
+	Load.Size = UDim2.new(0, 0, 1, 0)
+
+	TextLabel.Parent = Loading
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.BorderSizePixel = 0
+	TextLabel.Position = UDim2.new(0.2590909, 0, 00.544444448, 0)
+	TextLabel.Size = UDim2.new(0, 200, 0, 50)
+	TextLabel.Font = Enum.Font.GothamBold
+	TextLabel.Text = "Player Name : " .. plr.Name
+	TextLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	TextLabel.TextSize = 20.000
+
+	SitinkGUI.Name = "SitinkGUI"
+	SitinkGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+	Main.Visible = false
+	Load:TweenSize(UDim2.new(0, 400, 1, 0),"Out","Quad",10,true)
+	wait(10)
+	Loading.Visible = false
+	Main.Visible = true
 
 	Main.Name = "Main"
 	Main.Parent = SitinkGUI
@@ -319,12 +486,6 @@ function SitinkLib:AddWindows(cf)
 	List.Size = UDim2.new(1, 0, 1, 0)
 	List.CanvasSize = UDim2.new(2, 0, 0, 0)
 	List.ScrollBarThickness = 0
-	
-	game:GetService("RunService").Stepped:Connect(function()
-		pcall(function()
-			List.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
-		end)
-	end)
 
 	UIListLayout.Parent = List
 	UIListLayout.FillDirection = Enum.FillDirection.Horizontal
@@ -375,9 +536,7 @@ function SitinkLib:AddWindows(cf)
 		local List_2 = Instance.new("ScrollingFrame")
 		local Left = Instance.new("Frame")
 		local List_5 = Instance.new("ScrollingFrame")
-		local UIListLayout_999999 = Instance.new("UIListLayout")
-		local UIListLayout_9999999 = Instance.new("UIListLayout")
-		
+
 		TabDisable.Name = "Tab Disable"
 		TabDisable.Parent = List
 		TabDisable.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
@@ -433,10 +592,6 @@ function SitinkLib:AddWindows(cf)
 		List_5.ScrollBarThickness = 1
 		List_5.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 
-		UIListLayout_999999.Parent = List_5
-		UIListLayout_999999.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_999999.Padding = UDim.new(0, 5)
-
 		Channel.Name = "Channel"
 		Channel.Parent = ChannelContainer
 		Channel.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
@@ -466,15 +621,6 @@ function SitinkLib:AddWindows(cf)
 		List_2.Size = UDim2.new(1, 0, 1, 0)
 		List_2.ScrollBarThickness = 1
 
-		UIListLayout_9999999.Parent = List_2
-		UIListLayout_9999999.SortOrder = Enum.SortOrder.LayoutOrder
-		UIListLayout_9999999.Padding = UDim.new(0, 5)
-		game:GetService("RunService").Stepped:Connect(function()
-			pcall(function()
-				List_2.CanvasSize = UDim2.new(0,0,0,UIListLayout_9999999.AbsoluteContentSize.Y + 20)
-			end)
-		end)
-
 		Click_2.MouseButton1Click:Connect(function()
 			for i, v in pairs(ChannelContainer:GetChildren()) do
 				if v.Name == "Channel" then
@@ -501,17 +647,17 @@ function SitinkLib:AddWindows(cf)
 
 		local defaults = false
 		if defaults == false then
-            defaults = true
-            NameTab_2.TextColor3 = Color3.fromRGB(100, 100, 100)
-            ChannelContainer.Visible = true
-            TabDisable.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-            Channel.Visible = false
-        end
+			defaults = true
+			NameTab_2.TextColor3 = Color3.fromRGB(100, 100, 100)
+			ChannelContainer.Visible = true
+			TabDisable.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+			Channel.Visible = false
+		end
 		local TabFunc = {}
 		function TabFunc:AddSection(choosetab, ConfigSection)
 			ConfigSection = ConfigSection or {}
 			ConfigSection.Title = ConfigSection.Title or ""
-		
+
 			local Section = Instance.new("Frame")
 			local TopTitle = Instance.new("Frame")
 			local Line = Instance.new("Frame")
@@ -520,20 +666,20 @@ function SitinkLib:AddWindows(cf)
 			local UIListLayout_2 = Instance.new("UIListLayout")
 			local UIPadding_999 = Instance.new("UIPadding")
 			local UIPadding_9999 = Instance.new("UIPadding")
-		
-			if choosetab == "Left" or choosetab == nil then
+
+			if choosetab == "Left" then
 				ParentFeature = List_5
 			elseif choosetab == "Right" then
 				ParentFeature = List_2
 			end
-		
+
 			Section.Name = "Section"
 			Section.Parent = ParentFeature
 			Section.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 			Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Section.BorderSizePixel = 0
 			Section.Size = UDim2.new(1, 0, 0, 226)
-		
+
 			TopTitle.Name = "TopTitle"
 			TopTitle.Parent = Section
 			TopTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -541,7 +687,7 @@ function SitinkLib:AddWindows(cf)
 			TopTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			TopTitle.BorderSizePixel = 0
 			TopTitle.Size = UDim2.new(1, 0, 0, 35)
-		
+
 			Line.Name = "Line"
 			Line.Parent = TopTitle
 			Line.BackgroundColor3 = Color3.fromRGB(48, 120, 255)
@@ -549,7 +695,7 @@ function SitinkLib:AddWindows(cf)
 			Line.BorderSizePixel = 0
 			Line.Position = UDim2.new(0, -3, 0, 0)
 			Line.Size = UDim2.new(1, 0, 0, 1)
-		
+
 			SectionTitle.Name = "Section Title"
 			SectionTitle.Parent = TopTitle
 			SectionTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -565,7 +711,7 @@ function SitinkLib:AddWindows(cf)
 
 			UIPadding_999.Parent = TopTitle
 			UIPadding_999.PaddingLeft = UDim.new(0, 7)
-		
+
 			List_3.Name = "List"
 			List_3.Parent = Section
 			List_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -582,15 +728,15 @@ function SitinkLib:AddWindows(cf)
 			UIPadding_9999.Parent = List_3
 			UIPadding_9999.PaddingLeft = UDim.new(0, 3)
 			UIPadding_9999.PaddingRight = UDim.new(0, 3)
-		
+
 			local function AdjustSectionHeight()
 				local contentHeight = UIListLayout_2.AbsoluteContentSize.Y
 				Section.Size = UDim2.new(1, 0, 0, contentHeight + 48)
 			end
-		
+
 			UIListLayout_2:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(AdjustSectionHeight)
 			AdjustSectionHeight()
-		
+
 			local SectionFunc = {}
 			function SectionFunc:AddSeperator(ConfigSeperator)
 
@@ -677,7 +823,7 @@ function SitinkLib:AddWindows(cf)
 					UIPadding_21.PaddingLeft = UDim.new(0, 7)
 					UIPadding_21.PaddingTop = UDim.new(0, 2)
 				end
-				
+
 				if ParagraphConfig.Description == nil or ParagraphConfig.Description == "" then
 					Paragraph.Size = UDim2.new(1, 0, 0, 20)
 				end
@@ -753,7 +899,7 @@ function SitinkLib:AddWindows(cf)
 				ConfigsToggle.Callback = ConfigsToggle.Callback or function ()
 					-- nil
 				end
-				
+
 				local Toggle1_2 = Instance.new("Frame")
 				local UICorner_24 = Instance.new("UICorner")
 				local Title_10 = Instance.new("TextLabel")
@@ -824,7 +970,7 @@ function SitinkLib:AddWindows(cf)
 				Click_8.TextColor3 = Color3.fromRGB(0, 0, 0)
 				Click_8.TextSize = 14.000
 
-				
+
 				function ToggleFunc:Set(Value)
 					if Value then
 						TweenService:Create(Check_4, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(57, 153, 255)}):Play()
@@ -855,7 +1001,7 @@ function SitinkLib:AddWindows(cf)
 				ConfigSlider.Min = ConfigSlider.Min or 100
 				ConfigSlider.Default = ConfigSlider.Default or 50
 				ConfigSlider.Callback = ConfigSlider.Callback or function() end
-				
+
 				local Slider = Instance.new("Frame")
 				local Title_3 = Instance.new("TextLabel")
 				local UIPadding_5 = Instance.new("UIPadding")
@@ -1005,7 +1151,7 @@ function SitinkLib:AddWindows(cf)
 				local UIPadding_6 = Instance.new("UIPadding")
 				local Icon = Instance.new("ImageLabel")
 				local ListFrame = Instance.new("Frame")
-				local List_4 = Instance.new("ScrollingFrame")
+				local List_4 = Instance.new("Frame")
 				local UIPadding_7 = Instance.new("UIPadding")
 				local Click_10 = Instance.new("TextButton")
 				local UIListLayout_3 = Instance.new("UIListLayout")
@@ -1066,14 +1212,7 @@ function SitinkLib:AddWindows(cf)
 				List_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
 				List_4.BorderSizePixel = 0
 				List_4.ClipsDescendants = true
-				List_4.Selectable = false
 				List_4.Size = UDim2.new(1, 0, 1, 0)
-				List_4.ScrollBarThickness = 1
-				game:GetService("RunService").Stepped:Connect(function()
-					pcall(function()
-						List_4.CanvasSize = UDim2.new(0,0,0,UIListLayout_3.AbsoluteContentSize.Y + 20)
-					end)
-				end)
 
 				UIPadding_7.Parent = List_4
 				UIPadding_7.PaddingLeft = UDim.new(0, 4)
@@ -1158,9 +1297,9 @@ function SitinkLib:AddWindows(cf)
 					for i, v in pairs(List_4:GetChildren()) do
 						if v.Name == "Option 1" then
 							if v.Title_7.Text == acc then
-								Dropdown:TweenSize(UDim2.new(1, 0, 0, 35),"Out","Quad",.3,true)
+								Dropdown:TweenSize(UDim2.new(1, 0, 0., 35),"Out","Quad",.3,true)
 								Dropped = false
-								Title_5.Text = ConfigDropDown.Name .. " : " .. v.Title_7.Text
+								Title_17.Text = ConfigDropDown.Name .. " : " .. v.Title_7.Text
 								ConfigDropDown.Callback(v.Title_7.Text)
 							end
 						end
@@ -1175,12 +1314,12 @@ function SitinkLib:AddWindows(cf)
 					end
 					Dropped = false
 					DropFunc:Add(Option)
-					Title_5.Text = ConfigDropDown.Name .. " :"
+					Title_17.Text = ConfigDropDown.Name .. " :"
 				end
 
 				Click_10.MouseButton1Click:Connect(function()
 					if Dropped == false then
-						Dropdown:TweenSize(UDim2.new(1, 0, 0.45, 35),"Out","Quad",.3,true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0.35, 35),"Out","Quad",.3,true)
 						Dropped = true
 					else
 						Dropdown:TweenSize(UDim2.new(1, 0, 0, 35),"Out","Quad",.3,true)
