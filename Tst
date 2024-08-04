@@ -102,7 +102,7 @@ elseif placeid == 4442272183 then
 elseif placeid == 7449423635 then
 	Third_World = true
 end
-local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/chill"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SourceFullNightHub/ewihwg/main/nigga"))()
 function GetTextureMoon()
 	if Old_World then
 		return game:GetService("Lighting").FantasySky.MoonTextureId
