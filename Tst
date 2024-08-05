@@ -176,8 +176,6 @@ end)
 spawn(function()
 	while wait() do
 		if NoClip and plr.Character and plr.Character:FindFirstChild("Head") then
-			setfflag("HumanoidParallelRemoveNoPhysics", "False")
-            setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
 			if not plr.Character.Head:FindFirstChild("Nigga") then
 				local noclip = Instance.new("BodyVelocity")
 				noclip.Name = "Nigga"
