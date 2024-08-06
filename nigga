@@ -368,6 +368,13 @@ local TableKatakuri = {
     "Dough King"
 }
 
+function CheckStun()
+	if game:GetService('Players').LocalPlayer.Character:FindFirstChild("Stun") then
+		return game:GetService('Players').LocalPlayer.Character.Stun.Value ~= 0
+	end
+	return false
+end
+
 cac = 1
 spawn(function()
 	while wait() do
@@ -728,13 +735,6 @@ AttackFunction = LPH_JIT_MAX(function()
 		end
 	end
 end)
-
-function CheckStun()
-	if game:GetService('Players').LocalPlayer.Character:FindFirstChild("Stun") then
-		return game:GetService('Players').LocalPlayer.Character.Stun.Value ~= 0
-	end
-	return false
-end
 
 DamageAura = true
 LPH_JIT_MAX(function()
