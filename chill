@@ -1,1 +1,459 @@
+local Plac = game.PlaceId
+if Plac == 2753915549 then
+    Sea1 = true
+elseif Plac == 4442272183 then
+    Sea2 = true
+elseif Plac == 7449423635 then
+    Sea3 = true
+else
+    game.Players.LocalPlayer:Kick("Zenus Hub\n Not Support Others Game(Support Blox Fruit)")
+end
 
+getgenv().ScriptExecuted = true
+if getgenv().ScriptExecuted then
+	print("Script Executed")
+end
+repeat
+	task.wait()
+until game:IsLoaded() and game.Players and game.Players.LocalPlayer  
+if islclosure(loadstring) then
+	while true do
+        -- Get laggy for user if crack
+	end 
+end
+getgenv().LoadingFunction = true
+if getgenv().LoadingFunction then
+	print("Script : Loading Function")
+end
+repeat
+	task.wait()
+until game:IsLoaded() and game.Players and game.Players.LocalPlayer
+if islclosure(loadstring) then
+	while true do
+        -- Get laggy for user if crack
+	end
+end
+
+local plr = game:GetService("Players").LocalPlayer
+local LoadedHub
+local Ws = game:GetService("Workspace")
+local Rp = game:GetService("ReplicatedStorage")
+local CommF_ = Rp.Remotes.CommF_
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+HttpService = game:GetService("HttpService")
+a = {}
+local NameHub = "Zenus Hub"
+local PlayerName = plr.Name
+function SaveSettings(ni, ga)
+    if ni ~= nil then
+        a[ni] = ga
+    end
+    if not isfolder(NameHub) then
+        makefolder(NameHub)
+    end
+    writefile(NameHub .. "/" .. PlayerName, HttpService:JSONEncode(a))
+end
+function ReadSettings()
+    local bu, lon =
+        pcall(
+        function()
+            if not isfolder(NameHub) then
+                makefolder(NameHub)
+            end
+            return HttpService:JSONDecode(readfile(NameHub .. "/" .. PlayerName))
+        end
+    )
+    if bu then
+        return lon
+    else
+        SaveSettings()
+        return ReadSettings()
+    end
+end
+
+a = ReadSettings()
+
+function GetDistance(aL)
+    if typeof(aL) == "CFrame" then
+        return (aL.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+    elseif typeof(aL) == "Vector3" then
+        return (aL - plr.Character.HumanoidRootPart.Position).Magnitude
+    end
+end
+
+function TweenTo(PosTween)
+    Dis = PosTween.Position
+    TargetWithSameY = CFrame.new(PosTween.Position.X, PosTween.Position + 80, PosTween.Position.Z)
+    TargetY = Dis.Y
+    local tweenservice = game:GetService("TweenService")
+    local TwInfo = TweenInfo.new(GetDistance(Dis) / 180, Enum.EasingStyle.Linear)
+    local TweenFunc = {}
+    if not PosTween then return end
+    tween = tweenservice:Create(plr.Character.HumanoidRootPart, TwInfo, {CFrame = TargetWithSameY})
+    if GetDistance(Dis) <= 250 then
+        tween:Cancel()
+        plr.Character.HumanoidRootPart.CFrame = PosTween
+    else
+        if plr.Character.HumanoidRootPart.Position.Y < TargetY + 80 then
+            tween:Cancel()
+            plr.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.Position.Z, plr.Character.HumanoidRootPart.Position.Y + 80, plr.Character.HumanoidRootPart.Position.X)
+        end
+        tween:Play()
+    end
+    function TweenFunc:Stop()
+        tween:Cancel()
+    end
+    return TweenFunc
+end
+
+spawn(function()
+    while task.wait() do
+        if tween and tween.PlaybackState == Enum.PlaybackState.Playing then
+            NoClip = true
+        elseif tween then
+            NoClip = false
+        end
+    end
+end)
+
+function EBuso()
+	if not plr.Character:FindFirstChild("HasBuso") then
+		Rc.Remotes.CommF_:InvokeServer("Buso")
+	end
+end
+
+function GetWP(Type)
+	NahWP = ""
+	for r, v in next, plr.Backpack:GetChildren() do
+		if v:IsA("Tool") and v.ToolTip == Type then
+			NahWP = v.Name
+		end
+	end
+	for r, v in next, plr.Character:GetChildren() do
+		if v:IsA("Tool") and v.ToolTip == Type then
+			NahWP = v.Name
+		end
+	end
+	return NahWP
+end
+
+function EquipWeapon(WPName)
+	if a["Select Tool"] == nil or a["Select Tool"] == "" then
+		a["Select Tool"] = "Melee"
+	end
+	WPName = GetWP(a["Select Tool"])
+	if plr.Backpack:FindFirstChild(WPName) then
+		plr.Character.Humanoid:EquipTool(WPName)
+	end
+end
+
+function RemoveLevelTitle(PutThere)
+	return tostring(tostring(PutThere):gsub(" %pLv. %d+%p", ""):gsub(" %pRaid Boss%p", ""):gsub(" %pBoss%p", ""))
+end
+
+function CheckMob(targetcheck, checkrep)
+	local cccc
+	for r, v in pairs(targetcheck) do
+		targetcheck[r] = RemoveLevelTitle(v)
+	end
+    for i, v in pairs(Ws.Enemies:GetChildren()) do
+        if ((typeof(targetcheck) == "table" and table.find(targetcheck, v.Name)) or (typeof(targetcheck) == "string" and v.Name == targetcheck or string.find(v.Name, targetcheck))) and v.Parent and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+            cccc = v
+        end
+    end
+	if checkrep then
+		for i, v in pairs(Rc:GetChildren()) do
+			if ((typeof(targetcheck) == "table" and table.find(targetcheck, v.Name)) or (typeof(targetcheck) == "string" and v.Name == targetcheck or string.find(v.Name, targetcheck))) and v.Parent and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+				cccc = v
+			end
+		end
+	end
+    return cccc
+end
+
+function InMyNetWork(object)
+	if isnetworkowner then
+		return isnetworkowner(object)
+	else
+		if (object.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then 
+			return true
+		end
+		return false
+	end
+end
+
+spawn(function()
+	while wait() do
+		if NoClip == true and plr.Character and plr.Character:FindFirstChild("Head") then
+			if not plr.Character.Head:FindFirstChild("Body Velocity") then
+				local BodyVelocity = Instance.new("BodyVelocity")
+				BodyVelocity.Parent = plr.Character.Head
+				BodyVelocity.Name = "Body Velocity"
+				BodyVelocity.P = 1500
+				BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				BodyVelocity.Velocity = Vector3.new(0, 0, 0)
+			end
+			for i, v in pairs(plr.Character:GetDescendants()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end
+			end
+		elseif not NoClip and plr.Character and plr.Character:FindFirstChild("Head") and plr.Character.Head:FindFirstChild("Body Velocity") then
+			plr.Character.Head:FindFirstChild("Body Velocity"):Destroy()
+		end
+	end
+end)
+
+function BringMob(mobbring)
+	for i, v in pairs(Ws.Enemies:GetChildren()) do
+		if v.Name == mobbring and v.Parent and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude <= 250 then
+			if InMyNetWork(v.HumanoidRootPart) then
+				v.HumanoidRootPart.CFrame = LockCFrame
+				v.Humanoid.JumpPower = 0
+				v.Humanoid.WalkSpeed = 0
+				v.HumanoidRootPart.Transparency = 1
+				v.HumanoidRootPart.CanCollide = false
+				v.Head.CanCollide = false
+				if v.Humanoid:FindFirstChild("Animator") then
+					v.Humanoid.Animator:Destroy()
+				end
+				if not v.HumanoidRootPart:FindFirstChild("Lock") then
+					local lock = Instance.new("BodyVelocity")
+					lock.Parent = v.HumanoidRootPart
+					lock.Name = "Lock"
+					lock.MaxForce = Vector3.new(100000, 100000, 100000)
+					lock.Velocity = Vector3.new(0, 0, 0)
+				end
+				sethiddenproperty(plr, "SimulationRadius", math.huge)
+				v.Humanoid:ChangeState(11)
+			end
+		end
+	end
+end
+
+function GetDistance(a)
+    if typeof(a) == "CFrame" then
+        return (a.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+    elseif typeof(a) == "Vector3" then
+        return (a - plr.Character.HumanoidRootPart.Position).Magnitude
+    end
+end
+
+function KillMob(TargetName, StopFunc)
+	local v = CheckMob(TargetName, true)
+	if v.Parent and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and not StopFunc then
+		repeat task.wait()
+			if GetDistance(v.HumanoidRootPart.Position) <= 20 then
+				EquipWeapon()
+				EBuso()
+				LockCFrame = v.HumanoidRootPart.CFrame
+				BringMob(TargetName)
+			end
+			NoClip = true
+			TweenTo(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
+		until StopFunc or not v.Parent or not v:FindFirstChild("Humanoid") or v:FindFirstChild("Humanoid").Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+		NoClip = false
+	end
+end
+
+local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
+local Animation = Instance.new("Animation")
+function CurrentWeapon()
+    local ac = CombatFrameworkR.activeController
+    local ret = ac.blades[1]
+    if not ret then
+        return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    end
+    pcall(
+        function()
+            while ret.Parent ~= game.Players.LocalPlayer.Character do
+                ret = ret.Parent
+            end
+        end
+    )
+    if not ret then
+        return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    end
+    return ret
+end
+function DoAttack()
+    if game.Players.LocalPlayer.Character.Stun.Value ~= 0 then
+        return nil
+    end
+    local ac = CombatFrameworkR.activeController
+    ac.hitboxMagnitude = 55
+    if ac and ac.equipped then
+        for indexincrement = 1, 1 do
+            local bladehit =require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(game.Players.LocalPlayer.Character,{game.Players.LocalPlayer.Character.HumanoidRootPart},60)
+            if #bladehit > 0 then
+                local AcAttack8 = debug.getupvalue(ac.attack, 5)
+                local AcAttack9 = debug.getupvalue(ac.attack, 6)
+                local AcAttack7 = debug.getupvalue(ac.attack, 4)
+                local AcAttack10 = debug.getupvalue(ac.attack, 7)
+                local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
+                local NumberAc13 = AcAttack7 * 798405
+                (function()
+                    NumberAc12 = (NumberAc12 * AcAttack9 + NumberAc13) % 1099511627776
+                    AcAttack8 = math.floor(NumberAc12 / AcAttack9)
+                    AcAttack7 = NumberAc12 - AcAttack8 * AcAttack9
+                end)()
+                AcAttack10 = AcAttack10 + 1
+                debug.setupvalue(ac.attack, 5, AcAttack8)
+                debug.setupvalue(ac.attack, 6, AcAttack9)
+                debug.setupvalue(ac.attack, 4, AcAttack7)
+                debug.setupvalue(ac.attack, 7, AcAttack10)
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and ac.blades and ac.blades[1] then
+                    Animation.AnimationId = ac.anims.basic[2]
+                    ac.humanoid:LoadAnimation(Animation):Play(1, 1)
+                    game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10)
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(CurrentWeapon()))
+                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
+                end
+            end
+        end
+    end
+end
+
+FireAttack = 0  
+TickStartAttack = tick()
+spawn(function()
+    local MT = getrawmetatable(game)
+    local OldNameCall = MT.__namecall
+    setreadonly(MT, false)
+    MT.__namecall = newcclosure(function(self, ...)
+        local Method = getnamecallmethod()
+        local Args = {...}
+        if Method == 'FireServer' and self.Name == "RigControllerEvent" and  Args[1] == "hit"  then
+            FireAttack = FireAttack + 1 
+            TickStartAttack = tick()
+        end
+        return OldNameCall(self, unpack(Args))
+    end)
+end)
+
+function Attack()
+    pcall(function()
+        DoAttack()
+    end)
+end
+
+DelayAttack = 0.1
+function Attack2()
+    if FireAttack <= 70 then
+        Attack()
+        FireAttack = FireAttack + 1
+    elseif FireAttack >= 70 then
+        Attack()
+        task.wait(0.1)
+    end
+end
+
+UseFastAttack = true
+spawn(function()
+	while task.wait(0.001) do
+		repeat task.wait(0.0001)
+			Attack2()
+		until UseFastAttack == false
+	end
+end)
+
+-- // UI MAIN \\ --
+
+local Window = Fluent:CreateWindow({
+    Title = "Zenus Hub ",
+    SubTitle = "by Stay",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "home" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+Tabs.Main:AddSection("User Status")
+
+local FpsCount = Tabs.Main:AddParagraph({
+    Title = "Fps : 60",
+    Content = ""
+})
+
+local TimeCount = Tabs.Main:AddParagraph({
+    Title = "Client Time : 0H 0M 0S",
+    Content = ""
+})
+
+function CountTime()
+    local GameTime = math.floor(Ws.DistributedGameTime + 0.5)
+    local Hour = math.floor(GameTime / (60 ^ 2)) % 24
+    local Minute = math.floor(GameTime / (60 ^ 1)) % 60
+    local Second = math.floor(GameTime / (60 ^ 0)) % 60
+    return "Client Time " .. Hour .. " H " .. Minute .. " M  " .. Second .. " S"
+end
+
+game:GetService("RunService").RenderStepped:Connect(function(deltaTime)
+    local fps = math.floor(1 / deltaTime)
+    FpsCount:SetTitle("Fps : " .. fps)
+    TimeCount:SetTitle(CountTime())
+end)
+
+Tabs.Main:AddSection("Main Auto Farm")
+
+local ToggleAutoCakePrince = Tabs.Main:AddToggle("Auto Katakuri", {
+    Title = "Auto Katakuri",
+    Default = a["Auto Katakuri"],
+    Description = "bj mun chia",
+    Callback = function (Value)
+        Save("Auto Katakuri", Value)
+    end 
+})
+
+local TableMobsCake = {
+    "Cookie Crafter [Lv. 2200]",
+    "Cake Guard [Lv. 2225]",
+    "Baking Staff [Lv. 2250]",
+    "Head Baker [Lv. 2275]"
+}
+
+local TableKatakuri = {
+    "Cake Prince",
+    "Dough King"
+}
+
+function AutoKatakuri()
+    if not a["Auto Katakuri"] then return nil end
+    if CheckMob(TableKatakuri, true) then
+        if CheckMob(TableKatakuri, false) then
+            repeat wait()
+                KillMob(TableKatakuri, a["Auto Katakuri"])
+            until a["Auto Katakuri"] == false
+        else
+            TweenTo(CFrame.new(-1990.672607421875, 4532.99951171875, -14973.6748046875))
+        end
+    else
+        if CheckMob(TableMobsCake, false) then
+            repeat wait()
+                KillMob(TableMobsCake, a["Auto Katakuri"])
+            until a["Auto Katakuri"] == false
+        else
+            TweenTo(CFrame.new(-2142.66821,71.2588654,-12327.4619,0.996939838,-4.33107843e-08,0.078172572,4.20252917e-08,1,1.80894251e-08,-0.078172572,-1.47488439e-08, 0.996939838))
+        end
+    end
+end
+
+spawn(function()
+    while wait() do
+        if a["Auto Katakuri"] then
+            AutoKatakuri()
+        end
+    end
+end)
+
+LoadedHub = true
